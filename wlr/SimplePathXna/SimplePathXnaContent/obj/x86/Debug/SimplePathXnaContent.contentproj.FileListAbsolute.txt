@@ -1,0 +1,1 @@
+C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXnaContent\obj\x86\Debug\ResolveAssemblyReference.cache
