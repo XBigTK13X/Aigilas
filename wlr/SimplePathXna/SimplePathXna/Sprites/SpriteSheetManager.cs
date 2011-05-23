@@ -13,8 +13,8 @@ namespace welikerogues.Sprites
             {SpriteType.EMPTY,new SpriteInfo(0,1)},
             {SpriteType.PLAYER_STAND,new SpriteInfo(1,2)},
             {SpriteType.FLOOR,new SpriteInfo(2,1)},
-            {SpriteType.SPIKE,new SpriteInfo(3,1)},
-            {SpriteType.WALL,new SpriteInfo(4,1)}
+            {SpriteType.SPIKE,new SpriteInfo(4,1)},
+            {SpriteType.WALL,new SpriteInfo(3,1)}
         };
         public static SpriteInfo GetSpriteInfo(SpriteType spriteName)
         {

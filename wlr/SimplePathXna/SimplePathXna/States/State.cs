@@ -50,5 +50,9 @@ namespace welikerogues.States
             m_windowComponents.Add(gameComponent);
             GameplayObjectManager.AddObject(gameComponent);
         }
+        protected void AddLocal(GameplayObject gameComponent)
+        {
+            m_windowComponents.Add(gameComponent);
+        }
     }
 }

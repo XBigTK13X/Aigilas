@@ -20,7 +20,7 @@ namespace welikerogues.Management
         private static readonly List<string> m_playerInputDevices = new List<string>()
         {
             "KEYBOARD",
-            "GAMEPAD"
+            "KEYBOARD"
         };
         private static readonly Dictionary<Commands, Keys> m_keyboardMapping = new Dictionary<Commands, Keys>()
         {

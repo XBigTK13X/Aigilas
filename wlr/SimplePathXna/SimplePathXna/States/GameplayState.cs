@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using welikerogues.GameObjects;
 using welikerogues.Management;
-using welikerogues.Factory;
 using welikerogues.Sprites;
 using welikerogues.Dungeons;
 
@@ -15,12 +14,13 @@ namespace welikerogues.States
 {
     class GameplayState:State
     {
-        Dungeon currentLevel = new Dungeon();
         public GameplayState()
         {
-            foreach (GameplayObject tile in DungeonManager.GetNext())
+            DungeonManager.Start();
+            List<GameplayObject> items = GameplayObjectManager.GetObjects();
+            foreach (GameplayObject item in items)
             {
-                Add(tile);
+                AddLocal(item);
             }
         }
     }

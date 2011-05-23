@@ -14,17 +14,5 @@ namespace welikerogues.GameObjects
         {
             Initialize(gridX, gridY, SpriteType.FLOOR,GameObjectType.FLOOR);
         }
-        public override void Update()
-        {
-            base.Update();
-            GameplayObject player = GameplayObjectManager.GetObject(GameObjectType.PLAYER);
-            if(null != player)
-            {
-                if (HitTest.IsTouching(player, this))
-                {
-                    player.Move(-5, -5);
-                }
-            }
-        }
     }
 }

@@ -14,6 +14,7 @@ namespace welikerogues.GameObjects
 
         private float m_health = 100;
         private int m_moveCooldown = COOLDOWN_TIME;
+        private int m_moveSpeed = 25;
 
         private void Setup(int x, int y,int playerIndex)
         {
@@ -35,8 +36,9 @@ namespace welikerogues.GameObjects
         }
         public virtual void Run() 
         {
-            int yVel = ((InputManager.IsPressed(InputManager.Commands.MoveLeft, m_playerIndex)) ? -10 : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveRight, m_playerIndex)) ? 10 : 0);
-            int xVel = ((InputManager.IsPressed(InputManager.Commands.MoveDown, m_playerIndex)) ? 10 : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveUp, m_playerIndex)) ? -10 : 0);
+            int xVel = ((InputManager.IsPressed(InputManager.Commands.MoveLeft, m_playerIndex)) ? -m_moveSpeed : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveRight, m_playerIndex)) ? m_moveSpeed : 0);
+            int yVel = ((InputManager.IsPressed(InputManager.Commands.MoveDown, m_playerIndex)) ? m_moveSpeed : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveUp, m_playerIndex)) ? -m_moveSpeed : 0);
+            Console.WriteLine(xVel);
             MoveIfPossible(xVel, yVel);
         }
 
@@ -61,6 +63,14 @@ namespace welikerogues.GameObjects
                 //This is how an animation can be changed
                 //SetSpriteInfo(SpriteSheetManager.GetSpriteInfo(SpriteType.PLAYER_STAND));
             }
+        }
+        public int GetIndex()
+        {
+            return m_playerIndex;
+        }
+        public int GetMoveSpeed()
+        {
+            return m_moveSpeed;
         }
     }
 }
