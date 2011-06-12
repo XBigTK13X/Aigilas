@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeLikeRogues.Sprites;
-using WeLikeRogues.Management;
+using OGUR.Sprites;
+using OGUR.Management;
 
-namespace WeLikeRogues.GameObjects
+namespace OGUR.GameObjects
 {
     class Wall:GameplayObject
     {

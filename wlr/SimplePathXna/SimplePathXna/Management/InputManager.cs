@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace WeLikeRogues.Management
+namespace OGUR.Management
 {
     class InputManager
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
-using WeLikeRogues.Sprites;
+using OGUR.Sprites;
 
-namespace WeLikeRogues.Factory
+namespace OGUR.Factory
 {
     class AnimatedTextureFactory
     {

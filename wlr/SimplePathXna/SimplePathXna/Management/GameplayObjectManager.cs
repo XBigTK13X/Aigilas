@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeLikeRogues.GameObjects;
-using WeLikeRogues.Sprites;
+using OGUR.GameObjects;
+using OGUR.Sprites;
 
-namespace WeLikeRogues.Management
+namespace OGUR.Management
 {
     static class GameplayObjectManager
     {
@@ -27,6 +27,10 @@ namespace WeLikeRogues.Management
                 }
             }
             return null;
+        }
+        static public void RemoveObject(GameplayObject target)
+        {
+            m_contents.Remove(target);
         }
         static public List<GameplayObject> GetObjects(GameObjectType type)
         {

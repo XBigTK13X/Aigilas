@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using WeLikeRogues.Management;
-using WeLikeRogues.States;
-using WeLikeRogues.Sprites;
+using OGUR.Management;
+using OGUR.States;
+using OGUR.Sprites;
 
-namespace WeLikeRogues
+namespace OGUR
 {
     /// <summary>
     /// This is the main type for your game

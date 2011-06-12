@@ -5,12 +5,12 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using WeLikeRogues.GameObjects;
-using WeLikeRogues.Management;
-using WeLikeRogues.Sprites;
-using WeLikeRogues.Dungeons;
+using OGUR.GameObjects;
+using OGUR.Management;
+using OGUR.Sprites;
+using OGUR.Dungeons;
 
-namespace WeLikeRogues.States
+namespace OGUR.States
 {
     class GameplayState:State
     {

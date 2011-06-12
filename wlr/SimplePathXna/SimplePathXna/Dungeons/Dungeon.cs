@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeLikeRogues.GameObjects;
-using WeLikeRogues.Sprites;
-using WeLikeRogues.Factory;
-using WeLikeRogues.Management;
+using OGUR.GameObjects;
+using OGUR.Sprites;
+using OGUR.Factory;
+using OGUR.Management;
 using Microsoft.Xna.Framework;
 
-namespace WeLikeRogues.Dungeons
+namespace OGUR.Dungeons
 {
     class Dungeon
     {
@@ -83,16 +83,34 @@ namespace WeLikeRogues.Dungeons
 
         private void ConvertRoomsToWalls()
         {
+            Random rand = new Random();
+            int roomCount = 0;
             foreach (Room room in m_rooms)
             {
-                int rightSide = room.Width + room.X;
-                int bottomSide = room.Y + room.Height;
-                for (int ii = room.X; ii < rightSide; ii++)
+                var entrances = new List<Point>();
+                for (int ii = room.X; ii < room.RightSide; ii++)
                 {
-                    for (int jj = room.Y; jj < bottomSide; jj++)
+                    for (int jj = room.Y; jj < room.BottomSide; jj++)
                     {
-                        if (ii == room.X || jj == room.Y || ii == rightSide-1 || jj == bottomSide-1)
+                        if (ii == room.X || jj == room.Y || ii == room.RightSide-1 || jj == room.BottomSide-1)
                         {
+                            if(!room.Corners.Contains(new Collision.Point(ii,jj)))
+                            {
+                                if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < DungeonManager.BlocksWide))
+                                {
+                                    if(IsFloor(ii - 1, jj) && IsFloor(ii + 1, jj))
+                                    {
+                                        entrances.Add(new Point(ii, jj));
+                                    }
+                                }
+                                if ((jj == room.Y && jj > 0) || (jj == room.BottomSide && jj < DungeonManager.BlocksHigh))
+                                {
+                                    if(IsFloor(ii, jj-1) && IsFloor(ii, jj+1))
+                                    {
+                                        entrances.Add(new Point(ii, jj));
+                                    }
+                                }
+                            }
                             m_contents.Add(GameplayObjectFactory.Create(GameObjectType.WALL, ii * SpriteInfo.Width, jj * SpriteInfo.Height));
                             GameplayObjectManager.AddObject(m_contents.Last());
                         }
@@ -103,8 +121,28 @@ namespace WeLikeRogues.Dungeons
                         }
                     }
                 }
+                if (roomCount > 0&&entrances.Count()>0)
+                {
+                    int index = rand.Next(0, entrances.Count() - 1);
+                    var entrance = entrances[index];
+                    var tile = GetTilesAt(entrance.X, entrance.Y).Where(o => o.GetObjectType() == GameObjectType.WALL).First();
+                    m_contents.Remove(tile);
+                    GameplayObjectManager.RemoveObject(tile);
+                }
+                roomCount++;
             }
         }
+
+        private bool IsFloor(int x, int y)
+        {
+            return GetTilesAt(x - 1, y).Where(o => o.GetObjectType() == GameObjectType.FLOOR).Count() > 0;
+        }
+
+        private IList<GameplayObject> GetTilesAt(int x,int y)
+        {
+            return m_contents.Where(o => (o.GetPosition().X / SpriteInfo.Width) == x && (o.GetPosition().Y / SpriteInfo.Height) == y).ToList<GameplayObject>();
+        }
+
         public void LoadTiles()
         {
             GameplayObjectManager.Clear();

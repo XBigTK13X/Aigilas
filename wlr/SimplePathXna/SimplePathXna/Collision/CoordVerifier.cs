@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeLikeRogues.GameObjects;
-using WeLikeRogues.Management;
+using OGUR.GameObjects;
+using OGUR.Management;
 
-namespace WeLikeRogues.Collision
+namespace OGUR.Collision
 {
     static class CoordVerifier
     {

@@ -7,7 +7,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace WeLikeRogues.Management
+namespace OGUR.Management
 {
     class Camera
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using WeLikeRogues.States;
+using OGUR.States;
 
-namespace WeLikeRogues.Management
+namespace OGUR.Management
 {
     class StateManager
     {

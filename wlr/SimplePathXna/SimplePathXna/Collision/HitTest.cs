@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeLikeRogues.GameObjects;
-using WeLikeRogues.Sprites;
+using OGUR.GameObjects;
+using OGUR.Sprites;
 
-namespace WeLikeRogues.Collision
+namespace OGUR.Collision
 {
     static class HitTest
     {

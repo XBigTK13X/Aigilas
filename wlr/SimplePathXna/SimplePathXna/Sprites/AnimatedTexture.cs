@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using WeLikeRogues.Management;
+using OGUR.Management;
 
-namespace WeLikeRogues.Sprites
+namespace OGUR.Sprites
 {
     class AnimatedTexture
     {

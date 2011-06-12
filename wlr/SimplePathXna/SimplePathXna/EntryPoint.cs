@@ -1,6 +1,6 @@
 using System;
 
-namespace WeLikeRogues
+namespace OGUR
 {
 #if WINDOWS || XBOX
     static class EntryPoint

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WeLikeRogues.Management;
-using WeLikeRogues.Collision;
-using WeLikeRogues.Sprites;
+using OGUR.Management;
+using OGUR.Collision;
+using OGUR.Sprites;
 
-namespace WeLikeRogues.GameObjects
+namespace OGUR.GameObjects
 {
     class Spike:GameplayObject
     {
