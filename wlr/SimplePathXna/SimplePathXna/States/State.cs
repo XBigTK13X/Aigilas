@@ -5,11 +5,11 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using welikerogues.GameObjects;
-using welikerogues.Management;
+using WeLikeRogues.GameObjects;
+using WeLikeRogues.Management;
 
 
-namespace welikerogues.States
+namespace WeLikeRogues.States
 {
     class State
     {

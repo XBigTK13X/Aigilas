@@ -1,11 +1,13 @@
-﻿using System;
+﻿//Modified from source code found here: http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace welikerogues.Management
+namespace WeLikeRogues.Management
 {
     class Camera
     {
@@ -43,7 +45,7 @@ namespace welikerogues.Management
             get { return m_position; }
             set { m_position = value; }
         }
-        public Matrix get_transformation(GraphicsDevice graphicsDevice)
+        public Matrix GetTransformation(GraphicsDevice graphicsDevice)
         {
             m_transform =       // Thanks to o KB o for this solution
               Matrix.CreateTranslation(new Vector3(-m_position.X, -m_position.Y, 0)) *

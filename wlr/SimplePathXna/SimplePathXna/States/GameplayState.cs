@@ -5,12 +5,12 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using welikerogues.GameObjects;
-using welikerogues.Management;
-using welikerogues.Sprites;
-using welikerogues.Dungeons;
+using WeLikeRogues.GameObjects;
+using WeLikeRogues.Management;
+using WeLikeRogues.Sprites;
+using WeLikeRogues.Dungeons;
 
-namespace welikerogues.States
+namespace WeLikeRogues.States
 {
     class GameplayState:State
     {

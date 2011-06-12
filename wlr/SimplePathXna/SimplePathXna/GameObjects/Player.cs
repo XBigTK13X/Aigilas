@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using welikerogues.Management;
-using welikerogues.Collision;
-using welikerogues.Sprites;
+using WeLikeRogues.Management;
+using WeLikeRogues.Collision;
+using WeLikeRogues.Sprites;
 
-namespace welikerogues.GameObjects
+namespace WeLikeRogues.GameObjects
 {
     class Player:GameplayObject
     {
@@ -14,7 +14,7 @@ namespace welikerogues.GameObjects
 
         private float m_health = 100;
         private int m_moveCooldown = COOLDOWN_TIME;
-        private int m_moveSpeed = 25;
+        private int m_moveSpeed = SpriteInfo.Height;
 
         private void Setup(int x, int y,int playerIndex)
         {

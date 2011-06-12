@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace welikerogues.Management
+namespace WeLikeRogues.Management
 {
     class InputManager
     {

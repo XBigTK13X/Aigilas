@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using welikerogues.Management;
+using WeLikeRogues.Management;
 
-namespace welikerogues.Sprites
+namespace WeLikeRogues.Sprites
 {
     class AnimatedTexture
     {
@@ -41,7 +41,7 @@ namespace welikerogues.Sprites
                         null,
                         null,
                         null,
-                        XnaManager.GetCamera().get_transformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
+                        XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
             m_currentCell = new Rectangle(m_currentFrame * m_spriteInfo.X, m_spriteInfo.SpriteIndex * m_spriteInfo.Y, m_spriteInfo.X, m_spriteInfo.Y);
             Vector2 tempPosition = new Vector2(m_position.X, m_position.Y);
             target.Draw(m_graphic, tempPosition, m_currentCell, Color.White);

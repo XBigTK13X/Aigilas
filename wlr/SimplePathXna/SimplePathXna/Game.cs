@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using welikerogues.Management;
-using welikerogues.States;
-using welikerogues.Sprites;
+using WeLikeRogues.Management;
+using WeLikeRogues.States;
+using WeLikeRogues.Sprites;
 
-namespace welikerogues
+namespace WeLikeRogues
 {
     /// <summary>
     /// This is the main type for your game

@@ -1,6 +1,6 @@
 using System;
 
-namespace welikerogues
+namespace WeLikeRogues
 {
 #if WINDOWS || XBOX
     static class EntryPoint

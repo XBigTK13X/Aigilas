@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using welikerogues.GameObjects;
-using welikerogues.Management;
+using WeLikeRogues.GameObjects;
+using WeLikeRogues.Management;
 
-namespace welikerogues.Dungeons
+namespace WeLikeRogues.Dungeons
 {
     class DungeonManager
     {
+        public static int BlocksHigh = 20;
+        public static int BlocksWide = 30;
         static List<Dungeon> s_dungeons = new List<Dungeon>();
         static int s_currentDungeon = 0;
         public static void Start()

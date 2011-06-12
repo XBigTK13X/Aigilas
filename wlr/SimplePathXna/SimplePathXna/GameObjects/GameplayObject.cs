@@ -5,10 +5,10 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using welikerogues.Collision;
-using welikerogues.Sprites;
+using WeLikeRogues.Collision;
+using WeLikeRogues.Sprites;
 
-namespace welikerogues.GameObjects
+namespace WeLikeRogues.GameObjects
 {
     class GameplayObject
     {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using welikerogues.Management;
-using welikerogues.Collision;
-using welikerogues.Sprites;
+using WeLikeRogues.Management;
+using WeLikeRogues.Collision;
+using WeLikeRogues.Sprites;
 
-namespace welikerogues.GameObjects
+namespace WeLikeRogues.GameObjects
 {
     class Floor:GameplayObject
     {

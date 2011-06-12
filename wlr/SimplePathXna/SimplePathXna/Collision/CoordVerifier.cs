@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using welikerogues.GameObjects;
-using welikerogues.Management;
+using WeLikeRogues.GameObjects;
+using WeLikeRogues.Management;
 
-namespace welikerogues.Collision
+namespace WeLikeRogues.Collision
 {
     static class CoordVerifier
     {

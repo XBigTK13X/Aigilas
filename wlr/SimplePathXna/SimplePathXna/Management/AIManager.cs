@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using welikerogues.GameObjects;
+using WeLikeRogues.GameObjects;
 
-namespace welikerogues.Management
+namespace WeLikeRogues.Management
 {
     class AIManager
     {

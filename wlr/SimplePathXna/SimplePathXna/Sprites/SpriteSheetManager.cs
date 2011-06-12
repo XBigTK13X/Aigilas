@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace welikerogues.Sprites
+namespace WeLikeRogues.Sprites
 {
     class SpriteSheetManager
     {
