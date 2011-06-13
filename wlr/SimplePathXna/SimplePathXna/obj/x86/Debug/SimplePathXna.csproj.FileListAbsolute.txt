@@ -1,7 +1,0 @@
-C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXna\bin\x86\Debug\Content\GameplaySheet.xnb
-C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXna\bin\x86\Debug\SimplePathXna.exe
-C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXna\bin\x86\Debug\SimplePathXna.pdb
-C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXna\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXna\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXna\obj\x86\Debug\SimplePathXna.exe
-C:\git\spx\SimplePathXna\SimplePathXna\SimplePathXna\obj\x86\Debug\SimplePathXna.pdb
