@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OGUR.Sprites;
 using OGUR.Management;
+using OGUR.Creatures;
 
 namespace OGUR.GameObjects
 {
@@ -15,12 +16,12 @@ namespace OGUR.GameObjects
         }
         public override void Update()
         {
-            foreach (Player player in GameplayObjectManager.GetObjects(GameObjectType.PLAYER))
+            foreach (ICreature player in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
             {
                 if (Collision.HitTest.IsTouching(player, this))
                 {
-                    int xVel = ((InputManager.IsPressed(InputManager.Commands.MoveLeft, player.GetIndex())) ? -player.GetMoveSpeed() : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveRight, player.GetIndex())) ? player.GetMoveSpeed() : 0);
-                    int yVel = ((InputManager.IsPressed(InputManager.Commands.MoveDown, player.GetIndex())) ? player.GetMoveSpeed() : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveUp, player.GetIndex())) ? -player.GetMoveSpeed() : 0);
+                    int xVel = ((InputManager.IsPressed(InputManager.Commands.MoveLeft, player.GetPlayerIndex())) ? -player.GetInt(Stat.MOVE_SPEED) : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveRight, player.GetPlayerIndex())) ? player.GetInt(Stat.MOVE_SPEED) : 0);
+                    int yVel = ((InputManager.IsPressed(InputManager.Commands.MoveDown, player.GetPlayerIndex())) ? player.GetInt(Stat.MOVE_SPEED) : 0) + ((InputManager.IsPressed(InputManager.Commands.MoveUp, player.GetPlayerIndex())) ? -player.GetInt(Stat.MOVE_SPEED) : 0);
                     xVel *= -1;
                     yVel *= -1;
                     player.Move(xVel, yVel);

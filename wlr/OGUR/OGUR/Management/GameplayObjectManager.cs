@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.GameObjects;
 using OGUR.Sprites;
 using OGUR.Factory;
+using OGUR.Creatures;
 
 namespace OGUR.Management
 {
@@ -32,10 +33,7 @@ namespace OGUR.Management
             }
             return null;
         }
-        static public void RemoveObject(GameplayObject target)
-        {
-            m_contents.Remove(target);
-        }
+
         static public List<GameplayObject> GetObjects(GameObjectType type)
         {
             List<GameplayObject> result = new List<GameplayObject>();
@@ -48,20 +46,65 @@ namespace OGUR.Management
             }
             return result;
         }
+
+        static public ICreature GetObject(CreatureType type)
+        {
+            if (m_contents != null)
+            {
+                foreach (ICreature item in m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE))
+                {
+                    if (item.GetCreatureType() == type)
+                    {
+                        return item;
+                    }
+                }
+            }
+            return null;
+        }
+
+        static public List<ICreature> GetObjects(CreatureType type)
+        {
+            List<ICreature> result = new List<ICreature>();
+            foreach (ICreature item in m_contents.Where(o=>o.GetObjectType()==GameObjectType.CREATURE))
+            {
+                if (item.GetCreatureType() == type)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+
+
+
         static public List<GameplayObject> GetObjects()
         {
             return m_contents;
         }
+
+        static public void RemoveObject(GameplayObject target)
+        {
+            m_contents.Remove(target);
+        }
+
+
         static public void Clear()
         {
             m_contents.Clear();
-            GameplayObjectFactory.ResetPlayerCount();
+            CreatureFactory.ResetPlayerCount();
         }
         static public void Update()
         {
             for (int ii = 0; ii < m_contents.Count; ii++)
             {
-                m_contents[ii].Update();
+                if (m_contents[ii].GetObjectType() == GameObjectType.CREATURE)
+                {
+                    (m_contents[ii] as ICreature).Update();
+                }
+                else
+                {
+                    m_contents[ii].Update();
+                }
                 if (!m_contents[ii].IsActive())
                 {
                     m_contents.Remove(m_contents[ii]);

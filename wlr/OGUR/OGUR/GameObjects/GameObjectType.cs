@@ -7,11 +7,12 @@ namespace OGUR.GameObjects
 {
     public enum GameObjectType
     {
-        PLAYER,
         SPIKE,
         FLOOR,
         WALL,
         UPSTAIRS,
-        DOWNSTAIRS
+        DOWNSTAIRS,
+        CREATURE,
+        ITEM
     }
 }

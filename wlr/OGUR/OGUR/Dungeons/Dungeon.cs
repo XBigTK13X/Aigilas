@@ -7,6 +7,7 @@ using OGUR.Sprites;
 using OGUR.Factory;
 using OGUR.Management;
 using Microsoft.Xna.Framework;
+using OGUR.Creatures;
 
 namespace OGUR.Dungeons
 {
@@ -44,7 +45,7 @@ namespace OGUR.Dungeons
                     GameplayObjectManager.AddObject(tile);
                 }
             }
-            m_contents.Add(GameplayObjectManager.AddObject(GameplayObjectFactory.Create(GameObjectType.PLAYER, spawnLocation.X * SpriteInfo.Width, spawnLocation.Y * SpriteInfo.Height)));
+            m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, spawnLocation.X * SpriteInfo.Width, spawnLocation.Y * SpriteInfo.Height));
         }
 
         private void PlaceRooms()

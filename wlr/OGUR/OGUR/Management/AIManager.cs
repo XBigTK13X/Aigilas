@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.GameObjects;
+using OGUR.Creatures;
 
 namespace OGUR.Management
 {
     class AIManager
     {
-        private static List<Player> s_players = new List<Player>();
-
-        public static void Add(Player player)
-        {
-            s_players.Add(player);
-        }
-
         public static bool IsClosestPlayerNorth(Player source)
         {
             Player target = GetClosest(source);
@@ -57,8 +51,9 @@ namespace OGUR.Management
 
         private static Player GetClosest(Player source)
         {
-            List<float> s_distances = new List<float>();
-            foreach (Player target in s_players)
+            var s_distances = new List<float>();
+            var players = GameplayObjectManager.GetObjects(CreatureType.PLAYER);
+            foreach (Player target in players)
             {               
                 s_distances.Add(Math.Abs(target.GetPosition().X-source.GetPosition().X)+Math.Abs(target.GetPosition().Y-source.GetPosition().Y));   
             }
@@ -71,7 +66,7 @@ namespace OGUR.Management
                     if (s_distances[ii] < leastDistance)
                     {
                         leastDistance = s_distances[ii];
-                        result = s_players[ii];
+                        result = players[ii] as Player;
                     }
                 }
             }

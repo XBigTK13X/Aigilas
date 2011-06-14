@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Management;
 using OGUR.Collision;
 using OGUR.Sprites;
+using OGUR.Creatures;
 
 namespace OGUR.GameObjects
 {
@@ -17,11 +18,11 @@ namespace OGUR.GameObjects
         public override void Update()
         {
             base.Update();
-            if (null != GameplayObjectManager.GetObject(GameObjectType.PLAYER))
+            if (null != GameplayObjectManager.GetObject(CreatureType.PLAYER))
             {
-                if (HitTest.IsTouching(this, GameplayObjectManager.GetObject(GameObjectType.PLAYER)))
+                if (HitTest.IsTouching(this, GameplayObjectManager.GetObject(CreatureType.PLAYER)))
                 {
-                    GameplayObjectManager.GetObject(GameObjectType.PLAYER).SetInactive();
+                    GameplayObjectManager.GetObject(CreatureType.PLAYER).SetInactive();
                 }
             }
         }

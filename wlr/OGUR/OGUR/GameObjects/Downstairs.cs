@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Sprites;
 using OGUR.Management;
 using OGUR.Dungeons;
+using OGUR.Creatures;
 
 namespace OGUR.GameObjects
 {
@@ -16,7 +17,7 @@ namespace OGUR.GameObjects
         }
         public override void Update()
         {
-            foreach (Player player in GameplayObjectManager.GetObjects(GameObjectType.PLAYER))
+            foreach (ICreature player in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
             {
                 if (Collision.HitTest.IsTouching(player, this))
                 {
