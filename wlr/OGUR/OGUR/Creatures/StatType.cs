@@ -9,6 +9,8 @@
         DEFENSE,
         LUCK,
         AGE,
+        HEIGHT,
+        WEIGHT,
         MOVE_SPEED,
         MOVE_COOL_DOWN
     }

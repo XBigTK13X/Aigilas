@@ -12,7 +12,7 @@ using OGUR.Dungeons;
 
 namespace OGUR.States
 {
-    internal class GameplayState : State
+    public class GameplayState : State
     {
         public GameplayState()
         {

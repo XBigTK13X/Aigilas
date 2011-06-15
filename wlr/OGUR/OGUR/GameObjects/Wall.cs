@@ -2,7 +2,7 @@
 
 namespace OGUR.GameObjects
 {
-    internal class Wall : GameplayObject
+    public class Wall : GameplayObject
     {
         public Wall(int x, int y)
         {

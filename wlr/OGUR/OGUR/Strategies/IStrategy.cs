@@ -2,7 +2,7 @@
 
 namespace OGUR.Strategies
 {
-    internal abstract class IStrategy
+    public abstract class IStrategy
     {
         public abstract void Act(ICreature target);
     }

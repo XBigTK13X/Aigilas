@@ -5,7 +5,7 @@ using OGUR.Creatures;
 
 namespace OGUR.GameObjects
 {
-    internal class Downstairs : GameplayObject
+    public class Downstairs : GameplayObject
     {
         public Downstairs(int x, int y)
         {
@@ -18,6 +18,7 @@ namespace OGUR.GameObjects
             {
                 if (Collision.HitTest.IsTouching(player, this) && InputManager.IsPressed(InputManager.Commands.Confirm,player.GetPlayerIndex()))
                 {
+                    InputManager.Lock(InputManager.Commands.Confirm, 0);
                     DungeonManager.GotoNext();
                 }
             }

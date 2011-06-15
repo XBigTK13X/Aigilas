@@ -8,13 +8,13 @@ using OGUR.Collision;
 
 namespace OGUR.Creatures
 {
-    internal abstract class ICreature : GameplayObject
+    public abstract class ICreature : GameplayObject
     {
         protected IStrategy m_strategy;
         protected MentalState m_mentality = MentalState.NORMAL;
         protected List<ICreature> targets = new List<ICreature>();
-        protected List<IItem> inventory = new List<IItem>();
-        protected List<IItem> equipment = new List<IItem>();
+        protected List<GenericItem> inventory = new List<GenericItem>();
+        protected List<GenericItem> equipment = new List<GenericItem>();
         protected Stats m_stats;
         protected Stats m_maxStats;
         protected int m_playerIndex = -1;

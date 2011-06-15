@@ -10,7 +10,7 @@ using OGUR.Sprites;
 
 namespace OGUR.GameObjects
 {
-    internal class GameplayObject
+    public class GameplayObject
     {
         protected AnimatedTexture m_graphic = new AnimatedTexture();
 

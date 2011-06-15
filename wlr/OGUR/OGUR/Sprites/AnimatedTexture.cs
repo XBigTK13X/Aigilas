@@ -9,7 +9,7 @@ using OGUR.Management;
 
 namespace OGUR.Sprites
 {
-    internal class AnimatedTexture
+    public class AnimatedTexture
     {
         private readonly string m_assetPath = @"GameplaySheet";
         private readonly int m_ANIMATE_SPEED = 20;

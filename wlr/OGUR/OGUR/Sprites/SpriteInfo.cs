@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OGUR.Sprites
 {
-    internal class SpriteInfo
+    public class SpriteInfo
     {
         public static readonly int Height = 33;
         public static readonly int Width = 33;

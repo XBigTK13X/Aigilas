@@ -11,7 +11,7 @@ using OGUR.Management;
 
 namespace OGUR.States
 {
-    internal class State
+    public class State
     {
         public State()
         {

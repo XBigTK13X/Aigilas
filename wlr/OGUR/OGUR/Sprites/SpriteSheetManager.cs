@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace OGUR.Sprites
 {
-    internal class SpriteSheetManager
+    public class SpriteSheetManager
     {
         private static Dictionary<SpriteType, SpriteInfo> m_manager = new Dictionary<SpriteType, SpriteInfo>()
         {
@@ -16,7 +16,8 @@ namespace OGUR.Sprites
             {SpriteType.WALL, new SpriteInfo(3, 1)},
             {SpriteType.UPSTAIRS,new SpriteInfo(4, 1)},
             {SpriteType.DOWNSTAIRS,new SpriteInfo(5, 1)},            
-            {SpriteType.CREATURE,new SpriteInfo(6, 1)}
+            {SpriteType.CREATURE,new SpriteInfo(6, 1)},
+            {SpriteType.ITEM,new SpriteInfo(7, 1)}
         };
 
         public static SpriteInfo GetSpriteInfo(SpriteType spriteName)

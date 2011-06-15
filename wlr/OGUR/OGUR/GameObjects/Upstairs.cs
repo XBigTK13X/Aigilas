@@ -9,7 +9,7 @@ using OGUR.Creatures;
 
 namespace OGUR.GameObjects
 {
-    internal class Upstairs : GameplayObject
+    public class Upstairs : GameplayObject
     {
         public Upstairs(int x, int y)
         {
@@ -22,6 +22,7 @@ namespace OGUR.GameObjects
             {
                 if (Collision.HitTest.IsTouching(player, this) && InputManager.IsPressed(InputManager.Commands.Confirm, player.GetPlayerIndex()))
                 {
+                    InputManager.Lock(InputManager.Commands.Confirm, 0);
                     DungeonManager.GotoPrevious();
                 }
             }

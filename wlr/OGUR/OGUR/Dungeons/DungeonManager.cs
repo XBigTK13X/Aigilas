@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OGUR.Dungeons
 {
-    internal class DungeonManager
+    public class DungeonManager
     {
         public static int BlocksHigh = 20;
         public static int BlocksWide = 30;

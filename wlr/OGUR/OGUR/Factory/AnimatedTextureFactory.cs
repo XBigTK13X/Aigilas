@@ -7,7 +7,7 @@ using OGUR.Sprites;
 
 namespace OGUR.Factory
 {
-    internal class AnimatedTextureFactory
+    public class AnimatedTextureFactory
     {
         public static AnimatedTexture Create(SpriteType type, int x, int y)
         {

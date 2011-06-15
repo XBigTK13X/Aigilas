@@ -14,6 +14,7 @@ namespace OGUR.Sprites
         WALL,
         UPSTAIRS,
         DOWNSTAIRS,
-        CREATURE
+        CREATURE,
+        ITEM
     }    
 }

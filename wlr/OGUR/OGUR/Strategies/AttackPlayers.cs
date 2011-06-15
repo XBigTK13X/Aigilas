@@ -3,7 +3,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Strategies
 {
-    internal class AttackPlayers : IStrategy
+    public class AttackPlayers : IStrategy
     {
         public override void Act(ICreature target)
         {

@@ -3,7 +3,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Strategies
 {
-    internal class ControlledByPlayer : IStrategy
+    public class ControlledByPlayer : IStrategy
     {
         public override void Act(ICreature target)
         {
@@ -22,6 +22,10 @@ namespace OGUR.Strategies
                                       : 0);
             decimal yVel = downVelocity + upVelocity;
             target.MoveIfPossible((int) xVel, (int) yVel);
+            if(!InputManager.IsPressed(InputManager.Commands.Confirm,target.GetPlayerIndex(),false))
+            {
+                InputManager.Unlock(InputManager.Commands.Confirm,target.GetPlayerIndex());
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Management
 {
-    internal class AIManager
+    public class AIManager
     {
         public static bool IsClosestPlayerNorth(Player source)
         {

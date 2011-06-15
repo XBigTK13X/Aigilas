@@ -122,6 +122,7 @@
     <Compile Include="Factory\AnimatedTextureFactory.cs" />
     <Compile Include="Factory\CreatureFactory.cs" />
     <Compile Include="Factory\GameplayObjectFactory.cs" />
+    <Compile Include="Factory\ItemFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObjects\Downstairs.cs" />
     <Compile Include="GameObjects\Floor.cs" />
@@ -131,7 +132,12 @@
     <Compile Include="Creatures\Player.cs" />
     <Compile Include="GameObjects\Upstairs.cs" />
     <Compile Include="GameObjects\Wall.cs" />
-    <Compile Include="Items\IItem.cs" />
+    <Compile Include="Items\Slots.cs" />
+    <Compile Include="Items\GenericItem.cs" />
+    <Compile Include="Items\ItemPrefix.cs" />
+    <Compile Include="Items\ItemSlot.cs" />
+    <Compile Include="Items\ItemSuffix.cs" />
+    <Compile Include="Items\ItemType.cs" />
     <Compile Include="Management\AIManager.cs" />
     <Compile Include="Management\Camera.cs" />
     <Compile Include="Management\GameplayObjectManager.cs" />

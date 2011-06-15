@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace OGUR.Management
 {
-    internal class Camera
+    public class Camera
     {
         protected float m_zoom; // Camera Zoom
         public Matrix m_transform; // Matrix Transform

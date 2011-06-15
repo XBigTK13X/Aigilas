@@ -10,7 +10,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Dungeons
 {
-    internal class Dungeon
+    public class Dungeon
     {
         private List<Room> m_rooms = new List<Room>();
         private List<GameplayObject> m_contents = new List<GameplayObject>();
@@ -43,7 +43,6 @@ namespace OGUR.Dungeons
         private void Generate()
         {
             GameplayObjectManager.Clear();
-            InputManager.Lock(InputManager.Commands.Confirm,0);
 
             m_rooms.Add(new Room(DungeonManager.BlocksHigh, DungeonManager.BlocksWide, 0, 0));
             PlaceRooms();

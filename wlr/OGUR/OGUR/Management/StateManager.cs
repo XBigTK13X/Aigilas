@@ -8,7 +8,7 @@ using OGUR.States;
 
 namespace OGUR.Management
 {
-    internal class StateManager
+    public class StateManager
     {
         private static State m_state;
 

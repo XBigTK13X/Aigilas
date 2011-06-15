@@ -7,7 +7,7 @@ using OGUR.Sprites;
 
 namespace OGUR.Factory
 {
-    internal class GameplayObjectFactory
+    public class GameplayObjectFactory
     {
         public static GameplayObject Create(GameObjectType type, int x, int y)
         {

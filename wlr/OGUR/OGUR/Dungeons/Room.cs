@@ -3,7 +3,7 @@ using OGUR.Collision;
 
 namespace OGUR.Dungeons
 {
-    internal class Room
+    public class Room
     {
         public int Height, Width, X, Y, BottomSide, RightSide;
         public Point Center;

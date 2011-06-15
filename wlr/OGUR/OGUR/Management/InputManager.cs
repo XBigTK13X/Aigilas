@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace OGUR.Management
 {
-    internal class InputManager
+    public class InputManager
     {
         public enum Commands
         {
@@ -65,14 +65,16 @@ namespace OGUR.Management
                                                                           PlayerIndex.Four
                                                                       };
 
-        public static bool IsPressed(Commands command, int playerIndex)
+        public static bool IsPressed(Commands command, int playerIndex,bool failIfLocked=true)
         {
 
             string inputMechanism = m_playerInputDevices[playerIndex];
             bool isInputActive = false;
-            if (!IsLocked(command, playerIndex))
+            if (IsLocked(command, playerIndex) && failIfLocked)
             {
-                switch (inputMechanism)
+                return false;
+            }
+            switch (inputMechanism)
                 {
                     case "KEYBOARD":
                         isInputActive = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
@@ -84,7 +86,6 @@ namespace OGUR.Management
                     default:
                         throw new Exception("What were you smoking that brought up this error?");
                 }
-            }
             return isInputActive;
         }
 
@@ -109,7 +110,7 @@ namespace OGUR.Management
         }
     }
 
-    internal class CommandLock
+    public class CommandLock
     {
         public CommandLock(InputManager.Commands command, int playerIndex)
         {

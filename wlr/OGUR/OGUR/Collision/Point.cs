@@ -1,6 +1,6 @@
 ﻿namespace OGUR.Collision
 {
-    internal class Point
+    public class Point
     {
         public int X, Y;
 
