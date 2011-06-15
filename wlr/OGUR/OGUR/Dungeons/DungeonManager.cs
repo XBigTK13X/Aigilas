@@ -20,26 +20,26 @@ namespace OGUR.Dungeons
         public static void GotoNext()
         {
             s_currentDungeon++;
-            LoadOrCreateDungeon();
+            LoadOrCreateDungeon(false);
         }
         public static void GotoPrevious()
         {
             if (s_currentDungeon > 0)
             {
                 s_currentDungeon--;
-                LoadOrCreateDungeon();
+                LoadOrCreateDungeon(true);
             }
         }
-        private static void LoadOrCreateDungeon()
+        private static void LoadOrCreateDungeon(bool goingUp)
         {
             try
             {
-                s_dungeons[s_currentDungeon].LoadTiles();  
+                s_dungeons[s_currentDungeon].LoadTiles(goingUp);  
             }
             catch(Exception e)
             {
                 s_dungeons.Add(s_currentDungeon, new Dungeon());
-                s_dungeons[s_currentDungeon].LoadTiles();
+                s_dungeons[s_currentDungeon].LoadTiles(goingUp);
             }
         }
     }

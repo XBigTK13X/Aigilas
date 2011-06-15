@@ -16,16 +16,27 @@ namespace OGUR.Dungeons
         List<Room> m_rooms = new List<Room>();
         List<GameplayObject> m_contents = new List<GameplayObject>();
         GameplayObject[,] dungeon = new GameplayObject[DungeonManager.BlocksWide, DungeonManager.BlocksHigh];
-        Point spawnLocation = new Point(0, 0);
+        Point downSpawnLocation = new Point(0, 0);
+        Point upSpawnLocation = new Point(0, 0);
         bool playerPlaced = false;
 
         public Dungeon()
         {
             Generate();
         }
-        public List<GameplayObject> GetContents()
+        public void LoadTiles(bool goingUp)
         {
-            return m_contents;
+            GameplayObjectManager.Clear();
+            var spawn = goingUp ? upSpawnLocation : downSpawnLocation;
+            foreach (ICreature player in m_contents.Where(tile => tile.GetObjectType() == GameObjectType.CREATURE).Where(creature => ((ICreature)creature).GetCreatureType() == CreatureType.PLAYER))
+            {
+                
+                player.SetPosition(spawn.X * SpriteInfo.Width, spawn.Y * SpriteInfo.Height);
+            }
+            foreach (GameplayObject item in m_contents)
+            {
+                GameplayObjectManager.AddObject(item);
+            }
         }
         private void Generate()
         {
@@ -45,7 +56,7 @@ namespace OGUR.Dungeons
                     GameplayObjectManager.AddObject(tile);
                 }
             }
-            m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, spawnLocation.X * SpriteInfo.Width, spawnLocation.Y * SpriteInfo.Height));
+            m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X * SpriteInfo.Width, downSpawnLocation.Y * SpriteInfo.Height));
         }
 
         private void PlaceRooms()
@@ -95,27 +106,7 @@ namespace OGUR.Dungeons
                 if (dungeon[x,y].GetObjectType()==GameObjectType.FLOOR)
                 {
                     dungeon[x, y] = new Upstairs(x * SpriteInfo.Width, y * SpriteInfo.Height);
-                    
-                    for (int ii = -1; ii <= 1; ii++)
-                    {
-                        for (int jj = -1; jj <= 1; jj++)
-                        {
-                            if(playerPlaced)
-                            {
-                                break;
-                            }
-                            try
-                            {
-                                if (dungeon[x+ii, y+jj].GetObjectType() == GameObjectType.FLOOR)
-                                {
-                                    spawnLocation.X = x+ii;
-                                    spawnLocation.Y = y+jj;
-                                    playerPlaced = true;
-                                }
-                            }
-                            catch (Exception swallowed) { };
-                        }
-                    }
+                    PlaceSpawnPointNearStairs(ref downSpawnLocation,x,y);
                     break;
                 }
             }
@@ -126,7 +117,36 @@ namespace OGUR.Dungeons
                 if (dungeon[x, y].GetObjectType() == GameObjectType.FLOOR)
                 {
                     dungeon[x, y] = new Downstairs(x * SpriteInfo.Width, y * SpriteInfo.Height);
+                    PlaceSpawnPointNearStairs(ref upSpawnLocation, x, y);
                     break;
+                }
+            }
+        }
+
+        private void PlaceSpawnPointNearStairs(ref Point spawn,int x,int y)
+        {
+            bool playerPlaced = false;
+            for (int ii = -1; ii <= 1; ii++)
+            {
+                for (int jj = -1; jj <= 1; jj++)
+                {
+                    if (jj != 0 && ii != 0)
+                    {
+                        if (playerPlaced)
+                        {
+                            break;
+                        }
+                        try
+                        {
+                            if (dungeon[x + ii, y + jj].GetObjectType() == GameObjectType.FLOOR)
+                            {
+                                spawn.X = x + ii;
+                                spawn.Y = y + jj;
+                                playerPlaced = true;
+                            }
+                        }
+                        catch (Exception) { };
+                    }
                 }
             }
         }
@@ -187,17 +207,5 @@ namespace OGUR.Dungeons
             return dungeon[x,y].GetObjectType() == GameObjectType.FLOOR;
         }
 
-        public void LoadTiles()
-        {
-            GameplayObjectManager.Clear();
-            foreach (ICreature player in m_contents.Where(tile => tile.GetObjectType() == GameObjectType.CREATURE).Where(creature => ((ICreature)creature).GetCreatureType() == CreatureType.PLAYER))
-            {
-                player.SetPosition(spawnLocation.X*SpriteInfo.Width, spawnLocation.Y*SpriteInfo.Height);
-            }
-            foreach (GameplayObject item in m_contents)
-            {
-                GameplayObjectManager.AddObject(item);
-            }
-        }
     }
 }
