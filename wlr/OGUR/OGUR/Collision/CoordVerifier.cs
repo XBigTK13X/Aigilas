@@ -17,7 +17,7 @@ namespace OGUR.Collision
 
         static public bool IsBlocked(int x, int y)
         {
-            Point target = new Point(x + SpriteInfo.Width / 2, y + SpriteInfo.Height / 2);
+            var target = new Point(x + SpriteInfo.Width / 2, y + SpriteInfo.Height / 2);
             return GameplayObjectManager.GetObjects().Where(tile => tile.Contains(target) && tile.IsBlocking()).Count() > 0;
         }
     }

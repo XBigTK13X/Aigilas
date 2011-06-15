@@ -13,12 +13,11 @@ namespace OGUR.Dungeons
 {
     class Dungeon
     {
-        List<Room> m_rooms = new List<Room>();
-        List<GameplayObject> m_contents = new List<GameplayObject>();
-        GameplayObject[,] dungeon = new GameplayObject[DungeonManager.BlocksWide, DungeonManager.BlocksHigh];
-        Point downSpawnLocation = new Point(0, 0);
-        Point upSpawnLocation = new Point(0, 0);
-        bool playerPlaced = false;
+        private List<Room> m_rooms = new List<Room>();
+        private List<GameplayObject> m_contents = new List<GameplayObject>();
+        private GameplayObject[,] dungeon = new GameplayObject[DungeonManager.BlocksWide, DungeonManager.BlocksHigh];
+        private Point downSpawnLocation = new Point(0, 0);
+        private Point upSpawnLocation = new Point(0, 0);
 
         public Dungeon()
         {
@@ -62,19 +61,17 @@ namespace OGUR.Dungeons
         private void PlaceRooms()
         {
             var newRooms = new List<Room>();
-            Random rand = new Random();
-            int maxRoomCount = 15;
-            int roomsToPlace = 3 + rand.Next(0,maxRoomCount);
-            int startWidth = 3 + rand.Next(0, 3);
-            int startHeight = 3 + rand.Next(0, 3);
-            int attemptCount = 0;
+            var rand = new Random();
+            const int maxRoomCount = 15;
+            var roomsToPlace = 3 + rand.Next(0,maxRoomCount);
+            var attemptCount = 0;
             while (attemptCount < 1000 && roomsToPlace > 0)
             {
                 attemptCount++;
                 int startX = rand.Next(0, DungeonManager.BlocksWide-5);
                 int startY = rand.Next(0, DungeonManager.BlocksHigh-5);
-                startWidth = 5 + rand.Next(0, 2);
-                startHeight = 5 + rand.Next(0, 2);
+                int startWidth = 5 + rand.Next(0, 2);
+                int startHeight = 5 + rand.Next(0, 2);
                 roomsToPlace--;
                 var nextRoom = new Room(startHeight,startWidth,startX,startY);
                 bool collides = false;
@@ -98,7 +95,7 @@ namespace OGUR.Dungeons
 
         private void PlaceStairs()
         {
-            Random rand = new Random();
+            var rand = new Random();
             while (true)
             {
                 int x = rand.Next(0, DungeonManager.BlocksWide);
@@ -126,34 +123,33 @@ namespace OGUR.Dungeons
         private void PlaceSpawnPointNearStairs(ref Point spawn,int x,int y)
         {
             bool playerPlaced = false;
-            for (int ii = -1; ii <= 1; ii++)
+            var rand = new Random();
+            int ii = rand.Next(0, 2) - 1;
+            int jj = rand.Next(0, 2) - 1;
+            while(spawn.X==0&&spawn.Y==0)
             {
-                for (int jj = -1; jj <= 1; jj++)
+                try
                 {
-                    if (jj != 0 && ii != 0)
+                    if (dungeon[x + ii, y + jj].GetObjectType() == GameObjectType.FLOOR)
                     {
-                        if (playerPlaced)
-                        {
-                            break;
-                        }
-                        try
-                        {
-                            if (dungeon[x + ii, y + jj].GetObjectType() == GameObjectType.FLOOR)
-                            {
-                                spawn.X = x + ii;
-                                spawn.Y = y + jj;
-                                playerPlaced = true;
-                            }
-                        }
-                        catch (Exception) { };
+                        spawn.X = x + ii;
+                        spawn.Y = y + jj;
+                        playerPlaced = true;
                     }
                 }
+                catch (Exception)
+                { };
+                if (playerPlaced)
+                {
+                    break;
+                }
+                
             }
         }
 
         private void ConvertRoomsToWalls()
         {
-            Random rand = new Random();
+            var rand = new Random();
             int roomCount = 0;
             foreach (Room room in m_rooms)
             {
