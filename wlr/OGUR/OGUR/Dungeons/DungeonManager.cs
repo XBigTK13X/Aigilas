@@ -32,15 +32,11 @@ namespace OGUR.Dungeons
 
         private static void LoadOrCreateDungeon(bool goingUp)
         {
-            try
-            {
-                s_dungeons[s_currentDungeon].LoadTiles(goingUp);
-            }
-            catch (Exception)
+            if(!s_dungeons.ContainsKey(s_currentDungeon))
             {
                 s_dungeons.Add(s_currentDungeon, new Dungeon());
-                s_dungeons[s_currentDungeon].LoadTiles(goingUp);
             }
+            s_dungeons[s_currentDungeon].LoadTiles(goingUp);
         }
     }
 }
