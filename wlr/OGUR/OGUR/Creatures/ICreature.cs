@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Strategies;
 using OGUR.GameObjects;
 using OGUR.Sprites;
+using OGUR.Collision;
 
 namespace OGUR.Creatures
 {
@@ -90,8 +91,11 @@ namespace OGUR.Creatures
         {
             if ((xVel != 0 || yVel != 0) && GetInt(Stat.MOVE_COOL_DOWN) <= 0)
             {
-                Move(xVel, yVel);
-                m_stats[(int)Stat.MOVE_COOL_DOWN] = m_maxStats[(int)Stat.MOVE_COOL_DOWN];
+                if (!CoordVerifier.IsBlocked(xVel + (int)GetPosition().X, yVel + (int)GetPosition().Y))
+                {
+                    Move(xVel, yVel);
+                    m_stats[(int)Stat.MOVE_COOL_DOWN] = m_maxStats[(int)Stat.MOVE_COOL_DOWN];
+                }
             }
         }
     }

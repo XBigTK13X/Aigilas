@@ -47,6 +47,13 @@ namespace OGUR.GameObjects
                 m_graphic.SetPosition((int)m_graphic.GetPosition().X + amountX, (int)m_graphic.GetPosition().Y + amountY);
             }
         }
+        public void SetPosition(int x, int y)
+        {
+            if (CoordVerifier.IsValid(x, y))
+            {
+                m_graphic.SetPosition(x, y);
+            }
+        }
         public bool IsActive()
         {
             return m_isActive;
@@ -78,6 +85,11 @@ namespace OGUR.GameObjects
         protected void SetSpriteInfo(SpriteInfo sprite)
         {
             m_graphic.SetSpriteInfo(sprite);
+        }
+
+        public bool Contains(OGUR.Collision.Point target)
+        {
+            return (target.X >= GetPosition().X) && (target.Y >= GetPosition().Y) && (target.X <= GetPosition().X + SpriteInfo.Width) && (target.Y <= GetPosition().Y + SpriteInfo.Height);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace OGUR.Dungeons
             }
         }
         private static void LoadOrCreateDungeon()
-        {            
+        {
             try
             {
                 s_dungeons[s_currentDungeon].LoadTiles();  

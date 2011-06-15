@@ -21,7 +21,6 @@ namespace OGUR.GameObjects
             {
                 if (Collision.HitTest.IsTouching(player, this))
                 {
-                    DungeonManager.GotoNext();
                     Console.WriteLine("DOWNSTAIRS");
                 }
             }

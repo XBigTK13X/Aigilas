@@ -190,6 +190,10 @@ namespace OGUR.Dungeons
         public void LoadTiles()
         {
             GameplayObjectManager.Clear();
+            foreach (ICreature player in m_contents.Where(tile => tile.GetObjectType() == GameObjectType.CREATURE).Where(creature => ((ICreature)creature).GetCreatureType() == CreatureType.PLAYER))
+            {
+                player.SetPosition(spawnLocation.X*SpriteInfo.Width, spawnLocation.Y*SpriteInfo.Height);
+            }
             foreach (GameplayObject item in m_contents)
             {
                 GameplayObjectManager.AddObject(item);
