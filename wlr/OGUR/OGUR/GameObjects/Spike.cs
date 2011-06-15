@@ -9,12 +9,13 @@ using OGUR.Creatures;
 
 namespace OGUR.GameObjects
 {
-    class Spike:GameplayObject
+    internal class Spike : GameplayObject
     {
         public Spike(int x, int y)
         {
-            Initialize(x, y, SpriteType.SPIKE,GameObjectType.SPIKE);
+            Initialize(x, y, SpriteType.SPIKE, GameObjectType.SPIKE);
         }
+
         public override void Update()
         {
             base.Update();

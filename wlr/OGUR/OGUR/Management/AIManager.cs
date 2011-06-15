@@ -7,7 +7,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Management
 {
-    class AIManager
+    internal class AIManager
     {
         public static bool IsClosestPlayerNorth(Player source)
         {
@@ -54,8 +54,9 @@ namespace OGUR.Management
             var s_distances = new List<float>();
             var players = GameplayObjectManager.GetObjects(CreatureType.PLAYER);
             foreach (Player target in players)
-            {               
-                s_distances.Add(Math.Abs(target.GetPosition().X-source.GetPosition().X)+Math.Abs(target.GetPosition().Y-source.GetPosition().Y));   
+            {
+                s_distances.Add(Math.Abs(target.GetPosition().X - source.GetPosition().X) +
+                                Math.Abs(target.GetPosition().Y - source.GetPosition().Y));
             }
             float leastDistance = float.PositiveInfinity;
             Player result = null;

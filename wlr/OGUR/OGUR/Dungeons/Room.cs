@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using OGUR.Collision;
 
 namespace OGUR.Dungeons
 {
-    class Room
+    internal class Room
     {
         public int Height, Width, X, Y, BottomSide, RightSide;
         public Point Center;
         public List<Point> Corners = new List<Point>();
+
         public Room(int height, int width, int x, int y)
         {
             Height = height;
@@ -23,9 +21,9 @@ namespace OGUR.Dungeons
             Corners.Add(new Point(RightSide, Y));
             Corners.Add(new Point(RightSide, BottomSide));
             Corners.Add(new Point(X, BottomSide));
-            Center = new Point(RightSide / 2,BottomSide/2);
-
+            Center = new Point(RightSide/2, BottomSide/2);
         }
+
         public bool IsBad()
         {
             if (BottomSide > DungeonManager.BlocksHigh)
@@ -38,18 +36,19 @@ namespace OGUR.Dungeons
             }
             return false;
         }
+
         public bool Collides(Room target)
         {
             foreach (Point targetCorner in target.Corners)
             {
-                if(IsPointInsideBoundingBox(targetCorner))
+                if (IsPointInsideBoundingBox(targetCorner))
                 {
                     return true;
                 }
             }
-            foreach(Point corner in Corners)
+            foreach (Point corner in Corners)
             {
-                if(target.IsPointInsideBoundingBox(corner))
+                if (target.IsPointInsideBoundingBox(corner))
                 {
                     return true;
                 }
@@ -64,6 +63,7 @@ namespace OGUR.Dungeons
             }
             return false;
         }
+
         public bool IsPointInsideBoundingBox(Point target)
         {
             if (target.X > X && target.Y > Y && target.X < RightSide && target.Y < BottomSide)

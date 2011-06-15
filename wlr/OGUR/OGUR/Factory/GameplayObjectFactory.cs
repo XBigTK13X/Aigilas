@@ -7,10 +7,9 @@ using OGUR.Sprites;
 
 namespace OGUR.Factory
 {
-    class GameplayObjectFactory
+    internal class GameplayObjectFactory
     {
-        
-        static public GameplayObject Create(GameObjectType type, int x, int y)
+        public static GameplayObject Create(GameObjectType type, int x, int y)
         {
             switch (type)
             {

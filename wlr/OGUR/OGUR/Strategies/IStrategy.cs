@@ -6,8 +6,8 @@ using OGUR.Creatures;
 
 namespace OGUR.Strategies
 {
-    abstract class IStrategy
+    internal abstract class IStrategy
     {
-        abstract public void Act(ICreature target);
+        public abstract void Act(ICreature target);
     }
 }

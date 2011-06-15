@@ -19,9 +19,9 @@ namespace OGUR
     /// </summary>
     public class Game : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -93,7 +93,7 @@ namespace OGUR
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            StateManager.Draw(); 
+            StateManager.Draw();
             base.Draw(gameTime);
         }
     }

@@ -8,24 +8,28 @@ using OGUR.States;
 
 namespace OGUR.Management
 {
-    class StateManager
+    internal class StateManager
     {
-        static private State m_state;
-        static public void LoadState(State state)
+        private static State m_state;
+
+        public static void LoadState(State state)
         {
             m_state = state;
             GameplayObjectManager.LoadContent();
             GameplayObjectManager.Draw();
         }
-        static public void Draw()
+
+        public static void Draw()
         {
             GameplayObjectManager.Draw();
         }
-        static public void LoadContent()
+
+        public static void LoadContent()
         {
             GameplayObjectManager.LoadContent();
         }
-        static public void Update()
+
+        public static void Update()
         {
             GameplayObjectManager.Update();
         }

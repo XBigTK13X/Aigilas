@@ -9,17 +9,18 @@ using OGUR.Creatures;
 
 namespace OGUR.Management
 {
-    static class GameplayObjectManager
+    internal static class GameplayObjectManager
     {
-        static private List<GameplayObject> m_contents = new List<GameplayObject>();
-        
-        static public GameplayObject AddObject(GameplayObject gameplayObject)
+        private static List<GameplayObject> m_contents = new List<GameplayObject>();
+
+        public static GameplayObject AddObject(GameplayObject gameplayObject)
         {
             gameplayObject.LoadContent();
             m_contents.Add(gameplayObject);
             return gameplayObject;
         }
-        static public GameplayObject GetObject(GameObjectType type)
+
+        public static GameplayObject GetObject(GameObjectType type)
         {
             if (m_contents != null)
             {
@@ -34,7 +35,7 @@ namespace OGUR.Management
             return null;
         }
 
-        static public List<GameplayObject> GetObjects(GameObjectType type)
+        public static List<GameplayObject> GetObjects(GameObjectType type)
         {
             List<GameplayObject> result = new List<GameplayObject>();
             foreach (GameplayObject item in m_contents)
@@ -47,7 +48,7 @@ namespace OGUR.Management
             return result;
         }
 
-        static public ICreature GetObject(CreatureType type)
+        public static ICreature GetObject(CreatureType type)
         {
             if (m_contents != null)
             {
@@ -62,10 +63,10 @@ namespace OGUR.Management
             return null;
         }
 
-        static public List<ICreature> GetObjects(CreatureType type)
+        public static List<ICreature> GetObjects(CreatureType type)
         {
             List<ICreature> result = new List<ICreature>();
-            foreach (ICreature item in m_contents.Where(o=>o.GetObjectType()==GameObjectType.CREATURE))
+            foreach (ICreature item in m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE))
             {
                 if (item.GetCreatureType() == type)
                 {
@@ -76,24 +77,24 @@ namespace OGUR.Management
         }
 
 
-
-        static public List<GameplayObject> GetObjects()
+        public static List<GameplayObject> GetObjects()
         {
             return m_contents;
         }
 
-        static public void RemoveObject(GameplayObject target)
+        public static void RemoveObject(GameplayObject target)
         {
             m_contents.Remove(target);
         }
 
 
-        static public void Clear()
+        public static void Clear()
         {
             m_contents.Clear();
             CreatureFactory.ResetPlayerCount();
         }
-        static public void Update()
+
+        public static void Update()
         {
             for (int ii = 0; ii < m_contents.Count; ii++)
             {
@@ -112,7 +113,8 @@ namespace OGUR.Management
                 }
             }
         }
-        static public void Draw()
+
+        public static void Draw()
         {
             foreach (GameplayObject component in m_contents)
             {
@@ -122,7 +124,8 @@ namespace OGUR.Management
                 }
             }
         }
-        static public void LoadContent()
+
+        public static void LoadContent()
         {
             if (XnaManager.GetRenderTarget() != null)
             {

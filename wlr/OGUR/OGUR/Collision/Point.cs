@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace OGUR.Collision
+﻿namespace OGUR.Collision
 {
-    
-    class Point
+    internal class Point
     {
-        public int X,Y;
+        public int X, Y;
+
         public Point(int x, int y)
         {
             X = x;

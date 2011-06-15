@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OGUR.GameObjects;
-using OGUR.Management;
 
 namespace OGUR.Dungeons
 {
-    class DungeonManager
+    internal class DungeonManager
     {
         public static int BlocksHigh = 20;
         public static int BlocksWide = 30;
-        static Dictionary<int, Dungeon> s_dungeons = new Dictionary<int, Dungeon>();
-        static int s_currentDungeon = 0;
+        private static Dictionary<int, Dungeon> s_dungeons = new Dictionary<int, Dungeon>();
+        private static int s_currentDungeon;
+
         public static void Start()
         {
-            s_dungeons.Add(s_currentDungeon,new Dungeon());
+            s_dungeons.Add(s_currentDungeon, new Dungeon());
         }
+
         public static void GotoNext()
         {
             s_currentDungeon++;
             LoadOrCreateDungeon(false);
         }
+
         public static void GotoPrevious()
         {
             if (s_currentDungeon > 0)
@@ -30,13 +29,14 @@ namespace OGUR.Dungeons
                 LoadOrCreateDungeon(true);
             }
         }
+
         private static void LoadOrCreateDungeon(bool goingUp)
         {
             try
             {
-                s_dungeons[s_currentDungeon].LoadTiles(goingUp);  
+                s_dungeons[s_currentDungeon].LoadTiles(goingUp);
             }
-            catch(Exception e)
+            catch (Exception)
             {
                 s_dungeons.Add(s_currentDungeon, new Dungeon());
                 s_dungeons[s_currentDungeon].LoadTiles(goingUp);
