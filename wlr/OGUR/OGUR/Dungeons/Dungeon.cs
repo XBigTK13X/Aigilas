@@ -43,6 +43,7 @@ namespace OGUR.Dungeons
         private void Generate()
         {
             GameplayObjectManager.Clear();
+            InputManager.Lock(InputManager.Commands.Confirm,0);
 
             m_rooms.Add(new Room(DungeonManager.BlocksHigh, DungeonManager.BlocksWide, 0, 0));
             PlaceRooms();
@@ -127,30 +128,8 @@ namespace OGUR.Dungeons
 
         private void PlaceSpawnPointNearStairs(ref Point spawn, int x, int y)
         {
-            bool playerPlaced = false;
-            var rand = new Random();
-            int ii = rand.Next(0, 3) - 1;
-            int jj = rand.Next(0, 3) - 1;
-            while (spawn.X == 0 && spawn.Y == 0)
-            {
-                try
-                {
-                    if (dungeon[x + ii, y + jj].GetObjectType() == GameObjectType.FLOOR)
-                    {
-                        spawn.X = x + ii;
-                        spawn.Y = y + jj;
-                        playerPlaced = true;
-                    }
-                }
-                catch (Exception)
-                {
-                }
-                ;
-                if (playerPlaced)
-                {
-                    break;
-                }
-            }
+            spawn.X = x;
+            spawn.Y = y;
         }
 
         private void ConvertRoomsToWalls()

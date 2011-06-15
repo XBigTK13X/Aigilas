@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,6 +16,7 @@ namespace OGUR.Management
             MoveRight,
             Confirm
         }
+        private static List<CommandLock> s_locks = new List<CommandLock>(); 
 
         private static readonly List<string> m_playerInputDevices = new List<string>()
                                                                         {
@@ -28,7 +30,7 @@ namespace OGUR.Management
                                                                                        {Commands.MoveDown, Keys.Down},
                                                                                        {Commands.MoveRight, Keys.Right},
                                                                                        {Commands.MoveLeft, Keys.Left},
-                                                                                       {Commands.Confirm, Keys.Q}
+                                                                                       {Commands.Confirm, Keys.Space}
                                                                                    };
 
         private static readonly Dictionary<Commands, Buttons> m_gamePadMapping = new Dictionary<Commands, Buttons>()
@@ -65,20 +67,56 @@ namespace OGUR.Management
 
         public static bool IsPressed(Commands command, int playerIndex)
         {
+
             string inputMechanism = m_playerInputDevices[playerIndex];
             bool isInputActive = false;
-            switch (inputMechanism)
+            if (!IsLocked(command, playerIndex))
             {
-                case "KEYBOARD":
-                    isInputActive = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
-                    break;
-                case "GAMEPAD":
-                    isInputActive = GamePad.GetState(m_playerIndex[playerIndex]).IsButtonDown(m_gamePadMapping[command]);
-                    break;
-                default:
-                    throw new Exception("What were you smoking that brought up this error?");
+                switch (inputMechanism)
+                {
+                    case "KEYBOARD":
+                        isInputActive = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
+                        break;
+                    case "GAMEPAD":
+                        isInputActive =
+                            GamePad.GetState(m_playerIndex[playerIndex]).IsButtonDown(m_gamePadMapping[command]);
+                        break;
+                    default:
+                        throw new Exception("What were you smoking that brought up this error?");
+                }
             }
             return isInputActive;
         }
+
+        public static bool IsLocked(Commands command,int playerIndex)
+        {
+            return s_locks.Where(o => o.Command == command && o.PlayerIndex == playerIndex).Count() > 0;
+        }
+        public static void Lock(Commands command,int playerIndex)
+        {
+            s_locks.Add(new CommandLock(command,playerIndex));
+        }
+        public static void Unlock(Commands command, int playerIndex)
+        {
+            for(int ii = 0;ii<s_locks.Count();ii++)
+            {
+                if(s_locks[ii].Command==command && s_locks[ii].PlayerIndex==playerIndex)
+                {
+                    s_locks.Remove(s_locks[ii]);
+                    ii--;
+                }
+            }
+        }
+    }
+
+    internal class CommandLock
+    {
+        public CommandLock(InputManager.Commands command, int playerIndex)
+        {
+            Command = command;
+            PlayerIndex = playerIndex;
+        }
+        public InputManager.Commands Command;
+        public int PlayerIndex{ get; set; }
     }
 }

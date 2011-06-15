@@ -16,7 +16,7 @@ namespace OGUR.GameObjects
         {
             foreach (ICreature player in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
             {
-                if (Collision.HitTest.IsTouching(player, this))
+                if (Collision.HitTest.IsTouching(player, this) && InputManager.IsPressed(InputManager.Commands.Confirm,player.GetPlayerIndex()))
                 {
                     DungeonManager.GotoNext();
                 }
