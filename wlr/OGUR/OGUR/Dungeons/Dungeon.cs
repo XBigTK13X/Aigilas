@@ -60,6 +60,7 @@ namespace OGUR.Dungeons
             }
             m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X*SpriteInfo.Width,
                                                   downSpawnLocation.Y*SpriteInfo.Height));
+            m_contents.Add(CreatureFactory.Create(CreatureType.GOBLIN, upSpawnLocation.X * SpriteInfo.Width,upSpawnLocation.Y*SpriteInfo.Height));
         }
 
         private void PlaceRooms()
@@ -128,8 +129,8 @@ namespace OGUR.Dungeons
         {
             bool playerPlaced = false;
             var rand = new Random();
-            int ii = rand.Next(0, 2) - 1;
-            int jj = rand.Next(0, 2) - 1;
+            int ii = rand.Next(0, 3) - 1;
+            int jj = rand.Next(0, 3) - 1;
             while (spawn.X == 0 && spawn.Y == 0)
             {
                 try

@@ -1,4 +1,5 @@
 ﻿using OGUR.Collision;
+using OGUR.Strategies;
 
 namespace OGUR.Creatures
 {
@@ -8,7 +9,9 @@ namespace OGUR.Creatures
 
         public NormalCreature(CreatureType type,Point position,Stats stats)
         {
+            base.Setup(position.X, position.Y, type, stats);
             m_position = position;
+            m_strategy = new AttackPlayers();
         }
     }
 }

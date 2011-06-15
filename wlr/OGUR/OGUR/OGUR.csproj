@@ -129,7 +129,6 @@
     <Compile Include="GameObjects\GameplayObject.cs" />
     <Compile Include="Creatures\ICreature.cs" />
     <Compile Include="Creatures\Player.cs" />
-    <Compile Include="GameObjects\Spike.cs" />
     <Compile Include="GameObjects\Upstairs.cs" />
     <Compile Include="GameObjects\Wall.cs" />
     <Compile Include="Items\IItem.cs" />
@@ -147,6 +146,7 @@
     <Compile Include="States\GameplayState.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="Strategies\ControlledByPlayer.cs" />
+    <Compile Include="Strategies\AttackPlayers.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
   </ItemGroup>
   <ItemGroup>

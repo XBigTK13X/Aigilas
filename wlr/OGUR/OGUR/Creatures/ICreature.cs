@@ -20,6 +20,17 @@ namespace OGUR.Creatures
         protected int m_playerIndex = -1;
         protected CreatureType m_creatureType;
 
+        private SpriteType SpriteFromCreature(CreatureType type)
+        {
+            switch (type)
+            {
+                case CreatureType.PLAYER:
+                    return SpriteType.PLAYER_STAND;
+                default:
+                    return SpriteType.CREATURE;
+            }
+        }
+
         protected void Setup(int x, int y, CreatureType type, Stats stats)
         {
             Initialize(x, y, SpriteFromCreature(type), GameObjectType.CREATURE);
@@ -27,17 +38,6 @@ namespace OGUR.Creatures
             m_creatureType = type;
             m_stats = new Stats(stats);
             m_maxStats = new Stats(stats);
-        }
-
-        private SpriteType SpriteFromCreature(CreatureType type)
-        {
-            switch(type)
-            {
-                case CreatureType.PLAYER:
-                    return SpriteType.PLAYER_STAND;
-                default:
-                    throw new Exception("SpriteFromCreature isn't defined for input '"+type+"'");
-            }
         }
 
         public override void Update()
@@ -104,7 +104,7 @@ namespace OGUR.Creatures
         {
             if ((xVel != 0 || yVel != 0) && GetInt(StatType.MOVE_COOL_DOWN) <= 0)
             {
-                if (!CoordVerifier.IsBlocked(xVel + (int) GetPosition().X, yVel + (int) GetPosition().Y))
+                if (!CoordVerifier.IsBlocked(xVel + (int) GetPosition().X, yVel + (int) GetPosition().Y,this))
                 {
                     Move(xVel, yVel);
                     Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));

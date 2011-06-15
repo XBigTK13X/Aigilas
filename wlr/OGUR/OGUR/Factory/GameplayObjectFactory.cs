@@ -15,8 +15,6 @@ namespace OGUR.Factory
             {
                 case GameObjectType.FLOOR:
                     return new Floor(x, y);
-                case GameObjectType.SPIKE:
-                    return new Spike(x, y);
                 case GameObjectType.WALL:
                     return new Wall(x, y);
                 case GameObjectType.DOWNSTAIRS:

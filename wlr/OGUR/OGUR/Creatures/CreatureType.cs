@@ -2,6 +2,7 @@
 {
     public enum CreatureType
     {
-        PLAYER
+        PLAYER,
+        GOBLIN
     }
 }

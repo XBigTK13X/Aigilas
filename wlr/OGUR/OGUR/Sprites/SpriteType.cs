@@ -13,6 +13,7 @@ namespace OGUR.Sprites
         SPIKE,
         WALL,
         UPSTAIRS,
-        DOWNSTAIRS
+        DOWNSTAIRS,
+        CREATURE
     }    
 }

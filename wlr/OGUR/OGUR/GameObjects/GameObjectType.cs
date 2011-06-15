@@ -7,7 +7,6 @@ namespace OGUR.GameObjects
 {
     public enum GameObjectType
     {
-        SPIKE,
         FLOOR,
         WALL,
         UPSTAIRS,

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using OGUR.Management;
 using OGUR.Sprites;
+using OGUR.GameObjects;
 
 namespace OGUR.Collision
 {
@@ -11,7 +12,7 @@ namespace OGUR.Collision
             return (x > 0 && y > 0 && x < XnaManager.WindowWidth && y < XnaManager.WindowHeight);
         }
 
-        public static bool IsBlocked(int x, int y)
+        public static bool IsBlocked(int x, int y,GameplayObject calling)
         {
             var target = new Point(x + SpriteInfo.Width/2, y + SpriteInfo.Height/2);
             return
