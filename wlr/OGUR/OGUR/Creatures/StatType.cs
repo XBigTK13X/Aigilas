@@ -1,6 +1,6 @@
 ﻿namespace OGUR.Creatures
 {
-    public enum Stat
+    public enum StatType
     {
         HEALTH,
         MANA,

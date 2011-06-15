@@ -8,10 +8,9 @@ namespace OGUR.Creatures
     {
         private void Setup(int x, int y, int playerIndex)
         {
-            base.Setup(x, y, CreatureType.PLAYER, SpriteType.PLAYER_STAND);
+            base.Setup(x, y, CreatureType.PLAYER, new Stats(100, 100, 10, 10, 10, 10, 35));
             m_playerIndex = playerIndex;
             m_strategy = new ControlledByPlayer();
-            InitStats(new List<decimal>() {100, 100, 10, 10, 10, 10, 35, SpriteInfo.Height, COOLDOWN});
         }
 
         public Player(int x, int y, int playerIndex)

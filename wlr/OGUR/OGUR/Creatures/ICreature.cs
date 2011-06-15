@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using OGUR.Items;
 using OGUR.Strategies;
 using OGUR.GameObjects;
@@ -16,44 +15,71 @@ namespace OGUR.Creatures
         protected List<ICreature> targets = new List<ICreature>();
         protected List<IItem> inventory = new List<IItem>();
         protected List<IItem> equipment = new List<IItem>();
-        protected List<decimal> m_stats = new List<decimal>();
-        protected List<decimal> m_maxStats = new List<decimal>();
+        protected Stats m_stats;
+        protected Stats m_maxStats;
         protected int m_playerIndex = -1;
         protected CreatureType m_creatureType;
-        protected static int COOLDOWN = 6;
 
-        protected void Setup(int x, int y, CreatureType type, SpriteType sprite)
+        protected void Setup(int x, int y, CreatureType type, Stats stats)
         {
-            Initialize(x, y, sprite, GameObjectType.CREATURE);
+            Initialize(x, y, SpriteFromCreature(type), GameObjectType.CREATURE);
             m_isBlocking = true;
             m_creatureType = type;
-            foreach (Stat stat in Enum.GetValues(typeof (Stat)).Cast<Stat>())
+            m_stats = new Stats(stats);
+            m_maxStats = new Stats(stats);
+        }
+
+        private SpriteType SpriteFromCreature(CreatureType type)
+        {
+            switch(type)
             {
-                m_stats.Add(0);
-                m_maxStats.Add(1);
+                case CreatureType.PLAYER:
+                    return SpriteType.PLAYER_STAND;
+                default:
+                    throw new Exception("SpriteFromCreature isn't defined for input '"+type+"'");
             }
         }
 
         public override void Update()
         {
-            Adjust(Stat.MOVE_COOL_DOWN, -1);
+            Adjust(StatType.MOVE_COOL_DOWN, -1);
             m_strategy.Act(this);
             CheckForDamage();
         }
 
-        public decimal GetStat(Stat stat)
+        public decimal Get(StatType stat)
         {
-            return m_stats[(int) stat];
+            return m_stats.Get(stat);
         }
 
-        public int GetInt(Stat stat)
+        public decimal GetMax(StatType stat)
         {
-            return (int) GetStat(stat);
+            return (int) m_maxStats.Get(stat);
+        }
+
+        public decimal Set(StatType stat,decimal value)
+        {
+            return m_stats.Set(stat,value);
+        }
+
+        public decimal SetMax(StatType stat,decimal value)
+        {
+            return m_maxStats.Set(stat,value);
+        }
+
+        public int GetInt(StatType stat,bool getMax=false)
+        {
+            return (int) (getMax ? GetMax(stat) : Get(stat));
+        }
+
+        public decimal Set(StatType stat,decimal value,bool setMax=false)
+        {
+            return setMax ? SetMax(stat, value) : Set(stat, value);
         }
 
         protected void CheckForDamage()
         {
-            if (m_stats[(int) Stat.HEALTH] <= 0)
+            if (Get(StatType.HEALTH) <= 0)
             {
                 m_isActive = false;
             }
@@ -69,31 +95,19 @@ namespace OGUR.Creatures
             return m_creatureType;
         }
 
-        protected decimal Adjust(Stat stat, int adjustment)
+        protected decimal Adjust(StatType stat, int adjustment,bool adjustMax = false)
         {
-            m_stats[(int) stat] = m_stats[(int) stat] + adjustment;
-            return m_stats[(int) stat];
-        }
-
-        protected void InitStats(List<decimal> stats)
-        {
-            m_maxStats = new List<decimal>();
-            m_stats = new List<decimal>();
-            foreach (decimal item in stats)
-            {
-                m_maxStats.Add(item);
-                m_stats.Add(item);
-            }
+            return Set(stat, Get(stat) + adjustment,adjustMax);
         }
 
         public void MoveIfPossible(int xVel, int yVel)
         {
-            if ((xVel != 0 || yVel != 0) && GetInt(Stat.MOVE_COOL_DOWN) <= 0)
+            if ((xVel != 0 || yVel != 0) && GetInt(StatType.MOVE_COOL_DOWN) <= 0)
             {
                 if (!CoordVerifier.IsBlocked(xVel + (int) GetPosition().X, yVel + (int) GetPosition().Y))
                 {
                     Move(xVel, yVel);
-                    m_stats[(int) Stat.MOVE_COOL_DOWN] = m_maxStats[(int) Stat.MOVE_COOL_DOWN];
+                    Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));
                 }
             }
         }

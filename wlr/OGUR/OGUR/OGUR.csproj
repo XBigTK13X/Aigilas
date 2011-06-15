@@ -112,7 +112,9 @@
     <Compile Include="Collision\Point.cs" />
     <Compile Include="Creatures\CreatureType.cs" />
     <Compile Include="Creatures\MentalState.cs" />
-    <Compile Include="Creatures\Stat.cs" />
+    <Compile Include="Creatures\NormalCreature.cs" />
+    <Compile Include="Creatures\StatType.cs" />
+    <Compile Include="Creatures\Stats.cs" />
     <Compile Include="Dungeons\Dungeon.cs" />
     <Compile Include="Dungeons\DungeonManager.cs" />
     <Compile Include="Dungeons\Room.cs" />

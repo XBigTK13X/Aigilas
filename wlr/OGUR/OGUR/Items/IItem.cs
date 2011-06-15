@@ -13,7 +13,7 @@ namespace OGUR.Items
 
         protected IItem()
         {
-            foreach (Stat stat in Enum.GetValues(typeof (Stat)).Cast<Stat>())
+            foreach (StatType stat in Enum.GetValues(typeof (StatType)).Cast<StatType>())
             {
                 Modifers.Add(0);
             }
