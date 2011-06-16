@@ -2,7 +2,6 @@
 using System.Linq;
 using OGUR.Collision;
 using OGUR.Management;
-using OGUR.Factory;
 using OGUR.Creatures;
 
 namespace OGUR.GameObjects

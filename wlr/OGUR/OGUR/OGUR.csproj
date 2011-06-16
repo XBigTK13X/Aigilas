@@ -119,10 +119,10 @@
     <Compile Include="Dungeons\DungeonManager.cs" />
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />
-    <Compile Include="Factory\AnimatedTextureFactory.cs" />
-    <Compile Include="Factory\CreatureFactory.cs" />
-    <Compile Include="Factory\GameplayObjectFactory.cs" />
-    <Compile Include="Factory\ItemFactory.cs" />
+    <Compile Include="Sprites\AnimatedTextureFactory.cs" />
+    <Compile Include="Creatures\CreatureFactory.cs" />
+    <Compile Include="GameObjects\GameplayObjectFactory.cs" />
+    <Compile Include="Items\ItemFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObjects\Downstairs.cs" />
     <Compile Include="GameObjects\Floor.cs" />

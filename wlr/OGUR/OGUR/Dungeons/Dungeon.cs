@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using OGUR.GameObjects;
+using OGUR.Items;
 using OGUR.Sprites;
-using OGUR.Factory;
 using OGUR.Management;
 using Microsoft.Xna.Framework;
 using OGUR.Creatures;

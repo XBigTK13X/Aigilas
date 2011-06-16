@@ -51,7 +51,6 @@ namespace OGUR.Creatures
         {
             Adjust(StatType.MOVE_COOL_DOWN, -1);
             m_strategy.Act(this);
-            CheckForDamage();
         }
 
         public decimal Get(StatType stat)
@@ -129,9 +128,14 @@ namespace OGUR.Creatures
                 }
                 else
                 {
-                    foreach (var creature in GameplayObjectManager.GetObjects(GameObjectType.CREATURE,target).Cast<ICreature>().Where(creature => creature!=this))
+                    var creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE,target).Cast<ICreature>().Where(creature => creature!=this);
+                    if(creatures.Count()>0)
                     {
-                        creature.ApplyDamage(CalculateDamage());
+                        foreach (var creature in creatures)
+                        {
+                            creature.ApplyDamage(CalculateDamage());
+                        }
+                        Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));    
                     }
                 }
             }
