@@ -140,7 +140,7 @@
     <Compile Include="Items\ItemType.cs" />
     <Compile Include="Management\AIManager.cs" />
     <Compile Include="Management\Camera.cs" />
-    <Compile Include="Management\GameplayObjectManager.cs" />
+    <Compile Include="GameObjects\GameplayObjectManager.cs" />
     <Compile Include="Management\InputManager.cs" />
     <Compile Include="Management\StateManager.cs" />
     <Compile Include="Management\XnaManager.cs" />

@@ -1,10 +1,8 @@
 ﻿using System;
 using OGUR.Creatures;
 using OGUR.GameObjects;
-using OGUR.Items;
-using OGUR.Management;
 
-namespace OGUR.Factory
+namespace OGUR.Items
     
 {
     public class ItemFactory : GameplayObject

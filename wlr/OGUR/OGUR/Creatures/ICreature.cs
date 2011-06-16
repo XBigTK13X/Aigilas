@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OGUR.Items;
+using OGUR.Management;
 using OGUR.Strategies;
 using OGUR.GameObjects;
 using OGUR.Sprites;
@@ -82,14 +84,6 @@ namespace OGUR.Creatures
             return setMax ? SetMax(stat, value) : Set(stat, value);
         }
 
-        protected void CheckForDamage()
-        {
-            if (Get(StatType.HEALTH) <= 0)
-            {
-                m_isActive = false;
-            }
-        }
-
         public int GetPlayerIndex()
         {
             return m_playerIndex;
@@ -100,19 +94,45 @@ namespace OGUR.Creatures
             return m_creatureType;
         }
 
-        protected decimal Adjust(StatType stat, int adjustment,bool adjustMax = false)
+        protected decimal Adjust(StatType stat, decimal adjustment,bool adjustMax = false)
         {
             return Set(stat, Get(stat) + adjustment,adjustMax);
+        }
+
+        public void ApplyDamage(decimal damage)
+        {
+            damage -= m_stats.Get(StatType.DEFENSE);
+            if(damage>0)
+            {
+                Adjust(StatType.HEALTH, -damage);
+            }
+            if (Get(StatType.HEALTH) <= 0)
+            {
+                m_isActive = false;
+            }
+        }
+
+        protected decimal CalculateDamage()
+        {
+            return m_stats.Get(StatType.STRENGTH);
         }
 
         public void MoveIfPossible(int xVel, int yVel)
         {
             if ((xVel != 0 || yVel != 0) && GetInt(StatType.MOVE_COOL_DOWN) <= 0)
             {
-                if (!CoordVerifier.IsBlocked(xVel + (int) GetPosition().X, yVel + (int) GetPosition().Y,this))
+                var target = new Point(xVel + (int) GetPosition().X,yVel + (int) GetPosition().Y);
+                if (!CoordVerifier.IsBlocked(target.X,target.Y,this))
                 {
                     Move(xVel, yVel);
                     Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));
+                }
+                else
+                {
+                    foreach (var creature in GameplayObjectManager.GetObjects(GameObjectType.CREATURE,target).Cast<ICreature>().Where(creature => creature!=this))
+                    {
+                        creature.ApplyDamage(CalculateDamage());
+                    }
                 }
             }
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using OGUR.GameObjects;
 using OGUR.States;
 
 namespace OGUR.Management

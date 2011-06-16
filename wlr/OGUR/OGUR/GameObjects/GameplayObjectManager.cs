@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using OGUR.GameObjects;
-using OGUR.Sprites;
+using OGUR.Collision;
+using OGUR.Management;
 using OGUR.Factory;
 using OGUR.Creatures;
 
-namespace OGUR.Management
+namespace OGUR.GameObjects
 {
     internal static class GameplayObjectManager
     {
-        private static List<GameplayObject> m_contents = new List<GameplayObject>();
+        private static readonly List<GameplayObject> m_contents = new List<GameplayObject>();
 
         public static GameplayObject AddObject(GameplayObject gameplayObject)
         {
@@ -24,58 +22,34 @@ namespace OGUR.Management
         {
             if (m_contents != null)
             {
-                foreach (GameplayObject item in m_contents)
-                {
-                    if (item.GetObjectType() == type)
-                    {
-                        return item;
-                    }
-                }
+                return m_contents.FirstOrDefault(item => item.GetObjectType() == type);
+            }
+            return null;
+        }
+
+        public static List<GameplayObject> GetObjects(GameObjectType type,Point target)
+        {
+            if (m_contents != null)
+            {
+                return m_contents.Where(o => o.GetObjectType() == type && o.Contains(target)).ToList();
             }
             return null;
         }
 
         public static List<GameplayObject> GetObjects(GameObjectType type)
         {
-            List<GameplayObject> result = new List<GameplayObject>();
-            foreach (GameplayObject item in m_contents)
-            {
-                if (item.GetObjectType() == type)
-                {
-                    result.Add(item);
-                }
-            }
-            return result;
+            return m_contents.Where(item => item.GetObjectType() == type).ToList();
         }
 
         public static ICreature GetObject(CreatureType type)
         {
-            if (m_contents != null)
-            {
-                foreach (ICreature item in m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE))
-                {
-                    if (item.GetCreatureType() == type)
-                    {
-                        return item;
-                    }
-                }
-            }
-            return null;
+            return m_contents != null ? m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().FirstOrDefault(creature => creature.GetCreatureType() == type) : null;
         }
 
         public static List<ICreature> GetObjects(CreatureType type)
         {
-            List<ICreature> result = new List<ICreature>();
-            foreach (ICreature item in m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE))
-            {
-                if (item.GetCreatureType() == type)
-                {
-                    result.Add(item);
-                }
-            }
-            return result;
+            return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() == type).ToList();
         }
-
 
         public static List<GameplayObject> GetObjects()
         {
@@ -86,7 +60,6 @@ namespace OGUR.Management
         {
             m_contents.Remove(target);
         }
-
 
         public static void Clear()
         {
@@ -100,7 +73,8 @@ namespace OGUR.Management
             {
                 if (m_contents[ii].GetObjectType() == GameObjectType.CREATURE)
                 {
-                    (m_contents[ii] as ICreature).Update();
+                    var creature = m_contents[ii] as ICreature;
+                    if (creature != null) creature.Update();
                 }
                 else
                 {

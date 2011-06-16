@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OGUR.GameObjects;
-using OGUR.Sprites;
 
-namespace OGUR.Factory
+namespace OGUR.GameObjects
 {
     public class GameplayObjectFactory
     {

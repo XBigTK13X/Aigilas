@@ -1,9 +1,8 @@
 ﻿using System;
 using OGUR.Collision;
-using OGUR.Creatures;
-using OGUR.Management;
+using OGUR.GameObjects;
 
-namespace OGUR.Factory
+namespace OGUR.Creatures
 {
     public class CreatureFactory
     {
