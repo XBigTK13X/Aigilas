@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OGUR.Creatures;
 using OGUR.GameObjects;
+using OGUR.Management;
 using OGUR.Sprites;
 
 namespace OGUR.Items
@@ -15,8 +16,9 @@ namespace OGUR.Items
         private ItemType m_type;
         private Slots m_targetSlots;
 
-        public GenericItem(Stats modifiers,ItemSuffix suffix,ItemPrefix prefix,ItemType type,bool onGround=true)
+        public GenericItem(Stats modifiers,ItemSuffix suffix,ItemPrefix prefix,ItemType type,bool onGround=true,int x =-1,int y = -1)
         {
+            Setup(x,y,type);
             if(type==ItemType.NULL)
             {
                 throw new Exception("Invalid type NULL passed into the GenericItem factory!");
@@ -25,12 +27,29 @@ namespace OGUR.Items
             m_prefix = prefix;
             m_type = type;
             m_targetSlots = GetSlotFromType(type);
-            Name = Enum.GetName(typeof(ItemPrefix), m_prefix) + Enum.GetName(typeof(ItemType), m_type) + Enum.GetName(typeof(ItemSuffix), m_suffix);
+            Name = (m_prefix==ItemPrefix.NULL?"":Enum.GetName(typeof(ItemPrefix), m_prefix)+" ")+ Enum.GetName(typeof(ItemType), m_type) + (m_suffix==ItemSuffix.NULL?"":" "+Enum.GetName(typeof(ItemSuffix), m_suffix));
             Modifers = new Stats(modifiers);
         }
-        protected void Setup(int x, int y, ItemType type, Stats stats)
+        protected void Setup(int x, int y, ItemType type)
         {
-            Initialize(x, y, SpriteFromItem(type), GameObjectType.CREATURE);
+            Initialize(x, y, SpriteFromItem(type), GameObjectType.ITEM);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            if (m_isOnBoard)
+            {
+                foreach (ICreature player in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
+                {
+                    if (Collision.HitTest.IsTouching(player, this) &&
+                        InputManager.IsPressed(InputManager.Commands.Confirm, player.GetPlayerIndex()))
+                    {
+                        Hide();
+                        player.AddItem(this);
+                    }
+                }
+            }
         }
 
         private SpriteType SpriteFromItem(ItemType item)

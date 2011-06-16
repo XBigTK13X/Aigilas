@@ -40,6 +40,11 @@ namespace OGUR.Dungeons
             }
         }
 
+        public void CacheContents()
+        {
+            m_contents = new List<GameplayObject>(GameplayObjectManager.GetObjects());
+        }
+
         private void Generate()
         {
             GameplayObjectManager.Clear();
@@ -58,9 +63,11 @@ namespace OGUR.Dungeons
                     GameplayObjectManager.AddObject(tile);
                 }
             }
+            m_contents.Add(ItemFactory.CreateRandomPlain(100, 100));
             m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X*SpriteInfo.Width,
                                                   downSpawnLocation.Y*SpriteInfo.Height));
             m_contents.Add(CreatureFactory.Create(CreatureType.GOBLIN, upSpawnLocation.X * SpriteInfo.Width,upSpawnLocation.Y*SpriteInfo.Height));
+            
         }
 
         private void PlaceRooms()

@@ -12,9 +12,9 @@ namespace OGUR.Creatures
     {
         protected IStrategy m_strategy;
         protected MentalState m_mentality = MentalState.NORMAL;
-        protected List<ICreature> targets = new List<ICreature>();
-        protected List<GenericItem> inventory = new List<GenericItem>();
-        protected List<GenericItem> equipment = new List<GenericItem>();
+        protected List<ICreature> m_targets = new List<ICreature>();
+        protected List<GenericItem> m_inventory = new List<GenericItem>();
+        protected List<GenericItem> m_equipment = new List<GenericItem>();
         protected Stats m_stats;
         protected Stats m_maxStats;
         protected int m_playerIndex = -1;
@@ -38,6 +38,11 @@ namespace OGUR.Creatures
             m_creatureType = type;
             m_stats = new Stats(stats);
             m_maxStats = new Stats(stats);
+        }
+
+        public void AddItem(GenericItem item)
+        {
+            m_inventory.Add(item);
         }
 
         public override void Update()

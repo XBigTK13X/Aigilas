@@ -2,6 +2,7 @@
 using OGUR.Creatures;
 using OGUR.GameObjects;
 using OGUR.Items;
+using OGUR.Management;
 
 namespace OGUR.Factory
     
@@ -9,9 +10,17 @@ namespace OGUR.Factory
     public class ItemFactory : GameplayObject
     {
         private static Random rand = new Random();
-        public static GenericItem CreateRandomPlain()
+        public static GenericItem CreateRandomPlain(bool onFloor=false,int x = -100,int y = -100)
         {
-            return new GenericItem(new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),ItemSuffix.NULL,ItemPrefix.NULL, SelectRandomType());
+            return
+                (GenericItem)
+                GameplayObjectManager.AddObject(new GenericItem(new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+                                                                ItemSuffix.NULL, ItemPrefix.NULL, SelectRandomType(),
+                                                                onFloor, x, y));
+        }
+        public static GenericItem CreateRandomPlain(int x, int y)
+        {
+            return CreateRandomPlain(true, x, y);
         }
         public static GenericItem CreateRandomMagic()
         {
@@ -20,7 +29,7 @@ namespace OGUR.Factory
         }
         private static ItemType SelectRandomType()
         {
-            return (ItemType)Enum.GetValues(typeof (ItemType)).GetValue(rand.Next(0, Enum.GetValues(typeof (ItemType)).Length));
+            return (ItemType)Enum.GetValues(typeof (ItemType)).GetValue(rand.Next(1, Enum.GetValues(typeof (ItemType)).Length));
         }
     }
 }

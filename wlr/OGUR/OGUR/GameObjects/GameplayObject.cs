@@ -18,6 +18,7 @@ namespace OGUR.GameObjects
         protected bool m_isBlocking = false;
         protected SpriteType m_assetName;
         protected GameObjectType m_objectType;
+        protected bool m_isOnBoard = true;
 
         //Load the texture for the sprite using the Content Pipeline
         public void LoadContent()
@@ -28,7 +29,20 @@ namespace OGUR.GameObjects
         //Draw the sprite to the screen
         public void Draw()
         {
-            m_graphic.Draw();
+            if(m_isOnBoard)
+            {
+                m_graphic.Draw();                
+            }
+        }
+
+        public void Hide()
+        {
+            m_isOnBoard = false;
+        }
+
+        public void Show()
+        {
+            m_isOnBoard = true;
         }
 
         protected void Initialize(int x, int y, SpriteType spriteType, GameObjectType objectType)

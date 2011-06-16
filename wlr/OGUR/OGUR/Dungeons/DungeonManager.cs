@@ -17,6 +17,7 @@ namespace OGUR.Dungeons
 
         public static void GotoNext()
         {
+            s_dungeons[s_currentDungeon].CacheContents();
             s_currentDungeon++;
             LoadOrCreateDungeon(false);
         }
@@ -25,6 +26,7 @@ namespace OGUR.Dungeons
         {
             if (s_currentDungeon > 0)
             {
+                s_dungeons[s_currentDungeon].CacheContents();
                 s_currentDungeon--;
                 LoadOrCreateDungeon(true);
             }
