@@ -7,6 +7,7 @@ using OGUR.Strategies;
 using OGUR.GameObjects;
 using OGUR.Sprites;
 using OGUR.Collision;
+using OGUR.Text;
 
 namespace OGUR.Creatures
 {
@@ -134,6 +135,7 @@ namespace OGUR.Creatures
                         foreach (var creature in creatures)
                         {
                             creature.ApplyDamage(CalculateDamage());
+                            TextManager.AddMessage(CalculateDamage().ToString(),(int)creature.GetPosition().X,(int)creature.GetPosition().Y);
                         }
                         Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));    
                     }

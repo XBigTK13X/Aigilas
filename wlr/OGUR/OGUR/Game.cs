@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using OGUR.Management;
 using OGUR.States;
 using OGUR.Sprites;
+using OGUR.Text;
 
 namespace OGUR
 {
@@ -56,7 +57,7 @@ namespace OGUR
             spriteBatch = new SpriteBatch(GraphicsDevice);
             XnaManager.SetRenderTarget(spriteBatch);
             StateManager.LoadContent();
-            // TODO: use this.Content to load your game content here
+            TextManager.LoadContent();
         }
 
         /// <summary>
@@ -81,6 +82,7 @@ namespace OGUR
 
             // TODO: Add your update logic here
             StateManager.Update();
+            TextManager.Update();
             base.Update(gameTime);
         }
 
@@ -91,9 +93,8 @@ namespace OGUR
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
             StateManager.Draw();
+            TextManager.Draw();
             base.Draw(gameTime);
         }
     }
