@@ -23,11 +23,6 @@ namespace OGUR.Creatures
         public override void Update()
         {
             base.Update();
-            if(!Collision.HitTest.IsTouching(this,GameplayObjectManager.GetObject(GameObjectType.DOWNSTAIRS)) 
-                && !Collision.HitTest.IsTouching(this,GameplayObjectManager.GetObject(GameObjectType.UPSTAIRS)))
-            {
-                InputManager.Unlock(InputManager.Commands.Confirm,m_playerIndex);
-            }
         }
     }
 }

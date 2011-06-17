@@ -119,6 +119,8 @@
     <Compile Include="Dungeons\DungeonManager.cs" />
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="HUD\Inventory.cs" />
+    <Compile Include="HUD\InventoryScreensManager.cs" />
     <Compile Include="Text\Text.cs" />
     <Compile Include="Text\TextManager.cs" />
     <Compile Include="Sprites\AnimatedTextureFactory.cs" />

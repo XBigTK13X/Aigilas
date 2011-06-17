@@ -1,6 +1,7 @@
-﻿using OGUR.Management;
+﻿using OGUR.GameObjects;
+using OGUR.HUD;
+using OGUR.Management;
 using OGUR.Creatures;
-
 namespace OGUR.Strategies
 {
     public class ControlledByPlayer : IStrategy
@@ -22,9 +23,10 @@ namespace OGUR.Strategies
                                       : 0);
             decimal yVel = downVelocity + upVelocity;
             target.MoveIfPossible((int) xVel, (int) yVel);
-            if(!InputManager.IsPressed(InputManager.Commands.Confirm,target.GetPlayerIndex(),false))
+            
+            if(InputManager.IsPressed(InputManager.Commands.Inventory,target.GetPlayerIndex()))
             {
-                InputManager.Unlock(InputManager.Commands.Confirm,target.GetPlayerIndex());
+                InventoryScreensManager.Toggle(target.GetPlayerIndex());
             }
         }
     }

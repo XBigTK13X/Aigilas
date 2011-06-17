@@ -117,6 +117,16 @@ namespace OGUR.Creatures
             return m_stats.Get(StatType.STRENGTH);
         }
 
+        public void SetInventory(List<GenericItem> items)
+        {
+            m_inventory = new List<GenericItem>(items);
+        }
+
+        public List<GenericItem> GetInventory()
+        {
+            return m_inventory;
+        }
+
         public void MoveIfPossible(int xVel, int yVel)
         {
             if ((xVel != 0 || yVel != 0) && GetInt(StatType.MOVE_COOL_DOWN) <= 0)
