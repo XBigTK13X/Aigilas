@@ -1,4 +1,5 @@
-﻿using OGUR.Creatures;
+﻿using System.Collections.Generic;
+using OGUR.Creatures;
 
 namespace OGUR.Strategies
 {

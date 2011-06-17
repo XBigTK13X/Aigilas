@@ -60,7 +60,7 @@ namespace OGUR.HUD
                          null,
                          XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
             var tempPosition = new Vector2(0, 0);
-            target.Draw(InventoryScreensManager.GetMenuBase(), tempPosition, new Rectangle(0,0,1,1),Color.White,0f,new Vector2(0,0),new Vector2(100,100),SpriteEffects.None,0f);
+            target.Draw(InventoryScreensManager.GetMenuBase(), tempPosition, new Rectangle(0,0,1,1),Color.White,0f,new Vector2(0,0),new Vector2(XnaManager.WindowWidth/2,XnaManager.WindowHeight/2),SpriteEffects.None,0f);
             target.End();
         }
 

@@ -12,7 +12,7 @@ namespace OGUR.Collision
             return (x > 0 && y > 0 && x < XnaManager.WindowWidth && y < XnaManager.WindowHeight);
         }
 
-        public static bool IsBlocked(int x, int y,GameplayObject calling)
+        public static bool IsBlocked(int x, int y)
         {
             var target = new Point(x + SpriteInfo.Width/2, y + SpriteInfo.Height/2);
             return
