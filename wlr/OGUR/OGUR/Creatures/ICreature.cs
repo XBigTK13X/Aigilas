@@ -102,9 +102,15 @@ namespace OGUR.Creatures
         public void ApplyDamage(decimal damage)
         {
             damage -= m_stats.Get(StatType.DEFENSE);
+            if (damage <= 0)
+            {
+                damage = 0;
+                
+            }
+            TextManager.AddMessage(damage.ToString(), (int)this.GetPosition().X + SpriteInfo.Width / 2,
+                                       (int)this.GetPosition().Y + SpriteInfo.Height / 2);
             if(damage>0)
             {
-                TextManager.AddMessage(damage.ToString(), (int)this.GetPosition().X, (int)this.GetPosition().Y);
                 Adjust(StatType.HEALTH, -damage);
             }
             if (Get(StatType.HEALTH) <= 0)
