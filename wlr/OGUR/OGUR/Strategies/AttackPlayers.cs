@@ -8,16 +8,22 @@ namespace OGUR.Strategies
     {
         public override void Act(ICreature target)
         {
-            var opponent = GameplayObjectManager.FindNearestPlayer(target);
-            if(opponent!=null)
-            {
-                var pathToTraverse = GameplayObjectManager.FindNearestPlayer(target);
-
-            }
-            var rand = new Random();
-            int xVel = (rand.Next(0, 3) - 1)*(int)target.Get(StatType.MOVE_SPEED);
-            int yVel = (rand.Next(0, 3) - 1)*(int)target.Get(StatType.MOVE_SPEED);
-            target.MoveIfPossible(xVel,yVel);
+            var opponent = GameplayObjectManager.GetNearestPlayer(target);
+            decimal leftVelocity = (opponent.GetPosition().X<target.GetPosition().X)
+                                        ? -target.GetInt(StatType.MOVE_SPEED)
+                                        : 0;
+            decimal rightVelocity = (opponent.GetPosition().X>target.GetPosition().X)
+                                         ? target.GetInt(StatType.MOVE_SPEED)
+                                         : 0;
+            decimal xVel = leftVelocity + rightVelocity;
+            decimal downVelocity = (opponent.GetPosition().Y>target.GetPosition().Y)
+                                        ? target.GetInt(StatType.MOVE_SPEED)
+                                        : 0;
+            decimal upVelocity = (opponent.GetPosition().Y<target.GetPosition().Y)
+                                      ? -target.GetInt(StatType.MOVE_SPEED)
+                                      : 0;
+            decimal yVel = downVelocity + upVelocity;
+            target.MoveIfPossible((int)xVel, (int)yVel);
         }
     }
 }

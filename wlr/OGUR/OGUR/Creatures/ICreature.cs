@@ -104,6 +104,7 @@ namespace OGUR.Creatures
             damage -= m_stats.Get(StatType.DEFENSE);
             if(damage>0)
             {
+                TextManager.AddMessage(damage.ToString(), (int)this.GetPosition().X, (int)this.GetPosition().Y);
                 Adjust(StatType.HEALTH, -damage);
             }
             if (Get(StatType.HEALTH) <= 0)
@@ -145,7 +146,6 @@ namespace OGUR.Creatures
                         foreach (var creature in creatures)
                         {
                             creature.ApplyDamage(CalculateDamage());
-                            TextManager.AddMessage(CalculateDamage().ToString(),(int)creature.GetPosition().X,(int)creature.GetPosition().Y);
                         }
                         Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));    
                     }

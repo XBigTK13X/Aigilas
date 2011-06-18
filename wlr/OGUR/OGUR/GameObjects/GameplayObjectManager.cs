@@ -114,42 +114,17 @@ namespace OGUR.GameObjects
             }
         }
 
-        public static Point FindNearestPlayer(ICreature target)
+        public static ICreature GetNearestPlayer(ICreature target)
         {
-            var players = GetObjects(CreatureType.PLAYER);
-            ICreature closestPlayer = players[0];
-            foreach(ICreature player in players)
+            ICreature closest = GetObjects(CreatureType.PLAYER).First();
+            foreach(ICreature player in GetObjects(CreatureType.PLAYER))
             {
-                List<Point> path = new List<Point>();
-                path.Add(new Point((int)target.GetPosition().X / Sprites.SpriteInfo.Width, (int)target.GetPosition().Y / Sprites.SpriteInfo.Height));
-                int weight = 0;
-                bool searching = true;
-                while (searching)
+                if(HitTest.GetDistance(target,player) < HitTest.GetDistance(target,closest))
                 {
-                    weight++;
-                    foreach (Point tile in path)
-                    {
-                        for (int ii = -1; ii <= 1; ii++)
-                        {
-                            for (int jj = -1; jj <= 1; jj++)
-                            {
-                                var check = new Point(tile.X + ii*SpriteInfo.Width, tile.Y + jj*SpriteInfo.Height,weight);
-                                if (!CoordVerifier.IsBlocked(check.X,check.Y))
-                                {
-                                    if(path.Where(o=>o.X==check.X && o.Y == check.Y && o.Weight < check.Weight).Count()==0)
-                                    {
-                                        path.Add(check);
-                                        //Check to see if this Point is the player. If so, then stop looking.
-                                        // if so then return the first link in the path
-                                        return path[path.Count() - 2];
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    closest = player;
                 }
             }
-            return null;
+            return closest;
         }
     }
 }
