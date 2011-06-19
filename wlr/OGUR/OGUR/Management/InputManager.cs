@@ -15,11 +15,15 @@ namespace OGUR.Management
             MoveLeft,
             MoveRight,
             Confirm,
-            Inventory
+            Inventory,
+            InventoryLeft,
+            InventoryRight,
+            InventoryUp,
+            InventoryDown
         }
         private static List<CommandLock> s_locks = new List<CommandLock>(); 
 
-        private static List<Commands> s_lockOnPress = new List<Commands>(){Commands.Confirm,Commands.Inventory}; 
+        private static List<Commands> s_lockOnPress = new List<Commands>(){Commands.Confirm,Commands.Inventory,Commands.InventoryLeft,Commands.InventoryRight,Commands.InventoryDown,Commands.InventoryUp}; 
 
         private static readonly List<string> m_playerInputDevices = new List<string>()
                                                                         {
@@ -34,7 +38,11 @@ namespace OGUR.Management
                                                                                        {Commands.MoveRight, Keys.Right},
                                                                                        {Commands.MoveLeft, Keys.Left},
                                                                                        {Commands.Confirm, Keys.Space},
-                                                                                       {Commands.Inventory, Keys.E}
+                                                                                       {Commands.Inventory, Keys.E},
+                                                                                       {Commands.InventoryLeft, Keys.S},
+                                                                                       {Commands.InventoryRight, Keys.F},
+                                                                                       {Commands.InventoryDown, Keys.C},
+                                                                                       {Commands.InventoryUp,Keys.D}
                                                                                    };
 
         private static readonly Dictionary<Commands, Buttons> m_gamePadMapping = new Dictionary<Commands, Buttons>()

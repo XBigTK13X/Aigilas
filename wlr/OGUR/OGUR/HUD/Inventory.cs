@@ -19,6 +19,9 @@ namespace OGUR.HUD
         private ICreature m_target;
         private Vector2 m_position;
         private bool m_isVisible = true;
+        private int startingItem = 0;
+        private int endingItem = 4;
+        private int m_currentClass = 1;
 
         public Inventory(int playerIndex)
         {
@@ -66,6 +69,60 @@ namespace OGUR.HUD
 
         public void Update()
         {
+            if(InputManager.IsPressed(InputManager.Commands.InventoryLeft,m_target.GetPlayerIndex()))
+            {
+                m_currentClass--;
+                if(m_currentClass<=0)
+                {
+                    m_currentClass = Enum.GetValues(typeof (ItemClass)).Length-1;
+                }
+                TextManager.Clear();
+            }
+
+            if (InputManager.IsPressed(InputManager.Commands.InventoryRight, m_target.GetPlayerIndex()))
+            {
+                m_currentClass++;
+                if (m_currentClass > Enum.GetValues(typeof(ItemClass)).Length - 1)
+                {
+                    m_currentClass = 1;
+                }
+                TextManager.Clear();
+            }
+
+            if(InputManager.IsPressed(InputManager.Commands.InventoryDown,m_target.GetPlayerIndex()))
+            {
+                if (startingItem < m_contents.Count() - 1)
+                {
+                    startingItem++;
+                    endingItem++;
+                }
+                TextManager.Clear();
+            }
+
+            if (InputManager.IsPressed(InputManager.Commands.InventoryUp, m_target.GetPlayerIndex()))
+            {
+                if (startingItem > 0)
+                {
+                    startingItem--;
+                    endingItem--;
+                }
+                TextManager.Clear();
+            }
+
+            var currentClass = (ItemClass)Enum.GetValues(typeof(ItemClass)).GetValue(m_currentClass);
+            TextManager.Add(new InventoryItemsText(currentClass.ToString().Replace("_", " "), 140, 30, m_target.GetPlayerIndex()));
+            var invClassItems = m_contents.Where(o => o.GetItemClass() == currentClass).ToList();
+            
+
+            if(InputManager.IsPressed(InputManager.Commands.Confirm,m_target.GetPlayerIndex()))
+            {
+                m_target.Equip(invClassItems[startingItem]);
+            }
+
+            for(int ii = startingItem;ii<endingItem&&ii<invClassItems.Count();ii++)
+            {
+                TextManager.Add(new InventoryItemsText(invClassItems[ii].Name, 50, 60 + 25 * ii-startingItem, m_target.GetPlayerIndex()));
+            }
         }
     }
 }

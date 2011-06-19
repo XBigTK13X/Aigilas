@@ -5,7 +5,7 @@ using OGUR.GameObjects;
 namespace OGUR.Items
     
 {
-    public class ItemFactory : GameplayObject
+    public class ItemFactory
     {
         private static Random rand = new Random();
         public static GenericItem CreateRandomPlain(bool onFloor=false,int x = -100,int y = -100)

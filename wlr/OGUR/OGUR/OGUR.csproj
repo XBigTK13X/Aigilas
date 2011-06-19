@@ -121,6 +121,9 @@
     <Compile Include="EntryPoint.cs" />
     <Compile Include="HUD\Inventory.cs" />
     <Compile Include="HUD\InventoryScreensManager.cs" />
+    <Compile Include="Items\ItemClass.cs" />
+    <Compile Include="Text\ActionText.cs" />
+    <Compile Include="Text\InventoryItemsText.cs" />
     <Compile Include="Text\Text.cs" />
     <Compile Include="Text\TextManager.cs" />
     <Compile Include="Sprites\AnimatedTextureFactory.cs" />
@@ -196,7 +199,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

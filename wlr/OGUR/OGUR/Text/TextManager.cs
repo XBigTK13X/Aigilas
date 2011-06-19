@@ -9,9 +9,12 @@ namespace OGUR.Text
         static private SpriteFont actionFont;
         static private List<Text> m_contents = new List<Text>();
 
-        public static void AddMessage(string message,int x, int y)
+        public static void Add(Text textToAdd)
         {
-            m_contents.Add(new Text(message, 30, x, y));
+            if(!m_contents.Contains(textToAdd))
+            {
+                m_contents.Add(textToAdd);    
+            }
         }
 
         public static void Clear()
@@ -19,7 +22,7 @@ namespace OGUR.Text
             m_contents.Clear();
         }
 
-        static public SpriteFont GetActionFont()
+        static public SpriteFont GetFont()
         {
             return actionFont;
         }

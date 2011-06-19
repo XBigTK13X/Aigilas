@@ -22,6 +22,7 @@ namespace OGUR.Creatures
         protected Stats m_maxStats;
         protected int m_playerIndex = -1;
         protected CreatureType m_creatureType;
+        protected Slots m_equipmentSlots;
 
         private SpriteType SpriteFromCreature(CreatureType type)
         {
@@ -43,9 +44,31 @@ namespace OGUR.Creatures
             m_maxStats = new Stats(stats);
         }
 
-        public void AddItem(GenericItem item)
+        public void PickupItem(GenericItem item)
         {
             m_inventory.Add(item);
+        }
+
+        public void Equip(GenericItem item)
+        {
+            if(m_inventory.Contains(item)&&!m_equipmentSlots.IsFull(item.GetItemClass()))
+            {
+                item.Equip();
+                m_equipment.Add(item);
+                m_inventory.Remove(item);
+                m_equipmentSlots.Fill(item.GetItemClass());
+            }
+        }
+
+        public void Unequip(GenericItem item)
+        {
+            if (m_equipment.Contains(item))
+            {
+                item.Unequip();
+                m_inventory.Add(item);
+                m_equipment.Remove(item);
+                m_equipmentSlots.Remove(item.GetItemClass());
+            }
         }
 
         public override void Update()
@@ -107,8 +130,8 @@ namespace OGUR.Creatures
                 damage = 0;
                 
             }
-            TextManager.AddMessage(damage.ToString(), (int)this.GetPosition().X + SpriteInfo.Width / 2,
-                                       (int)this.GetPosition().Y + SpriteInfo.Height / 2);
+            TextManager.Add(new ActionText(damage.ToString(),30, (int)this.GetPosition().X + SpriteInfo.Width / 2,
+                                       (int)this.GetPosition().Y + SpriteInfo.Height / 2));
             if(damage>0)
             {
                 Adjust(StatType.HEALTH, -damage);

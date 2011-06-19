@@ -4,6 +4,13 @@
     {
         NULL,
         Sword,
-        Pants
+        Pants,
+        Dagger,
+        Shield,
+        Bow,
+        Arrow,
+        Staff,
+        Hood,
+        Shirt
     }
 }

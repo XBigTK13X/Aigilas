@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using OGUR.Management;
+using OGUR.Text;
 
 namespace OGUR.HUD
 {
@@ -33,8 +34,17 @@ namespace OGUR.HUD
         {
             foreach(Inventory items in m_inventories)
             {
-                items.Draw();
+                if (items.IsVisible())
+                {
+                    items.Draw();
+                }
             }
+        }
+
+
+        static public bool IsShowing(int playerIndex)
+        {
+            return m_inventories.Where(o => o.GetPlayerId() == playerIndex).Count() > 0;
         }
 
         static public Texture2D GetMenuBase()
@@ -54,6 +64,7 @@ namespace OGUR.HUD
                 else
                 {
                     m_inventories.Remove(items);
+                    TextManager.Clear();
                     index--;
                 }
             }

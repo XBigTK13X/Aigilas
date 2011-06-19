@@ -12,6 +12,7 @@
         LEGS,
         RIGHT_FINGER,
         LEFT_FINGER,
-        FEET
+        FEET,
+        HANDS
     }
 }
