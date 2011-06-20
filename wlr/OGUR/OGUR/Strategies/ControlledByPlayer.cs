@@ -1,4 +1,6 @@
-﻿using OGUR.Management;
+﻿using OGUR.Dungeons;
+using OGUR.GameObjects;
+using OGUR.Management;
 using OGUR.Creatures;
 namespace OGUR.Strategies
 {
@@ -25,6 +27,20 @@ namespace OGUR.Strategies
             if(InputManager.IsPressed(InputManager.Commands.Inventory,target.GetPlayerIndex()))
             {
                 target.ToggleInventoryVisibility();
+            }
+            foreach (var downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
+            {
+                if (Collision.HitTest.IsTouching(downstairs, target) && InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
+                {
+                    DungeonManager.GotoNext();
+                }
+            }
+            foreach (var upstairs in GameplayObjectManager.GetObjects(GameObjectType.UPSTAIRS))
+            {
+                if (Collision.HitTest.IsTouching(upstairs, target) && InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
+                {
+                    DungeonManager.GotoPrevious();
+                }
             }
         }
     }

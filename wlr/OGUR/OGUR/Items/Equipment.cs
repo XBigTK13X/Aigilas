@@ -72,7 +72,12 @@ namespace OGUR.Items
 
         public bool IsRegistered(GenericItem item)
         {
-            return (m_slots.ContainsKey(ClassToSlot(item.GetItemClass())));
+            var itemClass = ClassToSlot(item.GetItemClass());
+            if(m_slots.ContainsKey(itemClass))
+            {
+                return (item == m_slots[itemClass]) ;
+            }
+            return false;
         }
     }
 }

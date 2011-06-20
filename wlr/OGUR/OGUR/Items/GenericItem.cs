@@ -103,10 +103,14 @@ namespace OGUR.Items
 
         public override bool Equals(object obj)
         {
-            var gI = (GenericItem) obj;
-            if (Name == gI.Name && Modifers == gI.Modifers)
+            if(obj.GetType()==typeof(GenericItem))
             {
-                return true;
+                var gI = (GenericItem)obj;
+                if (Name == gI.Name && Modifers.GetHashCode() == gI.Modifers.GetHashCode())
+                {
+                    return true;
+                }
+                return false;
             }
             return false;
         }

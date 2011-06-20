@@ -60,6 +60,7 @@ namespace OGUR.Creatures
             if(m_inventory.Contains(item))
             {
                 m_equipment.Register(item);
+                m_inventory.Remove(item);
             }
         }
 

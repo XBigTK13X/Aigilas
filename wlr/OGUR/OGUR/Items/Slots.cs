@@ -13,6 +13,6 @@ namespace OGUR.Items
        {
            m_slots = new List<ItemSlot>(itemSlots);
        }
-
+       
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OGUR.Creatures
 {
@@ -48,6 +49,12 @@ namespace OGUR.Creatures
         public decimal Set(StatType stat, decimal value)
         {
             return m_stats[stat] = value;
+        }
+
+        public override int GetHashCode()
+        {
+            string hash = m_stats.Aggregate("", (current, pair) => current + m_stats.ToString());
+            return hash.GetHashCode();
         }
     }
 }

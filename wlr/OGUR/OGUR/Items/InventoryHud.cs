@@ -118,18 +118,34 @@ namespace OGUR.Storage
                 m_currentClassItems = m_inventory.GetItems(m_currentClass);
                 if (m_currentClassItems.Count > 0)
                 {
-                    var currentKey = m_currentClassItems.ElementAt(m_startingItem).Key;
-
+                    int ii = 0;
+                    GenericItem currentItemSelection = null;
+                    foreach(var item in m_currentClassItems.Keys)
+                    {
+                        if(ii==m_startingItem)
+                        {
+                            currentItemSelection = item;
+                        }
+                        if(ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
+                        {
+                            string displayText = ii + ")" 
+                                                      +
+                                                 ((m_parent.IsEquipped(item))
+                                                      ? "~"
+                                                      : "") 
+                                                      + item.Name
+                                                      + 
+                                                      ((m_currentClassItems[item]>0)?" x"+m_currentClassItems[item]:
+                                                      "");
+                            m_textHandler.Add(new InventoryItemsText(displayText, 50,
+                                                                     60 + 25*(ii - m_startingItem),
+                                                                     m_parent.GetPlayerIndex()));
+                        }
+                        ii++;
+                    }
                     if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
                     {
-                        m_parent.Equip(currentKey);
-                    }
-
-                    for (var ii = m_startingItem; ii < m_endingItem && ii < m_currentClassItems.Count(); ii++)
-                    {
-                        string displayText = ((m_parent.IsEquipped(m_currentClassItems.ElementAt(ii).Key))?"~":"")+m_currentClassItems.ElementAt(ii).Key.Name;
-                        m_textHandler.Add(new InventoryItemsText(displayText, 50,
-                                                               60 + 25*(ii - m_startingItem), m_parent.GetPlayerIndex()));
+                        m_parent.Equip(currentItemSelection);
                     }
                 }
             }
