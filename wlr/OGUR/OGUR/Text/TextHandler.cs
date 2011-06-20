@@ -8,7 +8,6 @@ namespace OGUR.Text
 {
     class TextHandler
     {
-        private SpriteFont actionFont;
         private List<Text> m_contents = new List<Text>();
 
         public TextHandler()

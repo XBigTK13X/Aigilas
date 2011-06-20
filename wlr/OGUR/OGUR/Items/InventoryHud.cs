@@ -17,7 +17,6 @@ namespace OGUR.Storage
         private static Texture2D m_menuBase;
         private bool m_isVisible = false;
         private ItemClass m_currentClass = (ItemClass) 1;
-        private int currentItem = 0;
         private Inventory m_inventory;
         private int m_endingItem = 4, m_startingItem = 0;
         private Dictionary<GenericItem, int> m_currentClassItems;
@@ -146,6 +145,10 @@ namespace OGUR.Storage
                     if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
                     {
                         m_parent.Equip(currentItemSelection);
+                    }
+                    if (InputManager.IsPressed(InputManager.Commands.Cancel, m_parent.GetPlayerIndex()))
+                    {
+                        m_parent.Drop(currentItemSelection);
                     }
                 }
             }

@@ -12,7 +12,7 @@ namespace OGUR.Items
         {
             return
                 (GenericItem)
-                GameplayObjectManager.AddObject(new GenericItem(new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+                GameplayObjectManager.AddObject(new GenericItem(new Stats(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0),
                                                                 ItemSuffix.NULL, ItemPrefix.NULL, SelectRandomType(),
                                                                 onFloor, x, y));
         }

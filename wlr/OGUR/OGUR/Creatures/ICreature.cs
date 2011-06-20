@@ -64,6 +64,13 @@ namespace OGUR.Creatures
             }
         }
 
+        public void Drop(GenericItem item)
+        {
+            GameplayObjectManager.AddObject(new GenericItem(item,GetPosition().X,GetPosition().Y));
+            m_equipment.Unregister(item);
+            m_inventory.Remove(item);
+        }
+
         public void Unequip(GenericItem item)
         {
             if (m_equipment.IsRegistered(item))
@@ -93,7 +100,12 @@ namespace OGUR.Creatures
 
         public decimal Get(StatType stat)
         {
-            return m_stats.Get(stat);
+            return m_stats.Get(stat)+CalculateEquipmentBonus(stat);
+        }
+
+        public decimal CalculateEquipmentBonus(StatType stat)
+        {
+            return m_equipment.CalculateBonus(stat);
         }
 
         public decimal GetMax(StatType stat)

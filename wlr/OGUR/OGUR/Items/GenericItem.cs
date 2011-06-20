@@ -43,22 +43,32 @@ namespace OGUR.Items
             }
         }
 
-        public GenericItem(Stats modifiers, ItemSuffix suffix, ItemPrefix prefix, ItemName type, bool onGround = true,
-                           int x = -1, int y = -1)
+        private void Initialize(ItemSuffix suffix, ItemPrefix prefix,ItemName type, Slots targetSlots,Stats modifiers,int x,int y)
         {
             Setup(x, y, type);
-            if (type == ItemName.NULL)
-            {
-                throw new Exception("Invalid type NULL passed into the GenericItem factory!");
-            }
             m_suffix = suffix;
             m_prefix = prefix;
             m_type = type;
             m_targetSlots = GetSlotFromType(type);
-            Name = (m_prefix == ItemPrefix.NULL ? "" : Enum.GetName(typeof (ItemPrefix), m_prefix) + " ") +
-                   Enum.GetName(typeof (ItemName), m_type) +
-                   (m_suffix == ItemSuffix.NULL ? "" : " " + Enum.GetName(typeof (ItemSuffix), m_suffix));
+            Name = (m_prefix == ItemPrefix.NULL ? "" : Enum.GetName(typeof(ItemPrefix), m_prefix) + " ") +
+                   Enum.GetName(typeof(ItemName), m_type) +
+                   (m_suffix == ItemSuffix.NULL ? "" : " " + Enum.GetName(typeof(ItemSuffix), m_suffix));
             Modifers = new Stats(modifiers);
+        }
+
+        public GenericItem(GenericItem item,float x,float y)
+        {
+            Initialize(item.m_suffix, item.m_prefix, item.m_type,item.m_targetSlots, item.Modifers,(int)x,(int)y);
+        }
+
+        public GenericItem(Stats modifiers, ItemSuffix suffix, ItemPrefix prefix, ItemName type, bool onGround = true,
+                           int x = -1, int y = -1)
+        {
+            if (type == ItemName.NULL)
+            {
+                throw new Exception("Invalid type NULL passed into the GenericItem factory!");
+            }
+            Initialize(m_suffix,m_prefix,type,GetSlotFromType(type),modifiers,x,y);
         }
 
         protected void Setup(int x, int y, ItemName type)
@@ -138,6 +148,11 @@ namespace OGUR.Items
         public static bool operator !=(GenericItem a, GenericItem b)
         {
             return !(a == b);
+        }
+
+        public decimal GetStatBonus(StatType stat)
+        {
+            return Modifers.Get(stat);
         }
     }
 }

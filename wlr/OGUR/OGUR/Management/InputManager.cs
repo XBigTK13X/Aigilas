@@ -19,11 +19,21 @@ namespace OGUR.Management
             InventoryLeft,
             InventoryRight,
             InventoryUp,
-            InventoryDown
+            InventoryDown,
+            Cancel
         }
         private static List<CommandLock> s_locks = new List<CommandLock>(); 
 
-        private static List<Commands> s_lockOnPress = new List<Commands>(){Commands.Confirm,Commands.Inventory,Commands.InventoryLeft,Commands.InventoryRight,Commands.InventoryDown,Commands.InventoryUp}; 
+        private static List<Commands> s_lockOnPress = new List<Commands>()
+                                                          {
+                                                              Commands.Confirm,
+                                                              Commands.Inventory,
+                                                              Commands.InventoryLeft,
+                                                              Commands.InventoryRight,
+                                                              Commands.InventoryDown,
+                                                              Commands.InventoryUp,
+                                                              Commands.Cancel
+                                                          }; 
 
         private static readonly List<string> m_playerInputDevices = new List<string>()
                                                                         {
@@ -38,11 +48,12 @@ namespace OGUR.Management
                                                                                        {Commands.MoveRight, Keys.Right},
                                                                                        {Commands.MoveLeft, Keys.Left},
                                                                                        {Commands.Confirm, Keys.Space},
-                                                                                       {Commands.Inventory, Keys.E},
+                                                                                       {Commands.Inventory, Keys.W},
                                                                                        {Commands.InventoryLeft, Keys.S},
                                                                                        {Commands.InventoryRight, Keys.F},
-                                                                                       {Commands.InventoryDown, Keys.C},
-                                                                                       {Commands.InventoryUp,Keys.D}
+                                                                                       {Commands.InventoryDown, Keys.D},
+                                                                                       {Commands.InventoryUp,Keys.E},
+                                                                                       {Commands.Cancel,Keys.R}
                                                                                    };
 
         private static readonly Dictionary<Commands, Buttons> m_gamePadMapping = new Dictionary<Commands, Buttons>()

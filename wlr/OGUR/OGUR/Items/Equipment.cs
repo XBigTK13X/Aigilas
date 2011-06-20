@@ -79,5 +79,15 @@ namespace OGUR.Items
             }
             return false;
         }
+
+        public decimal CalculateBonus(StatType stat)
+        {
+            decimal result = 0;
+            foreach(var item in m_slots)
+            {
+                result+=item.Value.GetStatBonus(stat);
+            }
+            return result;
+        }
     }
 }
