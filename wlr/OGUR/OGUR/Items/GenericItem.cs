@@ -13,42 +13,41 @@ namespace OGUR.Items
         public String Name;
         private ItemSuffix m_suffix;
         private ItemPrefix m_prefix;
-        private ItemType m_type;
+        private ItemName m_type;
         private Slots m_targetSlots;
-        private bool m_isEquipped = false;
 
         public ItemClass GetItemClass()
         {
             switch (m_type)
             {
-                case ItemType.Sword:
+                case ItemName.Sword:
                     return ItemClass.Melee_Weapon;
-                case ItemType.Arrow:
+                case ItemName.Arrow:
                     return ItemClass.Ranged_Ammo;
-                case ItemType.Bow:
+                case ItemName.Bow:
                     return ItemClass.Ranged_Weapon;
-                case ItemType.Shield:
+                case ItemName.Shield:
                     return ItemClass.Shield;
-                case ItemType.Pants:
+                case ItemName.Pants:
                     return ItemClass.Leggings;
-                case ItemType.Dagger:
+                case ItemName.Dagger:
                     return ItemClass.Melee_Weapon;
-                case ItemType.Staff:
+                case ItemName.Staff:
                     return ItemClass.Melee_Weapon;
-                case ItemType.Hood:
+                case ItemName.Hood:
                     return ItemClass.Head_Gear;
-                case ItemType.Shirt:
+                case ItemName.Shirt:
                     return ItemClass.Torso_Garb;
                 default:
                     return ItemClass.NULL;
             }
         }
 
-        public GenericItem(Stats modifiers, ItemSuffix suffix, ItemPrefix prefix, ItemType type, bool onGround = true,
+        public GenericItem(Stats modifiers, ItemSuffix suffix, ItemPrefix prefix, ItemName type, bool onGround = true,
                            int x = -1, int y = -1)
         {
             Setup(x, y, type);
-            if (type == ItemType.NULL)
+            if (type == ItemName.NULL)
             {
                 throw new Exception("Invalid type NULL passed into the GenericItem factory!");
             }
@@ -57,29 +56,14 @@ namespace OGUR.Items
             m_type = type;
             m_targetSlots = GetSlotFromType(type);
             Name = (m_prefix == ItemPrefix.NULL ? "" : Enum.GetName(typeof (ItemPrefix), m_prefix) + " ") +
-                   Enum.GetName(typeof (ItemType), m_type) +
+                   Enum.GetName(typeof (ItemName), m_type) +
                    (m_suffix == ItemSuffix.NULL ? "" : " " + Enum.GetName(typeof (ItemSuffix), m_suffix));
             Modifers = new Stats(modifiers);
         }
 
-        protected void Setup(int x, int y, ItemType type)
+        protected void Setup(int x, int y, ItemName type)
         {
             Initialize(x, y, SpriteFromItem(type), GameObjectType.ITEM);
-        }
-
-        public void Equip()
-        {
-            m_isEquipped = true;
-        }
-
-        public void Unequip()
-        {
-            m_isEquipped = false;
-        }
-
-        public bool isEquipped()
-        {
-            return m_isEquipped;
         }
 
         public override void Update()
@@ -99,22 +83,57 @@ namespace OGUR.Items
             }
         }
 
-        private SpriteType SpriteFromItem(ItemType item)
+        private SpriteType SpriteFromItem(ItemName item)
         {
             return SpriteType.ITEM;
         }
 
-        private Slots GetSlotFromType(ItemType type)
+        private Slots GetSlotFromType(ItemName type)
         {
-            switch(type)
+            switch (type)
             {
-                case ItemType.Sword:
-                    return new Slots(new List<ItemSlot>(){ItemSlot.RIGHT_HAND,ItemSlot.LEFT_HAND});
-                case ItemType.Pants:
-                    return new Slots(new List<ItemSlot>(){ItemSlot.LEGS});
+                case ItemName.Sword:
+                    return new Slots(new List<ItemSlot>() {ItemSlot.RIGHT_HAND, ItemSlot.LEFT_HAND});
+                case ItemName.Pants:
+                    return new Slots(new List<ItemSlot>() {ItemSlot.LEGS});
                 default:
                     return new Slots(new List<ItemSlot>());
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            var gI = (GenericItem) obj;
+            if (Name == gI.Name && Modifers == gI.Modifers)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode() + Modifers.GetHashCode();
+        }
+
+        public static bool operator ==(GenericItem a, GenericItem b)
+        {
+            if (System.Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            if (((object) a == null) || ((object) b == null))
+            {
+                return false;
+            }
+
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(GenericItem a, GenericItem b)
+        {
+            return !(a == b);
         }
     }
 }

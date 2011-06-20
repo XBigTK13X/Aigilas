@@ -1,6 +1,6 @@
 ﻿namespace OGUR.Items
 {
-    public enum ItemType
+    public enum ItemName
     {
         NULL,
         Sword,

@@ -25,9 +25,9 @@ namespace OGUR.Items
             return null;
             //return new IItem(new Stats(1,1,1,1,1,1,0,1,0,0,0),)            }
         }
-        private static ItemType SelectRandomType()
+        private static ItemName SelectRandomType()
         {
-            return (ItemType)Enum.GetValues(typeof (ItemType)).GetValue(rand.Next(1, Enum.GetValues(typeof (ItemType)).Length));
+            return (ItemName)Enum.GetValues(typeof (ItemName)).GetValue(rand.Next(1, Enum.GetValues(typeof (ItemName)).Length));
         }
     }
 }

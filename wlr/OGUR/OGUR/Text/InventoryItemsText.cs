@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using OGUR.HUD;
 using OGUR.Management;
+using OGUR.Storage;
 
 namespace OGUR.Text
 {
@@ -13,17 +9,13 @@ namespace OGUR.Text
     {
         private int m_playerIndex;
         public InventoryItemsText(string contents, int x, int y, int playerIndex)
-            : base(contents, x, y)
+            : base(contents, x, y,TextType.Inventory)
         {
             m_playerIndex = playerIndex;
         }
         public override int Update()
         {
-            if(InventoryScreensManager.IsShowing(m_playerIndex))
-            {
-                return 1;
-            }
-            return 0;
+           return 1;
         }
         public override void Draw()
         {

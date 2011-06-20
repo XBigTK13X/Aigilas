@@ -27,7 +27,7 @@ namespace OGUR.GameObjects
         }
 
         //Draw the sprite to the screen
-        public void Draw()
+        public virtual void Draw()
         {
             if(m_isOnBoard)
             {

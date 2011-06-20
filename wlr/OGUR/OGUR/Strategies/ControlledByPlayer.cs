@@ -1,6 +1,4 @@
-﻿using OGUR.GameObjects;
-using OGUR.HUD;
-using OGUR.Management;
+﻿using OGUR.Management;
 using OGUR.Creatures;
 namespace OGUR.Strategies
 {
@@ -26,7 +24,7 @@ namespace OGUR.Strategies
             
             if(InputManager.IsPressed(InputManager.Commands.Inventory,target.GetPlayerIndex()))
             {
-                InventoryScreensManager.Toggle(target.GetPlayerIndex());
+                target.ToggleInventoryVisibility();
             }
         }
     }

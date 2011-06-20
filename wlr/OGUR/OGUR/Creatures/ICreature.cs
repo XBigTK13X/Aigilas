@@ -1,13 +1,13 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using OGUR.Items;
-using OGUR.Management;
 using OGUR.Strategies;
 using OGUR.GameObjects;
 using OGUR.Sprites;
 using OGUR.Collision;
 using OGUR.Text;
+using OGUR.Storage;
 
 namespace OGUR.Creatures
 {
@@ -16,13 +16,13 @@ namespace OGUR.Creatures
         protected IStrategy m_strategy;
         protected MentalState m_mentality = MentalState.NORMAL;
         protected List<ICreature> m_targets = new List<ICreature>();
-        protected List<GenericItem> m_inventory = new List<GenericItem>();
-        protected List<GenericItem> m_equipment = new List<GenericItem>();
+        protected Inventory m_inventory;
+        protected InventoryHud m_inventoryHud;
+        protected Equipment m_equipment;
         protected Stats m_stats;
         protected Stats m_maxStats;
         protected int m_playerIndex = -1;
         protected CreatureType m_creatureType;
-        protected Slots m_equipmentSlots;
 
         private SpriteType SpriteFromCreature(CreatureType type)
         {
@@ -38,6 +38,12 @@ namespace OGUR.Creatures
         protected void Setup(int x, int y, CreatureType type, Stats stats)
         {
             Initialize(x, y, SpriteFromCreature(type), GameObjectType.CREATURE);
+            m_inventory = new Inventory(this);
+            m_equipment = new Equipment(this);
+            if(m_playerIndex>-1)
+            {
+                m_inventoryHud = new InventoryHud(this);
+            }
             m_isBlocking = true;
             m_creatureType = type;
             m_stats = new Stats(stats);
@@ -51,30 +57,37 @@ namespace OGUR.Creatures
 
         public void Equip(GenericItem item)
         {
-            if(m_inventory.Contains(item)&&!m_equipmentSlots.IsFull(item.GetItemClass()))
+            if(m_inventory.Contains(item))
             {
-                item.Equip();
-                m_equipment.Add(item);
-                m_inventory.Remove(item);
-                m_equipmentSlots.Fill(item.GetItemClass());
+                m_equipment.Register(item);
             }
         }
 
         public void Unequip(GenericItem item)
         {
-            if (m_equipment.Contains(item))
+            if (m_equipment.IsRegistered(item))
             {
-                item.Unequip();
-                m_inventory.Add(item);
-                m_equipment.Remove(item);
-                m_equipmentSlots.Remove(item.GetItemClass());
+                m_equipment.Unregister(item);
             }
         }
 
         public override void Update()
         {
             Adjust(StatType.MOVE_COOL_DOWN, -1);
+            if (m_inventoryHud != null)
+            {
+                m_inventoryHud.Update();
+            }
             m_strategy.Act(this);
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
+            if (m_inventoryHud != null)
+            {
+                m_inventoryHud.Draw();
+            }
         }
 
         public decimal Get(StatType stat)
@@ -147,14 +160,17 @@ namespace OGUR.Creatures
             return m_stats.Get(StatType.STRENGTH);
         }
 
-        public void SetInventory(List<GenericItem> items)
-        {
-            m_inventory = new List<GenericItem>(items);
-        }
-
-        public List<GenericItem> GetInventory()
+        public Inventory GetInventory()
         {
             return m_inventory;
+        }
+
+        public void ToggleInventoryVisibility()
+        {
+            if (m_inventoryHud != null)
+            {
+                m_inventoryHud.Toggle();
+            }
         }
 
         public void MoveIfPossible(int xVel, int yVel)
@@ -180,6 +196,11 @@ namespace OGUR.Creatures
                     }
                 }
             }
+        }
+
+        public bool IsEquipped(GenericItem item)
+        {
+            return m_equipment.IsRegistered(item);
         }
     }
 }

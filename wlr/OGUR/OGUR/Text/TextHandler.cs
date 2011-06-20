@@ -2,21 +2,20 @@
 using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
 using OGUR.Management;
+using OGUR.Text;
 
 namespace OGUR.Text
 {
-    public enum TextType
+    class TextHandler
     {
-        Action,
-        Inventory
-    }
+        private SpriteFont actionFont;
+        private List<Text> m_contents = new List<Text>();
 
-    class TextManager
-    {
-        static private SpriteFont actionFont;
-        static private List<Text> m_contents = new List<Text>();
+        public TextHandler()
+        {
+        }
 
-        public static void Add(Text textToAdd)
+        public void Add(Text textToAdd)
         {
             if(!m_contents.Contains(textToAdd))
             {
@@ -24,17 +23,12 @@ namespace OGUR.Text
             }
         }
 
-        public static void Clear()
+        public void Clear()
         {
             m_contents.Clear();
         }
 
-        static public SpriteFont GetFont()
-        {
-            return actionFont;
-        }
-
-        public static void Update()
+        public void Update()
         {
             for (int ii = 0; ii < m_contents.Count; ii++)
             {
@@ -46,7 +40,7 @@ namespace OGUR.Text
             }
         }
 
-        public static void Draw()
+        public void Draw()
         {
             foreach (Text component in m_contents)
             {
@@ -55,11 +49,6 @@ namespace OGUR.Text
                     component.Draw();
                 }
             }
-        }
-
-        public static void LoadContent()
-        {
-            actionFont = XnaManager.GetContentManager().Load<SpriteFont>("Action");
         }
     }
 }

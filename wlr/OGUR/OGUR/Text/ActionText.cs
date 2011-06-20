@@ -14,7 +14,7 @@ namespace OGUR.Text
         protected int m_lifeSpan = 0;
         protected float m_scalePercent = 1;
         public ActionText(string contents, int lifeSpan, int x, int y)
-            : base(contents, x, y)
+            : base(contents, x, y,TextType.Action)
         {
             m_lifeSpan = lifeSpan;
         }

@@ -119,10 +119,12 @@
     <Compile Include="Dungeons\DungeonManager.cs" />
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />
-    <Compile Include="HUD\Inventory.cs" />
-    <Compile Include="HUD\InventoryScreensManager.cs" />
+    <Compile Include="Items\Equipment.cs" />
+    <Compile Include="Items\Inventory.cs" />
+    <Compile Include="Items\InventoryHud.cs" />
     <Compile Include="Items\ItemClass.cs" />
     <Compile Include="Text\ActionText.cs" />
+    <Compile Include="Text\TextHandler.cs" />
     <Compile Include="Text\InventoryItemsText.cs" />
     <Compile Include="Text\Text.cs" />
     <Compile Include="Text\TextManager.cs" />
@@ -144,7 +146,7 @@
     <Compile Include="Items\ItemPrefix.cs" />
     <Compile Include="Items\ItemSlot.cs" />
     <Compile Include="Items\ItemSuffix.cs" />
-    <Compile Include="Items\ItemType.cs" />
+    <Compile Include="Items\ItemName.cs" />
     <Compile Include="Management\AIManager.cs" />
     <Compile Include="Management\Camera.cs" />
     <Compile Include="GameObjects\GameplayObjectManager.cs" />

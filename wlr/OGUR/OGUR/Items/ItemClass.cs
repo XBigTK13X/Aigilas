@@ -12,6 +12,7 @@
         Feet,
         Head_Gear,
         Gloves,
-        Shield
+        Shield,
+        LAST
     }
 }
