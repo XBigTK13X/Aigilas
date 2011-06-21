@@ -63,8 +63,11 @@ namespace OGUR.Dungeons
                 }
             }
             m_contents.Add(ItemFactory.CreateRandomPlain(100, 100));
-            m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X*SpriteInfo.Width,
-                                                  downSpawnLocation.Y*SpriteInfo.Height));
+            for (int ii = 0; ii < CreatureFactory.GetPlayerCount(); ii++)
+            {
+                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X*SpriteInfo.Width,
+                                                      downSpawnLocation.Y*SpriteInfo.Height));
+            }
             for (int ii = 0; ii < 20;ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).First().PickupItem(ItemFactory.CreateRandomPlain());

@@ -8,6 +8,15 @@ namespace OGUR.Strategies
     {
         public override void Act(ICreature target)
         {
+
+            if (InputManager.IsPressed(InputManager.Commands.Start, target.GetPlayerIndex()))
+            {
+                target.SetPlaying(true);
+            }
+            if (InputManager.IsPressed(InputManager.Commands.Back, target.GetPlayerIndex()))
+            {
+                target.SetPlaying(false);
+            }
             decimal leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft, target.GetPlayerIndex())
                                         ? -target.GetInt(StatType.MOVE_SPEED)
                                         : 0);

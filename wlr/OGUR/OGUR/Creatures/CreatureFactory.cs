@@ -30,5 +30,10 @@ namespace OGUR.Creatures
         {
             s_playerCount ++;
         }
+
+        public static int GetPlayerCount()
+        {
+            return s_playerCount;
+        }
     }
 }

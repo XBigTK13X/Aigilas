@@ -9,6 +9,8 @@ namespace OGUR.Creatures
 {
     public class Player : ICreature
     {
+        private bool m_isPlaying = false;
+
         private void Setup(int x, int y, int playerIndex)
         {
             m_playerIndex = playerIndex;
@@ -22,7 +24,10 @@ namespace OGUR.Creatures
         }
         public override void Update()
         {
-            base.Update();
+            if (m_isPlaying)
+            {
+                base.Update();
+            }
         }
     }
 }

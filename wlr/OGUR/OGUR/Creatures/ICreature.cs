@@ -26,6 +26,7 @@ namespace OGUR.Creatures
         protected Stats m_maxStats;
         protected int m_playerIndex = -1;
         protected CreatureType m_creatureType;
+        protected bool m_isPlaying = true;
 
         private SpriteType SpriteFromCreature(CreatureType type)
         {
@@ -105,6 +106,11 @@ namespace OGUR.Creatures
                 m_equipmentHud.Draw();
                 m_deltasHud.Draw();
             }
+        }
+
+        public bool SetPlaying(bool isPlaying)
+        {
+            m_isPlaying = isPlaying;
         }
 
         public decimal Get(StatType stat)

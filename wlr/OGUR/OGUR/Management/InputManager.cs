@@ -20,7 +20,9 @@ namespace OGUR.Management
             InventoryRight,
             InventoryUp,
             InventoryDown,
-            Cancel
+            Cancel,
+            Start,
+            Back
         }
         private static List<CommandLock> s_locks = new List<CommandLock>(); 
 
@@ -32,7 +34,9 @@ namespace OGUR.Management
                                                               Commands.InventoryRight,
                                                               Commands.InventoryDown,
                                                               Commands.InventoryUp,
-                                                              Commands.Cancel
+                                                              Commands.Cancel,
+                                                              Commands.Start,
+                                                              Commands.Back
                                                           }; 
 
         private static readonly List<string> m_playerInputDevices = new List<string>()
@@ -53,31 +57,26 @@ namespace OGUR.Management
                                                                                        {Commands.InventoryRight, Keys.F},
                                                                                        {Commands.InventoryDown, Keys.D},
                                                                                        {Commands.InventoryUp,Keys.E},
-                                                                                       {Commands.Cancel,Keys.R}
+                                                                                       {Commands.Cancel,Keys.R},
+                                                                                       {Commands.Start,Keys.Enter},
+                                                                                       {Commands.Back,Keys.Back}
                                                                                    };
 
         private static readonly Dictionary<Commands, Buttons> m_gamePadMapping = new Dictionary<Commands, Buttons>()
                                                                                      {
-                                                                                         {
-                                                                                             Commands.MoveUp,
-                                                                                             Buttons.DPadUp
-                                                                                             },
-                                                                                         {
-                                                                                             Commands.MoveDown,
-                                                                                             Buttons.DPadDown
-                                                                                             },
-                                                                                         {
-                                                                                             Commands.MoveRight,
-                                                                                             Buttons.DPadRight
-                                                                                             },
-                                                                                         {
-                                                                                             Commands.MoveLeft,
-                                                                                             Buttons.DPadLeft
-                                                                                             },
-                                                                                         {
-                                                                                             Commands.Confirm,
-                                                                                             Buttons.LeftShoulder
-                                                                                             }
+                                                                                         {Commands.MoveUp,Buttons.DPadUp},
+                                                                                         {Commands.MoveDown,Buttons.DPadDown},
+                                                                                         {Commands.MoveRight,Buttons.DPadRight},
+                                                                                         {Commands.MoveLeft,Buttons.DPadLeft},
+                                                                                         {Commands.Confirm,Buttons.LeftShoulder},
+                                                                                         {Commands.Inventory,Buttons.RightThumbstickDown},
+                                                                                         {Commands.InventoryLeft,Buttons.DPadLeft},
+                                                                                         {Commands.InventoryRight,Buttons.DPadRight},
+                                                                                         {Commands.InventoryDown,Buttons.DPadDown},
+                                                                                         {Commands.InventoryUp,Buttons.DPadUp},
+                                                                                         {Commands.Cancel,Buttons.X},
+                                                                                         {Commands.Start,Buttons.Start},
+                                                                                         {Commands.Back,Buttons.Back}
                                                                                      };
 
         private static readonly List<PlayerIndex> m_playerIndex = new List<PlayerIndex>()
