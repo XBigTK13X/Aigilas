@@ -54,7 +54,6 @@ namespace OGUR.Dungeons
             ConvertRoomsToWalls();
             PlaceStairs();
 
-
             foreach (GameplayObject tile in dungeon)
             {
                 if (tile != null)

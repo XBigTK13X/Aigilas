@@ -82,12 +82,12 @@ namespace OGUR.Items
 
         public decimal CalculateBonus(StatType stat)
         {
-            decimal result = 0;
-            foreach(var item in m_slots)
-            {
-                result+=item.Value.GetStatBonus(stat);
-            }
-            return result;
+            return m_slots.Sum(item => item.Value.GetStatBonus(stat));
+        }
+
+        public Dictionary<ItemSlot,GenericItem> GetItems()
+        {
+            return m_slots;
         }
     }
 }

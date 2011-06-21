@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OGUR.Items;
@@ -18,6 +19,8 @@ namespace OGUR.Creatures
         protected List<ICreature> m_targets = new List<ICreature>();
         protected Inventory m_inventory;
         protected InventoryHud m_inventoryHud;
+        protected EquipmentHud m_equipmentHud;
+        protected DeltasHud m_deltasHud;
         protected Equipment m_equipment;
         protected Stats m_stats;
         protected Stats m_maxStats;
@@ -43,6 +46,8 @@ namespace OGUR.Creatures
             if(m_playerIndex>-1)
             {
                 m_inventoryHud = new InventoryHud(this);
+                m_equipmentHud = new EquipmentHud(this);
+                m_deltasHud = new DeltasHud(this);
             }
             m_isBlocking = true;
             m_creatureType = type;
@@ -85,6 +90,8 @@ namespace OGUR.Creatures
             if (m_inventoryHud != null)
             {
                 m_inventoryHud.Update();
+                m_equipmentHud.Update();
+                m_deltasHud.Update();
             }
             m_strategy.Act(this);
         }
@@ -95,6 +102,8 @@ namespace OGUR.Creatures
             if (m_inventoryHud != null)
             {
                 m_inventoryHud.Draw();
+                m_equipmentHud.Draw();
+                m_deltasHud.Draw();
             }
         }
 
@@ -170,7 +179,7 @@ namespace OGUR.Creatures
 
         protected decimal CalculateDamage()
         {
-            return m_stats.Get(StatType.STRENGTH);
+            return Get(StatType.STRENGTH);
         }
 
         public Inventory GetInventory()
@@ -178,11 +187,33 @@ namespace OGUR.Creatures
             return m_inventory;
         }
 
+        public Equipment GetEquipment()
+        {
+            return m_equipment;
+        }
+
+        public GenericItem GetCurrentInventorySelection()
+        {
+            return m_inventoryHud.GetCurrentSelection();
+        }
+
+        public GenericItem GetEquipmentIn(ItemSlot slot)
+        {
+            var result = m_equipment.GetItems().Where(o => o.Key == slot);
+            if(result.Count()>0)
+            {
+                return result.First().Value;
+            }
+            return null;
+        }
+
         public void ToggleInventoryVisibility()
         {
             if (m_inventoryHud != null)
             {
                 m_inventoryHud.Toggle();
+                m_equipmentHud.Toggle();
+                m_deltasHud.Toggle();
             }
         }
 

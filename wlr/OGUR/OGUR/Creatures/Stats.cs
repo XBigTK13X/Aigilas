@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,6 +56,11 @@ namespace OGUR.Creatures
         {
             string hash = m_stats.Aggregate("", (current, pair) => current + m_stats.ToString());
             return hash.GetHashCode();
+        }
+
+        public IEnumerable GetDeltas(Stats stats)
+        {
+            return m_stats.Select((t, ii) => m_stats[(StatType) ii] - stats.m_stats[(StatType) ii]).ToList();
         }
     }
 }

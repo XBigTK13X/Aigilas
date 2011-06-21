@@ -21,6 +21,7 @@ namespace OGUR.Storage
         private int m_endingItem = 4, m_startingItem = 0;
         private Dictionary<GenericItem, int> m_currentClassItems;
         private TextHandler m_textHandler = new TextHandler();
+        private GenericItem m_currentSelectedItem = null;
 
         public InventoryHud(ICreature owner)
         {
@@ -44,7 +45,6 @@ namespace OGUR.Storage
 
         public void Draw()
         {
-            var items = m_parent.GetInventory().GetItems(m_currentClass);
             if (m_isVisible)
             {
                 SpriteBatch target = XnaManager.GetRenderTarget();
@@ -112,46 +112,55 @@ namespace OGUR.Storage
             if(m_isVisible)
             {
                 HandleInput();
-                m_textHandler.Add(new InventoryItemsText(m_currentClass.ToString().Replace("_", " "), 140, 30,
+                UpdateInventoryDisplay();
+            }
+        }
+
+        private void UpdateInventoryDisplay()
+        {
+            m_textHandler.Add(new InventoryItemsText(m_currentClass.ToString().Replace("_", " "), 20, 30,
                                                        m_parent.GetPlayerIndex()));
-                m_currentClassItems = m_inventory.GetItems(m_currentClass);
-                if (m_currentClassItems.Count > 0)
+            m_currentClassItems = m_inventory.GetItems(m_currentClass);
+            if (m_currentClassItems.Count > 0)
+            {
+                int ii = 0;
+                foreach (var item in m_currentClassItems.Keys)
                 {
-                    int ii = 0;
-                    GenericItem currentItemSelection = null;
-                    foreach(var item in m_currentClassItems.Keys)
+                    if (ii == m_startingItem)
                     {
-                        if(ii==m_startingItem)
-                        {
-                            currentItemSelection = item;
-                        }
-                        if(ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
-                        {
-                            string displayText = ii + ")" 
-                                                      +
-                                                 ((m_parent.IsEquipped(item))
-                                                      ? "~"
-                                                      : "") 
-                                                      + item.Name
-                                                      + 
-                                                      ((m_currentClassItems[item]>0)?" x"+m_currentClassItems[item]:
-                                                      "");
-                            m_textHandler.Add(new InventoryItemsText(displayText, 50,
-                                                                     60 + 25*(ii - m_startingItem),
-                                                                     m_parent.GetPlayerIndex()));
-                        }
-                        ii++;
+                        m_currentSelectedItem = item;
                     }
-                    if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
+                    if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
                     {
-                        m_parent.Equip(currentItemSelection);
+                        string displayText = ii + ")"
+                                                  +
+                                             ((m_parent.IsEquipped(item))
+                                                  ? "~"
+                                                  : "")
+                                                  + item.Name
+                                                  +
+                                                  ((m_currentClassItems[item] > 0) ? " x" + m_currentClassItems[item] :
+                                                  "");
+                        m_textHandler.Add(new InventoryItemsText(displayText, 50,
+                                                                 60 + 25 * (ii - m_startingItem),
+                                                                 m_parent.GetPlayerIndex()));
                     }
-                    if (InputManager.IsPressed(InputManager.Commands.Cancel, m_parent.GetPlayerIndex()))
-                    {
-                        m_parent.Drop(currentItemSelection);
-                    }
+                    ii++;
+                }
+                if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
+                {
+                    m_parent.Equip(m_currentSelectedItem);
+                }
+                if (InputManager.IsPressed(InputManager.Commands.Cancel, m_parent.GetPlayerIndex()))
+                {
+                    m_parent.Drop(m_currentSelectedItem);
                 }
             }
+        }
+
+        public GenericItem GetCurrentSelection()
+        {
+            return m_currentSelectedItem;
         }
     }
 }

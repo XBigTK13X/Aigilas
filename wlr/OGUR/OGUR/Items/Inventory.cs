@@ -10,7 +10,7 @@ using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
 
-namespace OGUR.Storage
+namespace OGUR.Items
 {
     public class Inventory
     {

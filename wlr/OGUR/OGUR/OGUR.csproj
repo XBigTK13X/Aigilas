@@ -119,6 +119,8 @@
     <Compile Include="Dungeons\DungeonManager.cs" />
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="Items\DeltasHud.cs" />
+    <Compile Include="Items\EquipmentHud.cs" />
     <Compile Include="Items\Equipment.cs" />
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="Items\InventoryHud.cs" />
