@@ -8,7 +8,6 @@ namespace OGUR.Strategies
     {
         public override void Act(ICreature target)
         {
-
             if (InputManager.IsPressed(InputManager.Commands.Start, target.GetPlayerIndex()))
             {
                 target.SetPlaying(true);
@@ -17,38 +16,57 @@ namespace OGUR.Strategies
             {
                 target.SetPlaying(false);
             }
-            decimal leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft, target.GetPlayerIndex())
-                                        ? -target.GetInt(StatType.MOVE_SPEED)
-                                        : 0);
-            decimal rightVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))
-                                         ? target.GetInt(StatType.MOVE_SPEED)
-                                         : 0);
-            decimal xVel = leftVelocity + rightVelocity;
-            decimal downVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))
-                                        ? target.GetInt(StatType.MOVE_SPEED)
-                                        : 0);
-            decimal upVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))
-                                      ? -target.GetInt(StatType.MOVE_SPEED)
-                                      : 0);
-            decimal yVel = downVelocity + upVelocity;
-            target.MoveIfPossible((int) xVel, (int) yVel);
-            
-            if(InputManager.IsPressed(InputManager.Commands.Inventory,target.GetPlayerIndex()))
+            if (target.IsPlaying())
             {
-                target.ToggleInventoryVisibility();
-            }
-            foreach (var downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
-            {
-                if (Collision.HitTest.IsTouching(downstairs, target) && InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
+                if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
                 {
-                    DungeonManager.GotoNext();
+                    decimal leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,
+                                                                   target.GetPlayerIndex())
+                                                ? -target.GetInt(StatType.MOVE_SPEED)
+                                                : 0);
+                    decimal rightVelocity =
+                        ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))
+                             ? target.GetInt(StatType.MOVE_SPEED)
+                             : 0);
+                    decimal xVel = leftVelocity + rightVelocity;
+                    decimal downVelocity =
+                        ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))
+                             ? target.GetInt(StatType.MOVE_SPEED)
+                             : 0);
+                    decimal upVelocity =
+                        ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))
+                             ? -target.GetInt(StatType.MOVE_SPEED)
+                             : 0);
+                    decimal yVel = downVelocity + upVelocity;
+                    target.MoveIfPossible((int) xVel, (int) yVel);
+
+                    foreach (var downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
+                    {
+                        if (Collision.HitTest.IsTouching(downstairs, target) &&
+                            InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
+                        {
+                            DungeonManager.GotoNext();
+                        }
+                    }
+                    foreach (var upstairs in GameplayObjectManager.GetObjects(GameObjectType.UPSTAIRS))
+                    {
+                        if (Collision.HitTest.IsTouching(upstairs, target) &&
+                            InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
+                        {
+                            DungeonManager.GotoPrevious();
+                        }
+                    }
                 }
-            }
-            foreach (var upstairs in GameplayObjectManager.GetObjects(GameObjectType.UPSTAIRS))
-            {
-                if (Collision.HitTest.IsTouching(upstairs, target) && InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
+                if (InputManager.IsPressed(InputManager.Commands.Inventory, target.GetPlayerIndex()))
                 {
-                    DungeonManager.GotoPrevious();
+                    if (target.ToggleInventoryVisibility())
+                    {
+                        InputManager.SetContext(InputManager.Contexts.Inventory,target.GetPlayerIndex());
+                    }
+                    else
+                    {
+                        InputManager.SetContext(InputManager.Contexts.Free, target.GetPlayerIndex());
+                    }
                 }
             }
         }

@@ -94,7 +94,17 @@ namespace OGUR.GameObjects
             {
                 if (XnaManager.GetRenderTarget() != null)
                 {
-                    component.Draw();
+                    if (component.GetObjectType() == GameObjectType.CREATURE)
+                    {
+                        if(((ICreature)component).IsPlaying())
+                        {
+                            component.Draw();
+                        }
+                    }
+                    else
+                    {
+                        component.Draw();    
+                    }
                 }
             }
         }
@@ -121,6 +131,11 @@ namespace OGUR.GameObjects
                 }
             }
             return closest;
+        }
+
+        public static void AddObjects(IEnumerable<GameplayObject> cache)
+        {
+            m_contents.AddRange(cache);
         }
     }
 }

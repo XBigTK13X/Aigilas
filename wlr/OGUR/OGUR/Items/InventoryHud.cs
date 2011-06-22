@@ -56,8 +56,7 @@ namespace OGUR.Storage
                              null,
                              null,
                              XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
-                var tempPosition = new Vector2(0, 0);
-                target.Draw(m_menuBase, tempPosition, new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0, 0), new Vector2(XnaManager.WindowWidth / 2, XnaManager.WindowHeight / 2), SpriteEffects.None, 0f);
+                target.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None, 0f);
                 target.End();
                 m_textHandler.Draw();
             }
@@ -65,7 +64,7 @@ namespace OGUR.Storage
 
         private void HandleInput()
         {
-            if (InputManager.IsPressed(InputManager.Commands.InventoryLeft, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(InputManager.Commands.MoveLeft, m_parent.GetPlayerIndex()))
             {
                 m_currentClass--;
                 if (m_currentClass <= (ItemClass)0)
@@ -76,7 +75,7 @@ namespace OGUR.Storage
                 m_endingItem = 4;
             }
 
-            if (InputManager.IsPressed(InputManager.Commands.InventoryRight, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(InputManager.Commands.MoveRight, m_parent.GetPlayerIndex()))
             {
                 m_currentClass++;
                 if (m_currentClass >= ItemClass.LAST)
@@ -87,7 +86,7 @@ namespace OGUR.Storage
                 m_endingItem = 4;
             }
 
-            if (InputManager.IsPressed(InputManager.Commands.InventoryDown, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(InputManager.Commands.MoveDown, m_parent.GetPlayerIndex()))
             {
                 if (m_startingItem < m_currentClassItems.Count() - 1)
                 {
@@ -96,7 +95,7 @@ namespace OGUR.Storage
                 }
             }
 
-            if (InputManager.IsPressed(InputManager.Commands.InventoryUp, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(InputManager.Commands.MoveUp, m_parent.GetPlayerIndex()))
             {
                 if (m_startingItem > 0)
                 {
@@ -119,7 +118,7 @@ namespace OGUR.Storage
         private void UpdateInventoryDisplay()
         {
             m_textHandler.Add(new InventoryItemsText(m_currentClass.ToString().Replace("_", " "), 20, 30,
-                                                       m_parent.GetPlayerIndex()));
+                                                       m_parent));
             m_currentClassItems = m_inventory.GetItems(m_currentClass);
             if (m_currentClassItems.Count > 0)
             {
@@ -143,7 +142,7 @@ namespace OGUR.Storage
                                                   "");
                         m_textHandler.Add(new InventoryItemsText(displayText, 50,
                                                                  60 + 25 * (ii - m_startingItem),
-                                                                 m_parent.GetPlayerIndex()));
+                                                                 m_parent));
                     }
                     ii++;
                 }
@@ -161,6 +160,11 @@ namespace OGUR.Storage
         public GenericItem GetCurrentSelection()
         {
             return m_currentSelectedItem;
+        }
+
+        public bool IsVisible()
+        {
+            return m_isVisible;
         }
     }
 }

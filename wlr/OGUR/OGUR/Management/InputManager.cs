@@ -16,33 +16,47 @@ namespace OGUR.Management
             MoveRight,
             Confirm,
             Inventory,
-            InventoryLeft,
-            InventoryRight,
-            InventoryUp,
-            InventoryDown,
             Cancel,
             Start,
             Back
         }
+
+        public enum Contexts
+        {
+            All,
+            Nonfree,
+            Free,
+            Inventory,
+            Magic
+        }
+
+        private static Dictionary<int, Contexts> m_contexts = new Dictionary<int, Contexts>()
+                                                                  {
+                                                                      {0, Contexts.Free},
+                                                                      {1, Contexts.Free},
+                                                                      {2, Contexts.Free},
+                                                                      {3, Contexts.Free}
+
+                                                                  };
         private static List<CommandLock> s_locks = new List<CommandLock>(); 
 
-        private static List<Commands> s_lockOnPress = new List<Commands>()
+        private static Dictionary<Commands,Contexts> s_lockOnPress = new Dictionary<Commands,Contexts>()
                                                           {
-                                                              Commands.Confirm,
-                                                              Commands.Inventory,
-                                                              Commands.InventoryLeft,
-                                                              Commands.InventoryRight,
-                                                              Commands.InventoryDown,
-                                                              Commands.InventoryUp,
-                                                              Commands.Cancel,
-                                                              Commands.Start,
-                                                              Commands.Back
+                                                              {Commands.Confirm,Contexts.All},
+                                                              {Commands.Inventory,Contexts.All},
+                                                              {Commands.Cancel,Contexts.All},
+                                                              {Commands.Start,Contexts.All},
+                                                              {Commands.Back,Contexts.All},
+                                                              {Commands.MoveRight,Contexts.Nonfree},
+                                                              {Commands.MoveLeft,Contexts.Nonfree},
+                                                              {Commands.MoveUp,Contexts.Nonfree},
+                                                              {Commands.MoveDown,Contexts.Nonfree}
                                                           }; 
 
         private static readonly List<string> m_playerInputDevices = new List<string>()
                                                                         {
-                                                                            "KEYBOARD",
-                                                                            "KEYBOARD"
+                                                                            "GAMEPAD",
+                                                                            "GAMEPAD"
                                                                         };
 
         private static readonly Dictionary<Commands, Keys> m_keyboardMapping = new Dictionary<Commands, Keys>()
@@ -51,12 +65,8 @@ namespace OGUR.Management
                                                                                        {Commands.MoveDown, Keys.Down},
                                                                                        {Commands.MoveRight, Keys.Right},
                                                                                        {Commands.MoveLeft, Keys.Left},
+                                                                                       {Commands.Inventory,Keys.E},
                                                                                        {Commands.Confirm, Keys.Space},
-                                                                                       {Commands.Inventory, Keys.W},
-                                                                                       {Commands.InventoryLeft, Keys.S},
-                                                                                       {Commands.InventoryRight, Keys.F},
-                                                                                       {Commands.InventoryDown, Keys.D},
-                                                                                       {Commands.InventoryUp,Keys.E},
                                                                                        {Commands.Cancel,Keys.R},
                                                                                        {Commands.Start,Keys.Enter},
                                                                                        {Commands.Back,Keys.Back}
@@ -68,12 +78,8 @@ namespace OGUR.Management
                                                                                          {Commands.MoveDown,Buttons.DPadDown},
                                                                                          {Commands.MoveRight,Buttons.DPadRight},
                                                                                          {Commands.MoveLeft,Buttons.DPadLeft},
-                                                                                         {Commands.Confirm,Buttons.LeftShoulder},
-                                                                                         {Commands.Inventory,Buttons.RightThumbstickDown},
-                                                                                         {Commands.InventoryLeft,Buttons.DPadLeft},
-                                                                                         {Commands.InventoryRight,Buttons.DPadRight},
-                                                                                         {Commands.InventoryDown,Buttons.DPadDown},
-                                                                                         {Commands.InventoryUp,Buttons.DPadUp},
+                                                                                         {Commands.Confirm,Buttons.A},
+                                                                                         {Commands.Inventory,Buttons.Y},
                                                                                          {Commands.Cancel,Buttons.X},
                                                                                          {Commands.Start,Buttons.Start},
                                                                                          {Commands.Back,Buttons.Back}
@@ -106,7 +112,7 @@ namespace OGUR.Management
 
             if(!isInputActive)
             {
-                if (s_lockOnPress.Contains(command))
+                if (ShouldLock(command,playerIndex))
                 {
                     Unlock(command, playerIndex);
                 }
@@ -119,7 +125,7 @@ namespace OGUR.Management
             
             if(isInputActive)
             {
-                if(s_lockOnPress.Contains(command))
+                if(ShouldLock(command,playerIndex))
                 {
                     Lock(command,playerIndex);
                 }
@@ -128,6 +134,20 @@ namespace OGUR.Management
             return isInputActive;
         }
 
+        private static bool ShouldLock(Commands command,int playerIndex)
+        {
+            return s_lockOnPress.Where(o => o.Key == command).Where(
+                o => o.Value == m_contexts[playerIndex] || (o.Value == Contexts.Nonfree && m_contexts[playerIndex] != Contexts.Free) || o.Value == Contexts.All).Count() > 0;
+        }
+
+        public static void SetContext(Contexts context,int playerIndex)
+        {
+            m_contexts[playerIndex] = context;
+        }
+        public static bool IsContext(Contexts context,int playerIndex)
+        {
+            return m_contexts[playerIndex] == context;
+        }
         public static bool IsLocked(Commands command,int playerIndex)
         {
             return s_locks.Where(o => o.Command == command && o.PlayerIndex == playerIndex).Count() > 0;

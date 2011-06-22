@@ -42,6 +42,11 @@ namespace OGUR.Dungeons
 
         public void CacheContents()
         {
+            foreach (var player in m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(o => o.GetCreatureType() == CreatureType.PLAYER))
+            {
+                DungeonManager.AddToCache(player);
+                GameplayObjectManager.RemoveObject(player);
+            }
             m_contents = new List<GameplayObject>(GameplayObjectManager.GetObjects());
         }
 
@@ -63,14 +68,23 @@ namespace OGUR.Dungeons
                 }
             }
             m_contents.Add(ItemFactory.CreateRandomPlain(100, 100));
-            for (int ii = 0; ii < CreatureFactory.GetPlayerCount(); ii++)
+            var cache = DungeonManager.FlushCache();
+            if (cache.Count() > 0)
+            {
+                m_contents.AddRange(cache);
+                GameplayObjectManager.AddObjects(cache);
+            }
+            else
             {
                 m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X*SpriteInfo.Width,
                                                       downSpawnLocation.Y*SpriteInfo.Height));
+                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X * SpriteInfo.Width,
+                                                      downSpawnLocation.Y * SpriteInfo.Height));
+
             }
-            for (int ii = 0; ii < 20;ii++)
+            for (int ii = 0; ii < 40;ii++)
             {
-                GameplayObjectManager.GetObjects(CreatureType.PLAYER).First().PickupItem(ItemFactory.CreateRandomPlain());
+                GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(new Random().Next(2)).PickupItem(ItemFactory.CreateRandomPlain());
             }    
             m_contents.Add(CreatureFactory.Create(CreatureType.GOBLIN, upSpawnLocation.X * SpriteInfo.Width, upSpawnLocation.Y * SpriteInfo.Height));
             

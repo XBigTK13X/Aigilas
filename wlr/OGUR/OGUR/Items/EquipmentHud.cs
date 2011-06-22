@@ -41,11 +41,11 @@ namespace OGUR.Items
         {
             m_textHandler.Update();
             m_textHandler.Clear();
-            m_textHandler.Add(new InventoryItemsText("Equipped", 300, 30,m_parent.GetPlayerIndex()));
+            m_textHandler.Add(new InventoryItemsText("Equipped", 300, 30,m_parent));
             int ii = 0;
             foreach(var item in m_equipment.GetItems())
             {
-                m_textHandler.Add(new InventoryItemsText(item.Key.ToString().Substring(0,1)+":"+item.Value.Name,320,60+ii*25,m_parent.GetPlayerIndex()));
+                m_textHandler.Add(new InventoryItemsText(item.Key.ToString().Substring(0,1)+":"+item.Value.Name,320,60+ii*25,m_parent));
                 ii++;
             }
         }

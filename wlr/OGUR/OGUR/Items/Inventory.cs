@@ -60,5 +60,18 @@ namespace OGUR.Items
         {
             return m_contents.ContainsKey(item);
         }
+
+        public void DropAll()
+        {
+            foreach(var item in m_contents.Keys)
+            {
+                while(m_contents[item]>0)
+                {
+                    GameplayObjectManager.AddObject(new GenericItem(item, m_parent.GetPosition().X,
+                                                                    m_parent.GetPosition().Y));
+                    Remove(item);
+                }
+            }
+        }
     }
 }

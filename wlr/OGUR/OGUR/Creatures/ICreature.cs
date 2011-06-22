@@ -2,13 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
+using OGUR.Classes;
 using OGUR.Items;
+using OGUR.Management;
 using OGUR.Strategies;
 using OGUR.GameObjects;
 using OGUR.Sprites;
 using OGUR.Collision;
 using OGUR.Text;
 using OGUR.Storage;
+using Point = OGUR.Collision.Point;
 
 namespace OGUR.Creatures
 {
@@ -27,6 +31,10 @@ namespace OGUR.Creatures
         protected int m_playerIndex = -1;
         protected CreatureType m_creatureType;
         protected bool m_isPlaying = true;
+        protected CreatureClass m_class;
+        private int m_currentLevel = 1;
+        private decimal m_experience = 0;
+        private decimal m_nextLevelExperience = 100;
 
         private SpriteType SpriteFromCreature(CreatureType type)
         {
@@ -50,6 +58,7 @@ namespace OGUR.Creatures
                 m_equipmentHud = new EquipmentHud(this);
                 m_deltasHud = new DeltasHud(this);
             }
+            m_class=new Plain();
             m_isBlocking = true;
             m_creatureType = type;
             m_stats = new Stats(stats);
@@ -87,12 +96,15 @@ namespace OGUR.Creatures
 
         public override void Update()
         {
-            Adjust(StatType.MOVE_COOL_DOWN, -1);
-            if (m_inventoryHud != null)
+            if (m_isPlaying)
             {
-                m_inventoryHud.Update();
-                m_equipmentHud.Update();
-                m_deltasHud.Update();
+                Adjust(StatType.MOVE_COOL_DOWN, -1);
+                if (m_inventoryHud != null)
+                {
+                    m_inventoryHud.Update();
+                    m_equipmentHud.Update();
+                    m_deltasHud.Update();
+                }
             }
             m_strategy.Act(this);
         }
@@ -108,14 +120,24 @@ namespace OGUR.Creatures
             }
         }
 
-        public bool SetPlaying(bool isPlaying)
+        public void SetPlaying(bool isPlaying)
         {
             m_isPlaying = isPlaying;
         }
 
+        public bool IsPlaying()
+        {
+            return m_isPlaying;
+        }
+
         public decimal Get(StatType stat)
         {
-            return m_stats.Get(stat)+CalculateEquipmentBonus(stat);
+            return m_stats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
+        }
+
+        private decimal CalculateInstrinsicBonus(StatType stat)
+        {
+            return m_class.GetBonus(m_currentLevel, stat);
         }
 
         public decimal CalculateEquipmentBonus(StatType stat)
@@ -125,7 +147,7 @@ namespace OGUR.Creatures
 
         public decimal GetMax(StatType stat)
         {
-            return (int) m_maxStats.Get(stat);
+            return (int)m_maxStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
         }
 
         public decimal Set(StatType stat,decimal value)
@@ -213,14 +235,16 @@ namespace OGUR.Creatures
             return null;
         }
 
-        public void ToggleInventoryVisibility()
+        public bool ToggleInventoryVisibility()
         {
             if (m_inventoryHud != null)
             {
                 m_inventoryHud.Toggle();
                 m_equipmentHud.Toggle();
                 m_deltasHud.Toggle();
+                return m_inventoryHud.IsVisible();
             }
+            return false;
         }
 
         public void MoveIfPossible(int xVel, int yVel)
@@ -241,6 +265,10 @@ namespace OGUR.Creatures
                         foreach (var creature in creatures)
                         {
                             creature.ApplyDamage(CalculateDamage());
+                            if(!creature.IsActive())
+                            {
+                                AddExperience(creature.CalculateExperience());
+                            }
                         }
                         Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));    
                     }
@@ -248,9 +276,42 @@ namespace OGUR.Creatures
             }
         }
 
+        public void AddExperience(decimal amount)
+        {
+            m_experience += amount;
+            if(m_experience>m_nextLevelExperience)
+            {
+                m_nextLevelExperience += 100;
+                m_experience = 0;
+                m_currentLevel++;
+                TextManager.Add(new ActionText("LEVEL UP!",30,(int)GetPosition().X,(int)GetPosition().Y));
+            }
+        }
+
+        private decimal CalculateExperience()
+        {
+            return m_currentLevel + m_stats.GetSum();
+        }
         public bool IsEquipped(GenericItem item)
         {
             return m_equipment.IsRegistered(item);
+        }
+
+        public Vector2 GetHudOrigin()
+        {
+            switch(m_playerIndex)
+            {
+                case 0:
+                    return new Vector2(0, 0);
+                case 1:
+                    return new Vector2(XnaManager.GetCenter().X, 0);
+                case 2:
+                    return new Vector2(0,XnaManager.GetCenter().Y);
+                case 3:
+                    return XnaManager.GetCenter();
+                default:
+                    throw new Exception("The given player index is outside the range of players allowed in the game!");
+            }
         }
     }
 }

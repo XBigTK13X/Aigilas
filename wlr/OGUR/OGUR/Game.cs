@@ -77,9 +77,14 @@ namespace OGUR
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
+            for (int ii = 0; ii < 4;ii++)
+            {
+                var player = (PlayerIndex) ii;
+                if (GamePad.GetState(player).Buttons.Back == ButtonState.Pressed && GamePad.GetState(player).Buttons.Start==ButtonState.Pressed)
+                {
+                    this.Exit();
+                }
+            }
             // TODO: Add your update logic here
             StateManager.Update();
             TextManager.Update();

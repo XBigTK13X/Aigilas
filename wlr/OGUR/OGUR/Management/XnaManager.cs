@@ -54,5 +54,10 @@ namespace OGUR.Management
         {
             return s_graphicsDevice;
         }
+
+        public static Vector2 GetCenter()
+        {
+            return new Vector2(WindowWidth/2, WindowHeight/2);
+        }
     }
 }

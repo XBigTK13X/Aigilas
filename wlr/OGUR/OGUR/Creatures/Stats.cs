@@ -62,5 +62,25 @@ namespace OGUR.Creatures
         {
             return m_stats.Select((t, ii) => m_stats[(StatType) ii] - stats.m_stats[(StatType) ii]).ToList();
         }
+
+        public Stats GetLevelBonuses(int level)
+        {
+            var result = new Stats(this);
+            foreach(var stat in result.m_stats.Keys)
+            {
+                result.m_stats[stat] += result.m_stats[stat]*level;
+            }
+            return result;
+        }
+
+        public decimal GetBonus(int level, StatType stat)
+        {
+            return m_stats[stat]*level;
+        }
+
+        public decimal GetSum()
+        {
+            return m_stats.Keys.Sum(stat => m_stats[stat]);
+        }
     }
 }
