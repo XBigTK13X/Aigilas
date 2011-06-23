@@ -55,7 +55,7 @@ namespace OGUR.Management
 
         private static readonly List<string> m_playerInputDevices = new List<string>()
                                                                         {
-                                                                            "GAMEPAD",
+                                                                            "KEYBOARD",
                                                                             "GAMEPAD"
                                                                         };
 
