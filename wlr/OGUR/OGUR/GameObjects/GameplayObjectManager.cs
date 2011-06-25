@@ -55,7 +55,6 @@ namespace OGUR.GameObjects
         {
             return m_contents;
         }
-
         public static void RemoveObject(GameplayObject target)
         {
             m_contents.Remove(target);
@@ -71,6 +70,16 @@ namespace OGUR.GameObjects
         {
             for (int ii = 0; ii < m_contents.Count; ii++)
             {
+                if(ii>=m_contents.Count)
+                {
+                    return;
+                }
+                if (!m_contents[ii].IsActive())
+                {
+                    m_contents.Remove(m_contents[ii]);
+                    ii--;
+                    continue;
+                }                
                 if (m_contents[ii].GetObjectType() == GameObjectType.CREATURE)
                 {
                     var creature = m_contents[ii] as ICreature;
@@ -79,11 +88,6 @@ namespace OGUR.GameObjects
                 else
                 {
                     m_contents[ii].Update();
-                }
-                if (!m_contents[ii].IsActive())
-                {
-                    m_contents.Remove(m_contents[ii]);
-                    ii--;
                 }
             }
         }
@@ -122,7 +126,7 @@ namespace OGUR.GameObjects
 
         public static ICreature GetNearestPlayer(ICreature target)
         {
-            ICreature closest = GetObjects(CreatureType.PLAYER).First();
+            ICreature closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
             foreach(ICreature player in GetObjects(CreatureType.PLAYER))
             {
                 if(HitTest.GetDistance(target,player) < HitTest.GetDistance(target,closest))
