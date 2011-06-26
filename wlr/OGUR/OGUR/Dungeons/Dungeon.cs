@@ -60,7 +60,7 @@ namespace OGUR.Dungeons
             ConvertRoomsToWalls();
             PlaceStairs();
             PlaceCreatures(new Random().Next(3, 10));
-
+            PlaceItems(new Random().Next(0, 5));
             PlaceFloor();
             foreach (GameplayObject tile in dungeon)
             {
@@ -70,7 +70,6 @@ namespace OGUR.Dungeons
                     GameplayObjectManager.AddObject(tile);
                 }
             }
-            m_contents.Add(ItemFactory.CreateRandomPlain(100, 100));
             var cache = DungeonManager.FlushCache();
             if (cache.Count() == 0)
             {
@@ -87,12 +86,22 @@ namespace OGUR.Dungeons
                 GameplayObjectManager.AddObjects(cache);
                 m_contents.AddRange(cache);
             }
-            //m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X * SpriteInfo.Width,
-                //                                  downSpawnLocation.Y * SpriteInfo.Height));
             
             for (int ii = 0; ii < 40;ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(0).PickupItem(ItemFactory.CreateRandomPlain());
+            }
+        }
+
+        private void PlaceItems(int amountToPlace)
+        {
+            while (amountToPlace > 0)
+            {
+                var rand = new Random();
+                amountToPlace--;
+                var randomPoint = FindRandomFreeTile();
+                dungeon[randomPoint.X, randomPoint.Y] = ItemFactory.CreateRandomPlain(randomPoint.X*SpriteInfo.Width,
+                                                                                      randomPoint.Y*SpriteInfo.Height);
             }
         }
 
