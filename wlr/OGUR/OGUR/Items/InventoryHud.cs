@@ -13,14 +13,14 @@ namespace OGUR.Storage
 {
     public class InventoryHud
     {
-        private ICreature m_parent;
+        private readonly ICreature m_parent;
         private static Texture2D m_menuBase;
         private bool m_isVisible = false;
         private ItemClass m_currentClass = (ItemClass) 1;
-        private Inventory m_inventory;
+        private readonly Inventory m_inventory;
         private int m_endingItem = 4, m_startingItem = 0;
         private Dictionary<GenericItem, int> m_currentClassItems;
-        private TextHandler m_textHandler = new TextHandler();
+        private readonly TextHandler m_textHandler = new TextHandler();
         private GenericItem m_currentSelectedItem = null;
 
         public InventoryHud(ICreature owner)

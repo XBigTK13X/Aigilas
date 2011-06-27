@@ -94,20 +94,38 @@ namespace OGUR.GameObjects
 
         public static void Draw()
         {
+            var players = new List<GameplayObject>();
             foreach (GameplayObject component in m_contents)
             {
                 if (XnaManager.GetRenderTarget() != null)
                 {
                     if (component.GetObjectType() == GameObjectType.CREATURE)
                     {
-                        if(((ICreature)component).IsPlaying())
+                        if(((ICreature)component).GetCreatureType()==CreatureType.PLAYER)
                         {
-                            component.Draw();
+                            players.Add(component);
+                        }
+                        else
+                        {
+                            if (((ICreature)component).IsPlaying())
+                            {
+                                component.Draw();
+                            }    
                         }
                     }
                     else
                     {
                         component.Draw();    
+                    }
+                }
+            }
+            foreach(var player in players)
+            {
+                if(XnaManager.GetRenderTarget()!=null)
+                {
+                    if(((ICreature)player).IsPlaying())
+                    {
+                        player.Draw();
                     }
                 }
             }
