@@ -19,6 +19,7 @@ namespace OGUR.GameObjects
         protected SpriteType m_assetName;
         protected GameObjectType m_objectType;
         protected bool m_isOnBoard = true;
+        protected List<Elements> m_composition = new List<Elements>(){Elements.NORMAL};
 
         //Load the texture for the sprite using the Content Pipeline
         public void LoadContent()

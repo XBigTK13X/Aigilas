@@ -5,6 +5,11 @@ namespace OGUR.Strategies
 {
     public abstract class IStrategy
     {
-        public abstract void Act(ICreature target);
+        protected TargetSet m_targets;
+        protected IStrategy(ICreature parent)
+        {
+            m_targets = new TargetSet(parent);
+        }
+        public abstract void Act(ICreature parent);
     }
 }

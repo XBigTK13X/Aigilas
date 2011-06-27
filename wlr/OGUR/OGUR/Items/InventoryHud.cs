@@ -129,16 +129,17 @@ namespace OGUR.Storage
                     {
                         m_currentSelectedItem = item;
                     }
+                    if(!m_parent.IsEquipped(item)&&m_inventory.GetItemCount(item)<=0)
+                    {
+                        continue;
+                    }
+
                     if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
                     {
                         string displayText = ii + ")"
-                                                  +
-                                             ((m_parent.IsEquipped(item))
-                                                  ? "~"
-                                                  : "")
-                                                  + item.Name
-                                                  +
-                                                  ((m_currentClassItems[item] > 0) ? " x" + m_currentClassItems[item] :
+                                                  +((m_parent.IsEquipped(item))? "~" : "")
+                                                  + item.Name +
+                                                  ((m_currentClassItems[item] > -1) ? " x" + m_currentClassItems[item] :
                                                   "");
                         m_textHandler.Add(new InventoryItemsText(displayText, 50,
                                                                  60 + 25 * (ii - m_startingItem),

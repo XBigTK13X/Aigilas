@@ -20,18 +20,20 @@ namespace OGUR.Creatures
     {
         protected IStrategy m_strategy;
         protected MentalState m_mentality = MentalState.NORMAL;
-        protected List<ICreature> m_targets = new List<ICreature>();
+
+        protected CreatureType m_creatureType;
+        protected CreatureClass m_class;
+        protected Stats m_stats;
+        protected Stats m_maxStats;
+
         protected Inventory m_inventory;
+        protected Equipment m_equipment;
         protected InventoryHud m_inventoryHud;
         protected EquipmentHud m_equipmentHud;
         protected DeltasHud m_deltasHud;
-        protected Equipment m_equipment;
-        protected Stats m_stats;
-        protected Stats m_maxStats;
+
         protected int m_playerIndex = -1;
-        protected CreatureType m_creatureType;
         protected bool m_isPlaying = true;
-        protected CreatureClass m_class;
         private int m_currentLevel = 1;
         private decimal m_experience = 0;
         private decimal m_nextLevelExperience = 100;
@@ -72,18 +74,36 @@ namespace OGUR.Creatures
 
         public void Equip(GenericItem item)
         {
-            if(m_inventory.Contains(item))
+            if (m_inventory.GetItemCount(item) > 0 && !m_equipment.IsRegistered(item))
             {
                 m_equipment.Register(item);
                 m_inventory.Remove(item);
             }
+            else
+            {
+                if (m_equipment.IsRegistered(item))
+                {
+                    m_equipment.Unregister(item);
+                }
+            }
         }
 
-        public void Drop(GenericItem item)
+        public void  Drop(GenericItem item)
         {
-            GameplayObjectManager.AddObject(new GenericItem(item,GetPosition().X,GetPosition().Y));
-            m_equipment.Unregister(item);
-            m_inventory.Remove(item);
+            if (m_inventory.GetItemCount(item)>0)
+            {
+                GameplayObjectManager.AddObject(new GenericItem(item, GetPosition().X, GetPosition().Y));
+                m_inventory.Remove(item);
+            }
+            else
+            {
+                if (m_inventory.GetItemCount(item) == 0)
+                {
+                    m_equipment.Unregister(item);
+                    GameplayObjectManager.AddObject(new GenericItem(item, GetPosition().X, GetPosition().Y));
+                    m_inventory.Remove(item);
+                }
+            }
         }
 
         public void Unequip(GenericItem item)
@@ -251,7 +271,7 @@ namespace OGUR.Creatures
         {
             if ((xVel != 0 || yVel != 0) && GetInt(StatType.MOVE_COOL_DOWN) <= 0)
             {
-                var target = new Point(xVel + (int) GetPosition().X,yVel + (int) GetPosition().Y);
+                var target = new Point(xVel + (int)GetPosition().X + SpriteInfo.Width / 2, yVel + (int)GetPosition().Y + SpriteInfo.Height / 2);
                 if (!CoordVerifier.IsBlocked(target.X,target.Y))
                 {
                     Move(xVel, yVel);
@@ -259,7 +279,7 @@ namespace OGUR.Creatures
                 }
                 else
                 {
-                    var creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE,target).Cast<ICreature>().Where(creature => creature!=this);
+                    var creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE,target).Cast<ICreature>().Where(creature => creature!=this).ToList();
                     if(creatures.Count()>0)
                     {
                         foreach (var creature in creatures)

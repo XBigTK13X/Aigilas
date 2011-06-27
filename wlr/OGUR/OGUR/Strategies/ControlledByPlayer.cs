@@ -6,6 +6,10 @@ namespace OGUR.Strategies
 {
     public class ControlledByPlayer : IStrategy
     {
+        public ControlledByPlayer(ICreature parent) : base(parent)
+        {
+        }
+
         public override void Act(ICreature target)
         {
             if (InputManager.IsPressed(InputManager.Commands.Start, target.GetPlayerIndex()))

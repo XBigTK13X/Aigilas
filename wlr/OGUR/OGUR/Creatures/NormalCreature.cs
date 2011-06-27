@@ -11,7 +11,7 @@ namespace OGUR.Creatures
         {
             base.Setup(position.X, position.Y, type, stats);
             m_position = position;
-            m_strategy = new AttackPlayers();
+            m_strategy = new AttackPlayers(this);
         }
     }
 }

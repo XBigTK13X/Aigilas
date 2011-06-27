@@ -49,7 +49,7 @@ namespace OGUR.Items
             if(Contains(item))
             {
                 m_contents[item]--;
-                if(m_contents[item]<=0)
+                if(m_contents[item]<=-1)
                 {
                     m_contents.Remove(item);
                 }
@@ -59,6 +59,15 @@ namespace OGUR.Items
         public bool Contains(GenericItem item)
         {
             return m_contents.ContainsKey(item);
+        }
+
+        public int GetItemCount(GenericItem item)
+        {
+            if(m_contents.Keys.Contains(item))
+            {
+                return m_contents[item];
+            }
+            return 0;
         }
 
         public void DropAll()

@@ -6,9 +6,14 @@ namespace OGUR.Strategies
 {
     public class AttackPlayers : IStrategy
     {
+        public AttackPlayers(ICreature parent) : base(parent)
+        {
+        }
+
         public override void Act(ICreature target)
         {
-            var opponent = GameplayObjectManager.GetNearestPlayer(target);
+            m_targets.UpdateTypes(CreatureType.PLAYER);
+            var opponent = m_targets.FindClosest();
             //Every player is dead
             if (null != opponent)
             {
