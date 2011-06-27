@@ -20,6 +20,10 @@ namespace OGUR.Strategies
             {
                 target.SetPlaying(false);
             }
+            if(InputManager.IsPressed(InputManager.Commands.Confirm,target.GetPlayerIndex()))
+            {
+                DungeonManager.GotoNext();
+            }
             if (target.IsPlaying())
             {
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
@@ -72,6 +76,7 @@ namespace OGUR.Strategies
                         InputManager.SetContext(InputManager.Contexts.Free, target.GetPlayerIndex());
                     }
                 }
+
             }
         }
     }

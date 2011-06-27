@@ -186,13 +186,30 @@ namespace OGUR.Dungeons
             dungeon[upSpawnLocation.X, upSpawnLocation.Y] = new Downstairs(upSpawnLocation.X * SpriteInfo.Width, upSpawnLocation.Y * SpriteInfo.Height);
         }
 
+        private class PointPoint
+        {
+            public int X, Y;
+            private bool m_isHorizontal;
+
+            public PointPoint(int x,int y, bool destroyHorizontal=false)
+            {
+                X = x;
+                Y = y;
+                m_isHorizontal = destroyHorizontal;
+            }
+            public bool isHorizontal()
+            {
+                return m_isHorizontal;
+            }
+        }
+        
         private void ConvertRoomsToWalls()
         {
-            var rand = new Random();
             int roomCount = 0;
+            var dungeonEntrances = new List<PointPoint>();
             foreach (Room room in m_rooms)
             {
-                var entrances = new List<Point>();
+                var entrances = new List<PointPoint>();
                 for (int ii = room.X; ii < room.RightSide; ii++)
                 {
                     for (int jj = room.Y; jj < room.BottomSide; jj++)
@@ -205,7 +222,7 @@ namespace OGUR.Dungeons
                                 {
                                     if (IsFloor(ii - 1, jj) && IsFloor(ii + 1, jj))
                                     {
-                                        entrances.Add(new Point(ii, jj));
+                                        entrances.Add(new PointPoint(ii, jj,true));
                                     }
                                 }
                                 if ((jj == room.Y && jj > 0) ||
@@ -213,7 +230,7 @@ namespace OGUR.Dungeons
                                 {
                                     if (IsFloor(ii, jj - 1) && IsFloor(ii, jj + 1))
                                     {
-                                        entrances.Add(new Point(ii, jj));
+                                        entrances.Add(new PointPoint(ii, jj));
                                     }
                                 }
                             }
@@ -227,16 +244,42 @@ namespace OGUR.Dungeons
                 }
                 if (roomCount > 0 && entrances.Count() > 0)
                 {
-                    int index = rand.Next(0, entrances.Count() - 1);
+                    int index = new Random().Next(0, entrances.Count() - 1);
                     var entrance = entrances[index];
-                    if (dungeon[entrance.X, entrance.Y].GetObjectType() == GameObjectType.WALL)
+                    if (dungeon[entrance.X, entrance.Y].GetObjectType() != GameObjectType.FLOOR)
                     {
-                        dungeon[entrance.X, entrance.Y] = new Floor(entrance.X*SpriteInfo.Width,
-                                                                    entrance.Y*SpriteInfo.Height);
+                        dungeonEntrances.Add(entrance);
                     }
                 }
                 roomCount++;
             }
+            foreach (var entrance in dungeonEntrances)
+            {
+                if (entrance.isHorizontal())
+                {
+                    for(int ii = 1;ii<DungeonManager.BlocksWide-1;ii++)
+                    {
+                        var currentTarget = new Point(ii, entrance.Y);
+                        if(dungeon[currentTarget.X,currentTarget.Y].GetObjectType()==GameObjectType.WALL)
+                        {
+                            dungeon[currentTarget.X,currentTarget.Y]=new Floor(currentTarget.X*SpriteInfo.Width,currentTarget.Y*SpriteInfo.Height);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int ii = 1; ii < DungeonManager.BlocksHigh - 1; ii++)
+                    {
+                        var currentTarget = new Point(entrance.X, ii);
+                        if (dungeon[currentTarget.X, currentTarget.Y].GetObjectType() == GameObjectType.WALL)
+                        {
+                            dungeon[currentTarget.X, currentTarget.Y] = new Floor(currentTarget.X, currentTarget.Y);
+                        }
+                    }
+                }
+            }
+
+
         }
 
         private bool IsFloor(int x, int y)
