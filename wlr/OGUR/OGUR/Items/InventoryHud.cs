@@ -117,7 +117,7 @@ namespace OGUR.Storage
 
         private void UpdateInventoryDisplay()
         {
-            m_textHandler.Add(new InventoryItemsText(m_currentClass.ToString().Replace("_", " "), 20, 30,
+            m_textHandler.Add(new DefaultHudText(m_currentClass.ToString().Replace("_", " "), 20, 30,
                                                        m_parent));
             m_currentClassItems = m_inventory.GetItems(m_currentClass);
             if (m_currentClassItems.Count > 0)
@@ -141,7 +141,7 @@ namespace OGUR.Storage
                                                   + item.Name +
                                                   ((m_currentClassItems[item] > -1) ? " x" + m_currentClassItems[item] :
                                                   "");
-                        m_textHandler.Add(new InventoryItemsText(displayText, 50,
+                        m_textHandler.Add(new DefaultHudText(displayText, 50,
                                                                  60 + 25 * (ii - m_startingItem),
                                                                  m_parent));
                     }

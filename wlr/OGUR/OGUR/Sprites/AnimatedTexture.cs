@@ -86,10 +86,10 @@ namespace OGUR.Sprites
             return m_position;
         }
 
-        public void SetPosition(int x, int y)
+        public void SetPosition(double x, double y)
         {
-            m_position.X = x;
-            m_position.Y = y;
+            m_position.X = (int)x;
+            m_position.Y = (int)y;
         }
     }
 }

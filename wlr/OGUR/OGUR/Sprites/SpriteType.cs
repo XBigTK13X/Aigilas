@@ -15,6 +15,7 @@ namespace OGUR.Sprites
         UPSTAIRS,
         DOWNSTAIRS,
         CREATURE,
-        ITEM
+        ITEM,
+        FX_PARTICLE
     }    
 }

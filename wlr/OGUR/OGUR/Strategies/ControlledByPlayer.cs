@@ -24,24 +24,36 @@ namespace OGUR.Strategies
             {
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
                 {
-                    decimal leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,
+                    //Handle skills
+                    var skillCycleVelocity =
+                        ((InputManager.IsPressed(InputManager.Commands.CycleLeft, target.GetPlayerIndex()))
+                             ? -1
+                             : 0)
+                        +
+                        ((InputManager.IsPressed(InputManager.Commands.CycleRight, target.GetPlayerIndex()))
+                             ? 1
+                             : 0);
+                    target.CycleActiveSkill(skillCycleVelocity);
+
+                    //Handle movement
+                    int leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,
                                                                    target.GetPlayerIndex())
                                                 ? -target.GetInt(StatType.MOVE_SPEED)
                                                 : 0);
-                    decimal rightVelocity =
+                    var rightVelocity =
                         ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))
                              ? target.GetInt(StatType.MOVE_SPEED)
                              : 0);
-                    decimal xVel = leftVelocity + rightVelocity;
-                    decimal downVelocity =
+                    var xVel = leftVelocity + rightVelocity;
+                    var downVelocity =
                         ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))
                              ? target.GetInt(StatType.MOVE_SPEED)
                              : 0);
-                    decimal upVelocity =
+                    var upVelocity =
                         ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))
                              ? -target.GetInt(StatType.MOVE_SPEED)
                              : 0);
-                    decimal yVel = downVelocity + upVelocity;
+                    var yVel = downVelocity + upVelocity;
                     target.MoveIfPossible((int) xVel, (int) yVel);
 
                     foreach (var downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
@@ -63,16 +75,11 @@ namespace OGUR.Strategies
                 }
                 if (InputManager.IsPressed(InputManager.Commands.Inventory, target.GetPlayerIndex()))
                 {
-                    if (target.ToggleInventoryVisibility())
-                    {
-                        InputManager.SetContext(InputManager.Contexts.Inventory,target.GetPlayerIndex());
-                    }
-                    else
-                    {
-                        InputManager.SetContext(InputManager.Contexts.Free, target.GetPlayerIndex());
-                    }
+                    InputManager.SetContext(
+                        target.ToggleInventoryVisibility()
+                            ? InputManager.Contexts.Inventory
+                            : InputManager.Contexts.Free, target.GetPlayerIndex());
                 }
-
             }
         }
     }

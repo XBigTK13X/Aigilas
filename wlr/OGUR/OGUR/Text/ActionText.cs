@@ -25,10 +25,10 @@ namespace OGUR.Text
         }
         public override void Draw()
         {
-            SpriteBatch target = XnaManager.GetRenderTarget();
+            var target = XnaManager.GetRenderTarget();
             target.Begin();
             // Find the center of the string
-            Vector2 fontCenter = TextManager.GetFont().MeasureString(m_contents) / 2;
+            var fontCenter = TextManager.GetFont().MeasureString(m_contents) / 2;
             target.DrawString(TextManager.GetFont(), m_contents, m_position, Color.Black, 0, fontCenter, 1.15f * m_scalePercent, SpriteEffects.None, 0.5f);
             target.DrawString(TextManager.GetFont(), m_contents, m_position, Color.White, 0, fontCenter, 1.0f * m_scalePercent, SpriteEffects.None, 0.5f);
             target.End();

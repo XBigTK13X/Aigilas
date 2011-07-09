@@ -29,7 +29,7 @@ namespace OGUR.Text
 
         public void Update()
         {
-            for (int ii = 0; ii < m_contents.Count; ii++)
+            for (var ii = 0; ii < m_contents.Count; ii++)
             {
                 if(m_contents[ii].Update()<=0)
                 {
@@ -41,9 +41,10 @@ namespace OGUR.Text
 
         public void Draw()
         {
-            foreach (Text component in m_contents)
+
+            if (XnaManager.GetRenderTarget() != null)
             {
-                if (XnaManager.GetRenderTarget() != null)
+                foreach (var component in m_contents)
                 {
                     component.Draw();
                 }

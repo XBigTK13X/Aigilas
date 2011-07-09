@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using OGUR.Classes;
 using OGUR.Items;
 using OGUR.Management;
+using OGUR.Skills;
 using OGUR.Strategies;
 using OGUR.GameObjects;
 using OGUR.Sprites;
@@ -26,17 +27,22 @@ namespace OGUR.Creatures
         protected Stats m_stats;
         protected Stats m_maxStats;
 
+        protected SkillPool m_skills = new SkillPool();
+        protected Point2 m_skillVector = new Point2(0,0);
+
         protected Inventory m_inventory;
         protected Equipment m_equipment;
+
         protected InventoryHud m_inventoryHud;
         protected EquipmentHud m_equipmentHud;
         protected DeltasHud m_deltasHud;
+        protected SkillHud m_skillHud;
 
         protected int m_playerIndex = -1;
         protected bool m_isPlaying = true;
-        private int m_currentLevel = 1;
-        private decimal m_experience = 0;
-        private decimal m_nextLevelExperience = 100;
+        protected int m_currentLevel = 1;
+        protected decimal m_experience = 0;
+        protected decimal m_nextLevelExperience = 100;
 
         private SpriteType SpriteFromCreature(CreatureType type)
         {
@@ -49,7 +55,7 @@ namespace OGUR.Creatures
             }
         }
 
-        protected void Setup(int x, int y, CreatureType type, Stats stats)
+        protected void Setup(int x, int y, CreatureType type, Stats stats,CreatureClass creatureClass=null)
         {
             Initialize(x, y, SpriteFromCreature(type), GameObjectType.CREATURE);
             m_inventory = new Inventory(this);
@@ -59,10 +65,13 @@ namespace OGUR.Creatures
                 m_inventoryHud = new InventoryHud(this);
                 m_equipmentHud = new EquipmentHud(this);
                 m_deltasHud = new DeltasHud(this);
+                m_skillHud = new SkillHud(this);
+                m_skillHud.Toggle();
             }
-            m_class=new Plain();
+            m_class = creatureClass ?? new NoClass();
             m_isBlocking = true;
             m_creatureType = type;
+            m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
             m_stats = new Stats(stats);
             m_maxStats = new Stats(stats);
         }
@@ -124,6 +133,7 @@ namespace OGUR.Creatures
                     m_inventoryHud.Update();
                     m_equipmentHud.Update();
                     m_deltasHud.Update();
+                    m_skillHud.Update();
                 }
             }
             m_strategy.Act(this);
@@ -137,6 +147,7 @@ namespace OGUR.Creatures
                 m_inventoryHud.Draw();
                 m_equipmentHud.Draw();
                 m_deltasHud.Draw();
+                m_skillHud.Draw();
             }
         }
 
@@ -262,6 +273,7 @@ namespace OGUR.Creatures
                 m_inventoryHud.Toggle();
                 m_equipmentHud.Toggle();
                 m_deltasHud.Toggle();
+                m_skillHud.Toggle();
                 return m_inventoryHud.IsVisible();
             }
             return false;
@@ -271,7 +283,7 @@ namespace OGUR.Creatures
         {
             if ((xVel != 0 || yVel != 0) && GetInt(StatType.MOVE_COOL_DOWN) <= 0)
             {
-                var target = new Point(xVel + (int)GetPosition().X + SpriteInfo.Width / 2, yVel + (int)GetPosition().Y + SpriteInfo.Height / 2);
+                var target = new Point2(xVel + GetPosition().X + SpriteInfo.Width / 2, yVel + GetPosition().Y + SpriteInfo.Height / 2);
                 if (!CoordVerifier.IsBlocked(target.X,target.Y))
                 {
                     Move(xVel, yVel);
@@ -294,6 +306,11 @@ namespace OGUR.Creatures
                     }
                 }
             }
+        }
+
+        public Point2 GetSkillVector()
+        {
+            return m_skillVector;
         }
 
         public void AddExperience(decimal amount)
@@ -332,6 +349,16 @@ namespace OGUR.Creatures
                 default:
                     throw new Exception("The given player index is outside the range of players allowed in the game!");
             }
+        }
+
+        public void CycleActiveSkill(int velocity)
+        {
+            m_skills.Cycle(velocity);
+        }
+
+        public ISkill GetActiveSkill()
+        {
+            return m_skills.GetActive();
         }
     }
 }

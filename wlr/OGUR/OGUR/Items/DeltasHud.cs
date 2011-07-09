@@ -50,14 +50,14 @@ namespace OGUR.Items
                     m_textHandler.Update();
                     m_textHandler.Clear();
 
-                    m_textHandler.Add(new InventoryItemsText("Deltas", 30, 260, m_parent));
+                    m_textHandler.Add(new DefaultHudText("Deltas", 30, 260, m_parent));
 
                     string deltas = "";
                     foreach (decimal stat in stats.GetDeltas(stats2))
                     {
                         deltas += ((stat > 0) ? "+" : "") + stat + "|";
                     }
-                    m_textHandler.Add(new InventoryItemsText(deltas, 30, 290, m_parent));
+                    m_textHandler.Add(new DefaultHudText(deltas, 30, 290, m_parent));
                 }
             }
         }

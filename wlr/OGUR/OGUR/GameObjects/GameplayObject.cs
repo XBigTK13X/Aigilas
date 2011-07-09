@@ -57,13 +57,13 @@ namespace OGUR.GameObjects
         {
         }
 
-        public void Move(int amountX, int amountY)
+        public void Move(double amountX, double amountY)
         {
-            if (CoordVerifier.IsValid((int) m_graphic.GetPosition().X + amountX,
-                                      (int) m_graphic.GetPosition().Y + amountY))
+            if (CoordVerifier.IsValid(m_graphic.GetPosition().X + amountX,
+                                      m_graphic.GetPosition().Y + amountY))
             {
-                m_graphic.SetPosition((int) m_graphic.GetPosition().X + amountX,
-                                      (int) m_graphic.GetPosition().Y + amountY);
+                m_graphic.SetPosition(m_graphic.GetPosition().X + amountX,
+                                      m_graphic.GetPosition().Y + amountY);
             }
         }
 
@@ -115,7 +115,7 @@ namespace OGUR.GameObjects
             m_graphic.SetSpriteInfo(sprite);
         }
 
-        public bool Contains(OGUR.Collision.Point target)
+        public bool Contains(Point2 target)
         {
             return (target.X >= GetPosition().X) && (target.Y >= GetPosition().Y) &&
                    (target.X <= GetPosition().X + SpriteInfo.Width) && (target.Y <= GetPosition().Y + SpriteInfo.Height);

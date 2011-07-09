@@ -16,6 +16,9 @@ namespace OGUR.Management
             MoveRight,
             Confirm,
             Inventory,
+            Skill,
+            CycleLeft,
+            CycleRight,
             Cancel,
             Start,
             Back
@@ -27,7 +30,7 @@ namespace OGUR.Management
             Nonfree,
             Free,
             Inventory,
-            Magic
+            Skill
         }
 
         private static Dictionary<int, Contexts> m_contexts = new Dictionary<int, Contexts>()
@@ -50,7 +53,10 @@ namespace OGUR.Management
                                                               {Commands.MoveRight,Contexts.Nonfree},
                                                               {Commands.MoveLeft,Contexts.Nonfree},
                                                               {Commands.MoveUp,Contexts.Nonfree},
-                                                              {Commands.MoveDown,Contexts.Nonfree}
+                                                              {Commands.MoveDown,Contexts.Nonfree},
+                                                              {Commands.CycleLeft,Contexts.All},
+                                                              {Commands.CycleRight,Contexts.All},
+                                                              {Commands.Skill,Contexts.All}
                                                           }; 
 
         private static readonly List<string> m_playerInputDevices = new List<string>()
@@ -69,7 +75,10 @@ namespace OGUR.Management
                                                                                        {Commands.Confirm, Keys.Space},
                                                                                        {Commands.Cancel,Keys.R},
                                                                                        {Commands.Start,Keys.Enter},
-                                                                                       {Commands.Back,Keys.Back}
+                                                                                       {Commands.Back,Keys.Back},
+                                                                                       {Commands.CycleLeft,Keys.A},
+                                                                                       {Commands.CycleRight,Keys.D},
+                                                                                       {Commands.Skill,Keys.LeftShift}
                                                                                    };
 
         private static readonly Dictionary<Commands, Buttons> m_gamePadMapping = new Dictionary<Commands, Buttons>()
@@ -82,7 +91,10 @@ namespace OGUR.Management
                                                                                          {Commands.Inventory,Buttons.Y},
                                                                                          {Commands.Cancel,Buttons.X},
                                                                                          {Commands.Start,Buttons.Start},
-                                                                                         {Commands.Back,Buttons.Back}
+                                                                                         {Commands.Back,Buttons.Back},
+                                                                                         {Commands.CycleLeft,Buttons.LeftShoulder},
+                                                                                         {Commands.CycleRight,Buttons.RightShoulder},
+                                                                                         {Commands.Skill,Buttons.RightTrigger}
                                                                                      };
 
         private static readonly List<PlayerIndex> m_playerIndex = new List<PlayerIndex>()

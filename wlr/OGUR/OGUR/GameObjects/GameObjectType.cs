@@ -12,6 +12,7 @@ namespace OGUR.GameObjects
         UPSTAIRS,
         DOWNSTAIRS,
         CREATURE,
-        ITEM
+        ITEM,
+        FX_PARTICLE
     }
 }

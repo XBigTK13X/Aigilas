@@ -3,7 +3,6 @@ using System.Linq;
 using OGUR.Collision;
 using OGUR.Management;
 using OGUR.Creatures;
-using OGUR.Sprites;
 
 namespace OGUR.GameObjects
 {
@@ -27,7 +26,7 @@ namespace OGUR.GameObjects
             return null;
         }
 
-        public static List<GameplayObject> GetObjects(GameObjectType type,Point target)
+        public static List<GameplayObject> GetObjects(GameObjectType type,Point2 target)
         {
             if (m_contents != null)
             {
@@ -95,34 +94,37 @@ namespace OGUR.GameObjects
         public static void Draw()
         {
             var players = new List<GameplayObject>();
-            foreach (GameplayObject component in m_contents)
+            if (XnaManager.GetRenderTarget() != null)
             {
-                if (XnaManager.GetRenderTarget() != null)
+                foreach (GameplayObject component in m_contents)
                 {
+
                     if (component.GetObjectType() == GameObjectType.CREATURE)
                     {
-                        if(((ICreature)component).GetCreatureType()==CreatureType.PLAYER)
+                        if (((ICreature) component).GetCreatureType() == CreatureType.PLAYER)
                         {
                             players.Add(component);
                         }
                         else
                         {
-                            if (((ICreature)component).IsPlaying())
+                            if (((ICreature) component).IsPlaying())
                             {
                                 component.Draw();
-                            }    
+                            }
                         }
                     }
                     else
                     {
-                        component.Draw();    
+                        component.Draw();
                     }
                 }
             }
-            foreach(var player in players)
+
+            if (XnaManager.GetRenderTarget() != null)
             {
-                if(XnaManager.GetRenderTarget()!=null)
+                foreach(var player in players)
                 {
+                
                     if(((ICreature)player).IsPlaying())
                     {
                         player.Draw();

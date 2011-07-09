@@ -17,7 +17,8 @@ namespace OGUR.Sprites
             {SpriteType.UPSTAIRS,new SpriteInfo(4, 1)},
             {SpriteType.DOWNSTAIRS,new SpriteInfo(5, 1)},            
             {SpriteType.CREATURE,new SpriteInfo(6, 1)},
-            {SpriteType.ITEM,new SpriteInfo(7, 1)}
+            {SpriteType.ITEM,new SpriteInfo(7, 1)},
+            {SpriteType.FX_PARTICLE,new SpriteInfo(8, 1)}
         };
 
         public static SpriteInfo GetSpriteInfo(SpriteType spriteName)
