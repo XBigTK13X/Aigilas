@@ -59,12 +59,23 @@ namespace OGUR.GameObjects
 
         public void Move(double amountX, double amountY)
         {
+            amountX = NormalizeDistance(amountX);
+            amountY = NormalizeDistance(amountY);
             if (CoordVerifier.IsValid(m_graphic.GetPosition().X + amountX,
                                       m_graphic.GetPosition().Y + amountY))
             {
                 m_graphic.SetPosition(m_graphic.GetPosition().X + amountX,
                                       m_graphic.GetPosition().Y + amountY);
             }
+        }
+
+        private double NormalizeDistance(double amount)
+        {
+            var isNeg = (amount < 0)? -1:1;
+            amount = Math.Abs(amount);
+            var factorsOfSpriteHeight = (int)Math.Floor(amount/SpriteInfo.Height);
+            factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount!=0) ? 1 : factorsOfSpriteHeight;
+            return (double) (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
         }
 
         public void SetPosition(int x, int y)

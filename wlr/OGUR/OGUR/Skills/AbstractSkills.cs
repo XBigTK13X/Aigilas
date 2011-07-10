@@ -10,9 +10,14 @@ namespace OGUR.Skills
     public abstract class ISkill
     {
         protected Stats m_cost;
+        protected ICreature m_source;
         protected List<Elements> m_elements = new List<Elements>() {Elements.NORMAL};
         public static ISkill NULL;
         protected SkillId m_implementationId;
+        protected List<SkillEffect> m_effectGraphic = new List<SkillEffect>();
+
+        protected ISkill()
+        {}
 
         protected ISkill(SkillId implementationId)
         {
@@ -21,7 +26,7 @@ namespace OGUR.Skills
             m_implementationId = implementationId;
         }
 
-        protected ISkill(IEnumerable<Elements> elements,Stats cost)
+        protected ISkill(IEnumerable<Elements> elements, Stats cost)
         {
             m_elements = new List<Elements>(elements);
             m_cost = new Stats(cost);
@@ -33,7 +38,12 @@ namespace OGUR.Skills
         }
 
         public abstract void Activate(ICreature source);
-        protected abstract void Affect(ICreature target);
+        public abstract void Affect(GameplayObject target);
+
+        public void SetSource(ICreature source)
+        {
+            m_source = source;
+        }
 
         public static string ImplEnumToString(SkillId skill)
         {
@@ -46,6 +56,14 @@ namespace OGUR.Skills
                 default:
                     return "No Name Defined in ImplEnumToString!";
             }
+        }
+        public ICreature IsCreature(GameplayObject target)
+        {
+            if(target.GetObjectType()==GameObjectType.CREATURE)
+            {
+                return (ICreature) target;
+            }
+            return null;
         }
     }
     public enum SkillId

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using OGUR.Creatures;
 using OGUR.GameObjects;
@@ -8,6 +10,7 @@ namespace OGUR.Strategies
     public class TargetSet
     {
         private List<ICreature> m_targets = new List<ICreature>();
+        private List<CreatureType> m_targetTypes = new List<CreatureType>(); 
         private readonly ICreature m_parent;
 
         public TargetSet(ICreature parent)
@@ -20,6 +23,15 @@ namespace OGUR.Strategies
             m_targets.Add(target);
             return target;
         }
+
+        public void AddTargetTypes(params object[] types)
+        {
+            foreach(var type in types)
+            {
+                m_targetTypes.Add((CreatureType)type);
+            }
+        }
+
 
         public IEnumerable<ICreature> AddTargets(IEnumerable<ICreature> targets)
         {
@@ -45,13 +57,33 @@ namespace OGUR.Strategies
                         closestDistance = dist;
                     }
                 }
+                foreach(var creatureType in m_targetTypes)
+                {
+                    foreach(var creature in GameplayObjectManager.GetObjects(creatureType))
+                    {
+                        var dist = Vector2.DistanceSquared(creature.GetPosition(), m_parent.GetPosition());
+                        if (dist < closestDistance)
+                        {
+                            result = creature;
+                            closestDistance = dist;
+                        }
+                    }
+                }
             }
             return result;
         }
 
-        public void UpdateTypes(CreatureType type)
+        public GameplayObject GetCollidedTarget(GameplayObject source)
         {
-            m_targets = new List<ICreature>(GameplayObjectManager.GetObjects(type));
+            var result = m_targets.FirstOrDefault(target => Collision.HitTest.IsTouching(target, source));
+            if(result==null)
+            {
+                foreach (var creature in from creatureType in m_targetTypes from creature in GameplayObjectManager.GetObjects(creatureType) where Collision.HitTest.IsTouching(creature, source) select creature)
+                {
+                    return creature;
+                }
+            }
+            return result;
         }
     }
 }

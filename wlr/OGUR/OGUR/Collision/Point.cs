@@ -22,5 +22,10 @@
             Y = y;
             Weight = weight;
         }
+
+        public Point2 Multiply(double factor)
+        {
+            return new Point2(X*factor,Y*factor);
+        }
     }
 }

@@ -29,8 +29,7 @@ namespace OGUR.Management
             All,
             Nonfree,
             Free,
-            Inventory,
-            Skill
+            Inventory
         }
 
         private static Dictionary<int, Contexts> m_contexts = new Dictionary<int, Contexts>()
@@ -78,7 +77,7 @@ namespace OGUR.Management
                                                                                        {Commands.Back,Keys.Back},
                                                                                        {Commands.CycleLeft,Keys.A},
                                                                                        {Commands.CycleRight,Keys.D},
-                                                                                       {Commands.Skill,Keys.LeftShift}
+                                                                                       {Commands.Skill,Keys.S}
                                                                                    };
 
         private static readonly Dictionary<Commands, Buttons> m_gamePadMapping = new Dictionary<Commands, Buttons>()

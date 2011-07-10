@@ -122,7 +122,7 @@
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="GameObjects\Elements.cs" />
-    <Compile Include="GameObjects\FxParticle.cs" />
+    <Compile Include="GameObjects\SkillEffect.cs" />
     <Compile Include="Items\DeltasHud.cs" />
     <Compile Include="Items\EquipmentHud.cs" />
     <Compile Include="Items\Equipment.cs" />

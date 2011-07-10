@@ -55,7 +55,7 @@ namespace OGUR.Skills
             m_textHandler.Clear();
             if(m_isVisible)
             {
-                m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkill().ToString(), 20, 30, m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 20, 30, m_parent,.2f));
             }
         }
 

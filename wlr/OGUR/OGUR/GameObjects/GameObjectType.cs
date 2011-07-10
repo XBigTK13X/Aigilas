@@ -13,6 +13,6 @@ namespace OGUR.GameObjects
         DOWNSTAIRS,
         CREATURE,
         ITEM,
-        FX_PARTICLE
+        SKILL_EFFECT
     }
 }

@@ -21,9 +21,5 @@ namespace OGUR.Creatures
         {
             Setup(x, y, playerIndex);
         }
-        public override void Update()
-        {
-            base.Update();
-        }
     }
 }

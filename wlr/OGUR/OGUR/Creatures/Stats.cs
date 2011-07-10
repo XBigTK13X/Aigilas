@@ -80,7 +80,7 @@ namespace OGUR.Creatures
 
         public decimal GetSum()
         {
-            return m_stats.Keys.Sum(stat => m_stats[stat]);
+            return m_stats.Keys.Where(o=>o!=StatType.HEALTH&&o!=StatType.MOVE_COOL_DOWN).Sum(stat => m_stats[stat]);
         }
     }
 }

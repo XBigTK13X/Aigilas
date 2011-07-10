@@ -47,7 +47,11 @@ namespace OGUR.GameObjects
 
         public static List<ICreature> GetObjects(CreatureType type)
         {
-            return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() == type).ToList();
+            if(type!=CreatureType.NONPLAYER)
+            {
+                return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() == type).ToList();    
+            }
+            return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() != CreatureType.PLAYER).ToList();
         }
 
         public static List<GameplayObject> GetObjects()
@@ -146,7 +150,7 @@ namespace OGUR.GameObjects
 
         public static ICreature GetNearestPlayer(ICreature target)
         {
-            ICreature closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
+            var closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
             foreach(ICreature player in GetObjects(CreatureType.PLAYER))
             {
                 if(HitTest.GetDistance(target,player) < HitTest.GetDistance(target,closest))

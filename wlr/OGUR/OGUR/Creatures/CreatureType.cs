@@ -3,6 +3,7 @@
     public enum CreatureType
     {
         PLAYER,
-        GOBLIN
+        GOBLIN,
+        NONPLAYER
     }
 }

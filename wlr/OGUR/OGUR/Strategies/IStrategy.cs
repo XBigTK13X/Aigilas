@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using OGUR.Creatures;
 
 namespace OGUR.Strategies
@@ -11,5 +12,10 @@ namespace OGUR.Strategies
             m_targets = new TargetSet(parent);
         }
         public abstract void Act(ICreature parent);
+
+        public TargetSet GetTargets()
+        {
+            return m_targets;
+        }
     }
 }

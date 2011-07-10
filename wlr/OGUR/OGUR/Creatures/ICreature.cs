@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -27,7 +28,7 @@ namespace OGUR.Creatures
         protected Stats m_stats;
         protected Stats m_maxStats;
 
-        protected SkillPool m_skills = new SkillPool();
+        protected SkillPool m_skills;
         protected Point2 m_skillVector = new Point2(0,0);
 
         protected Inventory m_inventory;
@@ -68,6 +69,7 @@ namespace OGUR.Creatures
                 m_skillHud = new SkillHud(this);
                 m_skillHud.Toggle();
             }
+            m_skills = new SkillPool(this);
             m_class = creatureClass ?? new NoClass();
             m_isBlocking = true;
             m_creatureType = type;
@@ -325,7 +327,7 @@ namespace OGUR.Creatures
             }
         }
 
-        private decimal CalculateExperience()
+        public decimal CalculateExperience()
         {
             return m_currentLevel + m_stats.GetSum();
         }
@@ -356,9 +358,24 @@ namespace OGUR.Creatures
             m_skills.Cycle(velocity);
         }
 
-        public ISkill GetActiveSkill()
+        public string GetActiveSkillName()
         {
-            return m_skills.GetActive();
+            return m_skills.GetActiveName();
+        }
+
+        public void UseActiveSkill()
+        {
+            m_skills.UseActive();
+        }
+
+        public TargetSet GetTargets()
+        {
+            return m_strategy.GetTargets();
+        }
+
+        public void SetSkillVector(Point2 skillVector)
+        {
+            m_skillVector = skillVector;
         }
     }
 }
