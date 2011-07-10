@@ -44,7 +44,7 @@ namespace OGUR.Skills
                          null,
                          null,
                          XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
-            target.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f,0f,0f,.4f), 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None, 0f);
+            target.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f,0f,0f,.4f), 0f, new Vector2(0,0), new Vector2(200,100), SpriteEffects.None, 0f);
             target.End();
             m_textHandler.Draw();
         }
@@ -55,7 +55,7 @@ namespace OGUR.Skills
             m_textHandler.Clear();
             if(m_isVisible)
             {
-                m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 20, 30, m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 40, 30, m_parent,.2f));
             }
         }
 

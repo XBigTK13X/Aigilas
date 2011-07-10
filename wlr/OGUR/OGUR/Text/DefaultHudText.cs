@@ -26,7 +26,7 @@ namespace OGUR.Text
             var target = XnaManager.GetRenderTarget();
             target.Begin();
             var fontCenter = new Vector2(0, 0);
-            target.DrawString(TextManager.GetFont(), m_contents, m_position+m_player.GetHudOrigin(), m_color, 0, fontCenter,.5f, SpriteEffects.None, 0.5f);
+            target.DrawString(TextManager.GetFont(), m_contents, m_position+m_player.GetHudOrigin(), m_color, 0, fontCenter,.75f, SpriteEffects.None, 0.5f);
             target.End();
         }
     }

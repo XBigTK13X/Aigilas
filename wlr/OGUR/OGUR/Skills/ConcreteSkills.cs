@@ -18,7 +18,9 @@ namespace OGUR.Skills
     {
 
         public FireballSkill()
-        {}
+        {
+            m_implementationId = SkillId.FIREBALL;
+        }
         public FireballSkill(ICreature source) : base(SkillId.FIREBALL)
         {
         }
