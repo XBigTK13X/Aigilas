@@ -11,5 +11,9 @@ namespace OGUR.GameObjects
         {
             Initialize(x, y, SpriteType.DOWNSTAIRS, GameObjectType.DOWNSTAIRS);
         }
+        public Location GetTargetLocation()
+        {
+            return Location.Depths;
+        }
     }
 }

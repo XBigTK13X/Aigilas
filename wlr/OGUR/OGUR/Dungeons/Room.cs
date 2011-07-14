@@ -26,11 +26,11 @@ namespace OGUR.Dungeons
 
         public bool IsBad()
         {
-            if (BottomSide > DungeonManager.BlocksHigh)
+            if (BottomSide > DungeonFactory.BlocksHigh)
             {
                 return true;
             }
-            if (RightSide > DungeonManager.BlocksWide)
+            if (RightSide > DungeonFactory.BlocksWide)
             {
                 return true;
             }

@@ -11,9 +11,12 @@ namespace OGUR.Dungeons
 {
     public class Dungeon
     {
+        private static readonly int m_blocksHigh = DungeonFactory.BlocksHigh;
+        private static readonly int m_blocksWide = DungeonFactory.BlocksWide;
+
         private readonly List<Room> m_rooms = new List<Room>();
         private List<GameplayObject> m_contents = new List<GameplayObject>();
-        private readonly GameplayObject[,] dungeon = new GameplayObject[DungeonManager.BlocksWide,DungeonManager.BlocksHigh];
+        private readonly GameplayObject[,] dungeon = new GameplayObject[m_blocksWide,m_blocksHigh];
         private Point downSpawnLocation = new Point(0, 0);
         private Point upSpawnLocation = new Point(0, 0);
 
@@ -26,7 +29,7 @@ namespace OGUR.Dungeons
         {
             GameplayObjectManager.Clear();
             PlaceFloor();
-            m_contents.AddRange(DungeonManager.FlushCache());
+            m_contents.AddRange(DungeonFactory.FlushCache());
             var spawn = goingUp ? upSpawnLocation : downSpawnLocation;
             foreach (
                 ICreature player in
@@ -45,7 +48,7 @@ namespace OGUR.Dungeons
         {
             foreach (var player in m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(o => o.GetCreatureType() == CreatureType.PLAYER))
             {
-                DungeonManager.AddToCache(player);
+                DungeonFactory.AddToCache(player);
                 GameplayObjectManager.RemoveObject(player);
             }
             m_contents = new List<GameplayObject>(GameplayObjectManager.GetObjects().Where(o => o.GetObjectType() != GameObjectType.FLOOR).ToList());
@@ -55,7 +58,7 @@ namespace OGUR.Dungeons
         {
             GameplayObjectManager.Clear();
 
-            m_rooms.Add(new Room(DungeonManager.BlocksHigh, DungeonManager.BlocksWide, 0, 0));
+            m_rooms.Add(new Room(m_blocksHigh, m_blocksWide, 0, 0));
             PlaceRooms();
             ConvertRoomsToWalls();
             PlaceStairs();
@@ -70,7 +73,7 @@ namespace OGUR.Dungeons
                     GameplayObjectManager.AddObject(tile);
                 }
             }
-            var cache = DungeonManager.FlushCache();
+            var cache = DungeonFactory.FlushCache();
             if (cache.Count() == 0)
             {
                 m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X*SpriteInfo.Width,
@@ -107,9 +110,9 @@ namespace OGUR.Dungeons
 
         private void PlaceFloor()
         {
-            for (int ii = 0; ii < DungeonManager.BlocksWide; ii++)
+            for (int ii = 0; ii < m_blocksWide; ii++)
             {
-                for(int jj = 0;jj<DungeonManager.BlocksHigh;jj++)
+                for(int jj = 0;jj<m_blocksHigh;jj++)
                 {
                     GameplayObjectManager.AddObject(new Floor(ii * SpriteInfo.Width, jj * SpriteInfo.Height));
                 }
@@ -138,8 +141,8 @@ namespace OGUR.Dungeons
             while (attemptCount < 1000 && roomsToPlace > 0)
             {
                 attemptCount++;
-                int startX = rand.Next(0, DungeonManager.BlocksWide - 5);
-                int startY = rand.Next(0, DungeonManager.BlocksHigh - 5);
+                int startX = rand.Next(0, m_blocksWide - 5);
+                int startY = rand.Next(0, m_blocksHigh - 5);
                 int startWidth = 5 + rand.Next(0, 2);
                 int startHeight = 5 + rand.Next(0, 2);
                 roomsToPlace--;
@@ -168,8 +171,8 @@ namespace OGUR.Dungeons
             var rand = new Random();
             while (true)
             {
-                var x = rand.Next(0, DungeonManager.BlocksWide);
-                var y = rand.Next(0, DungeonManager.BlocksHigh);
+                var x = rand.Next(0, m_blocksWide);
+                var y = rand.Next(0, m_blocksHigh);
                 if (dungeon[x, y].GetObjectType() == GameObjectType.FLOOR)
                 {
                     return new Point(x, y);
@@ -218,7 +221,7 @@ namespace OGUR.Dungeons
                         {
                             if (!room.Corners.Contains(new Collision.Point(ii, jj)))
                             {
-                                if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < DungeonManager.BlocksWide))
+                                if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < m_blocksWide))
                                 {
                                     if (IsFloor(ii - 1, jj) && IsFloor(ii + 1, jj))
                                     {
@@ -226,7 +229,7 @@ namespace OGUR.Dungeons
                                     }
                                 }
                                 if ((jj == room.Y && jj > 0) ||
-                                    (jj == room.BottomSide && jj < DungeonManager.BlocksHigh))
+                                    (jj == room.BottomSide && jj < m_blocksHigh))
                                 {
                                     if (IsFloor(ii, jj - 1) && IsFloor(ii, jj + 1))
                                     {
@@ -257,7 +260,7 @@ namespace OGUR.Dungeons
             {
                 if (entrance.isHorizontal())
                 {
-                    for(int ii = 1;ii<DungeonManager.BlocksWide-1;ii++)
+                    for(int ii = 1;ii<m_blocksWide-1;ii++)
                     {
                         var currentTarget = new Point(ii, entrance.Y);
                         if(dungeon[currentTarget.X,currentTarget.Y].GetObjectType()==GameObjectType.WALL)
@@ -268,7 +271,7 @@ namespace OGUR.Dungeons
                 }
                 else
                 {
-                    for (int ii = 1; ii < DungeonManager.BlocksHigh - 1; ii++)
+                    for (int ii = 1; ii < m_blocksHigh - 1; ii++)
                     {
                         var currentTarget = new Point(entrance.X, ii);
                         if (dungeon[currentTarget.X, currentTarget.Y].GetObjectType() == GameObjectType.WALL)

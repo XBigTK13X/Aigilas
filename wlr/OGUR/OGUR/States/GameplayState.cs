@@ -16,7 +16,7 @@ namespace OGUR.States
     {
         public GameplayState()
         {
-            DungeonManager.Start();
+            DungeonFactory.Start();
         }
     }
 }

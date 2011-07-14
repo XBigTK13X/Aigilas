@@ -118,6 +118,7 @@
     <Compile Include="Creatures\StatType.cs" />
     <Compile Include="Creatures\Stats.cs" />
     <Compile Include="Dungeons\Dungeon.cs" />
+    <Compile Include="Dungeons\DungeonFactory.cs" />
     <Compile Include="Dungeons\DungeonManager.cs" />
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />

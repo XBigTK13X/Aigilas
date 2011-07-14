@@ -66,18 +66,21 @@ namespace OGUR.Strategies
 
                     foreach (var downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
                     {
+                        var stairs = (Downstairs) downstairs;
                         if (Collision.HitTest.IsTouching(downstairs, target) &&
                             InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
                         {
-                            DungeonManager.GotoNext();
+                            DungeonFactory.GetNextFloor(stairs.GetTargetLocation());
                         }
                     }
                     foreach (var upstairs in GameplayObjectManager.GetObjects(GameObjectType.UPSTAIRS))
                     {
+                        var stairs = (Upstairs)upstairs;
                         if (Collision.HitTest.IsTouching(upstairs, target) &&
                             InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
                         {
-                            DungeonManager.GotoPrevious();
+
+                            DungeonFactory.GetPreviousFloor(stairs.GetTargetLocation());
                         }
                     }
                 }
