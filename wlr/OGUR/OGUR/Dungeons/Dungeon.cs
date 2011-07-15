@@ -4,13 +4,31 @@ using System.Linq;
 using OGUR.GameObjects;
 using OGUR.Items;
 using OGUR.Sprites;
-using OGUR.Management;
 using Microsoft.Xna.Framework;
 using OGUR.Creatures;
+
 namespace OGUR.Dungeons
 {
     public class Dungeon
     {
+        private class PointPoint
+        {
+            public readonly int X;
+            public readonly int Y;
+            private readonly bool m_isHorizontal;
+
+            public PointPoint(int x, int y, bool destroyHorizontal = false)
+            {
+                X = x;
+                Y = y;
+                m_isHorizontal = destroyHorizontal;
+            }
+            public bool isHorizontal()
+            {
+                return m_isHorizontal;
+            }
+        }
+
         private static readonly int m_blocksHigh = DungeonFactory.BlocksHigh;
         private static readonly int m_blocksWide = DungeonFactory.BlocksWide;
 
@@ -23,6 +41,40 @@ namespace OGUR.Dungeons
         public Dungeon()
         {
             Generate();
+        }
+
+        public Dungeon(Location target)
+        {
+            Init();
+            ConvertRoomsToWalls();
+            PlaceAltars();
+            PlaceStairs();
+            PlaceFloor();
+            TransferDungeonState();
+        }
+
+        private void Generate()
+        { 
+            GameplayObjectManager.Clear();
+            Init();
+            PlaceRooms();
+            ConvertRoomsToWalls();
+            PlaceStairs();
+            PlaceCreatures(new Random().Next(3, 10));
+            PlaceItems(new Random().Next(0, 5));
+            PlaceFloor();
+            TransferDungeonState();
+        }
+
+        private void PlaceAltars()
+        {
+            int startX = 8;
+            int startY = 10;
+            foreach(GodName god in Enum.GetValues(typeof(GodName)))
+            {
+                dungeon[startX,startY] = new Altar(startX*SpriteInfo.Width,startY*SpriteInfo.Height,god);
+                startX += 2;
+            }
         }
 
         public void LoadTiles(bool goingUp)
@@ -54,43 +106,42 @@ namespace OGUR.Dungeons
             m_contents = new List<GameplayObject>(GameplayObjectManager.GetObjects().Where(o => o.GetObjectType() != GameObjectType.FLOOR).ToList());
         }
 
-        private void Generate()
+        private void Init()
         {
-            GameplayObjectManager.Clear();
-
             m_rooms.Add(new Room(m_blocksHigh, m_blocksWide, 0, 0));
-            PlaceRooms();
-            ConvertRoomsToWalls();
-            PlaceStairs();
-            PlaceCreatures(new Random().Next(3, 10));
-            PlaceItems(new Random().Next(0, 5));
-            PlaceFloor();
+        }
+
+        private void TransferDungeonState()
+        {
             foreach (GameplayObject tile in dungeon)
             {
-                if (tile != null && tile.GetObjectType()!=GameObjectType.FLOOR)
+                if (tile != null)
                 {
-                    m_contents.Add(tile);
+                    if (tile.GetObjectType() != GameObjectType.FLOOR)
+                    {
+                        m_contents.Add(tile);
+                    }
                     GameplayObjectManager.AddObject(tile);
                 }
             }
+
             var cache = DungeonFactory.FlushCache();
             if (cache.Count() == 0)
             {
-                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X*SpriteInfo.Width,
-                                                      downSpawnLocation.Y*SpriteInfo.Height));
+                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X * SpriteInfo.Width,
+                                                      downSpawnLocation.Y * SpriteInfo.Height));
             }
             else
             {
-                foreach(var tile in cache)
+                foreach (var player in cache.Cast<ICreature>())
                 {
-                    var player = (ICreature) tile;
-                    player.SetPosition(downSpawnLocation.X,downSpawnLocation.Y);
+                    player.SetPosition(downSpawnLocation.X, downSpawnLocation.Y);
                 }
                 GameplayObjectManager.AddObjects(cache);
                 m_contents.AddRange(cache);
             }
-            
-            for (int ii = 0; ii < 40;ii++)
+
+            for (int ii = 0; ii < 40; ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(0).PickupItem(ItemFactory.CreateRandomPlain());
             }
@@ -100,7 +151,6 @@ namespace OGUR.Dungeons
         {
             while (amountToPlace > 0)
             {
-                var rand = new Random();
                 amountToPlace--;
                 var randomPoint = FindRandomFreeTile();
                 dungeon[randomPoint.X, randomPoint.Y] = ItemFactory.CreateRandomPlain(randomPoint.X*SpriteInfo.Width,
@@ -182,30 +232,22 @@ namespace OGUR.Dungeons
 
         private void PlaceStairs()
         {
-            downSpawnLocation = FindRandomFreeTile();
-            dungeon[downSpawnLocation.X, downSpawnLocation.Y] = new Upstairs(downSpawnLocation.X * SpriteInfo.Width, downSpawnLocation.Y * SpriteInfo.Height);
+            PlaceUpstairs();
+            PlaceDownstairs();
+        }
 
+        private void PlaceDownstairs()
+        {
             upSpawnLocation = FindRandomFreeTile();
             dungeon[upSpawnLocation.X, upSpawnLocation.Y] = new Downstairs(upSpawnLocation.X * SpriteInfo.Width, upSpawnLocation.Y * SpriteInfo.Height);
         }
 
-        private class PointPoint
+        private void PlaceUpstairs()
         {
-            public int X, Y;
-            private bool m_isHorizontal;
-
-            public PointPoint(int x,int y, bool destroyHorizontal=false)
-            {
-                X = x;
-                Y = y;
-                m_isHorizontal = destroyHorizontal;
-            }
-            public bool isHorizontal()
-            {
-                return m_isHorizontal;
-            }
+            downSpawnLocation = FindRandomFreeTile();
+            dungeon[downSpawnLocation.X, downSpawnLocation.Y] = new Upstairs(downSpawnLocation.X * SpriteInfo.Width, downSpawnLocation.Y * SpriteInfo.Height);
         }
-        
+
         private void ConvertRoomsToWalls()
         {
             int roomCount = 0;
@@ -281,8 +323,6 @@ namespace OGUR.Dungeons
                     }
                 }
             }
-
-
         }
 
         private bool IsFloor(int x, int y)

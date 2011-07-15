@@ -19,6 +19,7 @@ namespace OGUR.Sprites
         private Rectangle m_currentCell;
         private Texture2D m_graphic;
         private int m_animationTimer;
+        private Color m_color = Color.White;
 
         protected Vector2 m_position = Vector2.Zero;
 
@@ -45,7 +46,7 @@ namespace OGUR.Sprites
             m_currentCell = new Rectangle(m_currentFrame*m_spriteInfo.X, m_spriteInfo.SpriteIndex*m_spriteInfo.Y,
                                           m_spriteInfo.X, m_spriteInfo.Y);
             Vector2 tempPosition = new Vector2(m_position.X, m_position.Y);
-            target.Draw(m_graphic, tempPosition, m_currentCell, Color.White);
+            target.Draw(m_graphic, tempPosition, m_currentCell, m_color);
             target.End();
         }
 
@@ -90,6 +91,11 @@ namespace OGUR.Sprites
         {
             m_position.X = (int)x;
             m_position.Y = (int)y;
+        }
+
+        public void SetColor(Color color)
+        {
+            m_color = color;
         }
     }
 }

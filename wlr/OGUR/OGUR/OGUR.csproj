@@ -121,8 +121,39 @@
     <Compile Include="Dungeons\DungeonFactory.cs" />
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />
-    <Compile Include="GameObjects\Elements.cs" />
-    <Compile Include="GameObjects\SkillEffect.cs" />
+    <Compile Include="GameObjects\Altar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Downstairs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Elements.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Floor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\GameObjectType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\GameplayObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\GameplayObjectFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\GameplayObjectManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\SkillEffect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Upstairs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameObjects\Wall.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Items\DeltasHud.cs" />
     <Compile Include="Items\EquipmentHud.cs" />
     <Compile Include="Items\Equipment.cs" />
@@ -141,17 +172,10 @@
     <Compile Include="Text\TextManager.cs" />
     <Compile Include="Sprites\AnimatedTextureFactory.cs" />
     <Compile Include="Creatures\CreatureFactory.cs" />
-    <Compile Include="GameObjects\GameplayObjectFactory.cs" />
     <Compile Include="Items\ItemFactory.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameObjects\Downstairs.cs" />
-    <Compile Include="GameObjects\Floor.cs" />
-    <Compile Include="GameObjects\GameObjectType.cs" />
-    <Compile Include="GameObjects\GameplayObject.cs" />
     <Compile Include="Creatures\ICreature.cs" />
     <Compile Include="Creatures\Player.cs" />
-    <Compile Include="GameObjects\Upstairs.cs" />
-    <Compile Include="GameObjects\Wall.cs" />
     <Compile Include="Items\Slots.cs" />
     <Compile Include="Items\GenericItem.cs" />
     <Compile Include="Items\ItemPrefix.cs" />
@@ -160,7 +184,6 @@
     <Compile Include="Items\ItemName.cs" />
     <Compile Include="Management\AIManager.cs" />
     <Compile Include="Management\Camera.cs" />
-    <Compile Include="GameObjects\GameplayObjectManager.cs" />
     <Compile Include="Management\InputManager.cs" />
     <Compile Include="Management\StateManager.cs" />
     <Compile Include="Management\XnaManager.cs" />

@@ -16,6 +16,7 @@ namespace OGUR.Sprites
         DOWNSTAIRS,
         CREATURE,
         ITEM,
-        SKILL_EFFECT
+        SKILL_EFFECT,
+        ALTAR
     }    
 }

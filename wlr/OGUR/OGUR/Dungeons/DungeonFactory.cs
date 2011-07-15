@@ -43,7 +43,7 @@ namespace OGUR.Dungeons
 
         public static void Start()
         {
-            m_world.Add(Location.Depths,new DungeonSet());
+            m_world.Add(Location.Depths,new DungeonSet(Location.Start));
         }
     }
 
@@ -55,6 +55,11 @@ namespace OGUR.Dungeons
         public DungeonSet()
         {
             m_floors.Add(m_currentFloor,new Dungeon());
+        }
+
+        public DungeonSet(Location target)
+        {
+            m_floors.Add(m_currentFloor, new Dungeon(target));
         }
 
         public void GotoNext(Location area)

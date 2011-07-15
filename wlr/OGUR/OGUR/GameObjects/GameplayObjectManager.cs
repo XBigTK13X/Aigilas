@@ -148,17 +148,22 @@ namespace OGUR.GameObjects
             }
         }
 
-        public static ICreature GetNearestPlayer(ICreature target)
+        public static GameplayObject GetNearestPlayer(GameplayObject target)
         {
-            var closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
-            foreach(ICreature player in GetObjects(CreatureType.PLAYER))
+            GameplayObject closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
+            foreach (var player in GetObjects(CreatureType.PLAYER))
             {
-                if(HitTest.GetDistance(target,player) < HitTest.GetDistance(target,closest))
+                if (HitTest.GetDistance(target, player) < HitTest.GetDistance(target, closest))
                 {
                     closest = player;
                 }
             }
             return closest;
+        }
+
+        public static ICreature GetNearestPlayer(ICreature target)
+        {
+            return (ICreature)GetNearestPlayer((GameplayObject)target);
         }
 
         public static void AddObjects(IEnumerable<GameplayObject> cache)
