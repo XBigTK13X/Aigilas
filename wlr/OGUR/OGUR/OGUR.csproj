@@ -145,6 +145,7 @@
     <Compile Include="GameObjects\GameplayObjectManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GameObjects\God.cs" />
     <Compile Include="GameObjects\SkillEffect.cs">
       <SubType>Code</SubType>
     </Compile>

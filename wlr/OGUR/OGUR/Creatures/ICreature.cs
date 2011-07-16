@@ -15,6 +15,7 @@ using OGUR.Collision;
 using OGUR.Text;
 using OGUR.Storage;
 using Point = OGUR.Collision.Point;
+using OGUR.Gods;
 
 namespace OGUR.Creatures
 {
@@ -27,6 +28,7 @@ namespace OGUR.Creatures
         protected CreatureClass m_class;
         protected Stats m_stats;
         protected Stats m_maxStats;
+        protected God m_god;
 
         protected SkillPool m_skills;
         protected Point2 m_skillVector = new Point2(0,0);

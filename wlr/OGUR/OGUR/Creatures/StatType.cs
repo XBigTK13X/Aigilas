@@ -12,6 +12,7 @@
         HEIGHT,
         WEIGHT,
         MOVE_SPEED,
-        MOVE_COOL_DOWN
+        MOVE_COOL_DOWN,
+        PIETY
     }
 }

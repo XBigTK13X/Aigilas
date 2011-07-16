@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OGUR.GameObjects;
+using OGUR.Gods;
 using OGUR.Items;
 using OGUR.Sprites;
 using Microsoft.Xna.Framework;
@@ -70,7 +71,7 @@ namespace OGUR.Dungeons
         {
             int startX = 8;
             int startY = 10;
-            foreach(GodName god in Enum.GetValues(typeof(GodName)))
+            foreach(God.Name god in Enum.GetValues(typeof(God.Name)))
             {
                 dungeon[startX,startY] = new Altar(startX*SpriteInfo.Width,startY*SpriteInfo.Height,god);
                 startX += 2;

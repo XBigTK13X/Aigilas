@@ -1,59 +1,38 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using OGUR.Items;
 using OGUR.Sprites;
 using OGUR.Management;
 using OGUR.Dungeons;
 using OGUR.Creatures;
 using OGUR.Text;
+using OGUR.Gods;
+using System.Linq;
 
 namespace OGUR.GameObjects
 {
-    public enum GodName
-    {
-        LUST,
-        GREED,
-        SLOTH,
-        ENVY,
-        WRATH, 
-        GLUTTONY,
-        PRIDE
-    }
-
     public class Altar : GameplayObject
     {
-        public static Color ToColor(GodName god)
+        private God m_god;
+
+        public Altar(int x, int y, God.Name godName)
         {
-            switch(god)
-            {
-                case GodName.ENVY:
-                    return Color.Green;
-                case GodName.GREED:
-                    return Color.Gold;
-                case GodName.GLUTTONY:
-                    return Color.YellowGreen;
-                case GodName.LUST:
-                    return Color.Pink;
-                case GodName.PRIDE:
-                    return Color.Indigo;
-                case GodName.SLOTH:
-                    return Color.Black;
-                case GodName.WRATH:
-                    return Color.Red;
-                default:
-                    return Color.White;
-            }
-        }
-        private GodName m_god;
-        public Altar(int x, int y, GodName god)
-        {
-            m_god = god;
-            m_graphic.SetColor(ToColor(god));
+            m_god = God.Get(godName);
+            m_graphic.SetColor(m_god.GetColor());
             Initialize(x, y, SpriteType.ALTAR, GameObjectType.ALTAR);
         }
+
         public override void Update()
         {
-            if(Collision.HitTest.IsTouching(this,GameplayObjectManager.GetNearestPlayer(this)))
+            var offerings = GameplayObjectManager.GetObjects(GameObjectType.ITEM).Where(o => Collision.HitTest.IsTouching(this, o)).Cast<GenericItem>().ToList();
+            var player = (Player)GameplayObjectManager.GetNearestPlayer(this);
+            if (Collision.HitTest.IsTouching(this,player))
             {
-                TextManager.Add(new ActionText(m_god.ToString(),1,(int)this.GetPosition().X,(int)this.GetPosition().Y));
+                foreach(var offering in offerings)
+                {
+                    m_god.AcceptSacrifice(player,offering);
+                }
+                TextManager.Add(new ActionText(m_god.ToString(), 1, (int) this.GetPosition().X, (int) this.GetPosition().Y));
             }
         }
     }

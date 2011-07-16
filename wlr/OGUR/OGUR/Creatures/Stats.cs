@@ -32,7 +32,7 @@ namespace OGUR.Creatures
         {
             Setup(new List<decimal>(){(decimal) health, (decimal) mana, (decimal) strength, (decimal) wisdom, (decimal) defense,
                              (decimal) luck, (decimal) age,
-                             (decimal) weightInLbs, (decimal) heightInFeet, (decimal) moveSpeed, (decimal) moveCoolDown});
+                             (decimal) weightInLbs, (decimal) heightInFeet, (decimal) moveSpeed, (decimal) moveCoolDown,0});
         }
 
         private void Setup(List<decimal> stats )
