@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OGUR.Collision;
+using OGUR.Dungeons;
 using OGUR.Gods;
 using OGUR.Management;
 using OGUR.Creatures;
@@ -11,7 +12,7 @@ namespace OGUR.GameObjects
 {
     internal static class GameplayObjectManager
     {
-        private static readonly List<GameplayObject> m_contents = new List<GameplayObject>();
+        private static List<GameplayObject> m_contents = new List<GameplayObject>();
 
         public static GameplayObject AddObject(GameplayObject gameplayObject)
         {
@@ -72,11 +73,21 @@ namespace OGUR.GameObjects
             CreatureFactory.ResetPlayerCount();
         }
 
+        public static void Reset()
+        {
+            m_contents = new List<GameplayObject>();
+            CreatureFactory.ResetPlayerCount();
+            DungeonFactory.Start();
+            God.Reset();
+            GameplayObjectManager.LoadContent();
+            GameplayObjectManager.Draw();
+        }
+
         public static void Update()
         {
             if(!GetObjects(CreatureType.PLAYER).Any(o=>o.IsActive()))
             {
-                m_contents.Clear();
+                Reset();
                 StateManager.LoadState(new GameOverState());
             }
             for (int ii = 0; ii < m_contents.Count; ii++)

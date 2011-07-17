@@ -27,7 +27,7 @@ namespace OGUR.Gods
         }
 
 
-        private static readonly List<God> s_gods = new List<God>()
+        private static List<God> s_gods = new List<God>()
                                        {
                                            new God(Color.Pink,Name.LUST,ItemClass.Leggings,ItemClass.Melee_Weapon),
                                            new God(Color.Gold,Name.GREED,ItemClass.Head_Gear,ItemClass.Gloves),
@@ -37,6 +37,15 @@ namespace OGUR.Gods
                                            new God(Color.YellowGreen,Name.GLUTTONY,ItemClass.Gloves,ItemClass.Torso_Garb),
                                            new God(Color.Indigo,Name.PRIDE,ItemClass.Ring,ItemClass.Feet)
                                        };
+
+        static public void Reset()
+        {
+            foreach(God god in s_gods)
+            {
+                god.m_pietyTracker = new Dictionary<ICreature, decimal>();
+            }
+
+        }
 
         private Color m_color;
         private Name m_name;

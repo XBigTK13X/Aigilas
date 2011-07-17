@@ -16,8 +16,8 @@ namespace OGUR.Dungeons
         public static int BlocksHigh = 20;
         public static int BlocksWide = 30;
 
-        private static readonly Dictionary<Location, DungeonSet> m_world = new Dictionary<Location, DungeonSet>();
-        private static readonly List<GameplayObject> m_cache = new List<GameplayObject>(); 
+        private static Dictionary<Location, DungeonSet> m_world = new Dictionary<Location, DungeonSet>();
+        private static List<GameplayObject> m_cache = new List<GameplayObject>(); 
 
         public static void GetNextFloor(Location area)
         {
@@ -43,6 +43,8 @@ namespace OGUR.Dungeons
 
         public static void Start()
         {
+            m_world = new Dictionary<Location, DungeonSet>();
+            m_cache = new List<GameplayObject>();
             m_world.Add(Location.Depths,new DungeonSet(Location.Start));
         }
     }
