@@ -11,10 +11,10 @@ using OGUR.Management;
 
 namespace OGUR.States
 {
-    public class State
+    public abstract class State
     {
-        public State()
-        {
-        }
+        public abstract void Draw();
+        public abstract void Update();
+        public abstract void LoadContent();
     }
 }

@@ -64,23 +64,30 @@ namespace OGUR.Strategies
                         target.MoveIfPossible((int) xVel, (int) yVel);
                     }
 
-                    foreach (var downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
+                    foreach (Downstairs downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
                     {
-                        var stairs = (Downstairs) downstairs;
                         if (Collision.HitTest.IsTouching(downstairs, target) &&
                             InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
                         {
-                            DungeonFactory.GetNextFloor(stairs.GetTargetLocation());
+                            DungeonFactory.GetNextFloor(downstairs.GetTargetLocation());
                         }
                     }
-                    foreach (var upstairs in GameplayObjectManager.GetObjects(GameObjectType.UPSTAIRS))
+                    foreach (Upstairs upstairs in GameplayObjectManager.GetObjects(GameObjectType.UPSTAIRS))
                     {
-                        var stairs = (Upstairs)upstairs;
                         if (Collision.HitTest.IsTouching(upstairs, target) &&
                             InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
                         {
 
-                            DungeonFactory.GetPreviousFloor(stairs.GetTargetLocation());
+                            DungeonFactory.GetPreviousFloor(upstairs.GetTargetLocation());
+                        }
+                    }
+                    foreach(Altar altar in GameplayObjectManager.GetObjects(GameObjectType.ALTAR))
+                    {
+                        if (Collision.HitTest.IsTouching(altar, target) &&
+                            InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
+                        {
+
+                            target.Pray(altar.GetGod());
                         }
                     }
                 }

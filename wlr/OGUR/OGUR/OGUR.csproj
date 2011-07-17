@@ -165,6 +165,7 @@
     <Compile Include="Skills\ConcreteSkills.cs" />
     <Compile Include="Skills\SkillHud.cs" />
     <Compile Include="Skills\SkillPool.cs" />
+    <Compile Include="States\GameOverState.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
     <Compile Include="Text\ActionText.cs" />
     <Compile Include="Text\TextHandler.cs" />

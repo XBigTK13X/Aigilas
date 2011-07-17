@@ -16,23 +16,23 @@ namespace OGUR.Management
         public static void LoadState(State state)
         {
             m_state = state;
-            GameplayObjectManager.LoadContent();
-            GameplayObjectManager.Draw();
+            m_state.LoadContent();
+            m_state.Draw();
         }
 
         public static void Draw()
         {
-            GameplayObjectManager.Draw();
+            m_state.Draw();
         }
 
         public static void LoadContent()
         {
-            GameplayObjectManager.LoadContent();
+            m_state.LoadContent();
         }
 
         public static void Update()
-        {
-            GameplayObjectManager.Update();
+        {   
+            m_state.Update();
         }
     }
 }

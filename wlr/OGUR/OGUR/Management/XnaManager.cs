@@ -59,5 +59,10 @@ namespace OGUR.Management
         {
             return new Vector2(WindowWidth/2, WindowHeight/2);
         }
+
+        public static Vector2 GetDimensions()
+        {
+            return new Vector2(WindowWidth,WindowHeight);
+        }
     }
 }

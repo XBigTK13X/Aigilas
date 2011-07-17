@@ -131,7 +131,10 @@ namespace OGUR.Creatures
         {
             if (m_isPlaying)
             {
-                Adjust(StatType.MOVE_COOL_DOWN, -1);
+                if(Get(StatType.MOVE_COOL_DOWN)>0)
+                {
+                    Adjust(StatType.MOVE_COOL_DOWN, -1);    
+                }
                 if (m_inventoryHud != null)
                 {
                     m_inventoryHud.Update();
@@ -218,6 +221,12 @@ namespace OGUR.Creatures
         protected decimal Adjust(StatType stat, decimal adjustment,bool adjustMax = false)
         {
             return Set(stat, Get(stat) + adjustment,adjustMax);
+        }
+
+        public void Bless(StatType stat, decimal amount)
+        {
+            Set(stat, GetMax(stat)+amount);
+            Set(stat, amount, true);
         }
 
         public void ApplyDamage(decimal damage)
@@ -378,6 +387,24 @@ namespace OGUR.Creatures
         public void SetSkillVector(Point2 skillVector)
         {
             m_skillVector = skillVector;
+        }
+
+        public StatType GetLowestStat()
+        {
+            var result = StatType.AGE;
+            var min = decimal.MaxValue;
+            foreach (var stat in Enum.GetValues(typeof(StatType)).Cast<StatType>().Where(stat => Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY))
+            {
+                result = stat;
+                min = Get(stat);
+            }
+            return result;
+        }
+
+        public void Pray(God god)
+        {
+            m_god = god;
+            m_god.AnswerPrayer(this);
         }
     }
 }

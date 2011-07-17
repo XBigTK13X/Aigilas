@@ -17,6 +17,20 @@ namespace OGUR.States
         public GameplayState()
         {
             DungeonFactory.Start();
+            GameplayObjectManager.LoadContent();
+            GameplayObjectManager.Draw();
+        }
+        public override void Update()
+        {
+            GameplayObjectManager.Update();
+        }
+        public override void LoadContent()
+        {
+            GameplayObjectManager.LoadContent();
+        }
+        public override void Draw()
+        {
+            GameplayObjectManager.Draw();
         }
     }
 }

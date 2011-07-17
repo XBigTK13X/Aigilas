@@ -35,5 +35,10 @@ namespace OGUR.GameObjects
                 TextManager.Add(new ActionText(m_god.ToString(), 1, (int) this.GetPosition().X, (int) this.GetPosition().Y));
             }
         }
+
+        public God GetGod()
+        {
+            return m_god;
+        }
     }
 }

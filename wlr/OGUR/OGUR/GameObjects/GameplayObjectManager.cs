@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OGUR.Collision;
+using OGUR.Gods;
 using OGUR.Management;
 using OGUR.Creatures;
+using OGUR.States;
 
 namespace OGUR.GameObjects
 {
@@ -71,6 +74,11 @@ namespace OGUR.GameObjects
 
         public static void Update()
         {
+            if(!GetObjects(CreatureType.PLAYER).Any(o=>o.IsActive()))
+            {
+                m_contents.Clear();
+                StateManager.LoadState(new GameOverState());
+            }
             for (int ii = 0; ii < m_contents.Count; ii++)
             {
                 if(ii>=m_contents.Count)

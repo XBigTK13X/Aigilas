@@ -43,7 +43,7 @@ namespace OGUR.Gods
         private ItemClass m_goodSacrificeClass;
         private ItemClass m_badSacrificeClass;
 
-        private Dictionary<Player, decimal> m_pietyTracker = new Dictionary<Player, decimal>();
+        private Dictionary<ICreature, decimal> m_pietyTracker = new Dictionary<ICreature, decimal>();
 
         protected God(Color color, Name name,ItemClass goodSacrifice,ItemClass badSacrifice)
         {
@@ -63,14 +63,61 @@ namespace OGUR.Gods
             return m_name.ToString().ToUpperInvariant();
         }
 
-        public void AcceptSacrifice(Player player,GenericItem sacrifice)
+        public void AcceptSacrifice(ICreature servant,GenericItem sacrifice)
         {
-            if(!m_pietyTracker.Keys.Contains(player))
-            {
-                m_pietyTracker.Add(player,0);
-            }
-            m_pietyTracker[player]+=sacrifice.Modifers.GetSum()*((sacrifice.GetItemClass() == m_goodSacrificeClass) ? 3 : 1)*((sacrifice.GetItemClass()==m_badSacrificeClass)?-2:1);
+            RejectAdulturer(servant);
+            RememberCreature(servant);
+            m_pietyTracker[servant] += sacrifice.Modifers.GetSum() * ((sacrifice.GetItemClass() == m_goodSacrificeClass) ? 3 : 1) * ((sacrifice.GetItemClass() == m_badSacrificeClass) ? -2 : 1);
             sacrifice.SetInactive();
+        }
+
+        public void AnswerPrayer(ICreature player)
+        {
+            RejectAdulturer(player);
+            var knewServant = RememberCreature(player);
+            var lowest = player.GetLowestStat();
+            var adjustment = (m_pietyTracker[player]/100);
+            player.Bless(lowest,adjustment);
+            if(knewServant)
+            {
+                m_pietyTracker[player] -= 500;    
+            }
+        }
+
+        public void Reject(ICreature servant)
+        {
+            var piety = m_pietyTracker[servant];
+            m_pietyTracker.Remove(servant);
+            servant.ApplyDamage(piety);
+        }
+
+        private bool RememberCreature(ICreature servant)
+        {
+            if (!m_pietyTracker.ContainsKey(servant))
+            {
+                m_pietyTracker.Add(servant, 0);
+                return false;
+            }
+            return true;
+        }
+
+        private void RejectAdulturer(ICreature player)
+        {
+            var otherGod = s_gods.Where(o => o.m_pietyTracker.Keys.Contains(player) && o != this).FirstOrDefault();
+            if (otherGod != null)
+            {
+                otherGod.Reject(player);
+            }
+        }
+
+        private string GetPietyString()
+        {
+            return m_pietyTracker.Keys.Aggregate("", (current, servant) => current + m_pietyTracker[servant]+"|");
+        }
+
+        public static string GetDebugString()
+        {
+            return s_gods.Aggregate("", (current, god) => current + god.GetPietyString());
         }
     }
 }   
