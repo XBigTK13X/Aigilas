@@ -21,7 +21,7 @@ namespace OGUR.Classes
         {
             m_stats = new Stats(stats);
         }
-        public decimal GetBonus(int level,StatType stat)
+        public float GetBonus(int level,StatType stat)
         {
             return m_stats.GetBonus(level,stat);
         }

@@ -44,8 +44,8 @@ namespace OGUR.Creatures
         protected int m_playerIndex = -1;
         protected bool m_isPlaying = true;
         protected int m_currentLevel = 1;
-        protected decimal m_experience = 0;
-        protected decimal m_nextLevelExperience = 100;
+        protected float m_experience = 0;
+        protected float m_nextLevelExperience = 100;
 
         private SpriteType SpriteFromCreature(CreatureType type)
         {
@@ -168,32 +168,32 @@ namespace OGUR.Creatures
             return m_isPlaying;
         }
 
-        public decimal Get(StatType stat)
+        public float Get(StatType stat)
         {
             return m_stats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
         }
 
-        private decimal CalculateInstrinsicBonus(StatType stat)
+        private float CalculateInstrinsicBonus(StatType stat)
         {
             return m_class.GetBonus(m_currentLevel, stat);
         }
 
-        public decimal CalculateEquipmentBonus(StatType stat)
+        public float CalculateEquipmentBonus(StatType stat)
         {
             return m_equipment.CalculateBonus(stat);
         }
 
-        public decimal GetMax(StatType stat)
+        public float GetMax(StatType stat)
         {
             return (int)m_maxStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
         }
 
-        public decimal Set(StatType stat,decimal value)
+        public float Set(StatType stat,float value)
         {
             return m_stats.Set(stat,value);
         }
 
-        public decimal SetMax(StatType stat,decimal value)
+        public float SetMax(StatType stat,float value)
         {
             return m_maxStats.Set(stat,value);
         }
@@ -203,7 +203,7 @@ namespace OGUR.Creatures
             return (int) (getMax ? GetMax(stat) : Get(stat));
         }
 
-        public decimal Set(StatType stat,decimal value,bool setMax=false)
+        public float Set(StatType stat,float value,bool setMax=false)
         {
             return setMax ? SetMax(stat, value) : Set(stat, value);
         }
@@ -218,12 +218,12 @@ namespace OGUR.Creatures
             return m_creatureType;
         }
 
-        protected decimal Adjust(StatType stat, decimal adjustment,bool adjustMax = false)
+        protected float Adjust(StatType stat, float adjustment,bool adjustMax = false)
         {
             return Set(stat, Get(stat) + adjustment,adjustMax);
         }
 
-        public void ApplyDamage(decimal damage)
+        public void ApplyDamage(float damage)
         {
             damage -= m_stats.Get(StatType.DEFENSE);
             if (damage <= 0)
@@ -243,7 +243,7 @@ namespace OGUR.Creatures
             }
         }
 
-        protected decimal CalculateDamage()
+        protected float CalculateDamage()
         {
             return Get(StatType.STRENGTH);
         }
@@ -320,7 +320,7 @@ namespace OGUR.Creatures
             return m_skillVector;
         }
 
-        public void AddExperience(decimal amount)
+        public void AddExperience(float amount)
         {
             m_experience += amount;
             if(m_experience>m_nextLevelExperience)
@@ -332,7 +332,7 @@ namespace OGUR.Creatures
             }
         }
 
-        public decimal CalculateExperience()
+        public float CalculateExperience()
         {
             return m_currentLevel + m_stats.GetSum();
         }
@@ -386,7 +386,7 @@ namespace OGUR.Creatures
         private StatType GetLowestStat()
         {
             var result = StatType.AGE;
-            var min = decimal.MaxValue;
+            var min = float.MaxValue;
             foreach (var stat in Enum.GetValues(typeof(StatType)).Cast<StatType>().Where(stat => Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY))
             {
                 result = stat;

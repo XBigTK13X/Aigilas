@@ -11,17 +11,17 @@ namespace OGUR.GameObjects
 {
     public class SkillEffect:GameplayObject
     {
-        private const double m_strengthDecayAmount = .75;
-        public const double DefaultStrength = 1;
+        private const float m_strengthDecayAmount = .75f;
+        public const float DefaultStrength = 1;
         
-        private double m_strength;
+        private float m_strength;
         private readonly Point2 m_velocity;
         private readonly ICreature m_source;
         private readonly ISkill m_skill;
         private SpriteType m_spriteType;
 
 
-        public SkillEffect(float gridX, float gridY,Point2 velocity,ICreature source,ISkill skill,SpriteType sprite=SpriteType.EMPTY,double strength=DefaultStrength)
+        public SkillEffect(float gridX, float gridY,Point2 velocity,ICreature source,ISkill skill,SpriteType sprite=SpriteType.EMPTY,float strength=DefaultStrength)
         {
             m_spriteType = sprite;
             Initialize((int)gridX, (int)gridY, SpriteType.SKILL_EFFECT, GameObjectType.SKILL_EFFECT);

@@ -150,7 +150,7 @@ namespace OGUR.Items
             return !(a == b);
         }
 
-        public decimal GetStatBonus(StatType stat)
+        public float GetStatBonus(StatType stat)
         {
             return Modifers.Get(stat);
         }

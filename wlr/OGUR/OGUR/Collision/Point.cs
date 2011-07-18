@@ -14,16 +14,16 @@
 
     public class Point2
     {
-        public double X, Y, Weight;
+        public float X, Y, Weight;
 
-        public Point2(double x, double y, int weight = 0)
+        public Point2(float x, float y, int weight = 0)
         {
             X = x;
             Y = y;
             Weight = weight;
         }
 
-        public Point2 Multiply(double factor)
+        public Point2 Multiply(float factor)
         {
             return new Point2(X*factor,Y*factor);
         }

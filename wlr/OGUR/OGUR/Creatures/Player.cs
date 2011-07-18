@@ -14,7 +14,7 @@ namespace OGUR.Creatures
         {
             m_playerIndex = playerIndex;
             m_strategy = new ControlledByPlayer(this);
-            base.Setup(x, y, CreatureType.PLAYER, new Stats(100, 100, 10, 10, 10, 10, 35,50,6.0),new Mage());
+            base.Setup(x, y, CreatureType.PLAYER, new Stats(100f, 100f, 10f, 10f, 10f, 10f, 35f,50f,6.0f),new Mage());
         }
 
         public Player(int x, int y, int playerIndex)

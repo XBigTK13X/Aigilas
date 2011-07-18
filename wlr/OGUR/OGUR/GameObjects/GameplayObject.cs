@@ -57,7 +57,7 @@ namespace OGUR.GameObjects
         {
         }
 
-        public void Move(double amountX, double amountY)
+        public void Move(float amountX, float amountY)
         {
             amountX = NormalizeDistance(amountX);
             amountY = NormalizeDistance(amountY);
@@ -69,13 +69,13 @@ namespace OGUR.GameObjects
             }
         }
 
-        private double NormalizeDistance(double amount)
+        private float NormalizeDistance(float amount)
         {
             var isNeg = (amount < 0)? -1:1;
             amount = Math.Abs(amount);
             var factorsOfSpriteHeight = (int)Math.Floor(amount/SpriteInfo.Height);
             factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount!=0) ? 1 : factorsOfSpriteHeight;
-            return (double) (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
+            return (float) (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
         }
 
         public void SetPosition(int x, int y)

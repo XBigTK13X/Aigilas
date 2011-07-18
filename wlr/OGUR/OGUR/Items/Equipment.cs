@@ -80,7 +80,7 @@ namespace OGUR.Items
             return false;
         }
 
-        public decimal CalculateBonus(StatType stat)
+        public float CalculateBonus(StatType stat)
         {
             return m_slots.Sum(item => item.Value.GetStatBonus(stat));
         }

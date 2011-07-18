@@ -7,47 +7,47 @@ namespace OGUR.Creatures
 {
     public class Stats
     {
-        public const double DefaultMoveSpeed = 33;
-        public const double DefaultCoolDown = 6;
-        private readonly Dictionary<StatType, decimal> m_stats = new Dictionary<StatType, decimal>();
+        public const float DefaultMoveSpeed = 33;
+        public const float DefaultCoolDown = 6;
+        private readonly Dictionary<StatType, float> m_stats = new Dictionary<StatType, float>();
 
         public Stats(Stats target)
         {
-            m_stats = new Dictionary<StatType, decimal>(target.m_stats);
+            m_stats = new Dictionary<StatType, float>(target.m_stats);
         }
         public Stats
             (
-                double health,
-                double mana,
-                double strength,
-                double wisdom,
-                double defense,
-                double luck,
-                double age,
-                double weightInLbs,
-                double heightInFeet,
-                double moveSpeed = (double)DefaultMoveSpeed,
-                double moveCoolDown = (double)DefaultCoolDown
+                float health,
+                float mana,
+                float strength,
+                float wisdom,
+                float defense,
+                float luck,
+                float age,
+                float weightInLbs,
+                float heightInFeet,
+                float moveSpeed = (float)DefaultMoveSpeed,
+                float moveCoolDown = (float)DefaultCoolDown
             )
         {
-            Setup(new List<decimal>(){(decimal) health, (decimal) mana, (decimal) strength, (decimal) wisdom, (decimal) defense,
-                             (decimal) luck, (decimal) age,
-                             (decimal) weightInLbs, (decimal) heightInFeet, (decimal) moveSpeed, (decimal) moveCoolDown,0});
+            Setup(new List<float>(){(float) health, (float) mana, (float) strength, (float) wisdom, (float) defense,
+                             (float) luck, (float) age,
+                             (float) weightInLbs, (float) heightInFeet, (float) moveSpeed, (float) moveCoolDown,0});
         }
 
-        private void Setup(List<decimal> stats )
+        private void Setup(List<float> stats )
         {
             for (int ii = 0; ii < stats.Count; ii++)
             {
                 m_stats.Add((StatType)Enum.GetValues(typeof(StatType)).GetValue(ii), stats[ii]);
             }
         }
-        public decimal Get(StatType stat)
+        public float Get(StatType stat)
         {
             return m_stats[stat];
         }
 
-        public decimal Set(StatType stat, decimal value)
+        public float Set(StatType stat, float value)
         {
             return m_stats[stat] = value;
         }
@@ -73,12 +73,12 @@ namespace OGUR.Creatures
             return result;
         }
 
-        public decimal GetBonus(int level, StatType stat)
+        public float GetBonus(int level, StatType stat)
         {
             return m_stats[stat]*level;
         }
 
-        public decimal GetSum()
+        public float GetSum()
         {
             return m_stats.Keys.Where(o=>o!=StatType.HEALTH&&o!=StatType.MOVE_COOL_DOWN).Sum(stat => m_stats[stat]);
         }

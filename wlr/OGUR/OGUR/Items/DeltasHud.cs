@@ -53,7 +53,7 @@ namespace OGUR.Items
                     m_textHandler.Add(new DefaultHudText("Deltas", 30, 260, m_parent));
 
                     string deltas = "";
-                    foreach (decimal stat in stats.GetDeltas(stats2))
+                    foreach (float stat in stats.GetDeltas(stats2))
                     {
                         deltas += ((stat > 0) ? "+" : "") + stat + "|";
                     }

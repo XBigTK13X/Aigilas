@@ -9,7 +9,7 @@ namespace OGUR.Sprites
     {
         public static readonly int Height = 33;
         public static readonly int Width = 33;
-        public static readonly double Radius = Math.Sqrt(Math.Pow(33/2, 2) + Math.Pow(33/2, 2));
+        public static readonly double Radius = (float)Math.Sqrt(Math.Pow(33/2, 2) + Math.Pow(33/2, 2));
         public int X, Y, SpriteIndex, MaxFrame;
 
         public SpriteInfo(int spriteIndex, int maxFrame)
