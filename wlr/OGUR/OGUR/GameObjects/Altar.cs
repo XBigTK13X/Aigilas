@@ -30,7 +30,7 @@ namespace OGUR.GameObjects
             {
                 foreach(var offering in offerings)
                 {
-                    m_god.AcceptSacrifice(player,offering);
+                    player.Sacrifice(m_god,offering);
                 }
                 TextManager.Add(new ActionText(m_god.ToString(), 1, (int) this.GetPosition().X, (int) this.GetPosition().Y));
             }

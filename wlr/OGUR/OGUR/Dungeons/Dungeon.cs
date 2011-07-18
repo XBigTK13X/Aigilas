@@ -249,16 +249,16 @@ namespace OGUR.Dungeons
             dungeon[downSpawnLocation.X, downSpawnLocation.Y] = new Upstairs(downSpawnLocation.X * SpriteInfo.Width, downSpawnLocation.Y * SpriteInfo.Height);
         }
 
-        private void ConvertRoomsToWalls()
+         private void ConvertRoomsToWalls()
         {
             int roomCount = 0;
             var dungeonEntrances = new List<PointPoint>();
             foreach (Room room in m_rooms)
             {
                 var entrances = new List<PointPoint>();
-                for (int ii = room.X; ii < room.RightSide; ii++)
+                for (var ii = room.X; ii < room.RightSide; ii++)
                 {
-                    for (int jj = room.Y; jj < room.BottomSide; jj++)
+                    for (var jj = room.Y; jj < room.BottomSide; jj++)
                     {
                         if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1)
                         {

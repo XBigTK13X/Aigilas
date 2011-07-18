@@ -223,12 +223,6 @@ namespace OGUR.Creatures
             return Set(stat, Get(stat) + adjustment,adjustMax);
         }
 
-        public void Bless(StatType stat, decimal amount)
-        {
-            Set(stat, GetMax(stat)+amount);
-            Set(stat, amount, true);
-        }
-
         public void ApplyDamage(decimal damage)
         {
             damage -= m_stats.Get(StatType.DEFENSE);
@@ -389,7 +383,7 @@ namespace OGUR.Creatures
             m_skillVector = skillVector;
         }
 
-        public StatType GetLowestStat()
+        private StatType GetLowestStat()
         {
             var result = StatType.AGE;
             var min = decimal.MaxValue;
@@ -401,10 +395,39 @@ namespace OGUR.Creatures
             return result;
         }
 
+        public void Sacrifice(God god, GenericItem sacrifice)
+        {
+            AssignGod(god);
+            Adjust(StatType.PIETY,sacrifice.Modifers.GetSum() * ((m_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((m_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1));
+            sacrifice.SetInactive();
+        }
+
         public void Pray(God god)
         {
+            AssignGod(god);
+            const int pietyCost = 500;
+            if (Get(StatType.PIETY) >= pietyCost)
+            {
+                var lowest = GetLowestStat();
+                var adjustment = (Get(StatType.PIETY)/100);
+                Set(lowest, GetMax(lowest) + adjustment);
+                Set(lowest, adjustment, true);
+                Adjust(StatType.PIETY, -pietyCost);
+                if (Get(StatType.PIETY) < 0)
+                {
+                    Set(StatType.PIETY, 0);
+                }
+            }
+        }
+
+        private void AssignGod(God god)
+        {
+            if (m_god != god && m_god != null)
+            {
+                ApplyDamage(Get(StatType.PIETY));
+                Set(StatType.PIETY, 0);
+            }
             m_god = god;
-            m_god.AnswerPrayer(this);
         }
     }
 }

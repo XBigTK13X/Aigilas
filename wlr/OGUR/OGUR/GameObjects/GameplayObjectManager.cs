@@ -78,7 +78,6 @@ namespace OGUR.GameObjects
             m_contents = new List<GameplayObject>();
             CreatureFactory.ResetPlayerCount();
             DungeonFactory.Start();
-            God.Reset();
             GameplayObjectManager.LoadContent();
             GameplayObjectManager.Draw();
         }
