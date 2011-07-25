@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using OGUR.Collision;
 
 namespace OGUR.Dungeons
@@ -6,8 +7,8 @@ namespace OGUR.Dungeons
     public class Room
     {
         public int Height, Width, X, Y, BottomSide, RightSide;
-        public Point Center;
-        public List<Point> Corners = new List<Point>();
+        public Point2 Center;
+        public List<Point2> Corners = new List<Point2>();
 
         public Room(int height, int width, int x, int y)
         {
@@ -17,11 +18,11 @@ namespace OGUR.Dungeons
             Y = y;
             BottomSide = Y + Height;
             RightSide = X + Width;
-            Corners.Add(new Point(X, Y));
-            Corners.Add(new Point(RightSide, Y));
-            Corners.Add(new Point(RightSide, BottomSide));
-            Corners.Add(new Point(X, BottomSide));
-            Center = new Point(RightSide/2, BottomSide/2);
+            Corners.Add(new Point2(X, Y));
+            Corners.Add(new Point2(RightSide, Y));
+            Corners.Add(new Point2(RightSide, BottomSide));
+            Corners.Add(new Point2(X, BottomSide));
+            Center = new Point2(RightSide/2, BottomSide/2);
         }
 
         public bool IsBad()
@@ -39,32 +40,22 @@ namespace OGUR.Dungeons
 
         public bool Collides(Room target)
         {
-            foreach (Point targetCorner in target.Corners)
+            if (target.Corners.Any(targetCorner => IsPointInsideBoundingBox(targetCorner)))
             {
-                if (IsPointInsideBoundingBox(targetCorner))
-                {
-                    return true;
-                }
+                return true;
             }
-            foreach (Point corner in Corners)
+            if (Corners.Any(corner => target.IsPointInsideBoundingBox(corner)))
             {
-                if (target.IsPointInsideBoundingBox(corner))
-                {
-                    return true;
-                }
+                return true;
             }
             if (target.IsPointInsideBoundingBox(Center))
             {
                 return true;
             }
-            if (IsPointInsideBoundingBox(target.Center))
-            {
-                return true;
-            }
-            return false;
+            return IsPointInsideBoundingBox(target.Center);
         }
 
-        public bool IsPointInsideBoundingBox(Point target)
+        public bool IsPointInsideBoundingBox(Point2 target)
         {
             if (target.X > X && target.Y > Y && target.X < RightSide && target.Y < BottomSide)
             {

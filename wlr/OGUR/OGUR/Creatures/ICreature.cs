@@ -14,7 +14,6 @@ using OGUR.Sprites;
 using OGUR.Collision;
 using OGUR.Text;
 using OGUR.Storage;
-using Point = OGUR.Collision.Point;
 using OGUR.Gods;
 
 namespace OGUR.Creatures
@@ -58,7 +57,7 @@ namespace OGUR.Creatures
             }
         }
 
-        protected void Setup(int x, int y, CreatureType type, Stats stats,CreatureClass creatureClass=null)
+        protected void Setup(float x, float y, CreatureType type, Stats stats,CreatureClass creatureClass=null)
         {
             Initialize(x, y, SpriteFromCreature(type), GameObjectType.CREATURE);
             m_inventory = new Inventory(this);

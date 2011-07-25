@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OGUR.Collision;
 using OGUR.GameObjects;
 using OGUR.Gods;
 using OGUR.Items;
 using OGUR.Sprites;
-using Microsoft.Xna.Framework;
 using OGUR.Creatures;
+using Point = Microsoft.Xna.Framework.Point;
 
 namespace OGUR.Dungeons
 {
@@ -262,7 +263,7 @@ namespace OGUR.Dungeons
                     {
                         if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1)
                         {
-                            if (!room.Corners.Contains(new Collision.Point(ii, jj)))
+                            if (!room.Corners.Contains(new Point2(ii, jj)))
                             {
                                 if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < m_blocksWide))
                                 {

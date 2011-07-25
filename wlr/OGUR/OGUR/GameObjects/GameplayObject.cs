@@ -49,7 +49,7 @@ namespace OGUR.GameObjects
             m_isOnBoard = true;
         }
 
-        protected void Initialize(int x, int y, SpriteType spriteType, GameObjectType objectType)
+        protected void Initialize(float x, float y, SpriteType spriteType, GameObjectType objectType)
         {
             m_assetName = spriteType;
             m_objectType = objectType;
