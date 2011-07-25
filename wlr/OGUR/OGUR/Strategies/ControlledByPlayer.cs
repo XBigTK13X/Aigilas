@@ -46,7 +46,6 @@ namespace OGUR.Strategies
                          ? -target.Get(StatType.MOVE_SPEED)
                          : 0);
                 keyVelocity.Y = upVelocity + downVelocity;
-
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
                 {
                     var skillCycleVelocity =
@@ -73,12 +72,10 @@ namespace OGUR.Strategies
                 {
                     if(!keyVelocity.IsZero())
                     {
-                        Console.WriteLine("Setting SV: {0},{1}",keyVelocity.X,keyVelocity.Y);
                         target.SetSkillVector(keyVelocity);
                     }
                     if(!target.GetSkillVector().IsZero())
                     {
-                        Console.WriteLine("Casting "+target.GetSkillVector());
                         target.UseActiveSkill();
                         m_isCasting = false;
                     }

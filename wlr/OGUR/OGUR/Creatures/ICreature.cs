@@ -30,7 +30,7 @@ namespace OGUR.Creatures
         protected God m_god;
 
         protected SkillPool m_skills;
-        protected Point2 m_skillVector = new Point2(0,0);
+        protected Point2 m_skillVector;
 
         protected Inventory m_inventory;
         protected Equipment m_equipment;
@@ -311,7 +311,7 @@ namespace OGUR.Creatures
 
         public Point2 GetSkillVector()
         {
-            return m_skillVector;
+            return new Point2(m_skillVector);
         }
 
         public void AddExperience(float amount)
@@ -374,7 +374,7 @@ namespace OGUR.Creatures
 
         public void SetSkillVector(Point2 skillVector)
         {
-            m_skillVector = skillVector;
+            m_skillVector = new Point2(skillVector);
         }
 
         private StatType GetLowestStat()

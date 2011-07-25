@@ -15,6 +15,13 @@ namespace OGUR.Collision
             Weight = weight;
         }
 
+        public Point2(Point2 target)
+        {
+            X = target.X;
+            Y = target.Y;
+            Weight = 0;
+        }
+
         public bool IsZero()
         {
             var isZero = Equals(Zero);
@@ -24,7 +31,6 @@ namespace OGUR.Collision
             }
             else
             {
-                Console.WriteLine(this);
                 return false;
             }
         }
