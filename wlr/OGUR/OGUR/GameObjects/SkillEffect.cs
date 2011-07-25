@@ -49,7 +49,6 @@ namespace OGUR.GameObjects
                 m_strength *= m_strengthDecayAmount;
                 m_velocity.X *= m_strength;
                 m_velocity.Y *= m_strength;
-                Console.WriteLine(String.Format("{0}x {1}y",m_velocity.X, m_velocity.Y));
                 Move(m_velocity.X,m_velocity.Y);
             }
         }

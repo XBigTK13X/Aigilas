@@ -17,20 +17,20 @@ namespace OGUR.Strategies
             //Every player is dead
             if (null != opponent)
             {
-                float leftVelocity = (opponent.GetPosition().X < target.GetPosition().X)
-                                           ? -target.GetInt(StatType.MOVE_SPEED)
+                var leftVelocity = (opponent.GetPosition().X < target.GetPosition().X)
+                                           ? -target.Get(StatType.MOVE_SPEED)
                                            : 0;
-                float rightVelocity = (opponent.GetPosition().X > target.GetPosition().X)
-                                            ? target.GetInt(StatType.MOVE_SPEED)
+                var rightVelocity = (opponent.GetPosition().X > target.GetPosition().X)
+                                            ? target.Get(StatType.MOVE_SPEED)
                                             : 0;
-                float xVel = leftVelocity + rightVelocity;
-                float downVelocity = (opponent.GetPosition().Y > target.GetPosition().Y)
-                                           ? target.GetInt(StatType.MOVE_SPEED)
+                var xVel = leftVelocity + rightVelocity;
+                var downVelocity = (opponent.GetPosition().Y > target.GetPosition().Y)
+                                           ? target.Get(StatType.MOVE_SPEED)
                                            : 0;
-                float upVelocity = (opponent.GetPosition().Y < target.GetPosition().Y)
-                                         ? -target.GetInt(StatType.MOVE_SPEED)
+                var upVelocity = (opponent.GetPosition().Y < target.GetPosition().Y)
+                                         ? -target.Get(StatType.MOVE_SPEED)
                                          : 0;
-                float yVel = downVelocity + upVelocity;
+                var yVel = downVelocity + upVelocity;
                 target.MoveIfPossible((int) xVel, (int) yVel);
             }
         }

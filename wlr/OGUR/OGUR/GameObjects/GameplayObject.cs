@@ -72,7 +72,7 @@ namespace OGUR.GameObjects
             }
         }
 
-        private float NormalizeDistance(float amount)
+        private static float NormalizeDistance(float amount)
         {
             var isNeg = (amount < 0)? -1:1;
             amount = Math.Abs(amount);

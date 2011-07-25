@@ -27,28 +27,28 @@ namespace OGUR.Strategies
             }
             if (target.IsPlaying())
             {
+                var keyVelocity = new Point2(0, 0);
                 var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,
                                                target.GetPlayerIndex())
-                            ? -target.GetInt(StatType.MOVE_SPEED)
+                            ? -target.Get(StatType.MOVE_SPEED)
                             : 0);
                 var rightVelocity =
                     ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))
-                         ? target.GetInt(StatType.MOVE_SPEED)
+                         ? target.Get(StatType.MOVE_SPEED)
                          : 0);
-                var xVel = leftVelocity + rightVelocity;
+                keyVelocity.X = rightVelocity + leftVelocity;
                 var downVelocity =
                     ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))
-                         ? target.GetInt(StatType.MOVE_SPEED)
+                         ? target.Get(StatType.MOVE_SPEED)
                          : 0);
                 var upVelocity =
                     ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))
-                         ? -target.GetInt(StatType.MOVE_SPEED)
+                         ? -target.Get(StatType.MOVE_SPEED)
                          : 0);
-                var yVel = downVelocity + upVelocity;
+                keyVelocity.Y = upVelocity + downVelocity;
 
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
                 {
-                    //Handle skills
                     var skillCycleVelocity =
                         ((InputManager.IsPressed(InputManager.Commands.CycleLeft, target.GetPlayerIndex()))
                              ? -1
@@ -59,11 +59,9 @@ namespace OGUR.Strategies
                              : 0);
                     target.CycleActiveSkill(skillCycleVelocity);
 
-                    //Handle movement
-                    //Console.WriteLine("CURRENT STATE: {0}",target.IsInteracting());
                     if (!m_isCasting)
                     {
-                        target.MoveIfPossible((int) xVel, (int) yVel);
+                        target.MoveIfPossible(keyVelocity.X, keyVelocity.Y);
                         
                     }
                     if (InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()) && !target.IsInteracting())
@@ -73,15 +71,16 @@ namespace OGUR.Strategies
                 }
                 if(m_isCasting)
                 {
-                    if(xVel!=0||yVel!=0)
+                    if(!keyVelocity.IsZero())
                     {
-                        target.SetSkillVector(new Point2(xVel, yVel));
+                        Console.WriteLine("Setting SV: {0},{1}",keyVelocity.X,keyVelocity.Y);
+                        target.SetSkillVector(keyVelocity);
+                    }
+                    if(!target.GetSkillVector().IsZero())
+                    {
+                        Console.WriteLine("Casting "+target.GetSkillVector());
                         target.UseActiveSkill();
                         m_isCasting = false;
-                    }
-                    if(InputManager.IsPressed(InputManager.Commands.Skill,target.GetPlayerIndex()))
-                    {
-                        m_isCasting = !m_isCasting;
                     }
                 }
                 if (InputManager.IsPressed(InputManager.Commands.Inventory, target.GetPlayerIndex()))

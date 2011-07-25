@@ -198,11 +198,6 @@ namespace OGUR.Creatures
             return m_maxStats.Set(stat,value);
         }
 
-        public int GetInt(StatType stat,bool getMax=false)
-        {
-            return (int) (getMax ? GetMax(stat) : Get(stat));
-        }
-
         public float Set(StatType stat,float value,bool setMax=false)
         {
             return setMax ? SetMax(stat, value) : Set(stat, value);
@@ -286,9 +281,9 @@ namespace OGUR.Creatures
             return false;
         }
 
-        public void MoveIfPossible(int xVel, int yVel)
+        public void MoveIfPossible(float xVel, float yVel)
         {
-            if ((xVel != 0 || yVel != 0) && GetInt(StatType.MOVE_COOL_DOWN) <= 0)
+            if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) <= 0)
             {
                 var target = new Point2(xVel + GetPosition().X + SpriteInfo.Width / 2, yVel + GetPosition().Y + SpriteInfo.Height / 2);
                 if (!CoordVerifier.IsBlocked(target.X,target.Y))
