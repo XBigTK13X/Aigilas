@@ -188,5 +188,15 @@ namespace OGUR.GameObjects
         {
             m_contents.AddRange(cache);
         }
+
+        public static Player GetTouchingPlayer(GameplayObject source)
+        {
+            var nearest = GetNearestPlayer(source);
+            if(HitTest.IsTouching(source,nearest))
+            {
+                return (Player)nearest;
+            }
+            return null;
+        }
     }
 }

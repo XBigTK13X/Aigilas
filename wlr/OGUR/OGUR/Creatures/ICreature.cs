@@ -418,6 +418,7 @@ namespace OGUR.Creatures
                     Set(StatType.PIETY, 0);
                 }
             }
+            PerformInteraction();
         }
 
         private void AssignGod(God god)

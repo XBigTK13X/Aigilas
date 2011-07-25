@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using OGUR.Collision;
+using OGUR.Creatures;
+using OGUR.Management;
 using OGUR.Sprites;
 
 namespace OGUR.GameObjects
@@ -20,6 +22,7 @@ namespace OGUR.GameObjects
         protected GameObjectType m_objectType;
         protected bool m_isOnBoard = true;
         protected List<Elements> m_composition = new List<Elements>(){Elements.NORMAL};
+        private bool m_isInteracting = false;
 
         //Load the texture for the sprite using the Content Pipeline
         public void LoadContent()
@@ -130,6 +133,22 @@ namespace OGUR.GameObjects
         {
             return (target.X >= GetPosition().X) && (target.Y >= GetPosition().Y) &&
                    (target.X <= GetPosition().X + SpriteInfo.Width) && (target.Y <= GetPosition().Y + SpriteInfo.Height);
+        }
+
+        public void SetInteraction(bool isInteracting)
+        {
+            m_isInteracting = isInteracting;
+        }
+
+        public bool IsInteracting()
+        {
+            return m_isInteracting;
+        }
+
+        public void PerformInteraction()
+        {
+            m_isInteracting = false;
+            InputManager.Lock(InputManager.Commands.Confirm, ((ICreature) this).GetPlayerIndex());
         }
     }
 }

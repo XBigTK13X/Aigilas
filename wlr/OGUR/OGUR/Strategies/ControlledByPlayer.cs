@@ -1,4 +1,5 @@
-﻿using OGUR.Collision;
+﻿using System;
+using OGUR.Collision;
 using OGUR.Dungeons;
 using OGUR.GameObjects;
 using OGUR.Management;
@@ -26,7 +27,7 @@ namespace OGUR.Strategies
             }
             if (target.IsPlaying())
             {
-                int leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,
+                var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,
                                                target.GetPlayerIndex())
                             ? -target.GetInt(StatType.MOVE_SPEED)
                             : 0);
@@ -59,36 +60,15 @@ namespace OGUR.Strategies
                     target.CycleActiveSkill(skillCycleVelocity);
 
                     //Handle movement
+                    //Console.WriteLine("CURRENT STATE: {0}",target.IsInteracting());
                     if (!m_isCasting)
                     {
                         target.MoveIfPossible((int) xVel, (int) yVel);
+                        
                     }
-
-                    foreach (Downstairs downstairs in GameplayObjectManager.GetObjects(GameObjectType.DOWNSTAIRS))
+                    if (InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()) && !target.IsInteracting())
                     {
-                        if (Collision.HitTest.IsTouching(downstairs, target) &&
-                            InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
-                        {
-                            DungeonFactory.GetNextFloor(downstairs.GetTargetLocation());
-                        }
-                    }
-                    foreach (Upstairs upstairs in GameplayObjectManager.GetObjects(GameObjectType.UPSTAIRS))
-                    {
-                        if (Collision.HitTest.IsTouching(upstairs, target) &&
-                            InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
-                        {
-
-                            DungeonFactory.GetPreviousFloor(upstairs.GetTargetLocation());
-                        }
-                    }
-                    foreach(Altar altar in GameplayObjectManager.GetObjects(GameObjectType.ALTAR))
-                    {
-                        if (Collision.HitTest.IsTouching(altar, target) &&
-                            InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()))
-                        {
-
-                            target.Pray(altar.GetGod());
-                        }
+                        target.SetInteraction(true);
                     }
                 }
                 if(m_isCasting)
@@ -114,7 +94,6 @@ namespace OGUR.Strategies
                 if (InputManager.IsPressed(InputManager.Commands.Skill, target.GetPlayerIndex()))
                 {
                     m_isCasting = !m_isCasting;
-
                 }
             }
         }

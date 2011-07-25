@@ -19,5 +19,18 @@ namespace OGUR.GameObjects
         {
             return Location.Depths;
         }
+
+        public override void  Update()
+        {
+            var player = GameplayObjectManager.GetTouchingPlayer(this);
+            if(player!=null)
+            {
+                if (player.IsInteracting())
+                {
+                    player.PerformInteraction();
+                    DungeonFactory.GetPreviousFloor(GetTargetLocation());
+                }    
+            }
+        }
     }
 }

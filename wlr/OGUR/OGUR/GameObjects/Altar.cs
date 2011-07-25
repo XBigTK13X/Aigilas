@@ -13,7 +13,7 @@ namespace OGUR.GameObjects
 {
     public class Altar : GameplayObject
     {
-        private God m_god;
+        private readonly God m_god;
 
         public Altar(int x, int y, God.Name godName)
         {
@@ -25,12 +25,16 @@ namespace OGUR.GameObjects
         public override void Update()
         {
             var offerings = GameplayObjectManager.GetObjects(GameObjectType.ITEM).Where(o => Collision.HitTest.IsTouching(this, o)).Cast<GenericItem>().ToList();
-            var player = (Player)GameplayObjectManager.GetNearestPlayer(this);
-            if (Collision.HitTest.IsTouching(this,player))
+            var player = GameplayObjectManager.GetTouchingPlayer(this);
+            if (player != null)
             {
-                foreach(var offering in offerings)
+                if (player.IsInteracting())
                 {
-                    player.Sacrifice(m_god,offering);
+                    player.Pray(m_god);
+                }
+                foreach (var offering in offerings)
+                {
+                    player.Sacrifice(m_god, offering);
                 }
                 TextManager.Add(new ActionText(m_god.ToString(), 1, (int) this.GetPosition().X, (int) this.GetPosition().Y));
             }
