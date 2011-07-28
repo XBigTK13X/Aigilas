@@ -16,7 +16,14 @@ namespace OGUR.Collision
         {
             var target = new Point2(x + SpriteInfo.Width/2, y + SpriteInfo.Height/2);
             return
-                GameplayObjectManager.GetObjects().Where(tile => tile.Contains(target) && tile.IsBlocking()).Count() > 0;
+                GameplayObjectManager.GetObjects().Where(tile => tile.Contains(target) && tile.IsBlocking()).Any();
+        }   
+
+        public static bool Contains(float x, float y, GameObjectType type)
+        {
+            var target = new Point2(x + SpriteInfo.Width / 2, y + SpriteInfo.Height / 2);
+            return
+                GameplayObjectManager.GetObjects().Where(tile => tile.Contains(target) && tile.GetObjectType()==type).Any();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using OGUR.Collision;
@@ -6,6 +7,7 @@ using OGUR.Dungeons;
 using OGUR.Gods;
 using OGUR.Management;
 using OGUR.Creatures;
+using OGUR.Sprites;
 using OGUR.States;
 
 namespace OGUR.GameObjects
@@ -171,7 +173,7 @@ namespace OGUR.GameObjects
             GameplayObject closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
             foreach (var player in GetObjects(CreatureType.PLAYER))
             {
-                if (HitTest.GetDistance(target, player) < HitTest.GetDistance(target, closest))
+                if (HitTest.GetDistanceSquare(target, player) < HitTest.GetDistanceSquare(target, closest))
                 {
                     closest = player;
                 }

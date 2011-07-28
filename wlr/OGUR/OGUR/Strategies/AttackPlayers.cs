@@ -1,6 +1,8 @@
 ﻿using System;
+using OGUR.Collision;
 using OGUR.Creatures;
-using OGUR.GameObjects;
+using OGUR.Dungeons;
+using OGUR.Path;
 
 namespace OGUR.Strategies
 {
@@ -17,21 +19,11 @@ namespace OGUR.Strategies
             //Every player is dead
             if (null != opponent)
             {
-                var leftVelocity = (opponent.GetPosition().X < target.GetPosition().X)
-                                           ? -target.Get(StatType.MOVE_SPEED)
-                                           : 0;
-                var rightVelocity = (opponent.GetPosition().X > target.GetPosition().X)
-                                            ? target.Get(StatType.MOVE_SPEED)
-                                            : 0;
-                var xVel = leftVelocity + rightVelocity;
-                var downVelocity = (opponent.GetPosition().Y > target.GetPosition().Y)
-                                           ? target.Get(StatType.MOVE_SPEED)
-                                           : 0;
-                var upVelocity = (opponent.GetPosition().Y < target.GetPosition().Y)
-                                         ? -target.Get(StatType.MOVE_SPEED)
-                                         : 0;
-                var yVel = downVelocity + upVelocity;
-                target.MoveIfPossible((int) xVel, (int) yVel);
+                var targetPosition = PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation());
+                if (null != targetPosition)
+                {
+                    target.MoveTo(targetPosition);
+                }
             }
         }
     }

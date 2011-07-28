@@ -424,5 +424,15 @@ namespace OGUR.Creatures
             }
             m_god = god;
         }
+
+        public void MoveTo(Point2 targetPosition)
+        {
+            MoveIfPossible(targetPosition.X-GetPosition().X,targetPosition.Y-GetPosition().Y);
+        }
+
+        public Point2 GetLocation()
+        {
+            return new Point2(GetPosition());
+        }
     }
 }
