@@ -18,14 +18,6 @@ namespace OGUR.Skills
     {
         public FireballSkill() : base(SkillId.FIREBALL,new Stats(0,5,0,0,0,0,0,0,0,0,0),new List<Elements>(){Elements.FIRE}){}
 
-        public override void Activate(ICreature source)
-        {
-            m_source = source;
-            var direction = source.GetSkillVector();
-            m_effectGraphic.Add(new SkillEffect(source.GetPosition().X, source.GetPosition().Y, direction, source, this, SpriteType.SKILL_EFFECT));
-            GameplayObjectManager.AddObject(m_effectGraphic.Last());
-        }
-
         public override void Affect(GameplayObject target)
         {
             var creature = IsCreature(target);
@@ -38,13 +30,6 @@ namespace OGUR.Skills
     public class ThrashSkill : ISkill
     {
         public ThrashSkill(): base(SkillId.THRASH){}
-
-        public override void Activate(ICreature source)
-        {
-            var direction = source.GetSkillVector();
-            m_effectGraphic.Add(new SkillEffect(source.GetPosition().X, source.GetPosition().Y, direction, source, this, SpriteType.SKILL_EFFECT));
-            GameplayObjectManager.AddObject(m_effectGraphic.Last());
-        }
 
         public override void Affect(GameplayObject target)
         {

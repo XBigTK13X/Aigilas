@@ -1,7 +1,5 @@
 ﻿
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using OGUR.Classes;
@@ -25,7 +23,7 @@ namespace OGUR.Creatures
 
         protected CreatureType m_creatureType;
         protected CreatureClass m_class;
-        protected Stats m_stats;
+        protected Stats m_baseStats;
         protected Stats m_maxStats;
         protected God m_god;
 
@@ -43,7 +41,7 @@ namespace OGUR.Creatures
         protected int m_playerIndex = -1;
         protected bool m_isPlaying = true;
         protected int m_currentLevel = 1;
-        protected float m_experience = 0;
+        protected float m_experience;
         protected float m_nextLevelExperience = 100;
 
         private SpriteType SpriteFromCreature(CreatureType type)
@@ -75,7 +73,7 @@ namespace OGUR.Creatures
             m_isBlocking = true;
             m_creatureType = type;
             m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
-            m_stats = new Stats(stats);
+            m_baseStats = new Stats(stats);
             m_maxStats = new Stats(stats);
         }
 
@@ -169,7 +167,7 @@ namespace OGUR.Creatures
 
         public float Get(StatType stat)
         {
-            return m_stats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
+            return m_baseStats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
         }
 
         private float CalculateInstrinsicBonus(StatType stat)
@@ -189,7 +187,7 @@ namespace OGUR.Creatures
 
         public float Set(StatType stat,float value)
         {
-            return m_stats.Set(stat,value);
+            return m_baseStats.Set(stat,value);
         }
 
         public float SetMax(StatType stat,float value)
@@ -219,7 +217,7 @@ namespace OGUR.Creatures
 
         public void ApplyDamage(float damage,ICreature attacker=null)
         {
-            damage -= m_stats.Get(StatType.DEFENSE);
+            damage -= m_baseStats.Get(StatType.DEFENSE);
             if (damage <= 0)
             {
                 damage = 0;
@@ -336,7 +334,7 @@ namespace OGUR.Creatures
 
         public float CalculateExperience()
         {
-            return m_currentLevel + m_stats.GetSum();
+            return m_currentLevel + m_baseStats.GetSum();
         }
         public bool IsEquipped(GenericItem item)
         {

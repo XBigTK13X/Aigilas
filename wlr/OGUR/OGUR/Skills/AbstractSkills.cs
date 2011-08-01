@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OGUR.Creatures;
 using OGUR.GameObjects;
+using OGUR.Sprites;
 
 namespace OGUR.Skills
 {
@@ -28,8 +29,19 @@ namespace OGUR.Skills
             return m_implementationId;
         }
 
-        public abstract void Activate(ICreature source);
+        public virtual void Activate(ICreature source)
+        {
+            m_source = source;
+            m_effectGraphic.Add(UseInDirectionFaced());
+        }
         public abstract void Affect(GameplayObject target);
+
+        protected SkillEffect UseInDirectionFaced(SpriteType effectGraphic = SpriteType.SKILL_EFFECT)
+        {
+            var effect = new SkillEffect(m_source.GetPosition().X, m_source.GetPosition().Y, m_source.GetSkillVector(), m_source, this, SpriteType.SKILL_EFFECT);
+            GameplayObjectManager.AddObject(effect);
+            return effect;
+        }
 
         public ICreature IsCreature(GameplayObject target)
         {
