@@ -74,11 +74,14 @@ namespace OGUR.Strategies
                     {
                         target.SetSkillVector(keyVelocity);
                     }
-                    if(!target.GetSkillVector().IsZero())
+                    if(target.GetSkillVector() != null)
                     {
-                        target.UseActiveSkill();
-                        m_isCasting = false;
-                    }
+                        if(!target.GetSkillVector().IsZero())
+                        {
+                            target.UseActiveSkill();
+                            m_isCasting = false;
+                        }    
+                    }    
                 }
                 if (InputManager.IsPressed(InputManager.Commands.Inventory, target.GetPlayerIndex()))
                 {

@@ -169,6 +169,7 @@
     <Compile Include="Items\ItemClass.cs" />
     <Compile Include="Skills\AbstractSkills.cs" />
     <Compile Include="Skills\ConcreteSkills.cs" />
+    <Compile Include="Skills\SkillFactory.cs" />
     <Compile Include="Skills\SkillHud.cs" />
     <Compile Include="Skills\SkillPool.cs" />
     <Compile Include="States\GameOverState.cs" />

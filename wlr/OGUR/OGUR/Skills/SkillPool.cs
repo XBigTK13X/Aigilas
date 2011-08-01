@@ -8,43 +8,42 @@ namespace OGUR.Skills
 {
     public class SkillPool
     {
-        private List<ISkill> m_skills = new List<ISkill>();
+        private readonly List<string> m_skills = new List<string>();
         private int m_currentSkillSlot = 0;
-        private ISkill m_currentSkill;
-        private ICreature m_owner;
+        private string m_currentSkill;
+        private readonly ICreature m_owner;
 
         public SkillPool(ICreature owner)
         {
             m_owner = owner;
-            m_currentSkill=new NoSkill(m_owner);
+            m_currentSkill=SkillId.NO_SKILL;
         }
 
-        public void Add(ISkill skill)
+        public void Add(string skill)
         {
             if(skill.Equals(null)&&m_skills.Count==0)
             {
-                m_skills.Add(new NoSkill(m_owner));
+                m_skills.Add(SkillId.NO_SKILL);
                 FindCurrent();
                 return;
             }
             m_skills.Add(skill);
         }
 
-        private ISkill FindCurrent()
+        private string FindCurrent()
         {
             return m_currentSkill = m_skills[m_currentSkillSlot];
         }
 
-        public void Add(List<ISkill> getLevelSkills)
+        public void Add(List<string> getLevelSkills)
         {
             if(getLevelSkills.Count==0)
             {
-                m_skills.Add(new NoSkill(m_owner));
+                m_skills.Add(SkillId.NO_SKILL);
                 return;
             }
             foreach(var skill in getLevelSkills)
             {
-                skill.SetSource(m_owner);
                 m_skills.Add(skill);
             }
         }
@@ -57,18 +56,14 @@ namespace OGUR.Skills
 
         public string GetActiveName()
         {
-            if(m_skills.Count>0)
-            {
-                return FindCurrent().ToString();    
-            }
-            return "No Skill";
+            return m_skills.Count>0 ? FindCurrent() : "No Skill";
         }
 
         public void UseActive()
         {
             if (m_skills.Count > 0)
             {
-                FindCurrent().Activate(m_owner);
+                SkillFactory.Create(FindCurrent()).Activate(m_owner);
             }
         }
     }

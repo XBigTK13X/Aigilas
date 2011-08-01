@@ -217,7 +217,7 @@ namespace OGUR.Creatures
             return Set(stat, Get(stat) + adjustment,adjustMax);
         }
 
-        public void ApplyDamage(float damage)
+        public void ApplyDamage(float damage,ICreature attacker=null)
         {
             damage -= m_stats.Get(StatType.DEFENSE);
             if (damage <= 0)
@@ -234,6 +234,10 @@ namespace OGUR.Creatures
             if (Get(StatType.HEALTH) <= 0)
             {
                 m_isActive = false;
+                if (attacker != null)
+                {
+                    attacker.AddExperience(CalculateExperience());
+                }
             }
         }
 
@@ -293,11 +297,11 @@ namespace OGUR.Creatures
                 else
                 {
                     var creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE,target).Cast<ICreature>().Where(creature => creature!=this).ToList();
-                    if(creatures.Count()>0)
+                    if(creatures.Any())
                     {
                         foreach (var creature in creatures)
                         {
-                            creature.ApplyDamage(CalculateDamage());
+                            creature.ApplyDamage(CalculateDamage(),this);
                             if(!creature.IsActive())
                             {
                                 AddExperience(creature.CalculateExperience());
@@ -311,6 +315,10 @@ namespace OGUR.Creatures
 
         public Point2 GetSkillVector()
         {
+            if(null == m_skillVector)
+            {
+                return null;
+            }
             return new Point2(m_skillVector);
         }
 

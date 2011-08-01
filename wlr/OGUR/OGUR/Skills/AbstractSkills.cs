@@ -13,50 +13,24 @@ namespace OGUR.Skills
         protected ICreature m_source;
         protected List<Elements> m_elements = new List<Elements>() {Elements.NORMAL};
         public static ISkill NULL;
-        protected SkillId m_implementationId;
+        protected string m_implementationId;
         protected List<SkillEffect> m_effectGraphic = new List<SkillEffect>();
 
-        protected ISkill()
-        {}
-
-        protected ISkill(SkillId implementationId)
+        protected ISkill(string implementationId, Stats cost = null, IEnumerable<Elements> elements = null)
         {
-            m_elements = new List<Elements>(){Elements.NORMAL};
-            m_cost = new Stats(0,0,0,0,0,0,0,0,0,0,0);
+            m_elements = elements==null ? new List<Elements>() { Elements.NORMAL } : new List<Elements>(elements);
+            m_cost = cost==null ? new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) : new Stats(cost);
             m_implementationId = implementationId;
-        }
-
-        protected ISkill(IEnumerable<Elements> elements, Stats cost)
-        {
-            m_elements = new List<Elements>(elements);
-            m_cost = new Stats(cost);
         }
 
         public override string ToString()
         {
-            return ImplEnumToString(m_implementationId);
+            return m_implementationId;
         }
 
         public abstract void Activate(ICreature source);
         public abstract void Affect(GameplayObject target);
 
-        public void SetSource(ICreature source)
-        {
-            m_source = source;
-        }
-
-        public static string ImplEnumToString(SkillId skill)
-        {
-            switch(skill)
-            {
-                case SkillId.FIREBALL:
-                    return "Fireball";
-                case SkillId.NO_SKILL:
-                    return "No Skill";
-                default:
-                    return "No Name Defined in ImplEnumToString!";
-            }
-        }
         public ICreature IsCreature(GameplayObject target)
         {
             if(target.GetObjectType()==GameObjectType.CREATURE)
@@ -66,10 +40,10 @@ namespace OGUR.Skills
             return null;
         }
     }
-    public enum SkillId
+    public class SkillId
     {
-        NO_SKILL,
-        FIREBALL
+        public const string NO_SKILL = "No Skill";
+        public const string FIREBALL = "Fireball";
+        public const string THRASH = "Thrash";
     }
-
 }
