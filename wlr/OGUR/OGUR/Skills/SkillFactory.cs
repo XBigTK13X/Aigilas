@@ -16,8 +16,12 @@ namespace OGUR.Skills
                     return new FireballSkill();
                 case SkillId.THRASH:
                     return new ThrashSkill();
-                default:
+                case SkillId.BULK:
+                    return new BulkSkill();
+                case SkillId.NO_SKILL:    
                     return new NoSkill();
+                default:
+                    throw new Exception("You forgot to define the new skill in the Factory...YOU FOOL!"); 
             }
         }
     }

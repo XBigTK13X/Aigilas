@@ -49,11 +49,16 @@ namespace OGUR.GameObjects
             m_isOnBoard = true;
         }
 
-        protected void Initialize(float x, float y, SpriteType spriteType, GameObjectType objectType)
+        protected void Initialize(Point2 location, SpriteType spriteType, GameObjectType objectType)
         {
             m_assetName = spriteType;
             m_objectType = objectType;
-            m_graphic.SetPosition(x, y);
+            m_graphic.SetPosition(location);
+        }
+
+        protected void Initialize(float x, float y, SpriteType spriteType, GameObjectType objectType)
+        {
+            Initialize(new Point2(x,y),spriteType,objectType);
         }
 
         public virtual void Update()
@@ -86,6 +91,14 @@ namespace OGUR.GameObjects
             if (CoordVerifier.IsValid(x, y))
             {
                 m_graphic.SetPosition(x, y);
+            }
+        }
+
+        public void SetPosition(Point2 position)
+        {
+            if (CoordVerifier.IsValid(position))
+            {
+                m_graphic.SetPosition(position);
             }
         }
 
@@ -149,6 +162,11 @@ namespace OGUR.GameObjects
         {
             m_isInteracting = false;
             InputManager.Lock(InputManager.Commands.Confirm, ((ICreature) this).GetPlayerIndex());
+        }
+
+        public void SetAlpha(float alpha)
+        {
+            m_graphic.SetAlpha(alpha);
         }
     }
 }

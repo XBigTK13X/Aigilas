@@ -12,6 +12,11 @@ namespace OGUR.Collision
             return (x > 0 && y > 0 && x < XnaManager.WindowWidth && y < XnaManager.WindowHeight);
         }
 
+        public static bool IsValid(Point2 position)
+        {
+            return (position.X > 0 && position.Y > 0 && position.X < XnaManager.WindowWidth && position.Y < XnaManager.WindowHeight);
+        }
+
         public static bool IsBlocked(float x, float y)
         {
             var target = new Point2(x + SpriteInfo.Width/2, y + SpriteInfo.Height/2);

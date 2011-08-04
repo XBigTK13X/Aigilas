@@ -9,26 +9,14 @@ namespace OGUR.Classes
 {
     public abstract class CreatureClass
     {
-        private Stats m_stats;
+        private readonly Stats m_stats;
+        protected List<KeyValuePair<int, string>> m_skillUnlocks = new List<KeyValuePair<int, string>>();
 
-        protected Dictionary<int, string> m_skillUnlocks = new Dictionary<int, string>(); 
-
-        protected CreatureClass()
-        {
-            
-        }
-        protected CreatureClass(Stats stats)
-        {
-            m_stats = new Stats(stats);
-        }
-        public float GetBonus(int level,StatType stat)
-        {
-            return m_stats.GetBonus(level,stat);
-        }
-        public List<string> GetLevelSkills(int level)
-        {
-            return (from skill in m_skillUnlocks where skill.Key <= level select skill.Value).ToList();
-        }
+        protected CreatureClass(){}
+        protected CreatureClass(Stats stats){m_stats = new Stats(stats);}
+        public float GetBonus(int level,StatType stat){return m_stats.GetBonus(level,stat);}
+        public List<string> GetLevelSkills(int level){return (from skill in m_skillUnlocks where skill.Key <= level select skill.Value).ToList();}
+        protected void Add(int level, string skillId){m_skillUnlocks.Add(new KeyValuePair<int, string>(level,skillId));}
     }
     class NoClass : CreatureClass
     {
@@ -48,7 +36,7 @@ namespace OGUR.Classes
     {
         public Brute():base(new Stats(10,1,3,1,5,1,0,0,0,0,0))
         {
-            m_skillUnlocks.Add(1, SkillId.THRASH);
+            m_skillUnlocks.Add(new KeyValuePair<int, string>(1, SkillId.THRASH));
         }
     }
     class Dynamo : CreatureClass
@@ -63,7 +51,9 @@ namespace OGUR.Classes
         public Mage()
             : base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0)))
         {
-            m_skillUnlocks.Add(1,SkillId.FIREBALL);
+            Add(1, SkillId.FIREBALL);
+            Add(1, SkillId.BULK);
+            Add(1, SkillId.THRASH);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using OGUR.Collision;
 using OGUR.Management;
 
 namespace OGUR.Sprites
@@ -93,9 +94,19 @@ namespace OGUR.Sprites
             m_position.Y = (int)y;
         }
 
+        public void SetPosition(Point2 position)
+        {
+            m_position = new Vector2(position.X,position.Y);
+        }
+
         public void SetColor(Color color)
         {
             m_color = color;
+        }
+
+        public void SetAlpha(float alpha)
+        {
+            m_color = new Color(m_color.R, m_color.G, m_color.B,alpha);
         }
     }
 }

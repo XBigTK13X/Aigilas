@@ -11,14 +11,6 @@ namespace OGUR.GameObjects
 {
     public class SkillEffect:GameplayObject
     {
-
-        public enum Anim
-        {
-            RANGED,
-            SELF,
-            CLOUD
-        }
-
         private const float m_strengthDecayAmount = .75f;
         public const float DefaultStrength = 1;
         
@@ -27,13 +19,14 @@ namespace OGUR.GameObjects
         private readonly ICreature m_source;
         private readonly ISkill m_skill;
         private SpriteType m_spriteType;
-        private Anim m_animation;
+        private readonly Skill.Animation m_animation;
+        private float m_startingStrength;
+        private bool m_used = false;
 
-
-        public SkillEffect(float gridX, float gridY,Point2 velocity,ICreature source,ISkill skill,SpriteType sprite=SpriteType.EMPTY,float strength=DefaultStrength,Anim animation = Anim.RANGED)
+        public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill,Skill.Animation animation,SpriteType sprite=SpriteType.SKILL_EFFECT,float strength=DefaultStrength)
         {
             m_spriteType = sprite;
-            Initialize((int)gridX, (int)gridY, SpriteType.SKILL_EFFECT, GameObjectType.SKILL_EFFECT);
+            Initialize(gridLocation, sprite, GameObjectType.SKILL_EFFECT);
             m_strength = strength;
             m_velocity = velocity;
             m_source = source;
@@ -43,57 +36,70 @@ namespace OGUR.GameObjects
 
         public override void Update()
         {         
-            if(m_strength<.01)
+            if(m_strength<.001)
             {
+                if (m_animation == Skill.Animation.SELF && m_used)
+                {
+                    m_skill.Affect(m_source);
+                }
                 m_isActive = false;
             }
             else
             {
+                if (m_startingStrength == 0)
+                {
+                    m_startingStrength = m_strength;
+                }
+                m_strength *= m_strengthDecayAmount;
+                m_velocity.X *= m_strength;
+                m_velocity.Y *= m_strength;
                 switch(m_animation)
                 {
-                    case Anim.CLOUD:
+                    case Skill.Animation.CLOUD:
                         CloudAnimation();
                         break;
-                    case Anim.RANGED:
+                    case Skill.Animation.RANGED:
                         RangedAnimation();
                         break;
-                    case Anim.SELF:
+                    case Skill.Animation.SELF:
                         SelfAnimation();
                         break;
-                    default:
-                        break;
+                }
+                if(m_animation==Skill.Animation.SELF)
+                {
+                    if (!m_used)
+                    {
+                        m_skill.Affect(m_source);
+                        m_used = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    var collidedTarget = m_source.GetTargets().GetCollidedTarget(this);
+                    if (null != collidedTarget)
+                    {
+                        m_skill.Affect(collidedTarget);
+                        m_isActive = false;
+                        return;
+                    }    
                 }
             }
         }
 
         private void RangedAnimation()
         {
-            AffectTouchingTargets();
-            m_strength *= m_strengthDecayAmount;
-            m_velocity.X *= m_strength;
-            m_velocity.Y *= m_strength;
             Move(m_velocity.X,m_velocity.Y);
         }
 
         private void CloudAnimation()
         {
-            AffectTouchingTargets();
+            
         }
 
         private void SelfAnimation()
         {
-            AffectTouchingTargets();
-        }
-
-        private void AffectTouchingTargets()
-        {
-            var collidedTarget = m_source.GetTargets().GetCollidedTarget(this);
-            if (null != collidedTarget)
-            {
-                m_skill.Affect(collidedTarget);
-                m_isActive = false;
-                return;
-            }
+            SetPosition(m_source.GetLocation());
         }
     }
 }

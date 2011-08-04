@@ -440,5 +440,10 @@ namespace OGUR.Creatures
         {
             return new Point2(GetPosition());
         }
+
+        public void AddBuff(StatBuff buff)
+        {
+            m_baseStats.AddBuff(buff);
+        }
     }
 }

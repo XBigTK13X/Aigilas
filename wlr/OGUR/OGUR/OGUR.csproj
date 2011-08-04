@@ -113,6 +113,7 @@
     <Compile Include="Classes\CreatureClasses.cs" />
     <Compile Include="Collision\CoordVerifier.cs" />
     <Compile Include="Collision\HitTest.cs" />
+    <Compile Include="Creatures\StatBuff.cs" />
     <Compile Include="Path\Path.cs" />
     <Compile Include="Path\PathFinder.cs" />
     <Compile Include="Collision\Point.cs" />

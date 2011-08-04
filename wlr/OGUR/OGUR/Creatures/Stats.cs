@@ -10,6 +10,7 @@ namespace OGUR.Creatures
         public const float DefaultMoveSpeed = 33;
         public const float DefaultCoolDown = 6;
         private readonly Dictionary<StatType, float> m_stats = new Dictionary<StatType, float>();
+        private readonly List<StatBuff> m_buffs = new List<StatBuff>(); 
 
         public Stats(Stats target)
         {
@@ -26,30 +27,38 @@ namespace OGUR.Creatures
                 float age,
                 float weightInLbs,
                 float heightInFeet,
-                float moveSpeed = (float)DefaultMoveSpeed,
-                float moveCoolDown = (float)DefaultCoolDown
+                float moveSpeed = DefaultMoveSpeed,
+                float moveCoolDown = DefaultCoolDown
             )
         {
-            Setup(new List<float>(){(float) health, (float) mana, (float) strength, (float) wisdom, (float) defense,
-                             (float) luck, (float) age,
-                             (float) weightInLbs, (float) heightInFeet, (float) moveSpeed, (float) moveCoolDown,0});
+            Setup(new List<float>{health, mana, strength, wisdom, defense,luck, age,weightInLbs, heightInFeet, moveSpeed, moveCoolDown,0});
         }
 
-        private void Setup(List<float> stats )
+        private void Setup(IList<float> stats )
         {
-            for (int ii = 0; ii < stats.Count; ii++)
+            for (var ii = 0; ii < stats.Count; ii++)
             {
                 m_stats.Add((StatType)Enum.GetValues(typeof(StatType)).GetValue(ii), stats[ii]);
             }
         }
         public float Get(StatType stat)
-        {
-            return m_stats[stat];
+        {            
+            return m_stats[stat]+m_buffs.Where(o => o.Stat == stat).Sum(buff => buff.Amount);
         }
 
         public float Set(StatType stat, float value)
         {
             return m_stats[stat] = value;
+        }
+
+        public void AddBuff(StatBuff buff)
+        {
+            if(m_buffs.Contains(buff))
+            {
+                m_buffs.Remove(buff);
+                return;
+            }
+            m_buffs.Add(buff);
         }
 
         public override int GetHashCode()

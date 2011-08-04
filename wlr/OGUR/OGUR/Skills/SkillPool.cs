@@ -51,6 +51,10 @@ namespace OGUR.Skills
         public void Cycle(int velocity)
         {
             m_currentSkillSlot = (m_currentSkillSlot + velocity)%m_skills.Count;
+            if(m_currentSkillSlot<0)
+            {
+                m_currentSkillSlot = m_skills.Count() - 1;
+            }
             FindCurrent();
         }
 
