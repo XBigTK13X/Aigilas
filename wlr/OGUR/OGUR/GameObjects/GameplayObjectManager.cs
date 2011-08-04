@@ -80,8 +80,8 @@ namespace OGUR.GameObjects
             m_contents = new List<GameplayObject>();
             CreatureFactory.ResetPlayerCount();
             DungeonFactory.Start();
-            GameplayObjectManager.LoadContent();
-            GameplayObjectManager.Draw();
+            LoadContent();
+            Draw();
         }
 
         public static void Update()
@@ -118,9 +118,10 @@ namespace OGUR.GameObjects
         public static void Draw()
         {
             var players = new List<GameplayObject>();
+            var skillEffects = new List<GameplayObject>();
             if (XnaManager.GetRenderTarget() != null)
             {
-                foreach (GameplayObject component in m_contents)
+                foreach (var component in m_contents)
                 {
 
                     if (component.GetObjectType() == GameObjectType.CREATURE)
@@ -137,6 +138,10 @@ namespace OGUR.GameObjects
                             }
                         }
                     }
+                    else if(component.GetObjectType()==GameObjectType.SKILL_EFFECT)
+                    {
+                        skillEffects.Add(component);
+                    }
                     else
                     {
                         component.Draw();
@@ -146,13 +151,13 @@ namespace OGUR.GameObjects
 
             if (XnaManager.GetRenderTarget() != null)
             {
-                foreach(var player in players)
+                foreach (var player in players.Where(player => ((ICreature)player).IsPlaying()))
                 {
-                
-                    if(((ICreature)player).IsPlaying())
-                    {
-                        player.Draw();
-                    }
+                    player.Draw();
+                }
+                foreach(var skillEffect in skillEffects)
+                {
+                    skillEffect.Draw();
                 }
             }
         }
@@ -161,7 +166,7 @@ namespace OGUR.GameObjects
         {
             if (XnaManager.GetRenderTarget() != null)
             {
-                foreach (GameplayObject component in m_contents)
+                foreach (var component in m_contents)
                 {
                     component.LoadContent();
                 }
