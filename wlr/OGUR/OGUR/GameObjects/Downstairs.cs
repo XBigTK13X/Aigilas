@@ -1,4 +1,5 @@
 ﻿using System;
+using OGUR.Collision;
 using OGUR.Sprites;
 using OGUR.Management;
 using OGUR.Dungeons;
@@ -8,9 +9,9 @@ namespace OGUR.GameObjects
 {
     public class Downstairs : GameplayObject
     {
-        public Downstairs(int x, int y)
+        public Downstairs(Point2 location)
         {
-            Initialize(x, y, SpriteType.DOWNSTAIRS, GameObjectType.DOWNSTAIRS);
+            Initialize(location, SpriteType.DOWNSTAIRS, GameObjectType.DOWNSTAIRS);
         }
         private Location GetTargetLocation()
         {

@@ -37,8 +37,8 @@ namespace OGUR.Dungeons
         private readonly List<Room> m_rooms = new List<Room>();
         private List<GameplayObject> m_contents = new List<GameplayObject>();
         private readonly GameplayObject[,] dungeon = new GameplayObject[m_blocksWide,m_blocksHigh];
-        private Point downSpawnLocation = new Point(0, 0);
-        private Point upSpawnLocation = new Point(0, 0);
+        private Point2 downSpawnLocation = new Point2(0, 0);
+        private Point2 upSpawnLocation = new Point2(0, 0);
 
         public Dungeon()
         {
@@ -90,7 +90,7 @@ namespace OGUR.Dungeons
                     m_contents.Where(tile => tile.GetObjectType() == GameObjectType.CREATURE).Where(
                         creature => ((ICreature) creature).GetCreatureType() == CreatureType.PLAYER))
             {
-                player.SetPosition(spawn.X*SpriteInfo.Width, spawn.Y*SpriteInfo.Height);
+                player.SetPosition(spawn);
             }
             foreach (GameplayObject item in m_contents)
             {
@@ -130,14 +130,13 @@ namespace OGUR.Dungeons
             var cache = DungeonFactory.FlushCache();
             if (cache.Count() == 0)
             {
-                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation.X * SpriteInfo.Width,
-                                                      downSpawnLocation.Y * SpriteInfo.Height));
+                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
             }
             else
             {
                 foreach (var player in cache.Cast<ICreature>())
                 {
-                    player.SetPosition(downSpawnLocation.X, downSpawnLocation.Y);
+                    player.SetPosition(downSpawnLocation);
                 }
                 GameplayObjectManager.AddObjects(cache);
                 m_contents.AddRange(cache);
@@ -155,8 +154,7 @@ namespace OGUR.Dungeons
             {
                 amountToPlace--;
                 var randomPoint = FindRandomFreeTile();
-                dungeon[randomPoint.X, randomPoint.Y] = ItemFactory.CreateRandomPlain(randomPoint.X*SpriteInfo.Width,
-                                                                                      randomPoint.Y*SpriteInfo.Height);
+                dungeon[randomPoint.GridX(), randomPoint.GridY()] = ItemFactory.CreateRandomPlain(randomPoint);
             }
         }
 
@@ -216,7 +214,7 @@ namespace OGUR.Dungeons
             }
         }
 
-        private Point FindRandomFreeTile()
+        private Point2 FindRandomFreeTile()
         {
             var rand = new Random();
             while (true)
@@ -225,7 +223,7 @@ namespace OGUR.Dungeons
                 var y = rand.Next(0, m_blocksHigh);
                 if (dungeon[x, y].GetObjectType() == GameObjectType.FLOOR)
                 {
-                    return new Point(x, y);
+                    return new Point2(x, y);
                 }
             }
         }
@@ -239,13 +237,13 @@ namespace OGUR.Dungeons
         private void PlaceDownstairs()
         {
             upSpawnLocation = FindRandomFreeTile();
-            dungeon[upSpawnLocation.X, upSpawnLocation.Y] = new Downstairs(upSpawnLocation.X * SpriteInfo.Width, upSpawnLocation.Y * SpriteInfo.Height);
+            dungeon[upSpawnLocation.GridX(), upSpawnLocation.GridY()] = new Downstairs(upSpawnLocation);
         }
 
         private void PlaceUpstairs()
         {
             downSpawnLocation = FindRandomFreeTile();
-            dungeon[downSpawnLocation.X, downSpawnLocation.Y] = new Upstairs(downSpawnLocation.X * SpriteInfo.Width, downSpawnLocation.Y * SpriteInfo.Height);
+            dungeon[downSpawnLocation.GridX(), downSpawnLocation.GridY()] = new Upstairs(downSpawnLocation);
         }
 
          private void ConvertRoomsToWalls()

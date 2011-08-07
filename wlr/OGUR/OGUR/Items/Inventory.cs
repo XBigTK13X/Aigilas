@@ -76,8 +76,7 @@ namespace OGUR.Items
             {
                 while(m_contents[item]>0)
                 {
-                    GameplayObjectManager.AddObject(new GenericItem(item, m_parent.GetPosition().X,
-                                                                    m_parent.GetPosition().Y));
+                    GameplayObjectManager.AddObject(new GenericItem(item,m_parent.GetLocation()));
                     Remove(item);
                 }
             }

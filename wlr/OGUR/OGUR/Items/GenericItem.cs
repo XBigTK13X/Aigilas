@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OGUR.Collision;
 using OGUR.Creatures;
 using OGUR.GameObjects;
 using OGUR.Management;
@@ -43,9 +44,9 @@ namespace OGUR.Items
             }
         }
 
-        private void Initialize(ItemSuffix suffix, ItemPrefix prefix,ItemName type, Slots targetSlots,Stats modifiers,int x,int y)
+        private void Initialize(ItemSuffix suffix, ItemPrefix prefix,ItemName type, Slots targetSlots,Stats modifiers,Point2 location)
         {
-            Setup(x, y, type);
+            Setup(location, type);
             m_suffix = suffix;
             m_prefix = prefix;
             m_type = type;
@@ -56,24 +57,23 @@ namespace OGUR.Items
             Modifers = new Stats(modifiers);
         }
 
-        public GenericItem(GenericItem item,float x,float y)
+        public GenericItem(GenericItem item,Point2 location)
         {
-            Initialize(item.m_suffix, item.m_prefix, item.m_type,item.m_targetSlots, item.Modifers,(int)x,(int)y);
+            Initialize(item.m_suffix, item.m_prefix, item.m_type,item.m_targetSlots, item.Modifers,location);
         }
 
-        public GenericItem(Stats modifiers, ItemSuffix suffix, ItemPrefix prefix, ItemName type, bool onGround = true,
-                           int x = -1, int y = -1)
+        public GenericItem(Stats modifiers, ItemSuffix suffix, ItemPrefix prefix, ItemName type, Point2 location,bool onGround = true)
         {
             if (type == ItemName.NULL)
             {
                 throw new Exception("Invalid type NULL passed into the GenericItem factory!");
             }
-            Initialize(m_suffix,m_prefix,type,GetSlotFromType(type),modifiers,x,y);
+            Initialize(m_suffix,m_prefix,type,GetSlotFromType(type),modifiers,location);
         }
 
-        protected void Setup(int x, int y, ItemName type)
+        protected void Setup(Point2 location, ItemName type)
         {
-            Initialize(x, y, SpriteFromItem(type), GameObjectType.ITEM);
+            Initialize(location, SpriteFromItem(type), GameObjectType.ITEM);
         }
 
         public override void Update()

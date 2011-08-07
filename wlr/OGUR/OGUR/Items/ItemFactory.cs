@@ -1,4 +1,5 @@
 ﻿using System;
+using OGUR.Collision;
 using OGUR.Creatures;
 using OGUR.GameObjects;
 
@@ -8,17 +9,22 @@ namespace OGUR.Items
     public class ItemFactory
     {
         private static Random rand = new Random();
-        public static GenericItem CreateRandomPlain(bool onFloor=false,int x = -100,int y = -100)
+        public static GenericItem CreateRandomPlain(Point2 location = null,bool onFloor = false)
         {
+            if(location == null)
+            {
+                location = new Point2(-100,-100);
+            }
+
             return
                 (GenericItem)
                 GameplayObjectManager.AddObject(new GenericItem(new Stats(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0),
                                                                 ItemSuffix.NULL, ItemPrefix.NULL, SelectRandomType(),
-                                                                onFloor, x, y));
+                                                                location,onFloor));
         }
-        public static GenericItem CreateRandomPlain(int x, int y)
+        public static GenericItem CreateRandomPlain(Point2 location)
         {
-            return CreateRandomPlain(true, x, y);
+            return CreateRandomPlain(location, true);
         }
         public static GenericItem CreateRandomMagic()
         {

@@ -113,7 +113,7 @@ namespace OGUR.Creatures
         {
             if (m_inventory.GetItemCount(item)>0)
             {
-                GameplayObjectManager.AddObject(new GenericItem(item, GetPosition().X, GetPosition().Y));
+                GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
                 m_inventory.Remove(item);
             }
             else
@@ -121,7 +121,7 @@ namespace OGUR.Creatures
                 if (m_inventory.GetItemCount(item) == 0)
                 {
                     m_equipment.Unregister(item);
-                    GameplayObjectManager.AddObject(new GenericItem(item, GetPosition().X, GetPosition().Y));
+                    GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
                     m_inventory.Remove(item);
                 }
             }

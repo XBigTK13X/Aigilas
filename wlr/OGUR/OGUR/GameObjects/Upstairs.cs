@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OGUR.Collision;
 using OGUR.Sprites;
 using OGUR.Management;
 using OGUR.Dungeons;
@@ -11,9 +12,9 @@ namespace OGUR.GameObjects
 {
     public class Upstairs : GameplayObject
     {
-        public Upstairs(int x, int y)
+        public Upstairs(Point2 location)
         {
-            Initialize(x, y, SpriteType.UPSTAIRS, GameObjectType.UPSTAIRS);
+            Initialize(location, SpriteType.UPSTAIRS, GameObjectType.UPSTAIRS);
         }
         public Location GetTargetLocation()
         {
