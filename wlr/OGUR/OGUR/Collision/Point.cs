@@ -19,6 +19,13 @@ namespace OGUR.Collision
             Weight = weight;
         }
 
+        public Point2(Point target)
+        {
+            X = target.X;
+            Y = target.Y;
+            Weight = 0;
+        }
+
         public Point2(Point2 target)
         {
             X = target.X;
@@ -62,6 +69,24 @@ namespace OGUR.Collision
                 return (int)Y;
             }
             return (int)(Y / SpriteInfo.Height);
+        }
+
+        public float PosX()
+        {
+            if (X <= DungeonFactory.BlocksWide)
+            {
+                return X*SpriteInfo.Width;
+            }
+            return X;
+        }
+
+        public float PosY()
+        {
+            if (Y < DungeonFactory.BlocksWide)
+            {
+                return Y*SpriteInfo.Height;
+            }
+            return Y;
         }
 
         public Point2 Multiply(float factor)

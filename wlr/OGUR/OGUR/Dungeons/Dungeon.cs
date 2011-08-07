@@ -175,11 +175,9 @@ namespace OGUR.Dungeons
         {
             while(amountOfCreatures>0)
             {
-                var rand = new Random();
                 amountOfCreatures--;
-                var randomPoint = FindRandomFreeTile();
-                dungeon[randomPoint.X,randomPoint.Y] = CreatureFactory.Create((CreatureType) rand.Next(1, Enum.GetValues(typeof (CreatureType)).Length-1),
-                                           randomPoint.X * SpriteInfo.Width, randomPoint.Y*SpriteInfo.Width);
+                var randomPoint = new Point2(FindRandomFreeTile());
+                dungeon[randomPoint.GridX(), randomPoint.GridY()] = CreatureFactory.CreateRandom(randomPoint);
             }
         }
 

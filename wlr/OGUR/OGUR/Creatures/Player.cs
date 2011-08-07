@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OGUR.Classes;
+using OGUR.Collision;
 using OGUR.Sprites;
 using OGUR.Strategies;
 using OGUR.Management;
@@ -17,9 +18,20 @@ namespace OGUR.Creatures
             base.Setup(x, y, CreatureType.PLAYER, new Stats(100f, 100f, 10f, 10f, 10f, 10f, 35f,50f,6.0f),new Mage());
         }
 
+        private void Setup(Point2 location, int playerIndex)
+        {
+            m_playerIndex = playerIndex;
+            m_strategy = new ControlledByPlayer(this);
+            base.Setup(location, CreatureType.PLAYER, new Stats(100f, 100f, 10f, 10f, 10f, 10f, 35f, 50f, 6.0f), new Mage());
+        }
+        
         public Player(int x, int y, int playerIndex)
         {
             Setup(x, y, playerIndex);
+        }
+        public Player(Point2 location, int playerIndex)
+        {
+            Setup(location, playerIndex);
         }
     }
 }

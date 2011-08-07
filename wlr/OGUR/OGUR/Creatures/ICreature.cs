@@ -58,9 +58,20 @@ namespace OGUR.Creatures
         protected void Setup(float x, float y, CreatureType type, Stats stats,CreatureClass creatureClass=null)
         {
             Initialize(x, y, SpriteFromCreature(type), GameObjectType.CREATURE);
+            Init(type,stats,creatureClass);
+        }
+
+        protected void Setup(Point2 location, CreatureType type, Stats stats, CreatureClass creatureClass = null)
+        {
+            Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE);
+            Init(type,stats,creatureClass);
+        }
+
+        protected void Init(CreatureType type, Stats stats, CreatureClass creatureClass = null)
+        {
             m_inventory = new Inventory(this);
             m_equipment = new Equipment(this);
-            if(m_playerIndex>-1)
+            if (m_playerIndex > -1)
             {
                 m_inventoryHud = new InventoryHud(this);
                 m_equipmentHud = new EquipmentHud(this);

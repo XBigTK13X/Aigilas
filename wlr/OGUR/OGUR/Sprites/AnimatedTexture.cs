@@ -96,7 +96,7 @@ namespace OGUR.Sprites
 
         public void SetPosition(Point2 position)
         {
-            m_position = new Vector2(position.X,position.Y);
+            m_position = new Vector2(position.PosX(),position.PosY());
         }
 
         public void SetColor(Color color)
