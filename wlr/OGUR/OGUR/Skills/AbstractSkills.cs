@@ -98,7 +98,7 @@ namespace OGUR.Skills
                 {
                     if(ii!=0||jj!=0)
                     {
-                        var cloudPosition = new Point2(referencePoint.GridX() + ii, referencePoint.GridY() + jj);
+                        var cloudPosition = new Point2(referencePoint.GridX + ii, referencePoint.GridY + jj);
                         var effect = new SkillEffect(cloudPosition, new Point2(0, 0), m_source, this, m_animation, m_effectSprite);
                         m_effectGraphics.Add(effect);
                         GameplayObjectManager.AddObject(effect);

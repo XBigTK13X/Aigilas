@@ -23,6 +23,7 @@ namespace OGUR.GameObjects
         protected bool m_isOnBoard = true;
         protected List<Elements> m_composition = new List<Elements>(){Elements.NORMAL};
         private bool m_isInteracting = false;
+        protected Point2 m_location;
 
         //Load the texture for the sprite using the Content Pipeline
         public void LoadContent()
@@ -53,7 +54,7 @@ namespace OGUR.GameObjects
         {
             m_assetName = spriteType;
             m_objectType = objectType;
-            m_graphic.SetPosition(location);
+            SetLocation(location);
         }
 
         protected void Initialize(float x, float y, SpriteType spriteType, GameObjectType objectType)
@@ -65,15 +66,19 @@ namespace OGUR.GameObjects
         {
         }
 
+        public void SetLocation(Point2 location)
+        {
+            m_graphic.SetPosition(location);
+            m_location = new Point2(location);
+        }
+
         public void Move(float amountX, float amountY)
         {
             amountX = NormalizeDistance(amountX);
             amountY = NormalizeDistance(amountY);
-            if (CoordVerifier.IsValid(m_graphic.GetPosition().X + amountX,
-                                      m_graphic.GetPosition().Y + amountY))
+            if (CoordVerifier.IsValid(m_graphic.GetPosition().X + amountX,m_graphic.GetPosition().Y + amountY))
             {
-                m_graphic.SetPosition(m_graphic.GetPosition().X + amountX,
-                                      m_graphic.GetPosition().Y + amountY);
+                SetLocation(new Point2(m_graphic.GetPosition().X + amountX,m_graphic.GetPosition().Y + amountY));
             }
         }
 
@@ -84,22 +89,6 @@ namespace OGUR.GameObjects
             var factorsOfSpriteHeight = (int)Math.Floor(amount/SpriteInfo.Height);
             factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount!=0) ? 1 : factorsOfSpriteHeight;
             return (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
-        }
-
-        public void SetPosition(int x, int y)
-        {
-            if (CoordVerifier.IsValid(x, y))
-            {
-                m_graphic.SetPosition(x, y);
-            }
-        }
-
-        public void SetPosition(Point2 position)
-        {
-            if (CoordVerifier.IsValid(position))
-            {
-                m_graphic.SetPosition(position);
-            }
         }
 
         public bool IsActive()
@@ -132,6 +121,11 @@ namespace OGUR.GameObjects
             return m_graphic.GetPosition();
         }
 
+        public Point2 GetLocation()
+        {
+            return m_location;
+        }
+
         public bool IsGraphicLoaded()
         {
             return (m_graphic != null);
@@ -144,8 +138,8 @@ namespace OGUR.GameObjects
 
         public bool Contains(Point2 target)
         {
-            return (target.PosCenterX() >= GetPosition().X) && (target.PosCenterY() >= GetPosition().Y) &&
-                   (target.PosCenterX() <= GetPosition().X + SpriteInfo.Width) && (target.PosCenterY() <= GetPosition().Y + SpriteInfo.Height);
+            return (target.PosCenterX >= GetLocation().PosX) && (target.PosCenterY >= GetLocation().PosY) &&
+                   (target.PosCenterX <= (GetLocation().PosX + SpriteInfo.Width)) && (target.PosCenterY <= (GetLocation().PosY + SpriteInfo.Height));
         }
 
         public void SetInteraction(bool isInteracting)

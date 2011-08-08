@@ -36,7 +36,7 @@ namespace OGUR.Strategies
                     ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))
                          ? target.Get(StatType.MOVE_SPEED)
                          : 0);
-                keyVelocity.X = rightVelocity + leftVelocity;
+                keyVelocity.SetX(rightVelocity + leftVelocity);
                 var downVelocity =
                     ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))
                          ? target.Get(StatType.MOVE_SPEED)
@@ -45,7 +45,7 @@ namespace OGUR.Strategies
                     ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))
                          ? -target.Get(StatType.MOVE_SPEED)
                          : 0);
-                keyVelocity.Y = upVelocity + downVelocity;
+                keyVelocity.SetY(upVelocity + downVelocity);
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
                 {
                     var skillCycleVelocity =
@@ -61,7 +61,6 @@ namespace OGUR.Strategies
                     if (!m_isCasting)
                     {
                         target.MoveIfPossible(keyVelocity.X, keyVelocity.Y);
-                        
                     }
                     if (InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex()) && !target.IsInteracting())
                     {

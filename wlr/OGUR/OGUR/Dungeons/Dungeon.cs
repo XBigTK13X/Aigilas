@@ -89,7 +89,7 @@ namespace OGUR.Dungeons
                     m_contents.Where(tile => tile.GetObjectType() == GameObjectType.CREATURE).Where(
                         creature => ((ICreature) creature).GetCreatureType() == CreatureType.PLAYER))
             {
-                player.SetPosition(spawn);
+                player.SetLocation(spawn);
             }
             foreach (var item in m_contents)
             {
@@ -135,7 +135,7 @@ namespace OGUR.Dungeons
             {
                 foreach (var player in cache.Cast<ICreature>())
                 {
-                    player.SetPosition(downSpawnLocation);
+                    player.SetLocation(downSpawnLocation);
                 }
                 GameplayObjectManager.AddObjects(cache);
                 m_contents.AddRange(cache);
@@ -153,7 +153,7 @@ namespace OGUR.Dungeons
             {
                 amountToPlace--;
                 var randomPoint = FindRandomFreeTile();
-                dungeon[randomPoint.GridX(), randomPoint.GridY()] = ItemFactory.CreateRandomPlain(randomPoint);
+                dungeon[randomPoint.GridX, randomPoint.GridY] = ItemFactory.CreateRandomPlain(randomPoint);
             }
         }
 
@@ -174,7 +174,7 @@ namespace OGUR.Dungeons
             {
                 amountOfCreatures--;
                 var randomPoint = new Point2(FindRandomFreeTile());
-                dungeon[randomPoint.GridX(), randomPoint.GridY()] = CreatureFactory.CreateRandom(randomPoint);
+                dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.CreateRandom(randomPoint);
             }
         }
 
@@ -233,13 +233,13 @@ namespace OGUR.Dungeons
         private void PlaceDownstairs()
         {
             upSpawnLocation = FindRandomFreeTile();
-            dungeon[upSpawnLocation.GridX(), upSpawnLocation.GridY()] = new Downstairs(upSpawnLocation);
+            dungeon[upSpawnLocation.GridX, upSpawnLocation.GridY] = new Downstairs(upSpawnLocation);
         }
 
         private void PlaceUpstairs()
         {
             downSpawnLocation = FindRandomFreeTile();
-            dungeon[downSpawnLocation.GridX(), downSpawnLocation.GridY()] = new Upstairs(downSpawnLocation);
+            dungeon[downSpawnLocation.GridX, downSpawnLocation.GridY] = new Upstairs(downSpawnLocation);
         }
 
          private void ConvertRoomsToWalls()
@@ -299,9 +299,9 @@ namespace OGUR.Dungeons
                     for(var ii = 1;ii<m_blocksWide-1;ii++)
                     {
                         var currentTarget = new Point2(ii, entrance.Y);
-                        if(dungeon[currentTarget.GridX(),currentTarget.GridY()].GetObjectType()==GameObjectType.WALL)
+                        if(dungeon[currentTarget.GridX,currentTarget.GridY].GetObjectType()==GameObjectType.WALL)
                         {
-                            dungeon[currentTarget.GridX(), currentTarget.GridY()] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
                         }
                     }
                 }
@@ -310,9 +310,9 @@ namespace OGUR.Dungeons
                     for (var ii = 1; ii < m_blocksHigh - 1; ii++)
                     {
                         var currentTarget = new Point2(entrance.X, ii);
-                        if (dungeon[currentTarget.GridX(), currentTarget.GridY()].GetObjectType() == GameObjectType.WALL)
+                        if (dungeon[currentTarget.GridX, currentTarget.GridY].GetObjectType() == GameObjectType.WALL)
                         {
-                            dungeon[currentTarget.GridX(), currentTarget.GridY()] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
                         }
                     }
                 }

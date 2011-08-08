@@ -447,11 +447,6 @@ namespace OGUR.Creatures
             MoveIfPossible(targetPosition.X-GetPosition().X,targetPosition.Y-GetPosition().Y);
         }
 
-        public Point2 GetLocation()
-        {
-            return new Point2(GetPosition());
-        }
-
         public void AddBuff(StatBuff buff)
         {
             m_baseStats.AddBuff(buff);

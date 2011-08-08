@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OGUR", "OGUR\OGUR\OGUR.csproj", "{03C219A1-3732-4F8D-B5B6-0C0118854720}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "OGURContent", "OGUR\OGURContent\OGURContent.contentproj", "{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OGURContent", "OGUR\OGURContent\OGURContent.contentproj", "{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5331CAB6-CB52-420B-B6F1-738CE15FDF30}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -34,13 +34,13 @@ namespace OGUR.Path
                 }
                 foreach(var neighbor in neighbors)
                 {
-                    neighbor.Weight = HitTest.GetDistanceSquare(neighbor,destination);
+                    neighbor.SetWeight(HitTest.GetDistanceSquare(neighbor, destination));
                 }
                 var node = neighbors.Where(p => p.Weight == neighbors.Min(o => o.Weight)).First();
                 neighbors.Remove(node);
-                if (!CoordVerifier.Contains(node,GameObjectType.WALL) || (node.GridX() == destination.GridX() && node.GridY() == destination.GridY()))
+                if (!CoordVerifier.Contains(node,GameObjectType.WALL) || (node.GridX == destination.GridX && node.GridY == destination.GridY))
                 {
-                    node.Weight = Point2.CalculateDistanceSquared(node, path.GetLastStep());
+                    node.SetWeight(Point2.CalculateDistanceSquared(node, path.GetLastStep()));
                     var newPath = path.Add(node);
                     queue.Enqueue(newPath.GetCost(), newPath);
                 }

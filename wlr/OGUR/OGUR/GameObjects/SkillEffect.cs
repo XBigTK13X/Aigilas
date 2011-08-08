@@ -51,8 +51,8 @@ namespace OGUR.GameObjects
                     m_startingStrength = m_strength;
                 }
                 m_strength *= m_strengthDecayAmount;
-                m_velocity.X *= m_strength;
-                m_velocity.Y *= m_strength;
+                m_velocity.SetX(m_velocity.X*m_strength);
+                m_velocity.SetY(m_velocity.Y*m_strength);
                 switch(m_animation)
                 {
                     case Skill.Animation.CLOUD:
@@ -99,7 +99,7 @@ namespace OGUR.GameObjects
 
         private void SelfAnimation()
         {
-            SetPosition(m_source.GetLocation());
+            SetLocation(m_source.GetLocation());
         }
     }
 }
