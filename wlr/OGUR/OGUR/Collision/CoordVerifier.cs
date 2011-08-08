@@ -19,7 +19,7 @@ namespace OGUR.Collision
 
         public static bool IsBlocked(Point2 target)
         {
-            return GameplayObjectManager.GetObjects().Where(tile => tile.Contains(target) && tile.IsBlocking()).Any();
+            return GameplayObjectManager.IsLocationBlocked(target);
         }   
 
         public static bool Contains(Point2 target, GameObjectType type)

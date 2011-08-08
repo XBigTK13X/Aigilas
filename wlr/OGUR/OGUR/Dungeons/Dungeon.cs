@@ -104,7 +104,7 @@ namespace OGUR.Dungeons
                 DungeonFactory.AddToCache(player);
                 GameplayObjectManager.RemoveObject(player);
             }
-            m_contents = new List<GameplayObject>(GameplayObjectManager.GetObjects().Where(o => o.GetObjectType() != GameObjectType.FLOOR).ToList());
+            m_contents = new List<GameplayObject>(GameplayObjectManager.GetObjectsToCache());
         }
 
         private void Init()

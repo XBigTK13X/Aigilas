@@ -68,8 +68,10 @@ namespace OGUR.GameObjects
 
         public void SetLocation(Point2 location)
         {
+            var oldLocation = m_location;
             m_graphic.SetPosition(location);
             m_location = new Point2(location);
+            GameplayObjectManager.UpdateGridLocation(this, oldLocation);
         }
 
         public void Move(float amountX, float amountY)

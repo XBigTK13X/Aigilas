@@ -15,14 +15,17 @@ namespace OGUR.GameObjects
     internal static class GameplayObjectManager
     {
         private static List<GameplayObject> m_contents = new List<GameplayObject>();
+        private static Dictionary<Point2,List<GameplayObject>> m_gridContents = new Dictionary<Point2, List<GameplayObject>>();
 
         public static GameplayObject AddObject(GameplayObject gameplayObject)
         {
             gameplayObject.LoadContent();
             m_contents.Add(gameplayObject);
+            AddToGrid(gameplayObject);
             return gameplayObject;
         }
 
+        //GOT Accessors
         public static GameplayObject GetObject(GameObjectType type)
         {
             if (m_contents != null)
@@ -46,6 +49,7 @@ namespace OGUR.GameObjects
             return m_contents.Where(item => item.GetObjectType() == type);
         }
 
+        //CT Accessors
         public static ICreature GetObject(CreatureType type)
         {
             return m_contents != null ? m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().FirstOrDefault(creature => creature.GetCreatureType() == type) : null;
@@ -60,10 +64,53 @@ namespace OGUR.GameObjects
             return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() != CreatureType.PLAYER).ToList();
         }
 
-        public static List<GameplayObject> GetObjects()
+        public static bool IsLocationBlocked(Point2 location)
         {
-            return m_contents;
+            return m_gridContents[location].Any(o => o.IsBlocking());
         }
+        public static IEnumerable<GameplayObject> GetObjectsToCache()
+        {
+            return m_contents.Where(o => o.GetObjectType() != GameObjectType.FLOOR);
+        }
+
+        public static GameplayObject GetNearestPlayer(GameplayObject target)
+        {
+            GameplayObject closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
+            foreach (var player in GetObjects(CreatureType.PLAYER))
+            {
+                if (HitTest.GetDistanceSquare(target, player) < HitTest.GetDistanceSquare(target, closest))
+                {
+                    closest = player;
+                }
+            }
+            return closest;
+        }
+
+        public static ICreature GetNearestPlayer(ICreature target)
+        {
+            return (ICreature)GetNearestPlayer((GameplayObject)target);
+        }
+
+        public static void AddObjects(IEnumerable<GameplayObject> cache)
+        {
+            m_contents.AddRange(cache);
+        }
+
+        public static Player GetTouchingPlayer(GameplayObject source)
+        {
+            var nearest = GetNearestPlayer(source);
+            if (HitTest.IsTouching(source, nearest))
+            {
+                return (Player)nearest;
+            }
+            return null;
+        }
+
+        public static bool AnyContains(Point2 target, GameObjectType type)
+        {
+            return m_gridContents[target].Any(o => o.GetObjectType() == type);
+        }
+
         public static void RemoveObject(GameplayObject target)
         {
             m_contents.Remove(target);
@@ -72,12 +119,14 @@ namespace OGUR.GameObjects
         public static void Clear()
         {
             m_contents.Clear();
+            m_gridContents.Clear();
             CreatureFactory.ResetPlayerCount();
         }
 
         public static void Reset()
         {
             m_contents = new List<GameplayObject>();
+            m_gridContents = new Dictionary<Point2, List<GameplayObject>>();
             CreatureFactory.ResetPlayerCount();
             DungeonFactory.Start();
             LoadContent();
@@ -91,7 +140,7 @@ namespace OGUR.GameObjects
                 Reset();
                 StateManager.LoadState(new GameOverState());
             }
-            for (int ii = 0; ii < m_contents.Count; ii++)
+            for (var ii = 0; ii < m_contents.Count; ii++)
             {
                 if(ii>=m_contents.Count)
                 {
@@ -99,6 +148,7 @@ namespace OGUR.GameObjects
                 }
                 if (!m_contents[ii].IsActive())
                 {
+                    m_gridContents[m_contents[ii].GetLocation()].Remove(m_contents[ii]);
                     m_contents.Remove(m_contents[ii]);
                     ii--;
                     continue;
@@ -173,42 +223,25 @@ namespace OGUR.GameObjects
             }
         }
 
-        public static GameplayObject GetNearestPlayer(GameplayObject target)
+        private static void AddToGrid(GameplayObject gameplayObject)
         {
-            GameplayObject closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
-            foreach (var player in GetObjects(CreatureType.PLAYER))
+            if (!m_gridContents.ContainsKey(gameplayObject.GetLocation()))
             {
-                if (HitTest.GetDistanceSquare(target, player) < HitTest.GetDistanceSquare(target, closest))
-                {
-                    closest = player;
-                }
+                m_gridContents.Add(gameplayObject.GetLocation(), new List<GameplayObject>() { gameplayObject });
             }
-            return closest;
-        }
-
-        public static ICreature GetNearestPlayer(ICreature target)
-        {
-            return (ICreature)GetNearestPlayer((GameplayObject)target);
-        }
-
-        public static void AddObjects(IEnumerable<GameplayObject> cache)
-        {
-            m_contents.AddRange(cache);
-        }
-
-        public static Player GetTouchingPlayer(GameplayObject source)
-        {
-            var nearest = GetNearestPlayer(source);
-            if(HitTest.IsTouching(source,nearest))
+            else
             {
-                return (Player)nearest;
+                m_gridContents[gameplayObject.GetLocation()].Add(gameplayObject);
             }
-            return null;
         }
 
-        public static bool AnyContains(Point2 target, GameObjectType type)
+        public static void UpdateGridLocation(GameplayObject gameplayObject, Point2 oldLocation)
         {
-            return GetObjects(type, target).Any();
+            if(m_gridContents!=null && oldLocation !=null)
+            {
+                m_gridContents[oldLocation].Remove(gameplayObject);
+                AddToGrid(gameplayObject);
+            }
         }
     }
 }
