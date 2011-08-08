@@ -68,7 +68,7 @@ namespace OGUR.Collision
 
         public bool IsZero()
         {
-            return Equals(Zero);
+            return X == 0 && Y == 0;
         }
 
         public Point2 Multiply(float factor)
@@ -90,35 +90,11 @@ namespace OGUR.Collision
                 {
                     if (ii != 0 || jj != 0)
                     {
-                        var next = new Point2(X + (ii * SpriteInfo.Width), Y + (jj * SpriteInfo.Height));
-                        result.Add(next);
+                        result.Add(new Point2(X + (ii * SpriteInfo.Width), Y + (jj * SpriteInfo.Height)));
                     }
                 }
             }
             return result;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == typeof (Point2) && Equals((Point2) obj);
-        }
-
-        private bool Equals(Point2 other)
-        {
-            return other.X.Equals(X) && other.Y.Equals(Y);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var result = X.GetHashCode();
-                result = (result*397) ^ Y.GetHashCode();
-                result = (result*397) ^ Weight.GetHashCode();
-                return result;
-            }
         }
 
         public override string ToString()

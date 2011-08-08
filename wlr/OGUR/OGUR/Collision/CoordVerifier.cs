@@ -24,7 +24,7 @@ namespace OGUR.Collision
 
         public static bool Contains(Point2 target, GameObjectType type)
         {
-            return GameplayObjectManager.GetObjects().Any(tile => tile.Contains(target) && tile.GetObjectType() == type);
+            return GameplayObjectManager.AnyContains(target, type);
         }
     }
 }

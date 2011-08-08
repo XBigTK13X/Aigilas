@@ -32,7 +32,7 @@ namespace OGUR.GameObjects
             return null;
         }
 
-        public static List<GameplayObject> GetObjects(GameObjectType type,Point2 target)
+        public static IEnumerable<GameplayObject> GetObjects(GameObjectType type,Point2 target)
         {
             if (m_contents != null)
             {
@@ -204,6 +204,11 @@ namespace OGUR.GameObjects
                 return (Player)nearest;
             }
             return null;
+        }
+
+        public static bool AnyContains(Point2 target, GameObjectType type)
+        {
+            return GetObjects(type, target).Any();
         }
     }
 }
