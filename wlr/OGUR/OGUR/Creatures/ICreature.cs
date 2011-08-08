@@ -297,7 +297,7 @@ namespace OGUR.Creatures
         {
             if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) <= 0)
             {
-                var target = new Point2(xVel + GetPosition().X , yVel + GetPosition().Y);
+                var target = new Point2(xVel + GetLocation().PosX , yVel + GetLocation().PosY);
                 if (!CoordVerifier.IsBlocked(target))
                 {
                     Move(xVel, yVel);
@@ -305,7 +305,7 @@ namespace OGUR.Creatures
                 }
                 else
                 {
-                    var creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE,target).Cast<ICreature>().Where(creature => creature!=this).ToList();
+                    var creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE, target).Cast<ICreature>().Where(creature => creature != this);
                     if(creatures.Any())
                     {
                         foreach (var creature in creatures)
@@ -444,7 +444,7 @@ namespace OGUR.Creatures
 
         public void MoveTo(Point2 targetPosition)
         {
-            MoveIfPossible(targetPosition.X-GetPosition().X,targetPosition.Y-GetPosition().Y);
+            MoveIfPossible(targetPosition.PosX-GetLocation().PosX,targetPosition.PosY-GetLocation().PosY);
         }
 
         public void AddBuff(StatBuff buff)

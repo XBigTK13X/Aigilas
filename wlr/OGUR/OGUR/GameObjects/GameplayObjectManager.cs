@@ -36,7 +36,7 @@ namespace OGUR.GameObjects
         {
             if (m_contents != null)
             {
-                return m_contents.Where(o => o.GetObjectType() == type && o.Contains(target)).ToList();
+                return GetObjects(type).Where(o=>o.Contains(target));
             }
             return null;
         }

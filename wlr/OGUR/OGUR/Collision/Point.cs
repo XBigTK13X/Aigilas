@@ -43,6 +43,21 @@ namespace OGUR.Collision
             Weight = 0;
         }
 
+        public override int GetHashCode()
+        {
+            return GridX + 1000*GridY;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType()==typeof(Point2))
+            {
+                var target = (Point2) obj;
+                return target.GridX == GridX && target.GridY == GridY;
+            }
+            return false;
+        }
+
         public void SetX(float xValue)
         {
             X = xValue;
@@ -90,7 +105,7 @@ namespace OGUR.Collision
                 {
                     if (ii != 0 || jj != 0)
                     {
-                        result.Add(new Point2(X + (ii * SpriteInfo.Width), Y + (jj * SpriteInfo.Height)));
+                        result.Add(new Point2(GridX + ii, GridY + jj));
                     }
                 }
             }

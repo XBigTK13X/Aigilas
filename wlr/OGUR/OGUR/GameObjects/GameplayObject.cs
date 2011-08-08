@@ -76,9 +76,10 @@ namespace OGUR.GameObjects
         {
             amountX = NormalizeDistance(amountX);
             amountY = NormalizeDistance(amountY);
-            if (CoordVerifier.IsValid(m_graphic.GetPosition().X + amountX,m_graphic.GetPosition().Y + amountY))
+            var target = new Point2(m_graphic.GetPosition().X + amountX,m_graphic.GetPosition().Y + amountY);
+            if (CoordVerifier.IsValid(target))
             {
-                SetLocation(new Point2(m_graphic.GetPosition().X + amountX,m_graphic.GetPosition().Y + amountY));
+                SetLocation(target);
             }
         }
 
@@ -138,8 +139,7 @@ namespace OGUR.GameObjects
 
         public bool Contains(Point2 target)
         {
-            return (target.PosCenterX >= GetLocation().PosX) && (target.PosCenterY >= GetLocation().PosY) &&
-                   (target.PosCenterX <= (GetLocation().PosX + SpriteInfo.Width)) && (target.PosCenterY <= (GetLocation().PosY + SpriteInfo.Height));
+            return target.GridX == GetLocation().GridX && target.GridY == GetLocation().GridY;
         }
 
         public void SetInteraction(bool isInteracting)

@@ -19,23 +19,27 @@ namespace OGUR.Path
         public Path(Point2 start, Point2 finish)
         {
             Finish = new Point2(finish);
-            m_steps.Add(start);
-            m_stepLookup.Add(start);
-            m_totalWeight += start.Weight;
+            Add(start);
+            
         }
-        private Path(Point2 step, IEnumerable<Point2> steps,Point2 finish,float weight)
+
+        public Path(Path source)
         {
-            if (steps != null)
+            m_stepLookup = source.m_stepLookup;
+            m_steps = source.m_steps;
+            m_totalWeight = source.m_totalWeight;
+            Finish = source.Finish;
+        }
+
+        public bool Add(Point2 step)
+        {
+            if(m_stepLookup.Add(step))
             {
-                m_steps = new List<Point2>(steps) {step};
-                m_stepLookup = new HashSet<Point2>(steps) {step};
+                m_steps.Add(step);
+                m_totalWeight += step.Weight;
+                return true;
             }
-            m_totalWeight += weight+step.Weight;
-            Finish = finish;
-        }
-        public Path Add(Point2 step)
-        {
-            return new Path(step, m_steps,Finish,m_totalWeight);
+            return false;
         }
         public float GetCost()
         {
@@ -62,12 +66,20 @@ namespace OGUR.Path
             {
                 var neighbors = GetLastStep().GetNeighbors();
                 m_neighbors = new List<Point2>();
-                foreach (var t in neighbors.Where(t => !m_stepLookup.Contains(t)))
+                foreach (var neighbor in neighbors)
                 {
-                    Add(t);
+                    if(!m_neighbors.Contains(neighbor))
+                    {
+                        m_neighbors.Add(neighbor);    
+                    }
                 }
             }
             return m_neighbors;
+        }
+
+        public int Length()
+        {
+            return m_steps.Count;
         }
     }
 }
