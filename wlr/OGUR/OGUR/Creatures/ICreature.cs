@@ -297,8 +297,8 @@ namespace OGUR.Creatures
         {
             if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) <= 0)
             {
-                var target = new Point2(xVel + GetPosition().X + SpriteInfo.Width / 2, yVel + GetPosition().Y + SpriteInfo.Height / 2);
-                if (!CoordVerifier.IsBlocked(target.X,target.Y))
+                var target = new Point2(xVel + GetPosition().X , yVel + GetPosition().Y);
+                if (!CoordVerifier.IsBlocked(target))
                 {
                     Move(xVel, yVel);
                     Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));

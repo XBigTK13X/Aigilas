@@ -83,7 +83,7 @@ namespace OGUR.GameObjects
             amount = Math.Abs(amount);
             var factorsOfSpriteHeight = (int)Math.Floor(amount/SpriteInfo.Height);
             factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount!=0) ? 1 : factorsOfSpriteHeight;
-            return (float) (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
+            return (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
         }
 
         public void SetPosition(int x, int y)
@@ -144,8 +144,8 @@ namespace OGUR.GameObjects
 
         public bool Contains(Point2 target)
         {
-            return (target.X >= GetPosition().X) && (target.Y >= GetPosition().Y) &&
-                   (target.X <= GetPosition().X + SpriteInfo.Width) && (target.Y <= GetPosition().Y + SpriteInfo.Height);
+            return (target.PosCenterX() >= GetPosition().X) && (target.PosCenterY() >= GetPosition().Y) &&
+                   (target.PosCenterX() <= GetPosition().X + SpriteInfo.Width) && (target.PosCenterY() <= GetPosition().Y + SpriteInfo.Height);
         }
 
         public void SetInteraction(bool isInteracting)

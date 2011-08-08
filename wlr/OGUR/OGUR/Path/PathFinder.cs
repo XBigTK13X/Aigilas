@@ -38,7 +38,7 @@ namespace OGUR.Path
                 }
                 var node = neighbors.Where(p => p.Weight == neighbors.Min(o => o.Weight)).First();
                 neighbors.Remove(node);
-                if (!CoordVerifier.Contains(node.X, node.Y,GameObjectType.WALL) || (node.GridX() == destination.GridX() && node.GridY() == destination.GridY()))
+                if (!CoordVerifier.Contains(node,GameObjectType.WALL) || (node.GridX() == destination.GridX() && node.GridY() == destination.GridY()))
                 {
                     node.Weight = Point2.CalculateDistanceSquared(node, path.GetLastStep());
                     var newPath = path.Add(node);

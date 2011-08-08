@@ -1,12 +1,13 @@
-﻿using OGUR.Sprites;
+﻿using OGUR.Collision;
+using OGUR.Sprites;
 
 namespace OGUR.GameObjects
 {
     public class Floor : GameplayObject
     {
-        public Floor(int gridX, int gridY)
+        public Floor(Point2 location)
         {
-            Initialize(gridX, gridY, SpriteType.FLOOR, GameObjectType.FLOOR);
+            Initialize(location, SpriteType.FLOOR, GameObjectType.FLOOR);
         }
     }
 }

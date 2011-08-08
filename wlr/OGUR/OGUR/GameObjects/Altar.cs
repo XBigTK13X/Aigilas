@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using OGUR.Collision;
 using OGUR.Items;
 using OGUR.Sprites;
 using OGUR.Management;
@@ -15,11 +16,11 @@ namespace OGUR.GameObjects
     {
         private readonly God m_god;
 
-        public Altar(int x, int y, God.Name godName)
+        public Altar(Point2 location, God.Name godName)
         {
             m_god = God.Get(godName);
             m_graphic.SetColor(m_god.GetColor());
-            Initialize(x, y, SpriteType.ALTAR, GameObjectType.ALTAR);
+            Initialize(location, SpriteType.ALTAR, GameObjectType.ALTAR);
         }
 
         public override void Update()

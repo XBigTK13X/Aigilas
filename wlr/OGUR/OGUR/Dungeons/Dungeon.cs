@@ -7,7 +7,6 @@ using OGUR.Gods;
 using OGUR.Items;
 using OGUR.Sprites;
 using OGUR.Creatures;
-using Point = Microsoft.Xna.Framework.Point;
 
 namespace OGUR.Dungeons
 {
@@ -70,11 +69,11 @@ namespace OGUR.Dungeons
 
         private void PlaceAltars()
         {
-            int startX = 8;
-            int startY = 10;
+            var startX = 8;
+            const int startY = 10;
             foreach(God.Name god in Enum.GetValues(typeof(God.Name)))
             {
-                dungeon[startX,startY] = new Altar(startX*SpriteInfo.Width,startY*SpriteInfo.Height,god);
+                dungeon[startX,startY] = new Altar(new Point2(startX,startY),god);
                 startX += 2;
             }
         }
@@ -92,7 +91,7 @@ namespace OGUR.Dungeons
             {
                 player.SetPosition(spawn);
             }
-            foreach (GameplayObject item in m_contents)
+            foreach (var item in m_contents)
             {
                 GameplayObjectManager.AddObject(item);
             }
@@ -115,7 +114,7 @@ namespace OGUR.Dungeons
 
         private void TransferDungeonState()
         {
-            foreach (GameplayObject tile in dungeon)
+            foreach (var tile in dungeon)
             {
                 if (tile != null)
                 {
@@ -160,11 +159,11 @@ namespace OGUR.Dungeons
 
         private void PlaceFloor()
         {
-            for (int ii = 0; ii < m_blocksWide; ii++)
+            for (var ii = 0; ii < m_blocksWide; ii++)
             {
-                for(int jj = 0;jj<m_blocksHigh;jj++)
+                for(var jj = 0;jj<m_blocksHigh;jj++)
                 {
-                    GameplayObjectManager.AddObject(new Floor(ii * SpriteInfo.Width, jj * SpriteInfo.Height));
+                    GameplayObjectManager.AddObject(new Floor(new Point2(ii,jj)));
                 }
             }
         }
@@ -189,26 +188,23 @@ namespace OGUR.Dungeons
             while (attemptCount < 1000 && roomsToPlace > 0)
             {
                 attemptCount++;
-                int startX = rand.Next(0, m_blocksWide - 5);
-                int startY = rand.Next(0, m_blocksHigh - 5);
-                int startWidth = 5 + rand.Next(0, 2);
-                int startHeight = 5 + rand.Next(0, 2);
+                var startX = rand.Next(0, m_blocksWide - 5);
+                var startY = rand.Next(0, m_blocksHigh - 5);
+                var startWidth = 5 + rand.Next(0, 2);
+                var startHeight = 5 + rand.Next(0, 2);
                 roomsToPlace--;
                 var nextRoom = new Room(startHeight, startWidth, startX, startY);
-                bool collides = false;
-                foreach (Room room in newRooms)
+                var collides = false;
+                if(newRooms.Any(room => room.Collides(nextRoom)))
                 {
-                    if (room.Collides(nextRoom))
-                    {
-                        collides = true;
-                    }
+                    collides = true;
                 }
                 if (!collides && !nextRoom.IsBad())
                 {
                     newRooms.Add(nextRoom);
                 }
             }
-            foreach (Room room in newRooms)
+            foreach (var room in newRooms)
             {
                 m_rooms.Add(room);
             }
@@ -248,9 +244,9 @@ namespace OGUR.Dungeons
 
          private void ConvertRoomsToWalls()
         {
-            int roomCount = 0;
+            var roomCount = 0;
             var dungeonEntrances = new List<PointPoint>();
-            foreach (Room room in m_rooms)
+            foreach (var room in m_rooms)
             {
                 var entrances = new List<PointPoint>();
                 for (var ii = room.X; ii < room.RightSide; ii++)
@@ -277,17 +273,17 @@ namespace OGUR.Dungeons
                                     }
                                 }
                             }
-                            dungeon[ii, jj] = new Wall(ii*SpriteInfo.Width, jj*SpriteInfo.Height);
+                            dungeon[ii, jj] = GameplayObjectFactory.Create(GameObjectType.WALL, new Point2(ii, jj));
                         }
                         else
                         {
-                            dungeon[ii, jj] = new Floor(ii*SpriteInfo.Width, jj*SpriteInfo.Height);
+                            dungeon[ii, jj] = GameplayObjectFactory.Create(GameObjectType.FLOOR, new Point2(ii, jj));
                         }
                     }
                 }
                 if (roomCount > 0 && entrances.Count() > 0)
                 {
-                    int index = new Random().Next(0, entrances.Count() - 1);
+                    var index = new Random().Next(0, entrances.Count() - 1);
                     var entrance = entrances[index];
                     if (dungeon[entrance.X, entrance.Y].GetObjectType() != GameObjectType.FLOOR)
                     {
@@ -300,23 +296,23 @@ namespace OGUR.Dungeons
             {
                 if (entrance.isHorizontal())
                 {
-                    for(int ii = 1;ii<m_blocksWide-1;ii++)
+                    for(var ii = 1;ii<m_blocksWide-1;ii++)
                     {
-                        var currentTarget = new Point(ii, entrance.Y);
-                        if(dungeon[currentTarget.X,currentTarget.Y].GetObjectType()==GameObjectType.WALL)
+                        var currentTarget = new Point2(ii, entrance.Y);
+                        if(dungeon[currentTarget.GridX(),currentTarget.GridY()].GetObjectType()==GameObjectType.WALL)
                         {
-                            dungeon[currentTarget.X,currentTarget.Y]=new Floor(currentTarget.X*SpriteInfo.Width,currentTarget.Y*SpriteInfo.Height);
+                            dungeon[currentTarget.GridX(), currentTarget.GridY()] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
                         }
                     }
                 }
                 else
                 {
-                    for (int ii = 1; ii < m_blocksHigh - 1; ii++)
+                    for (var ii = 1; ii < m_blocksHigh - 1; ii++)
                     {
-                        var currentTarget = new Point(entrance.X, ii);
-                        if (dungeon[currentTarget.X, currentTarget.Y].GetObjectType() == GameObjectType.WALL)
+                        var currentTarget = new Point2(entrance.X, ii);
+                        if (dungeon[currentTarget.GridX(), currentTarget.GridY()].GetObjectType() == GameObjectType.WALL)
                         {
-                            dungeon[currentTarget.X, currentTarget.Y] = new Floor(currentTarget.X, currentTarget.Y);
+                            dungeon[currentTarget.GridX(), currentTarget.GridY()] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
                         }
                     }
                 }

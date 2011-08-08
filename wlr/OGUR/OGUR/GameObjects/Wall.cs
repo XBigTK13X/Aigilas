@@ -1,12 +1,13 @@
-﻿using OGUR.Sprites;
+﻿using OGUR.Collision;
+using OGUR.Sprites;
 
 namespace OGUR.GameObjects
 {
     public class Wall : GameplayObject
     {
-        public Wall(int x, int y)
+        public Wall(Point2 location)
         {
-            Initialize(x, y, SpriteType.WALL, GameObjectType.WALL);
+            Initialize(location, SpriteType.WALL, GameObjectType.WALL);
             m_isBlocking = true;
         }
     }

@@ -89,6 +89,24 @@ namespace OGUR.Collision
             return Y;
         }
 
+        public float PosCenterX()
+        {
+            if (X <= DungeonFactory.BlocksWide)
+            {
+                return X * SpriteInfo.Width + SpriteInfo.Width/2;
+            }
+            return X;
+        }
+
+        public float PosCenterY()
+        {
+            if (Y < DungeonFactory.BlocksWide)
+            {
+                return Y * SpriteInfo.Height + SpriteInfo.Height/2;
+            }
+            return Y;
+        }
+
         public Point2 Multiply(float factor)
         {
             return new Point2(X*factor,Y*factor);
