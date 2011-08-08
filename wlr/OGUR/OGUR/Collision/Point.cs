@@ -46,17 +46,19 @@ namespace OGUR.Collision
         public void SetX(float xValue)
         {
             X = xValue;
-            PosX = (X < DungeonFactory.BlocksWide) ? X * SpriteInfo.Width : X;
-            PosCenterX = (X <= DungeonFactory.BlocksWide) ? X * SpriteInfo.Width + halfWidth : X + halfWidth;
-            GridX = (X < DungeonFactory.BlocksWide) ? (int)X : (int)(X / SpriteInfo.Width);
+            var isGrid = (X < DungeonFactory.BlocksWide);
+            PosX = (isGrid) ? X * SpriteInfo.Width : X;
+            PosCenterX = (isGrid) ? X * SpriteInfo.Width + halfWidth : X + halfWidth;
+            GridX = (isGrid) ? (int)X : (int)(X / SpriteInfo.Width);
         }
 
         public void SetY(float yValue)
         {
             Y = yValue;
-            PosY = (Y < DungeonFactory.BlocksHigh)?Y*SpriteInfo.Height:Y;
-            PosCenterY = (Y <= DungeonFactory.BlocksHigh)?X * SpriteInfo.Height + halfHeight:X+halfHeight;
-            GridY = (Y < DungeonFactory.BlocksHigh) ? (int)Y : (int)(Y / SpriteInfo.Height);
+            var isGrid = (Y < DungeonFactory.BlocksHigh);
+            PosY = (isGrid)?Y*SpriteInfo.Height:Y;
+            PosCenterY = (isGrid)?Y * SpriteInfo.Height + halfHeight : Y+halfHeight;
+            GridY = (isGrid) ? (int)Y : (int)(Y / SpriteInfo.Height);
         }
 
         public void SetWeight(float weight)
@@ -66,17 +68,9 @@ namespace OGUR.Collision
 
         public bool IsZero()
         {
-            var isZero = Equals(Zero);
-            if(isZero)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return Equals(Zero);
         }
-        
+
         public Point2 Multiply(float factor)
         {
             return new Point2(X*factor,Y*factor);

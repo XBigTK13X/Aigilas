@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using OGUR.Collision;
 
@@ -55,7 +56,15 @@ namespace OGUR.Path
             
             if (m_neighbors == null)
             {
-                return m_neighbors = GetLastStep().GetNeighbors().Where(o => !steps.Contains(o)).ToList();
+                var neighbors = GetLastStep().GetNeighbors();
+                m_neighbors = new List<Point2>();
+                for (int ii = 0; ii < neighbors.Count;ii++)
+                {
+                    if(!steps.Contains(neighbors[ii]))
+                    {
+                        m_neighbors.Add(neighbors[ii]);
+                    }
+                }
             }
             return m_neighbors;
         }
