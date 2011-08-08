@@ -83,8 +83,7 @@ namespace OGUR.Items
             {
                 foreach (ICreature player in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
                 {
-                    if (Collision.HitTest.IsTouching(player, this) &&
-                        InputManager.IsPressed(InputManager.Commands.Confirm, player.GetPlayerIndex()))
+                    if (HitTest.IsTouching(player, this) && player.IsInteracting())
                     {
                         Hide();
                         player.PickupItem(this);

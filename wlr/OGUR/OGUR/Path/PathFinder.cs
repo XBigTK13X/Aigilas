@@ -28,7 +28,6 @@ namespace OGUR.Path
                 {
                     return path.GetNextMove();
                 }
-                
                 var neighbors = path.GetNeighbors();
                 if(!neighbors.Any())
                 {
