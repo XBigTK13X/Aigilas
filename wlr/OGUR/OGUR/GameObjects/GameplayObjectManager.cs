@@ -41,9 +41,9 @@ namespace OGUR.GameObjects
             return null;
         }
 
-        public static List<GameplayObject> GetObjects(GameObjectType type)
+        public static IEnumerable<GameplayObject> GetObjects(GameObjectType type)
         {
-            return m_contents.Where(item => item.GetObjectType() == type).ToList();
+            return m_contents.Where(item => item.GetObjectType() == type);
         }
 
         public static ICreature GetObject(CreatureType type)

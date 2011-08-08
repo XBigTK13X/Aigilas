@@ -17,8 +17,8 @@ namespace OGUR.Collision
 
         private static bool IsClose(GameplayObject source, GameplayObject target)
         {
-            return IsClose(source.GetPosition().X, target.GetPosition().X, source.GetPosition().Y,
-                           target.GetPosition().Y);
+            return IsClose(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY,
+                           target.GetLocation().PosY);
         }
 
         private static bool IsClose(float x1, float x2, float y1, float y2)
@@ -28,8 +28,8 @@ namespace OGUR.Collision
 
         public static float GetDistanceSquare(GameplayObject source, GameplayObject target)
         {
-            return GetDistanceSquare(source.GetPosition().X, target.GetPosition().X, source.GetPosition().Y,
-                                     target.GetPosition().Y);
+            return GetDistanceSquare(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY,
+                                     target.GetLocation().PosY);
         }
         public static float GetDistanceSquare(Point2 source, Point2 target)
         {

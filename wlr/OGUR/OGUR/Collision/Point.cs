@@ -116,5 +116,10 @@ namespace OGUR.Collision
         {
             return String.Format("Point2: ({0},{1})", X, Y);
         }
+
+        public static float DistanceSquared(Point2 source, Point2 target)
+        {
+            return (float)(Math.Pow(source.PosX - target.PosX, 2) + Math.Pow(source.PosY - target.PosY, 2));
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using OGUR.Collision;
 using OGUR.Creatures;
 using OGUR.GameObjects;
 
@@ -50,7 +51,7 @@ namespace OGUR.Strategies
             {
                 foreach (var target in m_targets)
                 {
-                    var dist = Vector2.DistanceSquared(target.GetPosition(), m_parent.GetPosition());
+                    var dist = Point2.DistanceSquared(target.GetLocation(), m_parent.GetLocation());
                     if (dist < closestDistance)
                     {
                         result = target;
@@ -61,7 +62,7 @@ namespace OGUR.Strategies
                 {
                     foreach(var creature in GameplayObjectManager.GetObjects(creatureType))
                     {
-                        var dist = Vector2.DistanceSquared(creature.GetPosition(), m_parent.GetPosition());
+                        var dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
                         if (dist < closestDistance)
                         {
                             result = creature;

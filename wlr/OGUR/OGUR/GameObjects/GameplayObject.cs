@@ -76,7 +76,7 @@ namespace OGUR.GameObjects
         {
             amountX = NormalizeDistance(amountX);
             amountY = NormalizeDistance(amountY);
-            var target = new Point2(m_graphic.GetPosition().X + amountX,m_graphic.GetPosition().Y + amountY);
+            var target = new Point2(m_location.PosX + amountX,m_location.PosY + amountY);
             if (CoordVerifier.IsValid(target))
             {
                 SetLocation(target);
@@ -115,11 +115,6 @@ namespace OGUR.GameObjects
         public GameObjectType GetObjectType()
         {
             return m_objectType;
-        }
-
-        public Vector2 GetPosition()
-        {
-            return m_graphic.GetPosition();
         }
 
         public Point2 GetLocation()

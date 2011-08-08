@@ -62,19 +62,8 @@ namespace OGUR.Path
 
         public IList<Point2> GetNeighbors()
         {
-            if (m_neighbors == null)
-            {
-                var neighbors = GetLastStep().GetNeighbors();
-                m_neighbors = new List<Point2>();
-                foreach (var neighbor in neighbors)
-                {
-                    if(!m_neighbors.Contains(neighbor))
-                    {
-                        m_neighbors.Add(neighbor);    
-                    }
-                }
-            }
-            return m_neighbors;
+            var neighbors = GetLastStep().GetNeighbors();
+            return neighbors;
         }
 
         public int Length()

@@ -18,6 +18,8 @@ namespace OGUR.Path
         public static Point2 FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly=true)
         {
             var queue = new PriorityQueue<double, Path>();
+            start = new Point2(start.GridX,start.GridY);
+            destination = new Point2(destination.GridX, destination.GridY);
             queue.Enqueue(0, new Path(start,destination));
             while (!queue.IsEmpty)
             {
@@ -44,9 +46,11 @@ namespace OGUR.Path
                     {
                         node.SetWeight(Point2.CalculateDistanceSquared(node, path.GetLastStep()));
                         var newPath = new Path(path);
-                        newPath.Add(node);
-                        queue.Enqueue(newPath.GetCost(), newPath);
-                        break;
+                        if(newPath.Add(node))
+                        {
+                            queue.Enqueue(newPath.GetCost(), newPath);
+                            break;    
+                        }
                     }
                 }
             }

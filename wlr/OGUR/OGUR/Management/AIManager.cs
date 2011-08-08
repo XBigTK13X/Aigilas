@@ -11,8 +11,8 @@ namespace OGUR.Management
     {
         public static bool IsClosestPlayerNorth(Player source)
         {
-            Player target = GetClosest(source);
-            if (target.GetPosition().Y < source.GetPosition().Y)
+            var target = GetClosest(source);
+            if (target.GetLocation().PosY < source.GetLocation().PosY)
             {
                 return true;
             }
@@ -21,8 +21,8 @@ namespace OGUR.Management
 
         public static bool IsClosestPlayerSouth(Player source)
         {
-            Player target = GetClosest(source);
-            if (target.GetPosition().Y > source.GetPosition().Y)
+            var target = GetClosest(source);
+            if (target.GetLocation().PosY > source.GetLocation().PosY)
             {
                 return true;
             }
@@ -31,8 +31,8 @@ namespace OGUR.Management
 
         public static bool IsClosestPlayerEast(Player source)
         {
-            Player target = GetClosest(source);
-            if (target.GetPosition().X > source.GetPosition().X)
+            var target = GetClosest(source);
+            if (target.GetLocation().PosX > source.GetLocation().PosX)
             {
                 return true;
             }
@@ -41,8 +41,8 @@ namespace OGUR.Management
 
         public static bool IsClosestPlayerWest(Player source)
         {
-            Player target = GetClosest(source);
-            if (target.GetPosition().X < source.GetPosition().X)
+            var target = GetClosest(source);
+            if (target.GetLocation().PosX < source.GetLocation().PosX)
             {
                 return true;
             }
@@ -55,12 +55,12 @@ namespace OGUR.Management
             var players = GameplayObjectManager.GetObjects(CreatureType.PLAYER);
             foreach (Player target in players)
             {
-                s_distances.Add(Math.Abs(target.GetPosition().X - source.GetPosition().X) +
-                                Math.Abs(target.GetPosition().Y - source.GetPosition().Y));
+                s_distances.Add(Math.Abs(target.GetLocation().PosX - source.GetLocation().PosX) +
+                                Math.Abs(target.GetLocation().PosY - source.GetLocation().PosY));
             }
-            float leastDistance = float.PositiveInfinity;
+            var leastDistance = float.PositiveInfinity;
             Player result = null;
-            for (int ii = 0; ii < s_distances.Count(); ii++)
+            for (var ii = 0; ii < s_distances.Count(); ii++)
             {
                 if (s_distances[ii] != 0)
                 {

@@ -234,8 +234,7 @@ namespace OGUR.Creatures
                 damage = 0;
                 
             }
-            TextManager.Add(new ActionText(damage.ToString(),30, (int)this.GetPosition().X + SpriteInfo.Width / 2,
-                                       (int)this.GetPosition().Y + SpriteInfo.Height / 2));
+            TextManager.Add(new ActionText(damage.ToString(),30, (int)GetLocation().PosCenterX,(int)GetLocation().PosCenterY));
             if(damage>0)
             {
                 Adjust(StatType.HEALTH, -damage);
@@ -339,7 +338,7 @@ namespace OGUR.Creatures
                 m_nextLevelExperience += 100;
                 m_experience = 0;
                 m_currentLevel++;
-                TextManager.Add(new ActionText("LEVEL UP!",30,(int)GetPosition().X,(int)GetPosition().Y));
+                TextManager.Add(new ActionText("LEVEL UP!",30,(int)GetLocation().PosX,(int)GetLocation().PosY));
             }
         }
 

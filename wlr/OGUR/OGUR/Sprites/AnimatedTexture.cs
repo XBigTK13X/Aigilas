@@ -83,11 +83,6 @@ namespace OGUR.Sprites
             }
         }
 
-        public Vector2 GetPosition()
-        {
-            return m_position;
-        }
-
         public void SetPosition(float x, float y)
         {
             m_position.X = (int)x;
