@@ -33,7 +33,7 @@ namespace OGUR.Collision
         }
         public static float GetDistanceSquare(Point2 source, Point2 target)
         {
-            return GetDistanceSquare(source.X, target.X, source.Y, target.Y);
+            return GetDistanceSquare(source.PosX, target.PosX, source.PosY, target.PosY);
         }
         private static float GetDistanceSquare(float x1,float x2, float y1, float y2)
         {

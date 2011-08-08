@@ -46,7 +46,7 @@ namespace OGUR.Sprites
                          XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
             m_currentCell = new Rectangle(m_currentFrame*m_spriteInfo.X, m_spriteInfo.SpriteIndex*m_spriteInfo.Y,
                                           m_spriteInfo.X, m_spriteInfo.Y);
-            Vector2 tempPosition = new Vector2(m_position.X, m_position.Y);
+            var tempPosition = new Vector2(m_position.X, m_position.Y);
             target.Draw(m_graphic, tempPosition, m_currentCell, m_color);
             target.End();
         }

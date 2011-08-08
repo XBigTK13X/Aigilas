@@ -5,16 +5,11 @@ using OGUR.GameObjects;
 
 namespace OGUR.Collision
 {
-    internal static class CoordVerifier
+    public static class CoordVerifier
     {
-        public static bool IsValid(float x, float y)
-        {
-            return (x > 0 && y > 0 && x < XnaManager.WindowWidth && y < XnaManager.WindowHeight);
-        }
-
         public static bool IsValid(Point2 position)
         {
-            return (position.X > 0 && position.Y > 0 && position.X < XnaManager.WindowWidth && position.Y < XnaManager.WindowHeight);
+            return (position.PosX > 0 && position.PosY > 0 && position.PosX < XnaManager.WindowWidth && position.PosY < XnaManager.WindowHeight);
         }
 
         public static bool IsBlocked(Point2 target)

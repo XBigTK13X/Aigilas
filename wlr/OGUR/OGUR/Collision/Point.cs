@@ -93,7 +93,7 @@ namespace OGUR.Collision
 
         public static float CalculateDistanceSquared(Point2 source, Point2 target)
         {
-            return Math.Abs(source.Y - target.Y) + Math.Abs(source.X - target.X);
+            return (float) (Math.Pow(source.PosY - target.PosY, 2) + Math.Pow(source.PosX - target.PosX, 2));
         }
 
         public IList<Point2> GetNeighbors()

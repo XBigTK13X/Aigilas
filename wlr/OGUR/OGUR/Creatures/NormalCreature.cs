@@ -9,7 +9,7 @@ namespace OGUR.Creatures
 
         public NormalCreature(CreatureType type,Point2 position,Stats stats)
         {
-            base.Setup(position.X, position.Y, type, stats);
+            Setup(position.PosX, position.PosY, type, stats);
             m_position = position;
             m_strategy = new AttackPlayers(this);
         }
