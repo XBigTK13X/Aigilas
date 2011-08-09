@@ -29,14 +29,24 @@ namespace OGUR.Skills
         protected SpriteType m_effectSprite = SpriteType.SKILL_EFFECT;
         protected StatBuff m_buff;
 
-        protected ISkill(string implementationId, Skill.Animation animation, Stats cost = null, 
-                         IEnumerable<Elements> elements = null, SpriteType effectGraphic = SpriteType.SKILL_EFFECT)
+        protected ISkill(string implementationId, Skill.Animation animation, SpriteType effectGraphic = SpriteType.SKILL_EFFECT)
         {
-            m_elements = elements==null ? new List<Elements>() { Elements.NORMAL } : new List<Elements>(elements);
-            m_cost = cost==null ? new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) : new Stats(cost);
+            m_elements = new List<Elements>() { Elements.NORMAL };
+            m_cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             m_implementationId = implementationId;
             m_effectSprite = effectGraphic;
             m_animation = animation;
+        }
+
+        protected void Add(params Elements[] elements)
+        {
+            m_elements.AddRange(elements);
+        }
+
+        protected void Add(StatType stat, float cost)
+        {
+            
+           m_cost.AddBuff(new StatBuff(stat,cost));
         }
 
         public override string ToString()

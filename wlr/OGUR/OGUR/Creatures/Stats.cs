@@ -8,7 +8,7 @@ namespace OGUR.Creatures
     public class Stats
     {
         public const float DefaultMoveSpeed = 33;
-        public const float DefaultCoolDown = 6;
+        public const float DefaultCoolDown = 18;
         private readonly Dictionary<StatType, float> m_stats = new Dictionary<StatType, float>();
         private readonly List<StatBuff> m_buffs = new List<StatBuff>(); 
 

@@ -4,6 +4,7 @@
     {
         PLAYER,
         GOBLIN,
+        ZORB,
         NONPLAYER
     }
 }

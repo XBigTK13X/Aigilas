@@ -19,7 +19,6 @@ namespace OGUR.Creatures
     public abstract class ICreature : GameplayObject
     {
         protected IStrategy m_strategy;
-        protected MentalState m_mentality = MentalState.NORMAL;
 
         protected CreatureType m_creatureType;
         protected CreatureClass m_class;
@@ -55,19 +54,13 @@ namespace OGUR.Creatures
             }
         }
 
-        protected void Setup(float x, float y, CreatureType type, Stats stats,CreatureClass creatureClass=null)
-        {
-            Initialize(x, y, SpriteFromCreature(type), GameObjectType.CREATURE);
-            Init(type,stats,creatureClass);
-        }
-
         protected void Setup(Point2 location, CreatureType type, Stats stats, CreatureClass creatureClass = null)
         {
             Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE);
             Init(type,stats,creatureClass);
         }
 
-        protected void Init(CreatureType type, Stats stats, CreatureClass creatureClass = null)
+        private void Init(CreatureType type, Stats stats, CreatureClass creatureClass = null)
         {
             m_inventory = new Inventory(this);
             m_equipment = new Equipment(this);

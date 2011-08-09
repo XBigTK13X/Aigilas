@@ -11,14 +11,30 @@ namespace OGUR.Creatures
 
         public static ICreature Create(CreatureType type, Point2 position)
         {
+            AbstractCreature result;
             switch (type)
             {
                 case CreatureType.PLAYER:
-                    return (Player)GameplayObjectManager.AddObject(new Player(position, s_playerCount++));
-                case CreatureType.GOBLIN:
-                    return (NormalCreature)GameplayObjectManager.AddObject(new NormalCreature(type, position, new Stats(50f, 10f, 1f, 1f, 1f, 20f, 1f, 10f, 1.5f, Stats.DefaultMoveSpeed, Stats.DefaultCoolDown * 3)));
+                    result = new Player(s_playerCount++);break;
                 default:
-                    throw new Exception("Attempted to create an undefined Creature type in the CreatureFactory.");
+                    result = GenerateCreature(type);
+                    break;
+            }
+            result.Setup(position);
+            GameplayObjectManager.AddObject(result);
+            return result;
+        }
+
+        private static AbstractCreature GenerateCreature(CreatureType type)
+        {
+            switch(type)
+            {
+                case CreatureType.GOBLIN:
+                    return new Goblin();
+                case CreatureType.ZORB:
+                    return new Zorb();
+                default:
+                    throw new Exception("You forgot to define Factory generation logic for: "+type);
             }
         }
 

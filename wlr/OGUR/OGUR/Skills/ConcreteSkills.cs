@@ -25,7 +25,8 @@ namespace OGUR.Skills
     }
     public class FireballSkill:ISkill
     {
-        public FireballSkill() : base(SkillId.FIREBALL,Skill.Animation.RANGED,new Stats(0,5,0,0,0,0,0,0,0,0,0),new List<Elements>(){Elements.FIRE}){}
+        public FireballSkill() : base(SkillId.FIREBALL,Skill.Animation.RANGED)
+        { Add(Elements.FIRE);Add(StatType.MANA,10);}
 
         public override void Affect(ICreature target)
         {
@@ -34,7 +35,8 @@ namespace OGUR.Skills
     }
     public class ThrashSkill : ISkill
     {
-        public ThrashSkill() : base(SkillId.THRASH, Skill.Animation.CLOUD) { }
+        public ThrashSkill() : base(SkillId.THRASH, Skill.Animation.CLOUD)
+        { Add(StatType.MANA, 40); }
 
         public override void Affect(ICreature target)
         {
@@ -44,8 +46,7 @@ namespace OGUR.Skills
 
     public class BulkSkill : ISkill
     {
-        public BulkSkill()
-            : base(SkillId.BULK, Skill.Animation.SELF)
+        public BulkSkill(): base(SkillId.BULK, Skill.Animation.SELF)
         {
             m_buff = new StatBuff(StatType.STRENGTH, 20);
         }

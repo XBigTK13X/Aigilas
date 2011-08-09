@@ -110,14 +110,14 @@
     <Compile Include="Classes\CreatureClasses.cs" />
     <Compile Include="Collision\CoordVerifier.cs" />
     <Compile Include="Collision\HitTest.cs" />
+    <Compile Include="Creatures\ConcreteCreatures.cs" />
     <Compile Include="Creatures\StatBuff.cs" />
     <Compile Include="Path\Path.cs" />
     <Compile Include="Path\PathFinder.cs" />
     <Compile Include="Collision\Point.cs" />
     <Compile Include="Path\PriorityQueue.cs" />
     <Compile Include="Creatures\CreatureType.cs" />
-    <Compile Include="Creatures\MentalState.cs" />
-    <Compile Include="Creatures\NormalCreature.cs" />
+    <Compile Include="Creatures\AbstractCreature.cs" />
     <Compile Include="Creatures\Race.cs" />
     <Compile Include="Creatures\StatType.cs" />
     <Compile Include="Creatures\Stats.cs" />
@@ -182,7 +182,6 @@
     <Compile Include="Items\ItemFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Creatures\ICreature.cs" />
-    <Compile Include="Creatures\Player.cs" />
     <Compile Include="Items\Slots.cs" />
     <Compile Include="Items\GenericItem.cs" />
     <Compile Include="Items\ItemPrefix.cs" />
