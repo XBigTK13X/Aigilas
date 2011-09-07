@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Creatures;
+using OGUR.Sprites;
 
 namespace OGUR.Skills
 {
@@ -79,6 +80,23 @@ namespace OGUR.Skills
                     return new VaporImplantSkill();
                 default:
                     throw new Exception("You forgot to define the new skill in the Factory...YOU FOOL!"); 
+            }
+        }
+
+        public static SkillBehavior Create(Skill.Animation animation,SpriteType skillGraphic,ISkill parentSkill,SkillComponents skillComponents)
+        {
+            switch (animation)
+            {
+                case Skill.Animation.CLOUD:
+                    return new CloudBehavior(skillGraphic, parentSkill);
+                case Skill.Animation.RANGED:
+                    return new RangedBehavior(skillGraphic, parentSkill);
+                case Skill.Animation.SELF:
+                    return new SelfBehavior(skillGraphic, parentSkill);
+                case Skill.Animation.STATIONARY:
+                    return new StationaryBehavior(skillGraphic, parentSkill);
+                default:
+                    throw new Exception("How dare you create a new Anim type for skills without defining a proper behavvior for them!");
             }
         }
     }

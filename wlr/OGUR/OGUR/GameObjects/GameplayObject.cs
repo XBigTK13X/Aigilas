@@ -155,9 +155,13 @@ namespace OGUR.GameObjects
             InputManager.Lock(InputManager.Commands.Confirm, ((ICreature) this).GetPlayerIndex());
         }
 
-        public void SetAlpha(float alpha)
+        public ICreature IsCreature()
         {
-            m_graphic.SetAlpha(alpha);
+            if (GetObjectType() == GameObjectType.CREATURE)
+            {
+                return (ICreature)this;
+            }
+            return null;
         }
     }
 }

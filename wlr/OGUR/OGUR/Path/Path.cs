@@ -13,7 +13,6 @@ namespace OGUR.Path
         public Point2 Finish { get; private set; }
         private List<Point2> m_steps = new List<Point2>();
         private HashSet<Point2> m_stepLookup = new HashSet<Point2>();
-        IList<Point2> m_neighbors;
         private float m_totalWeight = 0;
 
         public Path(Point2 start, Point2 finish)

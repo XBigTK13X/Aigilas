@@ -167,6 +167,9 @@
     <Compile Include="Items\ItemClass.cs" />
     <Compile Include="Skills\AbstractSkills.cs" />
     <Compile Include="Skills\ConcreteSkills.cs" />
+    <Compile Include="Skills\SideEffects.cs" />
+    <Compile Include="Skills\SkillBehavior.cs" />
+    <Compile Include="Skills\SkillComponents.cs" />
     <Compile Include="Skills\SkillFactory.cs" />
     <Compile Include="Skills\SkillHud.cs" />
     <Compile Include="Skills\SkillPool.cs" />

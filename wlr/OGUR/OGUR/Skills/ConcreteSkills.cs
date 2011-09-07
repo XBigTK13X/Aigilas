@@ -39,7 +39,7 @@ namespace OGUR.Skills
         public BulkSkill(): base(SkillId.BULK, Skill.Animation.SELF)
         {
             AddCost(StatType.MANA, 10);
-            m_buff = new StatBuff(StatType.STRENGTH, 20);
+            SetBuff(StatType.STRENGTH, 20);
         }
         public override void Affect(ICreature target)
         {
