@@ -41,8 +41,10 @@ namespace OGUR.Creatures
 
         public static ICreature CreateRandom(Point2 randomPoint)
         {
-            var rand = new Random();
-            return Create((CreatureType)rand.Next(1, Enum.GetValues(typeof(CreatureType)).Length - 1), randomPoint);
+            //TODO: This doesn't produce a very random distribution for some reason
+            var val = new Random().Next(1, Enum.GetValues(typeof(CreatureType)).Length - 1);
+            Console.WriteLine(val);
+            return Create((CreatureType)val, randomPoint);
         }
 
         public static void ResetPlayerCount()

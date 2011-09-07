@@ -48,6 +48,8 @@ namespace OGUR.Creatures
             {
                 case CreatureType.PLAYER:
                     return SpriteType.PLAYER_STAND;
+                case CreatureType.ZORB:
+                    return SpriteType.ZORB;
                 default:
                     return SpriteType.CREATURE;
             }
