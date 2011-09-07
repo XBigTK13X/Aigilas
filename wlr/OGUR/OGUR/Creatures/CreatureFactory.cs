@@ -15,7 +15,8 @@ namespace OGUR.Creatures
             switch (type)
             {
                 case CreatureType.PLAYER:
-                    result = new Player(s_playerCount++);break;
+                    result = new Player(s_playerCount++);
+                    break;
                 default:
                     result = GenerateCreature(type);
                     break;

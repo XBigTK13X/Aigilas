@@ -14,7 +14,8 @@ namespace OGUR.Skills
             NONE,
             RANGED,
             CLOUD,
-            SELF
+            SELF,
+            STATIONARY
         }
     }
     public abstract class ISkill
@@ -68,6 +69,9 @@ namespace OGUR.Skills
                 case Skill.Animation.CLOUD:
                     UseInSurroundingArea();
                     break;
+                case Skill.Animation.STATIONARY:
+                    UseInCurrentLocation();
+                    break;
             }
             
         }
@@ -87,16 +91,12 @@ namespace OGUR.Skills
 
         protected void UseInDirectionFaced()
         {
-            var effect = new SkillEffect(m_source.GetLocation(), m_source.GetSkillVector(), m_source, this, m_animation, m_effectSprite);
-            GameplayObjectManager.AddObject(effect);
-            m_effectGraphics.Add(effect);
+            AddGraphic(m_source.GetLocation(), m_source.GetSkillVector());
         }
 
         protected void UseOnSelf()
         {
-            var effect = new SkillEffect(m_source.GetLocation(), new Point2(0, 0), m_source, this, m_animation,m_effectSprite);
-            GameplayObjectManager.AddObject(effect);
-            m_effectGraphics.Add(effect);
+            AddGraphic(m_source.GetLocation(), new Point2(0, 0));
         }
 
         protected void UseInSurroundingArea()
@@ -109,12 +109,22 @@ namespace OGUR.Skills
                     if(ii!=0||jj!=0)
                     {
                         var cloudPosition = new Point2(referencePoint.GridX + ii, referencePoint.GridY + jj);
-                        var effect = new SkillEffect(cloudPosition, new Point2(0, 0), m_source, this, m_animation, m_effectSprite);
-                        m_effectGraphics.Add(effect);
-                        GameplayObjectManager.AddObject(effect);
+                        AddGraphic(cloudPosition,new Point2(0,0));
                     }
                 }
             }
+        }
+
+        protected void UseInCurrentLocation()
+        {
+            AddGraphic(m_source.GetLocation(), new Point2(0, 0));
+        }
+
+        protected void AddGraphic(Point2 gridLocation,Point2 velocity)
+        {
+            var effect = new SkillEffect(gridLocation, velocity, m_source, this, m_animation, m_effectSprite);
+            m_effectGraphics.Add(effect);
+            GameplayObjectManager.AddObject(effect);
         }
 
         public ICreature IsCreature(GameplayObject target)

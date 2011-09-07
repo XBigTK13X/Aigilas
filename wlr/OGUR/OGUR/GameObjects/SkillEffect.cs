@@ -64,6 +64,9 @@ namespace OGUR.GameObjects
                     case Skill.Animation.SELF:
                         SelfAnimation();
                         break;
+                    case Skill.Animation.STATIONARY:
+                        StationaryAnimation();
+                        break;
                 }
                 if(m_animation==Skill.Animation.SELF)
                 {
@@ -85,6 +88,11 @@ namespace OGUR.GameObjects
                     }    
                 }
             }
+        }
+
+        private void StationaryAnimation()
+        {
+
         }
 
         private void RangedAnimation()
