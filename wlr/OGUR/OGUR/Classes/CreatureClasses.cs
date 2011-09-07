@@ -25,13 +25,6 @@ namespace OGUR.Classes
         {
         }
     }
-    class Adjuster : CreatureClass
-    {
-        public Adjuster()
-            : base(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0))
-        {
-        }
-    }
     class Brute:CreatureClass
     {
         public Brute():base(new Stats(10,1,3,1,5,1,0,0,0,0,0))
@@ -39,21 +32,25 @@ namespace OGUR.Classes
             m_skillUnlocks.Add(new KeyValuePair<int, string>(1, SkillId.THRASH));
         }
     }
-    class Dynamo : CreatureClass
-    {
-        public Dynamo()
-            : base(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0))
-        {
-        }
-    }
     class Mage:CreatureClass
     {
-        public Mage()
-            : base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0)))
+        public Mage(): base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0)))
         {
             Add(1, SkillId.FIREBALL);
             Add(1, SkillId.BULK);
             Add(1, SkillId.THRASH);
         }
     }
+    class SlothAcolyte:CreatureClass
+    {
+        public SlothAcolyte(): base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0)))
+        {
+            Add(1, SkillId.FLOOR_SPIKES);
+            Add(1, SkillId.REMOTE_MINE);
+            Add(1, SkillId.ACID_NOZZLE);
+            Add(1, SkillId.VAPOR_IMPLANT);
+            Add(1, SkillId.DART);
+        }
+    }
+            
 }

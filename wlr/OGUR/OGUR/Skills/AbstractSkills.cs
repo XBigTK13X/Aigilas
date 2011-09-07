@@ -44,7 +44,7 @@ namespace OGUR.Skills
             m_elements.AddRange(elements);
         }
 
-        protected void Add(StatType stat, float cost)
+        protected void AddCost(StatType stat, float cost)
         {
             
            m_cost.AddBuff(new StatBuff(stat,cost));
