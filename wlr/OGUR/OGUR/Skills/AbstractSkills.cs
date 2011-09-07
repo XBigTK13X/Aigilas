@@ -29,14 +29,18 @@ namespace OGUR.Skills
         protected Skill.Animation m_animation;
         protected SpriteType m_effectSprite = SpriteType.SKILL_EFFECT;
         protected StatBuff m_buff;
+        protected float m_effectStrength = 0;
+        protected bool m_isPersistent = false;
 
-        protected ISkill(string implementationId, Skill.Animation animation, SpriteType effectGraphic = SpriteType.SKILL_EFFECT)
+        protected ISkill(string implementationId, Skill.Animation animation, float strength = SkillEffect.DefaultStrength,bool isPersistent=false,SpriteType effectGraphic = SpriteType.SKILL_EFFECT)
         {
             m_elements = new List<Elements>() { Elements.NORMAL };
             m_cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             m_implementationId = implementationId;
             m_effectSprite = effectGraphic;
             m_animation = animation;
+            m_effectStrength = strength;
+            m_isPersistent = isPersistent;
         }
 
         protected void Add(params Elements[] elements)
@@ -122,7 +126,7 @@ namespace OGUR.Skills
 
         protected void AddGraphic(Point2 gridLocation,Point2 velocity)
         {
-            var effect = new SkillEffect(gridLocation, velocity, m_source, this, m_animation, m_effectSprite);
+            var effect = new SkillEffect(gridLocation, velocity, m_source, this, m_animation, m_effectSprite,m_effectStrength,m_isPersistent);
             m_effectGraphics.Add(effect);
             GameplayObjectManager.AddObject(effect);
         }

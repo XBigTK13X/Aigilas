@@ -48,10 +48,10 @@ namespace OGUR.Skills
     }
     public class FloorSpikesSkill : ISkill
     {
-        public FloorSpikesSkill(): base(SkillId.FLOOR_SPIKES, Skill.Animation.STATIONARY){AddCost(StatType.MANA, 10);}
+        public FloorSpikesSkill(): base(SkillId.FLOOR_SPIKES, Skill.Animation.STATIONARY,float.MaxValue,true){AddCost(StatType.MANA, 10);}
         public override void Affect(ICreature target)
         {
-            Buff(target);
+            target.ApplyDamage(40);
         }
     }
     public class DartSkill : ISkill

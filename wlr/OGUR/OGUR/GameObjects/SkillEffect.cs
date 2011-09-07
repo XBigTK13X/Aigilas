@@ -22,8 +22,10 @@ namespace OGUR.GameObjects
         private readonly Skill.Animation m_animation;
         private float m_startingStrength;
         private bool m_used = false;
+        private bool m_isPersistent = false;
 
-        public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill,Skill.Animation animation,SpriteType sprite=SpriteType.SKILL_EFFECT,float strength=DefaultStrength)
+        public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill,
+                           Skill.Animation animation,SpriteType sprite=SpriteType.SKILL_EFFECT,float strength=DefaultStrength,bool isPersistent = false)
         {
             m_spriteType = sprite;
             Initialize(gridLocation, sprite, GameObjectType.SKILL_EFFECT);
@@ -32,6 +34,7 @@ namespace OGUR.GameObjects
             m_source = source;
             m_skill = skill;
             m_animation = animation;
+            m_isPersistent = isPersistent;
         }
 
         public override void Update()
@@ -83,7 +86,10 @@ namespace OGUR.GameObjects
                     if (null != collidedTarget)
                     {
                         m_skill.Affect(collidedTarget);
-                        m_isActive = false;
+                        if (!m_isPersistent)
+                        {
+                            m_isActive = false;
+                        }
                         return;
                     }    
                 }
