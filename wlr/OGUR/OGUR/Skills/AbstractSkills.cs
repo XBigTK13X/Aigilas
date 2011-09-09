@@ -37,11 +37,6 @@ namespace OGUR.Skills
         public virtual void Buff(ICreature target){m_components.Buff(target);}
         public void SetBuff(StatType stat, float amount) { m_components.SetBuff(stat, amount); }
 
-        public SkillComponents GetComponents()
-        {
-            return m_components;
-        }
-
         public virtual void Activate(ICreature source)
         {
             m_source = source;
@@ -61,6 +56,26 @@ namespace OGUR.Skills
         public override string ToString()
         {
             return m_implementationId;
+        }
+
+        public SpriteType GetSpriteType()
+        {
+            return m_behavior.GetSpriteType();
+        }
+
+        public Skill.Animation GetAnimationType()
+        {
+            return m_behavior.GetAnimationType();
+        }
+
+        internal float GetStrength()
+        {
+            return m_components.GetStrength();
+        }
+
+        internal bool IsPersistent()
+        {
+            return m_components.IsPersistent();
         }
     }
 }

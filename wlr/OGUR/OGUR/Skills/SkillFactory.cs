@@ -99,5 +99,18 @@ namespace OGUR.Skills
                     throw new Exception("How dare you create a new Anim type for skills without defining a proper behavvior for them!");
             }
         }
+
+        public static SkillAnimation Create(Skill.Animation animation)
+        {
+            switch (animation)
+            {
+                case Skill.Animation.RANGED:
+                    return new RangedAnimation();
+                case Skill.Animation.SELF:
+                    return new SelfAnimation();
+                default:
+                    return new NoAnimation();
+            }
+        }
     }
 }

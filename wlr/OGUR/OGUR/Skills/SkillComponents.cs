@@ -46,5 +46,10 @@ namespace OGUR.Skills
         {
             return m_effectStrength;
         }
+
+        public bool IsPersistent()
+        {
+            return m_isPersistent;
+        }
     }
 }

@@ -17,7 +17,13 @@ namespace OGUR.Skills
             m_parent = parentSkill;
             m_sideEffects = new SideEffects(effectGraphic, animation,m_parent);
         }
+        public SpriteType GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
+
+        internal Skill.Animation GetAnimationType()
+        {
+            return m_sideEffects.GetAnimationType();
+        }
     }
     public class RangedBehavior: SkillBehavior
     {

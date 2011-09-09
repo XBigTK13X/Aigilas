@@ -168,6 +168,7 @@
     <Compile Include="Skills\AbstractSkills.cs" />
     <Compile Include="Skills\ConcreteSkills.cs" />
     <Compile Include="Skills\SideEffects.cs" />
+    <Compile Include="Skills\SkillAnimation.cs" />
     <Compile Include="Skills\SkillBehavior.cs" />
     <Compile Include="Skills\SkillComponents.cs" />
     <Compile Include="Skills\SkillFactory.cs" />
