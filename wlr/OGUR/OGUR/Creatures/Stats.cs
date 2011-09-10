@@ -42,12 +42,21 @@ namespace OGUR.Creatures
             }
         }
         public float Get(StatType stat)
-        {            
-            return m_stats[stat]+m_buffs.Where(o => o.Stat == stat).Sum(buff => buff.Amount);
+        {
+            return GetRaw(stat)+m_buffs.Where(o => o.Stat == stat).Sum(buff => buff.Amount);
+        }
+
+        public float GetRaw(StatType stat)
+        {
+            return m_stats[stat];
         }
 
         public float Set(StatType stat, float value)
         {
+            if (stat != StatType.MOVE_COOL_DOWN)
+            {
+                var x = m_stats[stat];
+            }
             return m_stats[stat] = value;
         }
 

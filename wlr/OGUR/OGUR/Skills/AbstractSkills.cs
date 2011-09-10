@@ -29,11 +29,11 @@ namespace OGUR.Skills
         {
             m_implementationId = implementationId;
             m_components = new SkillComponents(strength, isPersistent);
-            m_behavior = SkillFactory.Create(animation,effectGraphic,this,m_components);
+            m_behavior = SkillFactory.Create(animation,effectGraphic,this);
         }
 
         protected void Add(params Elements[] elements){m_components.AddElements(elements);}
-        protected void AddCost(StatType stat, float cost){m_components.AddCost(stat, cost);}
+        protected void AddCost(StatType stat, float cost){m_behavior.AddCost(stat, cost);}
         public virtual void Buff(ICreature target){m_components.Buff(target);}
         public void SetBuff(StatType stat, float amount) { m_components.SetBuff(stat, amount); }
 
@@ -53,29 +53,18 @@ namespace OGUR.Skills
         }
         public abstract void Affect(ICreature target);
 
-        public override string ToString()
-        {
-            return m_implementationId;
-        }
+        public override string ToString(){return m_implementationId;}
 
-        public SpriteType GetSpriteType()
-        {
-            return m_behavior.GetSpriteType();
-        }
+        public SpriteType GetSpriteType(){return m_behavior.GetSpriteType();}
 
-        public Skill.Animation GetAnimationType()
-        {
-            return m_behavior.GetAnimationType();
-        }
+        public Skill.Animation GetAnimationType(){return m_behavior.GetAnimationType();}
 
-        internal float GetStrength()
-        {
-            return m_components.GetStrength();
-        }
+        public float GetStrength(){return m_components.GetStrength();}
 
-        internal bool IsPersistent()
-        {
-            return m_components.IsPersistent();
-        }
+        public bool IsPersistent(){return m_components.IsPersistent();}
+
+        public void Cleanup(ICreature target){m_behavior.Cleanup(target);}
+
+        public bool AffectTarget(ICreature target, SkillEffect graphic){return m_behavior.AffectTarget(target, graphic);}
     }
 }

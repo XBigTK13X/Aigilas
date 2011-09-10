@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Sprites;
 using OGUR.Creatures;
 using OGUR.Collision;
+using OGUR.GameObjects;
 
 namespace OGUR.Skills
 {
@@ -12,6 +13,8 @@ namespace OGUR.Skills
     {
         protected SideEffects m_sideEffects;
         protected ISkill m_parent;
+        protected bool m_used = false;
+
         public SkillBehavior(SpriteType effectGraphic, Skill.Animation animation,ISkill parentSkill)
         {
             m_parent = parentSkill;
@@ -19,30 +22,57 @@ namespace OGUR.Skills
         }
         public SpriteType GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
-
+        public virtual void Cleanup(ICreature target) { }
+        public virtual bool AffectTarget(ICreature source,SkillEffect graphic)
+        {
+            var collidedTarget = source.GetTargets().GetCollidedTarget(graphic);
+            if (null != collidedTarget)
+            {
+                m_parent.Affect(collidedTarget);
+                if (!m_parent.IsPersistent())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         internal Skill.Animation GetAnimationType()
         {
             return m_sideEffects.GetAnimationType();
         }
+        public void AddCost(StatType type, float cost)
+        {
+            m_sideEffects.AddCost(type, cost);
+        }
     }
     public class RangedBehavior: SkillBehavior
     {
-        public RangedBehavior(SpriteType effectGraphic,ISkill parentSkill):base(effectGraphic,Skill.Animation.RANGED,parentSkill){}
+        public RangedBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.RANGED, parentSkill) { }
         public override void Activate(ICreature target){m_sideEffects.Generate(target.GetLocation(),target.GetSkillVector(),target);}
     }
     public class SelfBehavior:SkillBehavior
     {
-        public SelfBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.SELF,parentSkill) { }
+        public SelfBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.SELF, parentSkill) { }
         public override void Activate(ICreature target){m_sideEffects.Generate(target.GetLocation(),new Point2(0,0),target);}
+        public override void Cleanup(ICreature target) {if(m_used)m_parent.Affect(target);}
+        public override bool AffectTarget(ICreature source, SkillEffect graphic)
+        {
+            if (!m_used)
+            {
+                m_parent.Affect(source);
+                m_used = true;
+            }
+            return true;
+        }
     }
     public class StationaryBehavior : SkillBehavior
     {
-        public StationaryBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.STATIONARY,parentSkill) { }
+        public StationaryBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.STATIONARY, parentSkill) { }
         public override void Activate(ICreature target) { m_sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target); }
     }
     public class CloudBehavior:SkillBehavior
     {
-        public CloudBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.CLOUD,parentSkill) { }
+        public CloudBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.CLOUD, parentSkill) { }
         public override void Activate(ICreature target)
         {
             var referencePoint = target.GetLocation();

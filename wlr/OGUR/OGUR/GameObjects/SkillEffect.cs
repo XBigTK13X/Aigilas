@@ -17,7 +17,6 @@ namespace OGUR.GameObjects
         private readonly Point2 m_velocity;
         private readonly ICreature m_source;
         private readonly ISkill m_skill;
-        private bool m_used = false;
         private float m_currentStrength = 0;
         private float m_startingStrength = 0;
         private SkillAnimation m_animation;
@@ -36,10 +35,8 @@ namespace OGUR.GameObjects
         {         
             if(m_currentStrength<.001)
             {
-                if (m_animation.GetType()==typeof(SelfAnimation) && m_used)
-                {
-                    m_skill.Affect(m_source);
-                }
+
+                m_skill.Cleanup(m_source);
                 m_isActive = false;
             }
             else
@@ -52,28 +49,7 @@ namespace OGUR.GameObjects
                 m_velocity.SetX(m_velocity.X*m_currentStrength);
                 m_velocity.SetY(m_velocity.Y*m_currentStrength);
                 m_animation.Animate(this,m_source,m_velocity);
-                if(m_animation.GetType()==typeof(SelfAnimation))
-                {
-                    if (!m_used)
-                    {
-                        m_skill.Affect(m_source);
-                        m_used = true;
-                        return;
-                    }
-                }
-                else
-                {
-                    var collidedTarget = m_source.GetTargets().GetCollidedTarget(this);
-                    if (null != collidedTarget)
-                    {
-                        m_skill.Affect(collidedTarget);
-                        if (!m_skill.IsPersistent())
-                        {
-                            m_isActive = false;
-                        }
-                        return;
-                    }    
-                }
+                m_isActive = m_skill.AffectTarget(m_source,this);    
             }
         }
     }

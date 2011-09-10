@@ -9,7 +9,6 @@ namespace OGUR.Skills
 {
     public class SkillComponents
     {
-        protected Stats m_cost;
         protected List<Elements> m_elements;
         protected StatBuff m_buff;
         protected float m_effectStrength = 0;
@@ -20,12 +19,9 @@ namespace OGUR.Skills
             m_effectStrength = strength;
             m_isPersistent = isPersistent;
             m_elements = new List<Elements>() { Elements.NORMAL };
-            m_cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
 
-        public void AddCost(StatType stat,float cost){
-            m_cost.AddBuff(new StatBuff(stat,cost));
-        }
+        
 
         public void AddElements(params Elements[] elements)
         {

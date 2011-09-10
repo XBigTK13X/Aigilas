@@ -175,6 +175,11 @@ namespace OGUR.Creatures
             return m_baseStats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
         }
 
+        private float GetRaw(StatType stat,bool isMax=false)
+        {
+            return isMax ? m_maxStats.GetRaw(stat) : m_baseStats.GetRaw(stat);
+        }
+
         private float CalculateInstrinsicBonus(StatType stat)
         {
             return m_class.GetBonus(m_currentLevel, stat);
@@ -217,7 +222,7 @@ namespace OGUR.Creatures
 
         protected float Adjust(StatType stat, float adjustment,bool adjustMax = false)
         {
-            return Set(stat, Get(stat) + adjustment,adjustMax);
+            return Set(stat, (GetRaw(stat) + adjustment),adjustMax);
         }
 
         public void ApplyDamage(float damage,ICreature attacker=null)
@@ -241,6 +246,20 @@ namespace OGUR.Creatures
                     attacker.AddExperience(CalculateExperience());
                 }
             }
+        }
+
+        public bool LowerStat(StatType stat, float amount)
+        {
+            if (amount != 0)
+            {
+                if (Get(stat) >= amount)
+                {
+                    Console.WriteLine(stat + ": " + amount);
+                    Adjust(stat, -amount);
+                    return true;
+                }
+            }
+            return false;
         }
 
         protected float CalculateDamage()
