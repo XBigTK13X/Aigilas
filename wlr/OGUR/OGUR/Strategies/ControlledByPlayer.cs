@@ -67,6 +67,10 @@ namespace OGUR.Strategies
                         target.SetInteraction(true);
                     }
                 }
+                if (InputManager.IsPressed(InputManager.Commands.Skill, target.GetPlayerIndex()))
+                {
+                    m_isCasting = !m_isCasting;
+                }
                 if(m_isCasting)
                 {
                     if(!keyVelocity.IsZero())
@@ -88,10 +92,6 @@ namespace OGUR.Strategies
                         target.ToggleInventoryVisibility()
                             ? InputManager.Contexts.Inventory
                             : InputManager.Contexts.Free, target.GetPlayerIndex());
-                }
-                if (InputManager.IsPressed(InputManager.Commands.Skill, target.GetPlayerIndex()))
-                {
-                    m_isCasting = !m_isCasting;
                 }
             }
         }

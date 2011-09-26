@@ -214,8 +214,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OGURContent\OGURContent.contentproj">
-      <Name>OGURContent</Name>
+      <Name>OGURContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -246,7 +247,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
