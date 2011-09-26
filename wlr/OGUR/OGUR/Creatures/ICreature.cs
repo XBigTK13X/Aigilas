@@ -80,6 +80,7 @@ namespace OGUR.Creatures
             m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
             m_baseStats = new Stats(stats);
             m_maxStats = new Stats(stats);
+
         }
 
         public void PickupItem(GenericItem item)
@@ -144,10 +145,23 @@ namespace OGUR.Creatures
                     m_deltasHud.Update();
                     m_skillHud.Update();
                 }
+                Regenerate();
             }
             m_strategy.Act(this);
         }
-
+        private void Regenerate()
+        {
+            foreach (StatType stat in Enum.GetValues(typeof(StatType)))
+            {
+                if (stat != StatType.MOVE_COOL_DOWN)
+                {
+                    if (m_baseStats.GetRaw(stat) < m_maxStats.GetRaw(stat))
+                    {
+                        Adjust(stat, m_baseStats.Get(StatType.STRENGTH) / 50);
+                    }
+                }
+            }
+        }
         public override void Draw()
         {
             base.Draw();
@@ -222,7 +236,12 @@ namespace OGUR.Creatures
 
         protected float Adjust(StatType stat, float adjustment,bool adjustMax = false)
         {
-            return Set(stat, (GetRaw(stat) + adjustment),adjustMax);
+            var result = GetRaw(stat) + adjustment;
+            if (result > GetRaw(stat,true))
+            {
+                result = GetRaw(stat,true);
+            }
+            return Set(stat, (result),adjustMax);
         }
 
         public void ApplyDamage(float damage,ICreature attacker=null)
