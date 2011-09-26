@@ -8,9 +8,11 @@ namespace OGUR.Creatures
     public class CreatureFactory
     {
         private static int s_playerCount = 0;
-
+        private static Random s_rand;
         public static ICreature Create(CreatureType type, Point2 position)
         {
+            if (s_rand == null)
+                s_rand = new Random();
             AbstractCreature result;
             switch (type)
             {
@@ -42,7 +44,7 @@ namespace OGUR.Creatures
         public static ICreature CreateRandom(Point2 randomPoint)
         {
             //TODO: This doesn't produce a very random distribution for some reason
-            var val = new Random().Next(1, Enum.GetValues(typeof(CreatureType)).Length - 1);
+            var val = s_rand.Next(1, Enum.GetValues(typeof(CreatureType)).Length - 1);
             return Create((CreatureType)val, randomPoint);
         }
 
