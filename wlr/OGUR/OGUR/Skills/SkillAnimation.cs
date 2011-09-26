@@ -19,7 +19,7 @@ namespace OGUR.Skills
     {
         public override void Animate(SkillEffect skill,ICreature source,Point2 velocity)
         {
-            skill.SetLocation(source.GetLocation());
+            skill.UpdateLocation(source.GetLocation());
         }
     }
 

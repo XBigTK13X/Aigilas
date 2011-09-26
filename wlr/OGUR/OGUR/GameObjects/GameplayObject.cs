@@ -54,7 +54,8 @@ namespace OGUR.GameObjects
         {
             m_assetName = spriteType;
             m_objectType = objectType;
-            SetLocation(location);
+            m_location = new Point2(location);
+            m_graphic.SetPosition(m_location);
         }
 
         protected void Initialize(float x, float y, SpriteType spriteType, GameObjectType objectType)
@@ -68,7 +69,13 @@ namespace OGUR.GameObjects
 
         public void SetLocation(Point2 location)
         {
-            var oldLocation = m_location;
+            m_graphic.SetPosition(location);
+            m_location = new Point2(location);
+        }
+
+        public void UpdateLocation(Point2 location)
+        {
+            var oldLocation = new Point2(m_location);
             m_graphic.SetPosition(location);
             m_location = new Point2(location);
             GameplayObjectManager.UpdateGridLocation(this, oldLocation);
@@ -81,7 +88,7 @@ namespace OGUR.GameObjects
             var target = new Point2(m_location.PosX + amountX,m_location.PosY + amountY);
             if (CoordVerifier.IsValid(target))
             {
-                SetLocation(target);
+                UpdateLocation(target);
             }
         }
 

@@ -135,6 +135,7 @@ namespace OGUR.Dungeons
             {
                 foreach (var player in cache.Cast<ICreature>())
                 {
+                    Console.WriteLine("WTF");
                     player.SetLocation(downSpawnLocation);
                 }
                 GameplayObjectManager.AddObjects(cache);

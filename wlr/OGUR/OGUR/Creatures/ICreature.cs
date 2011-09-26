@@ -312,6 +312,7 @@ namespace OGUR.Creatures
                 var target = new Point2(xVel + GetLocation().PosX , yVel + GetLocation().PosY);
                 if (!CoordVerifier.IsBlocked(target))
                 {
+
                     Move(xVel, yVel);
                     Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));
                 }

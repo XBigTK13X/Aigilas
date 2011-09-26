@@ -28,34 +28,20 @@ namespace OGUR.Strategies
             if (target.IsPlaying())
             {
                 var keyVelocity = new Point2(0, 0);
-                var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,
-                                               target.GetPlayerIndex())
-                            ? -target.Get(StatType.MOVE_SPEED)
-                            : 0);
-                var rightVelocity =
-                    ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))
-                         ? target.Get(StatType.MOVE_SPEED)
-                         : 0);
+                var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,target.GetPlayerIndex())? -target.Get(StatType.MOVE_SPEED): 0);
+                var rightVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))? target.Get(StatType.MOVE_SPEED): 0);
                 keyVelocity.SetX(rightVelocity + leftVelocity);
-                var downVelocity =
-                    ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))
-                         ? target.Get(StatType.MOVE_SPEED)
-                         : 0);
-                var upVelocity =
-                    ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))
-                         ? -target.Get(StatType.MOVE_SPEED)
-                         : 0);
+                
+                var downVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))? target.Get(StatType.MOVE_SPEED): 0);
+                var upVelocity =((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))? -target.Get(StatType.MOVE_SPEED): 0);
                 keyVelocity.SetY(upVelocity + downVelocity);
+
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
                 {
                     var skillCycleVelocity =
-                        ((InputManager.IsPressed(InputManager.Commands.CycleLeft, target.GetPlayerIndex()))
-                             ? -1
-                             : 0)
+                        ((InputManager.IsPressed(InputManager.Commands.CycleLeft, target.GetPlayerIndex()))? -1: 0)
                         +
-                        ((InputManager.IsPressed(InputManager.Commands.CycleRight, target.GetPlayerIndex()))
-                             ? 1
-                             : 0);
+                        ((InputManager.IsPressed(InputManager.Commands.CycleRight, target.GetPlayerIndex()))? 1: 0);
                     target.CycleActiveSkill(skillCycleVelocity);
 
                     if (!m_isCasting)
@@ -69,29 +55,29 @@ namespace OGUR.Strategies
                 }
                 if (InputManager.IsPressed(InputManager.Commands.Skill, target.GetPlayerIndex()))
                 {
-                    m_isCasting = !m_isCasting;
+                    m_isCasting = true;
                 }
+
                 if(m_isCasting)
                 {
                     if(!keyVelocity.IsZero())
                     {
                         target.SetSkillVector(keyVelocity);
                     }
-                    if(target.GetSkillVector() != null)
+                    if (target.GetSkillVector() == null)
                     {
-                        if(!target.GetSkillVector().IsZero())
-                        {
-                            target.UseActiveSkill();
-                            m_isCasting = false;
-                        }    
-                    }    
+                        target.SetSkillVector(new Point2(1, 0));
+                    }
+                    if (!target.GetSkillVector().IsZero())
+                    {
+                        target.UseActiveSkill();
+                        m_isCasting = false;
+                    }
                 }
+                
                 if (InputManager.IsPressed(InputManager.Commands.Inventory, target.GetPlayerIndex()))
                 {
-                    InputManager.SetContext(
-                        target.ToggleInventoryVisibility()
-                            ? InputManager.Contexts.Inventory
-                            : InputManager.Contexts.Free, target.GetPlayerIndex());
+                    InputManager.SetContext(target.ToggleInventoryVisibility()? InputManager.Contexts.Inventory: InputManager.Contexts.Free, target.GetPlayerIndex());
                 }
             }
         }
