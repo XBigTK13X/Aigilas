@@ -20,7 +20,8 @@ namespace OGUR.Sprites
             {SpriteType.ITEM,new SpriteInfo(7, 1)},
             {SpriteType.SKILL_EFFECT,new SpriteInfo(8, 1)},
             {SpriteType.ALTAR,new SpriteInfo(9, 1)},
-            {SpriteType.ZORB,new SpriteInfo(10,1)}
+            {SpriteType.ZORB,new SpriteInfo(10,1)},
+            {SpriteType.MINION,new SpriteInfo(11,1)}
         };
 
         public static SpriteInfo GetSpriteInfo(SpriteType spriteName)

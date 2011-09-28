@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OGUR.Creatures;
 using OGUR.Sprites;
+using OGUR.GameObjects;
 
 namespace OGUR.Skills
 {
@@ -16,6 +17,7 @@ namespace OGUR.Skills
         //Sloth
         public const string FLOOR_SPIKES = "Floor Spikes";
         public const string DART = "Dart";
+        public const string ACID_DRIP = "Acid Drip";
         public const string ACID_NOZZLE = "Acid Nozzle";
         public const string REMOTE_MINE = "Remote Mine";
         public const string VAPOR_IMPLANT = "Vapor Implant";
@@ -60,6 +62,8 @@ namespace OGUR.Skills
         {
             switch(skillId)
             {
+                case SkillId.ACID_DRIP:
+                    return new AcidDrip();
                 case SkillId.ACID_NOZZLE:
                     return new AcidNozzleSkill();
                 case SkillId.BULK:
@@ -96,7 +100,7 @@ namespace OGUR.Skills
                 case Skill.Animation.STATIONARY:
                     return new StationaryBehavior(skillGraphic, parentSkill);
                 default:
-                    throw new Exception("How dare you create a new Anim type for skills without defining a proper behavvior for them!");
+                    throw new Exception("How dare you create a new Anim type for skills without defining a proper behavior for them!");
             }
         }
 
@@ -110,6 +114,18 @@ namespace OGUR.Skills
                     return new SelfAnimation();
                 default:
                     return new NoAnimation();
+            }
+        }
+
+        public static ICreature CreateMinion(string skillId)
+        {
+            switch (skillId)
+            {
+                case SkillId.ACID_NOZZLE:
+                    return new AcidNozzle();
+
+                default:
+                    throw new Exception("A new skill generator was called without defining its instantiation in the factory!");
             }
         }
     }

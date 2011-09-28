@@ -17,6 +17,7 @@ namespace OGUR.Sprites
         CREATURE,
         ITEM,
         SKILL_EFFECT,
+        MINION,
         ALTAR,
         ZORB
     }    

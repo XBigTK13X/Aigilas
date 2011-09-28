@@ -51,7 +51,7 @@ namespace OGUR.Skills
                 Affect(creature);
             }
         }
-        public abstract void Affect(ICreature target);
+        public virtual void Affect(ICreature target) { }
 
         public override string ToString(){return m_implementationId;}
 

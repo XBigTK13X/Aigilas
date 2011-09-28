@@ -48,26 +48,34 @@ namespace OGUR.Skills
     }
     public class FloorSpikesSkill : ISkill
     {
-        public FloorSpikesSkill(): base(SkillId.FLOOR_SPIKES, Skill.Animation.STATIONARY,float.MaxValue,true){AddCost(StatType.MANA, 10);}
+        public FloorSpikesSkill(): base(SkillId.FLOOR_SPIKES, Skill.Animation.STATIONARY,float.MaxValue,true){AddCost(StatType.MANA, 20);}
         public override void Affect(ICreature target)
         {
-            target.ApplyDamage(40);
+            target.ApplyDamage(80);
         }
     }
     public class DartSkill : ISkill
     {
-        public DartSkill(): base(SkillId.DART, Skill.Animation.RANGED){AddCost(StatType.MANA, 10);}
+        public DartSkill(): base(SkillId.DART, Skill.Animation.RANGED){AddCost(StatType.MANA, 2);}
         public override void Affect(ICreature target)
         {
-            Buff(target);
+            target.ApplyDamage(5); 
+        }
+    }
+    public class AcidDrip : ISkill
+    {
+        public AcidDrip(): base(SkillId.ACID_DRIP, Skill.Animation.STATIONARY){AddCost(StatType.MANA, 10);}
+        public override void Affect(ICreature target)
+        {
+            target.ApplyDamage(20);
         }
     }
     public class AcidNozzleSkill : ISkill
     {
-        public AcidNozzleSkill(): base(SkillId.ACID_NOZZLE, Skill.Animation.STATIONARY){AddCost(StatType.MANA, 10);}
-        public override void Affect(ICreature target)
+        public AcidNozzleSkill() : base(SkillId.ACID_NOZZLE, Skill.Animation.STATIONARY) { AddCost(StatType.MANA, 10); }
+        public override void Activate(ICreature source)
         {
-            Buff(target);
+            CreatureFactory.CreateMinion(m_implementationId,source);
         }
     }
     public class RemoteMineSkill : ISkill

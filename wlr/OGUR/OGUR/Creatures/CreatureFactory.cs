@@ -2,6 +2,7 @@
 using OGUR.Collision;
 using OGUR.GameObjects;
 using OGUR.Sprites;
+using OGUR.Skills;
 
 namespace OGUR.Creatures
 {
@@ -43,9 +44,24 @@ namespace OGUR.Creatures
 
         public static ICreature CreateRandom(Point2 randomPoint)
         {
-            //TODO: This doesn't produce a very random distribution for some reason
             var val = s_rand.Next(1, Enum.GetValues(typeof(CreatureType)).Length - 1);
             return Create((CreatureType)val, randomPoint);
+        }
+
+        public static ICreature CreateMinion(string skillId, ICreature source)
+        {
+            Minion result = null;
+            switch (skillId)
+            {
+                case SkillId.ACID_NOZZLE:
+                    result = new AcidNozzle();
+                    break;
+                default:
+                    throw new Exception("No minion was defined for the given skillId.");
+            }
+            result.Init(source);
+            GameplayObjectManager.AddObject(result);
+            return result;
         }
 
         public static void ResetPlayerCount()

@@ -24,6 +24,7 @@ namespace OGUR.Creatures
         protected Stats m_baseStats;
         protected Stats m_maxStats;
         protected God m_god;
+        protected ICreature m_master;
 
         protected SkillPool m_skills;
         protected Point2 m_skillVector;
@@ -50,6 +51,8 @@ namespace OGUR.Creatures
                     return SpriteType.PLAYER_STAND;
                 case CreatureType.ZORB:
                     return SpriteType.ZORB;
+                case CreatureType.MINION:
+                    return SpriteType.MINION;
                 default:
                     return SpriteType.CREATURE;
             }
@@ -73,11 +76,15 @@ namespace OGUR.Creatures
                 m_skillHud = new SkillHud(this);
                 m_skillHud.Toggle();
             }
-            m_skills = new SkillPool(this);
+            
             m_class = creatureClass ?? new NoClass();
             m_isBlocking = true;
             m_creatureType = type;
-            m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
+            if (m_skills == null)
+            {
+                m_skills = new SkillPool(this);
+                m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
+            }
             m_baseStats = new Stats(stats);
             m_maxStats = new Stats(stats);
 
@@ -147,7 +154,10 @@ namespace OGUR.Creatures
                 }
                 Regenerate();
             }
-            m_strategy.Act(this);
+            if (m_strategy != null)
+            {
+                m_strategy.Act(this);
+            }
         }
         private void Regenerate()
         {
@@ -196,12 +206,20 @@ namespace OGUR.Creatures
 
         private float CalculateInstrinsicBonus(StatType stat)
         {
+            if (m_class == null)
+            {
+                return 0;
+            }
             return m_class.GetBonus(m_currentLevel, stat);
         }
 
         public float CalculateEquipmentBonus(StatType stat)
         {
-            return m_equipment.CalculateBonus(stat);
+            if (m_equipment != null)
+            {
+                return m_equipment.CalculateBonus(stat);
+            }
+            return 0;
         }
 
         public float GetMax(StatType stat)
@@ -244,7 +262,7 @@ namespace OGUR.Creatures
             return Set(stat, (result),adjustMax);
         }
 
-        public void ApplyDamage(float damage,ICreature attacker=null)
+        public void ApplyDamage(float damage,ICreature attacker=null,bool showDamage = true)
         {
             damage -= m_baseStats.Get(StatType.DEFENSE);
             if (damage <= 0)
@@ -252,7 +270,10 @@ namespace OGUR.Creatures
                 damage = 0;
                 
             }
-            TextManager.Add(new ActionText(damage.ToString(),30, (int)GetLocation().PosCenterX,(int)GetLocation().PosCenterY));
+            if (showDamage)
+            {
+                TextManager.Add(new ActionText(damage.ToString(), 30, (int)GetLocation().PosCenterX, (int)GetLocation().PosCenterY));
+            }
             if(damage>0)
             {
                 Adjust(StatType.HEALTH, -damage);
@@ -418,6 +439,10 @@ namespace OGUR.Creatures
 
         public TargetSet GetTargets()
         {
+            if (m_strategy == null)
+            {
+                return m_master.GetTargets();
+            }
             return m_strategy.GetTargets();
         }
 

@@ -14,6 +14,7 @@ namespace OGUR.GameObjects
         CREATURE,
         ITEM,
         SKILL_EFFECT,
+        SKILL_EFFECT_GENERATOR,
         ALTAR
     }
 }
