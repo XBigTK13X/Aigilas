@@ -121,5 +121,71 @@ namespace OGUR.Collision
         {
             return (float)(Math.Pow(source.PosX - target.PosX, 2) + Math.Pow(source.PosY - target.PosY, 2));
         }
+
+        public Point2 RotateClockwise()
+        {
+            if (GridX == 1)
+            {
+                if (GridY == -1)
+                {
+                    return new Point2(1, 0);
+                }
+                if (GridY == 0)
+                {
+                    return new Point2(1, 1);
+                }
+                if (GridY == 1)
+                {
+                    return new Point2(0, 1);
+                }
+            }
+            if (GridX == -1)
+            {
+                if (GridY == -1)
+                {
+                    return new Point2(0,-1);
+                }
+                if (GridY == 0)
+                {
+                    return new Point2(-1, -1);
+                }
+                if (GridY == 1)
+                {
+                    return new Point2(-1, 0);
+                }
+            }
+            if (GridX == 0)
+            {
+                if (GridY == 1)
+                {
+                    return new Point2(-1, 1);
+                }
+                if (GridY == -1)
+                {
+                    return new Point2(1, -1);
+                }
+            }
+            return new Point2(0, 0);
+            /*
+             * This is getting close, but the flipped Y coord is ticking me off.
+            var theta = Math.PI / 4f;
+            var currentRotation = Math.Atan2(-Y, X);
+            Console.WriteLine(currentRotation);
+            currentRotation -= theta;
+            var x = (float)Math.Cos(currentRotation);
+            var y = (float)Math.Sin(currentRotation);
+            if(x!=0)
+            {
+                x = (1 / (Math.Abs(x))) * x;
+            }
+            if (y != 0)
+            {
+                y = (1 / (Math.Abs(y))) * y;
+            }
+            var result = new Point2(x,y);
+            Console.WriteLine(result);
+            return result;
+             * */
+        }
     }
 }

@@ -64,7 +64,7 @@ namespace OGUR.Skills
     }
     public class AcidDrip : ISkill
     {
-        public AcidDrip(): base(SkillId.ACID_DRIP, Skill.Animation.STATIONARY){AddCost(StatType.MANA, 10);}
+        public AcidDrip() : base(SkillId.ACID_DRIP, Skill.Animation.STATIONARY) { StartOffCenter = true; AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target)
         {
             target.ApplyDamage(20);

@@ -33,10 +33,6 @@ namespace OGUR.Skills
                 m_skills.Remove(SkillId.NO_SKILL);
                 m_currentSkillSlot = m_skills.IndexOf(skill);
             }
-            foreach (var s in m_skills)
-            {
-                Console.WriteLine(s);
-            }
         }
 
         private string FindCurrent()

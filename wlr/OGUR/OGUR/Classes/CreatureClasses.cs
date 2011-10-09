@@ -45,9 +45,9 @@ namespace OGUR.Classes
     {
         public SlothAcolyte(): base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0)))
         {
+            Add(1, SkillId.ACID_NOZZLE);
             Add(1, SkillId.FLOOR_SPIKES);
             Add(1, SkillId.REMOTE_MINE);
-            Add(1, SkillId.ACID_NOZZLE);
             Add(1, SkillId.VAPOR_IMPLANT);
             Add(1, SkillId.DART);
         }

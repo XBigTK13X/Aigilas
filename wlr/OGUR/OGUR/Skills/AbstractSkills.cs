@@ -24,6 +24,7 @@ namespace OGUR.Skills
         protected string m_implementationId;        
         protected SkillBehavior m_behavior;
         protected SkillComponents m_components;
+        public bool StartOffCenter = false;
 
         protected ISkill(string implementationId, Skill.Animation animation, float strength = SkillEffect.DefaultStrength,bool isPersistent=false,SpriteType effectGraphic = SpriteType.SKILL_EFFECT)
         {

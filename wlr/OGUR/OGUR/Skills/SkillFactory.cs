@@ -116,17 +116,5 @@ namespace OGUR.Skills
                     return new NoAnimation();
             }
         }
-
-        public static ICreature CreateMinion(string skillId)
-        {
-            switch (skillId)
-            {
-                case SkillId.ACID_NOZZLE:
-                    return new AcidNozzle();
-
-                default:
-                    throw new Exception("A new skill generator was called without defining its instantiation in the factory!");
-            }
-        }
     }
 }

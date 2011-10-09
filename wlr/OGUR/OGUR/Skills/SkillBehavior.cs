@@ -82,7 +82,21 @@ namespace OGUR.Skills
     public class StationaryBehavior : SkillBehavior
     {
         public StationaryBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.STATIONARY, parentSkill) { }
-        public override void Activate(ICreature target) {if(SubtractCost(target)){m_sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target);}}
+        public override void Activate(ICreature target) 
+        {
+            if(SubtractCost(target))
+            {
+                if (m_parent.StartOffCenter)
+                {
+                    var location = new Point2(target.GetLocation().GridX + target.GetSkillVector().GridX, target.GetLocation().GridY + target.GetSkillVector().GridY);
+                    m_sideEffects.Generate(location, new Point2(0,0), target);
+                }
+                else
+                {
+                    m_sideEffects.Generate(target.GetLocation(), new Point2(0,0), target);
+                }
+            }
+        }
     }
     public class CloudBehavior:SkillBehavior
     {
