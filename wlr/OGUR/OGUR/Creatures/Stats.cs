@@ -43,7 +43,7 @@ namespace OGUR.Creatures
         }
         public float Get(StatType stat)
         {
-            if (m_buffs.Any(o => o.Stat == stat))
+            if (m_buffs != null)
             {
                 return GetRaw(stat) + m_buffs.Where(o => o.Stat == stat).Sum(buff => buff.Amount);
             }

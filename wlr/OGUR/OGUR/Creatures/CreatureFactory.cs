@@ -44,8 +44,8 @@ namespace OGUR.Creatures
 
         public static ICreature CreateRandom(Point2 randomPoint)
         {
-            var val = s_rand.Next(1, Enum.GetValues(typeof(CreatureType)).Length - 2)+1;
-            return Create((CreatureType)val, randomPoint);
+            var val = s_rand.Next(0, Generate.Randoms.Count);
+            return Create(Generate.Randoms[val], randomPoint);
         }
 
         public static ICreature CreateMinion(string skillId, ICreature source)
