@@ -44,7 +44,7 @@ namespace OGUR.Creatures
 
         public static ICreature CreateRandom(Point2 randomPoint)
         {
-            var val = s_rand.Next(1, Enum.GetValues(typeof(CreatureType)).Length - 1);
+            var val = s_rand.Next(1, Enum.GetValues(typeof(CreatureType)).Length - 2)+1;
             return Create((CreatureType)val, randomPoint);
         }
 
@@ -71,6 +71,8 @@ namespace OGUR.Creatures
 
         public static void IncreasePlayerCount()
         {
+
+            Console.WriteLine(s_playerCount);
             s_playerCount ++;
         }
 

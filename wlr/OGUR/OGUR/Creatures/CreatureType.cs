@@ -2,11 +2,11 @@
 {
     public enum CreatureType
     {
+        MINION,
         ACID_NOZZLE,
         PLAYER,
         GOBLIN,
         ZORB,
-        MINION,
         NONPLAYER
     }
 }

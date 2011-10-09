@@ -294,7 +294,6 @@ namespace OGUR.Creatures
             {
                 if (Get(stat) >= amount)
                 {
-                    Console.WriteLine(stat + ": " + amount);
                     Adjust(stat, -amount);
                     return true;
                 }

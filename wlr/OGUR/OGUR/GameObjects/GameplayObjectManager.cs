@@ -118,8 +118,8 @@ namespace OGUR.GameObjects
 
         public static void Clear()
         {
-            m_contents.Clear();
-            m_gridContents.Clear();
+            m_contents = new List<GameplayObject>();
+            m_gridContents = new Dictionary<Point2, List<GameplayObject>>();
             CreatureFactory.ResetPlayerCount();
         }
 
