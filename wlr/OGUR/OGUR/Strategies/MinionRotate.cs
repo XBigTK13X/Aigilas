@@ -15,10 +15,13 @@ namespace OGUR.Strategies
 
         public override void Act(ICreature target)
         {
-            target.SetSkillVector(target.GetSkillVector().RotateClockwise());
-            target.UseActiveSkill();
-            target.ApplyDamage(1, null, false);
-            target.Set(StatType.MOVE_COOL_DOWN, target.GetMax(StatType.MOVE_COOL_DOWN));
+            if (target.Get(StatType.MOVE_COOL_DOWN) <= 1)
+            {
+                target.SetSkillVector(target.GetSkillVector().RotateClockwise());
+                target.UseActiveSkill();
+                target.ApplyDamage(5, null, false);
+                target.Set(StatType.MOVE_COOL_DOWN, target.GetMax(StatType.MOVE_COOL_DOWN));
+            }
         }
     }
 }

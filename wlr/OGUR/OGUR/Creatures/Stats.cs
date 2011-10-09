@@ -53,10 +53,6 @@ namespace OGUR.Creatures
 
         public float Set(StatType stat, float value)
         {
-            if (stat != StatType.MOVE_COOL_DOWN)
-            {
-                var x = m_stats[stat];
-            }
             return m_stats[stat] = value;
         }
 
