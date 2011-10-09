@@ -135,6 +135,7 @@ namespace OGUR.GameObjects
 
         public static void Update()
         {
+            Console.WriteLine(GetObjects(CreatureType.PLAYER).Count());
             if(!GetObjects(CreatureType.PLAYER).Any(o=>o.IsActive()))
             {
                 Reset();

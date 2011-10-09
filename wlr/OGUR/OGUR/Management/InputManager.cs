@@ -107,7 +107,7 @@ namespace OGUR.Management
         public static bool IsPressed(Commands command, int playerIndex,bool failIfLocked=true)
         {
             
-          string inputMechanism = m_playerInputDevices[playerIndex];
+            string inputMechanism = m_playerInputDevices[playerIndex];
             bool isInputActive = false;
             switch (inputMechanism)
             {

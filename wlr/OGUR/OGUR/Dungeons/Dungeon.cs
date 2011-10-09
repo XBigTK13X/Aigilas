@@ -140,11 +140,12 @@ namespace OGUR.Dungeons
                 GameplayObjectManager.AddObjects(cache);
                 m_contents.AddRange(cache);
             }
-
+            /*
             for (int ii = 0; ii < 40; ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(0).PickupItem(ItemFactory.CreateRandomPlain());
             }
+             * */
         }
 
         private void PlaceItems(int amountToPlace)
