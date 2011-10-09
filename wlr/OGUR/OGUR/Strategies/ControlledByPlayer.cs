@@ -48,11 +48,18 @@ namespace OGUR.Strategies
                     {
                         target.MoveIfPossible(keyVelocity.X, keyVelocity.Y);
                     }
-                    if (!InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex(),false) && target.IsInteracting())
+                    var isPress = InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex());
+                    /*
+                    Console.WriteLine("LOCK: " + InputManager.IsLocked(InputManager.Commands.Confirm, target.GetPlayerIndex()));
+                    Console.WriteLine("PRES: "+isPress);
+                    Console.WriteLine("INTE: "+target.IsInteracting());
+                    if (!InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex(),false))
                     {
                         target.SetInteraction(false);
+                        InputManager.Unlock(InputManager.Commands.Confirm, target.GetPlayerIndex());
                     }
-                    if (InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex(),false) && !target.IsInteracting())
+                    */
+                    if (isPress && !target.IsInteracting())
                     {
                         Console.WriteLine(target.GetPlayerIndex());
                         target.SetInteraction(true);
