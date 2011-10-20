@@ -9,7 +9,7 @@ using OGUR.Sprites;
 
 namespace OGUR.Management
 {
-    internal static class XnaManager
+    public static class XnaManager
     {
         public static readonly int WindowHeight = SpriteInfo.Height*20;
         public static readonly int WindowWidth = SpriteInfo.Width*30;

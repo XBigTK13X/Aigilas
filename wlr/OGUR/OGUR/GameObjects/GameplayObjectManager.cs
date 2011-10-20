@@ -12,7 +12,7 @@ using OGUR.States;
 
 namespace OGUR.GameObjects
 {
-    internal static class GameplayObjectManager
+    public static class GameplayObjectManager
     {
         private static List<GameplayObject> m_contents = new List<GameplayObject>();
         private static Dictionary<Point2,List<GameplayObject>> m_gridContents = new Dictionary<Point2, List<GameplayObject>>();

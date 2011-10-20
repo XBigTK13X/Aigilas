@@ -4,7 +4,7 @@ using OGUR.Sprites;
 
 namespace OGUR.Collision
 {
-    internal static class HitTest
+    public static class HitTest
     {
         public static bool IsTouching(GameplayObject source, GameplayObject target)
         {

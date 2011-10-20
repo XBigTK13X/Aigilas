@@ -8,11 +8,13 @@ namespace OGUR.GameObjects
     public enum Elements
     {
         NORMAL,
-        EARTH,
-        WATER,
-        LIGHTNING,
         FIRE,
+        WATER,
+        EARTH,
+        AIR,
+        LIGHT,
         DARK,
-        LIGHT
+        PHYSICAL, 
+        MENTAL
     }
 }
