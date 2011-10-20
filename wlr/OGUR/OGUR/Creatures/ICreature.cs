@@ -12,6 +12,8 @@ using OGUR.Collision;
 using OGUR.Text;
 using OGUR.Storage;
 using OGUR.Gods;
+using OGUR.Reactions;
+using System.Collections.Generic;
 
 namespace OGUR.Creatures
 {
@@ -28,6 +30,7 @@ namespace OGUR.Creatures
 
         protected SkillPool m_skills;
         protected Point2 m_skillVector;
+        protected ComboMeter m_combo;
 
         protected Inventory m_inventory;
         protected Equipment m_equipment;
@@ -68,6 +71,7 @@ namespace OGUR.Creatures
         {
             m_inventory = new Inventory(this);
             m_equipment = new Equipment(this);
+            m_combo = new ComboMeter(this);
             if (m_playerIndex > -1)
             {
                 m_inventoryHud = new InventoryHud(this);
@@ -157,6 +161,7 @@ namespace OGUR.Creatures
             if (m_strategy != null)
             {
                 m_strategy.Act(this);
+                m_combo.Update();
             }
         }
         private void Regenerate()
@@ -506,6 +511,14 @@ namespace OGUR.Creatures
         public void AddBuff(StatBuff buff)
         {
             m_baseStats.AddBuff(buff);
+        }
+
+        public void Combo(IList<Elements> attack)
+        {
+            foreach(var element in attack)
+            {
+                m_combo.Add(element);
+            }
         }
     }
 }

@@ -166,7 +166,11 @@
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="Items\InventoryHud.cs" />
     <Compile Include="Items\ItemClass.cs" />
+    <Compile Include="Reactions\ConcreteReactions.cs" />
+    <Compile Include="Reactions\IReaction.cs" />
+    <Compile Include="Reactions\ReactionFactory.cs" />
     <Compile Include="Skills\AbstractSkills.cs" />
+    <Compile Include="Reactions\ComboMeter.cs" />
     <Compile Include="Skills\ConcreteSkills.cs" />
     <Compile Include="Skills\SideEffects.cs" />
     <Compile Include="Skills\SkillAnimation.cs" />

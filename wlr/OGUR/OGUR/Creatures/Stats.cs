@@ -45,7 +45,10 @@ namespace OGUR.Creatures
         {
             if (m_buffs != null)
             {
-                return GetRaw(stat) + m_buffs.Where(o => o.Stat == stat).Sum(buff => buff.Amount);
+                if (!m_buffs.Any(o=>o==null))
+                {
+                    return GetRaw(stat) + m_buffs.Where(o => o.Stat == stat).Sum(buff => buff.Amount);
+                }
             }
             return GetRaw(stat);
         }

@@ -23,6 +23,7 @@ namespace OGUR.Skills
 
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             target.ApplyDamage(20,target);
         }
     }
@@ -31,6 +32,7 @@ namespace OGUR.Skills
         public ThrashSkill() : base(SkillId.THRASH, Skill.Animation.CLOUD){ AddCost(StatType.MANA, 40); }
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             target.ApplyDamage(30,target);
         }
     }
@@ -43,6 +45,7 @@ namespace OGUR.Skills
         }
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             Buff(target);
         }
     }
@@ -51,14 +54,16 @@ namespace OGUR.Skills
         public FloorSpikesSkill(): base(SkillId.FLOOR_SPIKES, Skill.Animation.STATIONARY,float.MaxValue,true){AddCost(StatType.MANA, 20);}
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             target.ApplyDamage(80);
         }
     }
     public class DartSkill : ISkill
     {
-        public DartSkill(): base(SkillId.DART, Skill.Animation.RANGED){AddCost(StatType.MANA, 2);}
+        public DartSkill() : base(SkillId.DART, Skill.Animation.RANGED) { AddCost(StatType.MANA, 2); Add(Elements.FIRE, Elements.EARTH); }
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             target.ApplyDamage(5); 
         }
     }
@@ -67,6 +72,7 @@ namespace OGUR.Skills
         public AcidDrip() : base(SkillId.ACID_DRIP, Skill.Animation.STATIONARY) { StartOffCenter = true; AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             target.ApplyDamage(20);
         }
     }
@@ -83,6 +89,7 @@ namespace OGUR.Skills
         public RemoteMineSkill(): base(SkillId.REMOTE_MINE, Skill.Animation.STATIONARY){AddCost(StatType.MANA, 10);}
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             Buff(target);
         }
     }
@@ -91,6 +98,7 @@ namespace OGUR.Skills
         public VaporImplantSkill(): base(SkillId.VAPOR_IMPLANT, Skill.Animation.RANGED){AddCost(StatType.MANA, 10);}
         public override void Affect(ICreature target)
         {
+            base.Affect(target);
             Buff(target);
         }
     }
