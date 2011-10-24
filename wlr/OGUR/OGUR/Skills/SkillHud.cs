@@ -58,7 +58,7 @@ namespace OGUR.Skills
             if(m_isVisible)
             {
                 m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 40, 30, m_parent,.2f));
-                string statText = Enum.GetValues(typeof (StatType)).Cast<StatType>().Aggregate("", (current, stat) => current + (m_parent.Get(stat) + "|"));
+                string statText = OGUR.Util.EnumUtil.GetValues(typeof (StatType)).Cast<StatType>().Aggregate("", (current, stat) => current + (m_parent.Get(stat) + "|"));
                 m_textHandler.Add(new DefaultHudText(statText,5,50,m_parent,.2f));
             }
         }

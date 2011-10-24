@@ -38,7 +38,7 @@ namespace OGUR.Creatures
         {
             for (var ii = 0; ii < stats.Count; ii++)
             {
-                m_stats.Add((StatType)Enum.GetValues(typeof(StatType)).GetValue(ii), stats[ii]);
+                m_stats.Add((StatType)OGUR.Util.EnumUtil.GetValues(typeof(StatType)).GetValue(ii), stats[ii]);
             }
         }
         public float Get(StatType stat)

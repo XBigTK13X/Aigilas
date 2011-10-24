@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OGUR", "OGUR\OGUR\OGUR.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OGURContent", "OGUR\OGURContent\OGURContent.contentproj", "{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC44AD26-5F3D-42B8-8709-315FE7CA74D1}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OGUR.vsmdi
@@ -28,12 +26,14 @@ Global
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Debug|x86.ActiveCfg = Debug|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Debug|x86.Build.0 = Debug|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Debug|Xbox 360.ActiveCfg = Debug|x86
+		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Debug|Xbox 360.Build.0 = Debug|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Release|Any CPU.ActiveCfg = Release|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Release|Mixed Platforms.Build.0 = Release|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Release|x86.ActiveCfg = Release|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Release|x86.Build.0 = Release|x86
 		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Release|Xbox 360.ActiveCfg = Release|x86
+		{03C219A1-3732-4F8D-B5B6-0C0118854720}.Release|Xbox 360.Build.0 = Release|x86
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Debug|x86.ActiveCfg = Debug|x86

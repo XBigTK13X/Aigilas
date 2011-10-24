@@ -15,7 +15,7 @@ namespace OGUR.Path
     
     public static class PathFinder
     {
-        public static Point2 FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly=true)
+        public static Point2 FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly = true)
         {
             var queue = new PriorityQueue<double, Path>();
             start = new Point2(start.GridX,start.GridY);

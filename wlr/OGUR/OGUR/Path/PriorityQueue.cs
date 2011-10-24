@@ -1,6 +1,5 @@
 ﻿using System;
 //From Eric Lippert's blog: http://blogs.msdn.com/ericlippert/archive/2007/10/08/path-finding-using-a-in-c-3-0-part-three.aspx
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ namespace OGUR.Path
     
     class PriorityQueue<P, V>
     {
-        private SortedDictionary<P, Queue<V>> list = new SortedDictionary<P, Queue<V>>();
+        private Dictionary<P, Queue<V>> list = new Dictionary<P, Queue<V>>();
         public void Enqueue(P priority, V value)
         {
             Queue<V> q;

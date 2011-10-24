@@ -69,7 +69,7 @@ namespace OGUR.Storage
                 m_currentClass--;
                 if (m_currentClass <= (ItemClass)0)
                 {
-                    m_currentClass = (ItemClass)Enum.GetValues(typeof(ItemClass)).Length - 2;
+                    m_currentClass = (ItemClass)OGUR.Util.EnumUtil.GetValues(typeof(ItemClass)).Length - 2;
                 }
                 m_startingItem = 0;
                 m_endingItem = 4;

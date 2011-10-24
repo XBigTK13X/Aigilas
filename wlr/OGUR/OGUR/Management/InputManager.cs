@@ -32,7 +32,13 @@ namespace OGUR.Management
             Inventory
         }
 
-        private static Dictionary<int, Contexts> m_contexts = new Dictionary<int, Contexts>()
+        private static readonly List<string> m_playerInputDevices = new List<string>()
+                                                                        {
+                                                                            "KEYBOARD",
+                                                                            "GAMEPAD"
+                                                                        };
+
+        private static readonly Dictionary<int, Contexts> m_contexts = new Dictionary<int, Contexts>()
                                                                   {
                                                                       {0, Contexts.Free},
                                                                       {1, Contexts.Free},
@@ -40,9 +46,9 @@ namespace OGUR.Management
                                                                       {3, Contexts.Free}
 
                                                                   };
-        private static List<CommandLock> s_locks = new List<CommandLock>(); 
+        private static readonly List<CommandLock> s_locks = new List<CommandLock>(); 
 
-        private static Dictionary<Commands,Contexts> s_lockOnPress = new Dictionary<Commands,Contexts>()
+        private static readonly Dictionary<Commands,Contexts> s_lockOnPress = new Dictionary<Commands,Contexts>()
                                                           {
                                                               {Commands.Confirm,Contexts.All},
                                                               {Commands.Inventory,Contexts.All},
@@ -57,12 +63,6 @@ namespace OGUR.Management
                                                               {Commands.CycleRight,Contexts.All},
                                                               {Commands.Skill,Contexts.All}
                                                           }; 
-
-        private static readonly List<string> m_playerInputDevices = new List<string>()
-                                                                        {
-                                                                            "KEYBOARD",
-                                                                            "GAMEPAD"
-                                                                        };
 
         private static readonly Dictionary<Commands, Keys> m_keyboardMapping = new Dictionary<Commands, Keys>()
                                                                                    {

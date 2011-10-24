@@ -213,6 +213,7 @@
     <Compile Include="Strategies\ControlledByPlayer.cs" />
     <Compile Include="Strategies\AttackPlayers.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
+    <Compile Include="Util\EnumUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

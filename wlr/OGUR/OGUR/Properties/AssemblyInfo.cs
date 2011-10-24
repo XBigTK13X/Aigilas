@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("OGUR")]
+[assembly: AssemblyTitle("OGUR1")]
 [assembly: AssemblyProduct("OGUR")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("Microsoft")]
