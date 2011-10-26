@@ -63,7 +63,7 @@ namespace OGUR.Collision
             X = xValue;
             var isGrid = (X < DungeonFactory.BlocksWide);
             PosX = (isGrid) ? X * SpriteInfo.Width : X;
-            PosCenterX = (isGrid) ? X * SpriteInfo.Width + halfWidth : X + halfWidth;
+            PosCenterX = PosX + halfWidth;
             GridX = (isGrid) ? (int)X : (int)(X / SpriteInfo.Width);
         }
 
@@ -72,7 +72,7 @@ namespace OGUR.Collision
             Y = yValue;
             var isGrid = (Y < DungeonFactory.BlocksHigh);
             PosY = (isGrid)?Y*SpriteInfo.Height:Y;
-            PosCenterY = (isGrid)?Y * SpriteInfo.Height + halfHeight : Y+halfHeight;
+            PosCenterY = PosY+halfHeight;
             GridY = (isGrid) ? (int)Y : (int)(Y / SpriteInfo.Height);
         }
 
