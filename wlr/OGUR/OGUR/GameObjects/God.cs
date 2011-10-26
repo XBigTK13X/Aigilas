@@ -31,11 +31,11 @@ namespace OGUR.Gods
                                               {
                                                   new God(Color.Pink, Name.LUST, ItemClass.Leggings, ItemClass.Melee_Weapon),
                                                   new God(Color.Gold, Name.GREED, ItemClass.Head_Gear, ItemClass.Gloves),
-                                                  new God(Color.Black, Name.SLOTH, ItemClass.Shield, ItemClass.Head_Gear),
-                                                  new God(Color.Green, Name.ENVY, ItemClass.Torso_Garb, ItemClass.Ranged_Weapon),
+                                                  new God(Color.Silver, Name.SLOTH, ItemClass.Shield, ItemClass.Head_Gear),
+                                                  new God(Color.LightGoldenrodYellow, Name.ENVY, ItemClass.Torso_Garb, ItemClass.Ranged_Weapon),
                                                   new God(Color.Red, Name.WRATH, ItemClass.Melee_Weapon, ItemClass.Ranged_Ammo),
-                                                  new God(Color.YellowGreen, Name.GLUTTONY, ItemClass.Gloves, ItemClass.Torso_Garb),
-                                                  new God(Color.Indigo, Name.PRIDE, ItemClass.Ring, ItemClass.Feet)
+                                                  new God(Color.LightGreen, Name.GLUTTONY, ItemClass.Gloves, ItemClass.Torso_Garb),
+                                                  new God(Color.LightBlue, Name.PRIDE, ItemClass.Ring, ItemClass.Feet)
                                               };
 
         private Color m_color;
