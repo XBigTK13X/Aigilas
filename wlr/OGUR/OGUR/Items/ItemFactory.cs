@@ -18,7 +18,7 @@ namespace OGUR.Items
 
             return
                 (GenericItem)
-                GameplayObjectManager.AddObject(new GenericItem(new Stats(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+                GameplayObjectManager.AddObject(new GenericItem(new Stats(rand.Next(5), rand.Next(5), rand.Next(5), 0, 0, 0, 0, 0, 0, 0, 0),
                                                                 ItemSuffix.NULL, ItemPrefix.NULL, SelectRandomType(),
                                                                 location,onFloor));
         }
@@ -29,12 +29,11 @@ namespace OGUR.Items
         public static GenericItem CreateRandomMagic()
         {
             return null;
-            //return new IItem(new Stats(1,1,1,1,1,1,0,1,0,0,0),)            }
+            //return new IItem(new Stats(1,1,1,1,1,1,0,1,0,0,0),)}
         }
         private static ItemName SelectRandomType()
         {
-            return ItemName.Dagger;
-            //return (ItemName)OGUR.Util.EnumUtil.GetValues(typeof (ItemName)).GetValue(rand.Next(1, OGUR.Util.EnumUtil.GetValues(typeof (ItemName)).Length));
+            return (ItemName)OGUR.Util.EnumUtil.GetValues(typeof (ItemName)).GetValue(rand.Next(1, OGUR.Util.EnumUtil.GetValues(typeof (ItemName)).Length));
         }
     }
 }
