@@ -23,7 +23,7 @@ namespace OGUR.Collision
 
         private static bool IsClose(float x1, float x2, float y1, float y2)
         {
-            return GetDistanceSquare(x1,x2,y1,y2) <= 2*(SpriteInfo.Radius*SpriteInfo.Radius);
+            return GetDistanceSquare(x1,x2,y1,y2) < SpriteInfo.Radius;
         }
 
         public static float GetDistanceSquare(GameplayObject source, GameplayObject target)
