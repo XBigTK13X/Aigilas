@@ -75,8 +75,7 @@ namespace OGUR.Creatures
 
         public override int GetHashCode()
         {
-            string hash = m_stats.Aggregate("", (current, pair) => current + m_stats.ToString());
-            return hash.GetHashCode();
+            return m_stats.Aggregate("", (current, pair) => current + m_stats.ToString()).GetHashCode();
         }
 
         public IEnumerable GetDeltas(Stats stats)

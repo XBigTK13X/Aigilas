@@ -25,7 +25,7 @@ namespace OGUR.GameObjects
 
         public override void Update()
         {
-            var offerings = GameplayObjectManager.GetObjects(GameObjectType.ITEM).Where(o => Collision.HitTest.IsTouching(this, o)).Cast<GenericItem>().ToList();
+            var offerings = GameplayObjectManager.GetObjects(GameObjectType.ITEM).Where(o => Collision.HitTest.IsTouching(this, o));
             var player = GameplayObjectManager.GetTouchingPlayer(this);
             if (player != null)
             {
@@ -33,7 +33,7 @@ namespace OGUR.GameObjects
                 {
                     player.Pray(m_god);
                 }
-                foreach (var offering in offerings)
+                foreach (GenericItem offering in offerings)
                 {
                     player.Sacrifice(m_god, offering);
                 }

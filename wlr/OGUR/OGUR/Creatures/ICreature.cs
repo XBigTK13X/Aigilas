@@ -260,9 +260,12 @@ namespace OGUR.Creatures
         protected float Adjust(StatType stat, float adjustment,bool adjustMax = false)
         {
             var result = GetRaw(stat) + adjustment;
-            if (result > GetRaw(stat,true))
+            if (!adjustMax)
             {
-                result = GetRaw(stat,true);
+                if (result > GetRaw(stat, true))
+                {
+                    result = GetRaw(stat, true);
+                }
             }
             return Set(stat, (result),adjustMax);
         }
@@ -484,6 +487,7 @@ namespace OGUR.Creatures
         public void Sacrifice(God god, GenericItem sacrifice)
         {
             AssignGod(god);
+            Adjust(StatType.PIETY, sacrifice.Modifers.GetSum() * ((m_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((m_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1), true);
             Adjust(StatType.PIETY,sacrifice.Modifers.GetSum() * ((m_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((m_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1));
             sacrifice.SetInactive();
         }
