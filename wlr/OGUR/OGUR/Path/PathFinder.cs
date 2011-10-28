@@ -39,7 +39,8 @@ namespace OGUR.Path
                 }
                 while(neighbors.Any())
                 {
-                    var node = neighbors.Where(p => p.Weight == neighbors.Min(o => o.Weight)).First();
+                    var min = neighbors.Min(o => o.Weight);
+                    var node = neighbors.Where(p => p.Weight == min).First();
                     neighbors.Remove(node);
                     if (!CoordVerifier.IsBlocked(node) || (node.GridX == destination.GridX && node.GridY == destination.GridY))
                     {
