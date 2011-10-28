@@ -37,17 +37,7 @@ namespace OGUR.Skills
         public void Draw()
         {
             if (!m_isVisible) return;
-            SpriteBatch target = XnaManager.GetRenderTarget();
-            //target.Begin();
-            target.Begin(SpriteSortMode.BackToFront,
-                         BlendState.AlphaBlend,
-                         null,
-                         null,
-                         null,
-                         null,
-                         XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
-            target.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f,0f,0f,.4f), 0f, new Vector2(0,0), new Vector2(200,100), SpriteEffects.None, 0f);
-            target.End();
+            XnaManager.Renderer.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f,0f,0f,.4f), 0f, new Vector2(0,0), new Vector2(200,100), SpriteEffects.None, 0f);
             m_textHandler.Draw();
         }
             

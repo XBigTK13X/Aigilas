@@ -35,42 +35,23 @@ namespace OGUR.Sprites
         public void Draw()
         {
             UpdateAnimation();
-            SpriteBatch target = XnaManager.GetRenderTarget();
-            //target.Begin();
-            target.Begin(SpriteSortMode.BackToFront,
-                         BlendState.AlphaBlend,
-                         null,
-                         null,
-                         null,
-                         null,
-                         XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
             m_currentCell = new Rectangle((m_currentFrame * m_spriteInfo.X) + (m_currentFrame+1), (m_spriteInfo.SpriteIndex * m_spriteInfo.Y) + (m_spriteInfo.SpriteIndex+1),
                                           m_spriteInfo.X, m_spriteInfo.Y);
-            var tempPosition = new Vector2(m_position.X, m_position.Y);
-            target.Draw(m_graphic, tempPosition, m_currentCell, m_color);
-            target.End();
+            var target = new Vector2(m_position.X, m_position.Y);
+            XnaManager.Renderer.Draw(m_graphic, target, m_currentCell, m_color);
+            
         }
 
         private void UpdateAnimation()
         {
-            try
+            if (m_spriteInfo.MaxFrame != 1)
             {
-                if (m_spriteInfo.MaxFrame != 1)
+                m_animationTimer--;
+                if (m_animationTimer <= 0)
                 {
-                    m_animationTimer--;
-                    if (m_animationTimer <= 0)
-                    {
-                        m_currentFrame = (m_currentFrame + 1)%m_spriteInfo.MaxFrame;
-                        m_animationTimer = m_ANIMATE_SPEED;
-                    }
+                    m_currentFrame = (m_currentFrame + 1)%m_spriteInfo.MaxFrame;
+                    m_animationTimer = m_ANIMATE_SPEED;
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("AnimatedTexture.UpdateAnimation() threw an exception.");
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-                Console.WriteLine(e.InnerException);
             }
         }
 

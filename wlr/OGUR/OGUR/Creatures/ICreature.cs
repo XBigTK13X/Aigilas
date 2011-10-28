@@ -390,13 +390,27 @@ namespace OGUR.Creatures
 
         public void AddExperience(float amount)
         {
-            m_experience += amount;
-            if(m_experience>m_nextLevelExperience)
+            
+            while (amount > 0)
             {
-                m_nextLevelExperience += 100;
-                m_experience = 0;
-                m_currentLevel++;
-                TextManager.Add(new ActionText("LEVEL UP!",30,(int)GetLocation().PosX,(int)GetLocation().PosY));
+                var diff = amount;
+                if (amount > m_nextLevelExperience)
+                {
+                    diff = m_nextLevelExperience;
+                    amount -= m_nextLevelExperience;
+                }
+                else
+                {
+                    amount = 0;
+                }
+                m_experience += diff;
+                if (m_experience > m_nextLevelExperience)
+                {
+                    m_nextLevelExperience += 100;
+                    m_experience = 0;
+                    m_currentLevel++;
+                    TextManager.Add(new ActionText("LEVEL UP!", 30, (int)GetLocation().PosX, (int)GetLocation().PosY));
+                }
             }
         }
 

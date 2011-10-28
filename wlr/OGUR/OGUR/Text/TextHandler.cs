@@ -42,7 +42,7 @@ namespace OGUR.Text
         public void Draw()
         {
 
-            if (XnaManager.GetRenderTarget() != null)
+            if (XnaManager.Renderer != null)
             {
                 foreach (var component in m_contents)
                 {

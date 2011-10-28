@@ -24,18 +24,9 @@ namespace OGUR.States
 
         public override void Draw()
         {
-            SpriteBatch target = XnaManager.GetRenderTarget();
-            target.Begin(SpriteSortMode.BackToFront,
-                         BlendState.AlphaBlend,
-                         null,
-                         null,
-                         null,
-                         null,
-                         XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
             var x = (XnaManager.WindowWidth - m_menuBase.Bounds.Right)/2;
             var y = (XnaManager.WindowHeight - m_menuBase.Bounds.Bottom) / 2;
-            target.Draw(m_menuBase, new Vector2(x,y), Color.White);
-            target.End();
+            XnaManager.Renderer.Draw(m_menuBase, new Vector2(x,y), Color.White);
         }
 
         public override void Update()

@@ -14,28 +14,18 @@ namespace OGUR.Management
         public static readonly int WindowHeight = SpriteInfo.Height*20;
         public static readonly int WindowWidth = SpriteInfo.Width*30;
         private static ContentManager s_assetHandler;
-        private static SpriteBatch s_renderTarget;
         private static Camera s_camera = new Camera();
         private static GraphicsDeviceManager s_graphicsDevice;
+        public static SpriteBatch Renderer;
 
         public static void SetContentManager(ContentManager assetHandler)
         {
             s_assetHandler = assetHandler;
         }
 
-        public static void SetRenderTarget(SpriteBatch renderTarget)
-        {
-            s_renderTarget = renderTarget;
-        }
-
         public static ContentManager GetContentManager()
         {
             return s_assetHandler;
-        }
-
-        public static SpriteBatch GetRenderTarget()
-        {
-            return s_renderTarget;
         }
 
         public static void SetupCamera(GraphicsDeviceManager graphicsDevice)

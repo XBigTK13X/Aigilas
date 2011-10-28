@@ -9,6 +9,7 @@ using OGUR.Management;
 using OGUR.Creatures;
 using OGUR.Sprites;
 using OGUR.States;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace OGUR.GameObjects
 {
@@ -168,54 +169,19 @@ namespace OGUR.GameObjects
 
         public static void Draw()
         {
-            var players = new List<GameplayObject>();
-            var skillEffects = new List<GameplayObject>();
-            if (XnaManager.GetRenderTarget() != null)
+            if (XnaManager.Renderer != null)
             {
                 foreach (var component in m_contents)
                 {
 
-                    if (component.GetObjectType() == GameObjectType.CREATURE)
-                    {
-                        if (((ICreature) component).GetCreatureType() == CreatureType.PLAYER)
-                        {
-                            players.Add(component);
-                        }
-                        else
-                        {
-                            if (((ICreature) component).IsPlaying())
-                            {
-                                component.Draw();
-                            }
-                        }
-                    }
-                    else if(component.GetObjectType()==GameObjectType.SKILL_EFFECT)
-                    {
-                        skillEffects.Add(component);
-                    }
-                    else
-                    {
-                        component.Draw();
-                    }
-                }
-            }
-
-            if (XnaManager.GetRenderTarget() != null)
-            {
-                foreach (var player in players.Where(player => ((ICreature)player).IsPlaying()))
-                {
-                    player.Draw();
-                }
-                foreach(var skillEffect in skillEffects)
-                {
-                    skillEffect.Draw();
+                    component.Draw();
                 }
             }
         }
 
         public static void LoadContent()
         {
-            if (XnaManager.GetRenderTarget() != null)
+            if (XnaManager.Renderer != null)
             {
                 foreach (var component in m_contents)
                 {

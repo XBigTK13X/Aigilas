@@ -21,7 +21,6 @@ namespace OGUR
     public class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
 
         public Game()
         {
@@ -54,8 +53,7 @@ namespace OGUR
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            XnaManager.SetRenderTarget(spriteBatch);
+            XnaManager.Renderer = new SpriteBatch(GraphicsDevice); ;
             StateManager.LoadContent();
             TextManager.LoadContent();
         }
@@ -98,9 +96,17 @@ namespace OGUR
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
+            XnaManager.Renderer.Begin(SpriteSortMode.Immediate,
+                         BlendState.AlphaBlend,
+                         null,
+                         null,
+                         null,
+                         null,
+                         XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
             StateManager.Draw();
             TextManager.Draw();
             base.Draw(gameTime);
+            XnaManager.Renderer.End();
         }
     }
 }

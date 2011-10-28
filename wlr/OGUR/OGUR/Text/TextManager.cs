@@ -50,7 +50,7 @@ namespace OGUR.Text
         {
             foreach (Text component in m_contents)
             {
-                if (XnaManager.GetRenderTarget() != null)
+                if (XnaManager.Renderer != null)
                 {
                     component.Draw();
                 }
