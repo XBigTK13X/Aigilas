@@ -6,9 +6,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OGURContent", "OGUR\OGURContent\OGURContent.contentproj", "{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D45C6F76-73BB-4BE8-941E-71795ED82786}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbox 360 Copy of OGUR", "OGUR\OGUR\Xbox 360 Copy of OGUR.csproj", "{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -47,6 +46,22 @@ Global
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Release|x86.ActiveCfg = Release|x86
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Release|Xbox 360.ActiveCfg = Release|x86
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|Any CPU.ActiveCfg = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|Mixed Platforms.ActiveCfg = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|Mixed Platforms.Build.0 = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|Mixed Platforms.Deploy.0 = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|x86.ActiveCfg = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|Xbox 360.Build.0 = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Debug|Xbox 360.Deploy.0 = Debug|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|Any CPU.ActiveCfg = Release|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|Mixed Platforms.ActiveCfg = Release|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|Mixed Platforms.Build.0 = Release|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|Mixed Platforms.Deploy.0 = Release|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|x86.ActiveCfg = Release|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|Xbox 360.Build.0 = Release|Xbox 360
+		{942A8DAF-86C9-4761-8DA3-1BBBD0D8671A}.Release|Xbox 360.Deploy.0 = Release|Xbox 360
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

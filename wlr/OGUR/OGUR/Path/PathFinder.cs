@@ -15,21 +15,28 @@ namespace OGUR.Path
     
     public static class PathFinder
     {
+        private static PriorityQueue<double, Path> queue = new PriorityQueue<double, Path>();
+        private static Point2 node = new Point2(0, 0);
+        private static float min;
+        private static Path path;
+        private static List<Point2> neighbors = new List<Point2>();
+
         public static Point2 FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly = true)
         {
-            var queue = new PriorityQueue<double, Path>();
+            queue.Clear();
             start = new Point2(start.GridX,start.GridY);
             destination = new Point2(destination.GridX, destination.GridY);
             queue.Enqueue(0, new Path(start,destination));
             while (!queue.IsEmpty)
             {
-                var path = queue.Dequeue();
+                path = queue.Dequeue();
                 if (path.IsDone())
                 {
                     return path.GetNextMove();
                 }
-                var neighbors = path.GetNeighbors();
-                if(!neighbors.Any())
+                neighbors.Clear();
+                neighbors = path.GetNeighbors();
+                if(neighbors.Count==0)
                 {
                     continue;
                 }
@@ -37,10 +44,16 @@ namespace OGUR.Path
                 {
                     neighbor.SetWeight(HitTest.GetDistanceSquare(neighbor, destination));
                 }
-                while(neighbors.Any())
+                while(neighbors.Count>0)
                 {
-                    var min = neighbors.Min(o => o.Weight);
-                    var node = neighbors.Where(p => p.Weight == min).First();
+                    node = neighbors[0];
+                    foreach(var neighbor in neighbors)
+                    {
+                        if (neighbor.Weight < node.Weight)
+                        {
+                            node = neighbor;
+                        }
+                    }
                     neighbors.Remove(node);
                     if (!CoordVerifier.IsBlocked(node) || (node.GridX == destination.GridX && node.GridY == destination.GridY))
                     {

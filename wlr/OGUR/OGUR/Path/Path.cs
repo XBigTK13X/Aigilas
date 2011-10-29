@@ -11,14 +11,14 @@ namespace OGUR.Path
 
     public class Path
     {
-        public Point2 Finish { get; private set; }
+        public static Point2 Finish = new Point2(0, 0);
         private List<Point2> m_steps = new List<Point2>();
         private Dictionary<Point2,Point2> m_stepLookup = new Dictionary<Point2,Point2>();
         private float m_totalWeight = 0;
 
         public Path(Point2 start, Point2 finish)
         {
-            Finish = new Point2(finish);
+            Finish.Copy(finish);
             Add(start);
             
         }
@@ -28,7 +28,6 @@ namespace OGUR.Path
             m_stepLookup = source.m_stepLookup;
             m_steps = source.m_steps;
             m_totalWeight = source.m_totalWeight;
-            Finish = source.Finish;
         }
 
         public bool Add(Point2 step)
@@ -63,8 +62,7 @@ namespace OGUR.Path
 
         public List<Point2> GetNeighbors()
         {
-            var neighbors = GetLastStep().GetNeighbors();
-            return neighbors;
+           return GetLastStep().GetNeighbors();
         }
 
         public int Length()

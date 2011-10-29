@@ -34,6 +34,8 @@ namespace OGUR.Collision
                 new Point2(1, -1)
             };
 
+        public static Point2[,] m_locations;
+
         public Point2(float x, float y, int weight = 0)
         {
             SetX(x);
@@ -109,20 +111,32 @@ namespace OGUR.Collision
             return (float) (Math.Pow(source.PosY - target.PosY, 2) + Math.Pow(source.PosX - target.PosX, 2));
         }
 
+        private static List<Point2> m_neighbors = new List<Point2>();
         public List<Point2> GetNeighbors()
         {
-            var result = new List<Point2>();
+            if (m_locations == null)
+            {
+                m_locations = new Point2[DungeonFactory.BlocksHigh, DungeonFactory.BlocksWide];
+                for (int ii = 0; ii < DungeonFactory.BlocksHigh; ii++)
+                {
+                    for (int jj = 0; jj < DungeonFactory.BlocksWide; jj++)
+                    {
+                        m_locations[ii,jj] = new Point2(jj, ii);
+                    }
+                }
+            }
+            m_neighbors.Clear();
             for (var ii = -1; ii < 2; ii++)
             {
                 for (var jj = -1; jj < 2; jj++)
                 {
                     if (ii != 0 || jj != 0)
                     {
-                        result.Add(new Point2(GridX + ii, GridY + jj));
+                        m_neighbors.Add(m_locations[GridY + ii,GridX + jj]);
                     }
                 }
             }
-            return result;
+            return m_neighbors;
         }
 
         public Point2 RotateClockwise()

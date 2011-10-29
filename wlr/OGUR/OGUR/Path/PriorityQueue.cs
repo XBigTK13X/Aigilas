@@ -33,7 +33,12 @@ namespace OGUR.Path
         }
         public bool IsEmpty
         {
-            get { return !list.Any(); }
+            get { return list.Keys.Count()==0; }
+        }
+
+        public void Clear()
+        {
+            list.Clear();
         }
     }
 }
