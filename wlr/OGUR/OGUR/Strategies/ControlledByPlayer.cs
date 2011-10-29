@@ -9,6 +9,7 @@ namespace OGUR.Strategies
     public class ControlledByPlayer : IStrategy
     {
         private bool m_isCasting = false;
+        private Point2 m_keyVelocity = new Point2(0, 0);
 
         public ControlledByPlayer(ICreature parent) : base(parent)
         {
@@ -27,14 +28,13 @@ namespace OGUR.Strategies
             }
             if (target.IsPlaying())
             {
-                var keyVelocity = new Point2(0, 0);
                 var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,target.GetPlayerIndex())? -target.Get(StatType.MOVE_SPEED): 0);
                 var rightVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))? target.Get(StatType.MOVE_SPEED): 0);
-                keyVelocity.SetX(rightVelocity + leftVelocity);
+                m_keyVelocity.SetX(rightVelocity + leftVelocity);
                 
                 var downVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))? target.Get(StatType.MOVE_SPEED): 0);
                 var upVelocity =((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))? -target.Get(StatType.MOVE_SPEED): 0);
-                keyVelocity.SetY(upVelocity + downVelocity);
+                m_keyVelocity.SetY(upVelocity + downVelocity);
 
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
                 {
@@ -46,7 +46,7 @@ namespace OGUR.Strategies
 
                     if (!m_isCasting)
                     {
-                        target.MoveIfPossible(keyVelocity.X, keyVelocity.Y);
+                        target.MoveIfPossible(m_keyVelocity.X, m_keyVelocity.Y);
                     }
                     var isPress = InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex());
                     if (!isPress)
@@ -65,9 +65,9 @@ namespace OGUR.Strategies
 
                 if(m_isCasting)
                 {
-                    if(!keyVelocity.IsZero())
+                    if (!m_keyVelocity.IsZero())
                     {
-                        target.SetSkillVector(keyVelocity);
+                        target.SetSkillVector(m_keyVelocity);
                     }
                     if (target.GetSkillVector() == null)
                     {

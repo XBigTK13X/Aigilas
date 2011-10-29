@@ -14,7 +14,7 @@ namespace OGUR.GameObjects
         private const float m_strengthDecayAmount = .75f;
         public const float DefaultStrength = 1;
         
-        private readonly Point2 m_velocity;
+        private readonly Point2 m_velocity = new Point2(0,0);
         private readonly ICreature m_source;
         private readonly ISkill m_skill;
         private float m_currentStrength = 0;
@@ -25,7 +25,7 @@ namespace OGUR.GameObjects
         {
             m_skill = skill;
             Initialize(gridLocation, m_skill.GetSpriteType(), GameObjectType.SKILL_EFFECT);
-            m_velocity = velocity;
+            m_velocity.Copy(velocity);
             m_source = source;
             m_startingStrength = m_currentStrength = m_skill.GetStrength();
             m_animation = SkillFactory.Create(m_skill.GetAnimationType());

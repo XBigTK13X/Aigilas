@@ -29,7 +29,7 @@ namespace OGUR.Creatures
         protected ICreature m_master;
 
         protected SkillPool m_skills;
-        protected Point2 m_skillVector;
+        protected Point2 m_skillVector = new Point2(0,0);
         protected ComboMeter m_combo;
 
         protected Inventory m_inventory;
@@ -388,7 +388,13 @@ namespace OGUR.Creatures
             {
                 return null;
             }
-            return new Point2(m_skillVector);
+            return m_skillVector;
+        }
+        
+        public void SetSkillVector(Point2 skillVector)
+        {
+            m_skillVector.SetX(skillVector.X);
+            m_skillVector.SetY(skillVector.Y);
         }
 
         public void AddExperience(float amount)
@@ -467,10 +473,7 @@ namespace OGUR.Creatures
             return m_strategy.GetTargets();
         }
 
-        public void SetSkillVector(Point2 skillVector)
-        {
-            m_skillVector = new Point2(skillVector);
-        }
+        
 
         private StatType GetLowestStat()
         {

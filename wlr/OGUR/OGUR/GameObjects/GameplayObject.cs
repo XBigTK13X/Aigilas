@@ -23,7 +23,7 @@ namespace OGUR.GameObjects
         protected bool m_isOnBoard = true;
         protected List<Elements> m_composition = new List<Elements>(){Elements.NORMAL};
         private bool m_isInteracting = false;
-        protected Point2 m_location;
+        protected Point2 m_location = new Point2(0,0);
 
         //Load the texture for the sprite using the Content Pipeline
         public void LoadContent()
@@ -54,13 +54,8 @@ namespace OGUR.GameObjects
         {
             m_assetName = spriteType;
             m_objectType = objectType;
-            m_location = new Point2(location);
+            m_location.Copy(location);
             m_graphic.SetPosition(m_location);
-        }
-
-        protected void Initialize(float x, float y, SpriteType spriteType, GameObjectType objectType)
-        {
-            Initialize(new Point2(x,y),spriteType,objectType);
         }
 
         public virtual void Update()
@@ -70,14 +65,14 @@ namespace OGUR.GameObjects
         public void SetLocation(Point2 location)
         {
             m_graphic.SetPosition(location);
-            m_location = new Point2(location);
+            m_location = location;
         }
 
         public void UpdateLocation(Point2 location)
         {
-            var oldLocation = new Point2(m_location);
+            var oldLocation = m_location;
             m_graphic.SetPosition(location);
-            m_location = new Point2(location);
+            m_location = location;
             GameplayObjectManager.UpdateGridLocation(this, oldLocation);
         }
 

@@ -48,11 +48,17 @@ namespace OGUR.Collision
             Weight = 0;
         }
 
-        public Point2(Vector2  target)
+        public Point2(Vector2 target)
         {
             SetX(target.X);
             SetY(target.Y);
             Weight = 0;
+        }
+
+        public void Copy(Point2 point)
+        {
+            SetX(point.X);
+            SetY(point.Y);
         }
 
         public override int GetHashCode()
