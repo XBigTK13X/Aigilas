@@ -42,7 +42,7 @@ namespace OGUR.Skills
 
         public void Add(IEnumerable<string> getLevelSkills)
         {
-            if(getLevelSkills.Any())
+            if(!getLevelSkills.Any())
             {
                 m_skills.Add(SkillId.NO_SKILL);
                 return;
