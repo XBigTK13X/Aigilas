@@ -80,7 +80,8 @@ namespace OGUR
                 var player = (PlayerIndex) ii;
                 if (GamePad.GetState(player).Buttons.Back == ButtonState.Pressed && GamePad.GetState(player).Buttons.Start==ButtonState.Pressed)
                 {
-                    this.Exit();
+                    Exit();
+                    return;
                 }
             }
             // TODO: Add your update logic here

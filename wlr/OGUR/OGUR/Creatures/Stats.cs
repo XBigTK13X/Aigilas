@@ -34,7 +34,7 @@ namespace OGUR.Creatures
             Setup(new List<float>{health, mana, strength, wisdom, defense,luck, age,weightInLbs, heightInFeet, moveSpeed, moveCoolDown,0});
         }
 
-        private void Setup(IList<float> stats )
+        private void Setup(List<float> stats )
         {
             for (var ii = 0; ii < stats.Count; ii++)
             {
@@ -71,11 +71,6 @@ namespace OGUR.Creatures
                 return;
             }
             m_buffs.Add(buff);
-        }
-
-        public override int GetHashCode()
-        {
-            return m_stats.Aggregate("", (current, pair) => current + m_stats.ToString()).GetHashCode();
         }
 
         public IEnumerable GetDeltas(Stats stats)

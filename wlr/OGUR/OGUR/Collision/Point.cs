@@ -96,7 +96,7 @@ namespace OGUR.Collision
             return (float) (Math.Pow(source.PosY - target.PosY, 2) + Math.Pow(source.PosX - target.PosX, 2));
         }
 
-        public IList<Point2> GetNeighbors()
+        public List<Point2> GetNeighbors()
         {
             var result = new List<Point2>();
             for (var ii = -1; ii < 2; ii++)

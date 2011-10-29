@@ -531,7 +531,7 @@ namespace OGUR.Creatures
             m_baseStats.AddBuff(buff);
         }
 
-        public void Combo(IList<Elements> attack)
+        public void Combo(List<Elements> attack)
         {
             foreach(var element in attack)
             {

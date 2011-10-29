@@ -115,11 +115,18 @@ namespace OGUR.Items
             if(obj.GetType()==typeof(GenericItem))
             {
                 var gI = (GenericItem)obj;
-                if (Name == gI.Name && Modifers.GetHashCode() == gI.Modifers.GetHashCode())
+                if (Name != gI.Name)
                 {
-                    return true;
+                    return false;
                 }
-                return false;
+                foreach (StatType stat in OGUR.Util.EnumUtil.GetValues(typeof(StatType)))
+                {
+                    if (Modifers.Get(stat) != gI.Modifers.Get(stat))
+                    {
+                        return false;
+                    }
+                }    
+                return true;
             }
             return false;
         }

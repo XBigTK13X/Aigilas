@@ -34,7 +34,7 @@ namespace OGUR.Dungeons
             m_cache.Add(content);
         }
 
-        public static IList<GameplayObject> FlushCache()
+        public static List<GameplayObject> FlushCache()
         {
             var result = new List<GameplayObject>(m_cache);
             m_cache.Clear();

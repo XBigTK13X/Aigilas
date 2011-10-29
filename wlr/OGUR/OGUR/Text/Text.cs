@@ -10,7 +10,7 @@ namespace OGUR.Text
 {
     class Text
     {
-        protected string m_contents = "";
+        protected string m_contents;
         protected Vector2 m_position;
         protected TextType m_textType;
 

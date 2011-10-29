@@ -27,7 +27,7 @@ namespace OGUR.Gods
         }
 
 
-        private static List<God> s_gods = new List<God>()
+        private static readonly List<God> s_gods = new List<God>()
                                               {
                                                   new God(Color.Pink, Name.LUST, ItemClass.Leggings, ItemClass.Melee_Weapon),
                                                   new God(Color.Gold, Name.GREED, ItemClass.Head_Gear, ItemClass.Gloves),
@@ -43,22 +43,20 @@ namespace OGUR.Gods
         private ItemClass m_goodSacrificeClass;
         private ItemClass m_badSacrificeClass;
 
+        public string NameText;
+
         protected God(Color color, Name name, ItemClass goodSacrifice, ItemClass badSacrifice)
         {
             m_color = color;
             m_name = name;
             m_goodSacrificeClass = goodSacrifice;
             m_badSacrificeClass = badSacrifice;
+            NameText = m_name.ToString().ToUpperInvariant();
         }
 
         public Color GetColor()
         {
             return m_color;
-        }
-
-        public override string ToString()
-        {
-            return m_name.ToString().ToUpperInvariant();
         }
 
         public bool IsGoodSacrifice(ItemClass sacrifice)

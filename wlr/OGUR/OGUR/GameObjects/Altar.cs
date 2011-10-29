@@ -37,7 +37,7 @@ namespace OGUR.GameObjects
                 {
                     player.Sacrifice(m_god, offering);
                 }
-                TextManager.Add(new ActionText(m_god.ToString(), 1, (int) GetLocation().PosX, (int) GetLocation().PosY));
+                TextManager.Add(new ActionText(m_god.NameText, 1, (int) GetLocation().PosX, (int) GetLocation().PosY));
             }
         }
 

@@ -61,7 +61,7 @@ namespace OGUR.Path
             return m_steps[m_steps.Count - 1];
         }
 
-        public IList<Point2> GetNeighbors()
+        public List<Point2> GetNeighbors()
         {
             var neighbors = GetLastStep().GetNeighbors();
             return neighbors;

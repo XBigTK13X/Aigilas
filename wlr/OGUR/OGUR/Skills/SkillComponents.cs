@@ -48,7 +48,7 @@ namespace OGUR.Skills
             return m_isPersistent;
         }
 
-        public IList<Elements> GetElements()
+        public List<Elements> GetElements()
         {
             return m_elements;
         }
