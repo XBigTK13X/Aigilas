@@ -29,7 +29,7 @@ namespace OGUR.Storage
             m_inventory = owner.GetInventory();
             if (m_menuBase == null)
             {
-                m_menuBase = XnaManager.GetAsset("MenuBase");
+                m_menuBase = XnaManager.GetMenuBaseAsset();
             }
         }
 
@@ -40,7 +40,7 @@ namespace OGUR.Storage
 
         public void LoadContent()
         {
-            m_menuBase = XnaManager.GetAsset("MenuBase");
+            m_menuBase = XnaManager.GetMenuBaseAsset();
         }
 
         public void Draw()
@@ -127,7 +127,7 @@ namespace OGUR.Storage
                     if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
                     {
                         string displayText = ii + ")"
-                                                  +((m_parent.IsEquipped(item))? "~" : "")
+                                                  +((m_parent.IsEquipped(item))? "~" : String.Empty)
                                                   + item.Name +
                                                   ((m_currentClassItems[item] > -1) ? " x" + m_currentClassItems[item] :
                                                   "");

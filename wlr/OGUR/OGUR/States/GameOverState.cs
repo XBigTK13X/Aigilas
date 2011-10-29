@@ -19,7 +19,7 @@ namespace OGUR.States
 
         public GameOverState()
         {
-            m_menuBase = XnaManager.GetAsset("GameOver");
+            m_menuBase = XnaManager.GetGameOverAsset();
         }
 
         public override void Draw()

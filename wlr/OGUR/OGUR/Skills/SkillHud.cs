@@ -20,7 +20,7 @@ namespace OGUR.Skills
             m_parent = owner;
             if (m_menuBase == null)
             {
-                m_menuBase = XnaManager.GetAsset("MenuBase");
+                m_menuBase = XnaManager.GetMenuBaseAsset();
             }
         }
 
@@ -31,7 +31,7 @@ namespace OGUR.Skills
 
         public void LoadContent()
         {
-            m_menuBase = XnaManager.GetAsset("MenuBase");
+            m_menuBase = XnaManager.GetMenuBaseAsset();
         }
 
         public void Draw()
@@ -47,9 +47,9 @@ namespace OGUR.Skills
             m_textHandler.Clear();
             if(m_isVisible)
             {
-                m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 40, 30, m_parent,.2f));
+                //m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 40, 30, m_parent,.2f));
                 //string statText = OGUR.Util.EnumUtil.GetValues(typeof (StatType)).Cast<StatType>().Aggregate("", (current, stat) => current + ((int)m_parent.Get(stat) + "|"));
-                m_textHandler.Add(new DefaultHudText("",5,50,m_parent,.2f));
+                //m_textHandler.Add(new DefaultHudText("",5,50,m_parent,.2f));
             }
         }
 

@@ -97,12 +97,13 @@ namespace OGUR.GameObjects
             m_contents.AddRange(cache);
         }
 
+        private static GameplayObject s_nearest;
         public static Player GetTouchingPlayer(GameplayObject source)
         {
-            var nearest = GetNearestPlayer(source);
-            if (HitTest.IsTouching(source, nearest))
+            s_nearest = GetNearestPlayer(source);
+            if (HitTest.IsTouching(source, s_nearest))
             {
-                return (Player)nearest;
+                return (Player)s_nearest;
             }
             return null;
         }
@@ -134,9 +135,9 @@ namespace OGUR.GameObjects
             Draw();
         }
 
+        private static GameplayObject m_updateTarget;
         public static void Update()
         {
-            Console.WriteLine(GetObjects(CreatureType.PLAYER).Count());
             if(!GetObjects(CreatureType.PLAYER).Any(o=>o.IsActive()))
             {
                 Reset();
@@ -157,8 +158,8 @@ namespace OGUR.GameObjects
                 }                
                 if (m_contents[ii].GetObjectType() == GameObjectType.CREATURE)
                 {
-                    var creature = m_contents[ii] as ICreature;
-                    if (creature != null) creature.Update();
+                    m_updateTarget = m_contents[ii] as ICreature;
+                    if (m_updateTarget != null) m_updateTarget.Update();
                 }
                 else
                 {

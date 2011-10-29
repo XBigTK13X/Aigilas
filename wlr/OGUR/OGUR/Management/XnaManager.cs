@@ -18,19 +18,44 @@ namespace OGUR.Management
         private static GraphicsDeviceManager s_graphicsDevice;
         public static SpriteBatch Renderer;
 
+        private const string s_menuBaseSprite = "MenuBase";
+        private const string s_gameplaySheetSprite = "GameplaySheet";
+        private const string s_gameOverSprite = "GameOver";
+        private const string s_fontName = "Action";
+
         public static void SetContentManager(ContentManager assetHandler)
         {
             s_assetHandler = assetHandler;
         }
 
-        public static Texture2D GetAsset(string resourceName)
+        private static Texture2D GetAsset(string resourceName)
         {
             return s_assetHandler.Load<Texture2D>(resourceName);
         }
 
-        public static SpriteFont GetFont(string resourceName)
+        public static Texture2D GetMenuBaseAsset()
+        {
+            return GetAsset(s_menuBaseSprite);
+        }
+
+        public static Texture2D GetSpriteAsset()
+        {
+            return GetAsset(s_gameplaySheetSprite);
+        }
+
+        public static Texture2D GetGameOverAsset()
+        {
+            return GetAsset(s_gameOverSprite);
+        }
+
+        private static SpriteFont GetFont(string resourceName)
         {
             return s_assetHandler.Load<SpriteFont>(resourceName);
+        }
+
+        public static SpriteFont GetActionFont()
+        {
+            return GetFont(s_fontName);
         }
 
         public static void SetupCamera(GraphicsDeviceManager graphicsDevice)

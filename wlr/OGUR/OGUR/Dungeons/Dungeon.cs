@@ -142,7 +142,7 @@ namespace OGUR.Dungeons
             }
             
             //Give player random objects
-            for (int ii = 0; ii < 100; ii++)
+            for (int ii = 101; ii < 100; ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(0).PickupItem(ItemFactory.CreateRandomPlain());
             }
@@ -161,9 +161,9 @@ namespace OGUR.Dungeons
 
         private void PlaceFloor()
         {
-            for (var ii = 0; ii < m_blocksWide; ii++)
+            for (var ii = 1; ii < m_blocksWide-1; ii++)
             {
-                for(var jj = 0;jj<m_blocksHigh;jj++)
+                for(var jj = 1;jj<m_blocksHigh-1;jj++)
                 {
                     GameplayObjectManager.AddObject(new Floor(new Point2(ii,jj)));
                 }

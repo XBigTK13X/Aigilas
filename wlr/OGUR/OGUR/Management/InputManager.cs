@@ -32,12 +32,6 @@ namespace OGUR.Management
             Inventory
         }
 
-        private static readonly List<string> m_playerInputDevices = new List<string>()
-                                                                        {
-                                                                            "KEYBOARD",
-                                                                            "GAMEPAD"
-                                                                        };
-
         private static readonly Dictionary<int, Contexts> m_contexts = new Dictionary<int, Contexts>()
                                                                   {
                                                                       {0, Contexts.Free},
@@ -103,25 +97,29 @@ namespace OGUR.Management
                                                                           PlayerIndex.Three,
                                                                           PlayerIndex.Four
                                                                       };
+        private static readonly Dictionary<int, bool> s_inputs = new Dictionary<int, bool>();
+        private static bool s_isInputActive = false;
 
         public static bool IsPressed(Commands command, int playerIndex,bool failIfLocked=true)
         {
             
-            string inputMechanism = m_playerInputDevices[playerIndex];
-            bool isInputActive = false;
-            switch (inputMechanism)
+            s_isInputActive = false;
+            if(!s_inputs.ContainsKey(playerIndex))
             {
-                case "KEYBOARD":
-                    isInputActive = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
-                    break;
-                case "GAMEPAD":
-                    isInputActive = GamePad.GetState(m_playerIndex[playerIndex]).IsButtonDown(m_gamePadMapping[command]);
-                    break;
-                default:
-                    throw new Exception("What were you smoking that brought up this error?");
+                s_inputs.Add(playerIndex,GamePad.GetState(m_playerIndex[playerIndex]).IsConnected);
             }
-
-            if(!isInputActive)
+            else
+            {
+                if (s_inputs[playerIndex])
+                {
+                    s_isInputActive = GamePad.GetState(m_playerIndex[playerIndex]).IsButtonDown(m_gamePadMapping[command]);
+                }
+                else
+                {
+                    s_isInputActive = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
+                }
+            }
+            if (!s_isInputActive)
             {
                 if (ShouldLock(command,playerIndex))
                 {
@@ -133,22 +131,28 @@ namespace OGUR.Management
             {
                 return false;
             }
-            
-            if(isInputActive)
+
+            if (s_isInputActive)
             {
                 if(ShouldLock(command,playerIndex))
                 {
                     Lock(command,playerIndex);
                 }
             }
-            
-            return isInputActive;
+
+            return s_isInputActive;
         }
 
         private static bool ShouldLock(Commands command,int playerIndex)
         {
-            return s_lockOnPress.Where(o => o.Key == command).Where(
-                o => o.Value == m_contexts[playerIndex] || (o.Value == Contexts.Nonfree && m_contexts[playerIndex] != Contexts.Free) || o.Value == Contexts.All).Count() > 0;
+            foreach (var pair in s_lockOnPress.Where(o=>o.Key==command))
+            {
+                if(pair.Value == m_contexts[playerIndex] || (pair.Value == Contexts.Nonfree && m_contexts[playerIndex] != Contexts.Free) || pair.Value == Contexts.All)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static void SetContext(Contexts context,int playerIndex)
@@ -161,7 +165,14 @@ namespace OGUR.Management
         }
         public static bool IsLocked(Commands command,int playerIndex)
         {
-            return s_locks.Where(o => o.Command == command && o.PlayerIndex == playerIndex).Count() > 0;
+            foreach (var pair in s_locks)
+            {
+                if (pair.Command == command && pair.PlayerIndex == playerIndex)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public static void Lock(Commands command,int playerIndex)
         {

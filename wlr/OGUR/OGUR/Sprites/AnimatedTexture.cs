@@ -12,7 +12,6 @@ namespace OGUR.Sprites
 {
     public class AnimatedTexture
     {
-        private const string m_assetPath = @"GameplaySheet";
         private const int m_ANIMATE_SPEED = 20;
 
         private int m_currentFrame;
@@ -20,6 +19,7 @@ namespace OGUR.Sprites
         private Rectangle m_currentCell;
         private int m_animationTimer;
         private Color m_color = Color.White;
+        private readonly Texture2D m_texture = XnaManager.GetSpriteAsset();
 
         protected Vector2 m_position = Vector2.Zero;
 
@@ -36,7 +36,7 @@ namespace OGUR.Sprites
             m_currentCell = new Rectangle((m_currentFrame * m_spriteInfo.X) + (m_currentFrame+1), (m_spriteInfo.SpriteIndex * m_spriteInfo.Y) + (m_spriteInfo.SpriteIndex+1),
                                           m_spriteInfo.X, m_spriteInfo.Y);
             var target = new Vector2(m_position.X, m_position.Y);
-            XnaManager.Renderer.Draw(XnaManager.GetAsset(m_assetPath), target, m_currentCell, m_color);
+            XnaManager.Renderer.Draw(m_texture, target, m_currentCell, m_color);
             
         }
 

@@ -17,6 +17,8 @@ namespace OGUR.Items
         private ItemName m_type;
         private Slots m_targetSlots;
 
+        private const string s_spacingCharacter = " ";
+
         public ItemClass GetItemClass()
         {
             switch (m_type)
@@ -51,9 +53,9 @@ namespace OGUR.Items
             m_prefix = prefix;
             m_type = type;
             m_targetSlots = GetSlotFromType(type);
-            Name = (m_prefix == ItemPrefix.NULL ? "" : Enum.GetName(typeof(ItemPrefix), m_prefix) + " ") +
+            Name = (m_prefix == ItemPrefix.NULL ? String.Empty : Enum.GetName(typeof(ItemPrefix), m_prefix) + s_spacingCharacter) +
                    Enum.GetName(typeof(ItemName), m_type) +
-                   (m_suffix == ItemSuffix.NULL ? "" : " " + Enum.GetName(typeof(ItemSuffix), m_suffix));
+                   (m_suffix == ItemSuffix.NULL ? String.Empty : s_spacingCharacter + Enum.GetName(typeof(ItemSuffix), m_suffix));
             Modifers = new Stats(modifiers);
         }
 

@@ -15,6 +15,8 @@ namespace OGUR.GameObjects
     public class Altar : GameplayObject
     {
         private readonly God m_god;
+        private Player m_currentTarget;
+        private IEnumerable<GameplayObject> m_offerings;
 
         public Altar(Point2 location, God.Name godName)
         {
@@ -25,17 +27,17 @@ namespace OGUR.GameObjects
 
         public override void Update()
         {
-            var player = GameplayObjectManager.GetTouchingPlayer(this);
-            if (player != null)
+            m_currentTarget = GameplayObjectManager.GetTouchingPlayer(this);
+            if (m_currentTarget != null)
             {
-                if (player.IsInteracting())
+                if (m_currentTarget.IsInteracting())
                 {
-                    player.Pray(m_god);
+                    m_currentTarget.Pray(m_god);
                 }
-                var offerings = GameplayObjectManager.GetObjects(GameObjectType.ITEM, m_location);
-                foreach (GenericItem offering in offerings)
+                m_offerings = GameplayObjectManager.GetObjects(GameObjectType.ITEM, m_location);
+                foreach (GenericItem offering in m_offerings)
                 {
-                    player.Sacrifice(m_god, offering);
+                    m_currentTarget.Sacrifice(m_god, offering);
                 }
                 TextManager.Add(new ActionText(m_god.NameText, 1, (int) GetLocation().PosX, (int) GetLocation().PosY));
             }
