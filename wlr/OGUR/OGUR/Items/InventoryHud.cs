@@ -29,7 +29,7 @@ namespace OGUR.Storage
             m_inventory = owner.GetInventory();
             if (m_menuBase == null)
             {
-                m_menuBase = XnaManager.GetContentManager().Load<Texture2D>("MenuBase");
+                m_menuBase = XnaManager.GetAsset("MenuBase");
             }
         }
 
@@ -40,7 +40,7 @@ namespace OGUR.Storage
 
         public void LoadContent()
         {
-            m_menuBase = XnaManager.GetContentManager().Load<Texture2D>("MenuBase");
+            m_menuBase = XnaManager.GetAsset("MenuBase");
         }
 
         public void Draw()

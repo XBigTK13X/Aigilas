@@ -59,7 +59,7 @@ namespace OGUR.Text
 
         public static void LoadContent()
         {
-            actionFont = XnaManager.GetContentManager().Load<SpriteFont>("Action");
+            actionFont = XnaManager.GetFont("Action");
         }
     }
 }

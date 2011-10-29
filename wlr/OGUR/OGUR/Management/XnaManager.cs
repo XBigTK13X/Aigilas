@@ -23,9 +23,14 @@ namespace OGUR.Management
             s_assetHandler = assetHandler;
         }
 
-        public static ContentManager GetContentManager()
+        public static Texture2D GetAsset(string resourceName)
         {
-            return s_assetHandler;
+            return s_assetHandler.Load<Texture2D>(resourceName);
+        }
+
+        public static SpriteFont GetFont(string resourceName)
+        {
+            return s_assetHandler.Load<SpriteFont>(resourceName);
         }
 
         public static void SetupCamera(GraphicsDeviceManager graphicsDevice)
