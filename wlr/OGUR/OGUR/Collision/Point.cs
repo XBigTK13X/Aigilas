@@ -22,6 +22,18 @@ namespace OGUR.Collision
         public float PosCenterX { get; private set; }
         public float PosCenterY { get; private set; }
 
+        public static Point2[] m_rotateTargets = 
+            {
+                new Point2(1, 0),
+                new Point2(1, 1),
+                new Point2(0, 1),
+                new Point2(0,-1),
+                new Point2(-1,-1),
+                new Point2(-1, 0),
+                new Point2(-1, 1),
+                new Point2(1, -1)
+            };
+
         public Point2(float x, float y, int weight = 0)
         {
             SetX(x);
@@ -86,11 +98,6 @@ namespace OGUR.Collision
             return X == 0 && Y == 0;
         }
 
-        public Point2 Multiply(float factor)
-        {
-            return new Point2(X*factor,Y*factor);
-        }
-
         public static float CalculateDistanceSquared(Point2 source, Point2 target)
         {
             return (float) (Math.Pow(source.PosY - target.PosY, 2) + Math.Pow(source.PosX - target.PosX, 2));
@@ -112,60 +119,50 @@ namespace OGUR.Collision
             return result;
         }
 
-        public override string ToString()
-        {
-            return String.Format("Point2: ({0},{1})", X, Y);
-        }
-
-        public static float DistanceSquared(Point2 source, Point2 target)
-        {
-            return (float)(Math.Pow(source.PosX - target.PosX, 2) + Math.Pow(source.PosY - target.PosY, 2));
-        }
-
         public Point2 RotateClockwise()
         {
             if (GridX == 1)
             {
                 if (GridY == -1)
                 {
-                    return new Point2(1, 0);
+                    return m_rotateTargets[0];
                 }
                 if (GridY == 0)
                 {
-                    return new Point2(1, 1);
+                    return m_rotateTargets[1];
                 }
                 if (GridY == 1)
                 {
-                    return new Point2(0, 1);
+                    return m_rotateTargets[2];
                 }
             }
             if (GridX == -1)
             {
                 if (GridY == -1)
                 {
-                    return new Point2(0,-1);
+                    return m_rotateTargets[3];
                 }
                 if (GridY == 0)
                 {
-                    return new Point2(-1, -1);
+                    return m_rotateTargets[4];
                 }
                 if (GridY == 1)
                 {
-                    return new Point2(-1, 0);
+                    return m_rotateTargets[5];
                 }
             }
             if (GridX == 0)
             {
                 if (GridY == 1)
                 {
-                    return new Point2(-1, 1);
+                    return m_rotateTargets[6];
                 }
                 if (GridY == -1)
                 {
-                    return new Point2(1, -1);
+                    return m_rotateTargets[7];
                 }
             }
-            return new Point2(0, 0);
+            return Zero;
             /*
              * This is getting close, but the flipped Y coord is ticking me off.
             var theta = Math.PI / 4f;
@@ -186,6 +183,16 @@ namespace OGUR.Collision
             Console.WriteLine(result);
             return result;
              * */
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Point2: ({0},{1})", X, Y);
+        }
+
+        public static float DistanceSquared(Point2 source, Point2 target)
+        {
+            return (float)(Math.Pow(source.PosX - target.PosX, 2) + Math.Pow(source.PosY - target.PosY, 2));
         }
     }
 }
