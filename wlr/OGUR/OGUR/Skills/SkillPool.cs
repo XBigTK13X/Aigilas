@@ -40,9 +40,9 @@ namespace OGUR.Skills
             return m_currentSkill = m_skills[m_currentSkillSlot];
         }
 
-        public void Add(List<string> getLevelSkills)
+        public void Add(IEnumerable<string> getLevelSkills)
         {
-            if(getLevelSkills.Count==0)
+            if(getLevelSkills.Any())
             {
                 m_skills.Add(SkillId.NO_SKILL);
                 return;

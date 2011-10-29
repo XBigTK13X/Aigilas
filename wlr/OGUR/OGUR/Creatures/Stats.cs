@@ -75,7 +75,7 @@ namespace OGUR.Creatures
 
         public IEnumerable GetDeltas(Stats stats)
         {
-            return m_stats.Select((t, ii) => m_stats[(StatType) ii] - stats.m_stats[(StatType) ii]).ToList();
+            return m_stats.Select((t, ii) => m_stats[(StatType) ii] - stats.m_stats[(StatType) ii]);
         }
 
         public Stats GetLevelBonuses(int level)

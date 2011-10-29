@@ -51,24 +51,14 @@ namespace OGUR.Management
 
         private static Player GetClosest(Player source)
         {
-            var s_distances = new List<float>();
-            var players = GameplayObjectManager.GetObjects(CreatureType.PLAYER);
-            foreach (Player target in players)
-            {
-                s_distances.Add(Math.Abs(target.GetLocation().PosX - source.GetLocation().PosX) +
-                                Math.Abs(target.GetLocation().PosY - source.GetLocation().PosY));
-            }
-            var leastDistance = float.PositiveInfinity;
+            var minDist = float.PositiveInfinity;
             Player result = null;
-            for (var ii = 0; ii < s_distances.Count(); ii++)
+            foreach(Player o in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
             {
-                if (s_distances[ii] != 0)
+                var dist = Math.Abs(o.GetLocation().PosX - o.GetLocation().PosX) + Math.Abs(o.GetLocation().PosY - o.GetLocation().PosY);
+                if (dist < minDist)
                 {
-                    if (s_distances[ii] < leastDistance)
-                    {
-                        leastDistance = s_distances[ii];
-                        result = players[ii] as Player;
-                    }
+                    result = o;
                 }
             }
             return result;

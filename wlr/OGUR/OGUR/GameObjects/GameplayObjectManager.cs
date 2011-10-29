@@ -56,13 +56,13 @@ namespace OGUR.GameObjects
             return m_contents != null ? m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().FirstOrDefault(creature => creature.GetCreatureType() == type) : null;
         }
 
-        public static List<ICreature> GetObjects(CreatureType type)
+        public static IEnumerable<ICreature> GetObjects(CreatureType type)
         {
             if(type!=CreatureType.NONPLAYER)
             {
-                return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() == type).ToList();    
+                return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() == type);    
             }
-            return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() != CreatureType.PLAYER).ToList();
+            return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() != CreatureType.PLAYER);
         }
 
         public static bool IsLocationBlocked(Point2 location)
