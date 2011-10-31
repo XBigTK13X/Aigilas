@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using OGUR.Creatures;
 using OGUR.Management;
 using OGUR.Text;
+using System.Text;
 
 namespace OGUR.Skills
 {
@@ -40,15 +41,29 @@ namespace OGUR.Skills
             XnaManager.Renderer.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f,0f,0f,.4f), 0f, new Vector2(0,0), new Vector2(200,100), SpriteEffects.None, 0f);
             m_textHandler.Draw();
         }
-            
+
+        private string statDisplay = "";
+        private string skillName = "";
+        private StringBuilder statBuilder = new StringBuilder();
         public void Update()
         {
             m_textHandler.Update();
             m_textHandler.Clear();
             if(m_isVisible)
             {
-                m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 40, 30, m_parent,.2f));
-                m_textHandler.Add(new DefaultHudText(OGUR.Util.EnumUtil.GetValues(typeof (StatType)).Cast<StatType>().Aggregate("", (current, stat) => current + ((int)m_parent.Get(stat) + "|")),5,50,m_parent,.2f));
+                if (m_parent.GetActiveSkillName() != skillName)
+                {
+                    skillName = m_parent.GetActiveSkillName();
+                }
+                statDisplay = "";
+                statBuilder.Clear();
+                foreach(StatType stat in OGUR.Util.EnumUtil.GetValues(typeof (StatType)))
+                {
+                    statBuilder.Append((int)m_parent.Get(stat) + "|");
+                }
+
+                m_textHandler.Add(new DefaultHudText(skillName, 40, 30, m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(statBuilder.ToString(),5,50,m_parent,.2f));
             }
         }
 
