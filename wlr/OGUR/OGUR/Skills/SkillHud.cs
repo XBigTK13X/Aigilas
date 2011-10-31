@@ -42,7 +42,6 @@ namespace OGUR.Skills
             m_textHandler.Draw();
         }
 
-        private string statDisplay = "";
         private string skillName = "";
         private StringBuilder statBuilder = new StringBuilder();
         public void Update()
@@ -55,8 +54,7 @@ namespace OGUR.Skills
                 {
                     skillName = m_parent.GetActiveSkillName();
                 }
-                statDisplay = "";
-                statBuilder.Clear();
+                statBuilder.Remove(0,statBuilder.Length);
                 foreach(StatType stat in OGUR.Util.EnumUtil.GetValues(typeof (StatType)))
                 {
                     statBuilder.Append((int)m_parent.Get(stat) + "|");

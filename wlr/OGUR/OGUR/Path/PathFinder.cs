@@ -12,7 +12,6 @@ namespace OGUR.Path
     {
         private static PriorityQueue queue = new PriorityQueue();
         private static Point2 node = new Point2(0, 0);
-        private static float min;
         private static Path path;
         private static List<Point2> neighbors = new List<Point2>();
 
