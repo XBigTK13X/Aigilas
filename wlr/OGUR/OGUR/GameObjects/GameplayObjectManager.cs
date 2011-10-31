@@ -72,7 +72,6 @@ namespace OGUR.GameObjects
                         }
                     }
                 }
-
             }
             else
             {
@@ -170,7 +169,7 @@ namespace OGUR.GameObjects
         private static GameplayObject m_updateTarget;
         public static void Update()
         {
-            if(!GetObjects(CreatureType.PLAYER).Any(o=>o.IsActive()))
+            if(!(GetObjects(CreatureType.PLAYER).Count()>0))
             {
                 Reset();
                 StateManager.LoadState(new GameOverState());

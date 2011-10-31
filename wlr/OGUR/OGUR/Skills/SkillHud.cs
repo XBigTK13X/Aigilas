@@ -6,6 +6,8 @@ using OGUR.Creatures;
 using OGUR.Management;
 using OGUR.Text;
 using System.Text;
+using OGUR.Util;
+using System.Reflection;
 
 namespace OGUR.Skills
 {
@@ -43,7 +45,7 @@ namespace OGUR.Skills
         }
 
         private string skillName = "";
-        private StringBuilder statBuilder = new StringBuilder();
+        private readonly StringBuilder statBuilder = new StringBuilder(32, 32);
         public void Update()
         {
             m_textHandler.Update();
@@ -55,11 +57,23 @@ namespace OGUR.Skills
                     skillName = m_parent.GetActiveSkillName();
                 }
                 statBuilder.Remove(0,statBuilder.Length);
-                foreach(StatType stat in OGUR.Util.EnumUtil.GetValues(typeof (StatType)))
-                {
-                    statBuilder.Append((int)m_parent.Get(stat) + "|");
-                }
-
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.HEALTH)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.MANA)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.STRENGTH)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.DEFENSE)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WEIGHT)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WISDOM)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.AGE)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.PIETY)));
+                statBuilder.Append("|");
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.LUCK)));
                 m_textHandler.Add(new DefaultHudText(skillName, 40, 30, m_parent,.2f));
                 m_textHandler.Add(new DefaultHudText(statBuilder.ToString(),5,50,m_parent,.2f));
             }

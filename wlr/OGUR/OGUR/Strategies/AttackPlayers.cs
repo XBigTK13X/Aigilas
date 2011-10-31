@@ -13,13 +13,15 @@ namespace OGUR.Strategies
             m_targets.AddTargetTypes(CreatureType.PLAYER);
         }
 
+        private ICreature opponent;
+        private Point2 targetPosition;
         public override void Act(ICreature target)
         {
-            var opponent = m_targets.FindClosest();
+            opponent = m_targets.FindClosest();
             //Every player is dead
             if (null != opponent)
             {
-                var targetPosition = PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation());
+                targetPosition = PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation());
                 if (null != targetPosition)
                 {
                     target.MoveTo(targetPosition);

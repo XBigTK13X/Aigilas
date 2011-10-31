@@ -43,6 +43,9 @@ namespace OGUR.Strategies
             return targets;
         }
 
+
+        private IEnumerable<ICreature> m_calculatedTargets;
+        private float dist;
         public ICreature FindClosest()
         {
             ICreature result = null;
@@ -60,9 +63,10 @@ namespace OGUR.Strategies
                 }
                 foreach(var creatureType in m_targetTypes)
                 {
-                    foreach(var creature in GameplayObjectManager.GetObjects(creatureType))
+                    m_calculatedTargets = GameplayObjectManager.GetObjects(creatureType);
+                    foreach(var creature in m_calculatedTargets)
                     {
-                        var dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
+                        dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
                         if (dist < closestDistance)
                         {
                             result = creature;

@@ -17,9 +17,10 @@ namespace OGUR.GameObjects
         {
             return Location.Depths;
         }
+        private ICreature player;
         public override void Update()
         {
-            var player = GameplayObjectManager.GetTouchingPlayer(this);
+            player = GameplayObjectManager.GetTouchingPlayer(this);
             if (player != null)
             {
                 if (player.IsInteracting())
