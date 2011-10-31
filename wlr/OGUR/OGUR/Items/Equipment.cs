@@ -80,9 +80,15 @@ namespace OGUR.Items
             return false;
         }
 
+        private float bonusSum;
         public float CalculateBonus(StatType stat)
         {
-            return m_slots.Sum(item => item.Value.GetStatBonus(stat));
+            bonusSum = 0;
+            foreach (var slot in m_slots)
+            {
+                bonusSum += slot.Value.GetStatBonus(stat);
+            }
+            return bonusSum;
         }
 
         public Dictionary<ItemSlot,GenericItem> GetItems()

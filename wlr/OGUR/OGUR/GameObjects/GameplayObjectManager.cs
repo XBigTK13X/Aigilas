@@ -76,19 +76,15 @@ namespace OGUR.GameObjects
             }
             else
             {
-                if (type != CreatureType.NONPLAYER)
+                foreach (var elem in m_contents)
                 {
-                    foreach (var elem in m_contents)
+                    if (elem.GetObjectType() == GameObjectType.CREATURE)
                     {
-                        if (elem.GetObjectType() == GameObjectType.CREATURE)
+                        if (((ICreature)elem).GetCreatureType() != CreatureType.PLAYER)
                         {
-                            if (((ICreature)elem).GetCreatureType() != CreatureType.PLAYER)
-                            {
-                                creatures.Add(((ICreature)elem));
-                            }
+                            creatures.Add(((ICreature)elem));
                         }
                     }
-
                 }
             }
             return creatures;

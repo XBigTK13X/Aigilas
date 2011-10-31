@@ -157,13 +157,6 @@ namespace OGUR.Management
                     }
                 }
             }
-            foreach (var pair in s_lockOnPress.Where(o=>o.Key==command))
-            {
-                if(pair.Value == m_contexts[playerIndex] || (pair.Value == Contexts.Nonfree && m_contexts[playerIndex] != Contexts.Free) || pair.Value == Contexts.All)
-                {
-                    return true;
-                }
-            }
             return false;
         }
 

@@ -47,9 +47,8 @@ namespace OGUR.Skills
             m_textHandler.Clear();
             if(m_isVisible)
             {
-                //m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 40, 30, m_parent,.2f));
-                //string statText = OGUR.Util.EnumUtil.GetValues(typeof (StatType)).Cast<StatType>().Aggregate("", (current, stat) => current + ((int)m_parent.Get(stat) + "|"));
-                //m_textHandler.Add(new DefaultHudText("",5,50,m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(m_parent.GetActiveSkillName(), 40, 30, m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(OGUR.Util.EnumUtil.GetValues(typeof (StatType)).Cast<StatType>().Aggregate("", (current, stat) => current + ((int)m_parent.Get(stat) + "|")),5,50,m_parent,.2f));
             }
         }
 
