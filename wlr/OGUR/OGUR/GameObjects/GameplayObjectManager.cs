@@ -56,13 +56,42 @@ namespace OGUR.GameObjects
             return m_contents != null ? m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().FirstOrDefault(creature => creature.GetCreatureType() == type) : null;
         }
 
+        private static List<ICreature> creatures = new List<ICreature>();
         public static IEnumerable<ICreature> GetObjects(CreatureType type)
         {
-            if(type!=CreatureType.NONPLAYER)
+            creatures.Clear();
+            if (type != CreatureType.NONPLAYER)
             {
-                return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() == type);    
+                foreach (var elem in m_contents)
+                {
+                    if (elem.GetObjectType() == GameObjectType.CREATURE)
+                    {
+                        if (((ICreature)elem).GetCreatureType() == type)
+                        {
+                            creatures.Add(((ICreature)elem));
+                        }
+                    }
+                }
+
             }
-            return m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(item => item.GetCreatureType() != CreatureType.PLAYER);
+            else
+            {
+                if (type != CreatureType.NONPLAYER)
+                {
+                    foreach (var elem in m_contents)
+                    {
+                        if (elem.GetObjectType() == GameObjectType.CREATURE)
+                        {
+                            if (((ICreature)elem).GetCreatureType() != CreatureType.PLAYER)
+                            {
+                                creatures.Add(((ICreature)elem));
+                            }
+                        }
+                    }
+
+                }
+            }
+            return creatures;
         }
 
         public static bool IsLocationBlocked(Point2 location)
