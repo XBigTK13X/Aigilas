@@ -7,7 +7,7 @@ namespace OGUR.Util
 {
     class StringStorage
     {
-        private static readonly Dictionary<float, string> s_slots = new Dictionary<float, string>();
+        private static readonly Dictionary<int, string> s_slots = new Dictionary<int, string>();
 
         public static string Get(float value)
         {
@@ -15,14 +15,14 @@ namespace OGUR.Util
             {
                 for (float ii = 0; ii < 1000; ii++)
                 {
-                    s_slots.Add(ii, ii.ToString());
+                    s_slots.Add((int)ii, ii.ToString());
                 }
             }
-            if (s_slots.ContainsKey(value))
+            if (s_slots.ContainsKey((int)value))
             {
-                return s_slots[value];
+                return s_slots[(int)value];
             }
-            return "**";
+            return value.ToString();
         }
     }
 }
