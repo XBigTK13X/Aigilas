@@ -8,22 +8,26 @@ namespace OGUR.Util
 {
     class EnumUtil
     {
-        private static List<Enum> result = new List<Enum>();
+        private static readonly Dictionary<Type, List<Enum>> s_results = new Dictionary<Type, List<Enum>>();
+
         public static List<Enum> GetValues(Type enumType)
         {
-            if (enumType.BaseType == typeof(Enum))
+            if (!s_results.ContainsKey(enumType))
             {
-                result.Clear();
-                foreach(var info in enumType.GetFields(BindingFlags.Static | BindingFlags.Public))
+                if (enumType.BaseType == typeof(Enum))
                 {
-                    result.Add((Enum)info.GetValue(null));
+                    s_results.Add(enumType,new List<Enum>());
+                    foreach (var info in enumType.GetFields(BindingFlags.Static | BindingFlags.Public))
+                    {
+                        s_results[enumType].Add((Enum)info.GetValue(null));
+                    }
                 }
-                return result;
+                else
+                {
+                    throw new Exception("Given type is not an Enum type");
+                }
             }
-            else
-              {
-                 throw new Exception("Given type is not an Enum type");
-              }
+            return s_results[enumType];
         }
     }
 }
