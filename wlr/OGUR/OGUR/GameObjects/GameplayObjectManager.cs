@@ -67,7 +67,14 @@ namespace OGUR.GameObjects
 
         public static bool IsLocationBlocked(Point2 location)
         {
-            return m_gridContents[location].Any(o => o.IsBlocking());
+            foreach(GameplayObject elem in m_gridContents[location])
+            {
+                if(elem.IsBlocking())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public static IEnumerable<GameplayObject> GetObjectsToCache()
         {

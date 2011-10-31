@@ -23,13 +23,23 @@ namespace OGUR.Path
             }
             q.Enqueue(value);
         }
+        private double tempKey;
+        private Queue<Path> temp;
+        private Path result;
         public Path Dequeue()
         {
-            var pair = list.First();
-            var v = pair.Value.Dequeue();
-            if (pair.Value.Count == 0)
-                list.Remove(pair.Key);
-            return v;
+            foreach (var key in list.Keys)
+            {
+                tempKey = key;
+                break;
+            }
+            temp = list[tempKey];
+            result = temp.Dequeue();
+            if (temp.Count() == 0)
+            {
+                list.Remove(tempKey);
+            }
+            return result;
         }
         public bool IsEmpty
         {

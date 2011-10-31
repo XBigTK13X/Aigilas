@@ -38,16 +38,25 @@ namespace OGUR.Creatures
         {
             for (var ii = 0; ii < stats.Count; ii++)
             {
-                m_stats.Add((StatType)OGUR.Util.EnumUtil.GetValues(typeof(StatType)).GetValue(ii), stats[ii]);
+                m_stats.Add((StatType)OGUR.Util.EnumUtil.GetValues(typeof(StatType))[ii], stats[ii]);
             }
         }
+        private float statSum = 0;
         public float Get(StatType stat)
         {
             if (m_buffs != null)
             {
-                if (!m_buffs.Any(o=>o==null))
+                if (!m_buffs.Contains(null))
                 {
-                    return GetRaw(stat) + m_buffs.Where(o => o.Stat == stat).Sum(buff => buff.Amount);
+                    statSum = 0;
+                    for (int ii = 0; ii < m_buffs.Count(); ii++)
+                    {
+                        if (m_buffs[ii].Stat == stat)
+                        {
+                            statSum += m_buffs[ii].Amount;
+                        }
+                    }
+                    return GetRaw(stat) + statSum;
                 }
             }
             return GetRaw(stat);

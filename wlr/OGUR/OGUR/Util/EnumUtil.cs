@@ -7,23 +7,23 @@ using System.Reflection;
 namespace OGUR.Util
 {
     class EnumUtil
-    {   
-        public static Enum[] GetValues(Type enumType)
+    {
+        private static List<Enum> result = new List<Enum>();
+        public static List<Enum> GetValues(Type enumType)
         {
             if (enumType.BaseType == typeof(Enum))
             {
-            FieldInfo[] info = enumType.GetFields(BindingFlags.Static | BindingFlags.Public);
-            Enum[] values = new Enum[info.Length];
-            for (int i=0; i<values.Length; ++i)
-            {
-              values[i] = (Enum)info[i].GetValue(null);
+                result.Clear();
+                foreach(var info in enumType.GetFields(BindingFlags.Static | BindingFlags.Public))
+                {
+                    result.Add((Enum)info.GetValue(null));
+                }
+                return result;
             }
-            return values;
-          }
-          else
-          {
-             throw new Exception("Given type is not an Enum type");
-          }
-    }
+            else
+              {
+                 throw new Exception("Given type is not an Enum type");
+              }
+        }
     }
 }

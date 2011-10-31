@@ -145,6 +145,18 @@ namespace OGUR.Management
 
         private static bool ShouldLock(Commands command,int playerIndex)
         {
+            foreach(var key in s_lockOnPress.Keys)
+            {
+                if (key == command)
+                {
+                    if (s_lockOnPress[key] == m_contexts[playerIndex] ||
+                        (s_lockOnPress[key] == Contexts.Nonfree && m_contexts[playerIndex] != Contexts.Free) ||
+                        s_lockOnPress[key] == Contexts.All)
+                    {
+                        return true;
+                    }
+                }
+            }
             foreach (var pair in s_lockOnPress.Where(o=>o.Key==command))
             {
                 if(pair.Value == m_contexts[playerIndex] || (pair.Value == Contexts.Nonfree && m_contexts[playerIndex] != Contexts.Free) || pair.Value == Contexts.All)
