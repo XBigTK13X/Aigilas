@@ -114,6 +114,7 @@
     <Compile Include="Creatures\Minions.cs" />
     <Compile Include="Creatures\StatBuff.cs" />
     <Compile Include="Path\Path.cs" />
+    <Compile Include="Path\PathFactory.cs" />
     <Compile Include="Path\PathFinder.cs" />
     <Compile Include="Collision\Point.cs" />
     <Compile Include="Path\PriorityQueue.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="Items\InventoryHud.cs" />
     <Compile Include="Items\ItemClass.cs" />
+    <Compile Include="Path\QueueFactory.cs" />
     <Compile Include="Reactions\ConcreteReactions.cs" />
     <Compile Include="Reactions\IReaction.cs" />
     <Compile Include="Reactions\ReactionFactory.cs" />

@@ -9,25 +9,25 @@ namespace OGUR.Path
     using System.Collections.Generic;
     using System.Linq;
     
-    class PriorityQueue<P, V>
+    class PriorityQueue
     {
-        private Dictionary<P, Queue<V>> list = new Dictionary<P, Queue<V>>();
-        public void Enqueue(P priority, V value)
+        private Dictionary<double, Queue<Path>> list = new Dictionary<double, Queue<Path>>();
+
+
+        public void Enqueue(double priority, Path value)
         {
-            Queue<V> q;
-            if (!list.TryGetValue(priority, out q))
+            Queue<Path> q = QueueFactory.Create();
+            if (!list.ContainsValue(q))
             {
-                q = new Queue<V>();
                 list.Add(priority, q);
             }
             q.Enqueue(value);
         }
-        public V Dequeue()
+        public Path Dequeue()
         {
-            // will throw if there isn’t any first element!
             var pair = list.First();
             var v = pair.Value.Dequeue();
-            if (pair.Value.Count == 0) // nothing left of the top priority.
+            if (pair.Value.Count == 0)
                 list.Remove(pair.Key);
             return v;
         }

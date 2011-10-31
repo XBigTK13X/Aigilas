@@ -7,15 +7,10 @@ using OGUR.Dungeons;
 using OGUR.GameObjects;
 
 namespace OGUR.Path
-{
-    public interface IHasNeighbours<N>
-    {
-        IEnumerable<N> AccessibleNeighbours { get; }
-    }
-    
+{    
     public static class PathFinder
     {
-        private static PriorityQueue<double, Path> queue = new PriorityQueue<double, Path>();
+        private static PriorityQueue queue = new PriorityQueue();
         private static Point2 node = new Point2(0, 0);
         private static float min;
         private static Path path;
@@ -24,9 +19,9 @@ namespace OGUR.Path
         public static Point2 FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly = true)
         {
             queue.Clear();
-            start = new Point2(start.GridX,start.GridY);
-            destination = new Point2(destination.GridX, destination.GridY);
-            queue.Enqueue(0, new Path(start,destination));
+            start.Reset(start.GridX,start.GridY);
+            destination.Reset(destination.GridX, destination.GridY);
+            queue.Enqueue(0, PathFactory.Create(start,destination));
             while (!queue.IsEmpty)
             {
                 path = queue.Dequeue();
@@ -58,7 +53,7 @@ namespace OGUR.Path
                     if (!CoordVerifier.IsBlocked(node) || (node.GridX == destination.GridX && node.GridY == destination.GridY))
                     {
                         node.SetWeight(Point2.CalculateDistanceSquared(node, path.GetLastStep()));
-                        var newPath = new Path(path);
+                        var newPath = PathFactory.Create(path);
                         if(newPath.Add(node))
                         {
                             queue.Enqueue(newPath.GetCost(), newPath);

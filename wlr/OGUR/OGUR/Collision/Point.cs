@@ -43,6 +43,12 @@ namespace OGUR.Collision
             Weight = weight;
         }
 
+        public void Reset(float x, float y)
+        {
+            SetX(x);
+            SetY(y);
+        }
+
         public Point2(Point2 target)
         {
             SetX(target.X);

@@ -16,18 +16,24 @@ namespace OGUR.Path
         private Dictionary<Point2,Point2> m_stepLookup = new Dictionary<Point2,Point2>();
         private float m_totalWeight = 0;
 
-        public Path(Point2 start, Point2 finish)
+        public Path(){}
+
+        public Path Reset(Point2 start, Point2 finish)
         {
+            m_steps.Clear();
+            m_stepLookup.Clear();
+            m_totalWeight = 0;
             Finish.Copy(finish);
             Add(start);
-            
+            return this;
         }
 
-        public Path(Path source)
+        public Path Copy(Path source)
         {
             m_stepLookup = source.m_stepLookup;
             m_steps = source.m_steps;
             m_totalWeight = source.m_totalWeight;
+            return this;
         }
 
         public bool Add(Point2 step)
