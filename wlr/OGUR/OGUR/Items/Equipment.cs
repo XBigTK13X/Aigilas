@@ -45,12 +45,20 @@ namespace OGUR.Items
             m_parent = owner;
         }
 
+        public void Unequip(GenericItem item)
+        {
+            if (IsRegistered(item))
+            {
+                Unregister(item);
+            }
+        }
+
         public void Register(GenericItem item)
         {
             var itemSlot = ClassToSlot(item.GetItemClass());
             if(m_slots.ContainsKey(itemSlot))
             {
-                m_parent.Unequip(m_slots[itemSlot]);
+                Unequip(m_slots[itemSlot]);
                 m_slots[itemSlot] = item;
             }
             else

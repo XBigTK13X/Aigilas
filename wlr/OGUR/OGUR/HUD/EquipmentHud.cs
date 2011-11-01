@@ -15,7 +15,7 @@ namespace OGUR.HUD
     {
         private Equipment m_equipment;
 
-        public EquipmentHud(ICreature owner,Equipment equipment):base(owner,0,0)
+        public EquipmentHud(ICreature owner, Equipment equipment): base(owner, XnaManager.WindowWidth / 2, XnaManager.WindowHeight / 2)
         {
             m_equipment = equipment;
         }

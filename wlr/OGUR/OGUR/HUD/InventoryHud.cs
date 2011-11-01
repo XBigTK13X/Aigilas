@@ -15,6 +15,7 @@ namespace OGUR.HUD
     {
         private ItemClass m_currentClass = (ItemClass) 1;
         private readonly Inventory m_inventory;
+        private readonly Equipment m_equipment;
         private int m_endingItem = 4, m_startingItem = 0;
         private Dictionary<GenericItem, int> m_currentClassItems;
         private GenericItem m_currentSelectedItem = null;
@@ -24,7 +25,9 @@ namespace OGUR.HUD
         public InventoryHud(ICreature owner,Inventory inventory,Equipment equipment):base(owner,XnaManager.WindowWidth/2,XnaManager.WindowHeight/2)
         {
             m_inventory = inventory;
+            m_equipment = equipment;
             m_deltas = new DeltasHud(owner,equipment);
+            m_currentClassItems = m_inventory.GetItems(m_currentClass);
         }
 
         public void Draw()
@@ -110,7 +113,7 @@ namespace OGUR.HUD
                     {
                         m_currentSelectedItem = item;
                     }
-                    if(!m_parent.IsEquipped(item)&&m_inventory.GetItemCount(item)<=0)
+                    if(!m_equipment.IsRegistered(item)&&m_inventory.GetItemCount(item)<=0)
                     {
                         continue;
                     }
@@ -118,7 +121,7 @@ namespace OGUR.HUD
                     if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
                     {
                         string displayText = ii + ")"
-                                                  +((m_parent.IsEquipped(item))? "~" : String.Empty)
+                                                  +((m_equipment.IsRegistered(item))? "~" : String.Empty)
                                                   + item.Name +
                                                   ((m_currentClassItems[item] > -1) ? " x" + m_currentClassItems[item] :
                                                   "");

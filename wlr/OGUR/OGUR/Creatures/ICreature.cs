@@ -108,9 +108,9 @@ namespace OGUR.Creatures
             }
         }
 
-        public void  Drop(GenericItem item)
+        public void Drop(GenericItem item)
         {
-            if (m_inventory.GetItemCount(item)>0)
+            if (m_inventory.GetItemCount(item) > 0)
             {
                 GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
                 m_inventory.Remove(item);
@@ -124,15 +124,7 @@ namespace OGUR.Creatures
                     m_inventory.Remove(item);
                 }
             }
-        }
-
-        public void Unequip(GenericItem item)
-        {
-            if (m_equipment.IsRegistered(item))
-            {
-                m_equipment.Unregister(item);
-            }
-        }
+        }       
 
         public override void Update()
         {
@@ -214,7 +206,7 @@ namespace OGUR.Creatures
             return m_class.GetBonus(m_currentLevel, stat);
         }
 
-        public float CalculateEquipmentBonus(StatType stat)
+        private float CalculateEquipmentBonus(StatType stat)
         {
             if (m_equipment != null)
             {
@@ -389,10 +381,6 @@ namespace OGUR.Creatures
         public float CalculateExperience()
         {
             return m_currentLevel + m_baseStats.GetSum();
-        }
-        public bool IsEquipped(GenericItem item)
-        {
-            return m_equipment.IsRegistered(item);
         }
 
         public void CycleActiveSkill(int velocity)
