@@ -71,7 +71,7 @@ namespace OGUR.Creatures
             m_combo = new ComboMeter(this);
             if (m_playerIndex > -1)
             {
-                m_hudManager = new HudManager(this);
+                m_hudManager = new HudManager(this,m_inventory,m_equipment);
             }
             
             m_class = creatureClass ?? new NoClass();
@@ -481,27 +481,6 @@ namespace OGUR.Creatures
             {
                 m_combo.Add(element);
             }
-        }
-
-        //HUD Communication
-        public Inventory GetInventory()
-        {
-            return m_inventory;
-        }
-
-        public Equipment GetEquipment()
-        {
-            return m_equipment;
-        }
-
-        public GenericItem GetEquipmentIn(ItemSlot slot)
-        {
-            var result = m_equipment.GetItems().Where(o => o.Key == slot);
-            if (result.Count() > 0)
-            {
-                return result.First().Value;
-            }
-            return null;
         }
     }
 }

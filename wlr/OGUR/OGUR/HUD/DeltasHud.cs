@@ -13,7 +13,12 @@ namespace OGUR.HUD
 {
     public class DeltasHud:IHud
     {
-        public DeltasHud(ICreature owner) : base(owner, 30, 300) { }
+        private Equipment m_equipment;
+
+        public DeltasHud(ICreature owner,Equipment equipment) : base(owner, 30, 300) 
+        {
+            m_equipment = equipment;
+        }
 
         public void Draw()
         {
@@ -23,14 +28,23 @@ namespace OGUR.HUD
             }
         }
 
+        private GenericItem GetEquipmentIn(ItemSlot slot)
+        {
+            var result = m_equipment.GetItems().Where(o => o.Key == slot);
+            if (result.Count() > 0)
+            {
+                return result.First().Value;
+            }
+            return null;
+        }
         public void Update(GenericItem item)
         {
             if (item != null)
             {
-                var item2 = m_parent.GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass()));
+                var item2 = GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass()));
                 if (item2 != null)
                 {
-                    var stats = m_parent.GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers;
+                    var stats = GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers;
                     var stats2 = item.Modifers;
 
                     m_textHandler.Update();

@@ -145,7 +145,7 @@ namespace OGUR.Dungeons
             }
             
             //Give player random objects
-            for (int ii = 101; ii < 100; ii++)
+            for (int ii = 0; ii < 100; ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(0).PickupItem(ItemFactory.CreateRandomPlain());
             }

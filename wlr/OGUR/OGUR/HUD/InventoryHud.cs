@@ -21,10 +21,10 @@ namespace OGUR.HUD
 
         private DeltasHud m_deltas;
 
-        public InventoryHud(ICreature owner):base(owner,XnaManager.WindowWidth/2,XnaManager.WindowHeight/2)
+        public InventoryHud(ICreature owner,Inventory inventory,Equipment equipment):base(owner,XnaManager.WindowWidth/2,XnaManager.WindowHeight/2)
         {
-            m_inventory = owner.GetInventory();
-            m_deltas = new DeltasHud(owner);
+            m_inventory = inventory;
+            m_deltas = new DeltasHud(owner,equipment);
         }
 
         public void Draw()

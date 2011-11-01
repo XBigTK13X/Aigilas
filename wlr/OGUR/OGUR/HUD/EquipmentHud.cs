@@ -15,10 +15,9 @@ namespace OGUR.HUD
     {
         private Equipment m_equipment;
 
-        public EquipmentHud(ICreature owner):base(owner,0,0)
+        public EquipmentHud(ICreature owner,Equipment equipment):base(owner,0,0)
         {
-            m_parent = owner;
-            m_equipment = owner.GetEquipment();
+            m_equipment = equipment;
         }
 
         public void Draw()
