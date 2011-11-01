@@ -63,7 +63,7 @@ namespace OGUR.Creatures
 
         protected void Setup(Point2 location, CreatureType type, Stats stats, CreatureClass creatureClass = null)
         {
-            Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE);
+            Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE,.5f);
             Init(type,stats,creatureClass);
         }
 

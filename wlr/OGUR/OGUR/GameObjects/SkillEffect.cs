@@ -24,7 +24,7 @@ namespace OGUR.GameObjects
         public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill)
         {
             m_skill = skill;
-            Initialize(gridLocation, m_skill.GetSpriteType(), GameObjectType.SKILL_EFFECT);
+            Initialize(gridLocation, m_skill.GetSpriteType(), GameObjectType.SKILL_EFFECT,.7f);
             m_velocity.Copy(velocity);
             m_source = source;
             m_startingStrength = m_currentStrength = m_skill.GetStrength();

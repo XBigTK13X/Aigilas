@@ -24,7 +24,7 @@ namespace OGUR.Text
         public override void Draw()
         {
             var fontCenter = new Vector2(0, 0);
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position+m_player.GetHudOrigin(), m_color, 0, fontCenter,.75f, SpriteEffects.None, 0.5f);
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position+m_player.GetHudOrigin(), m_color, 0, fontCenter,.75f, SpriteEffects.None, .96f);
         }
     }
 }

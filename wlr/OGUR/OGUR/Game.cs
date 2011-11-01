@@ -97,7 +97,7 @@ namespace OGUR
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            XnaManager.Renderer.Begin(SpriteSortMode.Deferred,
+            XnaManager.Renderer.Begin(SpriteSortMode.FrontToBack,
                          BlendState.AlphaBlend,
                          null,
                          null,

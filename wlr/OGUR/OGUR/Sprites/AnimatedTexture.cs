@@ -17,9 +17,11 @@ namespace OGUR.Sprites
         private int m_currentFrame;
         private SpriteInfo m_spriteInfo;
         private Rectangle m_currentCell;
+        private Rectangle m_target;
         private int m_animationTimer;
         private Color m_color = Color.White;
         private readonly Texture2D m_texture = XnaManager.GetSpriteAsset();
+        private float m_layerDepth = 0f;
 
         protected Vector2 m_position = Vector2.Zero;
 
@@ -35,8 +37,9 @@ namespace OGUR.Sprites
             UpdateAnimation();
             m_currentCell = new Rectangle((m_currentFrame * m_spriteInfo.X) + (m_currentFrame+1), (m_spriteInfo.SpriteIndex * m_spriteInfo.Y) + (m_spriteInfo.SpriteIndex+1),
                                           m_spriteInfo.X, m_spriteInfo.Y);
-            var target = new Vector2(m_position.X, m_position.Y);
-            XnaManager.Renderer.Draw(m_texture, target, m_currentCell, m_color);
+            
+            m_target = new Rectangle((int)m_position.X,(int)m_position.Y,SpriteInfo.Width,SpriteInfo.Height);
+            XnaManager.Renderer.Draw(m_texture, m_target,m_currentCell,m_color,0f,Vector2.Zero,SpriteEffects.None,m_layerDepth);
             
         }
 
@@ -81,6 +84,11 @@ namespace OGUR.Sprites
         public void SetAlpha(float alpha)
         {
             m_color = new Color(m_color.R, m_color.G, m_color.B,alpha);
+        }
+
+        public void SetDepth(float depth)
+        {
+            m_layerDepth = depth;
         }
     }
 }

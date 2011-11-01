@@ -50,12 +50,13 @@ namespace OGUR.GameObjects
             m_isOnBoard = true;
         }
 
-        protected void Initialize(Point2 location, SpriteType spriteType, GameObjectType objectType)
+        protected void Initialize(Point2 location, SpriteType spriteType, GameObjectType objectType,float depth = 0f)
         {
             m_assetName = spriteType;
             m_objectType = objectType;
             m_location.Copy(location);
             m_graphic.SetPosition(m_location);
+            m_graphic.SetDepth(depth);
         }
 
         public virtual void Update()

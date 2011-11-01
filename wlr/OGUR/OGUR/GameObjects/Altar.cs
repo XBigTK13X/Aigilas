@@ -22,7 +22,7 @@ namespace OGUR.GameObjects
         {
             m_god = God.Get(godName);
             m_graphic.SetColor(m_god.GetColor());
-            Initialize(location, SpriteType.ALTAR, GameObjectType.ALTAR);
+            Initialize(location, SpriteType.ALTAR, GameObjectType.ALTAR,.2f);
         }
 
         public override void Update()
