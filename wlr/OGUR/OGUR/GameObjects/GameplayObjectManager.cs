@@ -57,7 +57,7 @@ namespace OGUR.GameObjects
         }
 
         private static List<ICreature> creatures = new List<ICreature>();
-        public static IEnumerable<ICreature> GetObjects(CreatureType type)
+        public static List<ICreature> GetObjects(CreatureType type)
         {
             creatures.Clear();
             if (type != CreatureType.NONPLAYER)

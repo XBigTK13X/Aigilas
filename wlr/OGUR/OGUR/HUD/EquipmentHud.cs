@@ -14,6 +14,7 @@ namespace OGUR.HUD
     public class EquipmentHud:IHud
     {
         private Equipment m_equipment;
+        private const string s_text = "Equipped";
 
         public EquipmentHud(ICreature owner, Equipment equipment): base(owner, XnaManager.WindowWidth / 2, XnaManager.WindowHeight / 2)
         {
@@ -32,7 +33,7 @@ namespace OGUR.HUD
         {
             m_textHandler.Update();
             m_textHandler.Clear();
-            m_textHandler.Add(new DefaultHudText("Equipped", 300, 30,GetHudOrigin()));
+            m_textHandler.Add(new DefaultHudText(s_text, 300, 30,GetHudOrigin()));
             int ii = 0;
             foreach(var item in m_equipment.GetItems())
             {

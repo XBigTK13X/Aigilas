@@ -39,9 +39,19 @@ namespace OGUR.Items
             }
         }
 
+        private readonly Dictionary<GenericItem, int> m_itemResult = new Dictionary<GenericItem, int>();
         public Dictionary<GenericItem, int> GetItems(ItemClass iClass)
         {
-            return m_contents.Where(element => element.Key.GetItemClass() == iClass).ToDictionary(element => element.Key, element => element.Value);
+            m_itemResult.Clear();
+            foreach (var key in m_contents.Keys)
+            {
+                if (key.GetItemClass() == iClass)
+                {
+                    m_itemResult.Add(key, m_contents[key]);
+                }
+            }
+            //return m_contents.Where(element => element.Key.GetItemClass() == iClass).ToDictionary(element => element.Key, element => element.Value);
+            return m_itemResult;
         }
 
         public void Remove(GenericItem item)

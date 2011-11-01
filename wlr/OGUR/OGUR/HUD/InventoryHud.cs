@@ -8,6 +8,7 @@ using OGUR.Creatures;
 using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
+using OGUR.Util;
 
 namespace OGUR.HUD
 {
@@ -100,9 +101,24 @@ namespace OGUR.HUD
             m_deltas.Toggle();
         }
 
+        private static readonly Dictionary<ItemClass, string> s_classStrings = new Dictionary<ItemClass, string>();
+
+        private string GetClassDisplay()
+        {
+            if(!s_classStrings.ContainsKey(m_currentClass))
+            {
+                s_classStrings.Add(m_currentClass, m_currentClass.ToString().Replace("_", " "));
+            }
+            return s_classStrings[m_currentClass];
+        }
+
+        private readonly StringBuilder statBuilder = new StringBuilder(32, 32);
+        private const string s_delim = ")";
+        private const string s_equipDelim = "~";
+        private const string s_seper = " x";
         private void UpdateInventoryDisplay()
         {
-            m_textHandler.Add(new DefaultHudText(m_currentClass.ToString().Replace("_", " "), 20, 30,GetHudOrigin()));
+            m_textHandler.Add(new DefaultHudText(GetClassDisplay(), 20, 30,GetHudOrigin()));
             m_currentClassItems = m_inventory.GetItems(m_currentClass);
             if (m_currentClassItems.Count > 0)
             {
@@ -118,14 +134,15 @@ namespace OGUR.HUD
                         continue;
                     }
 
+                    statBuilder.Remove(0, statBuilder.Length);
                     if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
                     {
-                        string displayText = ii + ")"
-                                                  +((m_equipment.IsRegistered(item))? "~" : String.Empty)
-                                                  + item.Name +
-                                                  ((m_currentClassItems[item] > -1) ? " x" + m_currentClassItems[item] :
-                                                  "");
-                        m_textHandler.Add(new DefaultHudText(displayText, 50,60 + 25 * (ii - m_startingItem),GetHudOrigin()));
+                        statBuilder.Append(StringStorage.Get(ii));
+                        statBuilder.Append(s_delim);
+                        statBuilder.Append((m_equipment.IsRegistered(item)) ? s_equipDelim : String.Empty);
+                        statBuilder.Append(item.Name);
+                        statBuilder.Append((m_currentClassItems[item] > -1) ? s_seper + m_currentClassItems[item] : String.Empty);
+                        m_textHandler.Add(new DefaultHudText(statBuilder.ToString(), 50,60 + 25 * (ii - m_startingItem),GetHudOrigin()));
                     }
                     ii++;
                 }

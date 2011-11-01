@@ -15,6 +15,8 @@ namespace OGUR.HUD
     public class SkillHud:IHud
     {
         public SkillHud(ICreature owner) : base(owner,200,100) { }
+        private const string s_separator = "|";
+        private const string s_newline = "\n";
 
         public void Draw()
         {
@@ -25,6 +27,47 @@ namespace OGUR.HUD
         
         private string skillName = "";
         private readonly StringBuilder statBuilder = new StringBuilder(32, 32);
+        private readonly Stats m_displayStats = new Stats(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+        private string statString = "";
+
+        private string GetStatString()
+        {
+            if (m_parent.Get(StatType.HEALTH) == m_displayStats.Get(StatType.HEALTH) &&
+                m_parent.Get(StatType.MANA) == m_displayStats.Get(StatType.MANA) &&
+                m_parent.Get(StatType.STRENGTH) == m_displayStats.Get(StatType.STRENGTH) &&
+                m_parent.Get(StatType.DEFENSE) == m_displayStats.Get(StatType.DEFENSE) &&
+                m_parent.Get(StatType.WISDOM) == m_displayStats.Get(StatType.WISDOM) &&
+                m_parent.Get(StatType.AGE) == m_displayStats.Get(StatType.AGE) &&
+                m_parent.Get(StatType.PIETY) == m_displayStats.Get(StatType.PIETY) &&
+                m_parent.Get(StatType.LUCK) == m_displayStats.Get(StatType.LUCK))
+            {
+                return statString;
+            }
+            else
+            {
+                statBuilder.Remove(0, statBuilder.Length);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.HEALTH)));
+                statBuilder.Append(s_separator);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.MANA)));
+                statBuilder.Append(s_separator);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.STRENGTH)));
+                statBuilder.Append(s_separator);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.DEFENSE)));
+                statBuilder.Append(s_newline);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WEIGHT)));
+                statBuilder.Append(s_separator);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WISDOM)));
+                statBuilder.Append(s_separator);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.AGE)));
+                statBuilder.Append(s_separator);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.PIETY)));
+                statBuilder.Append(s_separator);
+                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.LUCK)));
+                statString = statBuilder.ToString();
+            }
+            return statString;
+        }
+
         public void Update()
         {
             m_textHandler.Update();
@@ -34,27 +77,9 @@ namespace OGUR.HUD
                 if (m_parent.GetActiveSkillName() != skillName)
                 {
                     skillName = m_parent.GetActiveSkillName();
-                }
-                statBuilder.Remove(0,statBuilder.Length);
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.HEALTH)));
-                statBuilder.Append("|");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.MANA)));
-                statBuilder.Append("|");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.STRENGTH)));
-                statBuilder.Append("|");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.DEFENSE)));
-                statBuilder.Append("\n");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WEIGHT)));
-                statBuilder.Append("|");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WISDOM)));
-                statBuilder.Append("|");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.AGE)));
-                statBuilder.Append("|");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.PIETY)));
-                statBuilder.Append("|");
-                statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.LUCK)));
+                }              
                 m_textHandler.Add(new DefaultHudText(skillName, 40, 5,GetHudOrigin(),.2f));
-                m_textHandler.Add(new DefaultHudText(statBuilder.ToString(),20,35,GetHudOrigin(),.2f));
+                m_textHandler.Add(new DefaultHudText(GetStatString(),20,35,GetHudOrigin(),.2f));
             }
         }
     }

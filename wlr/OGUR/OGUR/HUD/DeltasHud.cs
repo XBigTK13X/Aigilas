@@ -30,10 +30,9 @@ namespace OGUR.HUD
 
         private GenericItem GetEquipmentIn(ItemSlot slot)
         {
-            var result = m_equipment.GetItems().Where(o => o.Key == slot);
-            if (result.Count() > 0)
+            if (m_equipment.GetItems().Where(o => o.Key == slot).Count() > 0)
             {
-                return result.First().Value;
+                return m_equipment.GetItems().Where(o => o.Key == slot).First().Value;
             }
             return null;
         }
