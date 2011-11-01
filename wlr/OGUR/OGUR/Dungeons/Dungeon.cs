@@ -130,6 +130,9 @@ namespace OGUR.Dungeons
             if (cache.Count() == 0)
             {
                 m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
+                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
+                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
+                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
             }
             else
             {

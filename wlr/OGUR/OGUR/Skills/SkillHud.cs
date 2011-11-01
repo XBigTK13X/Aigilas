@@ -64,7 +64,7 @@ namespace OGUR.Skills
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.STRENGTH)));
                 statBuilder.Append("|");
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.DEFENSE)));
-                statBuilder.Append("|");
+                statBuilder.Append("\n");
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WEIGHT)));
                 statBuilder.Append("|");
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.WISDOM)));
@@ -74,8 +74,8 @@ namespace OGUR.Skills
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.PIETY)));
                 statBuilder.Append("|");
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.LUCK)));
-                m_textHandler.Add(new DefaultHudText(skillName, 40, 30, m_parent,.2f));
-                m_textHandler.Add(new DefaultHudText(statBuilder.ToString(),5,50,m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(skillName, 40, 5, m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(statBuilder.ToString(),20,35,m_parent,.2f));
             }
         }
 

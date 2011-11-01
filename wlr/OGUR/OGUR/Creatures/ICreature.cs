@@ -432,21 +432,16 @@ namespace OGUR.Creatures
             return m_equipment.IsRegistered(item);
         }
 
+        private static List<Vector2> playerHudPositions = new List<Vector2>()
+        {
+            new Vector2(0, 0),
+            new Vector2(XnaManager.WindowWidth-200, 0),
+            new Vector2(0,XnaManager.WindowHeight-100),
+            new Vector2(XnaManager.WindowWidth-200,XnaManager.WindowHeight-100)
+        };
         public Vector2 GetHudOrigin()
         {
-            switch(m_playerIndex)
-            {
-                case 0:
-                    return new Vector2(0, 0);
-                case 1:
-                    return new Vector2(XnaManager.GetCenter().X, 0);
-                case 2:
-                    return new Vector2(0,XnaManager.GetCenter().Y);
-                case 3:
-                    return XnaManager.GetCenter();
-                default:
-                    throw new Exception("The given player index is outside the range of players allowed in the game!");
-            }
+            return playerHudPositions[m_playerIndex];
         }
 
         public void CycleActiveSkill(int velocity)
