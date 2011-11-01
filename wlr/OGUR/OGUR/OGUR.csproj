@@ -111,8 +111,10 @@
     <Compile Include="Collision\CoordVerifier.cs" />
     <Compile Include="Collision\HitTest.cs" />
     <Compile Include="Creatures\ConcreteCreatures.cs" />
+    <Compile Include="HUD\HudManager.cs" />
     <Compile Include="Creatures\Minions.cs" />
     <Compile Include="Creatures\StatBuff.cs" />
+    <Compile Include="HUD\IHud.cs" />
     <Compile Include="Path\Path.cs" />
     <Compile Include="Path\PathFactory.cs" />
     <Compile Include="Path\PathFinder.cs" />
@@ -161,11 +163,11 @@
     <Compile Include="GameObjects\Wall.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Items\DeltasHud.cs" />
-    <Compile Include="Items\EquipmentHud.cs" />
+    <Compile Include="HUD\DeltasHud.cs" />
+    <Compile Include="HUD\EquipmentHud.cs" />
     <Compile Include="Items\Equipment.cs" />
     <Compile Include="Items\Inventory.cs" />
-    <Compile Include="Items\InventoryHud.cs" />
+    <Compile Include="HUD\InventoryHud.cs" />
     <Compile Include="Items\ItemClass.cs" />
     <Compile Include="Path\QueueFactory.cs" />
     <Compile Include="Reactions\ConcreteReactions.cs" />
@@ -179,7 +181,7 @@
     <Compile Include="Skills\SkillBehavior.cs" />
     <Compile Include="Skills\SkillComponents.cs" />
     <Compile Include="Skills\SkillFactory.cs" />
-    <Compile Include="Skills\SkillHud.cs" />
+    <Compile Include="HUD\SkillHud.cs" />
     <Compile Include="Skills\SkillPool.cs" />
     <Compile Include="States\GameOverState.cs" />
     <Compile Include="Strategies\MinionRotate.cs" />

@@ -9,46 +9,31 @@ using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
 
-namespace OGUR.Storage
+namespace OGUR.HUD
 {
-    public class InventoryHud
+    public class InventoryHud:IHud
     {
-        private readonly ICreature m_parent;
-        private static Texture2D m_menuBase;
-        private bool m_isVisible = false;
         private ItemClass m_currentClass = (ItemClass) 1;
         private readonly Inventory m_inventory;
         private int m_endingItem = 4, m_startingItem = 0;
         private Dictionary<GenericItem, int> m_currentClassItems;
-        private readonly TextHandler m_textHandler = new TextHandler();
         private GenericItem m_currentSelectedItem = null;
 
-        public InventoryHud(ICreature owner)
+        private DeltasHud m_deltas;
+
+        public InventoryHud(ICreature owner):base(owner,XnaManager.WindowWidth/2,XnaManager.WindowHeight/2)
         {
-            m_parent = owner;
             m_inventory = owner.GetInventory();
-            if (m_menuBase == null)
-            {
-                m_menuBase = XnaManager.GetMenuBaseAsset();
-            }
-        }
-
-        public void Toggle()
-        {
-            m_isVisible = !m_isVisible;
-        }
-
-        public void LoadContent()
-        {
-            m_menuBase = XnaManager.GetMenuBaseAsset();
+            m_deltas = new DeltasHud(owner);
         }
 
         public void Draw()
         {
             if (m_isVisible)
             {
-                XnaManager.Renderer.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None, 0f);
+                XnaManager.Renderer.Draw(m_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,.95f);
                 m_textHandler.Draw();
+                m_deltas.Draw();
             }
         }
 
@@ -97,6 +82,7 @@ namespace OGUR.Storage
         public void Update()
         {
             m_textHandler.Update();
+            m_deltas.Update(m_currentSelectedItem);
             m_textHandler.Clear();
             if(m_isVisible)
             {
@@ -105,10 +91,15 @@ namespace OGUR.Storage
             }
         }
 
+        public override void Toggle()
+        {
+            base.Toggle();
+            m_deltas.Toggle();
+        }
+
         private void UpdateInventoryDisplay()
         {
-            m_textHandler.Add(new DefaultHudText(m_currentClass.ToString().Replace("_", " "), 20, 30,
-                                                       m_parent));
+            m_textHandler.Add(new DefaultHudText(m_currentClass.ToString().Replace("_", " "), 20, 30,GetHudOrigin()));
             m_currentClassItems = m_inventory.GetItems(m_currentClass);
             if (m_currentClassItems.Count > 0)
             {
@@ -131,9 +122,7 @@ namespace OGUR.Storage
                                                   + item.Name +
                                                   ((m_currentClassItems[item] > -1) ? " x" + m_currentClassItems[item] :
                                                   "");
-                        m_textHandler.Add(new DefaultHudText(displayText, 50,
-                                                                 60 + 25 * (ii - m_startingItem),
-                                                                 m_parent));
+                        m_textHandler.Add(new DefaultHudText(displayText, 50,60 + 25 * (ii - m_startingItem),GetHudOrigin()));
                     }
                     ii++;
                 }
@@ -146,16 +135,6 @@ namespace OGUR.Storage
                     m_parent.Drop(m_currentSelectedItem);
                 }
             }
-        }
-
-        public GenericItem GetCurrentSelection()
-        {
-            return m_currentSelectedItem;
-        }
-
-        public bool IsVisible()
-        {
-            return m_isVisible;
         }
     }
 }

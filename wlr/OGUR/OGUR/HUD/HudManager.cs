@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using OGUR.Creatures;
+using Microsoft.Xna.Framework;
+using OGUR.Management;
+
+namespace OGUR.HUD
+{
+    public class HudManager
+    {
+        private InventoryHud m_inventory;
+        private SkillHud m_skill;
+        private DeltasHud m_deltas;
+        private EquipmentHud m_equipment;
+        private ICreature m_parent;
+
+        private static List<Vector2> playerHudPositions = new List<Vector2>()
+        {
+            new Vector2(0, 0),
+            new Vector2(XnaManager.WindowWidth-200, 0),
+            new Vector2(0,XnaManager.WindowHeight-100),
+            new Vector2(XnaManager.WindowWidth-200,XnaManager.WindowHeight-100)
+        };
+
+        public HudManager(ICreature parent)
+        {
+            m_parent = parent;
+            m_inventory = new InventoryHud(parent);
+            m_equipment = new EquipmentHud(parent);
+            m_deltas = new DeltasHud(parent);
+            m_skill = new SkillHud(parent);
+            m_skill.Toggle();
+        }
+
+        public bool ToggleInventory()
+        {
+            m_inventory.Toggle();
+            m_equipment.Toggle();
+            m_deltas.Toggle();
+            m_skill.Toggle();
+            return m_inventory.IsVisible();
+        }
+
+        public void Update()
+        {
+            m_inventory.Update();
+            m_equipment.Update();
+            m_skill.Update();
+        }
+
+        public void Draw()
+        {
+            m_inventory.Draw();
+            m_equipment.Draw();
+            m_deltas.Draw();
+            m_skill.Draw();
+        }
+    }
+}

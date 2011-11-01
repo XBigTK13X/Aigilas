@@ -10,10 +10,10 @@ using OGUR.GameObjects;
 using OGUR.Sprites;
 using OGUR.Collision;
 using OGUR.Text;
-using OGUR.Storage;
 using OGUR.Gods;
 using OGUR.Reactions;
 using System.Collections.Generic;
+using OGUR.HUD;
 
 namespace OGUR.Creatures
 {
@@ -35,10 +35,7 @@ namespace OGUR.Creatures
         protected Inventory m_inventory;
         protected Equipment m_equipment;
 
-        protected InventoryHud m_inventoryHud;
-        protected EquipmentHud m_equipmentHud;
-        protected DeltasHud m_deltasHud;
-        protected SkillHud m_skillHud;
+        protected HudManager m_hudManager;
 
         protected int m_playerIndex = -1;
         protected bool m_isPlaying = true;
@@ -74,11 +71,7 @@ namespace OGUR.Creatures
             m_combo = new ComboMeter(this);
             if (m_playerIndex > -1)
             {
-                m_inventoryHud = new InventoryHud(this);
-                m_equipmentHud = new EquipmentHud(this);
-                m_deltasHud = new DeltasHud(this);
-                m_skillHud = new SkillHud(this);
-                m_skillHud.Toggle();
+                m_hudManager = new HudManager(this);
             }
             
             m_class = creatureClass ?? new NoClass();
@@ -149,12 +142,9 @@ namespace OGUR.Creatures
                 {
                     Adjust(StatType.MOVE_COOL_DOWN, -1);    
                 }
-                if (m_inventoryHud != null)
+                if (m_hudManager != null)
                 {
-                    m_inventoryHud.Update();
-                    m_equipmentHud.Update();
-                    m_deltasHud.Update();
-                    m_skillHud.Update();
+                    m_hudManager.Update();
                 }
                 Regenerate();
             }
@@ -180,13 +170,19 @@ namespace OGUR.Creatures
         public override void Draw()
         {
             base.Draw();
-            if (m_inventoryHud != null)
+            if (m_hudManager != null)
             {
-                m_inventoryHud.Draw();
-                m_equipmentHud.Draw();
-                m_deltasHud.Draw();
-                m_skillHud.Draw();
+                m_hudManager.Draw();
             }
+        }
+
+        public bool ToggleInventoryVisibility()
+        {
+            if (m_hudManager != null)
+            {
+                return m_hudManager.ToggleInventory();
+            }
+            return false;
         }
 
         public void SetPlaying(bool isPlaying)
@@ -309,47 +305,14 @@ namespace OGUR.Creatures
             return false;
         }
 
+        public void AddBuff(StatBuff buff)
+        {
+            m_baseStats.AddBuff(buff);
+        }
+
         protected float CalculateDamage()
         {
             return Get(StatType.STRENGTH);
-        }
-
-        public Inventory GetInventory()
-        {
-            return m_inventory;
-        }
-
-        public Equipment GetEquipment()
-        {
-            return m_equipment;
-        }
-
-        public GenericItem GetCurrentInventorySelection()
-        {
-            return m_inventoryHud.GetCurrentSelection();
-        }
-
-        public GenericItem GetEquipmentIn(ItemSlot slot)
-        {
-            var result = m_equipment.GetItems().Where(o => o.Key == slot);
-            if(result.Count()>0)
-            {
-                return result.First().Value;
-            }
-            return null;
-        }
-
-        public bool ToggleInventoryVisibility()
-        {
-            if (m_inventoryHud != null)
-            {
-                m_inventoryHud.Toggle();
-                m_equipmentHud.Toggle();
-                m_deltasHud.Toggle();
-                m_skillHud.Toggle();
-                return m_inventoryHud.IsVisible();
-            }
-            return false;
         }
 
         public void MoveIfPossible(float xVel, float yVel)
@@ -432,18 +395,6 @@ namespace OGUR.Creatures
             return m_equipment.IsRegistered(item);
         }
 
-        private static List<Vector2> playerHudPositions = new List<Vector2>()
-        {
-            new Vector2(0, 0),
-            new Vector2(XnaManager.WindowWidth-200, 0),
-            new Vector2(0,XnaManager.WindowHeight-100),
-            new Vector2(XnaManager.WindowWidth-200,XnaManager.WindowHeight-100)
-        };
-        public Vector2 GetHudOrigin()
-        {
-            return playerHudPositions[m_playerIndex];
-        }
-
         public void CycleActiveSkill(int velocity)
         {
             m_skills.Cycle(velocity);
@@ -524,17 +475,33 @@ namespace OGUR.Creatures
             MoveIfPossible(targetPosition.PosX-GetLocation().PosX,targetPosition.PosY-GetLocation().PosY);
         }
 
-        public void AddBuff(StatBuff buff)
-        {
-            m_baseStats.AddBuff(buff);
-        }
-
         public void Combo(List<Elements> attack)
         {
             foreach(var element in attack)
             {
                 m_combo.Add(element);
             }
+        }
+
+        //HUD Communication
+        public Inventory GetInventory()
+        {
+            return m_inventory;
+        }
+
+        public Equipment GetEquipment()
+        {
+            return m_equipment;
+        }
+
+        public GenericItem GetEquipmentIn(ItemSlot slot)
+        {
+            var result = m_equipment.GetItems().Where(o => o.Key == slot);
+            if (result.Count() > 0)
+            {
+                return result.First().Value;
+            }
+            return null;
         }
     }
 }

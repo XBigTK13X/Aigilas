@@ -9,23 +9,11 @@ using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
 
-namespace OGUR.Items
+namespace OGUR.HUD
 {
-    public class DeltasHud
+    public class DeltasHud:IHud
     {
-        private ICreature m_parent;
-        private bool m_isVisible = false;
-        private TextHandler m_textHandler = new TextHandler();
-
-        public DeltasHud(ICreature owner)
-        {
-            m_parent = owner;
-        }
-
-        public void Toggle()
-        {
-            m_isVisible = !m_isVisible;
-        }
+        public DeltasHud(ICreature owner) : base(owner, 30, 300) { }
 
         public void Draw()
         {
@@ -35,10 +23,8 @@ namespace OGUR.Items
             }
         }
 
-        public void Update()
+        public void Update(GenericItem item)
         {
-
-            var item = m_parent.GetCurrentInventorySelection();
             if (item != null)
             {
                 var item2 = m_parent.GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass()));
@@ -50,14 +36,14 @@ namespace OGUR.Items
                     m_textHandler.Update();
                     m_textHandler.Clear();
 
-                    m_textHandler.Add(new DefaultHudText("Deltas", 30, 260, m_parent));
+                    m_textHandler.Add(new DefaultHudText("Deltas", 30, 260,GetHudOrigin()));
 
                     string deltas = "";
                     foreach (float stat in stats.GetDeltas(stats2))
                     {
                         deltas += ((stat > 0) ? "+" : "") + stat + "|";
                     }
-                    m_textHandler.Add(new DefaultHudText(deltas, 30, 290, m_parent));
+                    m_textHandler.Add(new DefaultHudText(deltas, 30, 290, GetHudOrigin()));
                 }
             }
         }

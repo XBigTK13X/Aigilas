@@ -9,24 +9,16 @@ using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
 
-namespace OGUR.Items
+namespace OGUR.HUD
 {
-    public class EquipmentHud
+    public class EquipmentHud:IHud
     {
-        private ICreature m_parent;
-        private bool m_isVisible = false;
         private Equipment m_equipment;
-        private TextHandler m_textHandler = new TextHandler();
 
-        public EquipmentHud(ICreature owner)
+        public EquipmentHud(ICreature owner):base(owner,0,0)
         {
             m_parent = owner;
             m_equipment = owner.GetEquipment();
-        }
-
-        public void Toggle()
-        {
-            m_isVisible = !m_isVisible;
         }
 
         public void Draw()
@@ -41,11 +33,11 @@ namespace OGUR.Items
         {
             m_textHandler.Update();
             m_textHandler.Clear();
-            m_textHandler.Add(new DefaultHudText("Equipped", 300, 30,m_parent));
+            m_textHandler.Add(new DefaultHudText("Equipped", 300, 30,GetHudOrigin()));
             int ii = 0;
             foreach(var item in m_equipment.GetItems())
             {
-                m_textHandler.Add(new DefaultHudText(item.Key.ToString().Substring(0,1)+":"+item.Value.Name,320,60+ii*25,m_parent));
+                m_textHandler.Add(new DefaultHudText(item.Key.ToString().Substring(0,1)+":"+item.Value.Name,320,60+ii*25,GetHudOrigin()));
                 ii++;
             }
         }

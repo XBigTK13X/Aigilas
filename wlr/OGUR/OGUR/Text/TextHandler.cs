@@ -6,7 +6,7 @@ using OGUR.Text;
 
 namespace OGUR.Text
 {
-    class TextHandler
+    public class TextHandler
     {
         private List<Text> m_contents = new List<Text>();
 

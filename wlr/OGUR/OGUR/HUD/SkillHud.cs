@@ -8,42 +8,21 @@ using OGUR.Text;
 using System.Text;
 using OGUR.Util;
 using System.Reflection;
+using OGUR.Skills;
 
-namespace OGUR.Skills
+namespace OGUR.HUD
 {
-    public class SkillHud
+    public class SkillHud:IHud
     {
-        private readonly ICreature m_parent;
-        private static Texture2D m_menuBase;
-        private bool m_isVisible = false;
-        private readonly TextHandler m_textHandler = new TextHandler();
-
-        public SkillHud(ICreature owner)
-        {
-            m_parent = owner;
-            if (m_menuBase == null)
-            {
-                m_menuBase = XnaManager.GetMenuBaseAsset();
-            }
-        }
-
-        public void Toggle()
-        {
-            m_isVisible = !m_isVisible;
-        }
-
-        public void LoadContent()
-        {
-            m_menuBase = XnaManager.GetMenuBaseAsset();
-        }
+        public SkillHud(ICreature owner) : base(owner,200,100) { }
 
         public void Draw()
         {
             if (!m_isVisible) return;
-            XnaManager.Renderer.Draw(m_menuBase, m_parent.GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f,0f,0f,.4f), 0f, new Vector2(0,0), new Vector2(200,100), SpriteEffects.None, .95f);
+            XnaManager.Renderer.Draw(m_menuBase, GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f,0f,0f,.4f), 0f, new Vector2(0,0), m_dimensions, SpriteEffects.None, .95f);
             m_textHandler.Draw();
         }
-
+        
         private string skillName = "";
         private readonly StringBuilder statBuilder = new StringBuilder(32, 32);
         public void Update()
@@ -74,14 +53,9 @@ namespace OGUR.Skills
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.PIETY)));
                 statBuilder.Append("|");
                 statBuilder.Append(StringStorage.Get(m_parent.Get(StatType.LUCK)));
-                m_textHandler.Add(new DefaultHudText(skillName, 40, 5, m_parent,.2f));
-                m_textHandler.Add(new DefaultHudText(statBuilder.ToString(),20,35,m_parent,.2f));
+                m_textHandler.Add(new DefaultHudText(skillName, 40, 5,GetHudOrigin(),.2f));
+                m_textHandler.Add(new DefaultHudText(statBuilder.ToString(),20,35,GetHudOrigin(),.2f));
             }
-        }
-
-        public bool IsVisible()
-        {
-            return m_isVisible;
         }
     }
 }
