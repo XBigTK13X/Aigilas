@@ -307,28 +307,32 @@ namespace OGUR.Creatures
             return Get(StatType.STRENGTH);
         }
 
+        private Point2 target = new Point2(0, 0);
+        private IEnumerable<ICreature> creatures;
         public void MoveIfPossible(float xVel, float yVel)
         {
             if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) <= 0)
             {
-                var target = new Point2(xVel + GetLocation().PosX , yVel + GetLocation().PosY);
+                target.Reset(xVel + GetLocation().PosX , yVel + GetLocation().PosY);
                 if (!CoordVerifier.IsBlocked(target))
                 {
-
                     Move(xVel, yVel);
                     Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));
                 }
                 else
                 {
-                    var creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE, target).Cast<ICreature>().Where(creature => creature != this);
-                    if(creatures.Any())
+                    creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE, target).Cast<ICreature>();
+                    if(creatures.Count()>0)
                     {
                         foreach (var creature in creatures)
                         {
-                            creature.ApplyDamage(CalculateDamage(),this);
-                            if(!creature.IsActive())
+                            if (creature != this)
                             {
-                                AddExperience(creature.CalculateExperience());
+                                creature.ApplyDamage(CalculateDamage(), this);
+                                if (!creature.IsActive())
+                                {
+                                    AddExperience(creature.CalculateExperience());
+                                }
                             }
                         }
                         Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));    

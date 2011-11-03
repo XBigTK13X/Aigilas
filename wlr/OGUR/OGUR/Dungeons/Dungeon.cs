@@ -131,8 +131,8 @@ namespace OGUR.Dungeons
             {
                 m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
                 m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
-                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
-                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
+                //m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
+                //m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
             }
             else
             {
@@ -148,7 +148,7 @@ namespace OGUR.Dungeons
             var rand = new Random();
             for (int ii = 0; ii < 100; ii++)
             {
-                GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(rand.Next(4)).PickupItem(ItemFactory.CreateRandomPlain());
+                GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(rand.Next(2)).PickupItem(ItemFactory.CreateRandomPlain());
             }
            
         }

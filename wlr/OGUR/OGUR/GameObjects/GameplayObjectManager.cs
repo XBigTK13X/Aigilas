@@ -45,9 +45,12 @@ namespace OGUR.GameObjects
             return null;
         }
 
+        //private static IEnumerable<GameplayObject> goResults;
         public static IEnumerable<GameplayObject> GetObjects(GameObjectType type)
         {
             return m_contents.Where(item => item.GetObjectType() == type);
+            //goResults = m_contents.Where(item => item.GetObjectType() == type);
+            //return goResults;
         }
 
         //CT Accessors

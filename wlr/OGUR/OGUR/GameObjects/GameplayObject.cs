@@ -69,30 +69,34 @@ namespace OGUR.GameObjects
             m_location = location;
         }
 
+        private Point2 oldLocation = new Point2(0, 0);
         public void UpdateLocation(Point2 location)
         {
-            var oldLocation = m_location;
+            oldLocation.Copy(m_location);
             m_graphic.SetPosition(location);
-            m_location = location;
+            m_location.Copy(location);
             GameplayObjectManager.UpdateGridLocation(this, oldLocation);
         }
 
+        private Point2 target = new Point2(0, 0);
         public void Move(float amountX, float amountY)
         {
             amountX = NormalizeDistance(amountX);
             amountY = NormalizeDistance(amountY);
-            var target = new Point2(m_location.PosX + amountX,m_location.PosY + amountY);
+            target.Reset(m_location.PosX + amountX,m_location.PosY + amountY);
             if (CoordVerifier.IsValid(target))
             {
                 UpdateLocation(target);
             }
         }
 
+        private static int isNeg = 1;
+        private static int factorsOfSpriteHeight = 0;
         private static float NormalizeDistance(float amount)
         {
-            var isNeg = (amount < 0)? -1:1;
+            isNeg = (amount < 0)? -1:1;
             amount = Math.Abs(amount);
-            var factorsOfSpriteHeight = (int)Math.Floor(amount/SpriteInfo.Height);
+            factorsOfSpriteHeight = (int)Math.Floor(amount/SpriteInfo.Height);
             factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount!=0) ? 1 : factorsOfSpriteHeight;
             return (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
         }
