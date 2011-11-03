@@ -29,15 +29,25 @@ namespace OGUR.HUD
             }
         }
 
+        private DefaultHudText equipHeading = new DefaultHudText();
+        private DefaultHudText[] equipTexts = new DefaultHudText[100];
         public void Update()
         {
+            if (equipTexts[0] == null)
+            {
+                equipHeading.Reset(s_text, 300, 30, GetHudOrigin());
+                for (int jj = 0; jj < equipTexts.Count(); jj++)
+                {
+                    equipTexts[jj] = new DefaultHudText(.2f);
+                }
+            }
             m_textHandler.Update();
             m_textHandler.Clear();
-            m_textHandler.Add(new DefaultHudText(s_text, 300, 30,GetHudOrigin()));
+            m_textHandler.Add(equipHeading);
             int ii = 0;
             foreach(var item in m_equipment.GetItems())
             {
-                m_textHandler.Add(new DefaultHudText(item.Key.ToString().Substring(0,1)+":"+item.Value.Name,320,60+ii*25,GetHudOrigin()));
+                m_textHandler.WriteDefault(item.Key.ToString().Substring(0, 1) + ":" + item.Value.Name, 320, 60 + ii * 25, GetHudOrigin());
                 ii++;
             }
         }

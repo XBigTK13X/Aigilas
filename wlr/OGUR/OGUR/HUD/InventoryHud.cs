@@ -112,17 +112,21 @@ namespace OGUR.HUD
             return s_classStrings[m_currentClass];
         }
 
-        private readonly StringBuilder statBuilder = new StringBuilder(32, 32);
         private const string s_delim = ")";
         private const string s_equipDelim = "~";
         private const string s_seper = " x";
+        private const string s_newline = "\n";
+
+        private int lastStarting = -1;
+        private string displayString = "";
         private void UpdateInventoryDisplay()
         {
-            m_textHandler.Add(new DefaultHudText(GetClassDisplay(), 20, 30,GetHudOrigin()));
+            m_textHandler.WriteDefault(GetClassDisplay(), 20, 30,GetHudOrigin());
             m_currentClassItems = m_inventory.GetItems(m_currentClass);
             if (m_currentClassItems.Count > 0)
             {
                 int ii = 0;
+                StringSquisher.Clear();
                 foreach (var item in m_currentClassItems.Keys)
                 {
                     if (ii == m_startingItem)
@@ -134,18 +138,28 @@ namespace OGUR.HUD
                         continue;
                     }
 
-                    statBuilder.Remove(0, statBuilder.Length);
+                   
                     if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
                     {
-                        statBuilder.Append(StringStorage.Get(ii));
-                        statBuilder.Append(s_delim);
-                        statBuilder.Append((m_equipment.IsRegistered(item)) ? s_equipDelim : String.Empty);
-                        statBuilder.Append(item.Name);
-                        statBuilder.Append((m_currentClassItems[item] > -1) ? s_seper + m_currentClassItems[item] : String.Empty);
-                        m_textHandler.Add(new DefaultHudText(statBuilder.ToString(), 50,60 + 25 * (ii - m_startingItem),GetHudOrigin()));
+                        StringSquisher.Squish
+                        (
+                            StringStorage.Get(ii), s_delim,
+                            (m_equipment.IsRegistered(item)) ? s_equipDelim : String.Empty,
+                            item.Name);
+                        if (m_currentClassItems[item] > -1)
+                        {
+                            StringSquisher.Squish(s_seper, StringStorage.Get(m_currentClassItems[item]));
+                        }
+                        StringSquisher.Squish(s_newline);
                     }
                     ii++;
                 }
+                if (lastStarting != m_startingItem)
+                {
+                    displayString = StringSquisher.Flush();
+                    lastStarting = m_startingItem;
+                }
+                m_textHandler.WriteDefault(displayString, 50, 60, GetHudOrigin());
                 if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
                 {
                     m_parent.Equip(m_currentSelectedItem);

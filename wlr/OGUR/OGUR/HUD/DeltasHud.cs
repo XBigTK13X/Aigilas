@@ -8,6 +8,7 @@ using OGUR.Creatures;
 using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
+using OGUR.Util;
 
 namespace OGUR.HUD
 {
@@ -30,33 +31,34 @@ namespace OGUR.HUD
 
         private GenericItem GetEquipmentIn(ItemSlot slot)
         {
-            if (m_equipment.GetItems().Where(o => o.Key == slot).Count() > 0)
+            if (m_equipment.GetItems().ContainsKey(slot))
             {
-                return m_equipment.GetItems().Where(o => o.Key == slot).First().Value;
+                return m_equipment.GetItems()[slot];
             }
             return null;
         }
+
+        private const string delim = "|";
+        private const string positive = "+";
+        private const string title = "Deltas";
+
         public void Update(GenericItem item)
         {
             if (item != null)
             {
-                var item2 = GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass()));
-                if (item2 != null)
+                if (GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())) != null)
                 {
-                    var stats = GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers;
-                    var stats2 = item.Modifers;
-
                     m_textHandler.Update();
                     m_textHandler.Clear();
 
-                    m_textHandler.Add(new DefaultHudText("Deltas", 30, 260,GetHudOrigin()));
+                    m_textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
 
-                    string deltas = "";
-                    foreach (float stat in stats.GetDeltas(stats2))
+                    StringSquisher.Clear();
+                    foreach (float stat in GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers.GetDeltas(item.Modifers))
                     {
-                        deltas += ((stat > 0) ? "+" : "") + stat + "|";
+                        StringSquisher.Squish(((stat > 0) ? positive : String.Empty) + stat + delim);
                     }
-                    m_textHandler.Add(new DefaultHudText(deltas, 30, 290, GetHudOrigin()));
+                    m_textHandler.WriteDefault(StringSquisher.Flush(), 30, 290, GetHudOrigin());
                 }
             }
         }

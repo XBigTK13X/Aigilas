@@ -11,14 +11,23 @@ namespace OGUR.Text
     public class Text
     {
         protected string m_contents;
-        protected Vector2 m_position;
-        protected TextType m_textType;
+        protected Vector2 m_position = new Vector2(0,0);
+        protected TextType m_textType = TextType.Inventory;
+
+        public Text()
+        { }
+
+        public void Reset(string contents, int x, int y)
+        {
+            m_contents = contents;
+            m_position.X = x;
+            m_position.Y = y;
+        }
 
         public Text(string contents,int x, int y,TextType type)
         {
+            Reset(contents, x, y);
             m_textType = type;
-            m_contents = contents;
-            m_position = new Vector2(x,y);
         }
         public virtual int Update()
         {

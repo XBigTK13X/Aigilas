@@ -3,15 +3,30 @@ using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
 using OGUR.Management;
 using OGUR.Text;
+using Microsoft.Xna.Framework;
 
 namespace OGUR.Text
 {
     public class TextHandler
     {
+        private DefaultHudText[] defaultPool = new DefaultHudText[100];
+        private int defaultIndex = 0;
+
         private List<Text> m_contents = new List<Text>();
 
         public TextHandler()
         {
+            for (int ii = 0; ii < defaultPool.Count(); ii++)
+            {
+                defaultPool[ii] = new DefaultHudText(.2f);
+            }
+        }
+
+        public void WriteDefault(string contents,int x, int y,Vector2 origin)
+        {
+            defaultPool[defaultIndex].Reset(contents,x,y,origin);
+            Add(defaultPool[defaultIndex]);
+            defaultIndex = (defaultIndex + 1) % defaultPool.Count();
         }
 
         public void Add(Text textToAdd)

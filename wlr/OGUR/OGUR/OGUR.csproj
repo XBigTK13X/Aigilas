@@ -218,6 +218,7 @@
     <Compile Include="Strategies\AttackPlayers.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
     <Compile Include="Util\EnumUtil.cs" />
+    <Compile Include="Util\StringSquisher.cs" />
     <Compile Include="Util\StringStorage.cs" />
   </ItemGroup>
   <ItemGroup>
