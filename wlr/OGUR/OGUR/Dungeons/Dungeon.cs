@@ -34,7 +34,7 @@ namespace OGUR.Dungeons
         private static readonly int m_blocksWide = DungeonFactory.BlocksWide;
 
         //Top level game config
-        private const int playerCount = 2;
+        private const int playerCount = 4;
         private const int enemyCap = 0;
         private const int enemyBase = 0;
         private const int itemCap = 4;
@@ -86,22 +86,18 @@ namespace OGUR.Dungeons
             }
         }
 
+        private List<GameplayObject> playerCache;
         public void LoadTiles(bool goingUp)
         {
             GameplayObjectManager.Clear();
             PlaceFloor();
-            m_contents.AddRange(DungeonFactory.FlushCache());
+            playerCache = DungeonFactory.FlushCache();
             var spawn = goingUp ? upSpawnLocation : downSpawnLocation;
             var neighbors = spawn.GetNeighbors();
-            var nIndex = 0;
-            foreach (
-                ICreature player in
-                    m_contents.Where(tile => tile.GetObjectType() == GameObjectType.CREATURE).Where(
-                        creature => ((ICreature) creature).GetCreatureType() == CreatureType.PLAYER))
+            foreach (ICreature player in playerCache)
             {
-                nIndex = rand.Next(0, neighbors.Count());
-                player.SetLocation(neighbors[nIndex]);
-                neighbors.RemoveAt(nIndex);
+                player.SetLocation(GetRandomNeighbor(ref neighbors));
+                m_contents.Add(player);
             }
             foreach (var item in m_contents)
             {
@@ -140,38 +136,46 @@ namespace OGUR.Dungeons
 
             var cache = DungeonFactory.FlushCache();
             var neighbors = downSpawnLocation.GetNeighbors();
-            int neighborIndex = 0;
+            
             if (cache.Count() == 0)
             {
-                
                 for (int ii = 0; ii < playerCount; ii++)
                 {
-                    neighborIndex = rand.Next(0, neighbors.Count());
-                    m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, neighbors[neighborIndex]));
-                    neighbors.RemoveAt(neighborIndex);
+                    m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, GetRandomNeighbor(ref neighbors)));
                 }
             }
             else
             {
                 foreach (var player in cache.Cast<ICreature>())
                 {
-                    neighborIndex = rand.Next(0, neighbors.Count());
-                    player.SetLocation(neighbors[neighborIndex]);
-                    neighbors.RemoveAt(neighborIndex);
+                    player.SetLocation(GetRandomNeighbor(ref neighbors));
                 }
                 GameplayObjectManager.AddObjects(cache);
                 m_contents.AddRange(cache);
             }
             
             //Give player random objects
-            /*
-             * var rand = new Random();
-            for (int ii = 0; ii < 5; ii++)
+            for (int ii = 6; ii < 5; ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)).PickupItem(ItemFactory.CreateRandomPlain());
             }
-             * */
            
+        }
+
+        Point2 neighborTemp = new Point2(0, 0);
+        private Point2 GetRandomNeighbor(ref List<Point2> neighbors)
+        {
+            while (neighbors.Count() > 0)
+            {
+                int neighborIndex = rand.Next(0, neighbors.Count());
+                neighborTemp = neighbors[neighborIndex];
+                neighbors.RemoveAt(neighborIndex);
+                if (!dungeon[neighborTemp.GridX,neighborTemp.GridY].IsBlocking())
+                {
+                    return neighborTemp;
+                }
+            }
+            return null;
         }
 
         private void PlaceItems(int amountToPlace)

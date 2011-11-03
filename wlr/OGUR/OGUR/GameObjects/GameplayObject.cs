@@ -66,7 +66,7 @@ namespace OGUR.GameObjects
         public void SetLocation(Point2 location)
         {
             m_graphic.SetPosition(location);
-            m_location = location;
+            m_location.Copy(location);
         }
 
         private Point2 oldLocation = new Point2(0, 0);
