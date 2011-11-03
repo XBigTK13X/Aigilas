@@ -9,6 +9,9 @@ namespace OGUR.Items
     public class ItemFactory
     {
         private static Random rand = new Random();
+        private const int itemGrowth = 3;
+        private static ItemName itemType;
+
         public static GenericItem CreateRandomPlain(Point2 location = null,bool onFloor = false)
         {
             if(location == null)
@@ -16,10 +19,11 @@ namespace OGUR.Items
                 location = new Point2(-100,-100);
             }
 
+            itemType = SelectRandomType();
             return
                 (GenericItem)
-                GameplayObjectManager.AddObject(new GenericItem(new Stats(rand.Next(5), rand.Next(5), rand.Next(5), 0, 0, 0, 0, 0, 0, 0, 0),
-                                                                ItemSuffix.NULL, ItemPrefix.NULL, SelectRandomType(),
+                GameplayObjectManager.AddObject(new GenericItem(new Stats(rand.Next(itemGrowth), rand.Next(itemGrowth), rand.Next(itemGrowth), 0, 0, 0, 0, 0, 0, 0, 0),
+                                                                ItemSuffix.NULL, ItemPrefix.NULL, itemType,
                                                                 location,onFloor));
         }
         public static GenericItem CreateRandomPlain(Point2 location)

@@ -106,5 +106,16 @@ namespace OGUR.Creatures
         {
             return m_stats.Keys.Where(o=>o!=StatType.HEALTH&&o!=StatType.MOVE_COOL_DOWN).Sum(stat => m_stats[stat]);
         }
+
+        float hash = 0;
+        public override int GetHashCode()
+        {
+            hash = 0;
+            foreach(var key in m_stats.Keys)
+            {
+                hash += m_stats[key];
+            }
+            return hash.GetHashCode();
+        }
     }
 }

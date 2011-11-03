@@ -39,6 +39,7 @@ namespace OGUR.Dungeons
         private const int enemyBase = 0;
         private const int itemCap = 4;
         private const int itemBase = 1;
+        private const int startingItemAmount = 0;
 
         private readonly List<Room> m_rooms = new List<Room>();
         private List<GameplayObject> m_contents = new List<GameplayObject>();
@@ -155,7 +156,7 @@ namespace OGUR.Dungeons
             }
             
             //Give player random objects
-            for (int ii = 6; ii < 5; ii++)
+            for (int ii = 0; ii < startingItemAmount; ii++)
             {
                 GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)).PickupItem(ItemFactory.CreateRandomPlain());
             }
