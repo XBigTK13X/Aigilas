@@ -131,15 +131,21 @@ namespace OGUR.GameObjects
             m_contents.AddRange(cache);
         }
 
-        private static GameplayObject s_nearest;
+        private static Player s_nearest;
         public static Player GetTouchingPlayer(GameplayObject source)
         {
-            s_nearest = GetNearestPlayer(source);
-            if (HitTest.IsTouching(source, s_nearest))
+            s_nearest = null;
+            foreach (var elem in m_gridContents[source.GetLocation()])
             {
-                return (Player)s_nearest;
+                if (elem.GetObjectType() == GameObjectType.CREATURE)
+                {
+                    if (((ICreature)elem).GetCreatureType() == CreatureType.PLAYER)
+                    {
+                        s_nearest = (Player)elem;
+                    }
+                }
             }
-            return null;
+            return s_nearest;
         }
 
         public static bool AnyContains(Point2 target, GameObjectType type)

@@ -33,11 +33,19 @@ namespace OGUR.Dungeons
         private static readonly int m_blocksHigh = DungeonFactory.BlocksHigh;
         private static readonly int m_blocksWide = DungeonFactory.BlocksWide;
 
+        //Top level game config
+        private const int playerCount = 2;
+        private const int enemyCap = 0;
+        private const int enemyBase = 0;
+        private const int itemCap = 4;
+        private const int itemBase = 1;
+
         private readonly List<Room> m_rooms = new List<Room>();
         private List<GameplayObject> m_contents = new List<GameplayObject>();
         private readonly GameplayObject[,] dungeon = new GameplayObject[m_blocksWide,m_blocksHigh];
         private Point2 downSpawnLocation = new Point2(0, 0);
         private Point2 upSpawnLocation = new Point2(0, 0);
+        private static readonly Random rand = new Random();
 
         public Dungeon()
         {
@@ -61,8 +69,8 @@ namespace OGUR.Dungeons
             PlaceRooms();
             ConvertRoomsToWalls();
             PlaceStairs();
-            PlaceCreatures(new Random().Next(3, 10));
-            PlaceItems(new Random().Next(0, 5));
+            PlaceCreatures(rand.Next(enemyBase, enemyCap));
+            PlaceItems(rand.Next(itemBase, itemCap));
             PlaceFloor();
             TransferDungeonState();
         }
@@ -84,12 +92,16 @@ namespace OGUR.Dungeons
             PlaceFloor();
             m_contents.AddRange(DungeonFactory.FlushCache());
             var spawn = goingUp ? upSpawnLocation : downSpawnLocation;
+            var neighbors = spawn.GetNeighbors();
+            var nIndex = 0;
             foreach (
                 ICreature player in
                     m_contents.Where(tile => tile.GetObjectType() == GameObjectType.CREATURE).Where(
                         creature => ((ICreature) creature).GetCreatureType() == CreatureType.PLAYER))
             {
-                player.SetLocation(spawn);
+                nIndex = rand.Next(0, neighbors.Count());
+                player.SetLocation(neighbors[nIndex]);
+                neighbors.RemoveAt(nIndex);
             }
             foreach (var item in m_contents)
             {
@@ -99,7 +111,7 @@ namespace OGUR.Dungeons
 
         public void CacheContents()
         {
-            foreach (var player in m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().Where(o => o.GetCreatureType() == CreatureType.PLAYER))
+            foreach (var player in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
             {
                 DungeonFactory.AddToCache(player);
                 GameplayObjectManager.RemoveObject(player);
@@ -127,29 +139,38 @@ namespace OGUR.Dungeons
             }
 
             var cache = DungeonFactory.FlushCache();
+            var neighbors = downSpawnLocation.GetNeighbors();
+            int neighborIndex = 0;
             if (cache.Count() == 0)
             {
-                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
-                m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
-                //m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
-                //m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, downSpawnLocation));
+                
+                for (int ii = 0; ii < playerCount; ii++)
+                {
+                    neighborIndex = rand.Next(0, neighbors.Count());
+                    m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, neighbors[neighborIndex]));
+                    neighbors.RemoveAt(neighborIndex);
+                }
             }
             else
             {
                 foreach (var player in cache.Cast<ICreature>())
                 {
-                    player.SetLocation(downSpawnLocation);
+                    neighborIndex = rand.Next(0, neighbors.Count());
+                    player.SetLocation(neighbors[neighborIndex]);
+                    neighbors.RemoveAt(neighborIndex);
                 }
                 GameplayObjectManager.AddObjects(cache);
                 m_contents.AddRange(cache);
             }
             
             //Give player random objects
-            var rand = new Random();
-            for (int ii = 0; ii < 100; ii++)
+            /*
+             * var rand = new Random();
+            for (int ii = 0; ii < 5; ii++)
             {
-                GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(rand.Next(2)).PickupItem(ItemFactory.CreateRandomPlain());
+                GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)).PickupItem(ItemFactory.CreateRandomPlain());
             }
+             * */
            
         }
 
@@ -187,7 +208,6 @@ namespace OGUR.Dungeons
         private void PlaceRooms()
         {
             var newRooms = new List<Room>();
-            var rand = new Random();
             const int maxRoomCount = 15;
             var roomsToPlace = 3 + rand.Next(0, maxRoomCount);
             var attemptCount = 0;
@@ -218,7 +238,6 @@ namespace OGUR.Dungeons
 
         private Point2 FindRandomFreeTile()
         {
-            var rand = new Random();
             while (true)
             {
                 var x = rand.Next(0, m_blocksWide);
@@ -238,13 +257,13 @@ namespace OGUR.Dungeons
 
         private void PlaceDownstairs()
         {
-            upSpawnLocation = FindRandomFreeTile();
+            upSpawnLocation.Copy(FindRandomFreeTile());
             dungeon[upSpawnLocation.GridX, upSpawnLocation.GridY] = new Downstairs(upSpawnLocation);
         }
 
         private void PlaceUpstairs()
         {
-            downSpawnLocation = FindRandomFreeTile();
+            downSpawnLocation.Copy(FindRandomFreeTile());
             dungeon[downSpawnLocation.GridX, downSpawnLocation.GridY] = new Upstairs(downSpawnLocation);
         }
 

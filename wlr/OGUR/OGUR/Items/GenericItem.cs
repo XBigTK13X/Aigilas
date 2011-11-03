@@ -78,19 +78,22 @@ namespace OGUR.Items
             Initialize(location, SpriteFromItem(type), GameObjectType.ITEM,.45f);
         }
 
-        private List<ICreature> players;
+        private Player m_currentTarget;
         public override void Update()
         {
             base.Update();
             if (m_isOnBoard)
             {
-                players = GameplayObjectManager.GetObjects(CreatureType.PLAYER);
-                for(int ii = 0;ii<players.Count;ii++)
+                m_currentTarget = GameplayObjectManager.GetTouchingPlayer(this);
+                if (m_currentTarget != null)
                 {
-                    if (HitTest.IsTouching(players[ii], this) && players[ii].IsInteracting())
+                    if (m_currentTarget.IsInteracting())
                     {
-                        Hide();
-                        players[ii].PickupItem(this);
+                        if (HitTest.IsTouching(m_currentTarget, this) && m_currentTarget.IsInteracting())
+                        {
+                            Hide();
+                            m_currentTarget.PickupItem(this);
+                        }
                     }
                 }
             }
