@@ -52,6 +52,7 @@ namespace OGUR.HUD
                 }
                 m_startingItem = 0;
                 m_endingItem = 4;
+                forceRefresh = true;
             }
 
             if (InputManager.IsPressed(InputManager.Commands.MoveRight, m_parent.GetPlayerIndex()))
@@ -59,10 +60,11 @@ namespace OGUR.HUD
                 m_currentClass++;
                 if (m_currentClass >= ItemClass.LAST)
                 {
-                    m_currentClass = (ItemClass)1;
+                    m_currentClass = (ItemClass)1;                    
                 }
                 m_startingItem = 0;
                 m_endingItem = 4;
+                forceRefresh = true;
             }
 
             if (InputManager.IsPressed(InputManager.Commands.MoveDown, m_parent.GetPlayerIndex()))
@@ -71,6 +73,7 @@ namespace OGUR.HUD
                 {
                     m_startingItem++;
                     m_endingItem++;
+                    forceRefresh = true;
                 }
             }
 
@@ -80,7 +83,18 @@ namespace OGUR.HUD
                 {
                     m_startingItem--;
                     m_endingItem--;
+                    forceRefresh = true;
                 }
+            }
+            if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
+            {
+                m_parent.Equip(m_currentSelectedItem);
+                forceRefresh = true;
+            }
+            if (InputManager.IsPressed(InputManager.Commands.Cancel, m_parent.GetPlayerIndex()))
+            {
+                m_parent.Drop(m_currentSelectedItem);
+                forceRefresh = true;
             }
         }
         public void Update()
@@ -99,6 +113,7 @@ namespace OGUR.HUD
         {
             base.Toggle();
             m_deltas.Toggle();
+            forceRefresh = true;
         }
 
         private static readonly Dictionary<ItemClass, string> s_classStrings = new Dictionary<ItemClass, string>();
@@ -117,8 +132,9 @@ namespace OGUR.HUD
         private const string s_seper = " x";
         private const string s_newline = "\n";
 
-        private int lastStarting = -1;
         private string displayString = "";
+        private bool forceRefresh = false;
+
         private void UpdateInventoryDisplay()
         {
             m_textHandler.WriteDefault(GetClassDisplay(), 20, 30,GetHudOrigin());
@@ -154,20 +170,12 @@ namespace OGUR.HUD
                     }
                     ii++;
                 }
-                if (lastStarting != m_startingItem)
+                if (forceRefresh)
                 {
                     displayString = StringSquisher.Flush();
-                    lastStarting = m_startingItem;
+                    forceRefresh = false;                    
                 }
                 m_textHandler.WriteDefault(displayString, 50, 60, GetHudOrigin());
-                if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
-                {
-                    m_parent.Equip(m_currentSelectedItem);
-                }
-                if (InputManager.IsPressed(InputManager.Commands.Cancel, m_parent.GetPlayerIndex()))
-                {
-                    m_parent.Drop(m_currentSelectedItem);
-                }
             }
         }
     }

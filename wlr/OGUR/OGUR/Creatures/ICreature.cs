@@ -90,7 +90,7 @@ namespace OGUR.Creatures
         public void PickupItem(GenericItem item)
         {
             m_inventory.Add(item);
-            item.Hide();
+            GameplayObjectManager.RemoveObject(item);
         }
 
         public void Equip(GenericItem item)
