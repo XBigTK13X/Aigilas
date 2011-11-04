@@ -84,7 +84,8 @@ namespace OGUR
                     return;
                 }
             }
-            // TODO: Add your update logic here
+
+            InputManager.Update();
             StateManager.Update();
             TextManager.Update();
             base.Update(gameTime);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using OGUR.Util;
 
 namespace OGUR.Management
 {
@@ -99,26 +100,33 @@ namespace OGUR.Management
                                                                       };
         private static readonly Dictionary<int, bool> s_inputs = new Dictionary<int, bool>();
         private static bool s_isInputActive = false;
+        private static bool s_isDown = false;
 
-        public static bool IsPressed(Commands command, int playerIndex,bool failIfLocked=true)
+        private static bool IsDown(Commands command, int playerIndex)
         {
-            
-            s_isInputActive = false;
-            if(!s_inputs.ContainsKey(playerIndex))
+            if (!s_inputs.ContainsKey(playerIndex))
             {
-                s_inputs.Add(playerIndex,GamePad.GetState(m_playerIndex[playerIndex]).IsConnected);
+                s_inputs.Add(playerIndex, GamePad.GetState(m_playerIndex[playerIndex]).IsConnected);
             }
             else
             {
                 if (s_inputs[playerIndex])
                 {
-                    s_isInputActive = GamePad.GetState(m_playerIndex[playerIndex]).IsButtonDown(m_gamePadMapping[command]);
+                    s_isDown = GamePad.GetState(m_playerIndex[playerIndex]).IsButtonDown(m_gamePadMapping[command]);
                 }
                 else
                 {
-                    s_isInputActive = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
+                    s_isDown = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
                 }
             }
+            return s_isDown;
+        }
+
+        public static bool IsPressed(Commands command, int playerIndex,bool failIfLocked=true)
+        {
+            
+            s_isInputActive = IsDown(command,playerIndex);
+            
             if (!s_isInputActive)
             {
                 if (ShouldLock(command,playerIndex))
@@ -188,6 +196,18 @@ namespace OGUR.Management
             for(int ii = 0;ii<s_locks.Count();ii++)
             {
                 if(s_locks[ii].Command==command && s_locks[ii].PlayerIndex==playerIndex)
+                {
+                    s_locks.Remove(s_locks[ii]);
+                    ii--;
+                }
+            }
+        }
+
+        public static void Update()
+        {
+            for(int ii = 0;ii<s_locks.Count();ii++)
+            {
+                if (!IsDown(s_locks[ii].Command, s_locks[ii].PlayerIndex))
                 {
                     s_locks.Remove(s_locks[ii]);
                     ii--;
