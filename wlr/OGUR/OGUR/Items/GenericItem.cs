@@ -89,11 +89,7 @@ namespace OGUR.Items
                 {
                     if (m_currentTarget.IsInteracting())
                     {
-                        if (HitTest.IsTouching(m_currentTarget, this) && m_currentTarget.IsInteracting())
-                        {
-                            Hide();
-                            m_currentTarget.PickupItem(this);
-                        }
+                        m_currentTarget.PickupItem(this);
                     }
                 }
             }
