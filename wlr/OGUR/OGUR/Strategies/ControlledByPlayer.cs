@@ -28,12 +28,12 @@ namespace OGUR.Strategies
             }
             if (target.IsPlaying())
             {
-                var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,target.GetPlayerIndex())? -target.Get(StatType.MOVE_SPEED): 0);
-                var rightVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex()))? target.Get(StatType.MOVE_SPEED): 0);
+                var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,target.GetPlayerIndex())? -Stats.DefaultMoveSpeed: 0);
+                var rightVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
                 m_keyVelocity.SetX(rightVelocity + leftVelocity);
-                
-                var downVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex()))? target.Get(StatType.MOVE_SPEED): 0);
-                var upVelocity =((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex()))? -target.Get(StatType.MOVE_SPEED): 0);
+
+                var downVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                var upVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
                 m_keyVelocity.SetY(upVelocity + downVelocity);
 
                 if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))

@@ -21,20 +21,20 @@ namespace OGUR.Classes
     class NoClass : CreatureClass
     {
         public NoClass()
-            : base(new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+            : base(new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
         {
         }
     }
     class Brute:CreatureClass
     {
-        public Brute():base(new Stats(10,1,3,1,5,1,0,0,0,0,0))
+        public Brute():base(new Stats(10,1,3,1,5,1,0,0,0,0))
         {
             m_skillUnlocks.Add(new KeyValuePair<int, string>(1, SkillId.THRASH));
         }
     }
     class Mage:CreatureClass
     {
-        public Mage(): base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0)))
+        public Mage(): base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0)))
         {
             Add(1, SkillId.FIREBALL);
             Add(1, SkillId.BULK);
@@ -43,7 +43,7 @@ namespace OGUR.Classes
     }
     class SlothAcolyte:CreatureClass
     {
-        public SlothAcolyte(): base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0, 0)))
+        public SlothAcolyte(): base(new Stats(new Stats(5, 10, 1, 5, 3, 2, 1, 0, 0, 0)))
         {
             Add(1, SkillId.ACID_NOZZLE);
             Add(1, SkillId.FLOOR_SPIKES);

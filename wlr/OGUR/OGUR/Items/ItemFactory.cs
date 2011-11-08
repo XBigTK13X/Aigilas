@@ -22,7 +22,7 @@ namespace OGUR.Items
             itemType = SelectRandomType();
             return
                 (GenericItem)
-                GameplayObjectManager.AddObject(new GenericItem(new Stats(rand.Next(itemGrowth), rand.Next(itemGrowth), rand.Next(itemGrowth), 0, 0, 0, 0, 0, 0, 0, 0),
+                GameplayObjectManager.AddObject(new GenericItem(new Stats(rand.Next(itemGrowth), rand.Next(itemGrowth), rand.Next(itemGrowth), 0, 0, 0, 0, 0, 0, 0),
                                                                 ItemSuffix.NULL, ItemPrefix.NULL, itemType,
                                                                 location,onFloor));
         }

@@ -27,11 +27,10 @@ namespace OGUR.Creatures
                 float age,
                 float weightInLbs,
                 float heightInFeet,
-                float moveSpeed = DefaultMoveSpeed,
                 float moveCoolDown = DefaultCoolDown
             )
         {
-            Setup(new List<float>{health, mana, strength, wisdom, defense,luck, age,weightInLbs, heightInFeet, moveSpeed, moveCoolDown,0});
+            Setup(new List<float>{health, mana, strength, wisdom, defense,luck, age,weightInLbs, heightInFeet, moveCoolDown,0});
         }
 
         private void Setup(List<float> stats )

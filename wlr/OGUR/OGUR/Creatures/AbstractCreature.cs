@@ -18,8 +18,8 @@ namespace OGUR.Creatures
             }
             m_class = cClass;
             m_creatureType = type;
-            m_baseStats = new Stats(10, 10, 10, 10, 10, 10, 10, 10, 10);
-            m_maxStats = new Stats(10, 10, 10, 10, 10, 10, 10, 10, 10);
+            m_baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
+            m_maxStats = new Stats(m_baseStats);
         }
         public void Setup(Point2 position)
         {

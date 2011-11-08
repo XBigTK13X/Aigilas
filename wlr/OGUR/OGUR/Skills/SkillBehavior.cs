@@ -20,7 +20,7 @@ namespace OGUR.Skills
         {
             m_parent = parentSkill;
             m_sideEffects = new SideEffects(effectGraphic, animation,m_parent);
-            m_cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            m_cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
         public SpriteType GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }

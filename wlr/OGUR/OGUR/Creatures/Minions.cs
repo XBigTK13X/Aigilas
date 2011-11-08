@@ -13,7 +13,7 @@ namespace OGUR.Creatures
         public Minion(CreatureType type = CreatureType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
             m_creatureType = type;
-            m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,Stats.DefaultMoveSpeed,coolDown);
+            m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
         }
         public void Init(ICreature source)
         {
