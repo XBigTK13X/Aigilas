@@ -75,7 +75,7 @@ namespace OGUR.Reactions
             }
             if (m_elements.Count() == 2)
             {
-                key = (int)m_elements[1] * 10 + (int)m_elements[2];
+                key = (int)m_elements[0] * 10 + (int)m_elements[1];
                 if (s_reactions.Keys.Contains(key))
                 {
                     ReactionFactory.Create(s_reactions[key]).Affect(m_parent);

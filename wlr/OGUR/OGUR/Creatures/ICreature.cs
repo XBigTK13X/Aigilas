@@ -47,14 +47,10 @@ namespace OGUR.Creatures
         {
             switch (type)
             {
-                case CreatureType.PLAYER:
-                    return SpriteType.PLAYER_STAND;
-                case CreatureType.ZORB:
-                    return SpriteType.ZORB;
-                case CreatureType.MINION:
-                    return SpriteType.MINION;
-                default:
-                    return SpriteType.CREATURE;
+                case CreatureType.MINION: return SpriteType.MINION;
+                case CreatureType.PLAYER:return SpriteType.PLAYER_STAND;
+                case CreatureType.ZORB:return SpriteType.ZORB;
+                default:return SpriteType.CREATURE;
             }
         }
 
@@ -461,12 +457,13 @@ namespace OGUR.Creatures
             PerformInteraction();
         }
 
-        private void AssignGod(God god)
+        protected void AssignGod(God god)
         {
             if (m_god != god && m_god != null)
             {
                 ApplyDamage(Get(StatType.PIETY));
                 Set(StatType.PIETY, 0);
+                SetClass(god.GetClass());
             }
             m_god = god;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using OGUR.Creatures;
 using OGUR.Items;
+using OGUR.Classes;
 
 namespace OGUR.Gods
 {
@@ -57,6 +58,21 @@ namespace OGUR.Gods
         public Color GetColor()
         {
             return m_color;
+        }
+
+        public CreatureClass GetClass()
+        {
+            switch (m_name)
+            {
+                case Name.ENVY: return new EnvyAcolyte();
+                case Name.GLUTTONY: return new GluttonyAcolyte();
+                case Name.GREED: return new GreedAcolyte();
+                case Name.LUST: return new LustAcolyte();
+                case Name.PRIDE: return new PrideAcolyte();
+                case Name.SLOTH: return new SlothAcolyte();
+                case Name.WRATH: return new WrathAcolyte();
+            }
+            return new NoClass();
         }
 
         public bool IsGoodSacrifice(ItemClass sacrifice)

@@ -8,6 +8,7 @@ using OGUR.Classes;
 using OGUR.Sprites;
 using Microsoft.Xna.Framework;
 using OGUR.GameObjects;
+using OGUR.Gods;
 
 namespace OGUR.Creatures
 {
@@ -21,6 +22,7 @@ namespace OGUR.Creatures
             m_strategy = new ControlledByPlayer(this);
             m_baseStats = new Stats(100f, 100f, 1f, 10f, .1f, 10f, 35f, 50f, 6.0f, 6);
             m_maxStats = new Stats(m_baseStats);
+            AssignGod(God.Get(God.Name.SLOTH));
         }
     }
     class Peon : AbstractCreature
