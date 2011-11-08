@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using OGUR.Management;
+using OGUR.GameObjects;
 
 namespace OGUR.Text
 {
@@ -26,8 +27,8 @@ namespace OGUR.Text
         public override void Draw()
         {
             var fontCenter = TextManager.GetFont().MeasureString(m_contents) / 2;
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.Black, 0, fontCenter, 1.15f * m_scalePercent, SpriteEffects.None, 0.98f);
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.White, 0, fontCenter, 1.0f * m_scalePercent, SpriteEffects.None, 0.985f);
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.Black, 0, fontCenter, 1.15f * m_scalePercent, SpriteEffects.None, Depth.ActionTextBG);
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.White, 0, fontCenter, 1.0f * m_scalePercent, SpriteEffects.None, Depth.ActionText);
         }
     }
 }

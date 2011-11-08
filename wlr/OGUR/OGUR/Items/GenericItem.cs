@@ -75,7 +75,7 @@ namespace OGUR.Items
 
         protected void Setup(Point2 location, ItemName type)
         {
-            Initialize(location, SpriteFromItem(type), GameObjectType.ITEM,.45f);
+            Initialize(location, SpriteFromItem(type), GameObjectType.ITEM,Depth.Item);
         }
 
         private Player m_currentTarget;

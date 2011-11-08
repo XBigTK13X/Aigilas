@@ -7,7 +7,7 @@ namespace OGUR.GameObjects
     {
         public Floor(Point2 location)
         {
-            Initialize(location, SpriteType.FLOOR, GameObjectType.FLOOR,0f);
+            Initialize(location, SpriteType.FLOOR, GameObjectType.FLOOR,Depth.Floor);
         }
     }
 }

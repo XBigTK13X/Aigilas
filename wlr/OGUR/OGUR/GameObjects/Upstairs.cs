@@ -14,7 +14,7 @@ namespace OGUR.GameObjects
     {
         public Upstairs(Point2 location)
         {
-            Initialize(location, SpriteType.UPSTAIRS, GameObjectType.UPSTAIRS,.4f);
+            Initialize(location, SpriteType.UPSTAIRS, GameObjectType.UPSTAIRS,Depth.Stairs);
         }
         public Location GetTargetLocation()
         {

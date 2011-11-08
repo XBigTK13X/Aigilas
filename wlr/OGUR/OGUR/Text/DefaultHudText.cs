@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using OGUR.Creatures;
 using OGUR.Management;
+using OGUR.GameObjects;
 
 namespace OGUR.Text
 {
@@ -34,7 +35,7 @@ namespace OGUR.Text
         }
         public override void Draw()
         {
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position+m_origin, m_color, 0, Vector2.Zero,.75f, SpriteEffects.None, .96f);
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position+m_origin, m_color, 0, Vector2.Zero,.75f, SpriteEffects.None, Depth.DefaultHudText);
         }
     }
 }

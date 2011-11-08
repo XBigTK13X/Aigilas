@@ -9,6 +9,7 @@ using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
 using OGUR.Util;
+using OGUR.GameObjects;
 
 namespace OGUR.HUD
 {
@@ -35,7 +36,7 @@ namespace OGUR.HUD
         {
             if (m_isVisible)
             {
-                XnaManager.Renderer.Draw(m_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,.95f);
+                XnaManager.Renderer.Draw(m_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,Depth.HudBG);
                 m_textHandler.Draw();
                 m_deltas.Draw();
             }

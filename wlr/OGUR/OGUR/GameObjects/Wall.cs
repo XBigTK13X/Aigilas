@@ -7,7 +7,7 @@ namespace OGUR.GameObjects
     {
         public Wall(Point2 location)
         {
-            Initialize(location, SpriteType.WALL, GameObjectType.WALL,.1f);
+            Initialize(location, SpriteType.WALL, GameObjectType.WALL,Depth.Wall);
             m_isBlocking = true;
         }
     }
