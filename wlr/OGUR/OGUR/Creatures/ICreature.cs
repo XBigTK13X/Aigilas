@@ -63,9 +63,19 @@ namespace OGUR.Creatures
             Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE,Depth.Creature);
             Init(type,stats,creatureClass);
         }
+        protected void SetClass(CreatureClass cClass)
+        {
+            if (m_class != cClass || cClass == null)
+            {
+                m_class = cClass ?? new NoClass();
+                m_skills = new SkillPool(this);
+                m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
+            }
+        }
 
         private void Init(CreatureType type, Stats stats, CreatureClass creatureClass = null)
         {
+            SetClass(creatureClass);
             m_inventory = new Inventory(this);
             m_equipment = new Equipment(this);
             m_combo = new ComboMeter(this);
@@ -73,18 +83,10 @@ namespace OGUR.Creatures
             {
                 m_hudManager = new HudManager(this,m_inventory,m_equipment);
             }
-            
-            m_class = creatureClass ?? new NoClass();
             m_isBlocking = true;
             m_creatureType = type;
-            if (m_skills == null)
-            {
-                m_skills = new SkillPool(this);
-                m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
-            }
             m_baseStats = new Stats(stats);
             m_maxStats = new Stats(stats);
-
         }
 
         public void PickupItem(GenericItem item)

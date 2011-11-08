@@ -12,11 +12,7 @@ namespace OGUR.Creatures
     {
         public AbstractCreature(CreatureType type,SpriteType spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
         {
-            if (cClass == null)
-            {
-                cClass = new NoClass();
-            }
-            m_class = cClass;
+            SetClass(cClass);
             m_creatureType = type;
             m_baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
             m_maxStats = new Stats(m_baseStats);

@@ -58,30 +58,46 @@ namespace OGUR.Skills
     }
     class SkillFactory
     {
-        public static ISkill Create(string skillId)
+        public static ISkill Create(string idSkill)
         {
-            switch(skillId)
+            switch(idSkill)
             {
-                case SkillId.ACID_DRIP:
-                    return new AcidDrip();
-                case SkillId.ACID_NOZZLE:
-                    return new AcidNozzleSkill();
-                case SkillId.BULK:
-                    return new BulkSkill();
-                case SkillId.DART:
-                    return new DartSkill();
-                case SkillId.FIREBALL:
-                    return new FireballSkill();
-                case SkillId.FLOOR_SPIKES:
-                    return new FloorSpikesSkill();
-                case SkillId.NO_SKILL:
-                    return new NoSkill();
-                case SkillId.REMOTE_MINE:
-                    return new RemoteMineSkill();                
-                case SkillId.THRASH:
-                    return new ThrashSkill();
-                case SkillId.VAPOR_IMPLANT:
-                    return new VaporImplantSkill();
+                case SkillId.ABSORB:return new AbsorbSkill();
+                case SkillId.ACID_DRIP:return new AcidDripSkill();
+                case SkillId.ACID_NOZZLE:return new AcidNozzleSkill();
+                case SkillId.CAVALRY:return new CalvarySkill();
+                case SkillId.COLD_SHOULDER: return new ColdShoulderSkill();
+                case SkillId.COMBUST: return new CombustSkill();
+                case SkillId.CONFUSION:return new ConfusionSkill();
+                case SkillId.DART:return new DartSkill();
+                case SkillId.DROP_RATE_UP: return new DropRateUpSkill();
+                case SkillId.ELECTRIFY: return new ElectrifySkill();
+                case SkillId.ENVENOM: return new EnvenomSkill();
+                case SkillId.FIREBALL:return new FireballSkill();
+                case SkillId.FLAME_HAMMER: return new FlameHammerSkill();
+                case SkillId.FLOOR_SPIKES:return new FloorSpikesSkill();
+                case SkillId.FORGET_SKILL: return new ForgetSkill();
+                case SkillId.GUSH: return new GushSkill();
+                case SkillId.HORDER: return new HorderSkill();
+                case SkillId.HORRIFY: return new HorrifySkill();
+                case SkillId.MAGIC_MAP: return new MagicMapSkill();
+                case SkillId.MANA_UP: return new ManaUpSkill();
+                case SkillId.MIMIC: return new MimicSkill();
+                case SkillId.MUTINY: return new MutinySkill();
+                case SkillId.NO_SKILL:return new NoSkill();
+                case SkillId.REGEN_ALL: return new RegenAllSkill();
+                case SkillId.REMOTE_MINE:return new RemoteMineSkill();
+                case SkillId.SOUL_CRUSH: return new SoulCrushSkill();
+                case SkillId.SOUL_REINFORCEMENT: return new SoulReinforcementSkill();
+                case SkillId.SPEED_UP: return new SpeedUpSkill();
+                case SkillId.STEAL_ITEM: return new StealItemSkill();
+                case SkillId.STRENGTH_UP: return new StrengthUpSkill();
+                case SkillId.THROW_ITEM: return new ThrowItemSkill();
+                case SkillId.VALEDICTORIAN: return new ValedictorianSkill();
+                case SkillId.VAPOR_IMPLANT:return new VaporImplantSkill();
+                case SkillId.VENOM_FIST: return new VenomFistSkill();
+                case SkillId.WALL_PUNCH:return new WallPunchSkill();
+                case SkillId.WEAK_KNEEES:return new WeakKneesSkill();
                 default:
                     throw new Exception("You forgot to define the new skill in the Factory...YOU FOOL!"); 
             }

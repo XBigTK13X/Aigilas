@@ -19,8 +19,8 @@ namespace OGUR.Creatures
             m_playerIndex = playerIndex;
             m_graphic.SetColor(s_colors[m_playerIndex]);
             m_strategy = new ControlledByPlayer(this);
-            m_baseStats = new Stats(100f, 100f, 1f, 10f, 10f, 10f, 35f, 50f, 6.0f, 6);
-            m_maxStats = new Stats(100f, 100f, 1f, 10f, 10f, 10f, 35f, 50f, 6.0f, 6);
+            m_baseStats = new Stats(100f, 100f, 1f, 10f, .1f, 10f, 35f, 50f, 6.0f, 6);
+            m_maxStats = new Stats(m_baseStats);
         }
     }
     class Peon : AbstractCreature
