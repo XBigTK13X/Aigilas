@@ -3,12 +3,14 @@ using OGUR.Strategies;
 using OGUR.Classes;
 using OGUR.Skills;
 using OGUR.Sprites;
+using System.Collections.Generic;
+using OGUR.GameObjects;
 
 namespace OGUR.Creatures
 {
     public class AbstractCreature:ICreature
     {
-        public AbstractCreature(CreatureType type,Stats stats,SpriteType spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
+        public AbstractCreature(CreatureType type,SpriteType spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
         {
             if (cClass == null)
             {
@@ -16,7 +18,8 @@ namespace OGUR.Creatures
             }
             m_class = cClass;
             m_creatureType = type;
-            m_baseStats = stats;
+            m_baseStats = new Stats(10, 10, 10, 10, 10, 10, 10, 10, 10);
+            m_maxStats = new Stats(10, 10, 10, 10, 10, 10, 10, 10, 10);
         }
         public void Setup(Point2 position)
         {
@@ -33,6 +36,30 @@ namespace OGUR.Creatures
                 m_skills = new SkillPool(this);
             }
             m_skills.Add(skillId);
+        }
+        protected void Strengths(params StatType[] stats)
+        {
+            foreach (StatType stat in stats)
+            {
+                if (stat == StatType.MOVE_COOL_DOWN)
+                    InitStat(stat, Get(stat) - 2);
+                else
+                    InitStat(stat, Get(stat) * 2);
+            }
+        }
+        protected void Weaknesses(params StatType[] stats)
+        {
+            foreach (StatType stat in stats)
+            {
+                if (stat == StatType.MOVE_COOL_DOWN)
+                    InitStat(stat, Get(stat) + 2);
+                else
+                    InitStat(stat, Get(stat) * .5f);
+            }
+        }
+        protected void Compose(params Elements[] elems)
+        {
+            m_composition.AddRange(elems);
         }
     }
 }

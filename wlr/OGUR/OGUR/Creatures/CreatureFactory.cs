@@ -33,8 +33,8 @@ namespace OGUR.Creatures
         {
             switch(type)
             {
-                case CreatureType.GOBLIN:
-                    return new Goblin();
+                case CreatureType.PEON:
+                    return new Peon();
                 case CreatureType.ZORB:
                     return new Zorb();
                 default:

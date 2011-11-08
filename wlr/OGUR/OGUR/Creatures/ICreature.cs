@@ -236,6 +236,12 @@ namespace OGUR.Creatures
             return setMax ? SetMax(stat, value) : Set(stat, value);
         }
 
+        protected void InitStat(StatType stat, float value)
+        {
+            m_maxStats.Set(stat, value);
+            m_baseStats.Set(stat, value);
+        }
+
         public int GetPlayerIndex()
         {
             return m_playerIndex;

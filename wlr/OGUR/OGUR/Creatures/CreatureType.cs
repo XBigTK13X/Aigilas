@@ -6,12 +6,12 @@ namespace OGUR.Creatures
         MINION,
         PLAYER,
         ACID_NOZZLE,
-        GOBLIN,
+        PEON,
         ZORB,
         NONPLAYER
     }
     public class Generate
     {
-        public static List<CreatureType> Randoms = new List<CreatureType>() { CreatureType.GOBLIN, CreatureType.ZORB };
+        public static List<CreatureType> Randoms = new List<CreatureType>() { CreatureType.PEON, CreatureType.ZORB };
     }
 }
