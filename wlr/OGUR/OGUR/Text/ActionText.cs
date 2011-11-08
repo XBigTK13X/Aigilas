@@ -26,8 +26,8 @@ namespace OGUR.Text
         public override void Draw()
         {
             var fontCenter = TextManager.GetFont().MeasureString(m_contents) / 2;
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.Black, 0, fontCenter, 1.15f * m_scalePercent, SpriteEffects.None, 0.5f);
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.White, 0, fontCenter, 1.0f * m_scalePercent, SpriteEffects.None, 0.5f);
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.Black, 0, fontCenter, 1.15f * m_scalePercent, SpriteEffects.None, 0.98f);
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.White, 0, fontCenter, 1.0f * m_scalePercent, SpriteEffects.None, 0.985f);
         }
     }
 }
