@@ -30,10 +30,10 @@ namespace OGUR.Classes
         public SlothAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.ACID_NOZZLE);
-            Add(1, SkillId.FLOOR_SPIKES);
-            Add(1, SkillId.REMOTE_MINE);
-            Add(1, SkillId.VAPOR_IMPLANT);
-            Add(1, SkillId.DART);
+            Add(2, SkillId.FLOOR_SPIKES);
+            Add(3, SkillId.REMOTE_MINE);
+            Add(4, SkillId.VAPOR_IMPLANT);
+            Add(5, SkillId.DART);
         }
     }
     class EnvyAcolyte : CreatureClass
@@ -41,10 +41,10 @@ namespace OGUR.Classes
         public EnvyAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.CONFUSION);
-            Add(1, SkillId.WEAK_KNEEES);
-            Add(1, SkillId.VENOM_FIST);
-            Add(1, SkillId.ABSORB);
-            Add(1, SkillId.MUTINY);
+            Add(2, SkillId.WEAK_KNEEES);
+            Add(3, SkillId.VENOM_FIST);
+            Add(4, SkillId.ABSORB);
+            Add(5, SkillId.MUTINY);
         }
     }
     class GreedAcolyte : CreatureClass
@@ -52,10 +52,10 @@ namespace OGUR.Classes
         public GreedAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.SOUL_REINFORCEMENT);
-            Add(1, SkillId.HORDER);
-            Add(1, SkillId.DROP_RATE_UP);
-            Add(1, SkillId.THROW_ITEM);
-            Add(1, SkillId.STEAL_ITEM);
+            Add(2, SkillId.HORDER);
+            Add(3, SkillId.DROP_RATE_UP);
+            Add(4, SkillId.THROW_ITEM);
+            Add(5, SkillId.STEAL_ITEM);
         }
     }
     class WrathAcolyte : CreatureClass
@@ -63,10 +63,10 @@ namespace OGUR.Classes
         public WrathAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.FLAME_HAMMER);
-            Add(1, SkillId.GUSH);
-            Add(1, SkillId.SOUL_CRUSH);
-            Add(1, SkillId.COMBUST);
-            Add(1, SkillId.HORRIFY);
+            Add(2, SkillId.GUSH);
+            Add(3, SkillId.SOUL_CRUSH);
+            Add(4, SkillId.COMBUST);
+            Add(5, SkillId.HORRIFY);
         }
     }
     class GluttonyAcolyte : CreatureClass
@@ -81,10 +81,10 @@ namespace OGUR.Classes
         public LustAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.REGEN_ALL);
-            Add(1, SkillId.SPEED_UP);
-            Add(1, SkillId.ENVENOM);
-            Add(1, SkillId.COLD_SHOULDER);
-            Add(1, SkillId.CAVALRY);
+            Add(2, SkillId.SPEED_UP);
+            Add(3, SkillId.ENVENOM);
+            Add(4, SkillId.COLD_SHOULDER);
+            Add(5, SkillId.CAVALRY);
         }
     }
     class PrideAcolyte : CreatureClass
@@ -92,11 +92,11 @@ namespace OGUR.Classes
         public PrideAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.STRENGTH_UP);
-            Add(1, SkillId.MANA_UP);
-            Add(1, SkillId.ELECTRIFY);
-            Add(1, SkillId.WALL_PUNCH);
-            Add(1, SkillId.MIMIC);
-            Add(1, SkillId.VALEDICTORIAN);
+            Add(2, SkillId.MANA_UP);
+            Add(3, SkillId.ELECTRIFY);
+            Add(4, SkillId.WALL_PUNCH);
+            Add(5, SkillId.MIMIC);
+            Add(6, SkillId.VALEDICTORIAN);
         }
     }
 }
