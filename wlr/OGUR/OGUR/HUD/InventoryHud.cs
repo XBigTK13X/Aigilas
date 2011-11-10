@@ -143,36 +143,36 @@ namespace OGUR.HUD
             if (m_currentClassItems.Count > 0)
             {
                 int ii = 0;
-                StringSquisher.Clear();
-                foreach (var item in m_currentClassItems.Keys)
-                {
-                    if (ii == m_startingItem)
-                    {
-                        m_currentSelectedItem = item;
-                    }
-                    if(!m_equipment.IsRegistered(item)&&m_inventory.GetItemCount(item)<=0)
-                    {
-                        continue;
-                    }
-
-                   
-                    if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
-                    {
-                        StringSquisher.Squish
-                        (
-                            StringStorage.Get(ii), s_delim,
-                            (m_equipment.IsRegistered(item)) ? s_equipDelim : String.Empty,
-                            item.Name);
-                        if (m_currentClassItems[item] > -1)
-                        {
-                            StringSquisher.Squish(s_seper, StringStorage.Get(m_currentClassItems[item]));
-                        }
-                        StringSquisher.Squish(s_newline);
-                    }
-                    ii++;
-                }
                 if (forceRefresh)
                 {
+                    StringSquisher.Clear();
+                    foreach (var item in m_currentClassItems.Keys)
+                    {
+                        if (ii == m_startingItem)
+                        {
+                            m_currentSelectedItem = item;
+                        }
+                        if(!m_equipment.IsRegistered(item)&&m_inventory.GetItemCount(item)<=0)
+                        {
+                            continue;
+                        }
+
+                   
+                        if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
+                        {
+                            StringSquisher.Squish
+                            (
+                                StringStorage.Get(ii), s_delim,
+                                (m_equipment.IsRegistered(item)) ? s_equipDelim : String.Empty,
+                                item.Name);
+                            if (m_currentClassItems[item] > -1)
+                            {
+                                StringSquisher.Squish(s_seper, StringStorage.Get(m_currentClassItems[item]));
+                            }
+                            StringSquisher.Squish(s_newline);
+                        }
+                        ii++;
+                    }
                     displayString = StringSquisher.Flush();
                     forceRefresh = false;                    
                 }
