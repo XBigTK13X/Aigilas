@@ -17,7 +17,6 @@ namespace OGUR.Management
         {
             m_state = state;
             m_state.LoadContent();
-            m_state.Draw();
         }
 
         public static void Draw()

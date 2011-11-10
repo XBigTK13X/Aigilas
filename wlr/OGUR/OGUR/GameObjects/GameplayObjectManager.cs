@@ -169,20 +169,15 @@ namespace OGUR.GameObjects
         {
             m_contents = new List<GameplayObject>();
             m_gridContents = new Dictionary<Point2, List<GameplayObject>>();
+            creatures.Clear();
             CreatureFactory.ResetPlayerCount();
             DungeonFactory.Start();
             LoadContent();
-            Draw();
         }
 
         private static GameplayObject m_updateTarget;
         public static void Update()
-        {
-            if(!(GetObjects(CreatureType.PLAYER).Count()>0))
-            {
-                Reset();
-                StateManager.LoadState(new GameOverState());
-            }
+        {   
             for (var ii = 0; ii < m_contents.Count; ii++)
             {
                 if(ii>=m_contents.Count)
@@ -206,6 +201,11 @@ namespace OGUR.GameObjects
                     m_contents[ii].Update();
                 }
             }
+            if (!(GetObjects(CreatureType.PLAYER).Count() > 0))
+            {
+                Reset();
+                StateManager.LoadState(new GameOverState());
+            }
         }
 
         public static void Draw()
@@ -214,7 +214,6 @@ namespace OGUR.GameObjects
             {
                 foreach (var component in m_contents)
                 {
-
                     component.Draw();
                 }
             }

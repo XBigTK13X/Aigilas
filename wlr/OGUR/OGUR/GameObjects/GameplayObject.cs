@@ -34,7 +34,7 @@ namespace OGUR.GameObjects
         //Draw the sprite to the screen
         public virtual void Draw()
         {
-            if(m_isOnBoard)
+            if(m_isOnBoard && m_isActive)
             {
                 m_graphic.Draw();                
             }
