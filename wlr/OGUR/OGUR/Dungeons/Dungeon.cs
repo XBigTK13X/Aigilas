@@ -17,8 +17,8 @@ namespace OGUR.Dungeons
 
         //Top level game config
         private const int playerCount = 1;
-        private const int enemyCap = 10;
-        private const int enemyBase = 3;
+        private const int enemyCap = 25;
+        private const int enemyBase = 25;
         private const int itemCap = 4;
         private const int itemBase = 1;
         private const int startingItemAmount = 100;

@@ -44,7 +44,7 @@ namespace OGUR.Strategies
         }
 
 
-        private IEnumerable<ICreature> m_calculatedTargets;
+        private List<ICreature> m_calculatedTargets;
         private float dist;
         public ICreature FindClosest()
         {
