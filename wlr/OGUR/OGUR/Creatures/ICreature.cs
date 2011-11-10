@@ -41,7 +41,7 @@ namespace OGUR.Creatures
         protected bool m_isPlaying = true;
         protected int m_currentLevel = 1;
         protected float m_experience;
-        protected float m_nextLevelExperience = 100;
+        protected float m_nextLevelExperience = 10;
 
         private SpriteType SpriteFromCreature(CreatureType type)
         {
@@ -379,7 +379,7 @@ namespace OGUR.Creatures
                 m_experience += diff;
                 if (m_experience > m_nextLevelExperience)
                 {
-                    m_nextLevelExperience += 100;
+                    m_nextLevelExperience += 10;
                     m_experience = 0;
                     m_currentLevel++;
                     TextManager.Add(new ActionText("LEVEL UP!", 30, (int)GetLocation().PosX, (int)GetLocation().PosY));

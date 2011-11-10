@@ -34,9 +34,9 @@ namespace OGUR.Dungeons
         private static readonly int m_blocksWide = DungeonFactory.BlocksWide;
 
         //Top level game config
-        private const int playerCount = 1;
-        private const int enemyCap = 5;
-        private const int enemyBase = 1;
+        private const int playerCount = 2;
+        private const int enemyCap = 10;
+        private const int enemyBase = 3;
         private const int itemCap = 4;
         private const int itemBase = 1;
         private const int startingItemAmount = 100;

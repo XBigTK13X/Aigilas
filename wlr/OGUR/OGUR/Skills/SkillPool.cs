@@ -68,8 +68,17 @@ namespace OGUR.Skills
             return m_skills.Count>0 ? FindCurrent() : "No Skill";
         }
 
+        private void RemoveNone()
+        {
+            m_skills.Remove(SkillId.NO_SKILL);
+        }
         public void UseActive()
         {
+            if (FindCurrent() == SkillId.NO_SKILL)
+            {
+                RemoveNone();
+                m_currentSkillSlot = 0;
+            }
             if (m_skills.Count > 0)
             {
                 SkillFactory.Create(FindCurrent()).Activate(m_owner);
