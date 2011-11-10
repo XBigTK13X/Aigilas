@@ -49,7 +49,10 @@ namespace OGUR.Skills
             }
             foreach(var skill in getLevelSkills)
             {
-                m_skills.Add(skill);
+                if (!m_skills.Contains(skill))
+                {
+                    m_skills.Add(skill);
+                }
             }
         }
 

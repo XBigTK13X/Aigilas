@@ -12,29 +12,11 @@ namespace OGUR.Dungeons
 {
     public class Dungeon
     {
-        private class PointPoint
-        {
-            public readonly int X;
-            public readonly int Y;
-            private readonly bool m_isHorizontal;
-
-            public PointPoint(int x, int y, bool destroyHorizontal = false)
-            {
-                X = x;
-                Y = y;
-                m_isHorizontal = destroyHorizontal;
-            }
-            public bool isHorizontal()
-            {
-                return m_isHorizontal;
-            }
-        }
-
         private static readonly int m_blocksHigh = DungeonFactory.BlocksHigh;
         private static readonly int m_blocksWide = DungeonFactory.BlocksWide;
 
         //Top level game config
-        private const int playerCount = 2;
+        private const int playerCount = 1;
         private const int enemyCap = 10;
         private const int enemyBase = 3;
         private const int itemCap = 4;

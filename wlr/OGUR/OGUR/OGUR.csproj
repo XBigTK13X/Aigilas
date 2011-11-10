@@ -111,6 +111,7 @@
     <Compile Include="Collision\CoordVerifier.cs" />
     <Compile Include="Collision\HitTest.cs" />
     <Compile Include="Creatures\ConcreteCreatures.cs" />
+    <Compile Include="Dungeons\PointPoint.cs" />
     <Compile Include="GameObjects\Depth.cs" />
     <Compile Include="HUD\HudManager.cs" />
     <Compile Include="Creatures\Minions.cs" />
