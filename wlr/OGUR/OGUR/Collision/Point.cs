@@ -34,7 +34,7 @@ namespace OGUR.Collision
                 new Point2(1, -1)
             };
 
-        public static Point2[,] m_locations;
+        public static readonly Point2[,] m_locations = new Point2[DungeonFactory.BlocksHigh, DungeonFactory.BlocksWide];
 
         public Point2(float x, float y, int weight = 0)
         {
@@ -117,12 +117,11 @@ namespace OGUR.Collision
             return (float) (Math.Pow(source.PosY - target.PosY, 2) + Math.Pow(source.PosX - target.PosX, 2));
         }
 
-        private static List<Point2> m_neighbors = new List<Point2>();
+        private static readonly List<Point2> m_neighbors = new List<Point2>();
         public List<Point2> GetNeighbors()
         {
-            if (m_locations == null)
+            if (m_locations[0,0]==null)
             {
-                m_locations = new Point2[DungeonFactory.BlocksHigh, DungeonFactory.BlocksWide];
                 for (int ii = 0; ii < DungeonFactory.BlocksHigh; ii++)
                 {
                     for (int jj = 0; jj < DungeonFactory.BlocksWide; jj++)
@@ -209,11 +208,6 @@ namespace OGUR.Collision
             Console.WriteLine(result);
             return result;
              * */
-        }
-
-        public override string ToString()
-        {
-            return String.Format("Point2: ({0},{1})", X, Y);
         }
 
         public static float DistanceSquared(Point2 source, Point2 target)

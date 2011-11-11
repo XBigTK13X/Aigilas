@@ -14,6 +14,7 @@ using OGUR.Gods;
 using OGUR.Reactions;
 using System.Collections.Generic;
 using OGUR.HUD;
+using OGUR.Util;
 
 namespace OGUR.Creatures
 {
@@ -130,20 +131,20 @@ namespace OGUR.Creatures
         {
             if (m_isPlaying)
             {
-                if(Get(StatType.MOVE_COOL_DOWN)>0)
+                if(Get(StatType.MOVE_COOL_DOWN)>0f)
                 {
-                    Adjust(StatType.MOVE_COOL_DOWN, -1);    
+                    //$$$Adjust(StatType.MOVE_COOL_DOWN, -1);    
                 }
                 if (m_hudManager != null)
                 {
-                    m_hudManager.Update();
+                    //$$$m_hudManager.Update();
                 }
-                Regenerate();
+                //$$$Regenerate();
             }
             if (m_strategy != null)
             {
-                m_strategy.Act(this);
-                m_combo.Update();
+                //$$$m_strategy.Act(this);
+                //$$$m_combo.Update();
             }
         }
         private void Regenerate()
@@ -274,7 +275,7 @@ namespace OGUR.Creatures
             }
             if (showDamage)
             {
-                TextManager.Add(new ActionText(damage.ToString(), 30, (int)GetLocation().PosCenterX, (int)GetLocation().PosCenterY));
+                TextManager.Add(new ActionText(StringStorage.Get(damage), 30, (int)GetLocation().PosCenterX, (int)GetLocation().PosCenterY));
             }
             if(damage>0)
             {

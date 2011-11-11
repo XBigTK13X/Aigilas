@@ -53,7 +53,6 @@ namespace OGUR.Skills
             }
         }
         public virtual void Affect(ICreature target) { target.Combo(m_components.GetElements()); }
-        public override string ToString(){return m_implementationId;}
         public SpriteType GetSpriteType(){return m_behavior.GetSpriteType();}
         public Skill.Animation GetAnimationType() { return m_behavior.GetAnimationType(); }
         public float GetStrength(){return m_components.GetStrength();}

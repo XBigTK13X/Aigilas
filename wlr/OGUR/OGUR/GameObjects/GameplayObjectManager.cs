@@ -175,7 +175,6 @@ namespace OGUR.GameObjects
             LoadContent();
         }
 
-        private static GameplayObject m_updateTarget;
         public static void Update()
         {   
             for (var ii = 0; ii < m_contents.Count; ii++)
@@ -191,15 +190,7 @@ namespace OGUR.GameObjects
                     ii--;
                     continue;
                 }                
-                if (m_contents[ii].GetObjectType() == GameObjectType.CREATURE)
-                {
-                    m_updateTarget = m_contents[ii] as ICreature;
-                    if (m_updateTarget != null) m_updateTarget.Update();
-                }
-                else
-                {
-                    m_contents[ii].Update();
-                }
+                m_contents[ii].Update();
             }
             if (!(GetObjects(CreatureType.PLAYER).Count() > 0))
             {

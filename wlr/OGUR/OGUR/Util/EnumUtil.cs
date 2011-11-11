@@ -12,7 +12,7 @@ namespace OGUR.Util
 
         public static List<T> GetValues()
         {
-            if (s_results.Count()==0)
+            if (s_results.Count() == 0)
             {
                 foreach (var info in typeof(T).GetFields(BindingFlags.Static | BindingFlags.Public))
                 {

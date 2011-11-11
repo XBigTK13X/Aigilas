@@ -1,1 +1,0 @@
-Ildasm.exe OGUR.exe /text /source > out.cs
