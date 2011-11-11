@@ -148,7 +148,7 @@ namespace OGUR.Creatures
         }
         private void Regenerate()
         {
-            foreach (StatType stat in OGUR.Util.EnumUtil.GetValues(typeof(StatType)))
+            foreach (StatType stat in OGUR.Util.EnumUtil<StatType>.GetValues())
             {
                 if (stat != StatType.MOVE_COOL_DOWN)
                 {
@@ -424,7 +424,7 @@ namespace OGUR.Creatures
         {
             var result = StatType.AGE;
             var min = float.MaxValue;
-            foreach (var stat in OGUR.Util.EnumUtil.GetValues(typeof(StatType)).Cast<StatType>().Where(stat => Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY))
+            foreach (var stat in OGUR.Util.EnumUtil<StatType>.GetValues().Where(stat => Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY))
             {
                 result = stat;
                 min = Get(stat);

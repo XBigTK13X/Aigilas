@@ -122,7 +122,7 @@ namespace OGUR.Items
                 {
                     return false;
                 }
-                foreach (StatType stat in OGUR.Util.EnumUtil.GetValues(typeof(StatType)))
+                foreach (StatType stat in OGUR.Util.EnumUtil<StatType>.GetValues())
                 {
                     if (Modifers.Get(stat) != gI.Modifers.Get(stat))
                     {

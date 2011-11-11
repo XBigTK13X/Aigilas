@@ -32,7 +32,7 @@ namespace OGUR.Skills
         protected bool SubtractCost(ICreature owner)
         {
             bool costPaid = false;
-            foreach (StatType stat in OGUR.Util.EnumUtil.GetValues(typeof(StatType)))
+            foreach (StatType stat in OGUR.Util.EnumUtil<StatType>.GetValues())
             {
                 if (owner.LowerStat(stat, m_cost.Get(stat)))
                 {

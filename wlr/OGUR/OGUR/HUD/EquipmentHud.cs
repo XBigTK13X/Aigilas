@@ -8,6 +8,7 @@ using OGUR.Creatures;
 using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
+using OGUR.Util;
 
 namespace OGUR.HUD
 {
@@ -29,27 +30,24 @@ namespace OGUR.HUD
             }
         }
 
-        private DefaultHudText equipHeading = new DefaultHudText();
-        private DefaultHudText[] equipTexts = new DefaultHudText[100];
-        public void Update()
+        private const string sep = ":";
+        private const string newline = "\n";
+        private string display = "EMPTY";
+
+        public void Update(bool refresh)
         {
-            if (equipTexts[0] == null)
-            {
-                equipHeading.Reset(s_text, 300, 30, GetHudOrigin());
-                for (int jj = 0; jj < equipTexts.Count(); jj++)
-                {
-                    equipTexts[jj] = new DefaultHudText(.2f);
-                }
-            }
             m_textHandler.Update();
             m_textHandler.Clear();
-            m_textHandler.Add(equipHeading);
-            int ii = 0;
-            foreach(var item in m_equipment.GetItems())
+            if (refresh)
             {
-                m_textHandler.WriteDefault(item.Key.ToString().Substring(0, 1) + ":" + item.Value.Name, 320, 60 + ii * 25, GetHudOrigin());
-                ii++;
+                StringSquisher.Clear();
+                foreach (var item in m_equipment.GetItems())
+                {
+                    StringSquisher.Squish(item.Key.ToString().Substring(0, 1), sep, item.Value.Name, newline);
+                }
+                display = StringSquisher.Flush();
             }
+            m_textHandler.WriteDefault(display, 320, 60, GetHudOrigin());
         }
     }
 }

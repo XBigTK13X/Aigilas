@@ -41,26 +41,30 @@ namespace OGUR.HUD
         private const string delim = "|";
         private const string positive = "+";
         private const string title = "Deltas";
+        private string display = "EMPTY";
 
-        public void Update(GenericItem item)
+        public void Update(GenericItem item,bool refresh)
         {
-            if (item != null)
+            m_textHandler.Update();
+            m_textHandler.Clear();
+            if (item != null && refresh)
             {
                 if (GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())) != null)
                 {
-                    m_textHandler.Update();
-                    m_textHandler.Clear();
 
                     m_textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
 
                     StringSquisher.Clear();
+                    //$$$ BOXING
                     foreach (float stat in GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers.GetDeltas(item.Modifers))
                     {
+                        //$$$ stat UNBOXING
                         StringSquisher.Squish(((stat > 0) ? positive : String.Empty) + stat + delim);
                     }
-                    m_textHandler.WriteDefault(StringSquisher.Flush(), 30, 290, GetHudOrigin());
+                    display = StringSquisher.Flush();
                 }
             }
+            m_textHandler.WriteDefault(display, 30, 290, GetHudOrigin());
         }
     }
 }

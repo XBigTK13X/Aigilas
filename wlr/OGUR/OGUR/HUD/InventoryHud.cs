@@ -22,6 +22,7 @@ namespace OGUR.HUD
         private Dictionary<GenericItem, int> m_currentClassItems;
         private GenericItem m_currentSelectedItem = null;
 
+        private EquipmentHud m_equipHud;
         private DeltasHud m_deltas;
 
         public InventoryHud(ICreature owner,Inventory inventory,Equipment equipment):base(owner,XnaManager.WindowWidth/2,XnaManager.WindowHeight/2)
@@ -29,6 +30,7 @@ namespace OGUR.HUD
             m_inventory = inventory;
             m_equipment = equipment;
             m_deltas = new DeltasHud(owner,equipment);
+            m_equipHud = new EquipmentHud(owner, equipment);
             m_currentClassItems = m_inventory.GetItems(m_currentClass);
         }
 
@@ -39,6 +41,7 @@ namespace OGUR.HUD
                 XnaManager.Renderer.Draw(m_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,Depth.HudBG);
                 m_textHandler.Draw();
                 m_deltas.Draw();
+                m_equipHud.Draw();
             }
         }
 
@@ -49,7 +52,7 @@ namespace OGUR.HUD
                 m_currentClass--;
                 if (m_currentClass <= (ItemClass)0)
                 {
-                    m_currentClass = (ItemClass)OGUR.Util.EnumUtil.GetValues(typeof(ItemClass)).Count() - 2;
+                    m_currentClass = (ItemClass)OGUR.Util.EnumUtil<ItemClass>.GetValues().Count() - 2;
                 }
                 m_startingItem = 0;
                 m_endingItem = 4;
@@ -100,13 +103,18 @@ namespace OGUR.HUD
         }
         public void Update()
         {
-            m_textHandler.Update();
-            m_deltas.Update(m_currentSelectedItem);
-            m_textHandler.Clear();
-            if(m_isVisible)
+            if (m_isVisible)
             {
                 HandleInput();
+                m_textHandler.Update();
+                m_deltas.Update(m_currentSelectedItem,forceRefresh);
+                m_equipHud.Update(forceRefresh);
+                m_textHandler.Clear();
                 UpdateInventoryDisplay();
+                if (forceRefresh)
+                {
+                    forceRefresh = false;
+                }
             }
         }
 
@@ -114,6 +122,7 @@ namespace OGUR.HUD
         {
             base.Toggle();
             m_deltas.Toggle();
+            m_equipHud.Toggle();
             forceRefresh = true;
         }
 
@@ -173,8 +182,7 @@ namespace OGUR.HUD
                         }
                         ii++;
                     }
-                    displayString = StringSquisher.Flush();
-                    forceRefresh = false;                    
+                    displayString = StringSquisher.Flush();       
                 }
                 m_textHandler.WriteDefault(displayString, 50, 60, GetHudOrigin());
             }

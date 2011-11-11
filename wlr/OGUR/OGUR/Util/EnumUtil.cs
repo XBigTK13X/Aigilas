@@ -6,28 +6,20 @@ using System.Reflection;
 
 namespace OGUR.Util
 {
-    class EnumUtil
+    class EnumUtil<T>
     {
-        private static readonly Dictionary<Type, List<Enum>> s_results = new Dictionary<Type, List<Enum>>();
+        private static readonly List<T> s_results = new List<T>();
 
-        public static List<Enum> GetValues(Type enumType)
+        public static List<T> GetValues()
         {
-            if (!s_results.ContainsKey(enumType))
+            if (s_results.Count()==0)
             {
-                if (enumType.BaseType == typeof(Enum))
+                foreach (var info in typeof(T).GetFields(BindingFlags.Static | BindingFlags.Public))
                 {
-                    s_results.Add(enumType,new List<Enum>());
-                    foreach (var info in enumType.GetFields(BindingFlags.Static | BindingFlags.Public))
-                    {
-                        s_results[enumType].Add((Enum)info.GetValue(null));
-                    }
-                }
-                else
-                {
-                    throw new Exception("Given type is not an Enum type");
+                    s_results.Add((T)info.GetValue(null));
                 }
             }
-            return s_results[enumType];
+            return s_results;
         }
     }
 }
