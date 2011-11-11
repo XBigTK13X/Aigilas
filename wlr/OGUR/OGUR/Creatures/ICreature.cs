@@ -149,7 +149,7 @@ namespace OGUR.Creatures
         }
         private void Regenerate()
         {
-            foreach (StatType stat in OGUR.Util.EnumUtil<StatType>.GetValues())
+            foreach (string stat in StatType.Values)
             {
                 if (stat != StatType.MOVE_COOL_DOWN)
                 {
@@ -188,17 +188,17 @@ namespace OGUR.Creatures
             return m_isPlaying;
         }
 
-        public float Get(StatType stat)
+        public float Get(string stat)
         {
             return m_baseStats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
         }
 
-        private float GetRaw(StatType stat,bool isMax=false)
+        private float GetRaw(string stat,bool isMax=false)
         {
             return isMax ? m_maxStats.GetRaw(stat) : m_baseStats.GetRaw(stat);
         }
 
-        private float CalculateInstrinsicBonus(StatType stat)
+        private float CalculateInstrinsicBonus(string stat)
         {
             if (m_class == null)
             {
@@ -207,7 +207,7 @@ namespace OGUR.Creatures
             return m_class.GetBonus(m_currentLevel, stat);
         }
 
-        private float CalculateEquipmentBonus(StatType stat)
+        private float CalculateEquipmentBonus(string stat)
         {
             if (m_equipment != null)
             {
@@ -216,27 +216,27 @@ namespace OGUR.Creatures
             return 0;
         }
 
-        public float GetMax(StatType stat)
+        public float GetMax(string stat)
         {
             return (int)m_maxStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
         }
 
-        public float Set(StatType stat,float value)
+        public float Set(string stat,float value)
         {
             return m_baseStats.Set(stat,value);
         }
 
-        public float SetMax(StatType stat,float value)
+        public float SetMax(string stat,float value)
         {
             return m_maxStats.Set(stat,value);
         }
 
-        public float Set(StatType stat,float value,bool setMax=false)
+        public float Set(string stat,float value,bool setMax=false)
         {
             return setMax ? SetMax(stat, value) : Set(stat, value);
         }
 
-        protected void InitStat(StatType stat, float value)
+        protected void InitStat(string stat, float value)
         {
             m_maxStats.Set(stat, value);
             m_baseStats.Set(stat, value);
@@ -252,7 +252,7 @@ namespace OGUR.Creatures
             return m_creatureType;
         }
 
-        protected float Adjust(StatType stat, float adjustment,bool adjustMax = false)
+        protected float Adjust(string stat, float adjustment,bool adjustMax = false)
         {
             var result = GetRaw(stat) + adjustment;
             if (!adjustMax)
@@ -291,7 +291,7 @@ namespace OGUR.Creatures
             }
         }
 
-        public bool LowerStat(StatType stat, float amount)
+        public bool LowerStat(string stat, float amount)
         {
             if (amount != 0)
             {
@@ -421,11 +421,11 @@ namespace OGUR.Creatures
 
         
 
-        private StatType GetLowestStat()
+        private string GetLowestStat()
         {
             var result = StatType.AGE;
             var min = float.MaxValue;
-            foreach (var stat in OGUR.Util.EnumUtil<StatType>.GetValues().Where(stat => Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY))
+            foreach (var stat in StatType.Values.Where(stat => Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY))
             {
                 result = stat;
                 min = Get(stat);

@@ -33,7 +33,7 @@ namespace OGUR.Skills
             target.AddBuff(m_buff);
         }
 
-        public void SetBuff(StatType stat, float amount)
+        public void SetBuff(string stat, float amount)
         {
             m_buff = new StatBuff(stat, amount);
         }

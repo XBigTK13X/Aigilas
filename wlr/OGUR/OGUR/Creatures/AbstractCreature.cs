@@ -33,9 +33,9 @@ namespace OGUR.Creatures
             }
             m_skills.Add(skillId);
         }
-        protected void Strengths(params StatType[] stats)
+        protected void Strengths(params string[] stats)
         {
-            foreach (StatType stat in stats)
+            foreach (string stat in stats)
             {
                 if (stat == StatType.MOVE_COOL_DOWN)
                     InitStat(stat, Get(stat) - 2);
@@ -43,9 +43,9 @@ namespace OGUR.Creatures
                     InitStat(stat, Get(stat) * 2);
             }
         }
-        protected void Weaknesses(params StatType[] stats)
+        protected void Weaknesses(params string[] stats)
         {
-            foreach (StatType stat in stats)
+            foreach (string stat in stats)
             {
                 if (stat == StatType.MOVE_COOL_DOWN)
                     InitStat(stat, Get(stat) + 2);

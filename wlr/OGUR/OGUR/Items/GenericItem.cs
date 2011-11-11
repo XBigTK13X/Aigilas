@@ -122,7 +122,7 @@ namespace OGUR.Items
                 {
                     return false;
                 }
-                foreach (StatType stat in OGUR.Util.EnumUtil<StatType>.GetValues())
+                foreach (string stat in StatType.Values)
                 {
                     if (Modifers.Get(stat) != gI.Modifers.Get(stat))
                     {
@@ -159,7 +159,7 @@ namespace OGUR.Items
             return !(a == b);
         }
 
-        public float GetStatBonus(StatType stat)
+        public float GetStatBonus(string stat)
         {
             return Modifers.Get(stat);
         }

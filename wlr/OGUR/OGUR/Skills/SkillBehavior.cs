@@ -25,14 +25,14 @@ namespace OGUR.Skills
         public SpriteType GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
         public virtual void Cleanup(ICreature target) { }
-        public void AddCost(StatType stat, float cost)
+        public void AddCost(string stat, float cost)
         {
             m_cost.AddBuff(new StatBuff(stat, cost));
         }
         protected bool SubtractCost(ICreature owner)
         {
             bool costPaid = false;
-            foreach (StatType stat in OGUR.Util.EnumUtil<StatType>.GetValues())
+            foreach (string stat in StatType.Values)
             {
                 if (owner.LowerStat(stat, m_cost.Get(stat)))
                 {

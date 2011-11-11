@@ -10,12 +10,12 @@ namespace OGUR.Creatures
     {
         public const float DefaultMoveSpeed = Sprites.SpriteInfo.Height;
         public const float DefaultCoolDown = 18;
-        private readonly Dictionary<StatType, float> m_stats = new Dictionary<StatType, float>();
+        private readonly Dictionary<string, float> m_stats = new Dictionary<string, float>();
         private readonly List<StatBuff> m_buffs = new List<StatBuff>(); 
 
         public Stats(Stats target)
         {
-            m_stats = new Dictionary<StatType, float>(target.m_stats);
+            m_stats = new Dictionary<string, float>(target.m_stats);
         }
         public Stats
             (
@@ -38,11 +38,11 @@ namespace OGUR.Creatures
         {
             for (var ii = 0; ii < stats.Count; ii++)
             {
-                m_stats.Add((StatType)OGUR.Util.EnumUtil < StatType>.GetValues()[ii], stats[ii]);
+                m_stats.Add(StatType.Values[ii], stats[ii]);
             }
         }
         private float statSum = 0;
-        public float Get(StatType stat)
+        public float Get(string stat)
         {
             if (m_buffs != null)
             {
@@ -62,12 +62,12 @@ namespace OGUR.Creatures
             return GetRaw(stat);
         }
 
-        public float GetRaw(StatType stat)
+        public float GetRaw(string stat)
         {
             return m_stats[stat];
         }
 
-        public float Set(StatType stat, float value)
+        public float Set(string stat, float value)
         {
             return m_stats[stat] = value;
         }
@@ -86,7 +86,7 @@ namespace OGUR.Creatures
         public List<float> GetDeltas(Stats stats)
         {
             deltas.Clear();
-            foreach (var stat in EnumUtil<StatType>.GetValues())
+            foreach (var stat in StatType.Values)
             {
                 deltas.Add(m_stats[stat] - stats.m_stats[stat]);
             }
@@ -103,7 +103,7 @@ namespace OGUR.Creatures
             return result;
         }
 
-        public float GetBonus(int level, StatType stat)
+        public float GetBonus(int level, string stat)
         {
             return m_stats[stat]*level;
         }

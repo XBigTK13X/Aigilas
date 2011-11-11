@@ -14,7 +14,7 @@ namespace OGUR.Classes
 
         protected CreatureClass(){}
         protected CreatureClass(Stats stats){m_stats = new Stats(stats);}
-        public float GetBonus(int level,StatType stat){return m_stats.GetBonus(level,stat);}
+        public float GetBonus(int level,string stat){return m_stats.GetBonus(level,stat);}
         public IEnumerable<string> GetLevelSkills(int level){return (from skill in m_skillUnlocks where skill.Key <= level select skill.Value);}
         protected void Add(int level, string skillId){m_skillUnlocks.Add(new KeyValuePair<int, string>(level,skillId));}
     }

@@ -89,7 +89,7 @@ namespace OGUR.Items
         }
 
         private float bonusSum;
-        public float CalculateBonus(StatType stat)
+        public float CalculateBonus(string stat)
         {
             bonusSum = 0;
             foreach (var slot in m_slots)
