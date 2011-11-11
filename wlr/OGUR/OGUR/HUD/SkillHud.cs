@@ -71,10 +71,10 @@ namespace OGUR.HUD
 
         public void Update()
         {
-            m_textHandler.Update();
-            m_textHandler.Clear();
-            if(m_isVisible)
+            if (m_isVisible)
             {
+                m_textHandler.Update();
+                m_textHandler.Clear();
                 if (m_parent.GetActiveSkillName() != skillName)
                 {
                     skillName = m_parent.GetActiveSkillName();

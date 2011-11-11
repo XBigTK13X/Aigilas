@@ -33,21 +33,26 @@ namespace OGUR.HUD
         private const string sep = ":";
         private const string newline = "\n";
         private string display = "EMPTY";
+        private string title = "Equipped\n";
 
         public void Update(bool refresh)
         {
-            m_textHandler.Update();
-            m_textHandler.Clear();
-            if (refresh)
+            if (m_isVisible)
             {
-                StringSquisher.Clear();
-                foreach (var item in m_equipment.GetItems())
+                m_textHandler.Update();
+                m_textHandler.Clear();
+                if (refresh)
                 {
-                    StringSquisher.Squish(item.Key.ToString().Substring(0, 1), sep, item.Value.Name, newline);
+                    StringSquisher.Clear();
+                    StringSquisher.Squish(title);
+                    foreach (var item in m_equipment.GetItems())
+                    {
+                        StringSquisher.Squish(item.Key.ToString().Substring(0, 1), sep, item.Value.Name, newline);
+                    }
+                    display = StringSquisher.Flush();
                 }
-                display = StringSquisher.Flush();
+                m_textHandler.WriteDefault(display, 320, 30, GetHudOrigin());
             }
-            m_textHandler.WriteDefault(display, 320, 60, GetHudOrigin());
         }
     }
 }

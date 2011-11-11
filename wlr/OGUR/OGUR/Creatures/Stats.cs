@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using OGUR.Util;
 
 namespace OGUR.Creatures
 {
@@ -81,9 +82,15 @@ namespace OGUR.Creatures
             m_buffs.Add(buff);
         }
 
-        public IEnumerable GetDeltas(Stats stats)
+        private readonly List<float> deltas = new List<float>();
+        public List<float> GetDeltas(Stats stats)
         {
-            return m_stats.Select((t, ii) => m_stats[(StatType) ii] - stats.m_stats[(StatType) ii]);
+            deltas.Clear();
+            foreach (var stat in EnumUtil<StatType>.GetValues())
+            {
+                deltas.Add(m_stats[stat] - stats.m_stats[stat]);
+            }
+            return deltas;
         }
 
         public Stats GetLevelBonuses(int level)

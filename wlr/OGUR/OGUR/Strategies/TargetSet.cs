@@ -25,11 +25,11 @@ namespace OGUR.Strategies
             return target;
         }
 
-        public void AddTargetTypes(params object[] types)
+        public void AddTargetTypes(params CreatureType[] types)
         {
             foreach(var type in types)
             {
-                m_targetTypes.Add((CreatureType)type);
+                m_targetTypes.Add(type);
             }
         }
 

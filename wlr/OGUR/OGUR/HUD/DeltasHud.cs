@@ -45,26 +45,27 @@ namespace OGUR.HUD
 
         public void Update(GenericItem item,bool refresh)
         {
-            m_textHandler.Update();
-            m_textHandler.Clear();
-            if (item != null && refresh)
+            if (m_isVisible)
             {
-                if (GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())) != null)
+                m_textHandler.Update();
+                m_textHandler.Clear();
+                if (item != null && refresh)
                 {
-
-                    m_textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
-
-                    StringSquisher.Clear();
-                    //$$$ BOXING
-                    foreach (float stat in GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers.GetDeltas(item.Modifers))
+                    if (GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())) != null)
                     {
-                        //$$$ stat UNBOXING
-                        StringSquisher.Squish(((stat > 0) ? positive : String.Empty) + stat + delim);
+
+                        m_textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
+
+                        StringSquisher.Clear();
+                        foreach (var stat in GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers.GetDeltas(item.Modifers))
+                        {
+                            StringSquisher.Squish(((stat > 0) ? positive : String.Empty),StringStorage.Get(stat),delim);
+                        }
+                        display = StringSquisher.Flush();
                     }
-                    display = StringSquisher.Flush();
                 }
+                m_textHandler.WriteDefault(display, 30, 290, GetHudOrigin());
             }
-            m_textHandler.WriteDefault(display, 30, 290, GetHudOrigin());
         }
     }
 }
