@@ -19,7 +19,7 @@ namespace OGUR.GameObjects
         protected bool m_isActive = true;
         protected bool m_isBlocking = false;
         protected SpriteType m_assetName;
-        protected GameObjectType m_objectType;
+        protected int m_objectType;
         protected bool m_isOnBoard = true;
         protected List<int> m_composition = new List<int>(){Elements.NORMAL};
         private bool m_isInteracting = false;
@@ -50,7 +50,7 @@ namespace OGUR.GameObjects
             m_isOnBoard = true;
         }
 
-        protected void Initialize(Point2 location, SpriteType spriteType, GameObjectType objectType,float depth = 0f)
+        protected void Initialize(Point2 location, SpriteType spriteType, int objectType,float depth = 0f)
         {
             m_assetName = spriteType;
             m_objectType = objectType;
@@ -121,7 +121,7 @@ namespace OGUR.GameObjects
             return m_assetName;
         }
 
-        public GameObjectType GetObjectType()
+        public int GetObjectType()
         {
             return m_objectType;
         }

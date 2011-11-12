@@ -90,7 +90,7 @@ namespace OGUR.Dungeons
 
         public void CacheContents()
         {
-            foreach (var player in GameplayObjectManager.GetObjects(CreatureType.PLAYER))
+            foreach (var player in GameplayObjectManager.GetCreatures(CreatureType.PLAYER))
             {
                 DungeonFactory.AddToCache(player);
                 GameplayObjectManager.RemoveObject(player);
@@ -140,7 +140,7 @@ namespace OGUR.Dungeons
             //Give player random objects
             for (int ii = 0; ii < startingItemAmount; ii++)
             {
-                GameplayObjectManager.GetObjects(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)).PickupItem(ItemFactory.CreateRandomPlain());
+                GameplayObjectManager.GetCreatures(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)).PickupItem(ItemFactory.CreateRandomPlain());
             }
            
         }

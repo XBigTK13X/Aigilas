@@ -27,7 +27,7 @@ namespace OGUR.GameObjects
         }
 
         //GOT Accessors
-        public static GameplayObject GetObject(GameObjectType type)
+        public static GameplayObject GetObject(int type)
         {
             if (m_contents != null)
             {
@@ -36,7 +36,7 @@ namespace OGUR.GameObjects
             return null;
         }
 
-        public static IEnumerable<GameplayObject> GetObjects(GameObjectType type,Point2 target)
+        public static IEnumerable<GameplayObject> GetObjects(int type,Point2 target)
         {
             if (m_contents != null)
             {
@@ -46,7 +46,7 @@ namespace OGUR.GameObjects
         }
 
         //private static IEnumerable<GameplayObject> goResults;
-        public static IEnumerable<GameplayObject> GetObjects(GameObjectType type)
+        public static IEnumerable<GameplayObject> GetObjects(int type)
         {
             return m_contents.Where(item => item.GetObjectType() == type);
             //goResults = m_contents.Where(item => item.GetObjectType() == type);
@@ -54,13 +54,13 @@ namespace OGUR.GameObjects
         }
 
         //CT Accessors
-        public static ICreature GetObject(int type)
+        public static ICreature GetCreature(int type)
         {
             return m_contents != null ? m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().FirstOrDefault(creature => creature.GetCreatureType() == type) : null;
         }
 
         private static List<ICreature> creatures = new List<ICreature>();
-        public static List<ICreature> GetObjects(int type)
+        public static List<ICreature> GetCreatures(int type)
         {
             creatures.Clear();
             if (type != CreatureType.NONPLAYER)
@@ -110,8 +110,8 @@ namespace OGUR.GameObjects
 
         public static GameplayObject GetNearestPlayer(GameplayObject target)
         {
-            GameplayObject closest = GetObjects(CreatureType.PLAYER).FirstOrDefault();
-            foreach (var player in GetObjects(CreatureType.PLAYER))
+            GameplayObject closest = GetCreatures(CreatureType.PLAYER).FirstOrDefault();
+            foreach (var player in GetCreatures(CreatureType.PLAYER))
             {
                 if (HitTest.GetDistanceSquare(target, player) < HitTest.GetDistanceSquare(target, closest))
                 {
@@ -148,7 +148,7 @@ namespace OGUR.GameObjects
             return s_nearest;
         }
 
-        public static bool AnyContains(Point2 target, GameObjectType type)
+        public static bool AnyContains(Point2 target, int type)
         {
             return m_gridContents[target].Any(o => o.GetObjectType() == type);
         }
@@ -192,7 +192,7 @@ namespace OGUR.GameObjects
                 }                
                 m_contents[ii].Update();
             }
-            if (!(GetObjects(CreatureType.PLAYER).Count() > 0))
+            if (!(GetCreatures(CreatureType.PLAYER).Count() > 0))
             {
                 Reset();
                 StateManager.LoadState(new GameOverState());

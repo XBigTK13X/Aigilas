@@ -5,7 +5,7 @@ namespace OGUR.GameObjects
 {
     public class GameplayObjectFactory
     {
-        public static GameplayObject Create(GameObjectType type, Point2 location)
+        public static GameplayObject Create(int type, Point2 location)
         {
             switch (type)
             {
@@ -18,7 +18,7 @@ namespace OGUR.GameObjects
                 case GameObjectType.UPSTAIRS:
                     return new Upstairs(location);
                 default:
-                    throw new Exception("An undefined GameObjectType case was passed into the GameplayObjectFactory.");
+                    throw new Exception("An undefined int case was passed into the GameplayObjectFactory.");
             }
         }
     }

@@ -63,7 +63,7 @@ namespace OGUR.Strategies
                 }
                 foreach(var creatureType in m_targetTypes)
                 {
-                    m_calculatedTargets = GameplayObjectManager.GetObjects(creatureType);
+                    m_calculatedTargets = GameplayObjectManager.GetCreatures(creatureType);
                     foreach(var creature in m_calculatedTargets)
                     {
                         dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
