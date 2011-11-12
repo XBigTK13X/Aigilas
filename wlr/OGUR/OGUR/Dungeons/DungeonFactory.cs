@@ -6,25 +6,25 @@ using OGUR.GameObjects;
 
 namespace OGUR.Dungeons
 {
-    public enum Location
+    public class Location
     {
-        Start,
-        Depths
+        public const int Start = 0;
+        public const int Depths = 1;
     }
     public static class DungeonFactory
     {
         public static int BlocksHigh = 20;
         public static int BlocksWide = 30;
 
-        private static Dictionary<Location, DungeonSet> m_world = new Dictionary<Location, DungeonSet>();
+        private static Dictionary<int, DungeonSet> m_world = new Dictionary<int, DungeonSet>();
         private static List<GameplayObject> m_cache = new List<GameplayObject>(); 
 
-        public static void GetNextFloor(Location area)
+        public static void GetNextFloor(int area)
         {
             m_world[area].GotoNext(area);
         }
 
-        public static void GetPreviousFloor(Location area)
+        public static void GetPreviousFloor(int area)
         {
             m_world[area].GotoPrevious(area);
         }
@@ -43,7 +43,7 @@ namespace OGUR.Dungeons
 
         public static void Start()
         {
-            m_world = new Dictionary<Location, DungeonSet>();
+            m_world = new Dictionary<int, DungeonSet>();
             m_cache = new List<GameplayObject>();
             m_world.Add(Location.Depths,new DungeonSet(Location.Start));
         }
@@ -59,19 +59,19 @@ namespace OGUR.Dungeons
             m_floors.Add(m_currentFloor,new Dungeon());
         }
 
-        public DungeonSet(Location target)
+        public DungeonSet(int target)
         {
             m_floors.Add(m_currentFloor, new Dungeon(target));
         }
 
-        public void GotoNext(Location area)
+        public void GotoNext(int area)
         {
             m_floors[m_currentFloor].CacheContents();
             m_currentFloor++;
             LoadOrCreateDungeon(false);
         }
 
-        public void GotoPrevious(Location area)
+        public void GotoPrevious(int area)
         {
             if (m_currentFloor > 0)
             {

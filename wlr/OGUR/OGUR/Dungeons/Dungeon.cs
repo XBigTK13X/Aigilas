@@ -35,7 +35,7 @@ namespace OGUR.Dungeons
             Generate();
         }
 
-        public Dungeon(Location target)
+        public Dungeon(int target)
         {
             Init();
             ConvertRoomsToWalls();
