@@ -8,7 +8,7 @@ namespace OGUR.Path
 {
     class PathFactory
     {
-        private static readonly Path[] s_paths = new Path[15];
+        private static readonly Path[] s_paths = new Path[50];
         private static int s_pathIndex = 0;
 
         public static Path Create(Point2 source,Point2 dest)

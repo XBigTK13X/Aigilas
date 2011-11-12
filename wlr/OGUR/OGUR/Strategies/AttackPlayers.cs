@@ -14,18 +14,28 @@ namespace OGUR.Strategies
         }
 
         private ICreature opponent;
-        private Point2 targetPosition;
+        private readonly Point2 targetPosition = new Point2(0,0);
+        private const int throttleMin = 0;
+        private const int throttleMax = 0; 
+        private int throttle = 0;
+        private static readonly Random rand = new Random();
+
         public override void Act(ICreature target)
         {
-            opponent = m_targets.FindClosest();
-            //Every player is dead
-            if (null != opponent)
+            throttle--;
+            if (throttle <= 0)
             {
-                targetPosition = PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation());
-                if (null != targetPosition)
+                opponent = m_targets.FindClosest();
+                //Every player is dead
+                if (null != opponent)
                 {
-                    target.MoveTo(targetPosition);
+                    targetPosition.Copy(PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation()));
                 }
+                throttle = rand.Next(throttleMin, throttleMax);
+            }
+            if (null != targetPosition)
+            {
+                target.MoveTo(targetPosition);
             }
         }
     }

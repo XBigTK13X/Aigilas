@@ -65,8 +65,11 @@ namespace OGUR.Collision
 
         public void Copy(Point2 point)
         {
-            SetX(point.X);
-            SetY(point.Y);
+            if (point != null)
+            {
+                SetX(point.X);
+                SetY(point.Y);
+            }
         }
 
         public override int GetHashCode()

@@ -10,10 +10,12 @@ namespace OGUR.Path
 {    
     public static class PathFinder
     {
-        private static PriorityQueue queue = new PriorityQueue();
+        private static readonly PriorityQueue queue = new PriorityQueue();
         private static Point2 node = new Point2(0, 0);
         private static Path path;
         private static List<Point2> neighbors = new List<Point2>();
+
+        private static readonly Random rand = new Random();
 
         public static Point2 FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly = true)
         {
@@ -24,6 +26,8 @@ namespace OGUR.Path
             while (!queue.IsEmpty)
             {
                 path = queue.Dequeue();
+                break;}
+                /*
                 if (path.IsDone())
                 {
                     return path.GetNextMove();
@@ -38,18 +42,12 @@ namespace OGUR.Path
                 {
                     neighbor.SetWeight(HitTest.GetDistanceSquare(neighbor, destination));
                 }
+                
                 while(neighbors.Count>0)
                 {
-                    node = neighbors[0];
-                    foreach(var neighbor in neighbors)
-                    {
-                        if (neighbor.Weight < node.Weight)
-                        {
-                            node = neighbor;
-                        }
-                    }
+                    node = neighbors[rand.Next(0, neighbors.Count())];
                     neighbors.Remove(node);
-                    if (!CoordVerifier.IsBlocked(node) || (node.GridX == destination.GridX && node.GridY == destination.GridY))
+                    if (!CoordVerifier.IsBlocked(node) || node.IsSameSpot(destination))
                     {
                         node.SetWeight(Point2.CalculateDistanceSquared(node, path.GetLastStep()));
                         var newPath = PathFactory.Create(path);
@@ -61,7 +59,8 @@ namespace OGUR.Path
                     }
                 }
             }
-            return null;
+             * */
+            return Point2.m_locations[3,3];
         }
     }
 }

@@ -37,7 +37,7 @@ namespace OGUR.Collision
         }
         private static float GetDistanceSquare(float x1,float x2, float y1, float y2)
         {
-            return (float)(Math.Pow((x1 - x2), 2) + Math.Pow((y1 - y2), 2));
+            return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
         }
     }
 }

@@ -11,10 +11,10 @@ namespace OGUR.Path
     
     class PriorityQueue
     {
-        private Dictionary<double, Queue<Path>> list = new Dictionary<double, Queue<Path>>();
+        private Dictionary<float, Queue<Path>> list = new Dictionary<float, Queue<Path>>();
 
 
-        public void Enqueue(double priority, Path value)
+        public void Enqueue(float priority, Path value)
         {
             Queue<Path> q = QueueFactory.Create();
             if (!list.ContainsValue(q))
@@ -23,7 +23,7 @@ namespace OGUR.Path
             }
             q.Enqueue(value);
         }
-        private double tempKey;
+        private float tempKey;
         private Queue<Path> temp;
         private Path result;
         public Path Dequeue()
