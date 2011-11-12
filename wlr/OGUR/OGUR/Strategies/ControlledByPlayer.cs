@@ -18,37 +18,37 @@ namespace OGUR.Strategies
 
         public override void Act(ICreature target)
         {
-            if (InputManager.IsPressed(InputManager.Commands.Start, target.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.Start, target.GetPlayerIndex()))
             {
                 target.SetPlaying(true);
             }
-            if (InputManager.IsPressed(InputManager.Commands.Back, target.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.Back, target.GetPlayerIndex()))
             {
                 target.SetPlaying(false);
             }
             if (target.IsPlaying())
             {
-                var leftVelocity = (InputManager.IsPressed(InputManager.Commands.MoveLeft,target.GetPlayerIndex())? -Stats.DefaultMoveSpeed: 0);
-                var rightVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveRight, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                var leftVelocity = (InputManager.IsPressed(Commands.MoveLeft,target.GetPlayerIndex())? -Stats.DefaultMoveSpeed: 0);
+                var rightVelocity = ((InputManager.IsPressed(Commands.MoveRight, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
                 m_keyVelocity.SetX(rightVelocity + leftVelocity);
 
-                var downVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveDown, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
-                var upVelocity = ((InputManager.IsPressed(InputManager.Commands.MoveUp, target.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
+                var downVelocity = ((InputManager.IsPressed(Commands.MoveDown, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                var upVelocity = ((InputManager.IsPressed(Commands.MoveUp, target.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
                 m_keyVelocity.SetY(upVelocity + downVelocity);
 
-                if (InputManager.IsContext(InputManager.Contexts.Free,target.GetPlayerIndex()))
+                if (InputManager.IsContext(Contexts.Free,target.GetPlayerIndex()))
                 {
                     var skillCycleVelocity =
-                        ((InputManager.IsPressed(InputManager.Commands.CycleLeft, target.GetPlayerIndex()))? -1: 0)
+                        ((InputManager.IsPressed(Commands.CycleLeft, target.GetPlayerIndex()))? -1: 0)
                         +
-                        ((InputManager.IsPressed(InputManager.Commands.CycleRight, target.GetPlayerIndex()))? 1: 0);
+                        ((InputManager.IsPressed(Commands.CycleRight, target.GetPlayerIndex()))? 1: 0);
                     target.CycleActiveSkill(skillCycleVelocity);
 
                     if (!m_isCasting)
                     {
                         target.MoveIfPossible(m_keyVelocity.X, m_keyVelocity.Y);
                     }
-                    var isPress = InputManager.IsPressed(InputManager.Commands.Confirm, target.GetPlayerIndex());
+                    var isPress = InputManager.IsPressed(Commands.Confirm, target.GetPlayerIndex());
                     if (!isPress)
                     {
                         target.SetInteraction(false);
@@ -58,7 +58,7 @@ namespace OGUR.Strategies
                         target.SetInteraction(true);
                     }
                 }
-                if (InputManager.IsPressed(InputManager.Commands.Skill, target.GetPlayerIndex()))
+                if (InputManager.IsPressed(Commands.Skill, target.GetPlayerIndex()))
                 {
                     m_isCasting = true;
                 }
@@ -80,9 +80,9 @@ namespace OGUR.Strategies
                     }
                 }
                 
-                if (InputManager.IsPressed(InputManager.Commands.Inventory, target.GetPlayerIndex()))
+                if (InputManager.IsPressed(Commands.Inventory, target.GetPlayerIndex()))
                 {
-                    InputManager.SetContext(target.ToggleInventoryVisibility()? InputManager.Contexts.Inventory: InputManager.Contexts.Free, target.GetPlayerIndex());
+                    InputManager.SetContext(target.ToggleInventoryVisibility()? Contexts.Inventory: Contexts.Free, target.GetPlayerIndex());
                 }
             }
         }

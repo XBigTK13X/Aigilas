@@ -1,22 +1,6 @@
 ﻿using System.Collections.Generic;
 namespace OGUR.Creatures
 {
-    /*
-    /public enum StatType
-    {
-        HEALTH,
-        MANA,
-        STRENGTH,
-        WISDOM,
-        DEFENSE,
-        LUCK,
-        AGE,
-        HEIGHT,
-        WEIGHT,
-        MOVE_COOL_DOWN,
-        PIETY
-    }
-     * */
     public class StatType
     {
         public const string HEALTH = "Health";

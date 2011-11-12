@@ -47,7 +47,7 @@ namespace OGUR.HUD
 
         private void HandleInput()
         {
-            if (InputManager.IsPressed(InputManager.Commands.MoveLeft, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.MoveLeft, m_parent.GetPlayerIndex()))
             {
                 m_currentClass--;
                 if (m_currentClass <= ItemClass.NULL)
@@ -59,7 +59,7 @@ namespace OGUR.HUD
                 forceRefresh = true;
             }
 
-            if (InputManager.IsPressed(InputManager.Commands.MoveRight, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.MoveRight, m_parent.GetPlayerIndex()))
             {
                 m_currentClass++;
                 if (m_currentClass >= ItemClass.LAST)
@@ -71,7 +71,7 @@ namespace OGUR.HUD
                 forceRefresh = true;
             }
 
-            if (InputManager.IsPressed(InputManager.Commands.MoveDown, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.MoveDown, m_parent.GetPlayerIndex()))
             {
                 if (m_startingItem < m_currentClassItems.Count() - 1)
                 {
@@ -81,7 +81,7 @@ namespace OGUR.HUD
                 }
             }
 
-            if (InputManager.IsPressed(InputManager.Commands.MoveUp, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.MoveUp, m_parent.GetPlayerIndex()))
             {
                 if (m_startingItem > 0)
                 {
@@ -90,12 +90,12 @@ namespace OGUR.HUD
                     forceRefresh = true;
                 }
             }
-            if (InputManager.IsPressed(InputManager.Commands.Confirm, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.Confirm, m_parent.GetPlayerIndex()))
             {
                 m_parent.Equip(m_currentSelectedItem);
                 forceRefresh = true;
             }
-            if (InputManager.IsPressed(InputManager.Commands.Cancel, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.Cancel, m_parent.GetPlayerIndex()))
             {
                 m_parent.Drop(m_currentSelectedItem);
                 forceRefresh = true;

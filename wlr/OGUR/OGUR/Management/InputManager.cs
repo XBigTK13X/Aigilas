@@ -7,33 +7,33 @@ using OGUR.Util;
 
 namespace OGUR.Management
 {
+    public class Commands
+    {
+        public const int MoveUp = 0;
+        public const int MoveDown = 1;
+        public const int MoveLeft = 2;
+        public const int MoveRight = 3;
+        public const int Confirm = 4;
+        public const int Inventory = 5;
+        public const int Skill = 6;
+        public const int CycleLeft = 7;
+        public const int CycleRight = 8;
+        public const int Cancel = 9;
+        public const int Start = 10;
+        public const int Back = 11;
+    }
+    public class Contexts
+    {
+        public const int All = 0;
+        public const int Nonfree = 1;
+        public const int Free = 2;
+        public const int Inventory = 3;
+    }
     public class InputManager
     {
-        public enum Commands
-        {
-            MoveUp,
-            MoveDown,
-            MoveLeft,
-            MoveRight,
-            Confirm,
-            Inventory,
-            Skill,
-            CycleLeft,
-            CycleRight,
-            Cancel,
-            Start,
-            Back
-        }
+        
 
-        public enum Contexts
-        {
-            All,
-            Nonfree,
-            Free,
-            Inventory
-        }
-
-        private static readonly Dictionary<int, Contexts> m_contexts = new Dictionary<int, Contexts>()
+        private static readonly Dictionary<int, int> m_contexts = new Dictionary<int, int>()
                                                                   {
                                                                       {0, Contexts.Free},
                                                                       {1, Contexts.Free},
@@ -43,7 +43,7 @@ namespace OGUR.Management
                                                                   };
         private static readonly List<CommandLock> s_locks = new List<CommandLock>(); 
 
-        private static readonly Dictionary<Commands,Contexts> s_lockOnPress = new Dictionary<Commands,Contexts>()
+        private static readonly Dictionary<int,int> s_lockOnPress = new Dictionary<int,int>()
                                                           {
                                                               {Commands.Confirm,Contexts.All},
                                                               {Commands.Inventory,Contexts.All},
@@ -59,7 +59,7 @@ namespace OGUR.Management
                                                               {Commands.Skill,Contexts.All}
                                                           }; 
 
-        private static readonly Dictionary<Commands, Keys> m_keyboardMapping = new Dictionary<Commands, Keys>()
+        private static readonly Dictionary<int, Keys> m_keyboardMapping = new Dictionary<int, Keys>()
                                                                                    {
                                                                                        {Commands.MoveUp, Keys.Up},
                                                                                        {Commands.MoveDown, Keys.Down},
@@ -75,7 +75,7 @@ namespace OGUR.Management
                                                                                        {Commands.Skill,Keys.S}
                                                                                    };
 
-        private static readonly Dictionary<Commands, Buttons> m_gamePadMapping = new Dictionary<Commands, Buttons>()
+        private static readonly Dictionary<int, Buttons> m_gamePadMapping = new Dictionary<int, Buttons>()
                                                                                      {
                                                                                          {Commands.MoveUp,Buttons.DPadUp},
                                                                                          {Commands.MoveDown,Buttons.DPadDown},
@@ -102,7 +102,7 @@ namespace OGUR.Management
         private static bool s_isInputActive = false;
         private static bool s_isDown = false;
 
-        private static bool IsDown(Commands command, int playerIndex)
+        private static bool IsDown(int command, int playerIndex)
         {
             if (!s_inputs.ContainsKey(playerIndex))
             {
@@ -122,7 +122,7 @@ namespace OGUR.Management
             return s_isDown;
         }
 
-        public static bool IsPressed(Commands command, int playerIndex,bool failIfLocked=true)
+        public static bool IsPressed(int command, int playerIndex,bool failIfLocked=true)
         {
             
             s_isInputActive = IsDown(command,playerIndex);
@@ -151,7 +151,7 @@ namespace OGUR.Management
             return s_isInputActive;
         }
 
-        private static bool ShouldLock(Commands command,int playerIndex)
+        private static bool ShouldLock(int command,int playerIndex)
         {
             foreach(var key in s_lockOnPress.Keys)
             {
@@ -168,15 +168,15 @@ namespace OGUR.Management
             return false;
         }
 
-        public static void SetContext(Contexts context,int playerIndex)
+        public static void SetContext(int context,int playerIndex)
         {
             m_contexts[playerIndex] = context;
         }
-        public static bool IsContext(Contexts context,int playerIndex)
+        public static bool IsContext(int context,int playerIndex)
         {
             return m_contexts[playerIndex] == context;
         }
-        public static bool IsLocked(Commands command,int playerIndex)
+        public static bool IsLocked(int command,int playerIndex)
         {
             foreach (var pair in s_locks)
             {
@@ -187,11 +187,11 @@ namespace OGUR.Management
             }
             return false;
         }
-        public static void Lock(Commands command,int playerIndex)
+        public static void Lock(int command,int playerIndex)
         {
             s_locks.Add(new CommandLock(command,playerIndex));
         }
-        public static void Unlock(Commands command, int playerIndex)
+        public static void Unlock(int command, int playerIndex)
         {
             for(int ii = 0;ii<s_locks.Count();ii++)
             {
@@ -218,12 +218,12 @@ namespace OGUR.Management
 
     public class CommandLock
     {
-        public CommandLock(InputManager.Commands command, int playerIndex)
+        public CommandLock(int command, int playerIndex)
         {
             Command = command;
             PlayerIndex = playerIndex;
         }
-        public InputManager.Commands Command;
+        public int Command;
         public int PlayerIndex{ get; set; }
     }
 }

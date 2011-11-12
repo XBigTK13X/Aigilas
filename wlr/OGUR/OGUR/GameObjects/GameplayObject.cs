@@ -159,7 +159,7 @@ namespace OGUR.GameObjects
         public void PerformInteraction()
         {
             m_isInteracting = false;
-            InputManager.Lock(InputManager.Commands.Confirm, ((ICreature) this).GetPlayerIndex());
+            InputManager.Lock(Commands.Confirm, ((ICreature) this).GetPlayerIndex());
         }
 
         public ICreature IsCreature()

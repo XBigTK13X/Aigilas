@@ -31,7 +31,7 @@ namespace OGUR.States
 
         public override void Update()
         {
-            if(InputManager.IsPressed(InputManager.Commands.Confirm,0,true))
+            if(InputManager.IsPressed(Commands.Confirm,0,true))
             {
                 StateManager.LoadState(new GameplayState());
             }
