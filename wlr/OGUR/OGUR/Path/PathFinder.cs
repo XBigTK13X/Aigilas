@@ -10,7 +10,7 @@ namespace OGUR.Path
 {    
     public static class PathFinder
     {
-        private static readonly PriorityQueue queue = new PriorityQueue();
+        private static readonly PriorityQueue<float,Path> queue = new PriorityQueue<float,Path>();
         private static Point2 node = new Point2(0, 0);
         private static Path path;
         private static List<Point2> neighbors = new List<Point2>();
@@ -25,9 +25,7 @@ namespace OGUR.Path
             queue.Enqueue(0, PathFactory.Create(start,destination));
             while (!queue.IsEmpty)
             {
-                path = queue.Dequeue();
-                break;}
-                /*
+                path = queue.Dequeue().Value;
                 if (path.IsDone())
                 {
                     return path.GetNextMove();
@@ -46,6 +44,13 @@ namespace OGUR.Path
                 while(neighbors.Count>0)
                 {
                     node = neighbors[rand.Next(0, neighbors.Count())];
+                    foreach(var neighbor in neighbors)
+                    {
+                        if (neighbor.Weight < node.Weight)
+                        {
+                            node = neighbor;
+                        }
+                    }
                     neighbors.Remove(node);
                     if (!CoordVerifier.IsBlocked(node) || node.IsSameSpot(destination))
                     {
@@ -59,8 +64,7 @@ namespace OGUR.Path
                     }
                 }
             }
-             * */
-            return Point2.m_locations[3,3];
+            return null;
         }
     }
 }
