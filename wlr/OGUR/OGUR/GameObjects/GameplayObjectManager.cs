@@ -26,7 +26,6 @@ namespace OGUR.GameObjects
             return gameplayObject;
         }
 
-        //GOT Accessors
         public static GameplayObject GetObject(int type)
         {
             if (m_contents != null)
@@ -36,21 +35,39 @@ namespace OGUR.GameObjects
             return null;
         }
 
-        public static IEnumerable<GameplayObject> GetObjects(int type,Point2 target)
+        private static readonly List<GameplayObject> gopResults = new List<GameplayObject>();
+        public static List<GameplayObject> GetObjects(int type,Point2 target)
         {
             if (m_contents != null)
             {
-                return GetObjects(type).Where(o=>o.Contains(target));
+                goResults.Clear();
+                goResults.AddRange(GetObjects(type));
+                gopResults.Clear();
+                for (int ii = 0; ii < goResults.Count(); ii++)
+                {
+                    if (goResults[ii].Contains(target))
+                    {
+                        gopResults.Add(goResults[ii]);
+                    }
+                }
+                return gopResults;
             }
             return null;
         }
 
-        //private static IEnumerable<GameplayObject> goResults;
-        public static IEnumerable<GameplayObject> GetObjects(int type)
+        private static readonly List<GameplayObject> goResults = new List<GameplayObject>();
+        public static List<GameplayObject> GetObjects(int type)
         {
-            return m_contents.Where(item => item.GetObjectType() == type);
-            //goResults = m_contents.Where(item => item.GetObjectType() == type);
-            //return goResults;
+            //return m_contents.Where(item => item.GetObjectType() == type);
+            goResults.Clear();
+            for (int ii = 0; ii < m_contents.Count(); ii++)
+            {
+                if (m_contents[ii].GetObjectType() == type)
+                {
+                    goResults.Add(m_contents[ii]);
+                }
+            }
+            return goResults;
         }
 
         //CT Accessors

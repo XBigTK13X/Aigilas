@@ -188,6 +188,7 @@
     <Compile Include="Strategies\MinionRotate.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
     <Compile Include="Text\ActionText.cs" />
+    <Compile Include="Text\ActionTextHandler.cs" />
     <Compile Include="Text\TextHandler.cs" />
     <Compile Include="Text\DefaultHudText.cs" />
     <Compile Include="Text\Text.cs" />
@@ -218,7 +219,7 @@
     <Compile Include="Strategies\ControlledByPlayer.cs" />
     <Compile Include="Strategies\AttackPlayers.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
-    <Compile Include="Util\EnumUtil.cs" />
+    <Compile Include="Util\IntStorage.cs" />
     <Compile Include="Util\StringSquisher.cs" />
     <Compile Include="Util\StringStorage.cs" />
   </ItemGroup>

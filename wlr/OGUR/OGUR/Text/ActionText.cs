@@ -19,6 +19,15 @@ namespace OGUR.Text
         {
             m_lifeSpan = lifeSpan;
         }
+        public ActionText()
+        {
+
+        }
+        public void Reset(string contents, int lifespan, int x, int y)
+        {
+            m_lifeSpan = lifespan;
+            Reset(contents, x, y);
+        }
         public override int Update()
         {
             m_scalePercent *= .98f;

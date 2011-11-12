@@ -37,6 +37,7 @@ namespace OGUR.Creatures
         protected Equipment m_equipment;
 
         protected HudManager m_hudManager;
+        protected readonly ActionTextHandler m_damageText = new ActionTextHandler();
 
         protected int m_playerIndex = -1;
         protected bool m_isPlaying = true;
@@ -139,6 +140,7 @@ namespace OGUR.Creatures
                 {
                     m_hudManager.Update();
                 }
+                m_damageText.Update();
                 Regenerate();
             }
             if (m_strategy != null)
@@ -167,6 +169,7 @@ namespace OGUR.Creatures
             {
                 m_hudManager.Draw();
             }
+            m_damageText.Draw();
         }
 
         public bool ToggleInventoryVisibility()
@@ -270,12 +273,11 @@ namespace OGUR.Creatures
             damage -= m_baseStats.Get(StatType.DEFENSE);
             if (damage <= 0)
             {
-                damage = 0;
-                
+                damage = 0;                
             }
             if (showDamage)
             {
-                TextManager.Add(new ActionText(StringStorage.Get(damage), 30, (int)GetLocation().PosCenterX, (int)GetLocation().PosCenterY));
+                m_damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
             }
             if(damage>0)
             {
