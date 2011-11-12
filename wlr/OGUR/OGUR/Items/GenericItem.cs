@@ -12,9 +12,9 @@ namespace OGUR.Items
     {
         public Stats Modifers;
         public String Name;
-        private ItemSuffix m_suffix;
-        private ItemPrefix m_prefix;
-        private ItemName m_type;
+        private string m_suffix;
+        private string m_prefix;
+        private int m_type;
         private Slots m_targetSlots;
 
         private const string s_spacingCharacter = " ";
@@ -46,16 +46,16 @@ namespace OGUR.Items
             }
         }
 
-        private void Initialize(ItemSuffix suffix, ItemPrefix prefix,ItemName type, Slots targetSlots,Stats modifiers,Point2 location)
+        private void Initialize(string suffix, string prefix,int type, Slots targetSlots,Stats modifiers,Point2 location)
         {
             Setup(location, type);
             m_suffix = suffix;
             m_prefix = prefix;
             m_type = type;
             m_targetSlots = GetSlotFromType(type);
-            Name = (m_prefix == ItemPrefix.NULL ? String.Empty : Enum.GetName(typeof(ItemPrefix), m_prefix) + s_spacingCharacter) +
-                   Enum.GetName(typeof(ItemName), m_type) +
-                   (m_suffix == ItemSuffix.NULL ? String.Empty : s_spacingCharacter + Enum.GetName(typeof(ItemSuffix), m_suffix));
+            Name = (m_prefix == ItemPrefix.NULL ? String.Empty :  m_prefix + s_spacingCharacter) +
+                    ItemName.Names[m_type] +
+                   (m_suffix == ItemSuffix.NULL ? String.Empty : s_spacingCharacter + m_suffix);
             Modifers = new Stats(modifiers);
         }
 
@@ -64,7 +64,7 @@ namespace OGUR.Items
             Initialize(item.m_suffix, item.m_prefix, item.m_type,item.m_targetSlots, item.Modifers,location);
         }
 
-        public GenericItem(Stats modifiers, ItemSuffix suffix, ItemPrefix prefix, ItemName type, Point2 location,bool onGround = true)
+        public GenericItem(Stats modifiers, string suffix, string prefix, int type, Point2 location,bool onGround = true)
         {
             if (type == ItemName.NULL)
             {
@@ -73,7 +73,7 @@ namespace OGUR.Items
             Initialize(m_suffix,m_prefix,type,GetSlotFromType(type),modifiers,location);
         }
 
-        protected void Setup(Point2 location, ItemName type)
+        protected void Setup(Point2 location, int type)
         {
             Initialize(location, SpriteFromItem(type), GameObjectType.ITEM,Depth.Item);
         }
@@ -95,12 +95,12 @@ namespace OGUR.Items
             }
         }
 
-        private SpriteType SpriteFromItem(ItemName item)
+        private SpriteType SpriteFromItem(int item)
         {
             return SpriteType.ITEM;
         }
 
-        private Slots GetSlotFromType(ItemName type)
+        private Slots GetSlotFromType(int type)
         {
             switch (type)
             {

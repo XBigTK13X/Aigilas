@@ -10,7 +10,7 @@ namespace OGUR.Items
     {
         private static Random rand = new Random();
         private const int itemGrowth = 3;
-        private static ItemName itemType;
+        private static int itemType;
 
         public static GenericItem CreateRandomPlain(Point2 location = null,bool onFloor = false)
         {
@@ -35,9 +35,9 @@ namespace OGUR.Items
             return null;
             //return new IItem(new Stats(1,1,1,1,1,1,0,1,0,0,0),)}
         }
-        private static ItemName SelectRandomType()
+        private static int SelectRandomType()
         {
-            return (ItemName)OGUR.Util.EnumUtil < ItemName>.GetValues()[(rand.Next(1, OGUR.Util.EnumUtil<ItemName>.GetValues().Count))];
+            return ItemName.Values[(rand.Next(1, ItemName.Values.Count))];
         }
     }
 }

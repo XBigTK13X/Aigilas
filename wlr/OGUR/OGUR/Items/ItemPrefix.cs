@@ -1,10 +1,19 @@
-﻿namespace OGUR.Items
+﻿using System.Collections.Generic;
+namespace OGUR.Items
 {
-    public enum ItemPrefix
+    public class ItemPrefix
     {
-        NULL,
-        Silver,
-        Solid,
-        Permuted
+        public const string NULL = "NULL";
+        public const string Silver = "Silver";
+        public const string Solid = "Solid";
+        public const string Permuted = "Permuted";
+
+        public static readonly List<string> Values = new List<string>()
+        {
+            NULL,
+            Silver,
+            Solid,
+            Permuted
+        };
     }
 }
