@@ -45,7 +45,7 @@ namespace OGUR.Creatures
         protected const float s_levelUpAmonut = 50;
         protected float m_nextLevelExperience = s_levelUpAmonut;
 
-        private SpriteType SpriteFromCreature(int type)
+        private int SpriteFromCreature(int type)
         {
             switch (type)
             {

@@ -26,7 +26,7 @@ namespace OGUR.Skills
         protected SkillComponents m_components;
         public bool StartOffCenter = false;
 
-        protected ISkill(string implementationId, Skill.Animation animation, float strength = SkillEffect.DefaultStrength,bool isPersistent=false,SpriteType effectGraphic = SpriteType.SKILL_EFFECT)
+        protected ISkill(string implementationId, Skill.Animation animation, float strength = SkillEffect.DefaultStrength,bool isPersistent=false,int effectGraphic = SpriteType.SKILL_EFFECT)
         {
             m_implementationId = implementationId;
             m_components = new SkillComponents(strength, isPersistent);
@@ -53,7 +53,7 @@ namespace OGUR.Skills
             }
         }
         public virtual void Affect(ICreature target) { target.Combo(m_components.GetElements()); }
-        public SpriteType GetSpriteType(){return m_behavior.GetSpriteType();}
+        public int GetSpriteType(){return m_behavior.GetSpriteType();}
         public Skill.Animation GetAnimationType() { return m_behavior.GetAnimationType(); }
         public float GetStrength(){return m_components.GetStrength();}
         public bool IsPersistent() { return m_components.IsPersistent(); }

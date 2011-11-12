@@ -16,13 +16,13 @@ namespace OGUR.Skills
         protected bool m_used = false;
         protected Stats m_cost;
 
-        public SkillBehavior(SpriteType effectGraphic, Skill.Animation animation,ISkill parentSkill)
+        public SkillBehavior(int effectGraphic, Skill.Animation animation,ISkill parentSkill)
         {
             m_parent = parentSkill;
             m_sideEffects = new SideEffects(effectGraphic, animation,m_parent);
             m_cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
-        public SpriteType GetSpriteType() { return m_sideEffects.GetSpriteType(); }
+        public int GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
         public virtual void Cleanup(ICreature target) { }
         public void AddCost(string stat, float cost)
@@ -61,12 +61,12 @@ namespace OGUR.Skills
     }
     public class RangedBehavior: SkillBehavior
     {
-        public RangedBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.RANGED, parentSkill) { }
+        public RangedBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.RANGED, parentSkill) { }
         public override void Activate(ICreature target) { m_sideEffects.Generate(target.GetLocation(), target.GetSkillVector(), target);}
     }
     public class SelfBehavior:SkillBehavior
     {
-        public SelfBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.SELF, parentSkill) { }
+        public SelfBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.SELF, parentSkill) { }
         public override void Activate(ICreature target) { if (SubtractCost(target)) { m_sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target); } }
         public override void Cleanup(ICreature target) {if(m_used)m_parent.Affect(target);}
         public override bool AffectTarget(ICreature source, SkillEffect graphic)
@@ -81,7 +81,7 @@ namespace OGUR.Skills
     }
     public class StationaryBehavior : SkillBehavior
     {
-        public StationaryBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.STATIONARY, parentSkill) { }
+        public StationaryBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.STATIONARY, parentSkill) { }
         public override void Activate(ICreature target) 
         {
             if(SubtractCost(target))
@@ -100,7 +100,7 @@ namespace OGUR.Skills
     }
     public class CloudBehavior:SkillBehavior
     {
-        public CloudBehavior(SpriteType effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.CLOUD, parentSkill) { }
+        public CloudBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, Skill.Animation.CLOUD, parentSkill) { }
         public override void Activate(ICreature target)
         {
             if (SubtractCost(target))

@@ -103,7 +103,7 @@ namespace OGUR.Skills
             }
         }
 
-        public static SkillBehavior Create(Skill.Animation animation,SpriteType skillGraphic,ISkill parentSkill)
+        public static SkillBehavior Create(Skill.Animation animation,int skillGraphic,ISkill parentSkill)
         {
             switch (animation)
             {

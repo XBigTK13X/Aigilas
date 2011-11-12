@@ -15,11 +15,11 @@ namespace OGUR.Skills
 
         protected Skill.Animation m_animation;
         protected List<SkillEffect> m_effectGraphics = new List<SkillEffect>();
-        protected SpriteType m_effectSprite = SpriteType.SKILL_EFFECT;
+        protected int m_effectSprite = SpriteType.SKILL_EFFECT;
         protected float m_effectStrength;
         protected bool m_isPersistent = false;
 
-        public SideEffects(SpriteType effectGraphic,Skill.Animation animation,ISkill parent)
+        public SideEffects(int effectGraphic,Skill.Animation animation,ISkill parent)
         {
             m_parent = parent;
             m_effectStrength = parent.GetStrength();
@@ -34,7 +34,7 @@ namespace OGUR.Skills
             GameplayObjectManager.AddObject(effect);
         }
 
-        public SpriteType GetSpriteType()
+        public int GetSpriteType()
         {
             return m_effectSprite;
         }

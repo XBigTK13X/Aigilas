@@ -25,7 +25,7 @@ namespace OGUR.Sprites
 
         protected Vector2 m_position = Vector2.Zero;
 
-        public void LoadContent(SpriteType assetName)
+        public void LoadContent(int assetName)
         {
             m_spriteInfo = SpriteSheetManager.GetSpriteInfo(assetName);
             m_currentFrame = 0;

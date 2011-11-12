@@ -8,7 +8,7 @@ namespace OGUR.Sprites
 {
     public class SpriteSheetManager
     {
-        private static Dictionary<SpriteType, SpriteInfo> m_manager = new Dictionary<SpriteType, SpriteInfo>()
+        private static Dictionary<int, SpriteInfo> m_manager = new Dictionary<int, SpriteInfo>()
         {
             {SpriteType.EMPTY, new SpriteInfo(0, 1)},
             {SpriteType.PLAYER_STAND,new SpriteInfo(1, 2)},
@@ -24,7 +24,7 @@ namespace OGUR.Sprites
             {SpriteType.MINION,new SpriteInfo(11,1)}
         };
 
-        public static SpriteInfo GetSpriteInfo(SpriteType spriteName)
+        public static SpriteInfo GetSpriteInfo(int spriteName)
         {
             return m_manager[spriteName];
         }

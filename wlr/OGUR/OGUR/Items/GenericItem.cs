@@ -95,7 +95,7 @@ namespace OGUR.Items
             }
         }
 
-        private SpriteType SpriteFromItem(int item)
+        private int SpriteFromItem(int item)
         {
             return SpriteType.ITEM;
         }

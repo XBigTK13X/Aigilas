@@ -2,7 +2,7 @@
 {
     public class AnimatedTextureFactory
     {
-        public static AnimatedTexture Create(SpriteType type, int x, int y)
+        public static AnimatedTexture Create(int type, int x, int y)
         {
             var sprite = new AnimatedTexture();
             sprite.LoadContent(type);
