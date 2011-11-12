@@ -8,7 +8,7 @@ namespace OGUR.Items
 {
     public class Equipment
     {
-        public static ItemSlot ClassToSlot(ItemClass iClass)
+        public static ItemSlot ClassToSlot(int iClass)
         {
             switch(iClass)
             {

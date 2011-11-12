@@ -40,7 +40,7 @@ namespace OGUR.Items
         }
 
         private readonly Dictionary<GenericItem, int> m_itemResult = new Dictionary<GenericItem, int>();
-        public Dictionary<GenericItem, int> GetItems(ItemClass iClass)
+        public Dictionary<GenericItem, int> GetItems(int iClass)
         {
             m_itemResult.Clear();
             foreach (var key in m_contents.Keys)

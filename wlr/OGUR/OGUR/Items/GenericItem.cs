@@ -19,7 +19,7 @@ namespace OGUR.Items
 
         private const string s_spacingCharacter = " ";
 
-        public ItemClass GetItemClass()
+        public int GetItemClass()
         {
             switch (m_type)
             {

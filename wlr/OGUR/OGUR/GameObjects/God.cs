@@ -41,12 +41,12 @@ namespace OGUR.Gods
 
         private Color m_color;
         private Name m_name;
-        private ItemClass m_goodSacrificeClass;
-        private ItemClass m_badSacrificeClass;
+        private int m_goodSacrificeClass;
+        private int m_badSacrificeClass;
 
         public string NameText;
 
-        protected God(Color color, Name name, ItemClass goodSacrifice, ItemClass badSacrifice)
+        protected God(Color color, Name name, int goodSacrifice, int badSacrifice)
         {
             m_color = color;
             m_name = name;
@@ -75,12 +75,12 @@ namespace OGUR.Gods
             return new NoClass();
         }
 
-        public bool IsGoodSacrifice(ItemClass sacrifice)
+        public bool IsGoodSacrifice(int sacrifice)
         {
             return sacrifice == m_goodSacrificeClass;
         }
 
-        public bool IsBadSacrifice(ItemClass sacrifice)
+        public bool IsBadSacrifice(int sacrifice)
         {
             return sacrifice == m_badSacrificeClass;
         }

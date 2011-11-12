@@ -15,7 +15,7 @@ namespace OGUR.HUD
 {
     public class InventoryHud:IHud
     {
-        private ItemClass m_currentClass = (ItemClass) 1;
+        private int m_currentClass = ItemClass.Values[1];
         private readonly Inventory m_inventory;
         private readonly Equipment m_equipment;
         private int m_endingItem = 4, m_startingItem = 0;
@@ -50,9 +50,9 @@ namespace OGUR.HUD
             if (InputManager.IsPressed(InputManager.Commands.MoveLeft, m_parent.GetPlayerIndex()))
             {
                 m_currentClass--;
-                if (m_currentClass <= (ItemClass)0)
+                if (m_currentClass <= ItemClass.NULL)
                 {
-                    m_currentClass = (ItemClass)OGUR.Util.EnumUtil<ItemClass>.GetValues().Count() - 2;
+                    m_currentClass = ItemClass.Values.Count() - 2;
                 }
                 m_startingItem = 0;
                 m_endingItem = 4;
@@ -64,7 +64,7 @@ namespace OGUR.HUD
                 m_currentClass++;
                 if (m_currentClass >= ItemClass.LAST)
                 {
-                    m_currentClass = (ItemClass)1;                    
+                    m_currentClass = ItemClass.Values[1];                    
                 }
                 m_startingItem = 0;
                 m_endingItem = 4;
@@ -126,7 +126,7 @@ namespace OGUR.HUD
             forceRefresh = true;
         }
 
-        private static readonly Dictionary<ItemClass, string> s_classStrings = new Dictionary<ItemClass, string>();
+        private static readonly Dictionary<int, string> s_classStrings = new Dictionary<int, string>();
 
         private string GetClassDisplay()
         {
