@@ -29,7 +29,7 @@ namespace OGUR.HUD
             }
         }
 
-        private GenericItem GetEquipmentIn(ItemSlot slot)
+        private GenericItem GetEquipmentIn(int slot)
         {
             if (m_equipment.GetItems().ContainsKey(slot))
             {
@@ -53,9 +53,6 @@ namespace OGUR.HUD
                 {
                     if (GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())) != null)
                     {
-
-                        m_textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
-
                         StringSquisher.Clear();
                         foreach (var stat in GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())).Modifers.GetDeltas(item.Modifers))
                         {
@@ -64,6 +61,7 @@ namespace OGUR.HUD
                         display = StringSquisher.Flush();
                     }
                 }
+                m_textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
                 m_textHandler.WriteDefault(display, 30, 290, GetHudOrigin());
             }
         }

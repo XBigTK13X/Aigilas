@@ -132,7 +132,7 @@ namespace OGUR.HUD
         {
             if(!s_classStrings.ContainsKey(m_currentClass))
             {
-                s_classStrings.Add(m_currentClass, m_currentClass.ToString().Replace("_", " "));
+                s_classStrings.Add(m_currentClass, ItemClass.Names[m_currentClass]);
             }
             return s_classStrings[m_currentClass];
         }

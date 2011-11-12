@@ -8,7 +8,7 @@ namespace OGUR.Items
 {
     public class Equipment
     {
-        public static ItemSlot ClassToSlot(int iClass)
+        public static int ClassToSlot(int iClass)
         {
             switch(iClass)
             {
@@ -36,7 +36,7 @@ namespace OGUR.Items
             return ItemSlot.NULL;
         }
 
-        private readonly Dictionary<ItemSlot, GenericItem> m_slots = new Dictionary<ItemSlot, GenericItem>();
+        private readonly Dictionary<int, GenericItem> m_slots = new Dictionary<int, GenericItem>();
         private readonly ICreature m_parent;
 
 
@@ -99,7 +99,7 @@ namespace OGUR.Items
             return bonusSum;
         }
 
-        public Dictionary<ItemSlot,GenericItem> GetItems()
+        public Dictionary<int,GenericItem> GetItems()
         {
             return m_slots;
         }

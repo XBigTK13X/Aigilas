@@ -105,11 +105,11 @@ namespace OGUR.Items
             switch (type)
             {
                 case ItemName.Sword:
-                    return new Slots(new List<ItemSlot>() {ItemSlot.RIGHT_HAND, ItemSlot.LEFT_HAND});
+                    return new Slots(new List<int>() {ItemSlot.RIGHT_HAND, ItemSlot.LEFT_HAND});
                 case ItemName.Pants:
-                    return new Slots(new List<ItemSlot>() {ItemSlot.LEGS});
+                    return new Slots(new List<int>() {ItemSlot.LEGS});
                 default:
-                    return new Slots(new List<ItemSlot>());
+                    return new Slots(new List<int>());
             }
         }
 

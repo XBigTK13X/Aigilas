@@ -124,7 +124,6 @@
     <Compile Include="Path\PriorityQueue.cs" />
     <Compile Include="Creatures\CreatureType.cs" />
     <Compile Include="Creatures\AbstractCreature.cs" />
-    <Compile Include="Creatures\Race.cs" />
     <Compile Include="Creatures\StatType.cs" />
     <Compile Include="Creatures\Stats.cs" />
     <Compile Include="Dungeons\Dungeon.cs" />

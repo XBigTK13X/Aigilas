@@ -47,7 +47,7 @@ namespace OGUR.HUD
                     StringSquisher.Squish(title);
                     foreach (var item in m_equipment.GetItems())
                     {
-                        StringSquisher.Squish(item.Key.ToString().Substring(0, 1), sep, item.Value.Name, newline);
+                        StringSquisher.Squish(ItemSlot.Names[item.Key].Substring(0, 1), sep, item.Value.Name, newline);
                     }
                     display = StringSquisher.Flush();
                 }
