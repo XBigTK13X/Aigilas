@@ -9,7 +9,7 @@ namespace OGUR.Reactions
 {
     public class ComboMeter
     {
-        private static Dictionary<int, ReactionId> s_reactions = new Dictionary<int, ReactionId>()
+        private static Dictionary<int, int> s_reactions = new Dictionary<int, int>()
         {
             {12,ReactionId.SWEAT},
             {13,ReactionId.MAGMA},
