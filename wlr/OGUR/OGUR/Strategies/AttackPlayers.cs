@@ -17,8 +17,6 @@ namespace OGUR.Strategies
         private Point2 targetPosition;
         public override void Act(ICreature target)
         {
-            target.MoveTo(Point2.m_locations[2, 2]);
-            return;
             opponent = m_targets.FindClosest();
             //Every player is dead
             if (null != opponent)
