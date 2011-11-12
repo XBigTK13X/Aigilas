@@ -11,7 +11,7 @@ namespace OGUR.Strategies
     public class TargetSet
     {
         private List<ICreature> m_targets = new List<ICreature>();
-        private List<CreatureType> m_targetTypes = new List<CreatureType>(); 
+        private List<int> m_targetTypes = new List<int>(); 
         private readonly ICreature m_parent;
 
         public TargetSet(ICreature parent)
@@ -25,9 +25,9 @@ namespace OGUR.Strategies
             return target;
         }
 
-        public void AddTargetTypes(params CreatureType[] types)
+        public void AddTargetTypes(params int[] creatureTypes)
         {
-            foreach(var type in types)
+            foreach(var type in creatureTypes)
             {
                 m_targetTypes.Add(type);
             }

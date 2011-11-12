@@ -10,10 +10,10 @@ namespace OGUR.Creatures
 {
     public class AbstractCreature:ICreature
     {
-        public AbstractCreature(CreatureType type,SpriteType spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
+        public AbstractCreature(int creatureType,SpriteType spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
         {
             SetClass(cClass);
-            m_creatureType = type;
+            m_creatureType = creatureType;
             m_baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
             m_maxStats = new Stats(m_baseStats);
         }

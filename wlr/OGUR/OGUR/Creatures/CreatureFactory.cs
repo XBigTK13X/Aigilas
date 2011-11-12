@@ -10,18 +10,18 @@ namespace OGUR.Creatures
     {
         private static int s_playerCount = 0;
         private static Random s_rand;
-        public static ICreature Create(CreatureType type, Point2 position)
+        public static ICreature Create(int creatureType, Point2 position)
         {
             if (s_rand == null)
                 s_rand = new Random();
             AbstractCreature result;
-            switch (type)
+            switch (creatureType)
             {
                 case CreatureType.PLAYER:
                     result = new Player(s_playerCount++);
                     break;
                 default:
-                    result = GenerateCreature(type);
+                    result = GenerateCreature(creatureType);
                     break;
             }
             result.Setup(position);
@@ -29,16 +29,16 @@ namespace OGUR.Creatures
             return result;
         }
 
-        private static AbstractCreature GenerateCreature(CreatureType type)
+        private static AbstractCreature GenerateCreature(int creatureType)
         {
-            switch(type)
+            switch(creatureType)
             {
                 case CreatureType.PEON:
                     return new Peon();
                 case CreatureType.ZORB:
                     return new Zorb();
                 default:
-                    throw new Exception("You forgot to define Factory generation logic for: "+type);
+                    throw new Exception("You forgot to define Factory generation logic for: "+creatureType);
             }
         }
 

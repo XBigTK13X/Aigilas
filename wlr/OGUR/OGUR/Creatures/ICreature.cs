@@ -22,7 +22,7 @@ namespace OGUR.Creatures
     {
         protected IStrategy m_strategy;
 
-        protected CreatureType m_creatureType;
+        protected int m_creatureType;
         protected CreatureClass m_class;
         protected Stats m_baseStats;
         protected Stats m_maxStats;
@@ -45,7 +45,7 @@ namespace OGUR.Creatures
         protected const float s_levelUpAmonut = 50;
         protected float m_nextLevelExperience = s_levelUpAmonut;
 
-        private SpriteType SpriteFromCreature(CreatureType type)
+        private SpriteType SpriteFromCreature(int type)
         {
             switch (type)
             {
@@ -56,7 +56,7 @@ namespace OGUR.Creatures
             }
         }
 
-        protected void Setup(Point2 location, CreatureType type, Stats stats, CreatureClass creatureClass = null)
+        protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null)
         {
             Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE,Depth.Creature);
             Init(type,stats,creatureClass);
@@ -71,7 +71,7 @@ namespace OGUR.Creatures
             }
         }
 
-        private void Init(CreatureType type, Stats stats, CreatureClass creatureClass = null)
+        private void Init(int type, Stats stats, CreatureClass creatureClass = null)
         {
             SetClass(creatureClass);
             m_inventory = new Inventory(this);
@@ -133,18 +133,18 @@ namespace OGUR.Creatures
             {
                 if(Get(StatType.MOVE_COOL_DOWN)>0f)
                 {
-                    //$$$Adjust(StatType.MOVE_COOL_DOWN, -1);    
+                    Adjust(StatType.MOVE_COOL_DOWN, -1);    
                 }
                 if (m_hudManager != null)
                 {
-                    //$$$m_hudManager.Update();
+                    m_hudManager.Update();
                 }
-                //$$$Regenerate();
+                Regenerate();
             }
             if (m_strategy != null)
             {
-                //$$$m_strategy.Act(this);
-                //$$$m_combo.Update();
+                m_strategy.Act(this);
+                m_combo.Update();
             }
         }
         private void Regenerate()
@@ -247,7 +247,7 @@ namespace OGUR.Creatures
             return m_playerIndex;
         }
 
-        public CreatureType GetCreatureType()
+        public int GetCreatureType()
         {
             return m_creatureType;
         }

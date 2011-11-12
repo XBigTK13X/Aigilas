@@ -54,13 +54,13 @@ namespace OGUR.GameObjects
         }
 
         //CT Accessors
-        public static ICreature GetObject(CreatureType type)
+        public static ICreature GetObject(int type)
         {
             return m_contents != null ? m_contents.Where(o => o.GetObjectType() == GameObjectType.CREATURE).Cast<ICreature>().FirstOrDefault(creature => creature.GetCreatureType() == type) : null;
         }
 
         private static List<ICreature> creatures = new List<ICreature>();
-        public static List<ICreature> GetObjects(CreatureType type)
+        public static List<ICreature> GetObjects(int type)
         {
             creatures.Clear();
             if (type != CreatureType.NONPLAYER)

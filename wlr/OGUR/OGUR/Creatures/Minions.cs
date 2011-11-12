@@ -10,9 +10,9 @@ namespace OGUR.Creatures
 {
     class Minion : ICreature
     {
-        public Minion(CreatureType type = CreatureType.MINION,float coolDown = Stats.DefaultCoolDown)
+        public Minion(int creatureType = CreatureType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
-            m_creatureType = type;
+            m_creatureType = creatureType;
             m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
         }
         public void Init(ICreature source)
