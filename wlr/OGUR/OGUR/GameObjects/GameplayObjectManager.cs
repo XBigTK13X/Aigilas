@@ -108,6 +108,18 @@ namespace OGUR.GameObjects
             }
             return creatures;
         }
+        public static List<ICreature> GetCreaturesAt(Point2 target)
+        {
+            creatures.Clear();
+                foreach (var elem in m_gridContents[target])
+                {
+                    if (elem.GetObjectType() == GameObjectType.CREATURE)
+                    {
+                        creatures.Add(((ICreature)elem));
+                    }
+                }
+            return creatures;
+        }
 
         public static bool IsLocationBlocked(Point2 location)
         {

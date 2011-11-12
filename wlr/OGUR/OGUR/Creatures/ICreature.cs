@@ -317,7 +317,7 @@ namespace OGUR.Creatures
         }
 
         private Point2 target = new Point2(0, 0);
-        private IEnumerable<ICreature> creatures;
+        private List<ICreature> creatures;
         public void MoveIfPossible(float xVel, float yVel)
         {
             if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) <= 0)
@@ -330,7 +330,7 @@ namespace OGUR.Creatures
                 }
                 else
                 {
-                    creatures = GameplayObjectManager.GetObjects(GameObjectType.CREATURE, target).Cast<ICreature>();
+                    creatures = GameplayObjectManager.GetCreaturesAt(target);
                     if(creatures.Count()>0)
                     {
                         foreach (var creature in creatures)

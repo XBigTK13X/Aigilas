@@ -144,6 +144,11 @@ namespace OGUR.Collision
             return m_neighbors;
         }
 
+        public bool IsSameSpot(Point2 target)
+        {
+            return target.GridX == GridX && target.GridY == GridY;
+        }
+
         public Point2 RotateClockwise()
         {
             if (GridX == 1)
