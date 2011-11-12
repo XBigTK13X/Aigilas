@@ -5,10 +5,10 @@ using OGUR.Management;
 
 namespace OGUR.Text
 {
-    public enum TextType
+    public class TextType
     {
-        Action,
-        Inventory
+        public const int Action = 0;
+        public const int Inventory = 1;
     }
 
     class TextManager

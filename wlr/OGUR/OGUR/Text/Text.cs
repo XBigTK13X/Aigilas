@@ -12,7 +12,7 @@ namespace OGUR.Text
     {
         protected string m_contents;
         protected Vector2 m_position = new Vector2(0,0);
-        protected TextType m_textType = TextType.Inventory;
+        protected int m_textType = TextType.Inventory;
 
         public Text()
         { }
@@ -24,7 +24,7 @@ namespace OGUR.Text
             m_position.Y = y;
         }
 
-        public Text(string contents,int x, int y,TextType type)
+        public Text(string contents,int x, int y,int type)
         {
             Reset(contents, x, y);
             m_textType = type;
@@ -34,7 +34,7 @@ namespace OGUR.Text
             return 0;
         }
 
-        public TextType GetTextType()
+        public int GetTextType()
         {
             return m_textType;
         }
