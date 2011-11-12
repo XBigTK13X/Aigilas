@@ -103,30 +103,30 @@ namespace OGUR.Skills
             }
         }
 
-        public static SkillBehavior Create(Skill.Animation animation,int skillGraphic,ISkill parentSkill)
+        public static SkillBehavior Create(int animation,int skillGraphic,ISkill parentSkill)
         {
             switch (animation)
             {
-                case Skill.Animation.CLOUD:
+                case AnimationType.CLOUD:
                     return new CloudBehavior(skillGraphic, parentSkill);
-                case Skill.Animation.RANGED:
+                case AnimationType.RANGED:
                     return new RangedBehavior(skillGraphic, parentSkill);
-                case Skill.Animation.SELF:
+                case AnimationType.SELF:
                     return new SelfBehavior(skillGraphic, parentSkill);
-                case Skill.Animation.STATIONARY:
+                case AnimationType.STATIONARY:
                     return new StationaryBehavior(skillGraphic, parentSkill);
                 default:
                     throw new Exception("How dare you create a new Anim type for skills without defining a proper behavior for them!");
             }
         }
 
-        public static SkillAnimation Create(Skill.Animation animation)
+        public static SkillAnimation Create(int animation)
         {
             switch (animation)
             {
-                case Skill.Animation.RANGED:
+                case AnimationType.RANGED:
                     return new RangedAnimation();
-                case Skill.Animation.SELF:
+                case AnimationType.SELF:
                     return new SelfAnimation();
                 default:
                     return new NoAnimation();

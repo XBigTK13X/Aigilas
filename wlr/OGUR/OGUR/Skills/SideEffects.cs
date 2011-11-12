@@ -13,13 +13,13 @@ namespace OGUR.Skills
     {
         protected ISkill m_parent;
 
-        protected Skill.Animation m_animation;
+        protected int m_animation;
         protected List<SkillEffect> m_effectGraphics = new List<SkillEffect>();
         protected int m_effectSprite = SpriteType.SKILL_EFFECT;
         protected float m_effectStrength;
         protected bool m_isPersistent = false;
 
-        public SideEffects(int effectGraphic,Skill.Animation animation,ISkill parent)
+        public SideEffects(int effectGraphic,int animation,ISkill parent)
         {
             m_parent = parent;
             m_effectStrength = parent.GetStrength();
@@ -39,7 +39,7 @@ namespace OGUR.Skills
             return m_effectSprite;
         }
 
-        public Skill.Animation GetAnimationType()
+        public int GetAnimationType()
         {
             return m_animation;
         }

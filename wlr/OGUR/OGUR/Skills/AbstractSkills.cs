@@ -6,16 +6,13 @@ using OGUR.GameObjects;
 using OGUR.Sprites;
 namespace OGUR.Skills
 {
-    public class Skill
+    public class AnimationType
     {
-        public enum Animation
-        {
-            NONE,
-            RANGED,
-            CLOUD,
-            SELF,
-            STATIONARY
-        }
+        public const int NONE = 0;
+        public const int RANGED = 1;
+        public const int CLOUD = 2;
+        public const int SELF = 3;
+        public const int STATIONARY = 4; 
     }
     public abstract class ISkill
     {
@@ -26,7 +23,7 @@ namespace OGUR.Skills
         protected SkillComponents m_components;
         public bool StartOffCenter = false;
 
-        protected ISkill(string implementationId, Skill.Animation animation, float strength = SkillEffect.DefaultStrength,bool isPersistent=false,int effectGraphic = SpriteType.SKILL_EFFECT)
+        protected ISkill(string implementationId, int animation, float strength = SkillEffect.DefaultStrength,bool isPersistent=false,int effectGraphic = SpriteType.SKILL_EFFECT)
         {
             m_implementationId = implementationId;
             m_components = new SkillComponents(strength, isPersistent);
@@ -54,7 +51,7 @@ namespace OGUR.Skills
         }
         public virtual void Affect(ICreature target) { target.Combo(m_components.GetElements()); }
         public int GetSpriteType(){return m_behavior.GetSpriteType();}
-        public Skill.Animation GetAnimationType() { return m_behavior.GetAnimationType(); }
+        public int GetAnimationType() { return m_behavior.GetAnimationType(); }
         public float GetStrength(){return m_components.GetStrength();}
         public bool IsPersistent() { return m_components.IsPersistent(); }
         public void Cleanup(ICreature target){m_behavior.Cleanup(target);}
