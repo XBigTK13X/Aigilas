@@ -28,7 +28,7 @@ namespace OGUR.Skills
         public override void Affect(ICreature target)
         {
             base.Affect(target);
-            target.ApplyDamage(20);
+            target.ApplyDamage(20, m_source);
         }
     }
     public class AcidNozzleSkill : ISkill
@@ -73,7 +73,7 @@ namespace OGUR.Skills
         public override void Affect(ICreature target)
         {
             base.Affect(target);
-            target.ApplyDamage(5);
+            target.ApplyDamage(5,m_source);
         }
     }
     public class DropRateUpSkill : ISkill
@@ -105,7 +105,7 @@ namespace OGUR.Skills
         public override void Affect(ICreature target)
         {
             base.Affect(target);
-            target.ApplyDamage(20,target);
+            target.ApplyDamage(20,m_source);
         }
     }
     public class FlameHammerSkill : ISkill
@@ -121,7 +121,7 @@ namespace OGUR.Skills
         public override void Affect(ICreature target)
         {
             base.Affect(target);
-            target.ApplyDamage(80);
+            target.ApplyDamage(80,m_source);
         }
     }
     public class ForgetSkill : ISkill

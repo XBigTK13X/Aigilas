@@ -33,7 +33,7 @@ namespace OGUR.Skills
             m_behavior = SkillFactory.Create(animation,effectGraphic,this);
         }
 
-        protected void Add(params Elements[] elements){m_components.AddElements(elements);}
+        protected void Add(params int[] elements){m_components.AddElements(elements);}
         protected void AddCost(string stat, float cost){m_behavior.AddCost(stat, cost);}
         public virtual void Buff(ICreature target){m_components.Buff(target);}
         public void SetBuff(string stat, float amount) { m_components.SetBuff(stat, amount); }

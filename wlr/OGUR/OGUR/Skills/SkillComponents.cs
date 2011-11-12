@@ -9,7 +9,7 @@ namespace OGUR.Skills
 {
     public class SkillComponents
     {
-        protected List<Elements> m_elements;
+        protected List<int> m_elements;
         protected StatBuff m_buff;
         protected float m_effectStrength = 0;
         protected bool m_isPersistent = false;
@@ -18,12 +18,12 @@ namespace OGUR.Skills
         {
             m_effectStrength = strength;
             m_isPersistent = isPersistent;
-            m_elements = new List<Elements>() { Elements.NORMAL };
+            m_elements = new List<int>() { Elements.NORMAL };
         }
 
         
 
-        public void AddElements(params Elements[] elements)
+        public void AddElements(params int[] elements)
         {
             m_elements.AddRange(elements);
         }
@@ -48,7 +48,7 @@ namespace OGUR.Skills
             return m_isPersistent;
         }
 
-        public List<Elements> GetElements()
+        public List<int> GetElements()
         {
             return m_elements;
         }

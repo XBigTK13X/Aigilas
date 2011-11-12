@@ -53,7 +53,7 @@ namespace OGUR.Creatures
                     InitStat(stat, Get(stat) * .5f);
             }
         }
-        protected void Compose(params Elements[] elems)
+        protected void Compose(params int[] elems)
         {
             m_composition.AddRange(elems);
         }

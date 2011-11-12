@@ -17,14 +17,14 @@ namespace OGUR.Reactions
         };
 
         private ICreature m_parent;
-        private List<Elements> m_elements = new List<Elements>();
+        private List<int> m_elements = new List<int>();
         
         public ComboMeter(ICreature parent)
         {
             m_parent = parent;
         }
 
-        public void Add(Elements element)
+        public void Add(int element)
         {
             if (!m_elements.Contains(element))
             {

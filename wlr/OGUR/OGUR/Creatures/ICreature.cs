@@ -476,7 +476,7 @@ namespace OGUR.Creatures
             MoveIfPossible(targetPosition.PosX-GetLocation().PosX,targetPosition.PosY-GetLocation().PosY);
         }
 
-        public void Combo(List<Elements> attack)
+        public void Combo(List<int> attack)
         {
             foreach(var element in attack)
             {
