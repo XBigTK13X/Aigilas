@@ -18,7 +18,7 @@ namespace OGUR.GameObjects
         private Player m_currentTarget;
         private IEnumerable<GameplayObject> m_offerings;
 
-        public Altar(Point2 location, God.Name godName)
+        public Altar(Point2 location,int godName)
         {
             m_god = God.Get(godName);
             m_graphic.SetColor(m_god.GetColor());

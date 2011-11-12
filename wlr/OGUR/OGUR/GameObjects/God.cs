@@ -9,9 +9,17 @@ using OGUR.Classes;
 
 namespace OGUR.Gods
 {
-    public class God
+    public class GodId
     {
-        public enum Name
+        public const int LUST = 0;
+        public const int GREED = 1;
+        public const int SLOTH = 2;
+        public const int ENVY = 3;
+        public const int WRATH = 4;
+        public const int GLUTTONY = 5;
+        public const int PRIDE = 6;
+
+        public static readonly List<int> Values = new List<int>()
         {
             LUST,
             GREED,
@@ -20,9 +28,22 @@ namespace OGUR.Gods
             WRATH,
             GLUTTONY,
             PRIDE
-        }
+        };
 
-        public static God Get(Name name)
+        public static readonly List<string> Names = new List<string>()
+        {
+            "Lust",
+            "Greed",
+            "Sloth",
+            "Envy",
+            "Wrath",
+            "Gluttony",
+            "Pride"
+        };
+    }
+    public class God
+    {
+        public static God Get(int name)
         {
             return s_gods.Where(o => o.m_name == name).FirstOrDefault();
         }
@@ -30,29 +51,29 @@ namespace OGUR.Gods
 
         private static readonly List<God> s_gods = new List<God>()
                                               {
-                                                  new God(Color.Pink, Name.LUST, ItemClass.Leggings, ItemClass.Melee_Weapon),
-                                                  new God(Color.Gold, Name.GREED, ItemClass.Head_Gear, ItemClass.Gloves),
-                                                  new God(Color.Silver, Name.SLOTH, ItemClass.Shield, ItemClass.Head_Gear),
-                                                  new God(Color.LightGoldenrodYellow, Name.ENVY, ItemClass.Torso_Garb, ItemClass.Ranged_Weapon),
-                                                  new God(Color.Red, Name.WRATH, ItemClass.Melee_Weapon, ItemClass.Ranged_Ammo),
-                                                  new God(Color.LightGreen, Name.GLUTTONY, ItemClass.Gloves, ItemClass.Torso_Garb),
-                                                  new God(Color.LightBlue, Name.PRIDE, ItemClass.Ring, ItemClass.Feet)
+                                                  new God(Color.Pink, GodId.LUST, ItemClass.Leggings, ItemClass.Melee_Weapon),
+                                                  new God(Color.Gold, GodId.GREED, ItemClass.Head_Gear, ItemClass.Gloves),
+                                                  new God(Color.Silver, GodId.SLOTH, ItemClass.Shield, ItemClass.Head_Gear),
+                                                  new God(Color.LightGoldenrodYellow, GodId.ENVY, ItemClass.Torso_Garb, ItemClass.Ranged_Weapon),
+                                                  new God(Color.Red, GodId.WRATH, ItemClass.Melee_Weapon, ItemClass.Ranged_Ammo),
+                                                  new God(Color.LightGreen, GodId.GLUTTONY, ItemClass.Gloves, ItemClass.Torso_Garb),
+                                                  new God(Color.LightBlue, GodId.PRIDE, ItemClass.Ring, ItemClass.Feet)
                                               };
 
         private Color m_color;
-        private Name m_name;
+        private int m_name;
         private int m_goodSacrificeClass;
         private int m_badSacrificeClass;
 
         public string NameText;
 
-        protected God(Color color, Name name, int goodSacrifice, int badSacrifice)
+        protected God(Color color, int name, int goodSacrifice, int badSacrifice)
         {
             m_color = color;
             m_name = name;
             m_goodSacrificeClass = goodSacrifice;
             m_badSacrificeClass = badSacrifice;
-            NameText = m_name.ToString().ToUpperInvariant();
+            NameText = GodId.Names[m_name];
         }
 
         public Color GetColor()
@@ -64,13 +85,13 @@ namespace OGUR.Gods
         {
             switch (m_name)
             {
-                case Name.ENVY: return new EnvyAcolyte();
-                case Name.GLUTTONY: return new GluttonyAcolyte();
-                case Name.GREED: return new GreedAcolyte();
-                case Name.LUST: return new LustAcolyte();
-                case Name.PRIDE: return new PrideAcolyte();
-                case Name.SLOTH: return new SlothAcolyte();
-                case Name.WRATH: return new WrathAcolyte();
+                case GodId.ENVY: return new EnvyAcolyte();
+                case GodId.GLUTTONY: return new GluttonyAcolyte();
+                case GodId.GREED: return new GreedAcolyte();
+                case GodId.LUST: return new LustAcolyte();
+                case GodId.PRIDE: return new PrideAcolyte();
+                case GodId.SLOTH: return new SlothAcolyte();
+                case GodId.WRATH: return new WrathAcolyte();
             }
             return new NoClass();
         }

@@ -62,7 +62,7 @@ namespace OGUR.Dungeons
         {
             var startX = 8;
             const int startY = 10;
-            foreach(God.Name god in OGUR.Util.EnumUtil<God.Name>.GetValues())
+            foreach(var god in GodId.Values)
             {
                 dungeon[startX,startY] = new Altar(new Point2(startX,startY),god);
                 startX += 2;

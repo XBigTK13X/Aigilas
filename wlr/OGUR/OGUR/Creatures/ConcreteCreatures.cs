@@ -22,7 +22,7 @@ namespace OGUR.Creatures
             m_strategy = new ControlledByPlayer(this);
             m_baseStats = new Stats(1f, 100f, 1f, 10f, .1f, 10f, 35f, 50f, 6.0f, 6);
             m_maxStats = new Stats(m_baseStats);
-            AssignGod(God.Get(God.Name.SLOTH));
+            AssignGod(God.Get(GodId.SLOTH));
         }
     }
     class Peon : AbstractCreature
