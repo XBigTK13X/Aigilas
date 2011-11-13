@@ -77,10 +77,10 @@ namespace OGUR.Management
 
         private static readonly Dictionary<int, Buttons> m_gamePadMapping = new Dictionary<int, Buttons>()
                                                                                      {
-                                                                                         {Commands.MoveUp,Buttons.DPadUp},
-                                                                                         {Commands.MoveDown,Buttons.DPadDown},
-                                                                                         {Commands.MoveRight,Buttons.DPadRight},
-                                                                                         {Commands.MoveLeft,Buttons.DPadLeft},
+                                                                                         {Commands.MoveUp,Buttons.LeftThumbstickUp},
+                                                                                         {Commands.MoveDown,Buttons.LeftThumbstickDown},
+                                                                                         {Commands.MoveRight,Buttons.LeftThumbstickRight},
+                                                                                         {Commands.MoveLeft,Buttons.LeftThumbstickLeft},
                                                                                          {Commands.Confirm,Buttons.A},
                                                                                          {Commands.Inventory,Buttons.Y},
                                                                                          {Commands.Cancel,Buttons.X},

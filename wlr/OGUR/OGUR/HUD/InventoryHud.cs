@@ -47,7 +47,7 @@ namespace OGUR.HUD
 
         private void HandleInput()
         {
-            if (InputManager.IsPressed(Commands.MoveLeft, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.CycleLeft, m_parent.GetPlayerIndex()))
             {
                 m_currentClass--;
                 if (m_currentClass <= ItemClass.NULL)
@@ -59,7 +59,7 @@ namespace OGUR.HUD
                 forceRefresh = true;
             }
 
-            if (InputManager.IsPressed(Commands.MoveRight, m_parent.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.CycleRight, m_parent.GetPlayerIndex()))
             {
                 m_currentClass++;
                 if (m_currentClass >= ItemClass.LAST)

@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Performance2.psess = Performance2.psess
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbox 360 Copy (2) of OGUR", "OGUR\OGUR\Xbox 360 Copy (2) of OGUR.csproj", "{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbox 360 Copy of OGUR", "OGUR\OGUR\Xbox 360 Copy of OGUR.csproj", "{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -57,24 +57,24 @@ Global
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Release|Windows Phone.ActiveCfg = Release|x86
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Release|x86.ActiveCfg = Release|x86
 		{E73ECF0C-A956-43AE-AE7C-3B4D978B7BAB}.Release|Xbox 360.ActiveCfg = Release|x86
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Any CPU.ActiveCfg = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Mixed Platforms.ActiveCfg = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Mixed Platforms.Build.0 = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Mixed Platforms.Deploy.0 = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Windows Phone.ActiveCfg = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|x86.ActiveCfg = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Xbox 360.Build.0 = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Debug|Xbox 360.Deploy.0 = Debug|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Any CPU.ActiveCfg = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Mixed Platforms.ActiveCfg = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Mixed Platforms.Build.0 = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Mixed Platforms.Deploy.0 = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Windows Phone.ActiveCfg = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|x86.ActiveCfg = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Xbox 360.Build.0 = Release|Xbox 360
-		{5B02F3A5-8F40-4CF3-B19E-84DC20AAD185}.Release|Xbox 360.Deploy.0 = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Any CPU.ActiveCfg = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Mixed Platforms.ActiveCfg = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Mixed Platforms.Build.0 = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Mixed Platforms.Deploy.0 = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Windows Phone.ActiveCfg = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|x86.ActiveCfg = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Xbox 360.Build.0 = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Debug|Xbox 360.Deploy.0 = Debug|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Any CPU.ActiveCfg = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Mixed Platforms.ActiveCfg = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Mixed Platforms.Build.0 = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Mixed Platforms.Deploy.0 = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Windows Phone.ActiveCfg = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|x86.ActiveCfg = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Xbox 360.Build.0 = Release|Xbox 360
+		{6F4B7BD8-0448-487F-BA69-7ED7D759AC3E}.Release|Xbox 360.Deploy.0 = Release|Xbox 360
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
