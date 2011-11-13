@@ -337,10 +337,15 @@ namespace OGUR.Creatures
                         {
                             if (creature != this)
                             {
-                                creature.ApplyDamage(CalculateDamage(), this);
-                                if (!creature.IsActive())
+                                if ((creature.GetCreatureType() != CreatureType.PLAYER && m_creatureType == CreatureType.PLAYER)
+                                    ||
+                                    (creature.GetCreatureType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER))
                                 {
-                                    AddExperience(creature.CalculateExperience());
+                                    creature.ApplyDamage(CalculateDamage(), this);
+                                    if (!creature.IsActive())
+                                    {
+                                        AddExperience(creature.CalculateExperience());
+                                    }
                                 }
                             }
                         }

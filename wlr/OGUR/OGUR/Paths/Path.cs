@@ -33,11 +33,12 @@ namespace OGUR.Paths
         {
             if (source != null)
             {
-                m_stepLookup = source.m_stepLookup;
-                m_steps = source.m_steps;
+                m_stepLookup = StepLookup.Copy(source.m_stepLookup);
+                m_steps = Walk.Copy(source.m_steps);
                 m_totalWeight = source.m_totalWeight;
-                moveIndex = 0;
+                Finish.Copy(source.Finish);
             }
+            moveIndex = -1;
             return this;
         }
 
