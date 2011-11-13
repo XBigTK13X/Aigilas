@@ -2,21 +2,23 @@
 using OGUR.Collision;
 using OGUR.Creatures;
 using OGUR.Dungeons;
-using OGUR.Path;
+using OGUR.Paths;
 
 namespace OGUR.Strategies
 {
     public class AttackPlayers : IStrategy
     {
-        public AttackPlayers(ICreature parent) : base(parent)
+        public AttackPlayers(ICreature parent)
+            : base(parent)
         {
             m_targets.AddTargetTypes(CreatureType.PLAYER);
         }
 
         private ICreature opponent;
-        private readonly Point2 targetPosition = new Point2(0,0);
+        private readonly Path targetPath = new Path();
+        private readonly Point2 nextMove = new Point2(0, 0);
         private const int throttleMin = 5;
-        private const int throttleMax = 10; 
+        private const int throttleMax = 10;
         private int throttle = 0;
         private static readonly Random rand = new Random();
 
@@ -29,13 +31,20 @@ namespace OGUR.Strategies
                 //Every player is dead
                 if (null != opponent)
                 {
-                    targetPosition.Copy(PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation()));
+                    targetPath.Copy(PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation()));
                 }
                 throttle = rand.Next(throttleMin, throttleMax);
             }
-            if (null != targetPosition)
+            if (null != targetPath)
             {
-                target.MoveTo(targetPosition);
+                if (targetPath.HasMoves())
+                {
+                    if (target.Get(StatType.MOVE_COOL_DOWN) == 0)
+                    {
+                        nextMove.Copy(targetPath.GetNextMove());
+                        target.MoveTo(nextMove);
+                    }
+                }
             }
         }
     }

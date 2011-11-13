@@ -6,12 +6,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using OGUR.Collision;
 
-namespace OGUR.Path
+namespace OGUR.Paths
 {
 
     public class Path
     {
-        public static Point2 Finish = new Point2(0, 0);
+        public Point2 Finish = new Point2(0, 0);
         private List<Point2> m_steps = new List<Point2>();
         private Dictionary<Point2,Point2> m_stepLookup = new Dictionary<Point2,Point2>();
         private float m_totalWeight = 0;
@@ -23,6 +23,7 @@ namespace OGUR.Path
             m_steps.Clear();
             m_stepLookup.Clear();
             m_totalWeight = 0;
+            moveIndex = -1;
             Finish.Copy(finish);
             Add(start);
             return this;
@@ -30,9 +31,13 @@ namespace OGUR.Path
 
         public Path Copy(Path source)
         {
-            m_stepLookup = source.m_stepLookup;
-            m_steps = source.m_steps;
-            m_totalWeight = source.m_totalWeight;
+            if (source != null)
+            {
+                m_stepLookup = source.m_stepLookup;
+                m_steps = source.m_steps;
+                m_totalWeight = source.m_totalWeight;
+                moveIndex = 0;
+            }
             return this;
         }
 
@@ -52,9 +57,23 @@ namespace OGUR.Path
             return m_totalWeight;
         }
 
+        private int moveIndex = -1;
+        public bool HasMoves()
+        {
+            return moveIndex < m_steps.Count();
+        }
         public Point2 GetNextMove()
         {
-            return m_steps.Count == 1 ? m_steps.FirstOrDefault() : m_steps[1];
+            moveIndex++;
+            if (moveIndex >= m_steps.Count())
+            {
+                return null;
+            }
+            if (m_steps.Count() == 0)
+            {
+                return null;
+            }
+            return m_steps.Count == 1 ? m_steps[0] : m_steps[moveIndex];
         }
 
         public bool IsDone()

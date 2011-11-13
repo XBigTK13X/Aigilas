@@ -6,7 +6,7 @@ using OGUR.Collision;
 using OGUR.Dungeons;
 using OGUR.GameObjects;
 
-namespace OGUR.Path
+namespace OGUR.Paths
 {    
     public static class PathFinder
     {
@@ -17,7 +17,7 @@ namespace OGUR.Path
 
         private static readonly Random rand = new Random();
 
-        public static Point2 FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly = true)
+        public static Path FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly = true)
         {
             queue.Clear();
             start.Reset(start.GridX,start.GridY);
@@ -28,7 +28,7 @@ namespace OGUR.Path
                 path = queue.Dequeue().Value;
                 if (path.IsDone())
                 {
-                    return path.GetNextMove();
+                    return path;
                 }
                 neighbors.Clear();
                 neighbors = path.GetNeighbors();

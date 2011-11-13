@@ -349,6 +349,10 @@ namespace OGUR.Creatures
                 }
             }
         }
+        public void MoveTo(Point2 targetPosition)
+        {
+            MoveIfPossible(targetPosition.PosX - GetLocation().PosX, targetPosition.PosY - GetLocation().PosY);
+        }
 
         public Point2 GetSkillVector()
         {
@@ -471,11 +475,6 @@ namespace OGUR.Creatures
                 SetClass(god.GetClass());
             }
             m_god = god;
-        }
-
-        public void MoveTo(Point2 targetPosition)
-        {
-            MoveIfPossible(targetPosition.PosX-GetLocation().PosX,targetPosition.PosY-GetLocation().PosY);
         }
 
         public void Combo(List<int> attack)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OGUR.Collision;
 
-namespace OGUR.Path
+namespace OGUR.Paths
 {
     class PathFactory
     {

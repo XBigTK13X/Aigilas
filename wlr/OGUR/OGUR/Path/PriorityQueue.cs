@@ -10,7 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace OGUR.Path
+namespace OGUR.Paths
 {
     /// <summary>
     /// Priority queue based on binary heap,

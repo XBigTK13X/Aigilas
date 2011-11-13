@@ -2,7 +2,7 @@
 using OGUR.Collision;
 using OGUR.Creatures;
 using OGUR.Dungeons;
-using OGUR.Path;
+using OGUR.Paths;
 
 namespace OGUR.Strategies
 {

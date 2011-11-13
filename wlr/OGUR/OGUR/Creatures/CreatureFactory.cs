@@ -71,8 +71,6 @@ namespace OGUR.Creatures
 
         public static void IncreasePlayerCount()
         {
-
-            Console.WriteLine(s_playerCount);
             s_playerCount ++;
         }
 
