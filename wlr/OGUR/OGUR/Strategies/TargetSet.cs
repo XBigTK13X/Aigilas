@@ -46,18 +46,19 @@ namespace OGUR.Strategies
 
         private List<ICreature> m_calculatedTargets;
         private float dist;
+        ICreature closest;
         public ICreature FindClosest()
         {
-            ICreature result = null;
+            closest = null;
             var closestDistance = float.MaxValue;
             if (m_targets != null)
             {
                 foreach (var target in m_targets)
                 {
-                    var dist = Point2.DistanceSquared(target.GetLocation(), m_parent.GetLocation());
+                    dist = Point2.DistanceSquared(target.GetLocation(), m_parent.GetLocation());
                     if (dist < closestDistance)
                     {
-                        result = target;
+                        closest = target;
                         closestDistance = dist;
                     }
                 }
@@ -69,26 +70,36 @@ namespace OGUR.Strategies
                         dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
                         if (dist < closestDistance)
                         {
-                            result = creature;
+                            closest = creature;
                             closestDistance = dist;
                         }
                     }
                 }
             }
-            return result;
+            return closest;
         }
 
         public GameplayObject GetCollidedTarget(GameplayObject source)
         {
-            var result = m_targets.FirstOrDefault(target => Collision.HitTest.IsTouching(target, source));
-            if(result==null)
+            foreach(var target in m_targets)
             {
-                foreach (var creature in from creatureType in m_targetTypes from creature in GameplayObjectManager.GetObjects(creatureType) where Collision.HitTest.IsTouching(creature, source) select creature)
+                if(target.Contains(source.GetLocation()))
                 {
-                    return creature;
+                    return target;
                 }
             }
-            return result;
+
+            foreach (var creatureType in m_targetTypes)
+            {
+                foreach (var target in GameplayObjectManager.GetCreaturesAt(m_parent.GetLocation()))
+                {
+                    if (target.GetCreatureType()==creatureType)
+                    {
+                        return target;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

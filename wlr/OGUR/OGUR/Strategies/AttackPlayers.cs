@@ -17,8 +17,8 @@ namespace OGUR.Strategies
         private ICreature opponent;
         private readonly Path targetPath = new Path();
         private readonly Point2 nextMove = new Point2(0, 0);
-        private const int throttleMin = 5;
-        private const int throttleMax = 10;
+        private const int throttleMin = 10;
+        private const int throttleMax = 20;
         private int throttle = 0;
         private static readonly Random rand = new Random();
 
