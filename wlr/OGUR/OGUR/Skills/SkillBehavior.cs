@@ -41,12 +41,13 @@ namespace OGUR.Skills
             }
             return costPaid;
         }
+        private GameplayObject hitTarget;
         public virtual bool AffectTarget(ICreature source,SkillEffect graphic)
         {
-            var collidedTarget = source.GetTargets().GetCollidedTarget(graphic);
-            if (null != collidedTarget)
+            hitTarget = source.GetTargets().GetCollidedTarget(graphic);
+            if (null != hitTarget)
             {
-                m_parent.Affect(collidedTarget);
+                m_parent.Affect(hitTarget);
                 if (!m_parent.IsPersistent())
                 {
                     return false;

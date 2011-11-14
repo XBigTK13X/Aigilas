@@ -34,6 +34,7 @@ namespace OGUR.Text
             if (!m_contents.Contains(textToAdd))
             {
                 m_contents.Add(textToAdd);
+                TextManager.Add(textToAdd);
             }
         }
 

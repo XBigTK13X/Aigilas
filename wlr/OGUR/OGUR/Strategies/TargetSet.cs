@@ -91,9 +91,11 @@ namespace OGUR.Strategies
 
             foreach (var creatureType in m_targetTypes)
             {
-                foreach (var target in GameplayObjectManager.GetCreaturesAt(m_parent.GetLocation()))
+                foreach (var target in GameplayObjectManager.GetCreaturesAt(source.GetLocation()))
                 {
-                    if (target.GetCreatureType()==creatureType)
+                    if (target.GetCreatureType()==creatureType || 
+                        (creatureType == CreatureType.NONPLAYER && target.GetCreatureType()!=CreatureType.PLAYER) || 
+                        (creatureType == CreatureType.PLAYER && target.GetCreatureType()==CreatureType.PLAYER))
                     {
                         return target;
                     }
