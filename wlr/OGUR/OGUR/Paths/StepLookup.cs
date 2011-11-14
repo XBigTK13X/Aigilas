@@ -17,7 +17,7 @@ namespace OGUR.Paths
             {
                 for (int ii = 0; ii < s_lookups.Count(); ii++)
                 {
-                    s_lookups[ii] = new Dictionary<Point2,Point2>();
+                    s_lookups[ii] = new Dictionary<Point2,Point2>(200);
                 }
             }
             m_index = (m_index + 1) % s_lookups.Count();

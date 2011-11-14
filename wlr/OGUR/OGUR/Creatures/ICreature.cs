@@ -69,6 +69,10 @@ namespace OGUR.Creatures
                 m_class = cClass ?? new NoClass();
                 m_skills = new SkillPool(this);
                 m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
+                foreach (var elem in m_composition)
+                {
+                    m_skills.Add(SkillFactory.GetElementalSkill(elem));
+                }
             }
         }
 

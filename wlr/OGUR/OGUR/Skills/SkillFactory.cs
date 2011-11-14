@@ -55,6 +55,46 @@ namespace OGUR.Skills
         public const string WALL_PUNCH = "Wall Punch";
         public const string MIMIC = "Mimic";
         public const string VALEDICTORIAN = "Valedictorian";
+
+        public static readonly List<string> Values = new List<string>()
+        {
+            SkillId.ABSORB,
+            SkillId.ACID_DRIP,
+            SkillId.ACID_NOZZLE,
+            SkillId.CAVALRY,
+            SkillId.COLD_SHOULDER,
+            SkillId.COMBUST,
+            SkillId.CONFUSION,
+            SkillId.DART,
+            SkillId.DROP_RATE_UP,
+            SkillId.ELECTRIFY,
+            SkillId.ENVENOM,
+            SkillId.FIREBALL,
+            SkillId.FLAME_HAMMER,
+            SkillId.FLOOR_SPIKES,
+            SkillId.FORGET_SKILL,
+            SkillId.GUSH,
+            SkillId.HORDER,
+            SkillId.HORRIFY,
+            SkillId.MAGIC_MAP,
+            SkillId.MANA_UP,
+            SkillId.MIMIC,
+            SkillId.MUTINY,
+            SkillId.NO_SKILL,
+            SkillId.REGEN_ALL,
+            SkillId.REMOTE_MINE,
+            SkillId.SOUL_CRUSH,
+            SkillId.SOUL_REINFORCEMENT,
+            SkillId.SPEED_UP,
+            SkillId.STEAL_ITEM,
+            SkillId.STRENGTH_UP,
+            SkillId.THROW_ITEM,
+            SkillId.VALEDICTORIAN,
+            SkillId.VAPOR_IMPLANT,
+            SkillId.VENOM_FIST,
+            SkillId.WALL_PUNCH,
+            SkillId.WEAK_KNEEES
+        };
     }
     class SkillFactory
     {
@@ -101,6 +141,35 @@ namespace OGUR.Skills
                 default:
                     throw new Exception("You forgot to define the new skill in the Factory...YOU FOOL!"); 
             }
+        }
+
+        private static Dictionary<int, List<string>> s_elementMap = new Dictionary<int, List<string>>();
+
+        private static void GenerateElementMap()
+        {
+            if (s_elementMap.Count() == 0)
+            {
+                ISkill skill;
+                foreach (var skillId in SkillId.Values)
+                {
+                    skill = Create(skillId);
+                    foreach (var elem in skill.GetElements())
+                    {
+                        if (!s_elementMap.ContainsKey(elem))
+                        {
+                            s_elementMap.Add(elem, new List<string>());
+                        }
+                        s_elementMap[elem].Add(skillId);
+                    }
+                }
+            }
+        }
+
+        private static Random rand = new Random();
+        public static string GetElementalSkill(int elementId)
+        {
+            GenerateElementMap();
+            return s_elementMap[elementId][rand.Next(0, s_elementMap[elementId].Count())];
         }
 
         public static SkillBehavior Create(int animation,int skillGraphic,ISkill parentSkill)

@@ -24,7 +24,7 @@ namespace OGUR.Skills
     }
     public class AcidDripSkill : ISkill
     {
-        public AcidDripSkill() : base(SkillId.ACID_DRIP, AnimationType.STATIONARY) { StartOffCenter = true; AddCost(StatType.MANA, 10); }
+        public AcidDripSkill() : base(SkillId.ACID_DRIP, AnimationType.STATIONARY) { StartOffCenter = true; AddCost(StatType.MANA, 10); Add(Elements.WATER); }
         public override void Affect(ICreature target)
         {
             base.Affect(target);
@@ -69,7 +69,7 @@ namespace OGUR.Skills
     }
     public class DartSkill : ISkill
     {
-        public DartSkill() : base(SkillId.DART, AnimationType.RANGED) { AddCost(StatType.MANA, 2); Add(Elements.FIRE, Elements.EARTH); }
+        public DartSkill() : base(SkillId.DART, AnimationType.RANGED) { AddCost(StatType.MANA, 2); Add(Elements.DARK); }
         public override void Affect(ICreature target)
         {
             base.Affect(target);
@@ -117,7 +117,7 @@ namespace OGUR.Skills
     }
     public class FloorSpikesSkill : ISkill
     {
-        public FloorSpikesSkill(): base(SkillId.FLOOR_SPIKES, AnimationType.STATIONARY,float.MaxValue,true){AddCost(StatType.MANA, 20);}
+        public FloorSpikesSkill() : base(SkillId.FLOOR_SPIKES, AnimationType.STATIONARY, float.MaxValue, true) { AddCost(StatType.MANA, 20); Add(Elements.EARTH); }
         public override void Affect(ICreature target)
         {
             base.Affect(target);
@@ -189,7 +189,7 @@ namespace OGUR.Skills
     }
     public class RemoteMineSkill : ISkill
     {
-        public RemoteMineSkill(): base(SkillId.REMOTE_MINE, AnimationType.STATIONARY){AddCost(StatType.MANA, 10);}
+        public RemoteMineSkill() : base(SkillId.REMOTE_MINE, AnimationType.STATIONARY) { AddCost(StatType.MANA, 10); Add(Elements.FIRE); }
         public override void Affect(ICreature target)
         {
             base.Affect(target);
@@ -247,7 +247,7 @@ namespace OGUR.Skills
     }
     public class VaporImplantSkill : ISkill
     {
-        public VaporImplantSkill(): base(SkillId.VAPOR_IMPLANT, AnimationType.RANGED){AddCost(StatType.MANA, 10);}
+        public VaporImplantSkill() : base(SkillId.VAPOR_IMPLANT, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.PHYSICAL,Elements.AIR); }
         public override void Affect(ICreature target)
         {
             base.Affect(target);
