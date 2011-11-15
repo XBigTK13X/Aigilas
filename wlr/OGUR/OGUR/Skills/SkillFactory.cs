@@ -30,7 +30,7 @@ namespace OGUR.Skills
         //Greed
         public const string SOUL_REINFORCEMENT = "Soul Reinforcement";
         public const string HORDER = "Horder";
-        public const string DROP_RATE_UP = "Drop Rate (+)";
+        public const string SPAWN_ITEM = "Drop Rate (+)";
         public const string THROW_ITEM = "Throw Item";
         public const string STEAL_ITEM = "Steal Item";
         //Wrath
@@ -66,7 +66,6 @@ namespace OGUR.Skills
             SkillId.COMBUST,
             SkillId.CONFUSION,
             SkillId.DART,
-            SkillId.DROP_RATE_UP,
             SkillId.ELECTRIFY,
             SkillId.ENVENOM,
             SkillId.FIREBALL,
@@ -85,6 +84,7 @@ namespace OGUR.Skills
             SkillId.REMOTE_MINE,
             SkillId.SOUL_CRUSH,
             SkillId.SOUL_REINFORCEMENT,
+            SkillId.SPAWN_ITEM,
             SkillId.SPEED_UP,
             SkillId.STEAL_ITEM,
             SkillId.STRENGTH_UP,
@@ -110,7 +110,6 @@ namespace OGUR.Skills
                 case SkillId.COMBUST: return new CombustSkill();
                 case SkillId.CONFUSION:return new ConfusionSkill();
                 case SkillId.DART:return new DartSkill();
-                case SkillId.DROP_RATE_UP: return new DropRateUpSkill();
                 case SkillId.ELECTRIFY: return new ElectrifySkill();
                 case SkillId.ENVENOM: return new EnvenomSkill();
                 case SkillId.FIREBALL:return new FireballSkill();
@@ -129,6 +128,7 @@ namespace OGUR.Skills
                 case SkillId.REMOTE_MINE:return new RemoteMineSkill();
                 case SkillId.SOUL_CRUSH: return new SoulCrushSkill();
                 case SkillId.SOUL_REINFORCEMENT: return new SoulReinforcementSkill();
+                case SkillId.SPAWN_ITEM: return new SpawnItemSkill();
                 case SkillId.SPEED_UP: return new SpeedUpSkill();
                 case SkillId.STEAL_ITEM: return new StealItemSkill();
                 case SkillId.STRENGTH_UP: return new StrengthUpSkill();
