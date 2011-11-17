@@ -29,8 +29,7 @@ namespace OGUR.Creatures
     {
         public Peon(): base(CreatureType.PEON)
         {
-            Strengths(StatType.MOVE_COOL_DOWN);
-            Weaknesses(StatType.STRENGTH, StatType.HEALTH);
+            Weaknesses(StatType.STRENGTH, StatType.HEALTH,StatType.MOVE_COOL_DOWN);
             Compose(Elements.EARTH);
         }
     }

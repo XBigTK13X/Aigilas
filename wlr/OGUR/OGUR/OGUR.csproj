@@ -187,6 +187,10 @@
     <Compile Include="HUD\SkillHud.cs" />
     <Compile Include="Skills\SkillPool.cs" />
     <Compile Include="States\GameOverState.cs" />
+    <Compile Include="Statuses\ConcreteStatuses.cs" />
+    <Compile Include="Statuses\IStatus.cs" />
+    <Compile Include="Statuses\StatusFactory.cs" />
+    <Compile Include="Statuses\StatusPool.cs" />
     <Compile Include="Strategies\MinionRotate.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
     <Compile Include="Text\ActionText.cs" />

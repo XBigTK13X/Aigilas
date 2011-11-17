@@ -6,6 +6,7 @@ using OGUR.Creatures;
 using OGUR.GameObjects;
 using OGUR.Skills;
 using OGUR.Sprites;
+using OGUR.Statuses;
 
 namespace OGUR.Skills
 {
@@ -73,6 +74,7 @@ namespace OGUR.Skills
         public override void Affect(ICreature target)
         {
             base.Affect(target);
+            StatusFactory.Apply(target, Status.Poison);
             target.ApplyDamage(5,m_source);
         }
     }    

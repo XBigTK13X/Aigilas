@@ -15,6 +15,7 @@ using OGUR.Reactions;
 using System.Collections.Generic;
 using OGUR.HUD;
 using OGUR.Util;
+using OGUR.Statuses;
 
 namespace OGUR.Creatures
 {
@@ -32,6 +33,7 @@ namespace OGUR.Creatures
         protected SkillPool m_skills;
         protected Point2 m_skillVector = new Point2(0,0);
         protected ComboMeter m_combo;
+        protected StatusPool m_statuses = new StatusPool();
 
         protected Inventory m_inventory;
         protected Equipment m_equipment;
@@ -134,24 +136,28 @@ namespace OGUR.Creatures
 
         public override void Update()
         {
-            if (m_isPlaying)
+            m_statuses.Update();
+            if (m_statuses.CanMove())
             {
-                if(Get(StatType.MOVE_COOL_DOWN)<GetMax(StatType.MOVE_COOL_DOWN))
+                if (m_isPlaying)
                 {
-                    Adjust(StatType.MOVE_COOL_DOWN, 1);    
+                    if (Get(StatType.MOVE_COOL_DOWN) < GetMax(StatType.MOVE_COOL_DOWN))
+                    {
+                        Adjust(StatType.MOVE_COOL_DOWN, 1);
+                    }
+                    Regenerate();
                 }
-                if (m_hudManager != null)
+                if (m_strategy != null)
                 {
-                    m_hudManager.Update();
+                    m_strategy.Act(this);
+                    m_combo.Update();
                 }
-                m_damageText.Update();
-                Regenerate();
             }
-            if (m_strategy != null)
+            if (m_hudManager != null)
             {
-                m_strategy.Act(this);
-                m_combo.Update();
+                m_hudManager.Update();
             }
+            m_damageText.Update();
         }
         private void Regenerate()
         {
@@ -324,36 +330,42 @@ namespace OGUR.Creatures
         private List<ICreature> creatures;
         public void MoveIfPossible(float xVel, float yVel)
         {
-            if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN))
+            if (m_statuses.CanMove())
             {
-                target.Reset(xVel + GetLocation().PosX , yVel + GetLocation().PosY);
-                if (!CoordVerifier.IsBlocked(target))
+                if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN))
                 {
-                    Move(xVel, yVel);
-                    Set(StatType.MOVE_COOL_DOWN, 0);
-                }
-                else
-                {
-                    creatures = GameplayObjectManager.GetCreaturesAt(target);
-                    if(creatures.Count()>0)
+                    target.Reset(xVel + GetLocation().PosX, yVel + GetLocation().PosY);
+                    if (!CoordVerifier.IsBlocked(target))
                     {
-                        foreach (var creature in creatures)
+                        Move(xVel, yVel);
+                        Set(StatType.MOVE_COOL_DOWN, 0);
+                    }
+                    else
+                    {
+                        if(m_statuses.CanAttack())
                         {
-                            if (creature != this)
+                            creatures = GameplayObjectManager.GetCreaturesAt(target);
+                            if (creatures.Count() > 0)
                             {
-                                if ((creature.GetCreatureType() != CreatureType.PLAYER && m_creatureType == CreatureType.PLAYER)
-                                    ||
-                                    (creature.GetCreatureType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER))
+                                foreach (var creature in creatures)
                                 {
-                                    creature.ApplyDamage(CalculateDamage(), this);
-                                    if (!creature.IsActive())
+                                    if (creature != this)
                                     {
-                                        AddExperience(creature.CalculateExperience());
+                                        if ((creature.GetCreatureType() != CreatureType.PLAYER && m_creatureType == CreatureType.PLAYER)
+                                            ||
+                                            (creature.GetCreatureType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER))
+                                        {
+                                            creature.ApplyDamage(CalculateDamage(), this);
+                                            if (!creature.IsActive())
+                                            {
+                                                AddExperience(creature.CalculateExperience());
+                                            }
+                                        }
                                     }
                                 }
+                                Set(StatType.MOVE_COOL_DOWN, 0);
                             }
                         }
-                        Set(StatType.MOVE_COOL_DOWN, 0);    
                     }
                 }
             }
@@ -492,6 +504,11 @@ namespace OGUR.Creatures
             {
                 m_combo.Add(element);
             }
+        }
+
+        public void AddStatus(IStatus status)
+        {
+            m_statuses.Add(status);
         }
     }
 }
