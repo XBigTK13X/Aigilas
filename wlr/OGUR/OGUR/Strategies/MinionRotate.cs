@@ -15,12 +15,12 @@ namespace OGUR.Strategies
 
         public override void Act(ICreature target)
         {
-            if (target.Get(StatType.MOVE_COOL_DOWN) <= 1)
+            if (target.Get(StatType.MOVE_COOL_DOWN) >= target.GetMax(StatType.MOVE_COOL_DOWN))
             {
                 target.SetSkillVector(target.GetSkillVector().RotateClockwise());
                 target.UseActiveSkill();
                 target.ApplyDamage(5, null, false);
-                target.Set(StatType.MOVE_COOL_DOWN, target.GetMax(StatType.MOVE_COOL_DOWN));
+                target.Set(StatType.MOVE_COOL_DOWN, 0);
             }
         }
     }

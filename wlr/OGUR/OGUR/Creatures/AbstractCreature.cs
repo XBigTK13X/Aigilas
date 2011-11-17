@@ -37,20 +37,14 @@ namespace OGUR.Creatures
         {
             foreach (string stat in stats)
             {
-                if (stat == StatType.MOVE_COOL_DOWN)
-                    InitStat(stat, Get(stat) - 2);
-                else
-                    InitStat(stat, Get(stat) * 2);
+                InitStat(stat, Get(stat) * 2);
             }
         }
         protected void Weaknesses(params string[] stats)
         {
             foreach (string stat in stats)
             {
-                if (stat == StatType.MOVE_COOL_DOWN)
-                    InitStat(stat, Get(stat) + 2);
-                else
-                    InitStat(stat, Get(stat) * .5f);
+                InitStat(stat, Get(stat) * .5f);
             }
         }
         protected void Compose(params int[] elems)

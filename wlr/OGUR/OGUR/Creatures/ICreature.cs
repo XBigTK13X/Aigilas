@@ -136,9 +136,9 @@ namespace OGUR.Creatures
         {
             if (m_isPlaying)
             {
-                if(Get(StatType.MOVE_COOL_DOWN)>0f)
+                if(Get(StatType.MOVE_COOL_DOWN)<GetMax(StatType.MOVE_COOL_DOWN))
                 {
-                    Adjust(StatType.MOVE_COOL_DOWN, -1);    
+                    Adjust(StatType.MOVE_COOL_DOWN, 1);    
                 }
                 if (m_hudManager != null)
                 {
@@ -324,13 +324,13 @@ namespace OGUR.Creatures
         private List<ICreature> creatures;
         public void MoveIfPossible(float xVel, float yVel)
         {
-            if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) <= 0)
+            if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN))
             {
                 target.Reset(xVel + GetLocation().PosX , yVel + GetLocation().PosY);
                 if (!CoordVerifier.IsBlocked(target))
                 {
                     Move(xVel, yVel);
-                    Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));
+                    Set(StatType.MOVE_COOL_DOWN, 0);
                 }
                 else
                 {
@@ -353,7 +353,7 @@ namespace OGUR.Creatures
                                 }
                             }
                         }
-                        Set(StatType.MOVE_COOL_DOWN, GetMax(StatType.MOVE_COOL_DOWN));    
+                        Set(StatType.MOVE_COOL_DOWN, 0);    
                     }
                 }
             }

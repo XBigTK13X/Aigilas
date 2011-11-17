@@ -39,7 +39,7 @@ namespace OGUR.Strategies
             {
                 if (targetPath.HasMoves())
                 {
-                    if (target.Get(StatType.MOVE_COOL_DOWN) == 0)
+                    if (target.Get(StatType.MOVE_COOL_DOWN) >= target.GetMax(StatType.MOVE_COOL_DOWN))
                     {
                         nextMove.Copy(targetPath.GetNextMove());
                         target.MoveTo(nextMove);

@@ -152,14 +152,17 @@ namespace OGUR.Skills
                 ISkill skill;
                 foreach (var skillId in SkillId.Values)
                 {
-                    skill = Create(skillId);
-                    foreach (var elem in skill.GetElements())
+                    if (skillId != SkillId.NO_SKILL)
                     {
-                        if (!s_elementMap.ContainsKey(elem))
+                        skill = Create(skillId);
+                        foreach (var elem in skill.GetElements())
                         {
-                            s_elementMap.Add(elem, new List<string>());
+                            if (!s_elementMap.ContainsKey(elem))
+                            {
+                                s_elementMap.Add(elem, new List<string>());
+                            }
+                            s_elementMap[elem].Add(skillId);
                         }
-                        s_elementMap[elem].Add(skillId);
                     }
                 }
             }
