@@ -34,14 +34,14 @@ namespace OGUR.GameObjects
         public static readonly Color[] Colors =
         {
             Color.Gray,
-            Color.Black,
-            Color.White,
             Color.Red,
-            Color.Green,
             Color.Blue,
-            Color.Purple,
+            Color.Green,
             Color.Yellow,
-            Color.Orange
+            Color.White,
+            Color.Black,
+            Color.Orange,
+            Color.Purple
         };
 
     }

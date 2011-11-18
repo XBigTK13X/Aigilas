@@ -509,8 +509,6 @@ namespace OGUR.Creatures
 
         public Color GetElementColor()
         {
-            //Console.WriteLine(m_composition[0]);
-            //Console.WriteLine(Elements.Colors[m_composition[0]]);
             return Elements.Colors[m_composition[0]];
         }
 
