@@ -61,27 +61,32 @@ namespace OGUR.Reactions
             }
         }
 
+        private IReaction reaction;
         public void Update()
         {
             int key = 0;
             if (m_elements.Count() == 3)
             {
                 key = (int)m_elements[0] * 100 + (int)m_elements[1] * 10 + (int)m_elements[2];
-                if (s_reactions.Keys.Contains(key))
-                {
-                    ReactionFactory.Create(s_reactions[key]).Affect(m_parent);
-                }
-                m_elements.Clear();
+                React(key);
             }
             if (m_elements.Count() == 2)
             {
                 key = (int)m_elements[0] * 10 + (int)m_elements[1];
-                if (s_reactions.Keys.Contains(key))
-                {
-                    ReactionFactory.Create(s_reactions[key]).Affect(m_parent);
-                }
-                m_elements.Clear();
+                React(key);
             }
+        }
+        private void React(int reactionId)
+        {
+            if (s_reactions.Keys.Contains(reactionId))
+            {
+                reaction = ReactionFactory.Create(s_reactions[reactionId]);
+                if (reaction != null)
+                {
+                    reaction.Affect(m_parent);
+                }
+            }
+            m_elements.Clear();
         }
     }
 }

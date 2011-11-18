@@ -412,7 +412,7 @@ namespace OGUR.Creatures
                     m_experience = 0;
                     m_currentLevel++;
                     m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
-                    TextManager.Add(new ActionText("LEVEL UP!", 30, (int)GetLocation().PosX, (int)GetLocation().PosY));
+                    TextManager.Add(new ActionText("LEVEL UP!", 100, (int)GetLocation().PosX, (int)GetLocation().PosY));
                 }
             }
         }
@@ -434,6 +434,7 @@ namespace OGUR.Creatures
 
         public void UseActiveSkill()
         {
+            m_damageText.WriteAction(GetActiveSkillName(), 10, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
             m_skills.UseActive();
         }
 

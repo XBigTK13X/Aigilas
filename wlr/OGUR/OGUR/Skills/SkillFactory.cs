@@ -144,8 +144,9 @@ namespace OGUR.Skills
         }
 
         private static Dictionary<int, List<string>> s_elementMap = new Dictionary<int, List<string>>();
+        private static Dictionary<string, int> s_skillAnimationMap = new Dictionary<string,int>();
 
-        private static void GenerateElementMap()
+        private static void GenerateStaticSkillMaps()
         {
             if (s_elementMap.Count() == 0)
             {
@@ -163,6 +164,7 @@ namespace OGUR.Skills
                             }
                             s_elementMap[elem].Add(skillId);
                         }
+                        s_skillAnimationMap[skillId] = skill.GetAnimationType();
                     }
                 }
             }
@@ -171,8 +173,13 @@ namespace OGUR.Skills
         private static Random rand = new Random();
         public static string GetElementalSkill(int elementId)
         {
-            GenerateElementMap();
+            GenerateStaticSkillMaps();
             return s_elementMap[elementId][rand.Next(0, s_elementMap[elementId].Count())];
+        }
+
+        public static bool IsSkill(string skillId,int animationType)
+        {
+            return s_skillAnimationMap[skillId] == animationType;
         }
 
         public static SkillBehavior Create(int animation,int skillGraphic,ISkill parentSkill)
