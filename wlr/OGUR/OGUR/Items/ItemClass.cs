@@ -16,7 +16,7 @@ namespace OGUR.Items
         public const int Shield = 10;
         public const int LAST = 11;
 
-        public static readonly List<int> Values = new List<int>()
+        public static readonly int[] Values =
         {
             NULL,
             Melee_Weapon,

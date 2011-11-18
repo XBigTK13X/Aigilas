@@ -17,7 +17,7 @@ namespace OGUR.GameObjects
         public const int SKILL_EFFECT_GENERATOR = 7;
         public const int ALTAR = 8;
 
-        public static readonly List<int> Values = new List<int>()
+        public static readonly int[] Values =
         {
             FLOOR,
             WALL,

@@ -56,7 +56,7 @@ namespace OGUR.Skills
         public const string MIMIC = "Mimic";
         public const string VALEDICTORIAN = "Valedictorian";
 
-        public static readonly List<string> Values = new List<string>()
+        public static readonly string[] Values = 
         {
             SkillId.ABSORB,
             SkillId.ACID_DRIP,
@@ -167,6 +167,7 @@ namespace OGUR.Skills
                         s_skillAnimationMap[skillId] = skill.GetAnimationType();
                     }
                 }
+                s_skillAnimationMap.Add(SkillId.NO_SKILL, -1);
             }
         }
 
@@ -179,6 +180,7 @@ namespace OGUR.Skills
 
         public static bool IsSkill(string skillId,int animationType)
         {
+            GenerateStaticSkillMaps();
             return s_skillAnimationMap[skillId] == animationType;
         }
 

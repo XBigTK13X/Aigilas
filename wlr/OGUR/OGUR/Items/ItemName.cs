@@ -14,7 +14,7 @@ namespace OGUR.Items
         public const int Hood = 8;
         public const int Shirt = 9;
 
-        public static readonly List<int> Values = new List<int>()
+        public static readonly int[] Values =
         {
             NULL,
             Sword,

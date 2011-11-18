@@ -29,6 +29,7 @@ namespace OGUR.GameObjects
             m_source = source;
             m_startingStrength = m_currentStrength = m_skill.GetStrength();
             m_animation = SkillFactory.Create(m_skill.GetAnimationType());
+            m_graphic.SetColor(m_source.GetElementColor());
         }
 
         public override void Update()

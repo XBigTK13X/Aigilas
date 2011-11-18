@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace OGUR.GameObjects
 {
@@ -17,7 +18,7 @@ namespace OGUR.GameObjects
         public const int PHYSICAL = 7;
         public const int MENTAL = 8;
 
-        public static readonly List<int> Values = new List<int>()
+        public static readonly int[] Values = 
         {
             NORMAL,
             FIRE,
@@ -29,5 +30,19 @@ namespace OGUR.GameObjects
             PHYSICAL,
             MENTAL
         };
+
+        public static readonly Color[] Colors =
+        {
+            Color.Gray,
+            Color.Black,
+            Color.White,
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Purple,
+            Color.Yellow,
+            Color.Orange
+        };
+
     }
 }

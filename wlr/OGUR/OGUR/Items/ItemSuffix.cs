@@ -9,7 +9,7 @@ namespace OGUR.Items
         public const string Tragedy = "Tragedy";
         public const string Comedy = "Comedy";
 
-        public static readonly List<string> Values = new List<string>()
+        public static readonly string[] Values = 
         {
             NULL,
             Blight,

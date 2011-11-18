@@ -16,7 +16,7 @@ namespace OGUR.Items
         public const int FEET = 10;
         public const int HANDS = 11;
 
-        public static readonly List<string> Names = new List<string>()
+        public static readonly string[] Names =
         {
             "NULL",
             "Head",

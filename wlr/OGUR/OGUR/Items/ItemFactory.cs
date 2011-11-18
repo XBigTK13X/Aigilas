@@ -37,7 +37,7 @@ namespace OGUR.Items
         }
         private static int SelectRandomType()
         {
-            return ItemName.Values[(rand.Next(1, ItemName.Values.Count))];
+            return ItemName.Values[(rand.Next(1, ItemName.Values.Length))];
         }
     }
 }

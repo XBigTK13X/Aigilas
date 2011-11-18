@@ -14,7 +14,7 @@ namespace OGUR.Creatures
         public const int ZORB = 4;
         public const int NONPLAYER = 5;
 
-        public static readonly List<int> Values = new List<int>()
+        public static readonly int[] Values = 
         {
             MINION,
             PLAYER,

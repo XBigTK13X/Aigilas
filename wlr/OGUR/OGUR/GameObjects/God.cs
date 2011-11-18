@@ -19,7 +19,7 @@ namespace OGUR.Gods
         public const int GLUTTONY = 5;
         public const int PRIDE = 6;
 
-        public static readonly List<int> Values = new List<int>()
+        public static readonly int[] Values = 
         {
             LUST,
             GREED,
@@ -30,7 +30,7 @@ namespace OGUR.Gods
             PRIDE
         };
 
-        public static readonly List<string> Names = new List<string>()
+        public static readonly string[] Names = 
         {
             "Lust",
             "Greed",

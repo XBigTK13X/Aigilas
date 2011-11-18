@@ -21,7 +21,7 @@ namespace OGUR.GameObjects
         protected int m_assetName;
         protected int m_objectType;
         protected bool m_isOnBoard = true;
-        protected List<int> m_composition = new List<int>(){Elements.NORMAL};
+        protected List<int> m_composition = new List<int>(){};
         private bool m_isInteracting = false;
         protected Point2 m_location = new Point2(0,0);
 

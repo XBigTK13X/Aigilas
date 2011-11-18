@@ -40,7 +40,7 @@ namespace OGUR.Strategies
             {
                 if (m_parent.Get(StatType.MOVE_COOL_DOWN) >= m_parent.GetMax(StatType.MOVE_COOL_DOWN))
                 {
-                    if (SkillFactory.IsSkill(m_parent.GetActiveSkillName(),AnimationType.RANGED))
+                    if (SkillFactory.IsSkill(m_parent.GetActiveSkillName(), AnimationType.RANGED))
                     {
                         m_parent.SetSkillVector(CalculateTargetVector(m_parent.GetLocation(), opponent.GetLocation()));
                         if (m_parent.GetSkillVector().GridX != 0 || m_parent.GetSkillVector().GridY != 0)

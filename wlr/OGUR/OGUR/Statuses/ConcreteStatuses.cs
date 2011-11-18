@@ -9,7 +9,7 @@ namespace OGUR.Statuses
     public class Status
     {
         public const int Poison = 0;
-        public static readonly List<int> Values = new List<int>()
+        public static readonly int[] Values =
         {
             Poison
         };

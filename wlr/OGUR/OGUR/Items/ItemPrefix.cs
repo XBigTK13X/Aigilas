@@ -8,7 +8,7 @@ namespace OGUR.Items
         public const string Solid = "Solid";
         public const string Permuted = "Permuted";
 
-        public static readonly List<string> Values = new List<string>()
+        public static readonly string[] Values =
         {
             NULL,
             Silver,

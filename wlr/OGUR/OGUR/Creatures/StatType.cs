@@ -15,7 +15,8 @@ namespace OGUR.Creatures
         public const string MOVE_COOL_DOWN = "MoveCoolDown";
         public const string PIETY = "Piety";
 
-        public static readonly List<string> Values = new List<string>(){
+        public static readonly string[] Values = 
+        {
             HEALTH, 
             MANA, 
             STRENGTH, 
