@@ -149,7 +149,7 @@ namespace OGUR.Creatures
                 }
                 if (m_strategy != null)
                 {
-                    m_strategy.Act(this);
+                    m_strategy.Act();
                     m_combo.Update();
                 }
             }

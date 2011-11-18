@@ -22,7 +22,7 @@ namespace OGUR.Strategies
         private int throttle = 0;
         private static readonly Random rand = new Random();
 
-        public override void Act(ICreature target)
+        public override void Act()
         {
             throttle--;
             if (throttle <= 0)
@@ -31,7 +31,7 @@ namespace OGUR.Strategies
                 //Every player is dead
                 if (null != opponent)
                 {
-                    targetPath.Copy(PathFinder.FindNextMove(target.GetLocation(), opponent.GetLocation()));
+                    targetPath.Copy(PathFinder.FindNextMove(m_parent.GetLocation(), opponent.GetLocation()));
                 }
                 throttle = rand.Next(throttleMin, throttleMax);
             }
@@ -39,10 +39,10 @@ namespace OGUR.Strategies
             {
                 if (targetPath.HasMoves())
                 {
-                    if (target.Get(StatType.MOVE_COOL_DOWN) >= target.GetMax(StatType.MOVE_COOL_DOWN))
+                    if (m_parent.Get(StatType.MOVE_COOL_DOWN) >= m_parent.GetMax(StatType.MOVE_COOL_DOWN))
                     {
                         nextMove.Copy(targetPath.GetNextMove());
-                        target.MoveTo(nextMove);
+                        m_parent.MoveTo(nextMove);
                     }
                 }
             }

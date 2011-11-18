@@ -16,49 +16,49 @@ namespace OGUR.Strategies
             m_targets.AddTargetTypes(CreatureType.NONPLAYER);
         }
 
-        public override void Act(ICreature target)
+        public override void Act()
         {
-            if (InputManager.IsPressed(Commands.Start, target.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.Start, m_parent.GetPlayerIndex()))
             {
-                target.SetPlaying(true);
+                m_parent.SetPlaying(true);
             }
-            if (InputManager.IsPressed(Commands.Back, target.GetPlayerIndex()))
+            if (InputManager.IsPressed(Commands.Back, m_parent.GetPlayerIndex()))
             {
-                target.SetPlaying(false);
+                m_parent.SetPlaying(false);
             }
-            if (target.IsPlaying())
+            if (m_parent.IsPlaying())
             {
-                var leftVelocity = (InputManager.IsPressed(Commands.MoveLeft,target.GetPlayerIndex())? -Stats.DefaultMoveSpeed: 0);
-                var rightVelocity = ((InputManager.IsPressed(Commands.MoveRight, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                var leftVelocity = (InputManager.IsPressed(Commands.MoveLeft,m_parent.GetPlayerIndex())? -Stats.DefaultMoveSpeed: 0);
+                var rightVelocity = ((InputManager.IsPressed(Commands.MoveRight, m_parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
                 m_keyVelocity.SetX(rightVelocity + leftVelocity);
 
-                var downVelocity = ((InputManager.IsPressed(Commands.MoveDown, target.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
-                var upVelocity = ((InputManager.IsPressed(Commands.MoveUp, target.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
+                var downVelocity = ((InputManager.IsPressed(Commands.MoveDown, m_parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                var upVelocity = ((InputManager.IsPressed(Commands.MoveUp, m_parent.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
                 m_keyVelocity.SetY(upVelocity + downVelocity);
 
-                if (InputManager.IsContext(Contexts.Free,target.GetPlayerIndex()))
+                if (InputManager.IsContext(Contexts.Free,m_parent.GetPlayerIndex()))
                 {
                     var skillCycleVelocity =
-                        ((InputManager.IsPressed(Commands.CycleLeft, target.GetPlayerIndex()))? -1: 0)
+                        ((InputManager.IsPressed(Commands.CycleLeft, m_parent.GetPlayerIndex()))? -1: 0)
                         +
-                        ((InputManager.IsPressed(Commands.CycleRight, target.GetPlayerIndex()))? 1: 0);
-                    target.CycleActiveSkill(skillCycleVelocity);
+                        ((InputManager.IsPressed(Commands.CycleRight, m_parent.GetPlayerIndex()))? 1: 0);
+                    m_parent.CycleActiveSkill(skillCycleVelocity);
 
                     if (!m_isCasting)
                     {
-                        target.MoveIfPossible(m_keyVelocity.X, m_keyVelocity.Y);
+                        m_parent.MoveIfPossible(m_keyVelocity.X, m_keyVelocity.Y);
                     }
-                    var isPress = InputManager.IsPressed(Commands.Confirm, target.GetPlayerIndex());
+                    var isPress = InputManager.IsPressed(Commands.Confirm, m_parent.GetPlayerIndex());
                     if (!isPress)
                     {
-                        target.SetInteraction(false);
+                        m_parent.SetInteraction(false);
                     }
-                    if (isPress && !target.IsInteracting())
+                    if (isPress && !m_parent.IsInteracting())
                     {
-                        target.SetInteraction(true);
+                        m_parent.SetInteraction(true);
                     }
                 }
-                if (InputManager.IsPressed(Commands.Skill, target.GetPlayerIndex()))
+                if (InputManager.IsPressed(Commands.Skill, m_parent.GetPlayerIndex()))
                 {
                     m_isCasting = true;
                 }
@@ -67,22 +67,22 @@ namespace OGUR.Strategies
                 {
                     if (!m_keyVelocity.IsZero())
                     {
-                        target.SetSkillVector(m_keyVelocity);
+                        m_parent.SetSkillVector(m_keyVelocity);
                     }
-                    if (target.GetSkillVector() == null)
+                    if (m_parent.GetSkillVector() == null)
                     {
-                        target.SetSkillVector(new Point2(1, 0));
+                        m_parent.SetSkillVector(new Point2(1, 0));
                     }
-                    if (!target.GetSkillVector().IsZero())
+                    if (!m_parent.GetSkillVector().IsZero())
                     {
-                        target.UseActiveSkill();
+                        m_parent.UseActiveSkill();
                         m_isCasting = false;
                     }
                 }
                 
-                if (InputManager.IsPressed(Commands.Inventory, target.GetPlayerIndex()))
+                if (InputManager.IsPressed(Commands.Inventory, m_parent.GetPlayerIndex()))
                 {
-                    InputManager.SetContext(target.ToggleInventoryVisibility()? Contexts.Inventory: Contexts.Free, target.GetPlayerIndex());
+                    InputManager.SetContext(m_parent.ToggleInventoryVisibility()? Contexts.Inventory: Contexts.Free, m_parent.GetPlayerIndex());
                 }
             }
         }
