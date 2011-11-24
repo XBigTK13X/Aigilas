@@ -20,6 +20,8 @@ namespace OGUR.GameObjects
         private float m_currentStrength = 0;
         private float m_startingStrength = 0;
         private SkillAnimation m_animation;
+        private float m_coolDown = CoolDown;
+        private const float CoolDown = Stats.DefaultCoolDown/8;
 
         public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill)
         {
@@ -42,15 +44,20 @@ namespace OGUR.GameObjects
             }
             else
             {
-                if (m_startingStrength == 0)
+                m_coolDown--;
+                if (m_coolDown <= 0)
                 {
-                    m_startingStrength = m_currentStrength;
+                    if (m_startingStrength == 0)
+                    {
+                        m_startingStrength = m_currentStrength;
+                    }
+                    m_currentStrength *= m_strengthDecayAmount;
+                    m_velocity.SetX(m_velocity.X * m_currentStrength);
+                    m_velocity.SetY(m_velocity.Y * m_currentStrength);
+                    m_animation.Animate(this, m_source, m_velocity);
+                    m_isActive = m_skill.AffectTarget(m_source, this);
+                    m_coolDown = CoolDown;
                 }
-                m_currentStrength *= m_strengthDecayAmount;
-                m_velocity.SetX(m_velocity.X*m_currentStrength);
-                m_velocity.SetY(m_velocity.Y*m_currentStrength);
-                m_animation.Animate(this,m_source,m_velocity);
-                m_isActive = m_skill.AffectTarget(m_source,this);    
             }
         }
     }
