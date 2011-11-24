@@ -69,7 +69,6 @@ namespace OGUR.Skills
     {
         public SelfBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.SELF, parentSkill) { }
         public override void Activate(ICreature target) { if (SubtractCost(target)) { m_sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target); } }
-        public override void Cleanup(ICreature target) {if(m_used)m_parent.Affect(target);}
         public override bool AffectTarget(ICreature source, SkillEffect graphic)
         {
             if (!m_used)

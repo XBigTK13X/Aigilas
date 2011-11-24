@@ -13,6 +13,8 @@ namespace OGUR.Statuses
             switch (statusId)
             {
                 case Status.Poison: target.AddStatus(new PoisonStatus(target)); break;
+                case Status.Regen: target.AddStatus(new RegenStatus(target)); break;
+                case Status.StrengthUp: target.AddStatus(new StrengthUpStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

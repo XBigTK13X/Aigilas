@@ -178,9 +178,9 @@ namespace OGUR.Skills
     public class RegenAllSkill : ISkill
     {
         public RegenAllSkill()
-            : base(SkillId.REGEN_ALL, AnimationType.RANGED)
+            : base(SkillId.REGEN_ALL, AnimationType.SELF)
         { Add(Elements.LIGHT); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { base.Affect(target); }
+        public override void Affect(ICreature target) { base.Affect(target); StatusFactory.Apply(target, Status.Regen); }
     }
     public class RemoteMineSkill : ISkill
     {
@@ -229,9 +229,9 @@ namespace OGUR.Skills
     public class StrengthUpSkill : ISkill
     {
         public StrengthUpSkill()
-            : base(SkillId.STRENGTH_UP, AnimationType.RANGED)
+            : base(SkillId.STRENGTH_UP, AnimationType.SELF)
         { Add(Elements.FIRE); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { base.Affect(target); }
+        public override void Affect(ICreature target) { base.Affect(target); StatusFactory.Apply(target, Status.StrengthUp); }
     }
     public class ThrowItemSkill : ISkill
     {

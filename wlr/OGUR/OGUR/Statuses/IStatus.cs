@@ -21,6 +21,7 @@ namespace OGUR.Statuses
             m_stopsMovement = stopMovement;
             m_strength = m_maxStrength;
             m_target = target;
+            Setup();
         }
 
         public bool IsActive()

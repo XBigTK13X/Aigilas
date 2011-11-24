@@ -45,7 +45,6 @@ namespace OGUR.Statuses
                 m_statuses[ii].Update();
                 if (!m_statuses[ii].IsActive())
                 {
-                    m_statuses[ii].Cleanup();
                     m_statuses.Remove(m_statuses[ii]);
                     ii--;
                 }
