@@ -118,21 +118,30 @@ namespace OGUR.Creatures
 
         public void Drop(GenericItem item)
         {
-            if (m_inventory.GetItemCount(item) > 0)
+            if (item != null)
             {
-                GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
-                m_inventory.Remove(item);
-            }
-            else
-            {
-                if (m_inventory.GetItemCount(item) == 0)
+
+                if (m_inventory.GetItemCount(item) > 0)
                 {
-                    m_equipment.Unregister(item);
                     GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
                     m_inventory.Remove(item);
                 }
+                else
+                {
+                    if (m_inventory.GetItemCount(item) == 0)
+                    {
+                        m_equipment.Unregister(item);
+                        GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
+                        m_inventory.Remove(item);
+                    }
+                }
             }
-        }       
+        }
+
+        public GenericItem GetNonEquippedItem()
+        {
+            return m_inventory.GetFirst();
+        }
 
         public override void Update()
         {
@@ -434,7 +443,7 @@ namespace OGUR.Creatures
 
         public void UseActiveSkill()
         {
-            m_damageText.WriteAction(GetActiveSkillName(), 10, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
+            m_damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
             m_skills.UseActive();
         }
 

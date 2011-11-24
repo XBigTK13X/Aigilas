@@ -17,11 +17,14 @@ namespace OGUR.Dungeons
 
         //Top level game config
         private const int playerCount = 1;
-        private const int enemyCap = 2;
+        private const int enemyCap = 5;
         private const int enemyBase = 2;
         private const int itemCap = 4;
         private const int itemBase = 1;
         private const int startingItemAmount = 100;
+
+        private static int enemyCapModifier = 0;
+        private static int enemyBaseModifier = 0;
 
         private readonly List<Room> m_rooms = new List<Room>();
         private List<GameplayObject> m_contents = new List<GameplayObject>();
@@ -46,13 +49,15 @@ namespace OGUR.Dungeons
         }
 
         private void Generate()
-        { 
+        {
+            enemyCapModifier++;
+            enemyBaseModifier = enemyBase + (int)(enemyCapModifier / 5);
             GameplayObjectManager.Clear();
             Init();
             PlaceRooms();
             ConvertRoomsToWalls();
             PlaceStairs();
-            PlaceCreatures(rand.Next(enemyBase, enemyCap));
+            PlaceCreatures(rand.Next(enemyBase+enemyBaseModifier, enemyCap+enemyCapModifier));
             PlaceItems(rand.Next(itemBase, itemCap));
             PlaceFloor();
             TransferDungeonState();

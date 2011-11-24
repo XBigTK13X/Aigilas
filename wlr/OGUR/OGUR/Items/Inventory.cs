@@ -27,6 +27,11 @@ namespace OGUR.Items
             return m_parent;
         }
 
+        public GenericItem GetFirst()
+        {
+            return m_contents.Keys.FirstOrDefault();
+        }
+
         public void Add(GenericItem item)
         {
             if(Contains(item))

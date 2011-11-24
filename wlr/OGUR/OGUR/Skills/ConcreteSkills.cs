@@ -7,6 +7,7 @@ using OGUR.GameObjects;
 using OGUR.Skills;
 using OGUR.Sprites;
 using OGUR.Statuses;
+using OGUR.Items;
 
 namespace OGUR.Skills
 {
@@ -203,10 +204,16 @@ namespace OGUR.Skills
     }
     public class SoulReinforcementSkill : ISkill
     {
+        private GenericItem fodder;
         public SoulReinforcementSkill()
-            : base(SkillId.SOUL_REINFORCEMENT, AnimationType.RANGED)
+            : base(SkillId.SOUL_REINFORCEMENT, AnimationType.SELF)
         { Add(Elements.LIGHT); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { base.Affect(target); }
+        public override void Affect(ICreature target) 
+        { base.Affect(target);
+            fodder = target.GetNonEquippedItem();
+            target.Drop(fodder);
+            GameplayObjectManager.RemoveObject(fodder);
+        }
     }
     public class SpawnItemSkill : ISkill
     {
