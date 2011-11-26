@@ -33,11 +33,11 @@ namespace OGUR.Skills
 
     class RotateAnimation : SkillAnimation
     {
-        private Point2 rotation = new Point2(-1,-1);
+        private Point2 rotation = new Point2(-10,-10);
         private Point2 location = new Point2(0, 0);
         public override void Animate(SkillEffect skill, ICreature source, Point2 velocity)
         {
-            if (rotation.GridX == -1)
+            if (rotation.GridX == -10)
             {
                 rotation.SetX(source.GetSkillVector().GridX);
                 rotation.SetY(source.GetSkillVector().GridY);
@@ -45,7 +45,6 @@ namespace OGUR.Skills
             location.SetX(rotation.GridX + source.GetLocation().GridX);
             location.SetY(rotation.GridY + source.GetLocation().GridY);
             skill.SetLocation(location);
-            Console.WriteLine("VALUES: "+rotation.GridX + " : " + rotation.GridY);
             rotation.Copy(rotation.RotateClockwise());
         }
     }
