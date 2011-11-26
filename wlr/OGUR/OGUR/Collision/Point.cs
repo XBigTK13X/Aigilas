@@ -90,7 +90,7 @@ namespace OGUR.Collision
         public void SetX(float xValue)
         {
             X = xValue;
-            var isGrid = (X < DungeonFactory.BlocksWide);
+            var isGrid = (Math.Abs(X) < DungeonFactory.BlocksWide);
             PosX = (isGrid) ? X * SpriteInfo.Width : X;
             PosCenterX = PosX + halfWidth;
             GridX = (isGrid) ? (int)X : (int)(X / SpriteInfo.Width);
@@ -99,7 +99,7 @@ namespace OGUR.Collision
         public void SetY(float yValue)
         {
             Y = yValue;
-            var isGrid = (Y < DungeonFactory.BlocksHigh);
+            var isGrid = (Math.Abs(Y) < DungeonFactory.BlocksHigh);
             PosY = (isGrid)?Y*SpriteInfo.Height:Y;
             PosCenterY = PosY+halfHeight;
             GridY = (isGrid) ? (int)Y : (int)(Y / SpriteInfo.Height);

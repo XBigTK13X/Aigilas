@@ -111,13 +111,13 @@ namespace OGUR.GameObjects
         public static List<ICreature> GetCreaturesAt(Point2 target)
         {
             creatures.Clear();
-                foreach (var elem in m_gridContents[target])
+            foreach (var elem in m_gridContents[target])
+            {
+                if (elem.GetObjectType() == GameObjectType.CREATURE)
                 {
-                    if (elem.GetObjectType() == GameObjectType.CREATURE)
-                    {
-                        creatures.Add(((ICreature)elem));
-                    }
+                    creatures.Add(((ICreature)elem));
                 }
+            }
             return creatures;
         }
 

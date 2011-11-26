@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Skills;
 using OGUR.Sprites;
 using OGUR.Strategies;
+using OGUR.GameObjects;
 
 namespace OGUR.Creatures
 {
@@ -18,7 +19,7 @@ namespace OGUR.Creatures
         public void Init(ICreature source)
         {
             m_master = source;
-            Setup(source.GetLocation(), m_creatureType, m_baseStats);
+            Setup(source.GetLocation(), m_creatureType, m_baseStats,null,false);
             SetSkillVector(new Collision.Point2(1, 0));
             m_strategy = new MinionRotate(this);
         }
@@ -38,6 +39,7 @@ namespace OGUR.Creatures
             : base(CreatureType.MINION,50f)
         {
             Add(SkillId.ACID_DRIP);
+            m_composition.Add(Elements.EARTH);
         }
     }
 }

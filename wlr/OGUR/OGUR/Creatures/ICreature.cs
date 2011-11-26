@@ -59,10 +59,10 @@ namespace OGUR.Creatures
             }
         }
 
-        protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null)
+        protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
             Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE,Depth.Creature);
-            Init(type,stats,creatureClass);
+            Init(type,stats,creatureClass,setClass);
         }
         protected void SetClass(CreatureClass cClass)
         {
@@ -78,9 +78,12 @@ namespace OGUR.Creatures
             }
         }
 
-        private void Init(int type, Stats stats, CreatureClass creatureClass = null)
+        private void Init(int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
-            SetClass(creatureClass);
+            if (setClass)
+            {
+                SetClass(creatureClass);
+            }
             m_inventory = new Inventory(this);
             m_equipment = new Equipment(this);
             m_combo = new ComboMeter(this);

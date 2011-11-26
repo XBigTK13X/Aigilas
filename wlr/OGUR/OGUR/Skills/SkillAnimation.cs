@@ -37,14 +37,15 @@ namespace OGUR.Skills
         private Point2 location = new Point2(0, 0);
         public override void Animate(SkillEffect skill, ICreature source, Point2 velocity)
         {
-            if (rotation.X == -1)
+            if (rotation.GridX == -1)
             {
-                rotation.Copy(source.GetSkillVector());
+                rotation.SetX(source.GetSkillVector().GridX);
+                rotation.SetY(source.GetSkillVector().GridY);
             }
             location.SetX(rotation.GridX + source.GetLocation().GridX);
             location.SetY(rotation.GridY + source.GetLocation().GridY);
             skill.SetLocation(location);
-            Console.WriteLine(rotation.GridX + " : " + rotation.GridY);
+            Console.WriteLine("VALUES: "+rotation.GridX + " : " + rotation.GridY);
             rotation.Copy(rotation.RotateClockwise());
         }
     }
