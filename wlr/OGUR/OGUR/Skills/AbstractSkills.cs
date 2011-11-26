@@ -12,7 +12,8 @@ namespace OGUR.Skills
         public const int RANGED = 1;
         public const int CLOUD = 2;
         public const int SELF = 3;
-        public const int STATIONARY = 4; 
+        public const int STATIONARY = 4;
+        public const int ROTATE = 5;
     }
     public abstract class ISkill
     {

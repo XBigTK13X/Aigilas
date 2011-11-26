@@ -193,6 +193,7 @@
     <Compile Include="Statuses\StatusPool.cs" />
     <Compile Include="Strategies\MinionRotate.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
+    <Compile Include="Tests\TestManager.cs" />
     <Compile Include="Text\ActionText.cs" />
     <Compile Include="Text\ActionTextHandler.cs" />
     <Compile Include="Text\TextHandler.cs" />

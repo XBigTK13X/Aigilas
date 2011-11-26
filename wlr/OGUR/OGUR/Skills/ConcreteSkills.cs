@@ -107,7 +107,7 @@ namespace OGUR.Skills
     public class FlameHammerSkill : ISkill
     {
         public FlameHammerSkill()
-            : base(SkillId.FLAME_HAMMER, AnimationType.CLOUD)
+            : base(SkillId.FLAME_HAMMER, AnimationType.ROTATE)
         { Add(Elements.FIRE); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) 
         { base.Affect(target);

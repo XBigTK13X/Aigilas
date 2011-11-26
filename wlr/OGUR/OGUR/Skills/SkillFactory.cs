@@ -196,6 +196,8 @@ namespace OGUR.Skills
                     return new SelfBehavior(skillGraphic, parentSkill);
                 case AnimationType.STATIONARY:
                     return new StationaryBehavior(skillGraphic, parentSkill);
+                case AnimationType.ROTATE:
+                    return new RotateBehavior(skillGraphic, parentSkill);
                 default:
                     throw new Exception("How dare you create a new Anim type for skills without defining a proper behavior for them!");
             }
@@ -209,6 +211,8 @@ namespace OGUR.Skills
                     return new RangedAnimation();
                 case AnimationType.SELF:
                     return new SelfAnimation();
+                case AnimationType.ROTATE:
+                    return new RotateAnimation();
                 default:
                     return new NoAnimation();
             }

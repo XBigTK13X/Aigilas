@@ -120,4 +120,12 @@ namespace OGUR.Skills
             }
         }
     }
+    public class RotateBehavior : SkillBehavior
+    {
+        public RotateBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.ROTATE, parentSkill) { }
+        public override void Activate(ICreature target)
+        {
+            m_sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target);
+        }
+    }
 }

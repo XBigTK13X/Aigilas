@@ -12,6 +12,7 @@ using OGUR.Management;
 using OGUR.States;
 using OGUR.Sprites;
 using OGUR.Text;
+using OGUR.Tests;
 
 namespace OGUR
 {
@@ -30,6 +31,7 @@ namespace OGUR
             graphics.ApplyChanges();
             XnaManager.SetupCamera(graphics);
             Content.RootDirectory = "Content";
+            TestManager.Run();
         }
 
         /// <summary>
