@@ -8,6 +8,7 @@ namespace OGUR.Strategies
     {
         protected TargetSet m_targets;
         protected ICreature m_parent;
+        
         protected IStrategy(ICreature parent)
         {
             m_targets = new TargetSet(parent);

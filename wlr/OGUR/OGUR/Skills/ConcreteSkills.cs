@@ -67,7 +67,10 @@ namespace OGUR.Skills
         public ConfusionSkill()
             : base(SkillId.CONFUSION, AnimationType.RANGED)
         { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { base.Affect(target); }
+        public override void Affect(ICreature target) 
+        { base.Affect(target);
+            StatusFactory.Apply(target, Status.Confusion);
+        }
     }
     public class DartSkill : ISkill
     {

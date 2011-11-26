@@ -10,8 +10,9 @@ namespace OGUR.Statuses
     {
         protected bool m_stopsMovement = false;
         protected bool m_stopsAttacking = false;
+        protected bool m_hitAnything = false;
         protected int m_strength = 0;
-        protected int m_maxStrength = 100;
+        protected int m_maxStrength = 100;        
         protected bool m_isActive = true;
         protected ICreature m_target;
 
@@ -22,6 +23,11 @@ namespace OGUR.Statuses
             m_strength = m_maxStrength;
             m_target = target;
             Setup();
+        }
+
+        public bool HitAnything()
+        {
+            return m_hitAnything;
         }
 
         public bool IsActive()

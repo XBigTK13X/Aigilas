@@ -33,6 +33,18 @@ namespace OGUR.Statuses
             return true;
         }
 
+        public bool WillHitAnything()
+        {
+            for (int ii = 0; ii < m_statuses.Count(); ii++)
+            {
+                if (m_statuses[ii].HitAnything())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void Add(IStatus status)
         {
             m_statuses.Add(status);

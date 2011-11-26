@@ -191,7 +191,9 @@
     <Compile Include="Statuses\IStatus.cs" />
     <Compile Include="Statuses\StatusFactory.cs" />
     <Compile Include="Statuses\StatusPool.cs" />
+    <Compile Include="Strategies\ConfusedStrategy.cs" />
     <Compile Include="Strategies\MinionRotate.cs" />
+    <Compile Include="Strategies\StrategyFactory.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
     <Compile Include="Tests\TestManager.cs" />
     <Compile Include="Text\ActionText.cs" />

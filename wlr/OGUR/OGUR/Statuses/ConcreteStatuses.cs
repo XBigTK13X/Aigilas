@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Creatures;
+using OGUR.Strategies;
 
 namespace OGUR.Statuses
 {
@@ -11,12 +12,31 @@ namespace OGUR.Statuses
         public const int Poison = 0;
         public const int Regen = 1;
         public const int StrengthUp = 2;
+        public const int Confusion = 3;
         public static readonly int[] Values =
         {
             Poison,
             Regen,
-            StrengthUp
+            StrengthUp,
+            Confusion
         };
+    }
+
+    public class ConfusionStatus : IStatus
+    {
+        private int previousStrategy;
+        public ConfusionStatus(ICreature target) : base(false, false, target) { m_hitAnything = true; }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = StrategyFactory.GetId(m_target.GetStrategyType());
+            m_target.SetStrategy(StrategyFactory.Create(Strategy.Confused,m_target));
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            m_target.SetStrategy(StrategyFactory.Create(previousStrategy,m_target));
+        }
     }
 
     public class PoisonStatus:IStatus

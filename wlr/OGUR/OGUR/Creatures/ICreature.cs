@@ -19,6 +19,20 @@ using OGUR.Statuses;
 
 namespace OGUR.Creatures
 {
+    public abstract class Strategy
+    {
+        public const int AttackPlayers = 0;
+        public const int ControlledByPlayer = 1;
+        public const int Confused = 2;
+
+        public static readonly int[] Values =
+        {
+            AttackPlayers,
+            ControlledByPlayer,
+            Confused
+        };
+    }
+
     public abstract class ICreature : GameplayObject
     {
         protected IStrategy m_strategy;
@@ -365,7 +379,8 @@ namespace OGUR.Creatures
                                     {
                                         if ((creature.GetCreatureType() != CreatureType.PLAYER && m_creatureType == CreatureType.PLAYER)
                                             ||
-                                            (creature.GetCreatureType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER))
+                                            (creature.GetCreatureType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER)
+                                            || m_statuses.WillHitAnything())
                                         {
                                             creature.ApplyDamage(CalculateDamage(), this);
                                             if (!creature.IsActive())
@@ -522,6 +537,16 @@ namespace OGUR.Creatures
         public void AddStatus(IStatus status)
         {
             m_statuses.Add(status);
+        }
+
+        public void SetStrategy(IStrategy strategy)
+        {
+            m_strategy = strategy;
+        }
+
+        public Type GetStrategyType()
+        {
+            return m_strategy.GetType();
         }
     }
 }
