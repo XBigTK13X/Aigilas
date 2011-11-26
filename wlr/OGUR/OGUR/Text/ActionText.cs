@@ -25,6 +25,7 @@ namespace OGUR.Text
         }
         public void Reset(string contents, int lifespan, int x, int y)
         {
+            m_scalePercent = 1;
             m_lifeSpan = lifespan;
             Reset(contents, x, y);
         }
