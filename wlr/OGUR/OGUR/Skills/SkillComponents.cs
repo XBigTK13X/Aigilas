@@ -18,7 +18,7 @@ namespace OGUR.Skills
         {
             m_effectStrength = strength;
             m_isPersistent = isPersistent;
-            m_elements = new List<int>() { Elements.NORMAL };
+            m_elements = new List<int>() {};
         }
 
         

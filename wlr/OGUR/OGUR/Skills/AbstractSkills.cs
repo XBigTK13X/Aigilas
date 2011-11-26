@@ -4,6 +4,7 @@ using OGUR.Collision;
 using OGUR.Creatures;
 using OGUR.GameObjects;
 using OGUR.Sprites;
+using Microsoft.Xna.Framework;
 namespace OGUR.Skills
 {
     public class AnimationType
@@ -56,6 +57,7 @@ namespace OGUR.Skills
         public int GetAnimationType() { return m_behavior.GetAnimationType(); }
         public float GetStrength(){return m_components.GetStrength();}
         public bool IsPersistent() { return m_components.IsPersistent(); }
+        public Color GetElementColor() { return Elements.Colors[m_components.GetElements()[0]];}
         public void Cleanup(ICreature target){m_behavior.Cleanup(target);}
         public bool AffectTarget(ICreature target, SkillEffect graphic){return m_behavior.AffectTarget(target, graphic);}
     }

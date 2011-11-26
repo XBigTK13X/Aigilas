@@ -519,11 +519,6 @@ namespace OGUR.Creatures
             }
         }
 
-        public Color GetElementColor()
-        {
-            return Elements.Colors[m_composition[0]];
-        }
-
         public void AddStatus(IStatus status)
         {
             m_statuses.Add(status);
