@@ -33,14 +33,13 @@ namespace OGUR.Skills
 
     class RotateAnimation : SkillAnimation
     {
-        private Point2 rotation = new Point2(-10,-10);
+        private Point2 rotation;
         private Point2 location = new Point2(0, 0);
         public override void Animate(SkillEffect skill, ICreature source, Point2 velocity)
         {
-            if (rotation.GridX == -10)
+            if (rotation==null)
             {
-                rotation.SetX(source.GetSkillVector().GridX);
-                rotation.SetY(source.GetSkillVector().GridY);
+                rotation = new Point2(source.GetSkillVector().GridX, source.GetSkillVector().GridY);
             }
             location.SetX(rotation.GridX + source.GetLocation().GridX);
             location.SetY(rotation.GridY + source.GetLocation().GridY);
