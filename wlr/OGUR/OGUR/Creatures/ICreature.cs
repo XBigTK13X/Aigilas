@@ -80,9 +80,9 @@ namespace OGUR.Creatures
         }
         protected void SetClass(CreatureClass cClass)
         {
-            if (m_class != cClass || cClass == null)
+            if (m_class != cClass || cClass == null || cClass == CreatureClass.NULL)
             {
-                m_class = cClass ?? new NoClass();
+                m_class = cClass ?? CreatureClass.NULL;
                 m_skills = new SkillPool(this);
                 m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
                 foreach (var elem in m_composition)

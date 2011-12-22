@@ -11,6 +11,7 @@ namespace OGUR.Classes
     {
         private readonly Stats m_stats;
         protected List<KeyValuePair<int, string>> m_skillUnlocks = new List<KeyValuePair<int, string>>();
+        public static readonly CreatureClass NULL = new NoClass();
 
         protected CreatureClass(){}
         protected CreatureClass(Stats stats){m_stats = new Stats(stats);}
