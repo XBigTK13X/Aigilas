@@ -10,6 +10,8 @@ namespace OGUR.Creatures
     {
         public const float DefaultMoveSpeed = Sprites.SpriteInfo.Height;
         public const float DefaultCoolDown = 18;
+        public const float DefaultRegenRate = 1;
+
         private readonly Dictionary<string, float> m_stats = new Dictionary<string, float>();
         private readonly List<StatBuff> m_buffs = new List<StatBuff>(); 
 
@@ -28,13 +30,14 @@ namespace OGUR.Creatures
                 float age,
                 float weightInLbs,
                 float heightInFeet,
-                float moveCoolDown = DefaultCoolDown
+                float moveCoolDown = DefaultCoolDown,
+                float regenRate = DefaultRegenRate
             )
         {
-            Setup(new List<float>{health, mana, strength, wisdom, defense,luck, age,weightInLbs, heightInFeet, moveCoolDown,0});
+            Setup(new List<float>{health, mana, strength, wisdom, defense,luck, age,weightInLbs, heightInFeet, moveCoolDown,0,regenRate});
         }
 
-        private void Setup(List<float> stats )
+        private void Setup(List<float> stats)
         {
             for (var ii = 0; ii < stats.Count; ii++)
             {
@@ -110,7 +113,7 @@ namespace OGUR.Creatures
 
         public float GetSum()
         {
-            return m_stats.Keys.Where(o=>o!=StatType.HEALTH&&o!=StatType.MOVE_COOL_DOWN).Sum(stat => m_stats[stat]);
+            return m_stats.Keys.Where(o=>o!=StatType.HEALTH&&o!=StatType.MOVE_COOL_DOWN&&o!=StatType.REGEN).Sum(stat => m_stats[stat]);
         }
 
         float hash = 0;

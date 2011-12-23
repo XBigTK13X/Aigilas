@@ -34,9 +34,12 @@ namespace OGUR.Skills
             bool costPaid = false;
             foreach (string stat in StatType.Values)
             {
-                if (owner.LowerStat(stat, m_cost.Get(stat)))
+                if (stat != StatType.REGEN)
                 {
-                    costPaid = true;
+                    if (owner.LowerStat(stat, m_cost.Get(stat)))
+                    {
+                        costPaid = true;
+                    }
                 }
             }
             return costPaid;
@@ -63,7 +66,7 @@ namespace OGUR.Skills
     public class RangedBehavior: SkillBehavior
     {
         public RangedBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.RANGED, parentSkill) { }
-        public override void Activate(ICreature target) { m_sideEffects.Generate(target.GetLocation(), target.GetSkillVector(), target);}
+        public override void Activate(ICreature target) { if (SubtractCost(target)) { m_sideEffects.Generate(target.GetLocation(), target.GetSkillVector(), target); } }
     }
     public class SelfBehavior:SkillBehavior
     {

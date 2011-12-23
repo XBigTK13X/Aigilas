@@ -14,6 +14,7 @@ namespace OGUR.Creatures
         public const string WEIGHT = "Weight";
         public const string MOVE_COOL_DOWN = "MoveCoolDown";
         public const string PIETY = "Piety";
+        public const string REGEN = "Regen";
 
         public static readonly string[] Values = 
         {
@@ -27,7 +28,8 @@ namespace OGUR.Creatures
             HEIGHT, 
             WEIGHT, 
             MOVE_COOL_DOWN, 
-            PIETY
+            PIETY,
+            REGEN
         };
     }
 }

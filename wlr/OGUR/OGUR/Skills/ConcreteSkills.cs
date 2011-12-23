@@ -74,7 +74,7 @@ namespace OGUR.Skills
     }
     public class DartSkill : ISkill
     {
-        public DartSkill() : base(SkillId.DART, AnimationType.RANGED) { AddCost(StatType.MANA, 2); Add(Elements.DARK); }
+        public DartSkill() : base(SkillId.DART, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.DARK); }
         public override void Affect(ICreature target)
         {
             base.Affect(target);

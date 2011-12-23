@@ -108,7 +108,7 @@ namespace OGUR.Creatures
             m_isBlocking = true;
             m_creatureType = type;
             m_baseStats = new Stats(stats);
-            m_maxStats = new Stats(stats);
+            m_maxStats = new Stats(m_baseStats);
         }
 
         public void PickupItem(GenericItem item)
@@ -187,13 +187,14 @@ namespace OGUR.Creatures
         }
         private void Regenerate()
         {
+            Console.WriteLine(m_maxStats.GetRaw(StatType.REGEN) + ":" + m_baseStats.GetRaw(StatType.REGEN));
             foreach (string stat in StatType.Values)
             {
-                if (stat != StatType.MOVE_COOL_DOWN)
+                if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN)
                 {
                     if (m_baseStats.GetRaw(stat) < m_maxStats.GetRaw(stat))
                     {
-                        Adjust(stat, m_baseStats.Get(StatType.STRENGTH) / 50);
+                        Adjust(stat, m_baseStats.Get(StatType.REGEN) / 50);
                     }
                 }
             }
