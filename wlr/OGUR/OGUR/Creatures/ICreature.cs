@@ -459,10 +459,15 @@ namespace OGUR.Creatures
             return m_skills.GetActiveName();
         }
 
+        float lastSum = 0;
         public void UseActiveSkill()
         {
-            m_damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
+            lastSum = m_baseStats.GetSum();
             m_skills.UseActive();
+            if (lastSum != m_baseStats.GetSum())
+            {
+                m_damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
+            }
         }
 
         public TargetSet GetTargets()
