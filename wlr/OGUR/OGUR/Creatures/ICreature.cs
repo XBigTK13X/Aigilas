@@ -187,7 +187,6 @@ namespace OGUR.Creatures
         }
         private void Regenerate()
         {
-            Console.WriteLine(m_maxStats.GetRaw(StatType.REGEN) + ":" + m_baseStats.GetRaw(StatType.REGEN));
             foreach (string stat in StatType.Values)
             {
                 if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN)

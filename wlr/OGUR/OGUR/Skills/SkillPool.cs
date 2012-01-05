@@ -28,7 +28,6 @@ namespace OGUR.Skills
                 return;
             }
             m_skills.Add(skill);
-            Console.WriteLine(skill);
             if (m_skills.Contains(SkillId.NO_SKILL))
             {
                 m_skills.Remove(SkillId.NO_SKILL);

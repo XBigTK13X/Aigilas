@@ -60,5 +60,9 @@ namespace OGUR.Skills
         public Color GetElementColor() { return Elements.Colors[m_components.GetElements()[0]];}
         public void Cleanup(ICreature target){m_behavior.Cleanup(target);}
         public bool AffectTarget(ICreature target, SkillEffect graphic){return m_behavior.AffectTarget(target, graphic);}
+        public List<int> GetTargetTypes()
+        {
+            return m_components.GetTargetTypes();
+        }
     }
 }

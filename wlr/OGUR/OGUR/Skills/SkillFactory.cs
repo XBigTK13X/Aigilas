@@ -17,6 +17,7 @@ namespace OGUR.Skills
         //Sloth
         public const string FLOOR_SPIKES = "Floor Spikes";
         public const string DART = "Dart";
+        public const string DART_TRAP = "Dart Trap";
         public const string ACID_DRIP = "Acid Drip";
         public const string ACID_NOZZLE = "Acid Nozzle";
         public const string REMOTE_MINE = "Remote Mine";
@@ -66,6 +67,7 @@ namespace OGUR.Skills
             SkillId.COMBUST,
             SkillId.CONFUSION,
             SkillId.DART,
+            SkillId.DART_TRAP,
             SkillId.ELECTRIFY,
             SkillId.ENVENOM,
             SkillId.FIREBALL,
@@ -110,6 +112,7 @@ namespace OGUR.Skills
                 case SkillId.COMBUST: return new CombustSkill();
                 case SkillId.CONFUSION:return new ConfusionSkill();
                 case SkillId.DART:return new DartSkill();
+                case SkillId.DART_TRAP: return new DartTrapSkill();
                 case SkillId.ELECTRIFY: return new ElectrifySkill();
                 case SkillId.ENVENOM: return new EnvenomSkill();
                 case SkillId.FIREBALL:return new FireballSkill();

@@ -13,6 +13,7 @@ namespace OGUR.Skills
         protected StatBuff m_buff;
         protected float m_effectStrength = 0;
         protected bool m_isPersistent = false;
+        protected List<int> m_targetTypes = new List<int>(){GameObjectType.WALL};
 
         public SkillComponents(float strength,bool isPersistent)
         {
@@ -20,8 +21,6 @@ namespace OGUR.Skills
             m_isPersistent = isPersistent;
             m_elements = new List<int>() {};
         }
-
-        
 
         public void AddElements(params int[] elements)
         {
@@ -51,6 +50,11 @@ namespace OGUR.Skills
         public List<int> GetElements()
         {
             return m_elements;
+        }
+
+        public List<int> GetTargetTypes()
+        {
+            return m_targetTypes;
         }
     }
 }
