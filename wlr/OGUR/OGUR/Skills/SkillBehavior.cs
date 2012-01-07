@@ -50,7 +50,6 @@ namespace OGUR.Skills
             hitTarget = source.GetTargets().GetCollidedTarget(graphic);
             if (null != hitTarget && hitTarget!=source)
             {
-                Console.WriteLine(1);
                 m_parent.Affect(hitTarget);
                 if (!m_parent.IsPersistent())
                 {
@@ -64,7 +63,6 @@ namespace OGUR.Skills
                     hitTarget = GameplayObjectManager.GetObjects(targetType, graphic.GetLocation()).FirstOrDefault();
                     if (null != hitTarget && hitTarget!=source)
                     {
-                        Console.WriteLine(2);
                         m_parent.Affect(hitTarget);
                         if (!m_parent.IsPersistent())
                         {
@@ -93,6 +91,7 @@ namespace OGUR.Skills
         {
             if (!m_used)
             {
+                source.Combo(m_parent.GetElements());
                 m_parent.Affect(source);
                 m_used = true;
             }

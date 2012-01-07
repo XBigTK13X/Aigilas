@@ -52,7 +52,7 @@ namespace OGUR.Skills
             }
         }
         public List<int> GetElements() { return m_components.GetElements(); }
-        public virtual void Affect(ICreature target) { target.Combo(m_components.GetElements()); }
+        public virtual void Affect(ICreature target) { }
         public int GetSpriteType(){return m_behavior.GetSpriteType();}
         public int GetAnimationType() { return m_behavior.GetAnimationType(); }
         public float GetStrength(){return m_components.GetStrength();}
