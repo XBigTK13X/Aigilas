@@ -34,11 +34,19 @@ namespace OGUR.GameObjects
             m_graphic.SetColor(skill.GetElementColor());
         }
 
+        private GameplayObject hitTarget;
         public override void Update()
-        {         
+        {
+            foreach (var targetType in m_skill.GetTargetTypes())
+            {
+                hitTarget = GameplayObjectManager.GetObjects(targetType, this.GetLocation()).FirstOrDefault();
+                if (null != hitTarget && hitTarget != this)
+                {
+                    m_skill.Cleanup(this);
+                }
+            }
             if(m_currentStrength<.001)
             {
-
                 m_skill.Cleanup(m_source);
                 m_isActive = false;
             }

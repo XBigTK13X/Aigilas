@@ -24,7 +24,7 @@ namespace OGUR.Skills
         }
         public int GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
-        public virtual void Cleanup(ICreature target) { }
+        public virtual void Cleanup(GameplayObject target) { }
         public void AddCost(string stat, float cost)
         {
             m_cost.AddBuff(new StatBuff(stat, cost));
@@ -54,21 +54,6 @@ namespace OGUR.Skills
                 if (!m_parent.IsPersistent())
                 {
                     return false;
-                }
-            }
-            else
-            {
-                foreach (var targetType in m_parent.GetTargetTypes())
-                {
-                    hitTarget = GameplayObjectManager.GetObjects(targetType, graphic.GetLocation()).FirstOrDefault();
-                    if (null != hitTarget && hitTarget!=source)
-                    {
-                        m_parent.Affect(hitTarget);
-                        if (!m_parent.IsPersistent())
-                        {
-                            return false;
-                        }
-                    }
                 }
             }
             return true;

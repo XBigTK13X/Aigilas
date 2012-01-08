@@ -13,6 +13,7 @@ namespace OGUR.Creatures
         public const int PEON = 3;
         public const int ZORB = 4;
         public const int NONPLAYER = 5;
+        public const int DART_TRAP = 6;
 
         public static readonly int[] Values = 
         {
@@ -21,7 +22,8 @@ namespace OGUR.Creatures
             ACID_NOZZLE,
             PEON,
             ZORB,
-            NONPLAYER
+            NONPLAYER,
+            DART_TRAP
         };
     }
 }

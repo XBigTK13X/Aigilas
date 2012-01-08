@@ -77,17 +77,15 @@ namespace OGUR.Skills
         public DartSkill() : base(SkillId.DART, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.DARK); }
         public override void Affect(ICreature target)
         {
-
             StatusFactory.Apply(target, Status.Poison); target.ApplyDamage(5, m_source);
         }
     }
     public class DartTrapSkill : ISkill
     {
         public DartTrapSkill() : base(SkillId.DART_TRAP, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.DARK); }
-        public override void Affect(ICreature target)
+        public override void Cleanup(GameplayObject target)
         {
-
-            StatusFactory.Apply(target, Status.Poison); target.ApplyDamage(5, m_source);
+            CreatureFactory.CreateMinion(m_implementationId, m_source,target.GetLocation());
         }
     }
     public class ElectrifySkill : ISkill

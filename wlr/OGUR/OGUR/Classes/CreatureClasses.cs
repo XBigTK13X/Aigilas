@@ -34,7 +34,7 @@ namespace OGUR.Classes
             Add(2, SkillId.FLOOR_SPIKES);
             Add(3, SkillId.REMOTE_MINE);
             Add(4, SkillId.VAPOR_IMPLANT);
-            Add(1, SkillId.DART);
+            Add(1, SkillId.DART_TRAP);
         }
     }
     class EnvyAcolyte : CreatureClass

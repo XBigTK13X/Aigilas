@@ -24,4 +24,21 @@ namespace OGUR.Strategies
             }
         }
     }
+    public class MinionFire : IStrategy
+    {
+        public MinionFire(ICreature parent)
+            : base(parent)
+        {
+            parent.SetSkillVector(parent.GetSkillVector());
+        }
+        public override void Act()
+        {
+            if (m_parent.Get(StatType.MOVE_COOL_DOWN) >= m_parent.GetMax(StatType.MOVE_COOL_DOWN))
+            {
+                m_parent.UseActiveSkill();
+                m_parent.ApplyDamage(5, null, false);
+                m_parent.Set(StatType.MOVE_COOL_DOWN, 0);
+            }
+        }
+    }
 }

@@ -48,18 +48,22 @@ namespace OGUR.Creatures
             return Create(Generate.Randoms[val], randomPoint);
         }
 
-        public static ICreature CreateMinion(string skillId, ICreature source)
+        public static ICreature CreateMinion(string skillId, ICreature source,Point2 location=null)
         {
             Minion result = null;
             switch (skillId)
             {
-                case SkillId.ACID_NOZZLE:
-                    result = new AcidNozzle();
-                    break;
+                case SkillId.ACID_NOZZLE:result = new AcidNozzle();break;
+                case SkillId.DART_TRAP: result = new DartTrap(); break;
+
                 default:
                     throw new Exception("No minion was defined for the given skillId.");
             }
             result.Init(source);
+            if (location != null)
+            {
+                result.SetLocation(location);
+            }
             GameplayObjectManager.AddObject(result);
             return result;
         }

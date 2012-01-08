@@ -21,7 +21,7 @@ namespace OGUR.Creatures
             m_master = source;
             Setup(source.GetLocation(), m_creatureType, m_baseStats,null,false);
             SetSkillVector(new Collision.Point2(1, 0));
-            m_strategy = new MinionRotate(this);
+            m_strategy = new MinionFire(this);
         }
         protected void Add(string skill)
         {
@@ -40,6 +40,17 @@ namespace OGUR.Creatures
         {
             Add(SkillId.ACID_DRIP);
             m_composition.Add(Elements.EARTH);
+        }
+    }
+
+    class DartTrap : Minion
+    {
+        public DartTrap()
+            : base(CreatureType.DART_TRAP)
+        {
+            m_strategy = new MinionFire(this);
+            Add(SkillId.DART);
+            m_composition.Add(Elements.DARK);
         }
     }
 }
