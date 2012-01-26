@@ -46,7 +46,7 @@ namespace OGUR.Creatures
     class DartTrap : Minion
     {
         public DartTrap()
-            : base(CreatureType.DART_TRAP)
+            : base(CreatureType.MINION)
         {
             m_strategy = new MinionFire(this);
             Add(SkillId.DART);

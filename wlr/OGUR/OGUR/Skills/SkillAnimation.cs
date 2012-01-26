@@ -27,7 +27,10 @@ namespace OGUR.Skills
     {
         public override void Animate(SkillEffect skill, ICreature source, Point2 velocity)
         {
-            skill.Move(velocity.X, velocity.Y);
+            if (!skill.Move(velocity.X, velocity.Y))
+            {
+                skill.Cleanup();
+            }
         }
     }
 

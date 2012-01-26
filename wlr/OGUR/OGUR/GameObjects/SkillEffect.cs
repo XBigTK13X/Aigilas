@@ -35,6 +35,13 @@ namespace OGUR.GameObjects
         }
 
         private GameplayObject hitTarget;
+
+        public void Cleanup()
+        {
+            m_isActive = false;
+            m_skill.Cleanup(this);
+        }
+        
         public override void Update()
         {
             foreach (var targetType in m_skill.GetTargetTypes())

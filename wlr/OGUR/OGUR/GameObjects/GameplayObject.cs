@@ -79,7 +79,7 @@ namespace OGUR.GameObjects
         }
 
         private Point2 target = new Point2(0, 0);
-        public void Move(float amountX, float amountY)
+        public bool Move(float amountX, float amountY)
         {
             amountX = NormalizeDistance(amountX);
             amountY = NormalizeDistance(amountY);
@@ -87,7 +87,9 @@ namespace OGUR.GameObjects
             if (CoordVerifier.IsValid(target))
             {
                 UpdateLocation(target);
+                return true;
             }
+            return false;
         }
 
         private static int isNeg = 1;
