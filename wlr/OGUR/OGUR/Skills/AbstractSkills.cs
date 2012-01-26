@@ -58,7 +58,7 @@ namespace OGUR.Skills
         public float GetStrength(){return m_components.GetStrength();}
         public bool IsPersistent() { return m_components.IsPersistent(); }
         public Color GetElementColor() { return Elements.Colors[m_components.GetElements()[0]];}
-        public virtual void Cleanup(GameplayObject target){m_behavior.Cleanup(target);}
+        public virtual void Cleanup(GameplayObject target,SkillEffect source){m_behavior.Cleanup(target);}
         public bool AffectTarget(ICreature target, SkillEffect graphic){return m_behavior.AffectTarget(target, graphic);}
         public List<int> GetTargetTypes()
         {

@@ -22,12 +22,14 @@ namespace OGUR.GameObjects
         private SkillAnimation m_animation;
         private float m_coolDown = CoolDown;
         private const float CoolDown = Stats.DefaultCoolDown/8;
+        private readonly Point2 m_direction = new Point2(0, 0);
 
         public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill)
         {
             m_skill = skill;
             Initialize(gridLocation, m_skill.GetSpriteType(), GameObjectType.SKILL_EFFECT,.7f);
             m_velocity.Copy(velocity);
+            m_direction.Copy(velocity);
             m_source = source;
             m_startingStrength = m_currentStrength = m_skill.GetStrength();
             m_animation = SkillFactory.Create(m_skill.GetAnimationType());
@@ -39,9 +41,14 @@ namespace OGUR.GameObjects
         public void Cleanup()
         {
             m_isActive = false;
-            m_skill.Cleanup(this);
+            m_skill.Cleanup(this,this);
         }
-        
+
+        public Point2 GetDirection()
+        {
+            return m_direction;
+        }
+
         public override void Update()
         {
             foreach (var targetType in m_skill.GetTargetTypes())
@@ -49,12 +56,12 @@ namespace OGUR.GameObjects
                 hitTarget = GameplayObjectManager.GetObjects(targetType, this.GetLocation()).FirstOrDefault();
                 if (null != hitTarget && hitTarget != this)
                 {
-                    m_skill.Cleanup(this);
+                    m_skill.Cleanup(this,this);
                 }
             }
             if(m_currentStrength<.001)
             {
-                m_skill.Cleanup(m_source);
+                m_skill.Cleanup(m_source,this);
                 m_isActive = false;
             }
             else

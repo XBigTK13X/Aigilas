@@ -6,6 +6,7 @@ using OGUR.Skills;
 using OGUR.Sprites;
 using OGUR.Strategies;
 using OGUR.GameObjects;
+using OGUR.Collision;
 
 namespace OGUR.Creatures
 {
@@ -16,11 +17,18 @@ namespace OGUR.Creatures
             m_creatureType = creatureType;
             m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
         }
-        public void Init(ICreature source)
+        public void Init(ICreature source,SkillEffect effectGraphic)
         {
             m_master = source;
             Setup(source.GetLocation(), m_creatureType, m_baseStats,null,false);
-            SetSkillVector(new Collision.Point2(1, 0));
+            if (null != effectGraphic)
+            {
+                SetSkillVector(effectGraphic.GetDirection().RotateClockwise().RotateClockwise().RotateClockwise().RotateClockwise());
+            }
+            else
+            {
+                SetSkillVector(new Point2(0, 1));
+            }
             m_strategy = new MinionFire(this);
         }
         protected void Add(string skill)

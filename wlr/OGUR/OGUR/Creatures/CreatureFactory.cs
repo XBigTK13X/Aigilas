@@ -48,7 +48,7 @@ namespace OGUR.Creatures
             return Create(Generate.Randoms[val], randomPoint);
         }
 
-        public static ICreature CreateMinion(string skillId, ICreature source,Point2 location=null)
+        public static ICreature CreateMinion(string skillId, ICreature source,SkillEffect effectGraphic=null,Point2 location=null)
         {
             Minion result = null;
             switch (skillId)
@@ -59,7 +59,7 @@ namespace OGUR.Creatures
                 default:
                     throw new Exception("No minion was defined for the given skillId.");
             }
-            result.Init(source);
+            result.Init(source, effectGraphic);
             if (location != null)
             {
                 result.SetLocation(location);

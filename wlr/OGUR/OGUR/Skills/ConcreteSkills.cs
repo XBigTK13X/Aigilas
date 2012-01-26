@@ -83,9 +83,9 @@ namespace OGUR.Skills
     public class DartTrapSkill : ISkill
     {
         public DartTrapSkill() : base(SkillId.DART_TRAP, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.DARK); }
-        public override void Cleanup(GameplayObject target)
+        public override void Cleanup(GameplayObject target,SkillEffect source)
         {
-            CreatureFactory.CreateMinion(m_implementationId, m_source,target.GetLocation());
+            CreatureFactory.CreateMinion(m_implementationId, m_source,source,target.GetLocation());
         }
     }
     public class ElectrifySkill : ISkill
