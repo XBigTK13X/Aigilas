@@ -29,7 +29,7 @@ namespace OGUR.Skills
         {
             if (!skill.Move(velocity.X, velocity.Y))
             {
-                skill.Cleanup();
+                skill.Cleanup(skill);
             }
         }
     }

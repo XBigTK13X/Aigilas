@@ -72,6 +72,11 @@ namespace OGUR.Collision
             }
         }
 
+        public Point2 Add(Point2 target)
+        {
+            return new Point2(GridX + target.GridX,GridY + target.GridY);
+        }
+
         public override int GetHashCode()
         {
             return GridX + 1000*GridY;

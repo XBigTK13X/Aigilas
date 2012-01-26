@@ -24,7 +24,7 @@ namespace OGUR.Skills
         }
         public int GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
-        public virtual void Cleanup(GameplayObject target) { }
+        public virtual void Cleanup(GameplayObject target,SkillEffect source) { }
         public void AddCost(string stat, float cost)
         {
             m_cost.AddBuff(new StatBuff(stat, cost));
@@ -66,7 +66,7 @@ namespace OGUR.Skills
     public class RangedBehavior: SkillBehavior
     {
         public RangedBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.RANGED, parentSkill) { }
-        public override void Activate(ICreature target) { if (SubtractCost(target)) { m_sideEffects.Generate(target.GetLocation(), target.GetSkillVector(), target); } }
+        public override void Activate(ICreature target) { if (SubtractCost(target)) { m_sideEffects.Generate(target.GetLocation().Add(target.GetSkillVector()), target.GetSkillVector(), target); } }
     }
     public class SelfBehavior:SkillBehavior
     {

@@ -38,10 +38,10 @@ namespace OGUR.GameObjects
 
         private GameplayObject hitTarget;
 
-        public void Cleanup()
+        public void Cleanup(GameplayObject target)
         {
             m_isActive = false;
-            m_skill.Cleanup(this,this);
+            m_skill.Cleanup(target,this);
         }
 
         public Point2 GetDirection()
@@ -56,13 +56,12 @@ namespace OGUR.GameObjects
                 hitTarget = GameplayObjectManager.GetObjects(targetType, this.GetLocation()).FirstOrDefault();
                 if (null != hitTarget && hitTarget != this)
                 {
-                    m_skill.Cleanup(this,this);
+                    Cleanup(this);
                 }
             }
             if(m_currentStrength<.001)
             {
-                m_skill.Cleanup(m_source,this);
-                m_isActive = false;
+                Cleanup(m_source);
             }
             else
             {
