@@ -29,7 +29,6 @@ namespace OGUR.Creatures
             {
                 SetSkillVector(new Point2(0, 1));
             }
-            m_strategy = new MinionFire(this);
         }
         protected void Add(string skill)
         {
@@ -48,6 +47,7 @@ namespace OGUR.Creatures
         {
             Add(SkillId.ACID_DRIP);
             m_composition.Add(Elements.EARTH);
+            m_strategy = new MinionRotate(this);
         }
     }
 
