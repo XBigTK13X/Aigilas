@@ -33,6 +33,11 @@ namespace OGUR.Strategies
             }
         }
 
+        public void AddTargets(ICreature source)
+        {
+            m_targets.AddRange(source.GetTargets().m_targets);
+            m_targetTypes.AddRange(source.GetTargets().m_targetTypes);
+        }
 
         public IEnumerable<ICreature> AddTargets(IEnumerable<ICreature> targets)
         {

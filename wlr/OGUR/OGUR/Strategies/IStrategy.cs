@@ -20,5 +20,9 @@ namespace OGUR.Strategies
         {
             return m_targets;
         }
+        public void AddTargets(ICreature source)
+        {
+            m_targets.AddTargets(source);
+        }
     }
 }

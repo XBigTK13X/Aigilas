@@ -29,6 +29,7 @@ namespace OGUR.Creatures
             {
                 SetSkillVector(new Point2(0, 1));
             }
+            m_strategy.AddTargets(m_master);
         }
         protected void Add(string skill)
         {

@@ -8,7 +8,7 @@ namespace OGUR.Strategies
 {
     public class MinionRotate : IStrategy
     {
-        public MinionRotate(ICreature parent) : base(parent)
+        public MinionRotate(ICreature parent) : base(parent)//TODO pass master into strategy to copy targets here.
         {
             parent.SetSkillVector(new Point2(1,0));
         }
