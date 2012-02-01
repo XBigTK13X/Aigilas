@@ -24,6 +24,8 @@ namespace OGUR.Creatures
         public const int AttackPlayers = 0;
         public const int ControlledByPlayer = 1;
         public const int Confused = 2;
+        public const int MinionRotate = 3;
+        public const int MinionFire = 4;
 
         public static readonly int[] Values =
         {

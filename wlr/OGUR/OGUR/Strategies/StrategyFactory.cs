@@ -15,6 +15,8 @@ namespace OGUR.Strategies
                 case Strategy.AttackPlayers: return new AttackPlayers(target);
                 case Strategy.ControlledByPlayer: return new ControlledByPlayer(target);
                 case Strategy.Confused: return new ConfusedStrategy(target);
+                case Strategy.MinionFire: return new MinionFire(target);
+                case Strategy.MinionRotate: return new MinionRotate(target);
                 default: throw new Exception("An undefined strategy was passed into the strategy factory: " + strategy);
             }
         }
@@ -32,6 +34,14 @@ namespace OGUR.Strategies
             if (strategyType == typeof(ConfusedStrategy))
             {
                 return Strategy.Confused;
+            }
+            if (strategyType == typeof(MinionRotate))
+            {
+                return Strategy.MinionRotate;
+            }
+            if (strategyType == typeof(MinionFire))
+            {
+                return Strategy.MinionFire;
             }
             throw new Exception("An unknown strategyType was passed into StrategyFactory.GetId(): " + strategyType);
         }
