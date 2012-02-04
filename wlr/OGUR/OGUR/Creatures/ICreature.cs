@@ -340,8 +340,9 @@ namespace OGUR.Creatures
                     Adjust(stat, -amount);
                     return true;
                 }
+                return false;
             }
-            return false;
+            return true;
         }
 
         public void AddBuff(StatBuff buff)

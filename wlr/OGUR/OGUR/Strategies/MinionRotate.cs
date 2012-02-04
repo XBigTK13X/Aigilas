@@ -41,4 +41,18 @@ namespace OGUR.Strategies
             }
         }
     }
+
+    public class MinionExplode : IStrategy
+    {
+        public MinionExplode(ICreature parent)
+            : base(parent)
+        {
+            parent.SetSkillVector(parent.GetSkillVector());
+        }
+        public override void Act()
+        {
+            m_parent.UseActiveSkill();
+            m_parent.SetInactive();   
+        }
+    }
 }

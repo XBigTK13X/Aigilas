@@ -34,6 +34,13 @@ namespace OGUR.Skills
             GameplayObjectManager.AddObject(effect);
         }
 
+        public SkillEffect GetFirstGraphic()
+        {
+            if(m_effectGraphics.Count()>0)
+                return m_effectGraphics[0];
+            return null;
+        }
+
         public int GetSpriteType()
         {
             return m_effectSprite;

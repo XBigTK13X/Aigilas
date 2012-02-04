@@ -25,6 +25,14 @@ namespace OGUR.Skills
         public int GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
         public virtual void Cleanup(GameplayObject target,SkillEffect source) { }
+        public bool IsActive()
+        {
+            return !m_used;
+        }
+        public SkillEffect GetGraphic()
+        {
+            return m_sideEffects.GetFirstGraphic();
+        }
         public void AddCost(string stat, float cost)
         {
             m_cost.AddBuff(new StatBuff(stat, cost));

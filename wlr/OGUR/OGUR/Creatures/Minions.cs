@@ -62,4 +62,15 @@ namespace OGUR.Creatures
             m_composition.Add(Elements.DARK);
         }
     }
+
+    class Explosion : Minion
+    {
+        public Explosion()
+            : base(CreatureType.MINION)
+        {
+            m_strategy = new MinionExplode(this);
+            Add(SkillId.EXPLODE);
+            m_composition.Add(Elements.FIRE);
+        }
+    }
 }

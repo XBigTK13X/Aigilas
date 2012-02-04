@@ -102,6 +102,21 @@ namespace OGUR.Skills
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) { }
     }
+    public class ExplodeSkill : ISkill
+    {
+        public ExplodeSkill()
+            : base(SkillId.EXPLODE, AnimationType.CLOUD)
+        { Add(Elements.FIRE); AddCost(StatType.MANA, 0); }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            Console.WriteLine("TOTAL EXPLODE");
+        }
+        public override void Affect(ICreature target)
+        {
+            target.ApplyDamage(10,m_source,true);
+        }
+    }
     public class FireballSkill : ISkill
     {
         public FireballSkill()
@@ -196,10 +211,39 @@ namespace OGUR.Skills
     }
     public class RemoteMineSkill : ISkill
     {
+        private static Dictionary<ICreature, RemoteMineSkill> m_cache = new Dictionary<ICreature, RemoteMineSkill>();
         public RemoteMineSkill() : base(SkillId.REMOTE_MINE, AnimationType.STATIONARY) { AddCost(StatType.MANA, 10); Add(Elements.FIRE); }
-        public override void Affect(ICreature target)
+        public override void Activate(ICreature source)
         {
-            Buff(target);
+            
+            if (!m_cache.ContainsKey(source))
+            {
+                m_cache.Add(source, this);
+                base.Activate(source);
+            }
+            else
+            {
+                if (m_cache[source].IsActive())
+                {
+                    m_cache[source].Explode(source);
+                    m_cache[source].Cleanup(source, null);
+                    m_cache.Remove(source);
+                    Cleanup(source, null);
+                }
+                else
+                {
+                    m_cache.Remove(source);
+                    m_cache.Add(source, this);
+                    base.Activate(source);
+                }
+            }
+        }
+        private void Explode(ICreature source)
+        {
+            if (m_behavior.GetGraphic() != null)
+            {
+                CreatureFactory.CreateMinion(SkillId.EXPLODE, m_source, m_behavior.GetGraphic(), m_behavior.GetGraphic().GetLocation());
+            }
         }
     }
     public class SoulCrushSkill : ISkill
@@ -268,7 +312,7 @@ namespace OGUR.Skills
         public VaporImplantSkill() : base(SkillId.VAPOR_IMPLANT, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.PHYSICAL, Elements.AIR); }
         public override void Affect(ICreature target)
         {
-            Buff(target);
+            //Enemies release a slowing cloud while moving around
         }
     }
     public class VenomFistSkill : ISkill

@@ -57,6 +57,8 @@ namespace OGUR.Skills
         public const string MIMIC = "Mimic";
         public const string VALEDICTORIAN = "Valedictorian";
 
+        public const string EXPLODE = "Explode";
+
         public static readonly string[] Values = 
         {
             SkillId.ABSORB,
@@ -70,6 +72,7 @@ namespace OGUR.Skills
             SkillId.DART_TRAP,
             SkillId.ELECTRIFY,
             SkillId.ENVENOM,
+            SkillId.EXPLODE,
             SkillId.FIREBALL,
             SkillId.FLAME_HAMMER,
             SkillId.FLOOR_SPIKES,
@@ -115,6 +118,7 @@ namespace OGUR.Skills
                 case SkillId.DART_TRAP: return new DartTrapSkill();
                 case SkillId.ELECTRIFY: return new ElectrifySkill();
                 case SkillId.ENVENOM: return new EnvenomSkill();
+                case SkillId.EXPLODE: return new ExplodeSkill();
                 case SkillId.FIREBALL:return new FireballSkill();
                 case SkillId.FLAME_HAMMER: return new FlameHammerSkill();
                 case SkillId.FLOOR_SPIKES:return new FloorSpikesSkill();

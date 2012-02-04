@@ -55,7 +55,7 @@ namespace OGUR.Creatures
             {
                 case SkillId.ACID_NOZZLE:result = new AcidNozzle();break;
                 case SkillId.DART_TRAP: result = new DartTrap(); break;
-
+                case SkillId.EXPLODE: result = new Explosion(); break;
                 default:
                     throw new Exception("No minion was defined for the given skillId.");
             }
