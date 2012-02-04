@@ -43,6 +43,10 @@ namespace OGUR.Strategies
             {
                 return Strategy.MinionFire;
             }
+            if (strategyType == typeof(MinionFire))
+            {
+                return Strategy.MinionExplode;
+            }
             throw new Exception("An unknown strategyType was passed into StrategyFactory.GetId(): " + strategyType);
         }
     }
