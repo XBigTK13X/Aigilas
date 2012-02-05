@@ -55,4 +55,18 @@ namespace OGUR.Strategies
             m_parent.SetInactive();   
         }
     }
+
+    public class MinionCloud : IStrategy
+    {
+        public MinionCloud(ICreature parent)
+            : base(parent)
+        {
+            parent.SetSkillVector(parent.GetSkillVector());
+        }
+        public override void Act()
+        {
+            m_parent.UseActiveSkill();
+            m_parent.SetInactive();
+        }
+    }
 }

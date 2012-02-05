@@ -27,6 +27,7 @@ namespace OGUR.Creatures
         public const int MinionRotate = 3;
         public const int MinionFire = 4;
         public const int MinionExplode = 5;
+        public const int MinionCloud = 6;
 
         public static readonly int[] Values =
         {

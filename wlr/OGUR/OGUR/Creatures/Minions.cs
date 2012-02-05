@@ -73,4 +73,38 @@ namespace OGUR.Creatures
             m_composition.Add(Elements.FIRE);
         }
     }
+
+    class VaporCloud : Minion
+    {
+        private ICreature m_host = null;
+        public VaporCloud()
+            : base(CreatureType.MINION)
+        {
+            m_strategy = new MinionCloud(this);
+            Add(SkillId.VAPOR_CLOUD);
+            m_composition.Add(Elements.WATER);
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (m_host == null)
+            {
+                foreach (var creature in GameplayObjectManager.GetCreaturesAt(m_location))
+                {
+                    if (creature != this)
+                    {
+                        m_host = creature;
+                    }
+                }
+                if (m_host == null)
+                {
+                    SetInactive();
+                }
+            }
+            if (m_host != null)
+            {
+                SetLocation(m_host.GetLocation());
+            }
+        }
+    }
 }

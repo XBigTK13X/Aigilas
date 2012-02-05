@@ -107,11 +107,6 @@ namespace OGUR.Skills
         public ExplodeSkill()
             : base(SkillId.EXPLODE, AnimationType.CLOUD)
         { Add(Elements.FIRE); AddCost(StatType.MANA, 0); }
-        public override void Activate(ICreature source)
-        {
-            base.Activate(source);
-            Console.WriteLine("TOTAL EXPLODE");
-        }
         public override void Affect(ICreature target)
         {
             target.ApplyDamage(10,m_source,true);
@@ -307,12 +302,19 @@ namespace OGUR.Skills
         { Add(Elements.MENTAL, Elements.LIGHT); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) { }
     }
+    public class VaporCloudSkill : ISkill
+    {
+        public VaporCloudSkill()
+            : base(SkillId.VAPOR_CLOUD, AnimationType.CLOUD)
+        { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 10); }
+        public override void Affect(ICreature target) { target.AddBuff(new StatBuff(StatType.MOVE_COOL_DOWN, -10)); }
+    }
     public class VaporImplantSkill : ISkill
     {
         public VaporImplantSkill() : base(SkillId.VAPOR_IMPLANT, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.PHYSICAL, Elements.AIR); }
-        public override void Affect(ICreature target)
+        public override void  Affect(GameplayObject target)
         {
-            //Enemies release a slowing cloud while moving around
+            CreatureFactory.CreateMinion(SkillId.VAPOR_CLOUD, m_source,null,target.GetLocation());
         }
     }
     public class VenomFistSkill : ISkill

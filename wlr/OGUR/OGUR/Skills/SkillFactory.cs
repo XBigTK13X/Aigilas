@@ -58,6 +58,7 @@ namespace OGUR.Skills
         public const string VALEDICTORIAN = "Valedictorian";
 
         public const string EXPLODE = "Explode";
+        public const string VAPOR_CLOUD = "Vapor Cloud";
 
         public static readonly string[] Values = 
         {
@@ -98,7 +99,8 @@ namespace OGUR.Skills
             SkillId.VAPOR_IMPLANT,
             SkillId.VENOM_FIST,
             SkillId.WALL_PUNCH,
-            SkillId.WEAK_KNEEES
+            SkillId.WEAK_KNEEES,
+            SkillId.VAPOR_CLOUD
         };
     }
     class SkillFactory
@@ -145,6 +147,7 @@ namespace OGUR.Skills
                 case SkillId.VENOM_FIST: return new VenomFistSkill();
                 case SkillId.WALL_PUNCH:return new WallPunchSkill();
                 case SkillId.WEAK_KNEEES:return new WeakKneesSkill();
+                case SkillId.VAPOR_CLOUD: return new VaporCloudSkill();
                 default:
                     throw new Exception("You forgot to define the new skill in the Factory...YOU FOOL!"); 
             }

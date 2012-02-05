@@ -33,7 +33,7 @@ namespace OGUR.Classes
             Add(1, SkillId.ACID_NOZZLE);
             Add(1, SkillId.FLOOR_SPIKES);
             Add(1, SkillId.REMOTE_MINE);
-            Add(4, SkillId.VAPOR_IMPLANT);
+            Add(1, SkillId.VAPOR_IMPLANT);
             Add(1, SkillId.DART_TRAP);
         }
     }

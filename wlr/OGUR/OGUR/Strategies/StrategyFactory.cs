@@ -17,6 +17,7 @@ namespace OGUR.Strategies
                 case Strategy.Confused: return new ConfusedStrategy(target);
                 case Strategy.MinionFire: return new MinionFire(target);
                 case Strategy.MinionRotate: return new MinionRotate(target);
+                case Strategy.MinionCloud: return new MinionCloud(target);
                 default: throw new Exception("An undefined strategy was passed into the strategy factory: " + strategy);
             }
         }
@@ -42,6 +43,10 @@ namespace OGUR.Strategies
             if (strategyType == typeof(MinionFire))
             {
                 return Strategy.MinionFire;
+            }
+            if (strategyType == typeof(MinionFire))
+            {
+                return Strategy.MinionExplode;
             }
             if (strategyType == typeof(MinionFire))
             {
