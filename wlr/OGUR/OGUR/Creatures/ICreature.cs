@@ -167,6 +167,10 @@ namespace OGUR.Creatures
         public override void Update()
         {
             m_statuses.Update();
+            if (Get(StatType.HEALTH) <= 0)
+            {
+                m_isActive = false;
+            }
             if (m_statuses.CanMove())
             {
                 if (m_isPlaying)
@@ -308,10 +312,13 @@ namespace OGUR.Creatures
             return Set(stat, (result),adjustMax);
         }
 
-        public void ApplyDamage(float damage,ICreature attacker=null,bool showDamage = true)
+        public void ApplyDamage(float damage,ICreature attacker=null,bool showDamage = true,string statType = null)
         {
-            damage -= m_baseStats.Get(StatType.DEFENSE);
-            if (damage <= 0)
+            if (statType == null)
+            {
+                damage -= m_baseStats.Get(StatType.DEFENSE);
+            }
+            if (damage <= 0 && statType==null)
             {
                 damage = 0;                
             }
@@ -319,9 +326,9 @@ namespace OGUR.Creatures
             {
                 m_damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
             }
-            if(damage>0)
+            if(damage>0 && statType==null)
             {
-                Adjust(StatType.HEALTH, -damage);
+                Adjust(statType??StatType.HEALTH, -damage);
             }
             if (Get(StatType.HEALTH) <= 0)
             {

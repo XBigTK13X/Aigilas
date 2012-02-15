@@ -61,8 +61,9 @@ namespace OGUR.Management
         public static void SetupCamera(GraphicsDeviceManager graphicsDevice)
         {
             s_camera.Pos = new Vector2(SpriteInfo.Width*15, SpriteInfo.Height*10);
-            s_camera.Zoom = 1f;
             s_graphicsDevice = graphicsDevice;
+            s_camera.Zoom = 1f;
+            //s_graphicsDevice.IsFullScreen = true;
         }
 
         public static Camera GetCamera()

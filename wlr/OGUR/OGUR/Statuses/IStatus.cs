@@ -15,6 +15,7 @@ namespace OGUR.Statuses
         protected int m_maxStrength = 100;        
         protected bool m_isActive = true;
         protected ICreature m_target;
+        protected StatBuff m_buff = null;
 
         protected IStatus(bool stopMovement,bool stopAttacking,ICreature target)
         {
@@ -58,7 +59,21 @@ namespace OGUR.Statuses
             }
         }
 
-        public virtual void Setup() { }
-        public virtual void Cleanup() { }
+        private void CycleBuff()
+        {
+            if (m_buff != null)
+            {
+                m_target.AddBuff(m_buff);
+            }
+        }
+
+        public virtual void Setup() 
+        {
+            CycleBuff();
+        }
+        public virtual void Cleanup() 
+        {
+            CycleBuff();
+        }
     }
 }

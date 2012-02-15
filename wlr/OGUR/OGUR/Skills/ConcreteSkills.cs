@@ -23,7 +23,13 @@ namespace OGUR.Skills
         public AbsorbSkill()
             : base(SkillId.ABSORB, AnimationType.RANGED)
         { Add(Elements.LIGHT); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) 
+        {
+            target.ApplyDamage(10,m_source);
+            m_source.ApplyDamage(-10);
+            target.ApplyDamage(10, m_source, true, StatType.MANA);
+            m_source.ApplyDamage(-10, m_source, true, StatType.MANA);
+        }
     }
     public class AcidDripSkill : ISkill
     {
@@ -336,6 +342,9 @@ namespace OGUR.Skills
         public WeakKneesSkill()
             : base(SkillId.WEAK_KNEEES, AnimationType.RANGED)
         { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) 
+        {
+            StatusFactory.Apply(target, Status.WeakKnees);
+        }
     }
 }

@@ -41,10 +41,10 @@ namespace OGUR.Classes
     {
         public EnvyAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
-            Add(1, SkillId.CONFUSION);
-            Add(2, SkillId.WEAK_KNEEES);
+            Add(2, SkillId.CONFUSION);
+            Add(1, SkillId.WEAK_KNEEES);
             Add(3, SkillId.VENOM_FIST);
-            Add(4, SkillId.ABSORB);
+            Add(2, SkillId.ABSORB);
             Add(5, SkillId.MUTINY);
         }
     }

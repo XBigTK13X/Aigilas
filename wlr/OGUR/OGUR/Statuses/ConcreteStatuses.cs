@@ -13,12 +13,15 @@ namespace OGUR.Statuses
         public const int Regen = 1;
         public const int StrengthUp = 2;
         public const int Confusion = 3;
+        public const int WeakKnees = 4;
+
         public static readonly int[] Values =
         {
             Poison,
             Regen,
             StrengthUp,
-            Confusion
+            Confusion,
+            WeakKnees
         };
     }
 
@@ -63,15 +66,10 @@ namespace OGUR.Statuses
     {
         private StatBuff buff = new StatBuff(StatType.STRENGTH, 10f);
         public StrengthUpStatus(ICreature target) : base(false, false, target) { }
-        public override void Setup()
-        {
-            base.Setup();
-            m_target.AddBuff(buff);
-        }
-        public override void Cleanup()
-        {
-            base.Cleanup();
-            m_target.AddBuff(buff);
-        }
+    }
+
+    public class WeakKneesStatus : IStatus
+    {
+        public WeakKneesStatus(ICreature target) : base(true, true, target) { }
     }
 }

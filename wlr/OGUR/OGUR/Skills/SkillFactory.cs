@@ -182,10 +182,16 @@ namespace OGUR.Skills
         }
 
         private static Random rand = new Random();
+        private static int skillPick = 0;
+        private static List<string> InvalidRandomSkills = new List<string>() { SkillId.VAPOR_CLOUD, SkillId.VAPOR_IMPLANT, SkillId.ACID_NOZZLE, SkillId.DART_TRAP };
         public static string GetElementalSkill(int elementId)
         {
             GenerateStaticSkillMaps();
-            return s_elementMap[elementId][rand.Next(0, s_elementMap[elementId].Count())];
+            while (InvalidRandomSkills.Contains(SkillId.Values[skillPick]))
+            {
+                skillPick = rand.Next(0, s_elementMap[elementId].Count());
+            }
+            return s_elementMap[elementId][skillPick];
         }
 
         public static bool IsSkill(string skillId,int animationType)
