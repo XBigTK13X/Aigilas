@@ -16,6 +16,7 @@ namespace OGUR.Statuses
                 case Status.Regen: target.AddStatus(new RegenStatus(target)); break;
                 case Status.StrengthUp: target.AddStatus(new StrengthUpStatus(target)); break;
                 case Status.Confusion: target.AddStatus(new ConfusionStatus(target)); break;
+                case Status.VenomFist: target.AddStatus(new VenomFistStatus(target)); break;
                 case Status.WeakKnees: target.AddStatus(new WeakKneesStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));

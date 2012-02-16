@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OGUR.Creatures;
 
 namespace OGUR.Statuses
 {
@@ -60,6 +61,14 @@ namespace OGUR.Statuses
                     m_statuses.Remove(m_statuses[ii]);
                     ii--;
                 }
+            }
+        }
+
+        internal void ApplyContagions(ICreature target)
+        {
+            foreach (var status in m_statuses)
+            {
+                status.ApplyContagion(target);
             }
         }
     }

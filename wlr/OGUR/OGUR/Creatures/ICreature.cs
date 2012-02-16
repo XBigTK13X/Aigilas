@@ -314,6 +314,10 @@ namespace OGUR.Creatures
 
         public void ApplyDamage(float damage,ICreature attacker=null,bool showDamage = true,string statType = null)
         {
+            if (attacker != null)
+            {
+                attacker.ApplyContagions(this);
+            }
             if (statType == null)
             {
                 damage -= m_baseStats.Get(StatType.DEFENSE);
@@ -554,6 +558,11 @@ namespace OGUR.Creatures
         public void AddStatus(IStatus status)
         {
             m_statuses.Add(status);
+        }
+
+        public void ApplyContagions(ICreature target)
+        {
+            m_statuses.ApplyContagions(target);
         }
 
         public void SetStrategy(IStrategy strategy)

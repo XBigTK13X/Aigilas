@@ -16,6 +16,7 @@ namespace OGUR.Statuses
         protected bool m_isActive = true;
         protected ICreature m_target;
         protected StatBuff m_buff = null;
+        protected List<int> m_contagions = new List<int>();
 
         protected IStatus(bool stopMovement,bool stopAttacking,ICreature target)
         {
@@ -44,6 +45,14 @@ namespace OGUR.Statuses
         public bool StopAttack()
         {
             return m_stopsMovement;
+        }
+
+        public void ApplyContagion(ICreature target)
+        {
+            foreach (var contagion in m_contagions)
+            {
+                StatusFactory.Apply(target, contagion);
+            }
         }
 
         public virtual void Update()

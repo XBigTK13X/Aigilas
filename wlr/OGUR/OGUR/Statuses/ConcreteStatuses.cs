@@ -14,6 +14,7 @@ namespace OGUR.Statuses
         public const int StrengthUp = 2;
         public const int Confusion = 3;
         public const int WeakKnees = 4;
+        public const int VenomFist = 5;
 
         public static readonly int[] Values =
         {
@@ -21,7 +22,8 @@ namespace OGUR.Statuses
             Regen,
             StrengthUp,
             Confusion,
-            WeakKnees
+            WeakKnees,
+            VenomFist
         };
     }
 
@@ -66,6 +68,15 @@ namespace OGUR.Statuses
     {
         private StatBuff buff = new StatBuff(StatType.STRENGTH, 10f);
         public StrengthUpStatus(ICreature target) : base(false, false, target) { }
+    }
+
+    public class VenomFistStatus : IStatus
+    {
+        public VenomFistStatus(ICreature target)
+            : base(false, false, target)
+        {
+            m_contagions.Add(Status.Poison);
+        }
     }
 
     public class WeakKneesStatus : IStatus

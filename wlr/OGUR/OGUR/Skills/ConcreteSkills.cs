@@ -326,9 +326,13 @@ namespace OGUR.Skills
     public class VenomFistSkill : ISkill
     {
         public VenomFistSkill()
-            : base(SkillId.VENOM_FIST, AnimationType.RANGED)
+            : base(SkillId.VENOM_FIST, AnimationType.SELF)
         { Add(Elements.DARK); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void  Activate(ICreature source)
+        {
+ 	         base.Activate(source);
+             StatusFactory.Apply(source, Status.VenomFist);
+        }
     }
     public class WallPunchSkill : ISkill
     {
