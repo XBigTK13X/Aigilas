@@ -201,7 +201,10 @@ namespace OGUR.Skills
         public MutinySkill()
             : base(SkillId.MUTINY, AnimationType.RANGED)
         { Add(Elements.MENTAL, Elements.PHYSICAL); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target)
+        {
+            StatusFactory.Apply(target, Status.Mutiny);
+        }
     }
     public class RegenAllSkill : ISkill
     {

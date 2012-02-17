@@ -72,11 +72,14 @@ namespace OGUR.Strategies
                     m_calculatedTargets = GameplayObjectManager.GetCreatures(creatureType);
                     foreach(var creature in m_calculatedTargets)
                     {
-                        dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
-                        if (dist < closestDistance)
+                        if (creature != m_parent)
                         {
-                            closest = creature;
-                            closestDistance = dist;
+                            dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
+                            if (dist < closestDistance)
+                            {
+                                closest = creature;
+                                closestDistance = dist;
+                            }
                         }
                     }
                 }

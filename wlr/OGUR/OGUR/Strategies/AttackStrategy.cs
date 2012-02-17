@@ -7,12 +7,15 @@ using OGUR.Skills;
 
 namespace OGUR.Strategies
 {
-    public class AttackPlayers : IStrategy
+    public class AttackStrategy : IStrategy
     {
-        public AttackPlayers(ICreature parent)
+        public AttackStrategy(ICreature parent,params int[] targetTypes)
             : base(parent)
         {
-            m_targets.AddTargetTypes(CreatureType.PLAYER);
+            foreach (var targetType in targetTypes)
+            {
+                m_targets.AddTargetTypes(targetType);
+            }
         }
 
         private ICreature opponent;

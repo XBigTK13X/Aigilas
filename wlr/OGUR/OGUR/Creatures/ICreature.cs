@@ -28,12 +28,18 @@ namespace OGUR.Creatures
         public const int MinionFire = 4;
         public const int MinionExplode = 5;
         public const int MinionCloud = 6;
+        public const int Mutiny = 7;
 
         public static readonly int[] Values =
         {
             AttackPlayers,
             ControlledByPlayer,
-            Confused
+            Confused,
+            MinionRotate,
+            MinionFire,
+            MinionExplode,
+            MinionCloud,
+            Mutiny
         };
     }
 

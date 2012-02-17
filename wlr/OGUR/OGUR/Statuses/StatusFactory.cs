@@ -12,10 +12,11 @@ namespace OGUR.Statuses
         {
             switch (statusId)
             {
+                case Status.Confusion: target.AddStatus(new ConfusionStatus(target)); break;
+                case Status.Mutiny: target.AddStatus(new MutinyStatus(target)); break;
                 case Status.Poison: target.AddStatus(new PoisonStatus(target)); break;
                 case Status.Regen: target.AddStatus(new RegenStatus(target)); break;
-                case Status.StrengthUp: target.AddStatus(new StrengthUpStatus(target)); break;
-                case Status.Confusion: target.AddStatus(new ConfusionStatus(target)); break;
+                case Status.StrengthUp: target.AddStatus(new StrengthUpStatus(target)); break;                
                 case Status.VenomFist: target.AddStatus(new VenomFistStatus(target)); break;
                 case Status.WeakKnees: target.AddStatus(new WeakKneesStatus(target)); break;
                 default:

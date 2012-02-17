@@ -40,10 +40,10 @@ namespace OGUR.Statuses
             {
                 if (m_statuses[ii].HitAnything())
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         public void Add(IStatus status)

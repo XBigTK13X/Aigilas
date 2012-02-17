@@ -22,7 +22,7 @@ namespace OGUR.Creatures
             Setup(position, m_creatureType, m_baseStats, m_class);
             if (m_strategy == null)
             {
-                m_strategy = new AttackPlayers(this);
+                m_strategy = new AttackStrategy(this,CreatureType.PLAYER);
             }
         }
         protected void Add(string skillId)

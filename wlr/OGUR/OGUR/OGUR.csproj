@@ -226,7 +226,7 @@
     <Compile Include="States\GameplayState.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="Strategies\ControlledByPlayer.cs" />
-    <Compile Include="Strategies\AttackPlayers.cs" />
+    <Compile Include="Strategies\AttackStrategy.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
     <Compile Include="Util\IntStorage.cs" />
     <Compile Include="Util\StringSquisher.cs" />

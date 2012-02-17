@@ -39,8 +39,8 @@ namespace OGUR.Creatures
         public Zorb(): base(CreatureType.ZORB)
         {
             Compose(Elements.PHYSICAL, Elements.FIRE);
-            Strengths(StatType.DEFENSE, StatType.MANA,StatType.HEALTH);
-            Weaknesses(StatType.WISDOM);
+            Strengths(StatType.MANA,StatType.HEALTH);
+            Weaknesses(StatType.WISDOM,StatType.DEFENSE);
             Add(SkillId.FIREBALL);
         }
     }
