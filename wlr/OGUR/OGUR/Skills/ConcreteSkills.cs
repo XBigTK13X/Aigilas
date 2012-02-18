@@ -159,7 +159,10 @@ namespace OGUR.Skills
         public GushSkill()
             : base(SkillId.GUSH, AnimationType.RANGED)
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) 
+        {
+            target.ApplyDamage(10, m_source, true);
+        }
     }
     public class HorderSkill : ISkill
     {
