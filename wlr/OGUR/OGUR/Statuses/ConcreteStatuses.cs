@@ -16,6 +16,7 @@ namespace OGUR.Statuses
         public const int WeakKnees = 4;
         public const int VenomFist = 5;
         public const int Mutiny = 6;
+        public const int ManaUp = 7;
 
         public static readonly int[] Values =
         {
@@ -25,7 +26,8 @@ namespace OGUR.Statuses
             Confusion,
             WeakKnees,
             VenomFist,
-            Mutiny
+            Mutiny,
+            ManaUp
         };
     }
 
@@ -100,5 +102,11 @@ namespace OGUR.Statuses
     public class WeakKneesStatus : IStatus
     {
         public WeakKneesStatus(ICreature target) : base(true, true, target) { }
+    }
+
+    public class ManaUpStatus : IStatus
+    {
+        private StatBuff buff = new StatBuff(StatType.MANA, 10f);
+        public ManaUpStatus(ICreature target) : base(false, false, target) { }
     }
 }

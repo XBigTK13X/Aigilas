@@ -190,7 +190,7 @@ namespace OGUR.Skills
         public ManaUpSkill()
             : base(SkillId.MANA_UP, AnimationType.RANGED)
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) { StatusFactory.Apply(target, Status.ManaUp); }
     }
     public class MimicSkill : ISkill
     {
@@ -255,10 +255,14 @@ namespace OGUR.Skills
     }
     public class SoulCrushSkill : ISkill
     {
+        private Random _rand = new Random();
         public SoulCrushSkill()
             : base(SkillId.SOUL_CRUSH, AnimationType.RANGED)
         { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) 
+        {
+            target.ApplyDamage(5,m_source,true,StatType.Values[_rand.Next(0,3)]);
+        }
     }
     public class SoulReinforcementSkill : ISkill
     {
