@@ -23,7 +23,7 @@ namespace OGUR.Creatures
             Setup(source.GetLocation(), m_creatureType, m_baseStats,null,false);
             if (null != effectGraphic)
             {
-                SetSkillVector(effectGraphic.GetDirection().RotateClockwise().RotateClockwise().RotateClockwise().RotateClockwise());
+                SetSkillVector(effectGraphic.GetDirection().Rotate180());
             }
             else
             {

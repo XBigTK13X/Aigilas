@@ -211,7 +211,10 @@ namespace OGUR.Skills
         public HorrifySkill()
             : base(SkillId.HORRIFY, AnimationType.RANGED)
         { Add(Elements.DARK, Elements.FIRE); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) 
+        {
+            StatusFactory.Apply(target, Status.Flee);
+        }
     }
     public class MagicMapSkill : ISkill
     {

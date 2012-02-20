@@ -27,6 +27,7 @@ namespace OGUR.Statuses
                 case Status.DefenseUp: target.AddStatus(new DefenseUpStatus(target)); break;
                 case Status.ColdShoulder: target.AddStatus(new BurnOneHitStatus(target)); break;
                 case Status.Burn: target.AddStatus(new BurnStatus(target)); break;
+                case Status.Flee: target.AddStatus(new FleeStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

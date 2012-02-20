@@ -24,6 +24,7 @@ namespace OGUR.Statuses
         public const int DefenseUp = 12;
         public const int ColdShoulder = 13;
         public const int Burn = 14;
+        public const int Flee = 15;
 
         public static readonly int[] Values =
         {
@@ -41,7 +42,8 @@ namespace OGUR.Statuses
             PoisonOneHit,
             DefenseUp,
             ColdShoulder,
-            Burn
+            Burn,
+            Flee
         };
     }
 
@@ -71,6 +73,22 @@ namespace OGUR.Statuses
             base.Setup();
             previousStrategy = StrategyFactory.GetId(m_target.GetStrategyType());
             m_target.SetStrategy(StrategyFactory.Create(Strategy.Mutiny, m_target));
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            m_target.SetStrategy(StrategyFactory.Create(previousStrategy, m_target));
+        }
+    }
+    public class FleeStatus : IStatus
+    {
+        private int previousStrategy;
+        public FleeStatus(ICreature target) : base(false, false, target) { m_hitAnything = true; }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = StrategyFactory.GetId(m_target.GetStrategyType());
+            m_target.SetStrategy(StrategyFactory.Create(Strategy.Flee, m_target));
         }
         public override void Cleanup()
         {

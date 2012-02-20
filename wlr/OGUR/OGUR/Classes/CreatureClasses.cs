@@ -62,11 +62,11 @@ namespace OGUR.Classes
     {
         public WrathAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
-            Add(2, SkillId.FLAME_HAMMER);
+            Add(1, SkillId.FLAME_HAMMER);
             Add(2, SkillId.GUSH);
-            Add(2, SkillId.SOUL_CRUSH);
-            Add(1, SkillId.COMBUST);
-            Add(2, SkillId.HORRIFY);
+            Add(3, SkillId.SOUL_CRUSH);
+            Add(4, SkillId.COMBUST);
+            Add(5, SkillId.HORRIFY);
         }
     }
     class GluttonyAcolyte : CreatureClass

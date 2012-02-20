@@ -19,6 +19,7 @@ namespace OGUR.Strategies
                 case Strategy.MinionRotate: return new MinionRotate(target);
                 case Strategy.MinionCloud: return new MinionCloud(target);
                 case Strategy.Mutiny: return new AttackStrategy(target, CreatureType.NONPLAYER);
+                case Strategy.Flee: return new FleeStrategy(target,CreatureType.PLAYER);
                 default: throw new Exception("An undefined strategy was passed into the strategy factory: " + strategy);
             }
         }
@@ -52,6 +53,10 @@ namespace OGUR.Strategies
             if (strategyType == typeof(MinionFire))
             {
                 return Strategy.MinionExplode;
+            }
+            if (strategyType == typeof(FleeStrategy))
+            {
+                return Strategy.Flee;
             }
             throw new Exception("An unknown strategyType was passed into StrategyFactory.GetId(): " + strategyType);
         }

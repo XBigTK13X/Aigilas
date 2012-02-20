@@ -77,6 +77,11 @@ namespace OGUR.Collision
             return new Point2(GridX + target.GridX,GridY + target.GridY);
         }
 
+        public Point2 Minus(Point2 target)
+        {
+            return new Point2(GridX - target.GridX, GridY - target.GridY);
+        }
+
         public override int GetHashCode()
         {
             return GridX + 1000*GridY;
@@ -223,9 +228,14 @@ namespace OGUR.Collision
              * */
         }
 
+        public Point2 Rotate180()
+        {
+            return RotateClockwise().RotateClockwise().RotateClockwise().RotateClockwise();
+        }
+
         public static float DistanceSquared(Point2 source, Point2 target)
         {
             return (float)(Math.Pow(source.PosX - target.PosX, 2) + Math.Pow(source.PosY - target.PosY, 2));
-        }
+        }                
     }
 }

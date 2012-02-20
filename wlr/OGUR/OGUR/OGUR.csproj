@@ -192,6 +192,7 @@
     <Compile Include="Statuses\StatusFactory.cs" />
     <Compile Include="Statuses\StatusPool.cs" />
     <Compile Include="Strategies\ConfusedStrategy.cs" />
+    <Compile Include="Strategies\FleeStrategy.cs" />
     <Compile Include="Strategies\MinionStrategies.cs" />
     <Compile Include="Strategies\StrategyFactory.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
