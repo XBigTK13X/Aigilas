@@ -56,6 +56,7 @@ namespace OGUR.GameObjects
                 hitTarget = GameplayObjectManager.GetObjects(targetType, this.GetLocation()).FirstOrDefault();
                 if (null != hitTarget && hitTarget != this)
                 {
+                    m_skill.Affect(hitTarget);
                     Cleanup(this);
                 }
             }

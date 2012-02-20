@@ -349,7 +349,17 @@ namespace OGUR.Skills
         public WallPunchSkill()
             : base(SkillId.WALL_PUNCH, AnimationType.RANGED)
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void  Affect(GameplayObject target)
+        {
+            if (target.GetObjectType() == GameObjectType.WALL)
+            {
+                if (target.GetLocation().GridX > 0 && target.GetLocation().GridX < Dungeons.DungeonFactory.BlocksWide-1 &&
+                    target.GetLocation().GridY > 0 && target.GetLocation().GridY < Dungeons.DungeonFactory.BlocksHigh-1)
+                {
+                    target.SetInactive();
+                }
+            }
+        }
     }
     public class WeakKneesSkill : ISkill
     {
