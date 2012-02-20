@@ -64,11 +64,19 @@ namespace OGUR.Statuses
             }
         }
 
-        internal void ApplyContagions(ICreature target)
+        public void ApplyContagions(ICreature target)
         {
             foreach (var status in m_statuses)
             {
                 status.ApplyContagion(target);
+            }
+        }
+
+        public void ApplyPassives(ICreature target)
+        {
+            foreach (var status in m_statuses)
+            {
+                status.ApplyPassives(target);
             }
         }
     }

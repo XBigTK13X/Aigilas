@@ -18,6 +18,8 @@ namespace OGUR.Statuses
         public const int Mutiny = 6;
         public const int ManaUp = 7;
         public const int SpeedUp = 8;
+        public const int Electrify = 9;
+        public const int Zap = 10;
 
         public static readonly int[] Values =
         {
@@ -29,7 +31,9 @@ namespace OGUR.Statuses
             VenomFist,
             Mutiny,
             ManaUp,
-            SpeedUp
+            SpeedUp,
+            Electrify,
+            Zap
         };
     }
 
@@ -123,6 +127,26 @@ namespace OGUR.Statuses
         {
             m_buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);
             Setup();
+        }
+    }
+    public class ElectrifyStatus: IStatus
+    {
+        public ElectrifyStatus(ICreature target)
+            : base(false, false, target)
+        {
+            m_passives.Add(Status.Zap);
+        }
+    }
+    public class ZapStatus : IStatus
+    {
+        public ZapStatus(ICreature target)
+            : base(false, false, target)
+        {}
+        public override void Setup()
+        {
+            base.Setup();
+            m_target.ApplyDamage(10);
+            m_isActive = false;
         }
     }
 }

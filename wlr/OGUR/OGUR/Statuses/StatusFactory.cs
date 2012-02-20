@@ -21,6 +21,8 @@ namespace OGUR.Statuses
                 case Status.WeakKnees: target.AddStatus(new WeakKneesStatus(target)); break;
                 case Status.SpeedUp: target.AddStatus(new SpeedUpStatus(target)); break;
                 case Status.ManaUp: target.AddStatus(new ManaUpStatus(target)); break;
+                case Status.Electrify: target.AddStatus(new ElectrifyStatus(target)); break;
+                case Status.Zap: target.AddStatus(new ZapStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

@@ -323,6 +323,7 @@ namespace OGUR.Creatures
             if (attacker != null)
             {
                 attacker.ApplyContagions(this);
+                this.ApplyPassives(attacker);
             }
             if (statType == null)
             {
@@ -569,6 +570,11 @@ namespace OGUR.Creatures
         public void ApplyContagions(ICreature target)
         {
             m_statuses.ApplyContagions(target);
+        }
+
+        public void ApplyPassives(ICreature target)
+        {
+            m_statuses.ApplyPassives(target);
         }
 
         public void SetStrategy(IStrategy strategy)

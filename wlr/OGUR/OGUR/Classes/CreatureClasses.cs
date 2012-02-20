@@ -93,8 +93,8 @@ namespace OGUR.Classes
         {
             Add(2, SkillId.STRENGTH_UP);
             Add(2, SkillId.MANA_UP);
-            Add(3, SkillId.ELECTRIFY);
-            Add(1, SkillId.WALL_PUNCH);
+            Add(1, SkillId.ELECTRIFY);
+            Add(2, SkillId.WALL_PUNCH);
             Add(5, SkillId.MIMIC);
             Add(6, SkillId.VALEDICTORIAN);
         }

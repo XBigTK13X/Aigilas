@@ -17,6 +17,7 @@ namespace OGUR.Statuses
         protected ICreature m_target;
         protected StatBuff m_buff = null;
         protected List<int> m_contagions = new List<int>();
+        protected List<int> m_passives = new List<int>();
 
         protected IStatus(bool stopMovement,bool stopAttacking,ICreature target)
         {
@@ -52,6 +53,14 @@ namespace OGUR.Statuses
             foreach (var contagion in m_contagions)
             {
                 StatusFactory.Apply(target, contagion);
+            }
+        }
+
+        public void ApplyPassives(ICreature target)
+        {
+            foreach (var passive in m_passives)
+            {
+                StatusFactory.Apply(target, passive);
             }
         }
 

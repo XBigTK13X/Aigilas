@@ -97,9 +97,13 @@ namespace OGUR.Skills
     public class ElectrifySkill : ISkill
     {
         public ElectrifySkill()
-            : base(SkillId.ELECTRIFY, AnimationType.RANGED)
+            : base(SkillId.ELECTRIFY, AnimationType.SELF)
         { Add(Elements.AIR); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            StatusFactory.Apply(source, Status.Electrify);
+        }
     }
     public class EnvenomSkill : ISkill
     {
