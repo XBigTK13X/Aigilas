@@ -92,7 +92,7 @@ namespace OGUR.Classes
         public PrideAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.STRENGTH_UP);
-            Add(2, SkillId.MANA_UP);
+            Add(1, SkillId.MANA_UP);
             Add(3, SkillId.ELECTRIFY);
             Add(4, SkillId.WALL_PUNCH);
             Add(5, SkillId.MIMIC);

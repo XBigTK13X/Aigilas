@@ -88,8 +88,11 @@ namespace OGUR.Statuses
 
     public class StrengthUpStatus : IStatus
     {
-        private StatBuff buff = new StatBuff(StatType.STRENGTH, 10f);
-        public StrengthUpStatus(ICreature target) : base(false, false, target) { }
+        public StrengthUpStatus(ICreature target) : base(false, false, target)
+        {
+            m_buff = new StatBuff(StatType.STRENGTH, 10f);
+            Setup();
+        }
     }
 
     public class VenomFistStatus : IStatus
@@ -108,12 +111,18 @@ namespace OGUR.Statuses
 
     public class ManaUpStatus : IStatus
     {
-        private StatBuff buff = new StatBuff(StatType.MANA, 10f);
-        public ManaUpStatus(ICreature target) : base(false, false, target) { }
+        public ManaUpStatus(ICreature target) : base(false, false, target) 
+        {
+            m_buff = new StatBuff(StatType.MANA, 20f);
+            Setup();
+        }
     }
     public class SpeedUpStatus: IStatus
     {
-        private StatBuff buff = new StatBuff(StatType.MOVE_COOL_DOWN, 10f);
-        public SpeedUpStatus(ICreature target) : base(false, false, target) { }
+        public SpeedUpStatus(ICreature target) : base(false, false, target)
+        {
+            m_buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);
+            Setup();
+        }
     }
 }

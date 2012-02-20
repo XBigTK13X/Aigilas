@@ -188,7 +188,7 @@ namespace OGUR.Skills
     public class ManaUpSkill : ISkill
     {
         public ManaUpSkill()
-            : base(SkillId.MANA_UP, AnimationType.RANGED)
+            : base(SkillId.MANA_UP, AnimationType.SELF)
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) { StatusFactory.Apply(target, Status.ManaUp); }
     }
