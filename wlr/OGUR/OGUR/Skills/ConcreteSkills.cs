@@ -113,10 +113,7 @@ namespace OGUR.Skills
         public override void  Activate(ICreature source)
         {
  	        base.Activate(source);
-            foreach (var player in GameplayObjectManager.GetPlayers())
-            {
-                StatusFactory.Apply(player, Status.PoisonOneHit);
-            }
+            ApplyToPlayers(Status.PoisonOneHit);
         }
     }
     public class ExplodeSkill : ISkill
@@ -232,10 +229,7 @@ namespace OGUR.Skills
         public override void Activate(ICreature source) 
         {
             base.Activate(source);
-            foreach (var player in GameplayObjectManager.GetPlayers())
-            {
-                StatusFactory.Apply(player, Status.Regen);
-            }
+            ApplyToPlayers(Status.Regen);
         }
     }
     public class RemoteMineSkill : ISkill
@@ -312,10 +306,8 @@ namespace OGUR.Skills
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
         public override void Activate(ICreature source) 
         {
-            foreach (var player in GameplayObjectManager.GetPlayers())
-            {
-                StatusFactory.Apply(player, Status.SpeedUp);
-            }
+            base.Activate(source);
+            ApplyToPlayers(Status.SpeedUp);
         }
     }
     public class StealItemSkill : ISkill

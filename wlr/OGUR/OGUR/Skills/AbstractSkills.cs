@@ -5,6 +5,7 @@ using OGUR.Creatures;
 using OGUR.GameObjects;
 using OGUR.Sprites;
 using Microsoft.Xna.Framework;
+using OGUR.Statuses;
 namespace OGUR.Skills
 {
     public class AnimationType
@@ -49,6 +50,13 @@ namespace OGUR.Skills
             if (creature != null)
             {
                 Affect(creature);
+            }
+        }
+        public void ApplyToPlayers(int statusId)
+        {
+            foreach (var player in GameplayObjectManager.GetPlayers())
+            {
+                StatusFactory.Apply(player, statusId);
             }
         }
         public List<int> GetElements() { return m_components.GetElements(); }
