@@ -218,7 +218,13 @@ namespace OGUR.Skills
         public RegenAllSkill()
             : base(SkillId.REGEN_ALL, AnimationType.SELF)
         { Add(Elements.LIGHT); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { StatusFactory.Apply(target, Status.Regen); }
+        public override void Affect(ICreature target) 
+        {
+            foreach (var player in GameplayObjectManager.GetPlayers())
+            {
+                StatusFactory.Apply(player, Status.Regen);
+            }
+        }
     }
     public class RemoteMineSkill : ISkill
     {
@@ -292,7 +298,13 @@ namespace OGUR.Skills
         public SpeedUpSkill()
             : base(SkillId.SPEED_UP, AnimationType.RANGED)
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { StatusFactory.Apply(target, Status.SpeedUp); }
+        public override void Affect(ICreature target) 
+        {
+            foreach (var player in GameplayObjectManager.GetPlayers())
+            {
+                StatusFactory.Apply(player, Status.SpeedUp);
+            }
+        }
     }
     public class StealItemSkill : ISkill
     {

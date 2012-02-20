@@ -270,5 +270,19 @@ namespace OGUR.GameObjects
                 AddToGrid(gameplayObject);
             }
         }
+
+        private static List<ICreature> _players = new List<ICreature>();
+        public static IEnumerable<ICreature> GetPlayers()
+        {
+            _players.Clear();
+            foreach (var tile in m_contents)
+            {
+                if (tile.GetObjectType() == GameObjectType.CREATURE && (tile as ICreature).GetCreatureType() == CreatureType.PLAYER)
+                {
+                    _players.Add((tile as ICreature));
+                }
+            }
+            return _players;
+        }
     }
 }
