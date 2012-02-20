@@ -21,6 +21,7 @@ namespace OGUR.Statuses
         public const int Electrify = 9;
         public const int Zap = 10;
         public const int PoisonOneHit = 11;
+        public const int DefenseUp = 12;
 
         public static readonly int[] Values =
         {
@@ -35,7 +36,8 @@ namespace OGUR.Statuses
             SpeedUp,
             Electrify,
             Zap,
-            PoisonOneHit
+            PoisonOneHit,
+            DefenseUp
         };
     }
 
@@ -166,5 +168,14 @@ namespace OGUR.Statuses
                 m_isActive = false;
             }
         }
+    }
+    public class DefenseUpStatus : IStatus
+    {
+        public DefenseUpStatus(ICreature target)
+            : base(false, false, target)
+            {
+                m_buff = new StatBuff(StatType.DEFENSE, 10);
+                Setup();
+            }
     }
 }
