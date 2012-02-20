@@ -112,7 +112,7 @@ namespace OGUR.Skills
                 case SkillId.ABSORB:return new AbsorbSkill();
                 case SkillId.ACID_DRIP:return new AcidDripSkill();
                 case SkillId.ACID_NOZZLE:return new AcidNozzleSkill();
-                case SkillId.CAVALRY:return new CalvarySkill();
+                case SkillId.CAVALRY:return new CavalrySkill();
                 case SkillId.COLD_SHOULDER: return new ColdShoulderSkill();
                 case SkillId.COMBUST: return new CombustSkill();
                 case SkillId.CONFUSION:return new ConfusionSkill();

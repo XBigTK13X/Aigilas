@@ -47,9 +47,9 @@ namespace OGUR.Skills
             CreatureFactory.CreateMinion(m_implementationId, source);
         }
     }
-    public class CalvarySkill : ISkill
+    public class CavalrySkill : ISkill
     {
-        public CalvarySkill()
+        public CavalrySkill()
             : base(SkillId.CAVALRY, AnimationType.SELF)
         { Add(Elements.DARK, Elements.EARTH); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) { }
