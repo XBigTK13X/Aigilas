@@ -11,6 +11,7 @@ namespace OGUR.Statuses
         protected bool m_stopsMovement = false;
         protected bool m_stopsAttacking = false;
         protected bool m_hitAnything = false;
+        protected bool m_wasPassed = false;
         protected int m_strength = 0;
         protected int m_maxStrength = 100;        
         protected bool m_isActive = true;
@@ -54,6 +55,7 @@ namespace OGUR.Statuses
             {
                 StatusFactory.Apply(target, contagion);
             }
+            m_wasPassed = m_contagions.Any();
         }
 
         public void ApplyPassives(ICreature target)
@@ -62,6 +64,7 @@ namespace OGUR.Statuses
             {
                 StatusFactory.Apply(target, passive);
             }
+            m_wasPassed = m_passives.Any(); ;
         }
 
         public virtual void Update()

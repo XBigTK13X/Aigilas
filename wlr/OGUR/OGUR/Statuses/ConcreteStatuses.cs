@@ -20,6 +20,7 @@ namespace OGUR.Statuses
         public const int SpeedUp = 8;
         public const int Electrify = 9;
         public const int Zap = 10;
+        public const int PoisonOneHit = 11;
 
         public static readonly int[] Values =
         {
@@ -33,7 +34,8 @@ namespace OGUR.Statuses
             ManaUp,
             SpeedUp,
             Electrify,
-            Zap
+            Zap,
+            PoisonOneHit
         };
     }
 
@@ -147,6 +149,22 @@ namespace OGUR.Statuses
             base.Setup();
             m_target.ApplyDamage(10);
             m_isActive = false;
+        }
+    }
+    public class PoisonOneHitStatus : IStatus
+    {
+        public PoisonOneHitStatus(ICreature target)
+            : base(false, false, target)
+        {
+            m_contagions.Add(Status.Poison);
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (m_wasPassed)
+            {
+                m_isActive = false;
+            }
         }
     }
 }

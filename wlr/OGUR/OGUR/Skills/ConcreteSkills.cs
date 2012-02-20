@@ -108,9 +108,16 @@ namespace OGUR.Skills
     public class EnvenomSkill : ISkill
     {
         public EnvenomSkill()
-            : base(SkillId.ENVENOM, AnimationType.RANGED)
+            : base(SkillId.ENVENOM, AnimationType.SELF)
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void  Activate(ICreature source)
+        {
+ 	        base.Activate(source);
+            foreach (var player in GameplayObjectManager.GetPlayers())
+            {
+                StatusFactory.Apply(player, Status.PoisonOneHit);
+            }
+        }
     }
     public class ExplodeSkill : ISkill
     {
@@ -194,7 +201,11 @@ namespace OGUR.Skills
         public ManaUpSkill()
             : base(SkillId.MANA_UP, AnimationType.SELF)
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { StatusFactory.Apply(target, Status.ManaUp); }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            StatusFactory.Apply(source, Status.ManaUp);
+        }
     }
     public class MimicSkill : ISkill
     {
@@ -218,8 +229,9 @@ namespace OGUR.Skills
         public RegenAllSkill()
             : base(SkillId.REGEN_ALL, AnimationType.SELF)
         { Add(Elements.LIGHT); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) 
+        public override void Activate(ICreature source) 
         {
+            base.Activate(source);
             foreach (var player in GameplayObjectManager.GetPlayers())
             {
                 StatusFactory.Apply(player, Status.Regen);
@@ -296,9 +308,9 @@ namespace OGUR.Skills
     public class SpeedUpSkill : ISkill
     {
         public SpeedUpSkill()
-            : base(SkillId.SPEED_UP, AnimationType.RANGED)
+            : base(SkillId.SPEED_UP, AnimationType.SELF)
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) 
+        public override void Activate(ICreature source) 
         {
             foreach (var player in GameplayObjectManager.GetPlayers())
             {
@@ -318,7 +330,11 @@ namespace OGUR.Skills
         public StrengthUpSkill()
             : base(SkillId.STRENGTH_UP, AnimationType.SELF)
         { Add(Elements.FIRE); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { StatusFactory.Apply(target, Status.StrengthUp); }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            StatusFactory.Apply(source, Status.StrengthUp);
+        }
     }
     public class ThrowItemSkill : ISkill
     {

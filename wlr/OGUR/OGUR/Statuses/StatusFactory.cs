@@ -23,6 +23,7 @@ namespace OGUR.Statuses
                 case Status.ManaUp: target.AddStatus(new ManaUpStatus(target)); break;
                 case Status.Electrify: target.AddStatus(new ElectrifyStatus(target)); break;
                 case Status.Zap: target.AddStatus(new ZapStatus(target)); break;
+                case Status.PoisonOneHit: target.AddStatus(new PoisonOneHitStatus(target));break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }
