@@ -22,6 +22,8 @@ namespace OGUR.Statuses
         public const int Zap = 10;
         public const int PoisonOneHit = 11;
         public const int DefenseUp = 12;
+        public const int ColdShoulder = 13;
+        public const int Burn = 14;
 
         public static readonly int[] Values =
         {
@@ -37,7 +39,9 @@ namespace OGUR.Statuses
             Electrify,
             Zap,
             PoisonOneHit,
-            DefenseUp
+            DefenseUp,
+            ColdShoulder,
+            Burn
         };
     }
 
@@ -169,13 +173,38 @@ namespace OGUR.Statuses
             }
         }
     }
+    public class BurnOneHitStatus : IStatus
+    {
+        public BurnOneHitStatus(ICreature target)
+            : base(false, false, target)
+        {
+            m_contagions.Add(Status.Burn);
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (m_wasPassed)
+            {
+                m_isActive = false;
+            }
+        }
+    }
     public class DefenseUpStatus : IStatus
     {
         public DefenseUpStatus(ICreature target)
-            : base(false, false, target)
-            {
-                m_buff = new StatBuff(StatType.DEFENSE, 10);
-                Setup();
-            }
+        : base(false, false, target)
+        {
+            m_buff = new StatBuff(StatType.DEFENSE, 10);
+            Setup();
+        }
+    }
+    public class BurnStatus : IStatus
+    {
+        public BurnStatus(ICreature target) : base(true, false, target) { }
+        public override void Update()
+        {
+            base.Update();
+            m_target.ApplyDamage(1.0f);
+        }
     }
 }

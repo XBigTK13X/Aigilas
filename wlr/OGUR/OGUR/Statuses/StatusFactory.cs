@@ -25,6 +25,8 @@ namespace OGUR.Statuses
                 case Status.Zap: target.AddStatus(new ZapStatus(target)); break;
                 case Status.PoisonOneHit: target.AddStatus(new PoisonOneHitStatus(target));break;
                 case Status.DefenseUp: target.AddStatus(new DefenseUpStatus(target)); break;
+                case Status.ColdShoulder: target.AddStatus(new BurnOneHitStatus(target)); break;
+                case Status.Burn: target.AddStatus(new BurnStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

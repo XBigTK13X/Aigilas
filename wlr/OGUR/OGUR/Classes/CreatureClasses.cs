@@ -83,8 +83,8 @@ namespace OGUR.Classes
             Add(2, SkillId.REGEN_ALL);
             Add(2, SkillId.SPEED_UP);
             Add(2, SkillId.ENVENOM);
-            Add(4, SkillId.COLD_SHOULDER);
-            Add(1, SkillId.CAVALRY);
+            Add(1, SkillId.COLD_SHOULDER);
+            Add(2, SkillId.CAVALRY);
         }
     }
     class PrideAcolyte : CreatureClass

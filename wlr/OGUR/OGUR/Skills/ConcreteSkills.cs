@@ -61,9 +61,13 @@ namespace OGUR.Skills
     public class ColdShoulderSkill : ISkill
     {
         public ColdShoulderSkill()
-            : base(SkillId.COLD_SHOULDER, AnimationType.RANGED)
+            : base(SkillId.COLD_SHOULDER, AnimationType.SELF)
         { Add(Elements.FIRE); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            ApplyToPlayers(Status.ColdShoulder);
+        }
     }
     public class CombustSkill : ISkill
     {
