@@ -74,7 +74,26 @@ namespace OGUR.Skills
         public CombustSkill()
             : base(SkillId.COMBUST, AnimationType.RANGED)
         { Add(Elements.AIR, Elements.PHYSICAL); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) 
+        {
+            target.ApplyDamage(10,m_source);
+            if (!target.IsActive())
+            {
+                for (int ii = -1; ii < 2; ii++)
+                {
+                    for (int jj = -1;jj<2;jj++)
+                    {
+                        if (ii != 0 || jj != 0)
+                        {
+                            foreach(var creature in GameplayObjectManager.GetCreaturesAt(target.GetLocation().Add(new Collision.Point2(ii,jj))))
+                            {
+                                StatusFactory.Apply(creature, Status.Burn);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     public class ConfusionSkill : ISkill
     {

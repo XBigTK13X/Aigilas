@@ -31,10 +31,10 @@ namespace OGUR.Classes
         public SlothAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.ACID_NOZZLE);
-            Add(1, SkillId.FLOOR_SPIKES);
-            Add(1, SkillId.REMOTE_MINE);
-            Add(1, SkillId.VAPOR_IMPLANT);
-            Add(1, SkillId.DART_TRAP);
+            Add(2, SkillId.FLOOR_SPIKES);
+            Add(3, SkillId.REMOTE_MINE);
+            Add(4, SkillId.VAPOR_IMPLANT);
+            Add(5, SkillId.DART_TRAP);
         }
     }
     class EnvyAcolyte : CreatureClass
@@ -80,21 +80,21 @@ namespace OGUR.Classes
     {
         public LustAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
-            Add(2, SkillId.REGEN_ALL);
+            Add(1, SkillId.REGEN_ALL);
             Add(2, SkillId.SPEED_UP);
-            Add(2, SkillId.ENVENOM);
-            Add(1, SkillId.COLD_SHOULDER);
-            Add(2, SkillId.CAVALRY);
+            Add(3, SkillId.ENVENOM);
+            Add(4, SkillId.COLD_SHOULDER);
+            Add(5, SkillId.CAVALRY);
         }
     }
     class PrideAcolyte : CreatureClass
     {
         public PrideAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
-            Add(2, SkillId.STRENGTH_UP);
+            Add(1, SkillId.STRENGTH_UP);
             Add(2, SkillId.MANA_UP);
-            Add(1, SkillId.ELECTRIFY);
-            Add(2, SkillId.WALL_PUNCH);
+            Add(3, SkillId.ELECTRIFY);
+            Add(4, SkillId.WALL_PUNCH);
             Add(5, SkillId.MIMIC);
             Add(6, SkillId.VALEDICTORIAN);
         }
