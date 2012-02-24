@@ -25,6 +25,8 @@ namespace OGUR.Statuses
         public const int ColdShoulder = 13;
         public const int Burn = 14;
         public const int Flee = 15;
+        public const int Berserk = 16;
+        public const int RandomBuff = 17;
 
         public static readonly int[] Values =
         {
@@ -43,7 +45,9 @@ namespace OGUR.Statuses
             DefenseUp,
             ColdShoulder,
             Burn,
-            Flee
+            Flee,
+            Berserk,
+            RandomBuff
         };
     }
 
@@ -130,7 +134,7 @@ namespace OGUR.Statuses
         public VenomFistStatus(ICreature target)
             : base(false, false, target)
         {
-            m_contagions.Add(Status.Poison);
+            Add(Status.Poison,StatusComponent.Contagion);
         }
     }
 
@@ -160,7 +164,7 @@ namespace OGUR.Statuses
         public ElectrifyStatus(ICreature target)
             : base(false, false, target)
         {
-            m_passives.Add(Status.Zap);
+            Add(Status.Zap,StatusComponent.Passive );
         }
     }
     public class ZapStatus : IStatus
@@ -180,7 +184,7 @@ namespace OGUR.Statuses
         public PoisonOneHitStatus(ICreature target)
             : base(false, false, target)
         {
-            m_contagions.Add(Status.Poison);
+            Add(Status.Poison,StatusComponent.Contagion);
         }
         public override void Update()
         {
@@ -196,7 +200,7 @@ namespace OGUR.Statuses
         public BurnOneHitStatus(ICreature target)
             : base(false, false, target)
         {
-            m_contagions.Add(Status.Burn);
+            Add(Status.Burn, StatusComponent.Contagion);
         }
         public override void Update()
         {
@@ -223,6 +227,23 @@ namespace OGUR.Statuses
         {
             base.Update();
             m_target.ApplyDamage(1.0f);
+        }
+    }
+    public class BerserkStatus : IStatus
+    {
+        public BerserkStatus(ICreature target) : base(false, false, target) 
+        {
+            Add(Status.RandomBuff, StatusComponent.KillReward);
+        }
+    }
+    public class RandomBuffStatus : IStatus
+    {
+        private Random rand = new Random();
+        public RandomBuffStatus(ICreature target)
+        : base(false, false, target)
+        {
+            m_buff = new StatBuff(StatType.Values[rand.Next(0,3)], 10);
+            Setup();
         }
     }
 }

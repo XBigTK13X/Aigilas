@@ -28,6 +28,8 @@ namespace OGUR.Statuses
                 case Status.ColdShoulder: target.AddStatus(new BurnOneHitStatus(target)); break;
                 case Status.Burn: target.AddStatus(new BurnStatus(target)); break;
                 case Status.Flee: target.AddStatus(new FleeStatus(target)); break;
+                case Status.Berserk: target.AddStatus(new BerserkStatus(target)); break;
+                case Status.RandomBuff: target.AddStatus(new RandomBuffStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

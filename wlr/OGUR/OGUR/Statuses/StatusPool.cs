@@ -64,19 +64,11 @@ namespace OGUR.Statuses
             }
         }
 
-        public void ApplyContagions(ICreature target)
+        public void PassOn(ICreature target,StatusComponent componentType)
         {
             foreach (var status in m_statuses)
             {
-                status.ApplyContagion(target);
-            }
-        }
-
-        public void ApplyPassives(ICreature target)
-        {
-            foreach (var status in m_statuses)
-            {
-                status.ApplyPassives(target);
+                status.PassOn(target, componentType);
             }
         }
     }

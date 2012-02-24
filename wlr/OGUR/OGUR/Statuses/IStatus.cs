@@ -6,6 +6,12 @@ using OGUR.Creatures;
 
 namespace OGUR.Statuses
 {
+    public enum StatusComponent
+    {
+        Passive,
+        Contagion,
+        KillReward
+    }
     public class IStatus
     {
         protected bool m_stopsMovement = false;
@@ -17,8 +23,7 @@ namespace OGUR.Statuses
         protected bool m_isActive = true;
         protected ICreature m_target;
         protected StatBuff m_buff = null;
-        protected List<int> m_contagions = new List<int>();
-        protected List<int> m_passives = new List<int>();
+        protected Dictionary<StatusComponent,List<int>> m_passables = new Dictionary<StatusComponent,List<int>>();
 
         protected IStatus(bool stopMovement,bool stopAttacking,ICreature target)
         {
@@ -49,22 +54,22 @@ namespace OGUR.Statuses
             return m_stopsMovement;
         }
 
-        public void ApplyContagion(ICreature target)
+        public void PassOn(ICreature target,StatusComponent componentType)
         {
-            foreach (var contagion in m_contagions)
+            foreach (var contagion in m_passables[componentType])
             {
                 StatusFactory.Apply(target, contagion);
             }
-            m_wasPassed = m_contagions.Any();
+            m_wasPassed = m_passables.ContainsKey(componentType);
         }
 
-        public void ApplyPassives(ICreature target)
+        protected void Add(int statusId, StatusComponent componentType)
         {
-            foreach (var passive in m_passives)
+            if(!m_passables.ContainsKey(componentType))
             {
-                StatusFactory.Apply(target, passive);
+                m_passables.Add(componentType,new List<int>());
             }
-            m_wasPassed = m_passives.Any(); ;
+            m_passables[componentType].Add(statusId);
         }
 
         public virtual void Update()

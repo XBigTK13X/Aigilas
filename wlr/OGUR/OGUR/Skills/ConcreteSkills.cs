@@ -312,14 +312,13 @@ namespace OGUR.Skills
     }
     public class SoulReinforcementSkill : ISkill
     {
-        private GenericItem fodder;
         public SoulReinforcementSkill()
             : base(SkillId.SOUL_REINFORCEMENT, AnimationType.SELF)
         { Add(Elements.LIGHT); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target)
+        public override void  Activate(ICreature source)
         {
-            fodder = target.GetNonEquippedItem(); target.Drop(fodder);
-            GameplayObjectManager.RemoveObject(fodder);
+ 	        base.Activate(source);
+            StatusFactory.Apply(source, Status.Berserk);
         }
     }
     public class SpawnItemSkill : ISkill

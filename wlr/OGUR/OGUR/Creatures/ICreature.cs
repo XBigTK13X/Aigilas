@@ -324,8 +324,8 @@ namespace OGUR.Creatures
         {
             if (attacker != null)
             {
-                attacker.ApplyContagions(this);
-                this.ApplyPassives(attacker);
+                attacker.PassOn(this,StatusComponent.Contagion);
+                this.PassOn(attacker, StatusComponent.Passive);
             }
             if (statType == null)
             {
@@ -569,15 +569,11 @@ namespace OGUR.Creatures
             m_statuses.Add(status);
         }
 
-        public void ApplyContagions(ICreature target)
+        public void PassOn(ICreature target,StatusComponent componentType)
         {
-            m_statuses.ApplyContagions(target);
+            m_statuses.PassOn(target, componentType);
         }
 
-        public void ApplyPassives(ICreature target)
-        {
-            m_statuses.ApplyPassives(target);
-        }
 
         public void SetStrategy(IStrategy strategy)
         {
