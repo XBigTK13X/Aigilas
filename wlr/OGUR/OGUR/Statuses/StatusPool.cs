@@ -66,9 +66,9 @@ namespace OGUR.Statuses
 
         public void PassOn(ICreature target,StatusComponent componentType)
         {
-            foreach (var status in m_statuses)
+            for (int ii = 0; ii < m_statuses.Count; ii++)
             {
-                status.PassOn(target, componentType);
+                m_statuses[ii].PassOn(target, componentType);
             }
         }
     }

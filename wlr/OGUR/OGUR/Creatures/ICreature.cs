@@ -349,6 +349,7 @@ namespace OGUR.Creatures
                 if (attacker != null)
                 {
                     attacker.AddExperience(CalculateExperience());
+                    attacker.PassOn(attacker, StatusComponent.KillReward);
                 }
             }
         }

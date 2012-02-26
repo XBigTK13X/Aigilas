@@ -56,11 +56,15 @@ namespace OGUR.Statuses
 
         public void PassOn(ICreature target,StatusComponent componentType)
         {
-            foreach (var contagion in m_passables[componentType])
+            if (m_passables.ContainsKey(componentType))
             {
-                StatusFactory.Apply(target, contagion);
+                foreach (var contagion in m_passables[componentType])
+                {
+                    StatusFactory.Apply(target, contagion);
+                }
+                m_wasPassed = m_passables.ContainsKey(componentType);
             }
-            m_wasPassed = m_passables.ContainsKey(componentType);
+           
         }
 
         protected void Add(int statusId, StatusComponent componentType)
