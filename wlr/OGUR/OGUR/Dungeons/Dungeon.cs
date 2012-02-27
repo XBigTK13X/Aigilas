@@ -21,7 +21,7 @@ namespace OGUR.Dungeons
         private const int enemyBase = 2;
         private const int itemCap = 4;
         private const int itemBase = 1;
-        private const int startingItemAmount = 100;
+        private const int startingItemAmount = 5;
 
         private static int enemyCapModifier = 0;
         private static int enemyBaseModifier = 0;

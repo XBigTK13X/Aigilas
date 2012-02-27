@@ -15,7 +15,7 @@ namespace OGUR.Creatures
     public class Player : AbstractCreature
     {
         private static readonly List<Color> s_colors = new List<Color>() { Color.Red,Color.Green,Color.Blue,Color.White};
-        public Player(int playerIndex): base(CreatureType.PLAYER, SpriteType.PLAYER_STAND, new WrathAcolyte())
+        public Player(int playerIndex): base(CreatureType.PLAYER, SpriteType.PLAYER_STAND, new GreedAcolyte())
         {
             m_playerIndex = playerIndex;
             m_graphic.SetColor(s_colors[m_playerIndex]);

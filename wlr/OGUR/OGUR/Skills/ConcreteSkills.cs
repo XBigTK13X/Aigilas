@@ -359,10 +359,23 @@ namespace OGUR.Skills
     }
     public class ThrowItemSkill : ISkill
     {
+        private float _itemStrength = 0;
         public ThrowItemSkill()
             : base(SkillId.THROW_ITEM, AnimationType.RANGED)
-        { Add(Elements.AIR); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        { Add(Elements.AIR); AddCost(StatType.MANA, 0); }
+        public override void  Activate(ICreature source)
+        {
+            var item = source.DestroyRandomItemFromInventory();
+            if (item != null)
+            {
+                _itemStrength = item.Modifers.GetSum()*3;
+                base.Activate(source);
+            }
+        }
+        public override void Affect(ICreature target)
+        {
+            target.ApplyDamage(_itemStrength, m_source);
+        }
     }
     public class ValedictorianSkill : ISkill
     {

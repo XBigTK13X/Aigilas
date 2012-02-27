@@ -167,9 +167,14 @@ namespace OGUR.Creatures
             }
         }
 
-        public GenericItem GetNonEquippedItem()
+        public GenericItem DestroyRandomItemFromInventory()
         {
-            return m_inventory.GetFirst();
+            var item = m_inventory.GetNonZeroEntry();
+            if (item != null)
+            {
+                m_inventory.Remove(item);
+            }
+            return item;
         }
 
         public override void Update()

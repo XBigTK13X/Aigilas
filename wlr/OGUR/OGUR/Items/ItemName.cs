@@ -13,6 +13,7 @@ namespace OGUR.Items
         public const int Staff = 7;
         public const int Hood = 8;
         public const int Shirt = 9;
+        public const int Flak = 10;
 
         public static readonly int[] Values =
         {
@@ -25,7 +26,8 @@ namespace OGUR.Items
             Arrow,
             Staff,
             Hood,
-            Shirt
+            Shirt,
+            Flak
         };
 
         public static readonly Dictionary<int, string> Names = new Dictionary<int, string>()
@@ -39,7 +41,8 @@ namespace OGUR.Items
             {Arrow,"Arrow"},
             {Staff,"Staff"},
             {Hood,"Hood"},
-            {Shirt,"Shirt"}
+            {Shirt,"Shirt"},
+            {Flak,"Flak"}
         };
     }
 }

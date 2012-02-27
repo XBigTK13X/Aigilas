@@ -27,9 +27,9 @@ namespace OGUR.Items
             return m_parent;
         }
 
-        public GenericItem GetFirst()
+        public GenericItem GetNonZeroEntry()
         {
-            return m_contents.Keys.FirstOrDefault();
+            return m_contents.Keys.Where(k=>m_contents[k]>0).FirstOrDefault();
         }
 
         public void Add(GenericItem item)
