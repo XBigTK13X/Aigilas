@@ -324,9 +324,13 @@ namespace OGUR.Skills
     public class SpawnItemSkill : ISkill
     {
         public SpawnItemSkill()
-            : base(SkillId.SPAWN_ITEM, AnimationType.RANGED)
+            : base(SkillId.SPAWN_ITEM, AnimationType.SELF)
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            ItemFactory.CreateRandomPlain(source.GetLocation());
+        }
     }
     public class SpeedUpSkill : ISkill
     {

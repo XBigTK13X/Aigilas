@@ -53,8 +53,8 @@ namespace OGUR.Classes
         {
             Add(2, SkillId.SOUL_REINFORCEMENT);
             Add(2, SkillId.HORDER);
-            Add(3, SkillId.SPAWN_ITEM);
-            Add(1, SkillId.THROW_ITEM);
+            Add(1, SkillId.SPAWN_ITEM);
+            Add(2, SkillId.THROW_ITEM);
             Add(5, SkillId.STEAL_ITEM);
         }
     }
