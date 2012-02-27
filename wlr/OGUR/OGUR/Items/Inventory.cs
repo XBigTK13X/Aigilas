@@ -96,5 +96,16 @@ namespace OGUR.Items
                 }
             }
         }
+
+        float _nonZeroResult;
+        public float NonZeroCount()
+        {
+            _nonZeroResult = 0;
+            foreach(var item in m_contents.Where(c=>c.Value>0))
+            {
+                _nonZeroResult += item.Value;
+            }
+            return _nonZeroResult;
+        }
     }
 }

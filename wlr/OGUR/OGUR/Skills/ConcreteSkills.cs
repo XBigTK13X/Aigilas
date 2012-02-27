@@ -202,9 +202,13 @@ namespace OGUR.Skills
     public class HorderSkill : ISkill
     {
         public HorderSkill()
-            : base(SkillId.HORDER, AnimationType.RANGED)
+            : base(SkillId.HORDER, AnimationType.SELF)
         { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            StatusFactory.Apply(source, Status.Hord);
+        }
     }
     public class HorrifySkill : ISkill
     {

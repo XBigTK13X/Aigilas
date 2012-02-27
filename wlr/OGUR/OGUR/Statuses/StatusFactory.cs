@@ -30,6 +30,7 @@ namespace OGUR.Statuses
                 case Status.Flee: target.AddStatus(new FleeStatus(target)); break;
                 case Status.Berserk: target.AddStatus(new BerserkStatus(target)); break;
                 case Status.RandomBuff: target.AddStatus(new RandomBuffStatus(target)); break;
+                case Status.Hord: target.AddStatus(new HordStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

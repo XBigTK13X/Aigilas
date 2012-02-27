@@ -590,5 +590,10 @@ namespace OGUR.Creatures
         {
             return m_strategy.GetType();
         }
+
+        public float GetInventoryCount()
+        {
+            return m_inventory.NonZeroCount();
+        }
     }
 }

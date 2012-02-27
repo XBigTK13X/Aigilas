@@ -27,6 +27,7 @@ namespace OGUR.Statuses
         public const int Flee = 15;
         public const int Berserk = 16;
         public const int RandomBuff = 17;
+        public const int Hord = 18;
 
         public static readonly int[] Values =
         {
@@ -47,7 +48,8 @@ namespace OGUR.Statuses
             Burn,
             Flee,
             Berserk,
-            RandomBuff
+            RandomBuff,
+            Hord
         };
     }
 
@@ -243,6 +245,15 @@ namespace OGUR.Statuses
         : base(false, false, target)
         {
             m_buff = new StatBuff(StatType.Values[rand.Next(0,3)], 10);
+            Setup();
+        }
+    }
+    public class HordStatus : IStatus
+    {
+        public HordStatus(ICreature target)
+            : base(false, false, target)
+        {
+            m_buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
             Setup();
         }
     }

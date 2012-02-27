@@ -52,8 +52,8 @@ namespace OGUR.Classes
     {      public GreedAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(2, SkillId.SOUL_REINFORCEMENT);
-            Add(2, SkillId.HORDER);
-            Add(1, SkillId.SPAWN_ITEM);
+            Add(1, SkillId.HORDER);
+            Add(2, SkillId.SPAWN_ITEM);
             Add(2, SkillId.THROW_ITEM);
             Add(5, SkillId.STEAL_ITEM);
         }
