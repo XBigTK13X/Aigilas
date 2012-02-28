@@ -349,10 +349,17 @@ namespace OGUR.Skills
     }
     public class StealItemSkill : ISkill
     {
+        private Random _rand = new Random();
         public StealItemSkill()
-            : base(SkillId.STEAL_ITEM, AnimationType.RANGED)
+            : base(SkillId.STEAL_ITEM, AnimationType.ROTATE)
         { Add(Elements.WATER, Elements.AIR); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Affect(ICreature target) 
+        {
+            if (_rand.Next(100) > 0)
+            {
+                m_source.PickupItem(ItemFactory.CreateRandomPlain());
+            }
+        }
     }
     public class StrengthUpSkill : ISkill
     {
