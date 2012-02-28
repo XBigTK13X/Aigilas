@@ -59,6 +59,11 @@ namespace OGUR.Skills
             if (null != hitTarget && hitTarget!=source)
             {
                 m_parent.Affect(hitTarget);
+                if (hitTarget.GetObjectType() == GameObjectType.CREATURE)
+                {
+                    (hitTarget as ICreature).Combo(m_parent.GetElements());
+                    (hitTarget as ICreature).React(m_parent.GetSkillId());
+                }
                 if (!m_parent.IsPersistent())
                 {
                     return false;
@@ -85,6 +90,7 @@ namespace OGUR.Skills
             if (!m_used)
             {
                 source.Combo(m_parent.GetElements());
+                source.React(m_parent.GetSkillId());
                 m_parent.Affect(source);
                 m_used = true;
             }

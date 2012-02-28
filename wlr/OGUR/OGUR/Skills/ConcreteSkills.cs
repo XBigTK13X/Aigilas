@@ -185,9 +185,13 @@ namespace OGUR.Skills
     public class ForgetSkill : ISkill
     {
         public ForgetSkill()
-            : base(SkillId.FORGET_SKILL, AnimationType.RANGED)
+            : base(SkillId.FORGET_SKILL, AnimationType.SELF)
         { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
-        public override void Affect(ICreature target) { }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            m_source.RemoveLeastUsedSkill();
+        }
     }
     public class GushSkill : ISkill
     {

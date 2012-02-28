@@ -12,6 +12,7 @@ namespace OGUR.Skills
         private int m_currentSkillSlot = 0;
         private string m_currentSkill;
         private readonly ICreature m_owner;
+        private Dictionary<string, int> m_usageCounter = new Dictionary<string, int>();
 
         public SkillPool(ICreature owner)
         {
@@ -85,7 +86,42 @@ namespace OGUR.Skills
             if (m_skills.Count > 0)
             {
                 SkillFactory.Create(FindCurrent()).Activate(m_owner);
+                if(!m_usageCounter.ContainsKey(FindCurrent()))
+                {
+                    m_usageCounter.Add(FindCurrent(),0);
+                }
+                m_usageCounter[FindCurrent()]++;
             }
+        }
+
+        string _leastUsed;
+        public void RemoveLeastUsed()
+        {
+            foreach (var skillId in m_skills)
+            {
+                if (!m_usageCounter.ContainsKey(skillId))
+                {
+                    m_usageCounter.Add(skillId, 0);
+                }
+            }
+            _leastUsed = null;
+            foreach (var keyValue in m_usageCounter)
+            {
+                if ((_leastUsed == null || _leastUsed == SkillId.FORGET_SKILL || m_usageCounter[keyValue.Key] < m_usageCounter[_leastUsed]) 
+                     && keyValue.Key != SkillId.FORGET_SKILL)
+                {
+                    _leastUsed = keyValue.Key;
+                }
+            }
+            if (_leastUsed != SkillId.FORGET_SKILL)
+            {
+                m_skills.Remove(_leastUsed);
+            }
+        }
+
+        public int Count()
+        {
+            return m_skills.Count();
         }
     }
 }

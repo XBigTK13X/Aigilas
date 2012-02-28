@@ -74,6 +74,7 @@ namespace OGUR.Classes
         public GluttonyAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.FORGET_SKILL);
+            Add(1, SkillId.FIREBALL);
         }
     }
     class LustAcolyte : CreatureClass

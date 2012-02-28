@@ -595,5 +595,21 @@ namespace OGUR.Creatures
         {
             return m_inventory.NonZeroCount();
         }
+
+        public void RemoveLeastUsedSkill()
+        {
+            m_skills.RemoveLeastUsed();
+        }
+
+        public void React(string skillId)
+        {
+            if(m_creatureType == CreatureType.PLAYER && skillId != SkillId.FORGET_SKILL && m_god.NameText == GodId.Names[GodId.GLUTTONY])
+            {
+                if (m_skills.Count() < m_currentLevel)
+                {
+                    m_skills.Add(skillId);
+                }
+            }
+        }
     }
 }

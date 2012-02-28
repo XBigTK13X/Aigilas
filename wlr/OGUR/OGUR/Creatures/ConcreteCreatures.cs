@@ -15,14 +15,14 @@ namespace OGUR.Creatures
     public class Player : AbstractCreature
     {
         private static readonly List<Color> s_colors = new List<Color>() { Color.Red,Color.Green,Color.Blue,Color.White};
-        public Player(int playerIndex): base(CreatureType.PLAYER, SpriteType.PLAYER_STAND, new GreedAcolyte())
+        public Player(int playerIndex): base(CreatureType.PLAYER, SpriteType.PLAYER_STAND, new GluttonyAcolyte())
         {
             m_playerIndex = playerIndex;
             m_graphic.SetColor(s_colors[m_playerIndex]);
             m_strategy = new ControlledByPlayer(this);
             m_baseStats = new Stats(100f, 100f, 1f, 10f, 11f, 10f, 35f, 50f, 6.0f, 6, 1);
             m_maxStats = new Stats(m_baseStats);
-            AssignGod(God.Get(GodId.SLOTH));
+            AssignGod(God.Get(GodId.GLUTTONY));
             Compose(Elements.PHYSICAL);
         }
     }

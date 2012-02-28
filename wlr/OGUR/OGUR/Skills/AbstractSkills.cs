@@ -19,7 +19,6 @@ namespace OGUR.Skills
     }
     public abstract class ISkill
     {
-        
         protected ICreature m_source;       
         protected string m_implementationId;        
         protected SkillBehavior m_behavior;
@@ -75,6 +74,11 @@ namespace OGUR.Skills
         public List<int> GetTargetTypes()
         {
             return m_components.GetTargetTypes();
+        }
+
+        public string GetSkillId()
+        {
+            return m_implementationId;
         }
     }
 }
