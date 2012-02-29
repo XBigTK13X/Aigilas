@@ -1,4 +1,4 @@
-﻿namespace OGUR.Sprites
+﻿namespace SPX.Sprites
 {
     public class AnimatedTextureFactory
     {

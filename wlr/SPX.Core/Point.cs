@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using OGUR.Dungeons;
 using OGUR.Sprites;
 
-namespace OGUR.Collision
+namespace SPX.Core
 {
     public class Point2
     {

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using OGUR.Util;
 
-namespace OGUR.Management
+namespace SPX.Management
 {
     public class Commands
     {
@@ -107,7 +106,7 @@ namespace OGUR.Management
             if (!s_inputs.ContainsKey(playerIndex))
             {
                 s_inputs.Add(playerIndex, GamePad.GetState(m_playerIndex[playerIndex]).IsConnected);
-            }
+            } 
             else
             {
                 if (s_inputs[playerIndex])

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OGUR.Util
+namespace SPX.Util
 {
-    
-    class StringSquisher
+
+    public class StringSquisher
     {
         private static readonly StringBuilder builder = new StringBuilder(64,64);
         private static readonly Dictionary<StringBuilder, string> lookup = new Dictionary<StringBuilder, string>();

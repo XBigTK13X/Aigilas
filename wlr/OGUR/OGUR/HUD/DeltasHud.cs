@@ -8,7 +8,7 @@ using OGUR.Creatures;
 using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
-using OGUR.Util;
+using SPX.Util;
 
 namespace OGUR.HUD
 {

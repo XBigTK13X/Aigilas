@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OGUR.Util
+namespace SPX.Util
 {
-    class StringStorage
+    public class StringStorage
     {
         private static readonly Dictionary<int, string> s_slots = new Dictionary<int, string>();
 

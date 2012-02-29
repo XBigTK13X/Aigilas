@@ -12,13 +12,9 @@ using OGUR.Management;
 using OGUR.States;
 using OGUR.Sprites;
 using OGUR.Text;
-using OGUR.Tests;
 
 namespace OGUR
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
     public class Game : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
@@ -31,49 +27,27 @@ namespace OGUR
             graphics.ApplyChanges();
             XnaManager.SetupCamera(graphics);
             Content.RootDirectory = "Content";
-            TestManager.Run();
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will numerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             XnaManager.SetContentManager(this.Content);
             StateManager.LoadState(new GameplayState());
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             XnaManager.Renderer = new SpriteBatch(GraphicsDevice); ;
             StateManager.LoadContent();
             TextManager.LoadContent();
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit

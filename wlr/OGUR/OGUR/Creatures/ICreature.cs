@@ -14,7 +14,7 @@ using OGUR.Gods;
 using OGUR.Reactions;
 using System.Collections.Generic;
 using OGUR.HUD;
-using OGUR.Util;
+using SPX.Util;
 using OGUR.Statuses;
 
 namespace OGUR.Creatures

@@ -5,10 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using OGUR.Collision;
-using OGUR.Management;
 
-namespace OGUR.Sprites
+namespace SPX.Sprites
 {
     public class AnimatedTexture
     {

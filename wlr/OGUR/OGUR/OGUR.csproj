@@ -108,8 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CreatureClasses.cs" />
-    <Compile Include="Collision\CoordVerifier.cs" />
-    <Compile Include="Collision\HitTest.cs" />
     <Compile Include="Creatures\ConcreteCreatures.cs" />
     <Compile Include="Dungeons\PointPoint.cs" />
     <Compile Include="GameObjects\Depth.cs" />
@@ -117,11 +115,6 @@
     <Compile Include="Creatures\Minions.cs" />
     <Compile Include="Creatures\StatBuff.cs" />
     <Compile Include="HUD\IHud.cs" />
-    <Compile Include="Paths\Path.cs" />
-    <Compile Include="Paths\PathFactory.cs" />
-    <Compile Include="Paths\PathFinder.cs" />
-    <Compile Include="Collision\Point.cs" />
-    <Compile Include="Paths\PriorityQueue.cs" />
     <Compile Include="Creatures\CreatureType.cs" />
     <Compile Include="Creatures\AbstractCreature.cs" />
     <Compile Include="Creatures\StatType.cs" />
@@ -170,9 +163,6 @@
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="HUD\InventoryHud.cs" />
     <Compile Include="Items\ItemClass.cs" />
-    <Compile Include="Paths\QueueFactory.cs" />
-    <Compile Include="Paths\StepLookup.cs" />
-    <Compile Include="Paths\Walk.cs" />
     <Compile Include="Reactions\ConcreteReactions.cs" />
     <Compile Include="Reactions\IReaction.cs" />
     <Compile Include="Reactions\ReactionFactory.cs" />
@@ -196,14 +186,6 @@
     <Compile Include="Strategies\MinionStrategies.cs" />
     <Compile Include="Strategies\StrategyFactory.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
-    <Compile Include="Tests\TestManager.cs" />
-    <Compile Include="Text\ActionText.cs" />
-    <Compile Include="Text\ActionTextHandler.cs" />
-    <Compile Include="Text\TextHandler.cs" />
-    <Compile Include="Text\DefaultHudText.cs" />
-    <Compile Include="Text\Text.cs" />
-    <Compile Include="Text\TextManager.cs" />
-    <Compile Include="Sprites\AnimatedTextureFactory.cs" />
     <Compile Include="Creatures\CreatureFactory.cs" />
     <Compile Include="Items\ItemFactory.cs" />
     <Compile Include="Game.cs" />
@@ -215,29 +197,38 @@
     <Compile Include="Items\ItemSuffix.cs" />
     <Compile Include="Items\ItemName.cs" />
     <Compile Include="Management\AIManager.cs" />
-    <Compile Include="Management\Camera.cs" />
-    <Compile Include="Management\InputManager.cs" />
-    <Compile Include="Management\StateManager.cs" />
-    <Compile Include="Management\XnaManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sprites\AnimatedTexture.cs" />
-    <Compile Include="Sprites\SpriteInfo.cs" />
-    <Compile Include="Sprites\SpriteSheetManager.cs" />
-    <Compile Include="Sprites\SpriteType.cs" />
     <Compile Include="States\GameplayState.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="Strategies\ControlledByPlayer.cs" />
     <Compile Include="Strategies\AttackStrategy.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
-    <Compile Include="Util\IntStorage.cs" />
-    <Compile Include="Util\StringSquisher.cs" />
-    <Compile Include="Util\StringStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SPX.Collision\SPX.Collision.csproj">
+      <Project>{1CFEBB81-75D5-4C29-8893-48DDC4291BDD}</Project>
+      <Name>SPX.Collision</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SPX.Core\SPX.Core.csproj">
+      <Project>{5BF5C616-63E5-4975-94FC-2FF2035D01F8}</Project>
+      <Name>SPX.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SPX.Entities\SPX.Entities.csproj">
+      <Project>{D3C6D6AE-3DF2-4A5F-B4F3-167776319AF7}</Project>
+      <Name>SPX.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SPX.Paths\SPX.Paths.csproj">
+      <Project>{89607996-AE50-442C-8931-DF9B9648234D}</Project>
+      <Name>SPX.Paths</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SPX.Util\SPX.Util.csproj">
+      <Project>{ABE3B969-802E-49E1-BB09-C969EA7E0D4C}</Project>
+      <Name>SPX.Util</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OGURContent\OGURContent.contentproj">
       <Name>OGURContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>

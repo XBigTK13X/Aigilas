@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace OGUR.Sprites
+namespace SPX.Sprites
 {
     public class SpriteSheetManager
     {

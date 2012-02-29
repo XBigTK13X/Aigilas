@@ -1,6 +1,5 @@
 ﻿using System;
-using OGUR.GameObjects;
-using OGUR.Sprites;
+using SPX.Entities;
 
 namespace OGUR.Collision
 {

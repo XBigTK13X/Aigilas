@@ -6,7 +6,7 @@ using OGUR.Creatures;
 using OGUR.Management;
 using OGUR.Text;
 using System.Text;
-using OGUR.Util;
+using SPX.Util;
 using System.Reflection;
 using OGUR.Skills;
 using OGUR.GameObjects;
