@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using SPX.Collision;
+using SPX.Core;
 
-namespace OGUR.Paths
+namespace SPX.Paths
 {
 
     public class Path

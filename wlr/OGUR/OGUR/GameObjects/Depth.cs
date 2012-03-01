@@ -15,9 +15,5 @@ namespace OGUR.GameObjects
         public const float Creature = .5f;
         public const float Player = .7f;
         public const float SkillEffect = .75f;
-        public const float HudBG = .95f;
-        public const float DefaultHudText = .96f;
-        public const float ActionTextBG = 0.98f;
-        public const float ActionText = 0.985f;
     }
 }

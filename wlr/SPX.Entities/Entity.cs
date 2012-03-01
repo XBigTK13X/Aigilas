@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 using SPX.Sprites;
 using SPX.Core;
 
-namespace OGUR.GameObjects
+namespace SPX.Entities
 {
-    public class Entity
+    public class Entity: IEntity
     {
         protected AnimatedTexture m_graphic = new AnimatedTexture();
 
@@ -71,7 +71,7 @@ namespace OGUR.GameObjects
             oldLocation.Copy(m_location);
             m_graphic.SetPosition(location);
             m_location.Copy(location);
-            GameplayObjectManager.UpdateGridLocation(this, oldLocation);
+            EntityManager.UpdateGridLocation(this, oldLocation);
         }
 
         private Point2 target = new Point2(0, 0);
@@ -119,11 +119,6 @@ namespace OGUR.GameObjects
             return m_assetName;
         }
 
-        public int GetObjectType()
-        {
-            return m_objectType;
-        }
-
         public Point2 GetLocation()
         {
             return m_location;
@@ -154,19 +149,9 @@ namespace OGUR.GameObjects
             return m_isInteracting;
         }
 
-        public void PerformInteraction()
+        public int EntityType()
         {
-            m_isInteracting = false;
-            InputManager.Lock(Commands.Confirm, ((ICreature) this).GetPlayerIndex());
-        }
-
-        public ICreature IsCreature()
-        {
-            if (GetObjectType() == GameObjectType.CREATURE)
-            {
-                return (ICreature)this;
-            }
-            return null;
+            return m_objectType;
         }
     }
 }

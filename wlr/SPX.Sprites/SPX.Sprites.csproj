@@ -31,6 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +48,12 @@
     <Compile Include="SpriteInfo.cs" />
     <Compile Include="SpriteSheetManager.cs" />
     <Compile Include="SpriteType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SPX.Core\SPX.Core.csproj">
+      <Project>{5BF5C616-63E5-4975-94FC-2FF2035D01F8}</Project>
+      <Name>SPX.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using OGUR.Management;
-using OGUR.Sprites;
-using OGUR.GameObjects;
+using SPX.Core;
+using SPX.Sprites;
+using SPX.Entities;
 
-namespace OGUR.Collision
+namespace SPX.Entities
 {
     public static class CoordVerifier
     {
@@ -14,12 +14,12 @@ namespace OGUR.Collision
 
         public static bool IsBlocked(Point2 target)
         {
-            return GameplayObjectManager.IsLocationBlocked(target);
+            return EntityManager.IsLocationBlocked(target);
         }   
 
         public static bool Contains(Point2 target, int type)
         {
-            return GameplayObjectManager.AnyContains(target, type);
+            return EntityManager.AnyContains(target, type);
         }
     }
 }

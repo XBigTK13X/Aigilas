@@ -144,9 +144,6 @@
     <Compile Include="GameObjects\GameplayObjectFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\GameplayObjectManager.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="GameObjects\God.cs" />
     <Compile Include="GameObjects\SkillEffect.cs">
       <SubType>Code</SubType>
@@ -186,7 +183,6 @@
     <Compile Include="Strategies\MinionStrategies.cs" />
     <Compile Include="Strategies\StrategyFactory.cs" />
     <Compile Include="Strategies\TargetSet.cs" />
-    <Compile Include="Creatures\CreatureFactory.cs" />
     <Compile Include="Items\ItemFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Creatures\ICreature.cs" />
@@ -199,7 +195,6 @@
     <Compile Include="Management\AIManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\GameplayState.cs" />
-    <Compile Include="States\State.cs" />
     <Compile Include="Strategies\ControlledByPlayer.cs" />
     <Compile Include="Strategies\AttackStrategy.cs" />
     <Compile Include="Strategies\IStrategy.cs" />
@@ -209,10 +204,6 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SPX.Collision\SPX.Collision.csproj">
-      <Project>{1CFEBB81-75D5-4C29-8893-48DDC4291BDD}</Project>
-      <Name>SPX.Collision</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SPX.Core\SPX.Core.csproj">
       <Project>{5BF5C616-63E5-4975-94FC-2FF2035D01F8}</Project>
       <Name>SPX.Core</Name>

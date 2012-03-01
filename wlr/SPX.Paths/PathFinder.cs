@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OGUR.Collision;
-using OGUR.Dungeons;
-using OGUR.GameObjects;
+using SPX.Core;
+using SPX.Entities;
 
-namespace OGUR.Paths
+namespace SPX.Paths
 {    
     public static class PathFinder
     {

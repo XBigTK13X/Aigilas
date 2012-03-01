@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
-using OGUR.Management;
+using SPX.Core;
 
-namespace OGUR.Text
+namespace SPX.Text
 {
     public class TextType
     {

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using OGUR.Dungeons;
-using OGUR.Sprites;
 
 namespace SPX.Core
 {
     public class Point2
     {
         private static readonly Point2 Zero = new Point2(0, 0);
-        private static readonly float halfHeight = SpriteInfo.Height/2;
-        private static readonly float halfWidth= SpriteInfo.Width / 2;
+        private static readonly float halfHeight = GameManager.SpriteHeight/2;
+        private static readonly float halfWidth= GameManager.SpriteWidth/ 2;
 
         public float X { get; private set; }
         public float Y { get; private set; }
@@ -34,7 +32,7 @@ namespace SPX.Core
                 new Point2(1, -1)
             };
 
-        public static readonly Point2[,] m_locations = new Point2[DungeonFactory.BlocksHigh, DungeonFactory.BlocksWide];
+        public static readonly Point2[,] m_locations = new Point2[GameManager.TileMapHeight, GameManager.TileMapWidth];
 
         public Point2(float x, float y, int weight = 0)
         {
@@ -100,19 +98,19 @@ namespace SPX.Core
         public void SetX(float xValue)
         {
             X = xValue;
-            var isGrid = (Math.Abs(X) < DungeonFactory.BlocksWide);
-            PosX = (isGrid) ? X * SpriteInfo.Width : X;
+            var isGrid = (Math.Abs(X) < GameManager.TileMapWidth);
+            PosX = (isGrid) ? X * GameManager.SpriteWidth : X;
             PosCenterX = PosX + halfWidth;
-            GridX = (isGrid) ? (int)X : (int)(X / SpriteInfo.Width);
+            GridX = (isGrid) ? (int)X : (int)(X / GameManager.SpriteWidth);
         }
 
         public void SetY(float yValue)
         {
             Y = yValue;
-            var isGrid = (Math.Abs(Y) < DungeonFactory.BlocksHigh);
-            PosY = (isGrid)?Y*SpriteInfo.Height:Y;
+            var isGrid = (Math.Abs(Y) < GameManager.TileMapHeight);
+            PosY = (isGrid) ? Y * GameManager.SpriteHeight: Y;
             PosCenterY = PosY+halfHeight;
-            GridY = (isGrid) ? (int)Y : (int)(Y / SpriteInfo.Height);
+            GridY = (isGrid) ? (int)Y : (int)(Y / GameManager.SpriteHeight);
         }
 
         public void SetWeight(float weight)
@@ -135,9 +133,9 @@ namespace SPX.Core
         {
             if (m_locations[0,0]==null)
             {
-                for (int ii = 0; ii < DungeonFactory.BlocksHigh; ii++)
+                for (int ii = 0; ii < GameManager.TileMapHeight; ii++)
                 {
-                    for (int jj = 0; jj < DungeonFactory.BlocksWide; jj++)
+                    for (int jj = 0; jj < GameManager.TileMapWidth; jj++)
                     {
                         m_locations[ii,jj] = new Point2(jj, ii);
                     }

@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using OGUR.Creatures;
-using OGUR.Management;
-using OGUR.GameObjects;
+using SPX.Core;
 
-namespace OGUR.Text
+namespace SPX.Text
 {
     class DefaultHudText:Text
     {

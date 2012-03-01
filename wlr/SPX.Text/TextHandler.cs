@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
-using OGUR.Management;
-using OGUR.Text;
+using SPX.Core;
 using Microsoft.Xna.Framework;
 
-namespace OGUR.Text
+namespace SPX.Text
 {
     public class TextHandler
     {

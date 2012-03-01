@@ -1,11 +1,11 @@
 ﻿using System;
-using SPX.Entities;
+using SPX.Core;
 
-namespace SPX.Collision
+namespace SPX.Entities
 {
     public static class HitTest
     {
-        public static bool IsTouching(GameplayObject source, GameplayObject target)
+        public static bool IsTouching(IEntity source, IEntity target)
         {
             if (IsClose(source, target))
             {
@@ -14,7 +14,7 @@ namespace SPX.Collision
             return false;
         }
 
-        private static bool IsClose(GameplayObject source, GameplayObject target)
+        private static bool IsClose(IEntity source, IEntity target)
         {
             return IsClose(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY,
                            target.GetLocation().PosY);
@@ -25,7 +25,7 @@ namespace SPX.Collision
             return GetDistanceSquare(x1,x2,y1,y2) < GameManager.SpriteRadius;
         }
 
-        public static float GetDistanceSquare(GameplayObject source, GameplayObject target)
+        public static float GetDistanceSquare(IEntity source, IEntity target)
         {
             return GetDistanceSquare(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY,
                                      target.GetLocation().PosY);
