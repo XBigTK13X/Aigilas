@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using OGUR.GameObjects;
-using OGUR.Management;
-using OGUR.Sprites;
-using OGUR.Dungeons;
-using OGUR.Text;
+using SPX.States;
+using SPX.Core;
 
 namespace OGUR.States
 {
@@ -22,14 +14,14 @@ namespace OGUR.States
             m_menuBase = XnaManager.GetGameOverAsset();
         }
 
-        public override void Draw()
+        public void Draw()
         {
             var x = (XnaManager.WindowWidth - m_menuBase.Bounds.Right)/2;
             var y = (XnaManager.WindowHeight - m_menuBase.Bounds.Bottom) / 2;
             XnaManager.Renderer.Draw(m_menuBase, new Vector2(x,y), Color.White);
         }
 
-        public override void Update()
+        public void Update()
         {
             if(InputManager.IsPressed(Commands.Confirm,0,true))
             {
@@ -37,7 +29,7 @@ namespace OGUR.States
             }
         }
 
-        public override void LoadContent()
+        public void LoadContent()
         {
 
         }

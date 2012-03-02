@@ -216,6 +216,18 @@
       <Project>{89607996-AE50-442C-8931-DF9B9648234D}</Project>
       <Name>SPX.Paths</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SPX.Sprites\SPX.Sprites.csproj">
+      <Project>{9846DC75-EF80-47DF-AACB-2CB75EA2F1B3}</Project>
+      <Name>SPX.Sprites</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SPX.States\SPX.States.csproj">
+      <Project>{5D0E626A-F05F-48D5-866F-6855C858C2B6}</Project>
+      <Name>SPX.States</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SPX.Text\SPX.Text.csproj">
+      <Project>{28ACB616-EE2A-4B68-80E3-DCAD7803455A}</Project>
+      <Name>SPX.Text</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SPX.Util\SPX.Util.csproj">
       <Project>{ABE3B969-802E-49E1-BB09-C969EA7E0D4C}</Project>
       <Name>SPX.Util</Name>

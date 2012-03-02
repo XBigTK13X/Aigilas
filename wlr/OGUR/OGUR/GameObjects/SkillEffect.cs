@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OGUR.Collision;
-using OGUR.Creatures;
+﻿using OGUR.Creatures;
 using OGUR.Skills;
-using OGUR.Sprites;
+using SPX.Core;
 
 namespace OGUR.GameObjects
 {
@@ -53,7 +48,7 @@ namespace OGUR.GameObjects
         {
             foreach (var targetType in m_skill.GetTargetTypes())
             {
-                hitTarget = GameplayObjectManager.GetObjects(targetType, this.GetLocation()).FirstOrDefault();
+                hitTarget = EntityManager.GetObjects(targetType, this.GetLocation()).FirstOrDefault();
                 if (null != hitTarget && hitTarget != this)
                 {
                     m_skill.Affect(hitTarget);

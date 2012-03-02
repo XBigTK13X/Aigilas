@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using OGUR.GameObjects;
-using OGUR.Management;
-using OGUR.Sprites;
-using OGUR.Dungeons;
+﻿using SPX.States;
+using SPX.Entities;
 
 namespace OGUR.States
 {
@@ -16,19 +7,19 @@ namespace OGUR.States
     {
         public GameplayState()
         {
-            GameplayObjectManager.Reset();
+            EntityManager.Reset();
         }
-        public override void Update()
+        public void Update()
         {
-            GameplayObjectManager.Update();
+            EntityManager.Update();
         }
-        public override void LoadContent()
+        public void LoadContent()
         {
-            GameplayObjectManager.LoadContent();
+            EntityManager.LoadContent();
         }
-        public override void Draw()
+        public void Draw()
         {
-            GameplayObjectManager.Draw();
+            EntityManager.Draw();
         }
     }
 }
