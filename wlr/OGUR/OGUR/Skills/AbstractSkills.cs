@@ -43,7 +43,7 @@ namespace OGUR.Skills
             m_behavior.Activate(source);
             
         }
-        public virtual void Affect(GameplayObject target)
+        public virtual void Affect(Entity target)
         {
             var creature = target.IsCreature();
             if (creature != null)
@@ -53,7 +53,7 @@ namespace OGUR.Skills
         }
         public void ApplyToPlayers(int statusId)
         {
-            foreach (var player in GameplayObjectManager.GetPlayers())
+            foreach (var player in EntityManager.GetPlayers())
             {
                 StatusFactory.Apply(player, statusId);
             }
@@ -65,7 +65,7 @@ namespace OGUR.Skills
         public float GetStrength(){return m_components.GetStrength();}
         public bool IsPersistent() { return m_components.IsPersistent(); }
         public Color GetElementColor() { return Elements.Colors[m_components.GetElements()[0]];}
-        public virtual void Cleanup(GameplayObject target,SkillEffect source){m_behavior.Cleanup(target,source);}
+        public virtual void Cleanup(Entity target,SkillEffect source){m_behavior.Cleanup(target,source);}
         public bool AffectTarget(ICreature target, SkillEffect graphic){return m_behavior.AffectTarget(target, graphic);}
         public bool IsActive()
         {

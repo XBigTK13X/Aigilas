@@ -17,7 +17,7 @@ namespace OGUR.Dungeons
         public static int BlocksWide = 30;
 
         private static Dictionary<int, DungeonSet> m_world = new Dictionary<int, DungeonSet>();
-        private static List<GameplayObject> m_cache = new List<GameplayObject>(); 
+        private static List<Entity> m_cache = new List<Entity>(); 
 
         public static void GetNextFloor(int area)
         {
@@ -29,14 +29,14 @@ namespace OGUR.Dungeons
             m_world[area].GotoPrevious(area);
         }
 
-        public static void AddToCache(GameplayObject content)
+        public static void AddToCache(Entity content)
         {
             m_cache.Add(content);
         }
 
-        public static List<GameplayObject> FlushCache()
+        public static List<Entity> FlushCache()
         {
-            var result = new List<GameplayObject>(m_cache);
+            var result = new List<Entity>(m_cache);
             m_cache.Clear();
             return result;
         }
@@ -44,7 +44,7 @@ namespace OGUR.Dungeons
         public static void Start()
         {
             m_world = new Dictionary<int, DungeonSet>();
-            m_cache = new List<GameplayObject>();
+            m_cache = new List<Entity>();
             m_world.Add(Location.Depths,new DungeonSet(Location.Start));
         }
     }

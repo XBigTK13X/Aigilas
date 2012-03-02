@@ -89,7 +89,7 @@ namespace OGUR.Creatures
             base.Update();
             if (m_host == null)
             {
-                foreach (var creature in GameplayObjectManager.GetCreaturesAt(m_location))
+                foreach (var creature in EntityManager.GetCreaturesAt(m_location))
                 {
                     if (creature != this)
                     {

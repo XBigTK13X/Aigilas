@@ -8,7 +8,7 @@ using OGUR.Sprites;
 
 namespace OGUR.Items
 {
-    public class GenericItem : GameplayObject
+    public class GenericItem : Entity
     {
         public Stats Modifers;
         public String Name;
@@ -84,7 +84,7 @@ namespace OGUR.Items
             base.Update();
             if (m_isOnBoard)
             {
-                m_currentTarget = GameplayObjectManager.GetTouchingPlayer(this);
+                m_currentTarget = EntityManager.GetTouchingPlayer(this);
                 if (m_currentTarget != null)
                 {
                     if (m_currentTarget.IsInteracting())

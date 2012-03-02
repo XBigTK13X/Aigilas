@@ -4,7 +4,7 @@ using SPX.Core;
 
 namespace OGUR.GameObjects
 {
-    public class SkillEffect:GameplayObject
+    public class SkillEffect:Entity
     {
         private const float m_strengthDecayAmount = .75f;
         public const float DefaultStrength = 1;
@@ -31,9 +31,9 @@ namespace OGUR.GameObjects
             m_graphic.SetColor(skill.GetElementColor());
         }
 
-        private GameplayObject hitTarget;
+        private Entity hitTarget;
 
-        public void Cleanup(GameplayObject target)
+        public void Cleanup(Entity target)
         {
             m_isActive = false;
             m_skill.Cleanup(target,this);

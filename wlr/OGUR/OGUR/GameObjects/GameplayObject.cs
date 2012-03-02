@@ -12,7 +12,7 @@ using OGUR.Sprites;
 
 namespace OGUR.GameObjects
 {
-    public class GameplayObject
+    public class Entity
     {
         protected AnimatedTexture m_graphic = new AnimatedTexture();
 
@@ -75,7 +75,7 @@ namespace OGUR.GameObjects
             oldLocation.Copy(m_location);
             m_graphic.SetPosition(location);
             m_location.Copy(location);
-            GameplayObjectManager.UpdateGridLocation(this, oldLocation);
+            EntityManager.UpdateGridLocation(this, oldLocation);
         }
 
         private Point2 target = new Point2(0, 0);

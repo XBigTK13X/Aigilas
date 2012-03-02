@@ -45,7 +45,7 @@ namespace OGUR.Creatures
         };
     }
 
-    public abstract class ICreature : GameplayObject
+    public abstract class ICreature : Entity
     {
         protected IStrategy m_strategy;
 
@@ -126,7 +126,7 @@ namespace OGUR.Creatures
         public void PickupItem(GenericItem item)
         {
             m_inventory.Add(item);
-            GameplayObjectManager.RemoveObject(item);
+            EntityManager.RemoveObject(item);
         }
 
         public void Equip(GenericItem item)
@@ -152,7 +152,7 @@ namespace OGUR.Creatures
 
                 if (m_inventory.GetItemCount(item) > 0)
                 {
-                    GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
+                    EntityManager.AddObject(new GenericItem(item, GetLocation()));
                     m_inventory.Remove(item);
                 }
                 else
@@ -160,7 +160,7 @@ namespace OGUR.Creatures
                     if (m_inventory.GetItemCount(item) == 0)
                     {
                         m_equipment.Unregister(item);
-                        GameplayObjectManager.AddObject(new GenericItem(item, GetLocation()));
+                        EntityManager.AddObject(new GenericItem(item, GetLocation()));
                         m_inventory.Remove(item);
                     }
                 }
@@ -401,7 +401,7 @@ namespace OGUR.Creatures
                     {
                         if(m_statuses.CanAttack())
                         {
-                            creatures = GameplayObjectManager.GetCreaturesAt(target);
+                            creatures = EntityManager.GetCreaturesAt(target);
                             if (creatures.Count() > 0)
                             {
                                 foreach (var creature in creatures)

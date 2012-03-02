@@ -91,7 +91,7 @@ namespace OGUR.Items
             {
                 while(m_contents[item]>0)
                 {
-                    GameplayObjectManager.AddObject(new GenericItem(item,m_parent.GetLocation()));
+                    EntityManager.AddObject(new GenericItem(item,m_parent.GetLocation()));
                     Remove(item);
                 }
             }

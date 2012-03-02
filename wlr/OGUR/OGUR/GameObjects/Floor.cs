@@ -3,7 +3,7 @@ using OGUR.Sprites;
 
 namespace OGUR.GameObjects
 {
-    public class Floor : GameplayObject
+    public class Floor : Entity
     {
         public Floor(Point2 location)
         {

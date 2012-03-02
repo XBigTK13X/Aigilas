@@ -12,12 +12,12 @@ namespace SPX.Entities
         private static List<IEntity> m_contents = new List<IEntity>();
         private static Dictionary<Point2,List<IEntity>> m_gridContents = new Dictionary<Point2, List<IEntity>>();
 
-        public static IEntity AddObject(IEntity gameplayObject)
+        public static IEntity AddObject(IEntity Entity)
         {
-            gameplayObject.LoadContent();
-            m_contents.Add(gameplayObject);
-            AddToGrid(gameplayObject);
-            return gameplayObject;
+            Entity.LoadContent();
+            m_contents.Add(Entity);
+            AddToGrid(Entity);
+            return Entity;
         }
 
         public static IEntity GetObject(int type)
@@ -220,24 +220,24 @@ namespace SPX.Entities
             }
         }
 
-        private static void AddToGrid(IEntity gameplayObject)
+        private static void AddToGrid(IEntity Entity)
         {
-            if (!m_gridContents.ContainsKey(gameplayObject.GetLocation()))
+            if (!m_gridContents.ContainsKey(Entity.GetLocation()))
             {
-                m_gridContents.Add(gameplayObject.GetLocation(), new List<IEntity>() { gameplayObject });
+                m_gridContents.Add(Entity.GetLocation(), new List<IEntity>() { Entity });
             }
             else
             {
-                m_gridContents[gameplayObject.GetLocation()].Add(gameplayObject);
+                m_gridContents[Entity.GetLocation()].Add(Entity);
             }
         }
 
-        public static void UpdateGridLocation(IEntity gameplayObject, Point2 oldLocation)
+        public static void UpdateGridLocation(IEntity Entity, Point2 oldLocation)
         {
             if(m_gridContents!=null && oldLocation !=null)
             {
-                m_gridContents[oldLocation].Remove(gameplayObject);
-                AddToGrid(gameplayObject);
+                m_gridContents[oldLocation].Remove(Entity);
+                AddToGrid(Entity);
             }
         }
 

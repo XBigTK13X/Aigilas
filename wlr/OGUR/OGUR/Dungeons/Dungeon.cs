@@ -27,8 +27,8 @@ namespace OGUR.Dungeons
         private static int enemyBaseModifier = 0;
 
         private readonly List<Room> m_rooms = new List<Room>();
-        private List<GameplayObject> m_contents = new List<GameplayObject>();
-        private readonly GameplayObject[,] dungeon = new GameplayObject[m_blocksWide,m_blocksHigh];
+        private List<Entity> m_contents = new List<Entity>();
+        private readonly Entity[,] dungeon = new Entity[m_blocksWide,m_blocksHigh];
         private Point2 downSpawnLocation = new Point2(0, 0);
         private Point2 upSpawnLocation = new Point2(0, 0);
         private static readonly Random rand = new Random();
@@ -52,7 +52,7 @@ namespace OGUR.Dungeons
         {
             enemyCapModifier++;
             enemyBaseModifier = enemyBase + (int)(enemyCapModifier / 5);
-            GameplayObjectManager.Clear();
+            EntityManager.Clear();
             Init();
             PlaceRooms();
             ConvertRoomsToWalls();
@@ -74,10 +74,10 @@ namespace OGUR.Dungeons
             }
         }
 
-        private List<GameplayObject> playerCache;
+        private List<Entity> playerCache;
         public void LoadTiles(bool goingUp)
         {
-            GameplayObjectManager.Clear();
+            EntityManager.Clear();
             PlaceFloor();
             playerCache = DungeonFactory.FlushCache();
             var spawn = goingUp ? upSpawnLocation : downSpawnLocation;
@@ -89,18 +89,18 @@ namespace OGUR.Dungeons
             }
             foreach (var item in m_contents)
             {
-                GameplayObjectManager.AddObject(item);
+                EntityManager.AddObject(item);
             }
         }
 
         public void CacheContents()
         {
-            foreach (var player in GameplayObjectManager.GetCreatures(CreatureType.PLAYER))
+            foreach (var player in EntityManager.GetCreatures(CreatureType.PLAYER))
             {
                 DungeonFactory.AddToCache(player);
-                GameplayObjectManager.RemoveObject(player);
+                EntityManager.RemoveObject(player);
             }
-            m_contents = new List<GameplayObject>(GameplayObjectManager.GetObjectsToCache());
+            m_contents = new List<Entity>(EntityManager.GetObjectsToCache());
         }
 
         private void Init()
@@ -118,7 +118,7 @@ namespace OGUR.Dungeons
                     {
                         m_contents.Add(tile);
                     }
-                    GameplayObjectManager.AddObject(tile);
+                    EntityManager.AddObject(tile);
                 }
             }
 
@@ -138,14 +138,14 @@ namespace OGUR.Dungeons
                 {
                     player.SetLocation(GetRandomNeighbor(ref neighbors));
                 }
-                GameplayObjectManager.AddObjects(cache);
+                EntityManager.AddObjects(cache);
                 m_contents.AddRange(cache);
             }
             
             //Give player random objects
             for (int ii = 0; ii < startingItemAmount; ii++)
             {
-                GameplayObjectManager.GetCreatures(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)).PickupItem(ItemFactory.CreateRandomPlain());
+                EntityManager.GetCreatures(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)).PickupItem(ItemFactory.CreateRandomPlain());
             }
            
         }
@@ -182,7 +182,7 @@ namespace OGUR.Dungeons
             {
                 for(var jj = 1;jj<m_blocksHigh-1;jj++)
                 {
-                    GameplayObjectManager.AddObject(new Floor(new Point2(ii,jj)));
+                    EntityManager.AddObject(new Floor(new Point2(ii,jj)));
                 }
             }
         }
@@ -290,11 +290,11 @@ namespace OGUR.Dungeons
                                     }
                                 }
                             }
-                            dungeon[ii, jj] = GameplayObjectFactory.Create(GameObjectType.WALL, new Point2(ii, jj));
+                            dungeon[ii, jj] = EntityFactory.Create(GameObjectType.WALL, new Point2(ii, jj));
                         }
                         else
                         {
-                            dungeon[ii, jj] = GameplayObjectFactory.Create(GameObjectType.FLOOR, new Point2(ii, jj));
+                            dungeon[ii, jj] = EntityFactory.Create(GameObjectType.FLOOR, new Point2(ii, jj));
                         }
                     }
                 }
@@ -318,7 +318,7 @@ namespace OGUR.Dungeons
                         var currentTarget = new Point2(ii, entrance.Y);
                         if(dungeon[currentTarget.GridX,currentTarget.GridY].GetObjectType()==GameObjectType.WALL)
                         {
-                            dungeon[currentTarget.GridX, currentTarget.GridY] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(GameObjectType.FLOOR, currentTarget);
                         }
                     }
                 }
@@ -329,7 +329,7 @@ namespace OGUR.Dungeons
                         var currentTarget = new Point2(entrance.X, ii);
                         if (dungeon[currentTarget.GridX, currentTarget.GridY].GetObjectType() == GameObjectType.WALL)
                         {
-                            dungeon[currentTarget.GridX, currentTarget.GridY] = GameplayObjectFactory.Create(GameObjectType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(GameObjectType.FLOOR, currentTarget);
                         }
                     }
                 }

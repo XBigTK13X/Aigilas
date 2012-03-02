@@ -24,7 +24,7 @@ namespace OGUR.Skills
         }
         public int GetSpriteType() { return m_sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
-        public virtual void Cleanup(GameplayObject target,SkillEffect source) { }
+        public virtual void Cleanup(Entity target,SkillEffect source) { }
         public bool IsActive()
         {
             return !m_used;
@@ -52,7 +52,7 @@ namespace OGUR.Skills
             }
             return costPaid;
         }
-        private GameplayObject hitTarget;
+        private Entity hitTarget;
         public virtual bool AffectTarget(ICreature source,SkillEffect graphic)
         {
             hitTarget = source.GetTargets().GetCollidedTarget(graphic);

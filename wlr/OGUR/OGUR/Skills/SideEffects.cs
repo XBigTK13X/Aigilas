@@ -31,7 +31,7 @@ namespace OGUR.Skills
         {
             var effect = new SkillEffect(gridLocation, velocity, source, m_parent);
             m_effectGraphics.Add(effect);
-            GameplayObjectManager.AddObject(effect);
+            EntityManager.AddObject(effect);
         }
 
         public SkillEffect GetFirstGraphic()

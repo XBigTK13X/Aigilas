@@ -12,11 +12,11 @@ using System.Linq;
 
 namespace OGUR.GameObjects
 {
-    public class Altar : GameplayObject
+    public class Altar : Entity
     {
         private readonly God m_god;
         private Player m_currentTarget;
-        private IEnumerable<GameplayObject> m_offerings;
+        private IEnumerable<Entity> m_offerings;
 
         public Altar(Point2 location,int godName)
         {
@@ -27,14 +27,14 @@ namespace OGUR.GameObjects
 
         public override void Update()
         {
-            m_currentTarget = GameplayObjectManager.GetTouchingPlayer(this);
+            m_currentTarget = EntityManager.GetTouchingPlayer(this);
             if (m_currentTarget != null)
             {
                 if (m_currentTarget.IsInteracting())
                 {
                     m_currentTarget.Pray(m_god);
                 }
-                m_offerings = GameplayObjectManager.GetObjects(GameObjectType.ITEM, m_location);
+                m_offerings = EntityManager.GetObjects(GameObjectType.ITEM, m_location);
                 foreach (GenericItem offering in m_offerings)
                 {
                     m_currentTarget.Sacrifice(m_god, offering);

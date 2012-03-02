@@ -1,7 +1,7 @@
 ﻿using System;
-using OGUR.Collision;
 using OGUR.Creatures;
-using OGUR.GameObjects;
+using SPX.Core;
+using SPX.Entities;
 
 namespace OGUR.Items
     
@@ -22,7 +22,7 @@ namespace OGUR.Items
             itemType = SelectRandomType();
             return
                 (GenericItem)
-                GameplayObjectManager.AddObject(new GenericItem(new Stats(rand.Next(itemGrowth), rand.Next(itemGrowth), rand.Next(itemGrowth), 0, 0, 0, 0, 0, 0, 0),
+                EntityManager.AddObject(new GenericItem(new Stats(rand.Next(itemGrowth), rand.Next(itemGrowth), rand.Next(itemGrowth), 0, 0, 0, 0, 0, 0, 0),
                                                                 ItemSuffix.NULL, ItemPrefix.NULL, itemType,
                                                                 location,onFloor));
         }

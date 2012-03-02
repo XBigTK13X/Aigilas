@@ -3,7 +3,7 @@ using OGUR.Sprites;
 
 namespace OGUR.GameObjects
 {
-    public class Wall : GameplayObject
+    public class Wall : Entity
     {
         public Wall(Point2 location)
         {

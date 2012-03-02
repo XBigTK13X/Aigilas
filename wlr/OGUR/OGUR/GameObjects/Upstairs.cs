@@ -10,7 +10,7 @@ using OGUR.Creatures;
 
 namespace OGUR.GameObjects
 {
-    public class Upstairs : GameplayObject
+    public class Upstairs : Entity
     {
         public Upstairs(Point2 location)
         {
@@ -24,7 +24,7 @@ namespace OGUR.GameObjects
         ICreature player;
         public override void  Update()
         {
-            player = GameplayObjectManager.GetTouchingPlayer(this);
+            player = EntityManager.GetTouchingPlayer(this);
             if(player!=null)
             {
                 if (player.IsInteracting())

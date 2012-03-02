@@ -69,7 +69,7 @@ namespace OGUR.Strategies
                 }
                 foreach(var creatureType in m_targetTypes)
                 {
-                    m_calculatedTargets = GameplayObjectManager.GetCreatures(creatureType);
+                    m_calculatedTargets = EntityManager.GetCreatures(creatureType);
                     foreach(var creature in m_calculatedTargets)
                     {
                         if (creature != m_parent)
@@ -87,7 +87,7 @@ namespace OGUR.Strategies
             return closest;
         }
 
-        public GameplayObject GetCollidedTarget(GameplayObject source)
+        public Entity GetCollidedTarget(Entity source)
         {
             foreach(var target in m_targets)
             {
@@ -99,7 +99,7 @@ namespace OGUR.Strategies
 
             foreach (var creatureType in m_targetTypes)
             {
-                foreach (var target in GameplayObjectManager.GetCreaturesAt(source.GetLocation()))
+                foreach (var target in EntityManager.GetCreaturesAt(source.GetLocation()))
                 {
                     if (target.GetCreatureType()==creatureType || 
                         (creatureType == CreatureType.NONPLAYER && target.GetCreatureType()!=CreatureType.PLAYER) || 
