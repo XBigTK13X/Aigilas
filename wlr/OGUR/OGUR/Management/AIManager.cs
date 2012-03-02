@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OGUR.Entities;
 using OGUR.Creatures;
+using SPX.Entities;
 
 namespace OGUR.Management
 {
@@ -53,7 +50,7 @@ namespace OGUR.Management
         {
             var minDist = float.PositiveInfinity;
             Player result = null;
-            foreach(Player o in EntityManager.GetCreatures(CreatureType.PLAYER))
+            foreach(Player o in EntityManager.GetActors(CreatureType.PLAYER))
             {
                 var dist = Math.Abs(o.GetLocation().PosX - o.GetLocation().PosX) + Math.Abs(o.GetLocation().PosY - o.GetLocation().PosY);
                 if (dist < minDist)

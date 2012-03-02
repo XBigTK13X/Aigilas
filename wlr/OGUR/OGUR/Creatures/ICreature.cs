@@ -1,20 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OGUR.Classes;
-using OGUR.Items;
-using OGUR.Skills;
-using OGUR.Strategies;
-using OGUR.Entities;
 using OGUR.Gods;
-using OGUR.Reactions;
-using System.Collections.Generic;
 using OGUR.HUD;
-using SPX.Util;
+using OGUR.Items;
+using OGUR.Reactions;
+using OGUR.Skills;
 using OGUR.Statuses;
-using SPX.Entities;
+using OGUR.Strategies;
 using SPX.Core;
-using SPX.Text;
+using SPX.Entities;
 using SPX.Sprites;
+using SPX.Text;
+using SPX.Util;
 
 namespace OGUR.Creatures
 {
@@ -44,7 +43,7 @@ namespace OGUR.Creatures
         };
     }
 
-    public abstract class ICreature : Entity
+    public abstract class ICreature : Entity,IActor
     {
         protected IStrategy m_strategy;
 
@@ -86,7 +85,7 @@ namespace OGUR.Creatures
 
         protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
-            Initialize(location, SpriteFromCreature(type), EntityType.CREATURE,OGUR.ZZDepth.Creature);
+            Initialize(location, SpriteFromCreature(type), OGUR.EntityType.CREATURE,OGUR.ZDepth.Creature);
             Init(type,stats,creatureClass,setClass);
         }
         protected void SetClass(CreatureClass cClass)
@@ -306,7 +305,7 @@ namespace OGUR.Creatures
             return m_playerIndex;
         }
 
-        public int GetCreatureType()
+        public int ActorType()
         {
             return m_creatureType;
         }
@@ -400,16 +399,16 @@ namespace OGUR.Creatures
                     {
                         if(m_statuses.CanAttack())
                         {
-                            creatures = EntityManager.GetCreaturesAt(target);
+                            creatures = EntityManager.GetActorsAt(target).Select(a=>a as ICreature).ToList();
                             if (creatures.Count() > 0)
                             {
                                 foreach (var creature in creatures)
                                 {
                                     if (creature != this)
                                     {
-                                        if ((creature.GetCreatureType() != CreatureType.PLAYER && m_creatureType == CreatureType.PLAYER)
+                                        if ((creature.ActorType() != CreatureType.PLAYER && m_creatureType == CreatureType.PLAYER)
                                             ||
-                                            (creature.GetCreatureType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER)
+                                            (creature.ActorType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER)
                                             || m_statuses.WillHitAnything())
                                         {
                                             creature.ApplyDamage(CalculateDamage(), this);
@@ -609,6 +608,13 @@ namespace OGUR.Creatures
                     m_skills.Add(skillId);
                 }
             }
+        }
+
+
+        public void PerformInteraction()
+        {
+            SetInteracting(false);
+            InputManager.Lock(Commands.Confirm, GetPlayerIndex());
         }
     }
 }

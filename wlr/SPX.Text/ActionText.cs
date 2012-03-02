@@ -8,7 +8,7 @@ using SPX.Core;
 
 namespace SPX.Text
 {
-    class ActionText:Text
+    public class ActionText:Text
     {
 
         protected int m_lifeSpan = 0;

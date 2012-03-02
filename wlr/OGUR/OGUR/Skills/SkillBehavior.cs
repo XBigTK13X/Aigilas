@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SPX.Sprites;
-using OGUR.Creatures;
-using SPX.Entities;
+﻿using OGUR.Creatures;
 using OGUR.Entities;
+using SPX.Core;
+using SPX.Entities;
 
 namespace OGUR.Skills
 {
@@ -52,14 +48,14 @@ namespace OGUR.Skills
             }
             return costPaid;
         }
-        private Entity hitTarget;
+        private IEntity hitTarget;
         public virtual bool AffectTarget(ICreature source,SkillEffect graphic)
         {
             hitTarget = source.GetTargets().GetCollidedTarget(graphic);
             if (null != hitTarget && hitTarget!=source)
             {
                 m_parent.Affect(hitTarget);
-                if (hitTarget.EntityType() == EntityType.CREATURE)
+                if (hitTarget.EntityType() == OGUR.EntityType.CREATURE)
                 {
                     (hitTarget as ICreature).Combo(m_parent.GetElements());
                     (hitTarget as ICreature).React(m_parent.GetSkillId());

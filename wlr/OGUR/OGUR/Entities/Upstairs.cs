@@ -20,7 +20,7 @@ namespace OGUR.Entities
         ICreature player;
         public override void  Update()
         {
-            player = EntityManager.GetTouchingPlayer(this);
+            player = EntityManager.GetTouchingCreature(this) as Player;
             if(player!=null)
             {
                 if (player.IsInteracting())

@@ -16,5 +16,6 @@ namespace SPX.Entities
         int EntityType();
         bool IsActive();
         bool IsBlocking();
+        void SetInactive();
     }
 }

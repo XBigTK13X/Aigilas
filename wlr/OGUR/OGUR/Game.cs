@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using OGUR.Management;
 using OGUR.States;
-using SPX.Sprites;
-using OGUR.Text;
+using SPX.States;
+using SPX.Core;
+using SPX.Text;
 
 namespace OGUR
 {

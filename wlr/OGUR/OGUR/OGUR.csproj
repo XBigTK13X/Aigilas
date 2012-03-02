@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Classes\CreatureClasses.cs" />
     <Compile Include="Creatures\ConcreteCreatures.cs" />
+    <Compile Include="Creatures\CreatureFactory.cs" />
     <Compile Include="Dungeons\PointPoint.cs" />
     <Compile Include="Entities\Depth.cs" />
     <Compile Include="Entities\Extensions.cs" />

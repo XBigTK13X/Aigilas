@@ -7,6 +7,7 @@ using SPX.Sprites;
 using OGUR.Strategies;
 using OGUR.Entities;
 using SPX.Entities;
+using SPX.Core;
 
 namespace OGUR.Creatures
 {
@@ -89,11 +90,11 @@ namespace OGUR.Creatures
             base.Update();
             if (m_host == null)
             {
-                foreach (var creature in EntityManager.GetCreaturesAt(m_location))
+                foreach (var creature in EntityManager.GetActorsAt(m_location))
                 {
                     if (creature != this)
                     {
-                        m_host = creature;
+                        m_host = creature as ICreature;
                     }
                 }
                 if (m_host == null)

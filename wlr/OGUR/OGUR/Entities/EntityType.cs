@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SPX.Entities;
 
-namespace OGUR.Entities
+namespace OGUR
 {
     public class EntityType:SPX.Entities.EntityType
     {

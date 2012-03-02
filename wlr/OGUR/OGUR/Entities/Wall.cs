@@ -8,7 +8,7 @@ namespace OGUR.Entities
     {
         public Wall(Point2 location)
         {
-            Initialize(location, SpriteType.WALL, EntityType.WALL,ZZDepth.Wall);
+            Initialize(location, SpriteType.WALL, OGUR.EntityType.WALL,ZDepth.Wall);
             m_isBlocking = true;
         }
     }

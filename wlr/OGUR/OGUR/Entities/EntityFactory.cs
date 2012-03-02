@@ -10,13 +10,13 @@ namespace OGUR.Entities
         {
             switch (type)
             {
-                case EntityType.FLOOR:
+                case OGUR.EntityType.FLOOR:
                     return new Floor(location);
-                case EntityType.WALL:
+                case OGUR.EntityType.WALL:
                     return new Wall(location);
-                case EntityType.DOWNSTAIRS:
+                case OGUR.EntityType.DOWNSTAIRS:
                     return new Downstairs(location);
-                case EntityType.UPSTAIRS:
+                case OGUR.EntityType.UPSTAIRS:
                     return new Upstairs(location);
                 default:
                     throw new Exception("An undefined int case was passed into the EntityFactory.");

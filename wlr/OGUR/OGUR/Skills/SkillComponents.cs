@@ -13,7 +13,7 @@ namespace OGUR.Skills
         protected StatBuff m_buff;
         protected float m_effectStrength = 0;
         protected bool m_isPersistent = false;
-        protected List<int> m_targetTypes = new List<int>(){EntityType.WALL};
+        protected List<int> m_targetTypes = new List<int>(){OGUR.EntityType.WALL};
 
         public SkillComponents(float strength,bool isPersistent)
         {

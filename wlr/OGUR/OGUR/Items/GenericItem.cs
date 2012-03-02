@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using OGUR.Creatures;
-using OGUR.Entities;
 using SPX.Core;
 using SPX.Entities;
 using SPX.Sprites;
@@ -84,7 +83,7 @@ namespace OGUR.Items
             base.Update();
             if (m_isOnBoard)
             {
-                m_currentTarget = EntityManager.GetTouchingPlayer(this);
+                m_currentTarget = EntityManager.GetTouchingCreature(this) as Player;
                 if (m_currentTarget != null)
                 {
                     if (m_currentTarget.IsInteracting())

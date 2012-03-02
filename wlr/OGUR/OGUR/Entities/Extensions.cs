@@ -1,24 +1,19 @@
 ﻿using OGUR.Creatures;
 using SPX.Entities;
 using SPX.Core;
+using System.Collections.Generic;
 
 namespace OGUR.Entities
 {
     public static class Extensions
     {
-        public static ICreature IsCreature(this Entity entity)
+        public static ICreature IsCreature(this IEntity entity)
         {
-            if (entity.EntityType() == EntityType.CREATURE)
+            if (entity.EntityType() == OGUR.EntityType.CREATURE)
             {
                 return entity as ICreature;
             }
             return null;
-        }
-
-        public static void PerformInteraction(this Entity creature)
-        {
-            creature.SetInteracting(false);
-            InputManager.Lock(Commands.Confirm, ((ICreature)creature).GetPlayerIndex());
         }
     }
 }

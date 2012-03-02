@@ -9,6 +9,7 @@ using SPX.Sprites;
 using OGUR.Statuses;
 using OGUR.Items;
 using SPX.Entities;
+using SPX.Core;
 
 namespace OGUR.Skills
 {
@@ -16,7 +17,7 @@ namespace OGUR.Skills
     {
         public NoSkill() : base(SkillId.NO_SKILL, AnimationType.NONE) { }
         public override void Activate(ICreature source) { }
-        public override void Affect(Entity target) { }
+        public override void Affect(IEntity target) { }
         public override void Affect(ICreature target) { }
     }
     public class AbsorbSkill : ISkill
@@ -86,9 +87,9 @@ namespace OGUR.Skills
                     {
                         if (ii != 0 || jj != 0)
                         {
-                            foreach(var creature in EntityManager.GetCreaturesAt(target.GetLocation().Add(new Collision.Point2(ii,jj))))
+                            foreach(var creature in EntityManager.GetActorsAt(target.GetLocation().Add(new Point2(ii,jj))))
                             {
-                                StatusFactory.Apply(creature, Status.Burn);
+                                StatusFactory.Apply(creature as ICreature, Status.Burn);
                             }
                         }
                     }
@@ -414,7 +415,7 @@ namespace OGUR.Skills
     public class VaporImplantSkill : ISkill
     {
         public VaporImplantSkill() : base(SkillId.VAPOR_IMPLANT, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.PHYSICAL, Elements.AIR); }
-        public override void  Affect(Entity target)
+        public override void  Affect(IEntity target)
         {
             CreatureFactory.CreateMinion(SkillId.VAPOR_CLOUD, m_source,null,target.GetLocation());
         }
@@ -435,9 +436,9 @@ namespace OGUR.Skills
         public WallPunchSkill()
             : base(SkillId.WALL_PUNCH, AnimationType.RANGED)
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
-        public override void  Affect(Entity target)
+        public override void  Affect(IEntity target)
         {
-            if (target.EntityType() == OGUR.Entities.EntityType.WALL)
+            if (target.EntityType() == OGUR.EntityType.WALL)
             {
                 if (target.GetLocation().GridX > 0 && target.GetLocation().GridX < Dungeons.DungeonFactory.BlocksWide-1 &&
                     target.GetLocation().GridY > 0 && target.GetLocation().GridY < Dungeons.DungeonFactory.BlocksHigh-1)

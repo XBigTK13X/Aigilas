@@ -11,7 +11,7 @@ namespace SPX.Text
         public const int Inventory = 1;
     }
 
-    class TextManager
+    public class TextManager
     {
         static private SpriteFont actionFont;
         static private List<Text> m_contents = new List<Text>();

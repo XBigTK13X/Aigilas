@@ -30,7 +30,7 @@ namespace SPX.Entities
         }
 
         private static readonly List<IEntity> gopResults = new List<IEntity>();
-        public static List<IEntity> GetObjects(int type,Point2 target)
+        public static List<IEntity> GetEntities(int type,Point2 target)
         {
             if (m_contents != null)
             {
@@ -52,7 +52,6 @@ namespace SPX.Entities
         private static readonly List<IEntity> goResults = new List<IEntity>();
         public static List<IEntity> GetObjects(int type)
         {
-            //return m_contents.Where(item => item.EntityType() == type);
             goResults.Clear();
             for (int ii = 0; ii < m_contents.Count(); ii++)
             {
@@ -253,6 +252,16 @@ namespace SPX.Entities
                 }
             }
             return _players;
+        }
+
+        //Deprecated methods
+        public static ICollection<IEntity> GetEntitiesToCache()
+        {
+            return m_contents.Where(c => c.EntityType() != EntityType.FLOOR).ToList();
+        }
+        public static IActor GetTouchingCreature(IEntity entity)
+        {
+            return m_contents.Where(c=>c.EntityType() == EntityType.ACTOR).SingleOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
         }
     }
 }

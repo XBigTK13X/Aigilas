@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using SPX.Entities;
-using OGUR.Items;
-using SPX.Sprites;
-using OGUR.Management;
-using OGUR.Dungeons;
 using OGUR.Creatures;
-using OGUR.Text;
 using OGUR.Gods;
-using System.Linq;
+using OGUR.Items;
 using SPX.Core;
+using SPX.Entities;
+using SPX.Sprites;
+using SPX.Text;
 
 namespace OGUR.Entities
 {
@@ -17,25 +13,25 @@ namespace OGUR.Entities
     {
         private readonly God m_god;
         private Player m_currentTarget;
-        private IEnumerable<Entity> m_offerings;
+        private List<IEntity> m_offerings;
 
         public Altar(Point2 location,int godName)
         {
             m_god = God.Get(godName);
             m_graphic.SetColor(m_god.GetColor());
-            Initialize(location, SpriteType.ALTAR, EntityType.ALTAR,ZDepth.Altar);
+            Initialize(location, SpriteType.ALTAR, OGUR.EntityType.ALTAR,ZDepth.Altar);
         }
 
         public override void Update()
         {
-            m_currentTarget = EntityManager.GetTouchingPlayer(this);
+            m_currentTarget = EntityManager.GetTouchingCreature(this) as Player;
             if (m_currentTarget != null)
             {
                 if (m_currentTarget.IsInteracting())
                 {
                     m_currentTarget.Pray(m_god);
                 }
-                m_offerings = EntityManager.GetObjects(EntityType.ITEM, m_location);
+                m_offerings = EntityManager.GetEntities(OGUR.EntityType.ITEM, m_location);
                 foreach (GenericItem offering in m_offerings)
                 {
                     m_currentTarget.Sacrifice(m_god, offering);

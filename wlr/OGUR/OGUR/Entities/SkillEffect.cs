@@ -23,7 +23,7 @@ namespace OGUR.Entities
         public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill)
         {
             m_skill = skill;
-            Initialize(gridLocation, m_skill.GetSpriteType(), EntityType.SKILL_EFFECT,.7f);
+            Initialize(gridLocation, m_skill.GetSpriteType(), OGUR.EntityType.SKILL_EFFECT,.7f);
             m_velocity.Copy(velocity);
             m_direction.Copy(velocity);
             m_source = source;
@@ -32,7 +32,7 @@ namespace OGUR.Entities
             m_graphic.SetColor(skill.GetElementColor());
         }
 
-        private Entity hitTarget;
+        private IEntity hitTarget;
 
         public void Cleanup(Entity target)
         {
@@ -49,7 +49,7 @@ namespace OGUR.Entities
         {
             foreach (var targetType in m_skill.GetTargetTypes())
             {
-                hitTarget = EntityManager.GetObjects(targetType, this.GetLocation()).FirstOrDefault();
+                hitTarget = EntityManager.GetEntities(targetType, this.GetLocation())[0];
                 if (null != hitTarget && hitTarget != this)
                 {
                     m_skill.Affect(hitTarget);

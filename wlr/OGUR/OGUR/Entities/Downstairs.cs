@@ -10,7 +10,7 @@ namespace OGUR.Entities
     {
         public Downstairs(Point2 location)
         {
-            Initialize(location, SpriteType.DOWNSTAIRS, EntityType.DOWNSTAIRS,ZDepth.Stairs);
+            Initialize(location, SpriteType.DOWNSTAIRS, OGUR.EntityType.DOWNSTAIRS,ZDepth.Stairs);
         }
         private int GetTargetLocation()
         {
@@ -19,7 +19,7 @@ namespace OGUR.Entities
         private ICreature player;
         public override void Update()
         {
-            player = EntityManager.GetTouchingPlayer(this);
+            player = EntityManager.GetTouchingCreature(this) as ICreature;
             if (player != null)
             {
                 if (player.IsInteracting())

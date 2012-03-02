@@ -1,15 +1,8 @@
-﻿using System;
-using System.Linq;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using OGUR.Creatures;
-using OGUR.Management;
-using OGUR.Text;
-using System.Text;
 using SPX.Util;
-using System.Reflection;
-using OGUR.Skills;
-using OGUR.Entities;
+using SPX.Core;
 
 namespace OGUR.HUD
 {

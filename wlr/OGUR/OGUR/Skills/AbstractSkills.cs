@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using OGUR.Creatures;
 using OGUR.Entities;
-using Microsoft.Xna.Framework;
 using OGUR.Statuses;
-using SPX.Sprites;
 using SPX.Entities;
-using OGUR.Entities;
+using SPX.Sprites;
 
 namespace OGUR.Skills
 {
@@ -44,7 +43,7 @@ namespace OGUR.Skills
             m_behavior.Activate(source);
             
         }
-        public virtual void Affect(Entity target)
+        public virtual void Affect(IEntity target)
         {
             var creature = target.IsCreature();
             if (creature != null)
@@ -56,7 +55,7 @@ namespace OGUR.Skills
         {
             foreach (var player in EntityManager.GetPlayers())
             {
-                StatusFactory.Apply(player, statusId);
+                StatusFactory.Apply(player as ICreature, statusId);
             }
         }
         public List<int> GetElements() { return m_components.GetElements(); }

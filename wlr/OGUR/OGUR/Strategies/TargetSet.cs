@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using SPX.Entities;
 using OGUR.Creatures;
 using OGUR.Entities;
+using SPX.Core;
 
 namespace OGUR.Strategies
 {
@@ -69,7 +70,7 @@ namespace OGUR.Strategies
                 }
                 foreach(var creatureType in m_targetTypes)
                 {
-                    m_calculatedTargets = EntityManager.GetCreatures(creatureType);
+                    m_calculatedTargets = EntityManager.GetActors(creatureType).Select(a=>a as ICreature).ToList();
                     foreach(var creature in m_calculatedTargets)
                     {
                         if (creature != m_parent)
@@ -87,7 +88,7 @@ namespace OGUR.Strategies
             return closest;
         }
 
-        public Entity GetCollidedTarget(Entity source)
+        public IEntity GetCollidedTarget(Entity source)
         {
             foreach(var target in m_targets)
             {
@@ -99,13 +100,13 @@ namespace OGUR.Strategies
 
             foreach (var creatureType in m_targetTypes)
             {
-                foreach (var target in EntityManager.GetCreaturesAt(source.GetLocation()))
+                foreach (var target in EntityManager.GetActorsAt(source.GetLocation()))
                 {
-                    if (target.GetCreatureType()==creatureType || 
-                        (creatureType == CreatureType.NONPLAYER && target.GetCreatureType()!=CreatureType.PLAYER) || 
-                        (creatureType == CreatureType.PLAYER && target.GetCreatureType()==CreatureType.PLAYER))
+                    if (target.ActorType()==creatureType || 
+                        (creatureType == CreatureType.NONPLAYER && target.ActorType()!=CreatureType.PLAYER) || 
+                        (creatureType == CreatureType.PLAYER && target.ActorType()==CreatureType.PLAYER))
                     {
-                        return target;
+                        return target as IEntity;
                     }
                 }
             }
