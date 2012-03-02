@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using OGUR.Creatures;
-using OGUR.Collision;
-using OGUR.Paths;
-using System;
+using SPX.Core;
+using SPX.Paths;
 
 namespace OGUR.Strategies
 {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using OGUR.Collision;
 using OGUR.Creatures;
-using OGUR.GameObjects;
-using OGUR.Management;
-using OGUR.Sprites;
+using OGUR.Entities;
+using SPX.Core;
+using SPX.Entities;
+using SPX.Sprites;
 
 namespace OGUR.Items
 {
@@ -75,7 +75,7 @@ namespace OGUR.Items
 
         protected void Setup(Point2 location, int type)
         {
-            Initialize(location, SpriteFromItem(type), GameObjectType.ITEM,Depth.Item);
+            Initialize(location, SpriteFromItem(type), OGUR.EntityType.ITEM,ZDepth.Item);
         }
 
         private Player m_currentTarget;

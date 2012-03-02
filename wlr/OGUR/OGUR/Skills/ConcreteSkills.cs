@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Creatures;
-using OGUR.GameObjects;
+using OGUR.Entities;
 using OGUR.Skills;
-using OGUR.Sprites;
+using SPX.Sprites;
 using OGUR.Statuses;
 using OGUR.Items;
+using SPX.Entities;
 
 namespace OGUR.Skills
 {
@@ -436,7 +437,7 @@ namespace OGUR.Skills
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
         public override void  Affect(Entity target)
         {
-            if (target.GetObjectType() == GameObjectType.WALL)
+            if (target.EntityType() == OGUR.Entities.EntityType.WALL)
             {
                 if (target.GetLocation().GridX > 0 && target.GetLocation().GridX < Dungeons.DungeonFactory.BlocksWide-1 &&
                     target.GetLocation().GridY > 0 && target.GetLocation().GridY < Dungeons.DungeonFactory.BlocksHigh-1)

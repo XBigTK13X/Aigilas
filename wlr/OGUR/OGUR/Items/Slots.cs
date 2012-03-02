@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OGUR.Creatures;
-using OGUR.GameObjects;
+using OGUR.Entities;
 
 namespace OGUR.Items
 {

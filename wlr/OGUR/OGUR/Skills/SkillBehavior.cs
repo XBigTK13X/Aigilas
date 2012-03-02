@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OGUR.Sprites;
+using SPX.Sprites;
 using OGUR.Creatures;
-using OGUR.Collision;
-using OGUR.GameObjects;
+using SPX.Entities;
+using OGUR.Entities;
 
 namespace OGUR.Skills
 {
@@ -59,7 +59,7 @@ namespace OGUR.Skills
             if (null != hitTarget && hitTarget!=source)
             {
                 m_parent.Affect(hitTarget);
-                if (hitTarget.GetObjectType() == GameObjectType.CREATURE)
+                if (hitTarget.EntityType() == EntityType.CREATURE)
                 {
                     (hitTarget as ICreature).Combo(m_parent.GetElements());
                     (hitTarget as ICreature).React(m_parent.GetSkillId());

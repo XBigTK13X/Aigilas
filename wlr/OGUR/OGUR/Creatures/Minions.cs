@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Skills;
-using OGUR.Sprites;
+using SPX.Sprites;
 using OGUR.Strategies;
-using OGUR.GameObjects;
-using OGUR.Collision;
+using OGUR.Entities;
+using SPX.Entities;
 
 namespace OGUR.Creatures
 {

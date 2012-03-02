@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Xna.Framework;
 using OGUR.Classes;
 using OGUR.Items;
-using OGUR.Management;
 using OGUR.Skills;
 using OGUR.Strategies;
-using OGUR.GameObjects;
-using OGUR.Sprites;
-using OGUR.Collision;
-using OGUR.Text;
+using OGUR.Entities;
 using OGUR.Gods;
 using OGUR.Reactions;
 using System.Collections.Generic;
 using OGUR.HUD;
 using SPX.Util;
 using OGUR.Statuses;
+using SPX.Entities;
+using SPX.Core;
+using SPX.Text;
+using SPX.Sprites;
 
 namespace OGUR.Creatures
 {
@@ -87,7 +86,7 @@ namespace OGUR.Creatures
 
         protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
-            Initialize(location, SpriteFromCreature(type), GameObjectType.CREATURE,Depth.Creature);
+            Initialize(location, SpriteFromCreature(type), EntityType.CREATURE,OGUR.ZZDepth.Creature);
             Init(type,stats,creatureClass,setClass);
         }
         protected void SetClass(CreatureClass cClass)

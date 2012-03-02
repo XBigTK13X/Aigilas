@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OGUR.GameObjects;
+using OGUR.Entities;
+using SPX.Entities;
 
 namespace OGUR.Dungeons
 {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Creatures;
-using OGUR.Collision;
+using SPX.Entities;
+using SPX.Core;
 
 namespace OGUR.Strategies
 {

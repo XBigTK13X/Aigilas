@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SPX.Util;
+using SPX.Core;
 
 namespace OGUR.Creatures
 {
     public class Stats
     {
-        public const float DefaultMoveSpeed = Sprites.SpriteInfo.Height;
+        public static readonly float DefaultMoveSpeed = GameManager.SpriteHeight;
         public const float DefaultCoolDown = 36;
         public const float DefaultRegenRate = 1;
 

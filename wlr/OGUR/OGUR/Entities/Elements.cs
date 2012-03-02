@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace OGUR.GameObjects
+namespace OGUR.Entities
 {
     public class Elements
     {

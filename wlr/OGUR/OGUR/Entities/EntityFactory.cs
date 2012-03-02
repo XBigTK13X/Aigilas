@@ -1,7 +1,8 @@
 ﻿using System;
-using OGUR.Collision;
+using SPX.Entities;
+using SPX.Core;
 
-namespace OGUR.GameObjects
+namespace OGUR.Entities
 {
     public class EntityFactory
     {
@@ -9,13 +10,13 @@ namespace OGUR.GameObjects
         {
             switch (type)
             {
-                case GameObjectType.FLOOR:
+                case EntityType.FLOOR:
                     return new Floor(location);
-                case GameObjectType.WALL:
+                case EntityType.WALL:
                     return new Wall(location);
-                case GameObjectType.DOWNSTAIRS:
+                case EntityType.DOWNSTAIRS:
                     return new Downstairs(location);
-                case GameObjectType.UPSTAIRS:
+                case EntityType.UPSTAIRS:
                     return new Upstairs(location);
                 default:
                     throw new Exception("An undefined int case was passed into the EntityFactory.");

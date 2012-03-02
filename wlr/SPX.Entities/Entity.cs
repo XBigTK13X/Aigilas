@@ -149,6 +149,11 @@ namespace SPX.Entities
             return m_isInteracting;
         }
 
+        public void SetInteracting(bool isInteracting)
+        {
+            m_isInteracting = isInteracting;
+        }
+
         public int EntityType()
         {
             return m_objectType;

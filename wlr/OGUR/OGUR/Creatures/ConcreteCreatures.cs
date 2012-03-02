@@ -5,9 +5,9 @@ using System.Text;
 using OGUR.Skills;
 using OGUR.Strategies;
 using OGUR.Classes;
-using OGUR.Sprites;
+using SPX.Sprites;
 using Microsoft.Xna.Framework;
-using OGUR.GameObjects;
+using OGUR.Entities;
 using OGUR.Gods;
 
 namespace OGUR.Creatures

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Creatures;
-using OGUR.GameObjects;
+using OGUR.Entities;
 
 namespace OGUR.Reactions
 {

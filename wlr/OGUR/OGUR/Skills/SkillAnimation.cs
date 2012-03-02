@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using OGUR.GameObjects;
-using OGUR.Creatures;
-using OGUR.Collision;
+﻿using OGUR.Creatures;
+using OGUR.Entities;
+using SPX.Core;
 
 namespace OGUR.Skills
 {

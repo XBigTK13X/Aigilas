@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using OGUR.Collision;
+using SPX.Entities;
 using OGUR.Creatures;
-using OGUR.GameObjects;
+using OGUR.Entities;
 
 namespace OGUR.Strategies
 {

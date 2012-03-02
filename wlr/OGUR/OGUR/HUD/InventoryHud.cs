@@ -9,7 +9,7 @@ using OGUR.Items;
 using OGUR.Management;
 using OGUR.Text;
 using SPX.Util;
-using OGUR.GameObjects;
+using OGUR.Entities;
 
 namespace OGUR.HUD
 {
@@ -38,7 +38,7 @@ namespace OGUR.HUD
         {
             if (m_isVisible)
             {
-                XnaManager.Renderer.Draw(m_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,Depth.HudBG);
+                XnaManager.Renderer.Draw(m_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,ZDepth.HudBG);
                 m_textHandler.Draw();
                 m_deltas.Draw();
                 m_equipHud.Draw();

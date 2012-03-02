@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using OGUR.Collision;
+﻿using System.Collections.Generic;
 using OGUR.Creatures;
-using OGUR.GameObjects;
-using OGUR.Sprites;
+using OGUR.Entities;
 using Microsoft.Xna.Framework;
 using OGUR.Statuses;
+using SPX.Sprites;
+using SPX.Entities;
+using OGUR.Entities;
+
 namespace OGUR.Skills
 {
     public class AnimationType

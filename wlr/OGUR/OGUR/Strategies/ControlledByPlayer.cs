@@ -1,9 +1,10 @@
 ﻿using System;
-using OGUR.Collision;
+using SPX.Entities;
 using OGUR.Dungeons;
-using OGUR.GameObjects;
+using OGUR.Entities;
 using OGUR.Management;
 using OGUR.Creatures;
+using SPX.Core;
 namespace OGUR.Strategies
 {
     public class ControlledByPlayer : IStrategy

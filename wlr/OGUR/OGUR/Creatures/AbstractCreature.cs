@@ -1,10 +1,8 @@
-﻿using OGUR.Collision;
-using OGUR.Strategies;
+﻿using OGUR.Strategies;
 using OGUR.Classes;
 using OGUR.Skills;
-using OGUR.Sprites;
-using System.Collections.Generic;
-using OGUR.GameObjects;
+using SPX.Sprites;
+using SPX.Core;
 
 namespace OGUR.Creatures
 {

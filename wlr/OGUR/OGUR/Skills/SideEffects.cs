@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OGUR.GameObjects;
-using OGUR.Sprites;
-using OGUR.Collision;
+using OGUR.Entities;
+using SPX.Sprites;
+using SPX.Entities;
 using OGUR.Creatures;
 
 namespace OGUR.Skills

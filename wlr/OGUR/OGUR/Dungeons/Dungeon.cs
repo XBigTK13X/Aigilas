@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OGUR.Collision;
-using OGUR.GameObjects;
+using OGUR.Creatures;
+using OGUR.Entities;
 using OGUR.Gods;
 using OGUR.Items;
-using OGUR.Sprites;
-using OGUR.Creatures;
+using SPX.Core;
+using SPX.Entities;
 
 namespace OGUR.Dungeons
 {
@@ -114,7 +114,7 @@ namespace OGUR.Dungeons
             {
                 if (tile != null)
                 {
-                    if (tile.GetObjectType() != GameObjectType.FLOOR)
+                    if (tile.EntityType() != EntityType.FLOOR)
                     {
                         m_contents.Add(tile);
                     }
@@ -234,7 +234,7 @@ namespace OGUR.Dungeons
             {
                 var x = rand.Next(0, m_blocksWide);
                 var y = rand.Next(0, m_blocksHigh);
-                if (dungeon[x, y].GetObjectType() == GameObjectType.FLOOR)
+                if (dungeon[x, y].EntityType() == EntityType.FLOOR)
                 {
                     return new Point2(x, y);
                 }
@@ -290,11 +290,11 @@ namespace OGUR.Dungeons
                                     }
                                 }
                             }
-                            dungeon[ii, jj] = EntityFactory.Create(GameObjectType.WALL, new Point2(ii, jj));
+                            dungeon[ii, jj] = EntityFactory.Create(EntityType.WALL, new Point2(ii, jj));
                         }
                         else
                         {
-                            dungeon[ii, jj] = EntityFactory.Create(GameObjectType.FLOOR, new Point2(ii, jj));
+                            dungeon[ii, jj] = EntityFactory.Create(EntityType.FLOOR, new Point2(ii, jj));
                         }
                     }
                 }
@@ -302,7 +302,7 @@ namespace OGUR.Dungeons
                 {
                     var index = new Random().Next(0, entrances.Count() - 1);
                     var entrance = entrances[index];
-                    if (dungeon[entrance.X, entrance.Y].GetObjectType() != GameObjectType.FLOOR)
+                    if (dungeon[entrance.X, entrance.Y].EntityType() != EntityType.FLOOR)
                     {
                         dungeonEntrances.Add(entrance);
                     }
@@ -316,9 +316,9 @@ namespace OGUR.Dungeons
                     for(var ii = 1;ii<m_blocksWide-1;ii++)
                     {
                         var currentTarget = new Point2(ii, entrance.Y);
-                        if(dungeon[currentTarget.GridX,currentTarget.GridY].GetObjectType()==GameObjectType.WALL)
+                        if(dungeon[currentTarget.GridX,currentTarget.GridY].EntityType()==EntityType.WALL)
                         {
-                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(GameObjectType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(EntityType.FLOOR, currentTarget);
                         }
                     }
                 }
@@ -327,9 +327,9 @@ namespace OGUR.Dungeons
                     for (var ii = 1; ii < m_blocksHigh - 1; ii++)
                     {
                         var currentTarget = new Point2(entrance.X, ii);
-                        if (dungeon[currentTarget.GridX, currentTarget.GridY].GetObjectType() == GameObjectType.WALL)
+                        if (dungeon[currentTarget.GridX, currentTarget.GridY].EntityType() == EntityType.WALL)
                         {
-                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(GameObjectType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(EntityType.FLOOR, currentTarget);
                         }
                     }
                 }
@@ -338,7 +338,7 @@ namespace OGUR.Dungeons
 
         private bool IsFloor(int x, int y)
         {
-            return dungeon[x, y].GetObjectType() == GameObjectType.FLOOR;
+            return dungeon[x, y].EntityType() == EntityType.FLOOR;
         }
     }
 }

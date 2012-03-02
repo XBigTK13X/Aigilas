@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SPX.Entities
 {
-    class EntityType
+    public class EntityType
     {
         public const int ACTOR = 0;
         public const int FLOOR = 1;

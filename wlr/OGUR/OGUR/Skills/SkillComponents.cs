@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Creatures;
-using OGUR.GameObjects;
+using OGUR.Entities;
 
 namespace OGUR.Skills
 {
@@ -13,7 +13,7 @@ namespace OGUR.Skills
         protected StatBuff m_buff;
         protected float m_effectStrength = 0;
         protected bool m_isPersistent = false;
-        protected List<int> m_targetTypes = new List<int>(){GameObjectType.WALL};
+        protected List<int> m_targetTypes = new List<int>(){EntityType.WALL};
 
         public SkillComponents(float strength,bool isPersistent)
         {

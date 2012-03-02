@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OGUR.Collision;
+using SPX.Entities;
+using SPX.Core;
 
 namespace OGUR.Dungeons
 {

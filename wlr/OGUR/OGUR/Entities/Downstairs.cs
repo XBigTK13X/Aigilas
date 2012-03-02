@@ -1,17 +1,16 @@
-﻿using System;
-using OGUR.Collision;
-using OGUR.Sprites;
-using OGUR.Management;
+﻿using OGUR.Creatures;
 using OGUR.Dungeons;
-using OGUR.Creatures;
+using SPX.Core;
+using SPX.Entities;
+using SPX.Sprites;
 
-namespace OGUR.GameObjects
+namespace OGUR.Entities
 {
     public class Downstairs : Entity
     {
         public Downstairs(Point2 location)
         {
-            Initialize(location, SpriteType.DOWNSTAIRS, GameObjectType.DOWNSTAIRS,Depth.Stairs);
+            Initialize(location, SpriteType.DOWNSTAIRS, EntityType.DOWNSTAIRS,ZDepth.Stairs);
         }
         private int GetTargetLocation()
         {

@@ -9,7 +9,7 @@ using System.Text;
 using SPX.Util;
 using System.Reflection;
 using OGUR.Skills;
-using OGUR.GameObjects;
+using OGUR.Entities;
 
 namespace OGUR.HUD
 {
@@ -22,7 +22,7 @@ namespace OGUR.HUD
         public void Draw()
         {
             if (!m_isVisible) return;
-            XnaManager.Renderer.Draw(m_menuBase, GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f, 0f, 0f, .4f), 0f, new Vector2(0, 0), m_dimensions, SpriteEffects.None, Depth.HudBG);
+            XnaManager.Renderer.Draw(m_menuBase, GetHudOrigin(), new Rectangle(0, 0, 1, 1), new Color(0f, 0f, 0f, .4f), 0f, new Vector2(0, 0), m_dimensions, SpriteEffects.None, ZDepth.HudBG);
             m_textHandler.Draw();
         }
 

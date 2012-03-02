@@ -1,8 +1,5 @@
-﻿using System;
-using OGUR.Collision;
-using OGUR.Creatures;
-using OGUR.Dungeons;
-using OGUR.Paths;
+﻿using OGUR.Creatures;
+using SPX.Core;
 
 namespace OGUR.Strategies
 {

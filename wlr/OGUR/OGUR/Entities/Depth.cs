@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OGUR.GameObjects
+namespace OGUR
 {
-    public class Depth
+    public class ZDepth:SPX.Core.Depth
     {
         public const float Floor = 0f;
         public const float Wall = .1f;

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using OGUR.Management;
 using OGUR.States;
-using OGUR.Sprites;
+using SPX.Sprites;
 using OGUR.Text;
 
 namespace OGUR

@@ -110,7 +110,8 @@
     <Compile Include="Classes\CreatureClasses.cs" />
     <Compile Include="Creatures\ConcreteCreatures.cs" />
     <Compile Include="Dungeons\PointPoint.cs" />
-    <Compile Include="GameObjects\Depth.cs" />
+    <Compile Include="Entities\Depth.cs" />
+    <Compile Include="Entities\Extensions.cs" />
     <Compile Include="HUD\HudManager.cs" />
     <Compile Include="Creatures\Minions.cs" />
     <Compile Include="Creatures\StatBuff.cs" />
@@ -123,35 +124,32 @@
     <Compile Include="Dungeons\DungeonFactory.cs" />
     <Compile Include="Dungeons\Room.cs" />
     <Compile Include="EntryPoint.cs" />
-    <Compile Include="GameObjects\Altar.cs">
+    <Compile Include="Entities\Altar.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Downstairs.cs">
+    <Compile Include="Entities\Downstairs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Elements.cs">
+    <Compile Include="Entities\Elements.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Floor.cs">
+    <Compile Include="Entities\Floor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\GameObjectType.cs">
+    <Compile Include="Entities\EntityType.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\GameplayObject.cs">
+    <Compile Include="Entities\EntityFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\GameplayObjectFactory.cs">
+    <Compile Include="Entities\God.cs" />
+    <Compile Include="Entities\SkillEffect.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\God.cs" />
-    <Compile Include="GameObjects\SkillEffect.cs">
+    <Compile Include="Entities\Upstairs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameObjects\Upstairs.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="GameObjects\Wall.cs">
+    <Compile Include="Entities\Wall.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="HUD\DeltasHud.cs" />
