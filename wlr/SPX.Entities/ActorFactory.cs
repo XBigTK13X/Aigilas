@@ -5,9 +5,9 @@ namespace SPX.Entities
 {
     public interface IActorFactory
     {
-        IActor Create(int creatureType, Point2 position);
+        IActor Create(int actorType, Point2 position);
 
-        IActor GenerateActor(int creatureType);
+        IActor GenerateActor(int actorType);
 
         IActor CreateRandom(Point2 randomPoint);
 

@@ -13,9 +13,9 @@ namespace OGUR.Creatures
 {
     class Minion : ICreature
     {
-        public Minion(int creatureType = OgurActorType.MINION,float coolDown = Stats.DefaultCoolDown)
+        public Minion(int actorType = OgurActorType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
-            m_actorType = creatureType;
+            m_actorType = actorType;
             m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
         }
         public void Init(ICreature source,SkillEffect effectGraphic)

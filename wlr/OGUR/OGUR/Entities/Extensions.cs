@@ -9,7 +9,7 @@ namespace OGUR.Entities
     {
         public static ICreature IsCreature(this IEntity entity)
         {
-            if (entity.GetEntityType() == OGUR.EntityType.CREATURE)
+            if (entity.GetEntityType() == OGUR.EntityType.ACTOR)
             {
                 return entity as ICreature;
             }

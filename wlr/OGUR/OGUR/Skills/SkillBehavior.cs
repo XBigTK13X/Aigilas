@@ -49,16 +49,18 @@ namespace OGUR.Skills
             return costPaid;
         }
         private IEntity hitTarget;
+        private ICreature hitCreature;
         public virtual bool AffectTarget(ICreature source,SkillEffect graphic)
         {
             hitTarget = source.GetTargets().GetCollidedTarget(graphic);
             if (null != hitTarget && hitTarget!=source)
             {
                 m_parent.Affect(hitTarget);
-                if (hitTarget.GetEntityType() == OGUR.EntityType.CREATURE)
+                hitCreature = hitTarget.IsCreature();
+                if (hitCreature != null)
                 {
-                    (hitTarget as ICreature).Combo(m_parent.GetElements());
-                    (hitTarget as ICreature).React(m_parent.GetSkillId());
+                    hitCreature.Combo(m_parent.GetElements());
+                    hitCreature.React(m_parent.GetSkillId());
                 }
                 if (!m_parent.IsPersistent())
                 {

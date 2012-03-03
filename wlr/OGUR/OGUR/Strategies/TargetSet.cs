@@ -26,9 +26,9 @@ namespace OGUR.Strategies
             return target;
         }
 
-        public void AddTargetTypes(params int[] creatureTypes)
+        public void AddTargetTypes(params int[] actorTypes)
         {
-            foreach(var type in creatureTypes)
+            foreach(var type in actorTypes)
             {
                 m_targetTypes.Add(type);
             }
@@ -68,9 +68,9 @@ namespace OGUR.Strategies
                         closestDistance = dist;
                     }
                 }
-                foreach(var creatureType in m_targetTypes)
+                foreach(var actorType in m_targetTypes)
                 {
-                    m_calculatedTargets = EntityManager.GetActors(creatureType).Select(a=>a as ICreature).ToList();
+                    m_calculatedTargets = EntityManager.GetActors(actorType).Select(a=>a as ICreature).ToList();
                     foreach(var creature in m_calculatedTargets)
                     {
                         if (creature != m_parent)
@@ -98,13 +98,13 @@ namespace OGUR.Strategies
                 }
             }
 
-            foreach (var creatureType in m_targetTypes)
+            foreach (var actorType in m_targetTypes)
             {
                 foreach (var target in EntityManager.GetActorsAt(source.GetLocation()))
                 {
-                    if (target.GetActorType() == creatureType ||
-                        (creatureType == ActorType.NONPLAYER && target.GetActorType() != ActorType.PLAYER) ||
-                        (creatureType == ActorType.PLAYER && target.GetActorType() == ActorType.PLAYER))
+                    if (target.GetActorType() == actorType ||
+                        (actorType == ActorType.NONPLAYER && target.GetActorType() != ActorType.PLAYER) ||
+                        (actorType == ActorType.PLAYER && target.GetActorType() == ActorType.PLAYER))
                     {
                         return target as IEntity;
                     }

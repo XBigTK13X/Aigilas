@@ -12,7 +12,6 @@ namespace OGUR
         public const int WALL = 3;
         public const int UPSTAIRS = 4;
         public const int DOWNSTAIRS = 5;
-        public const int CREATURE = 6;
         public const int ITEM = 7;
         public const int SKILL_EFFECT = 8;
         public const int SKILL_EFFECT_GENERATOR = 9;
