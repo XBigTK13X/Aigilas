@@ -28,19 +28,6 @@ namespace OGUR.Creatures
         public const int MinionCloud = 6;
         public const int Mutiny = 7;
         public const int Flee = 8;
-
-        public static readonly int[] Values =
-        {
-            AttackPlayers,
-            ControlledByPlayer,
-            Confused,
-            MinionRotate,
-            MinionFire,
-            MinionExplode,
-            MinionCloud,
-            Mutiny,
-            Flee
-        };
     }
 
     public abstract class ICreature : Entity,IActor
@@ -72,19 +59,22 @@ namespace OGUR.Creatures
         protected const float s_levelUpAmonut = 50;
         protected float m_nextLevelExperience = s_levelUpAmonut;
 
+        protected int m_actorType;
+
         private int SpriteFromCreature(int type)
         {
             switch (type)
             {
-                case CreatureType.MINION: return SpriteType.MINION;
-                case CreatureType.PLAYER:return SpriteType.PLAYER_STAND;
-                case CreatureType.ZORB:return SpriteType.ZORB;
+                case OgurActorType.MINION: return SpriteType.MINION;
+                case OgurActorType.PLAYER:return SpriteType.PLAYER_STAND;
+                case OgurActorType.ZORB:return SpriteType.ZORB;
                 default:return SpriteType.CREATURE;
             }
         }
 
         protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
+            m_entityType = SPX.Entities.EntityType.ACTOR;
             Initialize(location, SpriteFromCreature(type), OGUR.EntityType.CREATURE,OGUR.ZDepth.Creature);
             Init(type,stats,creatureClass,setClass);
         }
@@ -305,9 +295,9 @@ namespace OGUR.Creatures
             return m_playerIndex;
         }
 
-        public int ActorType()
+        public int GetActorType()
         {
-            return m_creatureType;
+            return m_actorType;
         }
 
         protected float Adjust(string stat, float adjustment,bool adjustMax = false)
@@ -406,9 +396,9 @@ namespace OGUR.Creatures
                                 {
                                     if (creature != this)
                                     {
-                                        if ((creature.ActorType() != CreatureType.PLAYER && m_creatureType == CreatureType.PLAYER)
+                                        if ((creature.GetActorType() != OgurActorType.PLAYER && m_creatureType == OgurActorType.PLAYER)
                                             ||
-                                            (creature.ActorType() == CreatureType.PLAYER && m_creatureType != CreatureType.PLAYER)
+                                            (creature.GetActorType() == OgurActorType.PLAYER && m_creatureType != OgurActorType.PLAYER)
                                             || m_statuses.WillHitAnything())
                                         {
                                             creature.ApplyDamage(CalculateDamage(), this);
@@ -601,7 +591,7 @@ namespace OGUR.Creatures
 
         public void React(string skillId)
         {
-            if(m_creatureType == CreatureType.PLAYER && skillId != SkillId.FORGET_SKILL && m_god.NameText == GodId.Names[GodId.GLUTTONY])
+            if(m_creatureType == OgurActorType.PLAYER && skillId != SkillId.FORGET_SKILL && m_god.NameText == GodId.Names[GodId.GLUTTONY])
             {
                 if (m_skills.Count() < m_currentLevel)
                 {

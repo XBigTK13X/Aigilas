@@ -1,5 +1,7 @@
 ﻿using SPX.States;
 using SPX.Entities;
+using OGUR.Creatures;
+using OGUR.Dungeons;
 
 namespace OGUR.States
 {
@@ -7,6 +9,8 @@ namespace OGUR.States
     {
         public GameplayState()
         {
+            CreatureFactory.ResetPlayerCount();
+            DungeonFactory.Start();
             EntityManager.Reset();
         }
         public void Update()

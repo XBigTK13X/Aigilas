@@ -11,7 +11,7 @@ namespace SPX.Entities
 {
     public interface IActor:IEntity
     {
-        int ActorType();
+        int GetActorType();
         void PerformInteraction();
     }
 }

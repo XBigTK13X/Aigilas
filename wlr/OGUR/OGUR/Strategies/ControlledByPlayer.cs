@@ -14,7 +14,7 @@ namespace OGUR.Strategies
 
         public ControlledByPlayer(ICreature parent) : base(parent)
         {
-            m_targets.AddTargetTypes(CreatureType.NONPLAYER);
+            m_targets.AddTargetTypes(ActorType.NONPLAYER);
         }
 
         public override void Act()

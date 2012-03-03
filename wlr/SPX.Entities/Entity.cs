@@ -22,7 +22,7 @@ namespace SPX.Entities
         protected List<int> m_composition = new List<int>(){};
         private bool m_isInteracting = false;
         protected Point2 m_location = new Point2(0,0);
-
+        protected int m_entityType;
         public void LoadContent()
         {
             m_graphic.LoadContent(m_assetName);

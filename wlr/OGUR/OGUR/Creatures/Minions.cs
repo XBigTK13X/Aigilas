@@ -13,7 +13,7 @@ namespace OGUR.Creatures
 {
     class Minion : ICreature
     {
-        public Minion(int creatureType = CreatureType.MINION,float coolDown = Stats.DefaultCoolDown)
+        public Minion(int creatureType = OgurActorType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
             m_creatureType = creatureType;
             m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
@@ -45,7 +45,7 @@ namespace OGUR.Creatures
     class AcidNozzle : Minion
     {
         public AcidNozzle()
-            : base(CreatureType.MINION,50f)
+            : base(OgurActorType.MINION,50f)
         {
             Add(SkillId.ACID_DRIP);
             m_composition.Add(Elements.EARTH);
@@ -56,7 +56,7 @@ namespace OGUR.Creatures
     class DartTrap : Minion
     {
         public DartTrap()
-            : base(CreatureType.MINION)
+            : base(OgurActorType.MINION)
         {
             m_strategy = new MinionFire(this);
             Add(SkillId.DART);
@@ -67,7 +67,7 @@ namespace OGUR.Creatures
     class Explosion : Minion
     {
         public Explosion()
-            : base(CreatureType.MINION)
+            : base(OgurActorType.MINION)
         {
             m_strategy = new MinionExplode(this);
             Add(SkillId.EXPLODE);
@@ -79,7 +79,7 @@ namespace OGUR.Creatures
     {
         private ICreature m_host = null;
         public VaporCloud()
-            : base(CreatureType.MINION)
+            : base(OgurActorType.MINION)
         {
             m_strategy = new MinionCloud(this);
             Add(SkillId.VAPOR_CLOUD);

@@ -117,7 +117,7 @@
     <Compile Include="Creatures\Minions.cs" />
     <Compile Include="Creatures\StatBuff.cs" />
     <Compile Include="HUD\IHud.cs" />
-    <Compile Include="Creatures\CreatureType.cs" />
+    <Compile Include="Creatures\ActorType.cs" />
     <Compile Include="Creatures\AbstractCreature.cs" />
     <Compile Include="Creatures\StatType.cs" />
     <Compile Include="Creatures\Stats.cs" />

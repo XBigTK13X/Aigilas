@@ -50,7 +50,7 @@ namespace OGUR.Management
         {
             var minDist = float.PositiveInfinity;
             Player result = null;
-            foreach(Player o in EntityManager.GetActors(CreatureType.PLAYER))
+            foreach(Player o in EntityManager.GetActors(OgurActorType.PLAYER))
             {
                 var dist = Math.Abs(o.GetLocation().PosX - o.GetLocation().PosX) + Math.Abs(o.GetLocation().PosY - o.GetLocation().PosY);
                 if (dist < minDist)

@@ -95,7 +95,7 @@ namespace OGUR.Dungeons
 
         public void CacheContents()
         {
-            foreach (var player in EntityManager.GetActors(CreatureType.PLAYER))
+            foreach (var player in EntityManager.GetActors(OgurActorType.PLAYER))
             {
                 DungeonFactory.AddToCache(player as Entity);
                 EntityManager.RemoveObject(player);
@@ -129,7 +129,7 @@ namespace OGUR.Dungeons
             {
                 for (int ii = 0; ii < playerCount; ii++)
                 {
-                    m_contents.Add(CreatureFactory.Create(CreatureType.PLAYER, GetRandomNeighbor(ref neighbors)));
+                    m_contents.Add(CreatureFactory.Create(OgurActorType.PLAYER, GetRandomNeighbor(ref neighbors)));
                 }
             }
             else
@@ -145,7 +145,7 @@ namespace OGUR.Dungeons
             //Give player random objects
             for (int ii = 0; ii < startingItemAmount; ii++)
             {
-                (EntityManager.GetActors(CreatureType.PLAYER).ElementAt(rand.Next(playerCount)) as ICreature).PickupItem(ItemFactory.CreateRandomPlain());
+                (EntityManager.GetActors(OgurActorType.PLAYER).ElementAt(rand.Next(playerCount)) as ICreature).PickupItem(ItemFactory.CreateRandomPlain());
             }
            
         }

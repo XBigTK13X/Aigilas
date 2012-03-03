@@ -17,7 +17,7 @@ namespace OGUR.Creatures
             AbstractCreature result;
             switch (creatureType)
             {
-                case CreatureType.PLAYER:
+                case OgurActorType.PLAYER:
                     result = new Player(s_playerCount++);
                     break;
                 default:
@@ -33,9 +33,9 @@ namespace OGUR.Creatures
         {
             switch(creatureType)
             {
-                case CreatureType.PEON:
+                case OgurActorType.PEON:
                     return new Peon();
-                case CreatureType.ZORB:
+                case OgurActorType.ZORB:
                     return new Zorb();
                 default:
                     throw new Exception("You forgot to define Factory generation logic for: "+creatureType);

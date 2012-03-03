@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SPX.Entities
 {
-    class ActorType
+    public class ActorType
     {
         public const int NONPLAYER = 0;
         public const int PLAYER = 1;

@@ -9,13 +9,14 @@ using SPX.Sprites;
 using Microsoft.Xna.Framework;
 using OGUR.Entities;
 using OGUR.Gods;
+using OGUR.Creatures;
 
 namespace OGUR.Creatures
 {
     public class Player : AbstractCreature
     {
         private static readonly List<Color> s_colors = new List<Color>() { Color.Red,Color.Green,Color.Blue,Color.White};
-        public Player(int playerIndex): base(CreatureType.PLAYER, SpriteType.PLAYER_STAND, new GluttonyAcolyte())
+        public Player(int playerIndex): base(OgurActorType.PLAYER, SpriteType.PLAYER_STAND, new GluttonyAcolyte())
         {
             m_playerIndex = playerIndex;
             m_graphic.SetColor(s_colors[m_playerIndex]);
@@ -28,7 +29,7 @@ namespace OGUR.Creatures
     }
     class Peon : AbstractCreature
     {
-        public Peon(): base(CreatureType.PEON)
+        public Peon(): base(OgurActorType.PEON)
         {
             Weaknesses(StatType.STRENGTH, StatType.HEALTH,StatType.MOVE_COOL_DOWN);
             Compose(Elements.EARTH);
@@ -36,7 +37,7 @@ namespace OGUR.Creatures
     }
     class Zorb : AbstractCreature
     {
-        public Zorb(): base(CreatureType.ZORB)
+        public Zorb(): base(OgurActorType.ZORB)
         {
             Compose(Elements.PHYSICAL, Elements.FIRE);
             Strengths(StatType.MANA,StatType.HEALTH);

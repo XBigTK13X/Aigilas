@@ -66,7 +66,7 @@ namespace SPX.Entities
         //CT Accessors
         public static IActor GetActor(int type)
         {
-            return m_contents != null ? m_contents.Where(o => o.EntityType() == EntityType.ACTOR).Cast<IActor>().FirstOrDefault(creature => creature.ActorType() == type) : null;
+            return m_contents != null ? m_contents.Where(o => o.EntityType() == EntityType.ACTOR).Cast<IActor>().FirstOrDefault(creature => creature.GetActorType() == type) : null;
         }
 
         private static List<IActor> creatures = new List<IActor>();
@@ -79,7 +79,7 @@ namespace SPX.Entities
                 {
                     if (elem.EntityType() == EntityType.ACTOR)
                     {
-                        if (((IActor)elem).ActorType() == type)
+                        if (((IActor)elem).GetActorType() == type)
                         {
                             creatures.Add(((IActor)elem));
                         }
@@ -92,7 +92,7 @@ namespace SPX.Entities
                 {
                     if (elem.EntityType() == EntityType.ACTOR)
                     {
-                        if (((IActor)elem).ActorType() != ActorType.PLAYER)
+                        if (((IActor)elem).GetActorType() != ActorType.PLAYER)
                         {
                             creatures.Add(((IActor)elem));
                         }
@@ -246,7 +246,7 @@ namespace SPX.Entities
             _players.Clear();
             foreach (var tile in m_contents)
             {
-                if (tile.EntityType() == EntityType.ACTOR && (tile as IActor).ActorType() == ActorType.PLAYER)
+                if (tile.EntityType() == EntityType.ACTOR && (tile as IActor).GetActorType() == ActorType.PLAYER)
                 {
                     _players.Add((tile as IActor));
                 }

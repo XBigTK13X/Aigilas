@@ -12,14 +12,14 @@ namespace OGUR.Strategies
         {
             switch (strategy)
             {
-                case Strategy.AttackPlayers: return new AttackStrategy(target,CreatureType.PLAYER);
+                case Strategy.AttackPlayers: return new AttackStrategy(target,OgurActorType.PLAYER);
                 case Strategy.ControlledByPlayer: return new ControlledByPlayer(target);
                 case Strategy.Confused: return new ConfusedStrategy(target);
                 case Strategy.MinionFire: return new MinionFire(target);
                 case Strategy.MinionRotate: return new MinionRotate(target);
                 case Strategy.MinionCloud: return new MinionCloud(target);
-                case Strategy.Mutiny: return new AttackStrategy(target, CreatureType.NONPLAYER);
-                case Strategy.Flee: return new FleeStrategy(target,CreatureType.PLAYER);
+                case Strategy.Mutiny: return new AttackStrategy(target, OgurActorType.NONPLAYER);
+                case Strategy.Flee: return new FleeStrategy(target,OgurActorType.PLAYER);
                 default: throw new Exception("An undefined strategy was passed into the strategy factory: " + strategy);
             }
         }

@@ -102,9 +102,9 @@ namespace OGUR.Strategies
             {
                 foreach (var target in EntityManager.GetActorsAt(source.GetLocation()))
                 {
-                    if (target.ActorType()==creatureType || 
-                        (creatureType == CreatureType.NONPLAYER && target.ActorType()!=CreatureType.PLAYER) || 
-                        (creatureType == CreatureType.PLAYER && target.ActorType()==CreatureType.PLAYER))
+                    if (target.GetActorType() == creatureType ||
+                        (creatureType == ActorType.NONPLAYER && target.GetActorType() != ActorType.PLAYER) ||
+                        (creatureType == ActorType.PLAYER && target.GetActorType() == ActorType.PLAYER))
                     {
                         return target as IEntity;
                     }

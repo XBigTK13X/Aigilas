@@ -8,10 +8,10 @@ namespace OGUR.Creatures
 {
     public class AbstractCreature:ICreature
     {
-        public AbstractCreature(int creatureType,int spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
+        public AbstractCreature(int actorType,int spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
         {
             SetClass(cClass);
-            m_creatureType = creatureType;
+            m_actorType = actorType;
             m_baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
             m_maxStats = new Stats(m_baseStats);
         }
@@ -20,7 +20,7 @@ namespace OGUR.Creatures
             Setup(position, m_creatureType, m_baseStats, m_class);
             if (m_strategy == null)
             {
-                m_strategy = new AttackStrategy(this,CreatureType.PLAYER);
+                m_strategy = new AttackStrategy(this,OgurActorType.PLAYER);
             }
         }
         protected void Add(string skillId)
