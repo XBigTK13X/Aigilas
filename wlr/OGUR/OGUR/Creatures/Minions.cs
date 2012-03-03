@@ -15,13 +15,13 @@ namespace OGUR.Creatures
     {
         public Minion(int creatureType = OgurActorType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
-            m_creatureType = creatureType;
+            m_actorType = creatureType;
             m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
         }
         public void Init(ICreature source,SkillEffect effectGraphic)
         {
             m_master = source;
-            Setup(source.GetLocation(), m_creatureType, m_baseStats,null,false);
+            Setup(source.GetLocation(), m_actorType, m_baseStats,null,false);
             if (null != effectGraphic)
             {
                 SetSkillVector(effectGraphic.GetDirection().Rotate180());

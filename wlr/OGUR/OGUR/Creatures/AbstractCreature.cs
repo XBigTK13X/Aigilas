@@ -17,7 +17,7 @@ namespace OGUR.Creatures
         }
         public void Setup(Point2 position)
         {
-            Setup(position, m_creatureType, m_baseStats, m_class);
+            Setup(position, m_actorType, m_baseStats, m_class);
             if (m_strategy == null)
             {
                 m_strategy = new AttackStrategy(this,OgurActorType.PLAYER);

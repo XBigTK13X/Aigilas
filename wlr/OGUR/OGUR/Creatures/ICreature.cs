@@ -34,7 +34,6 @@ namespace OGUR.Creatures
     {
         protected IStrategy m_strategy;
 
-        protected int m_creatureType;
         protected CreatureClass m_class;
         protected Stats m_baseStats;
         protected Stats m_maxStats;
@@ -106,7 +105,7 @@ namespace OGUR.Creatures
                 m_hudManager = new HudManager(this,m_inventory,m_equipment);
             }
             m_isBlocking = true;
-            m_creatureType = type;
+            m_actorType = type;
             m_baseStats = new Stats(stats);
             m_maxStats = new Stats(m_baseStats);
         }
@@ -396,9 +395,9 @@ namespace OGUR.Creatures
                                 {
                                     if (creature != this)
                                     {
-                                        if ((creature.GetActorType() != OgurActorType.PLAYER && m_creatureType == OgurActorType.PLAYER)
+                                        if ((creature.GetActorType() != OgurActorType.PLAYER && m_actorType == OgurActorType.PLAYER)
                                             ||
-                                            (creature.GetActorType() == OgurActorType.PLAYER && m_creatureType != OgurActorType.PLAYER)
+                                            (creature.GetActorType() == OgurActorType.PLAYER && m_actorType != OgurActorType.PLAYER)
                                             || m_statuses.WillHitAnything())
                                         {
                                             creature.ApplyDamage(CalculateDamage(), this);
@@ -591,7 +590,7 @@ namespace OGUR.Creatures
 
         public void React(string skillId)
         {
-            if(m_creatureType == OgurActorType.PLAYER && skillId != SkillId.FORGET_SKILL && m_god.NameText == GodId.Names[GodId.GLUTTONY])
+            if (m_actorType == OgurActorType.PLAYER && skillId != SkillId.FORGET_SKILL && m_god.NameText == GodId.Names[GodId.GLUTTONY])
             {
                 if (m_skills.Count() < m_currentLevel)
                 {

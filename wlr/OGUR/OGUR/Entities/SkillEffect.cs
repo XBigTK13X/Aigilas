@@ -49,11 +49,15 @@ namespace OGUR.Entities
         {
             foreach (var targetType in m_skill.GetTargetTypes())
             {
-                hitTarget = EntityManager.GetEntities(targetType, this.GetLocation())[0];
-                if (null != hitTarget && hitTarget != this)
+                var targets = EntityManager.GetEntities(targetType, this.GetLocation());
+                if (targets != null && targets.Count > 0)
                 {
-                    m_skill.Affect(hitTarget);
-                    Cleanup(this);
+                    hitTarget = targets[0];
+                    if (null != hitTarget && hitTarget != this)
+                    {
+                        m_skill.Affect(hitTarget);
+                        Cleanup(this);
+                    }
                 }
             }
             if(m_currentStrength<.001)
