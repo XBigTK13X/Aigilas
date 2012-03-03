@@ -9,9 +9,9 @@ namespace OGUR.States
     {
         public GameplayState()
         {
+            EntityManager.Reset();
             CreatureFactory.ResetPlayerCount();
             DungeonFactory.Start();
-            EntityManager.Reset();
         }
         public void Update()
         {

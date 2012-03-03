@@ -75,7 +75,7 @@ namespace OGUR.Creatures
         protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
             m_entityType = SPX.Entities.EntityType.ACTOR;
-            Initialize(location, SpriteFromCreature(type), OGUR.EntityType.CREATURE,OGUR.ZDepth.Creature);
+            Initialize(location, SpriteFromCreature(type), OGUR.EntityType.ACTOR,OGUR.ZDepth.Creature);
             Init(type,stats,creatureClass,setClass);
         }
         protected void SetClass(CreatureClass cClass)

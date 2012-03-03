@@ -154,7 +154,7 @@ namespace SPX.Entities
             m_isInteracting = isInteracting;
         }
 
-        public int EntityType()
+        public int GetEntityType()
         {
             return m_objectType;
         }

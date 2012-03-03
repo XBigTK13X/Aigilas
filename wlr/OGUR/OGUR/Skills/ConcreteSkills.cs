@@ -438,7 +438,7 @@ namespace OGUR.Skills
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
         public override void  Affect(IEntity target)
         {
-            if (target.EntityType() == OGUR.EntityType.WALL)
+            if (target.GetEntityType() == OGUR.EntityType.WALL)
             {
                 if (target.GetLocation().GridX > 0 && target.GetLocation().GridX < Dungeons.DungeonFactory.BlocksWide-1 &&
                     target.GetLocation().GridY > 0 && target.GetLocation().GridY < Dungeons.DungeonFactory.BlocksHigh-1)

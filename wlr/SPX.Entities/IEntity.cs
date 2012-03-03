@@ -13,7 +13,7 @@ namespace SPX.Entities
         void Update();
         void LoadContent();
         Point2 GetLocation();
-        int EntityType();
+        int GetEntityType();
         bool IsActive();
         bool IsBlocking();
         void SetInactive();

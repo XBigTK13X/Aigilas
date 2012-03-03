@@ -55,7 +55,7 @@ namespace OGUR.Skills
             if (null != hitTarget && hitTarget!=source)
             {
                 m_parent.Affect(hitTarget);
-                if (hitTarget.EntityType() == OGUR.EntityType.CREATURE)
+                if (hitTarget.GetEntityType() == OGUR.EntityType.CREATURE)
                 {
                     (hitTarget as ICreature).Combo(m_parent.GetElements());
                     (hitTarget as ICreature).React(m_parent.GetSkillId());

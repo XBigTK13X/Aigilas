@@ -24,7 +24,7 @@ namespace SPX.Entities
         {
             if (m_contents != null)
             {
-                return m_contents.FirstOrDefault(item => item.EntityType() == type);
+                return m_contents.FirstOrDefault(item => item.GetEntityType() == type);
             }
             return null;
         }
@@ -55,7 +55,7 @@ namespace SPX.Entities
             goResults.Clear();
             for (int ii = 0; ii < m_contents.Count(); ii++)
             {
-                if (m_contents[ii].EntityType() == type)
+                if (m_contents[ii].GetEntityType() == type)
                 {
                     goResults.Add(m_contents[ii]);
                 }
@@ -66,7 +66,7 @@ namespace SPX.Entities
         //CT Accessors
         public static IActor GetActor(int type)
         {
-            return m_contents != null ? m_contents.Where(o => o.EntityType() == EntityType.ACTOR).Cast<IActor>().FirstOrDefault(creature => creature.GetActorType() == type) : null;
+            return m_contents != null ? m_contents.Where(o => o.GetEntityType() == EntityType.ACTOR).Cast<IActor>().FirstOrDefault(creature => creature.GetActorType() == type) : null;
         }
 
         private static List<IActor> creatures = new List<IActor>();
@@ -77,7 +77,7 @@ namespace SPX.Entities
             {
                 foreach (var elem in m_contents)
                 {
-                    if (elem.EntityType() == EntityType.ACTOR)
+                    if (elem.GetEntityType() == EntityType.ACTOR)
                     {
                         if (((IActor)elem).GetActorType() == type)
                         {
@@ -90,7 +90,7 @@ namespace SPX.Entities
             {
                 foreach (var elem in m_contents)
                 {
-                    if (elem.EntityType() == EntityType.ACTOR)
+                    if (elem.GetEntityType() == EntityType.ACTOR)
                     {
                         if (((IActor)elem).GetActorType() != ActorType.PLAYER)
                         {
@@ -107,7 +107,7 @@ namespace SPX.Entities
             creatures.Clear();
             foreach (var elem in m_gridContents[target])
             {
-                if (elem.EntityType() == EntityType.ACTOR)
+                if (elem.GetEntityType() == EntityType.ACTOR)
                 {
                     creatures.Add(((IActor)elem));
                 }
@@ -128,7 +128,7 @@ namespace SPX.Entities
         }
         public static IEnumerable<IEntity> GetObjectsToCache()
         {
-            return m_contents.Where(o => o.EntityType() != EntityType.FLOOR);
+            return m_contents.Where(o => o.GetEntityType() != EntityType.FLOOR);
         }
 
         public static IActor GetNearestPlayer(IEntity target)
@@ -156,7 +156,7 @@ namespace SPX.Entities
 
         public static bool AnyContains(Point2 target, int type)
         {
-            return m_gridContents[target].Any(o => o.EntityType() == type);
+            return m_gridContents[target].Any(o => o.GetEntityType() == type);
         }
 
         public static void RemoveObject(IEntity target)
@@ -246,7 +246,7 @@ namespace SPX.Entities
             _players.Clear();
             foreach (var tile in m_contents)
             {
-                if (tile.EntityType() == EntityType.ACTOR && (tile as IActor).GetActorType() == ActorType.PLAYER)
+                if (tile.GetEntityType() == EntityType.ACTOR && (tile as IActor).GetActorType() == ActorType.PLAYER)
                 {
                     _players.Add((tile as IActor));
                 }
@@ -257,11 +257,11 @@ namespace SPX.Entities
         //Deprecated methods
         public static ICollection<IEntity> GetEntitiesToCache()
         {
-            return m_contents.Where(c => c.EntityType() != EntityType.FLOOR).ToList();
+            return m_contents.Where(c => c.GetEntityType() != EntityType.FLOOR).ToList();
         }
         public static IActor GetTouchingCreature(IEntity entity)
         {
-            return m_contents.Where(c=>c.EntityType() == EntityType.ACTOR).SingleOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
+            return m_contents.Where(c=>c.GetEntityType() == EntityType.ACTOR).SingleOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
         }
     }
 }

@@ -114,7 +114,7 @@ namespace OGUR.Dungeons
             {
                 if (tile != null)
                 {
-                    if (tile.EntityType() != OGUR.EntityType.FLOOR)
+                    if (tile.GetEntityType() != OGUR.EntityType.FLOOR)
                     {
                         m_contents.Add(tile);
                     }
@@ -234,7 +234,7 @@ namespace OGUR.Dungeons
             {
                 var x = rand.Next(0, m_blocksWide);
                 var y = rand.Next(0, m_blocksHigh);
-                if (dungeon[x, y].EntityType() == OGUR.EntityType.FLOOR)
+                if (dungeon[x, y].GetEntityType() == OGUR.EntityType.FLOOR)
                 {
                     return new Point2(x, y);
                 }
@@ -302,7 +302,7 @@ namespace OGUR.Dungeons
                 {
                     var index = new Random().Next(0, entrances.Count() - 1);
                     var entrance = entrances[index];
-                    if (dungeon[entrance.X, entrance.Y].EntityType() != OGUR.EntityType.FLOOR)
+                    if (dungeon[entrance.X, entrance.Y].GetEntityType() != OGUR.EntityType.FLOOR)
                     {
                         dungeonEntrances.Add(entrance);
                     }
@@ -316,7 +316,7 @@ namespace OGUR.Dungeons
                     for(var ii = 1;ii<m_blocksWide-1;ii++)
                     {
                         var currentTarget = new Point2(ii, entrance.Y);
-                        if(dungeon[currentTarget.GridX,currentTarget.GridY].EntityType()==OGUR.EntityType.WALL)
+                        if(dungeon[currentTarget.GridX,currentTarget.GridY].GetEntityType()==OGUR.EntityType.WALL)
                         {
                             dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(OGUR.EntityType.FLOOR, currentTarget);
                         }
@@ -327,7 +327,7 @@ namespace OGUR.Dungeons
                     for (var ii = 1; ii < m_blocksHigh - 1; ii++)
                     {
                         var currentTarget = new Point2(entrance.X, ii);
-                        if (dungeon[currentTarget.GridX, currentTarget.GridY].EntityType() == OGUR.EntityType.WALL)
+                        if (dungeon[currentTarget.GridX, currentTarget.GridY].GetEntityType() == OGUR.EntityType.WALL)
                         {
                             dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(OGUR.EntityType.FLOOR, currentTarget);
                         }
@@ -338,7 +338,7 @@ namespace OGUR.Dungeons
 
         private bool IsFloor(int x, int y)
         {
-            return dungeon[x, y].EntityType() == OGUR.EntityType.FLOOR;
+            return dungeon[x, y].GetEntityType() == OGUR.EntityType.FLOOR;
         }
     }
 }
