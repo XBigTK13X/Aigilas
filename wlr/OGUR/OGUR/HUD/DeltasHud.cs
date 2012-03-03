@@ -8,26 +8,26 @@ namespace OGUR.HUD
 {
     public class DeltasHud:IHud
     {
-        private Equipment m_equipment;
+        private Equipment _equipment;
 
         public DeltasHud(ICreature owner, Equipment equipment): base(owner, XnaManager.WindowWidth / 2, XnaManager.WindowHeight / 2)
         {
-            m_equipment = equipment;
+            _equipment = equipment;
         }
 
         public void Draw()
         {
-            if (m_isVisible)
+            if (_isVisible)
             {
-                m_textHandler.Draw();
+                _textHandler.Draw();
             }
         }
 
         private GenericItem GetEquipmentIn(int slot)
         {
-            if (m_equipment.GetItems().ContainsKey(slot))
+            if (_equipment.GetItems().ContainsKey(slot))
             {
-                return m_equipment.GetItems()[slot];
+                return _equipment.GetItems()[slot];
             }
             return null;
         }
@@ -39,10 +39,10 @@ namespace OGUR.HUD
 
         public void Update(GenericItem item,bool refresh)
         {
-            if (m_isVisible)
+            if (_isVisible)
             {
-                m_textHandler.Update();
-                m_textHandler.Clear();
+                _textHandler.Update();
+                _textHandler.Clear();
                 if (item != null && refresh)
                 {
                     if (GetEquipmentIn(Equipment.ClassToSlot(item.GetItemClass())) != null)
@@ -55,8 +55,8 @@ namespace OGUR.HUD
                         display = StringSquisher.Flush();
                     }
                 }
-                m_textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
-                m_textHandler.WriteDefault(display, 30, 290, GetHudOrigin());
+                _textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
+                _textHandler.WriteDefault(display, 30, 290, GetHudOrigin());
             }
         }
     }

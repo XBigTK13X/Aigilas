@@ -7,19 +7,19 @@ namespace OGUR.HUD
 {
     public class EquipmentHud:IHud
     {
-        private Equipment m_equipment;
-        private const string s_text = "Equipped";
+        private Equipment _equipment;
+        private const string __text = "Equipped";
 
         public EquipmentHud(ICreature owner, Equipment equipment): base(owner, XnaManager.WindowWidth / 2, XnaManager.WindowHeight / 2)
         {
-            m_equipment = equipment;
+            _equipment = equipment;
         }
 
         public void Draw()
         {
-            if (m_isVisible)
+            if (_isVisible)
             {
-                m_textHandler.Draw();
+                _textHandler.Draw();
             }
         }
 
@@ -30,21 +30,21 @@ namespace OGUR.HUD
 
         public void Update(bool refresh)
         {
-            if (m_isVisible)
+            if (_isVisible)
             {
-                m_textHandler.Update();
-                m_textHandler.Clear();
+                _textHandler.Update();
+                _textHandler.Clear();
                 if (refresh)
                 {
                     StringSquisher.Clear();
                     StringSquisher.Squish(title);
-                    foreach (var item in m_equipment.GetItems())
+                    foreach (var item in _equipment.GetItems())
                     {
                         StringSquisher.Squish(ItemSlot.Names[item.Key].Substring(0, 1), sep, item.Value.Name, newline);
                     }
                     display = StringSquisher.Flush();
                 }
-                m_textHandler.WriteDefault(display, 320, 30, GetHudOrigin());
+                _textHandler.WriteDefault(display, 320, 30, GetHudOrigin());
             }
         }
     }

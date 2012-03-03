@@ -12,47 +12,47 @@ namespace SPX.Entities
 {
     public class Entity: IEntity
     {
-        protected AnimatedTexture m_graphic = new AnimatedTexture();
+        protected AnimatedTexture _graphic = new AnimatedTexture();
 
-        protected bool m_isActive = true;
-        protected bool m_isBlocking = false;
-        protected int m_assetName;
-        protected int m_objectType;
-        protected bool m_isOnBoard = true;
-        protected List<int> m_composition = new List<int>(){};
-        private bool m_isInteracting = false;
-        protected Point2 m_location = new Point2(0,0);
-        protected int m_entityType;
+        protected bool _isActive = true;
+        protected bool _isBlocking = false;
+        protected int _assetName;
+        protected int _objectType;
+        protected bool _isOnBoard = true;
+        protected List<int> _composition = new List<int>(){};
+        private bool _isInteracting = false;
+        protected Point2 _location = new Point2(0,0);
+        protected int _entityType;
         public void LoadContent()
         {
-            m_graphic.LoadContent(m_assetName);
+            _graphic.LoadContent(_assetName);
         }
 
         public virtual void Draw()
         {
-            if(m_isOnBoard && m_isActive)
+            if(_isOnBoard && _isActive)
             {
-                m_graphic.Draw();                
+                _graphic.Draw();                
             }
         }
 
         public void Hide()
         {
-            m_isOnBoard = false;
+            _isOnBoard = false;
         }
 
         public void Show()
         {
-            m_isOnBoard = true;
+            _isOnBoard = true;
         }
 
         protected void Initialize(Point2 location, int spriteType, int objectType,float depth = 0f)
         {
-            m_assetName = spriteType;
-            m_objectType = objectType;
-            m_location.Copy(location);
-            m_graphic.SetPosition(m_location);
-            m_graphic.SetDepth(depth);
+            _assetName = spriteType;
+            _objectType = objectType;
+            _location.Copy(location);
+            _graphic.SetPosition(_location);
+            _graphic.SetDepth(depth);
         }
 
         public virtual void Update()
@@ -61,16 +61,16 @@ namespace SPX.Entities
 
         public void SetLocation(Point2 location)
         {
-            m_graphic.SetPosition(location);
-            m_location.Copy(location);
+            _graphic.SetPosition(location);
+            _location.Copy(location);
         }
 
         private Point2 oldLocation = new Point2(0, 0);
         public void UpdateLocation(Point2 location)
         {
-            oldLocation.Copy(m_location);
-            m_graphic.SetPosition(location);
-            m_location.Copy(location);
+            oldLocation.Copy(_location);
+            _graphic.SetPosition(location);
+            _location.Copy(location);
             EntityManager.UpdateGridLocation(this, oldLocation);
         }
 
@@ -79,7 +79,7 @@ namespace SPX.Entities
         {
             amountX = NormalizeDistance(amountX);
             amountY = NormalizeDistance(amountY);
-            target.Reset(m_location.PosX + amountX,m_location.PosY + amountY);
+            target.Reset(_location.PosX + amountX,_location.PosY + amountY);
             if (CoordVerifier.IsValid(target))
             {
                 UpdateLocation(target);
@@ -101,37 +101,37 @@ namespace SPX.Entities
 
         public bool IsActive()
         {
-            return m_isActive;
+            return _isActive;
         }
 
         public void SetInactive()
         {
-            m_isActive = false;
+            _isActive = false;
         }
 
         public bool IsBlocking()
         {
-            return m_isBlocking;
+            return _isBlocking;
         }
 
         public int GetAssetType()
         {
-            return m_assetName;
+            return _assetName;
         }
 
         public Point2 GetLocation()
         {
-            return m_location;
+            return _location;
         }
 
         public bool IsGraphicLoaded()
         {
-            return (m_graphic != null);
+            return (_graphic != null);
         }
 
         protected void SetSpriteInfo(SpriteInfo sprite)
         {
-            m_graphic.SetSpriteInfo(sprite);
+            _graphic.SetSpriteInfo(sprite);
         }
 
         public bool Contains(Point2 target)
@@ -141,22 +141,22 @@ namespace SPX.Entities
 
         public void SetInteraction(bool isInteracting)
         {
-            m_isInteracting = isInteracting;
+            _isInteracting = isInteracting;
         }
 
         public bool IsInteracting()
         {
-            return m_isInteracting;
+            return _isInteracting;
         }
 
         public void SetInteracting(bool isInteracting)
         {
-            m_isInteracting = isInteracting;
+            _isInteracting = isInteracting;
         }
 
         public int GetEntityType()
         {
-            return m_objectType;
+            return _objectType;
         }
     }
 }

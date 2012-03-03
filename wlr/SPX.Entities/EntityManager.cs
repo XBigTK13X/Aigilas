@@ -9,22 +9,22 @@ namespace SPX.Entities
 {
     public static class EntityManager
     {
-        private static List<IEntity> m_contents = new List<IEntity>();
-        private static Dictionary<Point2,List<IEntity>> m_gridContents = new Dictionary<Point2, List<IEntity>>();
+        private static List<IEntity> _contents = new List<IEntity>();
+        private static Dictionary<Point2,List<IEntity>> _gridContents = new Dictionary<Point2, List<IEntity>>();
 
         public static IEntity AddObject(IEntity Entity)
         {
             Entity.LoadContent();
-            m_contents.Add(Entity);
+            _contents.Add(Entity);
             AddToGrid(Entity);
             return Entity;
         }
 
         public static IEntity GetObject(int type)
         {
-            if (m_contents != null)
+            if (_contents != null)
             {
-                return m_contents.FirstOrDefault(item => item.GetEntityType() == type);
+                return _contents.FirstOrDefault(item => item.GetEntityType() == type);
             }
             return null;
         }
@@ -32,7 +32,7 @@ namespace SPX.Entities
         private static readonly List<IEntity> gopResults = new List<IEntity>();
         public static List<IEntity> GetEntities(int type,Point2 target)
         {
-            if (m_contents != null)
+            if (_contents != null)
             {
                 goResults.Clear();
                 goResults.AddRange(GetObjects(type));
@@ -53,11 +53,11 @@ namespace SPX.Entities
         public static List<IEntity> GetObjects(int type)
         {
             goResults.Clear();
-            for (int ii = 0; ii < m_contents.Count(); ii++)
+            for (int ii = 0; ii < _contents.Count(); ii++)
             {
-                if (m_contents[ii].GetEntityType() == type)
+                if (_contents[ii].GetEntityType() == type)
                 {
-                    goResults.Add(m_contents[ii]);
+                    goResults.Add(_contents[ii]);
                 }
             }
             return goResults;
@@ -66,7 +66,7 @@ namespace SPX.Entities
         //CT Accessors
         public static IActor GetActor(int type)
         {
-            return m_contents != null ? m_contents.Where(o => o.GetEntityType() == EntityType.ACTOR).Cast<IActor>().FirstOrDefault(creature => creature.GetActorType() == type) : null;
+            return _contents != null ? _contents.Where(o => o.GetEntityType() == EntityType.ACTOR).Cast<IActor>().FirstOrDefault(creature => creature.GetActorType() == type) : null;
         }
 
         private static List<IActor> creatures = new List<IActor>();
@@ -75,7 +75,7 @@ namespace SPX.Entities
             creatures.Clear();
             if (type != ActorType.NONPLAYER)
             {
-                foreach (var elem in m_contents)
+                foreach (var elem in _contents)
                 {
                     if (elem.GetEntityType() == EntityType.ACTOR)
                     {
@@ -88,7 +88,7 @@ namespace SPX.Entities
             }
             else
             {
-                foreach (var elem in m_contents)
+                foreach (var elem in _contents)
                 {
                     if (elem.GetEntityType() == EntityType.ACTOR)
                     {
@@ -105,7 +105,7 @@ namespace SPX.Entities
         public static List<IActor> GetActorsAt(Point2 target)
         {
             creatures.Clear();
-            foreach (var elem in m_gridContents[target])
+            foreach (var elem in _gridContents[target])
             {
                 if (elem.GetEntityType() == EntityType.ACTOR)
                 {
@@ -117,7 +117,7 @@ namespace SPX.Entities
 
         public static bool IsLocationBlocked(Point2 location)
         {
-            foreach(IEntity elem in m_gridContents[location])
+            foreach(IEntity elem in _gridContents[location])
             {
                 if(elem.IsBlocking())
                 {
@@ -128,7 +128,7 @@ namespace SPX.Entities
         }
         public static IEnumerable<IEntity> GetObjectsToCache()
         {
-            return m_contents.Where(o => o.GetEntityType() != EntityType.FLOOR);
+            return _contents.Where(o => o.GetEntityType() != EntityType.FLOOR);
         }
 
         public static IActor GetNearestPlayer(IEntity target)
@@ -151,49 +151,49 @@ namespace SPX.Entities
 
         public static void AddObjects(IEnumerable<IEntity> cache)
         {
-            m_contents.AddRange(cache);
+            _contents.AddRange(cache);
         }
 
         public static bool AnyContains(Point2 target, int type)
         {
-            return m_gridContents[target].Any(o => o.GetEntityType() == type);
+            return _gridContents[target].Any(o => o.GetEntityType() == type);
         }
 
         public static void RemoveObject(IEntity target)
         {
-            m_contents.Remove(target);
+            _contents.Remove(target);
         }
 
         public static void Clear()
         {
-            m_contents = new List<IEntity>();
-            m_gridContents = new Dictionary<Point2, List<IEntity>>();
+            _contents = new List<IEntity>();
+            _gridContents = new Dictionary<Point2, List<IEntity>>();
         }
 
         public static void Reset()
         {
-            m_contents = new List<IEntity>();
-            m_gridContents = new Dictionary<Point2, List<IEntity>>();
+            _contents = new List<IEntity>();
+            _gridContents = new Dictionary<Point2, List<IEntity>>();
             creatures.Clear();
             LoadContent();
         }
 
         public static void Update()
         {   
-            for (var ii = 0; ii < m_contents.Count; ii++)
+            for (var ii = 0; ii < _contents.Count; ii++)
             {
-                if(ii>=m_contents.Count)
+                if(ii>=_contents.Count)
                 {
                     return;
                 }
-                if (!m_contents[ii].IsActive())
+                if (!_contents[ii].IsActive())
                 {
-                    m_gridContents[m_contents[ii].GetLocation()].Remove(m_contents[ii]);
-                    m_contents.Remove(m_contents[ii]);
+                    _gridContents[_contents[ii].GetLocation()].Remove(_contents[ii]);
+                    _contents.Remove(_contents[ii]);
                     ii--;
                     continue;
                 }                
-                m_contents[ii].Update();
+                _contents[ii].Update();
             }
         }
 
@@ -201,7 +201,7 @@ namespace SPX.Entities
         {
             if (XnaManager.Renderer != null)
             {
-                foreach (var component in m_contents)
+                foreach (var component in _contents)
                 {
                     component.Draw();
                 }
@@ -212,7 +212,7 @@ namespace SPX.Entities
         {
             if (XnaManager.Renderer != null)
             {
-                foreach (var component in m_contents)
+                foreach (var component in _contents)
                 {
                     component.LoadContent();
                 }
@@ -221,21 +221,21 @@ namespace SPX.Entities
 
         private static void AddToGrid(IEntity Entity)
         {
-            if (!m_gridContents.ContainsKey(Entity.GetLocation()))
+            if (!_gridContents.ContainsKey(Entity.GetLocation()))
             {
-                m_gridContents.Add(Entity.GetLocation(), new List<IEntity>() { Entity });
+                _gridContents.Add(Entity.GetLocation(), new List<IEntity>() { Entity });
             }
             else
             {
-                m_gridContents[Entity.GetLocation()].Add(Entity);
+                _gridContents[Entity.GetLocation()].Add(Entity);
             }
         }
 
         public static void UpdateGridLocation(IEntity Entity, Point2 oldLocation)
         {
-            if(m_gridContents!=null && oldLocation !=null)
+            if(_gridContents!=null && oldLocation !=null)
             {
-                m_gridContents[oldLocation].Remove(Entity);
+                _gridContents[oldLocation].Remove(Entity);
                 AddToGrid(Entity);
             }
         }
@@ -244,7 +244,7 @@ namespace SPX.Entities
         public static IEnumerable<IActor> GetPlayers()
         {
             _players.Clear();
-            foreach (var tile in m_contents)
+            foreach (var tile in _contents)
             {
                 if (tile.GetEntityType() == EntityType.ACTOR && (tile as IActor).GetActorType() == ActorType.PLAYER)
                 {
@@ -257,11 +257,11 @@ namespace SPX.Entities
         //Deprecated methods
         public static ICollection<IEntity> GetEntitiesToCache()
         {
-            return m_contents.Where(c => c.GetEntityType() != EntityType.FLOOR).ToList();
+            return _contents.Where(c => c.GetEntityType() != EntityType.FLOOR).ToList();
         }
         public static IActor GetTouchingCreature(IEntity entity)
         {
-            return m_contents.Where(c=>c.GetEntityType() == EntityType.ACTOR).SingleOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
+            return _contents.Where(c=>c.GetEntityType() == EntityType.ACTOR).SingleOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
         }
     }
 }

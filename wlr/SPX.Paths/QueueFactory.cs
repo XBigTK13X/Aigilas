@@ -7,16 +7,16 @@ namespace SPX.Paths
 {
     class QueueFactory
     {
-        private static readonly Queue<Path>[] s_stock = new Queue<Path>[15];
-        private static int s_index = 0;
+        private static readonly Queue<Path>[] __stock = new Queue<Path>[15];
+        private static int __index = 0;
 
         public static Queue<Path> Create()
         {
-            if (s_stock[0] == null)
+            if (__stock[0] == null)
             {
-                for (int ii = 0; ii < s_stock.Length; ii++)
+                for (int ii = 0; ii < __stock.Length; ii++)
                 {
-                    s_stock[ii] = new Queue<Path>();
+                    __stock[ii] = new Queue<Path>();
                 }
             }
             GetNext().Clear();
@@ -25,13 +25,13 @@ namespace SPX.Paths
 
         private static Queue<Path> GetNext()
         {
-            s_index = (++s_index) % s_stock.Length;
+            __index = (++__index) % __stock.Length;
             return GetCurrent();
         }
 
         private static Queue<Path> GetCurrent()
         {
-            return s_stock[s_index];
+            return __stock[__index];
         }
     }
 }

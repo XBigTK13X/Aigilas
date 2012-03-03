@@ -56,50 +56,50 @@ namespace OGUR.Statuses
     public class ConfusionStatus : IStatus
     {
         private int previousStrategy;
-        public ConfusionStatus(ICreature target) : base(false, false, target) { m_hitAnything = true; }
+        public ConfusionStatus(ICreature target) : base(false, false, target) { _hitAnything = true; }
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(m_target.GetStrategyType());
-            m_target.SetStrategy(StrategyFactory.Create(Strategy.Confused,m_target));
+            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Confused,_target));
         }
         public override void Cleanup()
         {
             base.Cleanup();
-            m_target.SetStrategy(StrategyFactory.Create(previousStrategy,m_target));
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy,_target));
         }
     }
     public class MutinyStatus : IStatus
     {
         private int previousStrategy;
         private StatBuff buff = new StatBuff(StatType.MOVE_COOL_DOWN, 10);
-        public MutinyStatus(ICreature target) : base(false, false, target) { m_hitAnything = true; }
+        public MutinyStatus(ICreature target) : base(false, false, target) { _hitAnything = true; }
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(m_target.GetStrategyType());
-            m_target.SetStrategy(StrategyFactory.Create(Strategy.Mutiny, m_target));
+            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Mutiny, _target));
         }
         public override void Cleanup()
         {
             base.Cleanup();
-            m_target.SetStrategy(StrategyFactory.Create(previousStrategy, m_target));
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
         }
     }
     public class FleeStatus : IStatus
     {
         private int previousStrategy;
-        public FleeStatus(ICreature target) : base(false, false, target) { m_hitAnything = true; }
+        public FleeStatus(ICreature target) : base(false, false, target) { _hitAnything = true; }
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(m_target.GetStrategyType());
-            m_target.SetStrategy(StrategyFactory.Create(Strategy.Flee, m_target));
+            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Flee, _target));
         }
         public override void Cleanup()
         {
             base.Cleanup();
-            m_target.SetStrategy(StrategyFactory.Create(previousStrategy, m_target));
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
         }
     }
     public class PoisonStatus:IStatus
@@ -108,7 +108,7 @@ namespace OGUR.Statuses
         public override void Update()
         {
             base.Update();
-            m_target.ApplyDamage(2.1f);
+            _target.ApplyDamage(2.1f);
         }
     }
 
@@ -118,7 +118,7 @@ namespace OGUR.Statuses
         public override void Update()
         {
             base.Update();
-            m_target.ApplyDamage(-1f);
+            _target.ApplyDamage(-1f);
         }
     }
 
@@ -126,7 +126,7 @@ namespace OGUR.Statuses
     {
         public StrengthUpStatus(ICreature target) : base(false, false, target)
         {
-            m_buff = new StatBuff(StatType.STRENGTH, 10f);
+            _buff = new StatBuff(StatType.STRENGTH, 10f);
             Setup();
         }
     }
@@ -149,7 +149,7 @@ namespace OGUR.Statuses
     {
         public ManaUpStatus(ICreature target) : base(false, false, target) 
         {
-            m_buff = new StatBuff(StatType.MANA, 20f);
+            _buff = new StatBuff(StatType.MANA, 20f);
             Setup();
         }
     }
@@ -157,7 +157,7 @@ namespace OGUR.Statuses
     {
         public SpeedUpStatus(ICreature target) : base(false, false, target)
         {
-            m_buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);
+            _buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);
             Setup();
         }
     }
@@ -177,8 +177,8 @@ namespace OGUR.Statuses
         public override void Setup()
         {
             base.Setup();
-            m_target.ApplyDamage(10);
-            m_isActive = false;
+            _target.ApplyDamage(10);
+            _isActive = false;
         }
     }
     public class PoisonOneHitStatus : IStatus
@@ -191,9 +191,9 @@ namespace OGUR.Statuses
         public override void Update()
         {
             base.Update();
-            if (m_wasPassed)
+            if (_wasPassed)
             {
-                m_isActive = false;
+                _isActive = false;
             }
         }
     }
@@ -207,9 +207,9 @@ namespace OGUR.Statuses
         public override void Update()
         {
             base.Update();
-            if (m_wasPassed)
+            if (_wasPassed)
             {
-                m_isActive = false;
+                _isActive = false;
             }
         }
     }
@@ -218,7 +218,7 @@ namespace OGUR.Statuses
         public DefenseUpStatus(ICreature target)
         : base(false, false, target)
         {
-            m_buff = new StatBuff(StatType.DEFENSE, 10);
+            _buff = new StatBuff(StatType.DEFENSE, 10);
             Setup();
         }
     }
@@ -228,7 +228,7 @@ namespace OGUR.Statuses
         public override void Update()
         {
             base.Update();
-            m_target.ApplyDamage(1.0f);
+            _target.ApplyDamage(1.0f);
         }
     }
     public class BerserkStatus : IStatus
@@ -244,7 +244,7 @@ namespace OGUR.Statuses
         public RandomBuffStatus(ICreature target)
         : base(false, false, target)
         {
-            m_buff = new StatBuff(StatType.Values[rand.Next(0,3)], 10);
+            _buff = new StatBuff(StatType.Values[rand.Next(0,3)], 10);
             Setup();
         }
     }
@@ -253,7 +253,7 @@ namespace OGUR.Statuses
         public HordStatus(ICreature target)
             : base(false, false, target)
         {
-            m_buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
+            _buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
             Setup();
         }
     }

@@ -36,13 +36,13 @@ namespace OGUR.Items
             return ItemSlot.NULL;
         }
 
-        private readonly Dictionary<int, GenericItem> m_slots = new Dictionary<int, GenericItem>();
-        private readonly ICreature m_parent;
+        private readonly Dictionary<int, GenericItem> _slots = new Dictionary<int, GenericItem>();
+        private readonly ICreature _parent;
 
 
         public Equipment(ICreature owner)
         {
-            m_parent = owner;
+            _parent = owner;
         }
 
         public void Unequip(GenericItem item)
@@ -56,14 +56,14 @@ namespace OGUR.Items
         public void Register(GenericItem item)
         {
             var itemSlot = ClassToSlot(item.GetItemClass());
-            if(m_slots.ContainsKey(itemSlot))
+            if(_slots.ContainsKey(itemSlot))
             {
-                Unequip(m_slots[itemSlot]);
-                m_slots[itemSlot] = item;
+                Unequip(_slots[itemSlot]);
+                _slots[itemSlot] = item;
             }
             else
             {
-                m_slots.Add(itemSlot, item);
+                _slots.Add(itemSlot, item);
             }
             
         }
@@ -71,19 +71,19 @@ namespace OGUR.Items
         public void Unregister(GenericItem item)
         {
             var itemSlot = ClassToSlot(item.GetItemClass());
-            if (m_slots.ContainsKey(itemSlot))
+            if (_slots.ContainsKey(itemSlot))
             {
-                m_parent.PickupItem(m_slots[itemSlot]);
-                m_slots.Remove(itemSlot);
+                _parent.PickupItem(_slots[itemSlot]);
+                _slots.Remove(itemSlot);
             }
         }
 
         public bool IsRegistered(GenericItem item)
         {
             var itemClass = ClassToSlot(item.GetItemClass());
-            if(m_slots.ContainsKey(itemClass))
+            if(_slots.ContainsKey(itemClass))
             {
-                return (item == m_slots[itemClass]) ;
+                return (item == _slots[itemClass]) ;
             }
             return false;
         }
@@ -92,7 +92,7 @@ namespace OGUR.Items
         public float CalculateBonus(string stat)
         {
             bonusSum = 0;
-            foreach (var slot in m_slots)
+            foreach (var slot in _slots)
             {
                 bonusSum += slot.Value.GetStatBonus(stat);
             }
@@ -101,7 +101,7 @@ namespace OGUR.Items
 
         public Dictionary<int,GenericItem> GetItems()
         {
-            return m_slots;
+            return _slots;
         }
     }
 }

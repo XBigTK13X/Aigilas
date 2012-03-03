@@ -13,101 +13,101 @@ namespace OGUR.HUD
 {
     public class InventoryHud:IHud
     {
-        private int m_currentClass = ItemClass.Values[1];
-        private readonly Inventory m_inventory;
-        private readonly Equipment m_equipment;
-        private int m_endingItem = 4, m_startingItem = 0;
-        private Dictionary<GenericItem, int> m_currentClassItems;
-        private GenericItem m_currentSelectedItem = null;
+        private int _currentClass = ItemClass.Values[1];
+        private readonly Inventory _inventory;
+        private readonly Equipment _equipment;
+        private int _endingItem = 4, _startingItem = 0;
+        private Dictionary<GenericItem, int> _currentClassItems;
+        private GenericItem _currentSelectedItem = null;
 
-        private EquipmentHud m_equipHud;
-        private DeltasHud m_deltas;
+        private EquipmentHud _equipHud;
+        private DeltasHud _deltas;
 
         public InventoryHud(ICreature owner,Inventory inventory,Equipment equipment):base(owner,XnaManager.WindowWidth/2,XnaManager.WindowHeight/2)
         {
-            m_inventory = inventory;
-            m_equipment = equipment;
-            m_deltas = new DeltasHud(owner,equipment);
-            m_equipHud = new EquipmentHud(owner, equipment);
-            m_currentClassItems = m_inventory.GetItems(m_currentClass);
+            _inventory = inventory;
+            _equipment = equipment;
+            _deltas = new DeltasHud(owner,equipment);
+            _equipHud = new EquipmentHud(owner, equipment);
+            _currentClassItems = _inventory.GetItems(_currentClass);
         }
 
         public void Draw()
         {
-            if (m_isVisible)
+            if (_isVisible)
             {
-                XnaManager.Renderer.Draw(m_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,ZDepth.HudBG);
-                m_textHandler.Draw();
-                m_deltas.Draw();
-                m_equipHud.Draw();
+                XnaManager.Renderer.Draw(_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,ZDepth.HudBG);
+                _textHandler.Draw();
+                _deltas.Draw();
+                _equipHud.Draw();
             }
         }
 
         private void HandleInput()
         {
-            if (Input.IsPressed(Commands.CycleLeft, m_parent.GetPlayerIndex()))
+            if (Input.IsPressed(Commands.CycleLeft, _parent.GetPlayerIndex()))
             {
-                m_currentClass--;
-                if (m_currentClass <= ItemClass.NULL)
+                _currentClass--;
+                if (_currentClass <= ItemClass.NULL)
                 {
-                    m_currentClass = ItemClass.Values.Count() - 2;
+                    _currentClass = ItemClass.Values.Count() - 2;
                 }
-                m_startingItem = 0;
-                m_endingItem = 4;
+                _startingItem = 0;
+                _endingItem = 4;
                 forceRefresh = true;
             }
 
-            if (Input.IsPressed(Commands.CycleRight, m_parent.GetPlayerIndex()))
+            if (Input.IsPressed(Commands.CycleRight, _parent.GetPlayerIndex()))
             {
-                m_currentClass++;
-                if (m_currentClass >= ItemClass.LAST)
+                _currentClass++;
+                if (_currentClass >= ItemClass.LAST)
                 {
-                    m_currentClass = ItemClass.Values[1];                    
+                    _currentClass = ItemClass.Values[1];                    
                 }
-                m_startingItem = 0;
-                m_endingItem = 4;
+                _startingItem = 0;
+                _endingItem = 4;
                 forceRefresh = true;
             }
 
-            if (Input.IsPressed(Commands.MoveDown, m_parent.GetPlayerIndex()))
+            if (Input.IsPressed(Commands.MoveDown, _parent.GetPlayerIndex()))
             {
-                if (m_startingItem < m_currentClassItems.Count() - 1)
+                if (_startingItem < _currentClassItems.Count() - 1)
                 {
-                    m_startingItem++;
-                    m_endingItem++;
+                    _startingItem++;
+                    _endingItem++;
                     forceRefresh = true;
                 }
             }
 
-            if (Input.IsPressed(Commands.MoveUp, m_parent.GetPlayerIndex()))
+            if (Input.IsPressed(Commands.MoveUp, _parent.GetPlayerIndex()))
             {
-                if (m_startingItem > 0)
+                if (_startingItem > 0)
                 {
-                    m_startingItem--;
-                    m_endingItem--;
+                    _startingItem--;
+                    _endingItem--;
                     forceRefresh = true;
                 }
             }
-            if (Input.IsPressed(Commands.Confirm, m_parent.GetPlayerIndex()))
+            if (Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex()))
             {
-                m_parent.Equip(m_currentSelectedItem);
+                _parent.Equip(_currentSelectedItem);
                 forceRefresh = true;
             }
-            if (Input.IsPressed(Commands.Cancel, m_parent.GetPlayerIndex()))
+            if (Input.IsPressed(Commands.Cancel, _parent.GetPlayerIndex()))
             {
-                m_parent.Drop(m_currentSelectedItem);
+                _parent.Drop(_currentSelectedItem);
                 forceRefresh = true;
             }
         }
         public void Update()
         {
-            if (m_isVisible)
+            if (_isVisible)
             {
                 HandleInput();
-                m_textHandler.Update();
-                m_deltas.Update(m_currentSelectedItem,forceRefresh);
-                m_equipHud.Update(forceRefresh);
-                m_textHandler.Clear();
+                _textHandler.Update();
+                _deltas.Update(_currentSelectedItem,forceRefresh);
+                _equipHud.Update(forceRefresh);
+                _textHandler.Clear();
                 UpdateInventoryDisplay();
                 if (forceRefresh)
                 {
@@ -119,70 +119,70 @@ namespace OGUR.HUD
         public override void Toggle()
         {
             base.Toggle();
-            m_deltas.Toggle();
-            m_equipHud.Toggle();
+            _deltas.Toggle();
+            _equipHud.Toggle();
             forceRefresh = true;
         }
 
-        private static readonly Dictionary<int, string> s_classStrings = new Dictionary<int, string>();
+        private static readonly Dictionary<int, string> __classStrings = new Dictionary<int, string>();
 
         private string GetClassDisplay()
         {
-            if(!s_classStrings.ContainsKey(m_currentClass))
+            if(!__classStrings.ContainsKey(_currentClass))
             {
-                s_classStrings.Add(m_currentClass, ItemClass.Names[m_currentClass]);
+                __classStrings.Add(_currentClass, ItemClass.Names[_currentClass]);
             }
-            return s_classStrings[m_currentClass];
+            return __classStrings[_currentClass];
         }
 
-        private const string s_delim = ")";
-        private const string s_equipDelim = "~";
-        private const string s_seper = " x";
-        private const string s_newline = "\n";
+        private const string __delim = ")";
+        private const string __equipDelim = "~";
+        private const string __seper = " x";
+        private const string __newline = "\n";
 
         private string displayString = "";
         private bool forceRefresh = false;
 
         private void UpdateInventoryDisplay()
         {
-            m_textHandler.WriteDefault(GetClassDisplay(), 20, 30,GetHudOrigin());
-            m_currentClassItems = m_inventory.GetItems(m_currentClass);
-            if (m_currentClassItems.Count > 0)
+            _textHandler.WriteDefault(GetClassDisplay(), 20, 30,GetHudOrigin());
+            _currentClassItems = _inventory.GetItems(_currentClass);
+            if (_currentClassItems.Count > 0)
             {
                 int ii = 0;
                 if (forceRefresh)
                 {
                     StringSquisher.Clear();
-                    foreach (var item in m_currentClassItems.Keys)
+                    foreach (var item in _currentClassItems.Keys)
                     {
-                        if (ii == m_startingItem)
+                        if (ii == _startingItem)
                         {
-                            m_currentSelectedItem = item;
+                            _currentSelectedItem = item;
                         }
-                        if(!m_equipment.IsRegistered(item)&&m_inventory.GetItemCount(item)<=0)
+                        if(!_equipment.IsRegistered(item)&&_inventory.GetItemCount(item)<=0)
                         {
                             continue;
                         }
 
                    
-                        if (ii >= m_startingItem && ii < m_endingItem && ii < m_currentClassItems.Keys.Count())
+                        if (ii >= _startingItem && ii < _endingItem && ii < _currentClassItems.Keys.Count())
                         {
                             StringSquisher.Squish
                             (
-                                StringStorage.Get(ii), s_delim,
-                                (m_equipment.IsRegistered(item)) ? s_equipDelim : String.Empty,
+                                StringStorage.Get(ii), __delim,
+                                (_equipment.IsRegistered(item)) ? __equipDelim : String.Empty,
                                 item.Name);
-                            if (m_currentClassItems[item] > -1)
+                            if (_currentClassItems[item] > -1)
                             {
-                                StringSquisher.Squish(s_seper, StringStorage.Get(m_currentClassItems[item]));
+                                StringSquisher.Squish(__seper, StringStorage.Get(_currentClassItems[item]));
                             }
-                            StringSquisher.Squish(s_newline);
+                            StringSquisher.Squish(__newline);
                         }
                         ii++;
                     }
                     displayString = StringSquisher.Flush();       
                 }
-                m_textHandler.WriteDefault(displayString, 50, 60, GetHudOrigin());
+                _textHandler.WriteDefault(displayString, 50, 60, GetHudOrigin());
             }
         }
     }

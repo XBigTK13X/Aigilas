@@ -15,7 +15,7 @@ namespace OGUR.Strategies
         {
             foreach (var targetType in targetTypes)
             {
-                m_targets.AddTargetTypes(targetType);
+                _targets.AddTargetTypes(targetType);
             }
         }
 
@@ -27,8 +27,8 @@ namespace OGUR.Strategies
                 _transfer = targetPath.GetNextMove();
                 if(_transfer != null)
                 {
-                    nextMove.Copy(m_parent.GetLocation().Add(_transfer.Minus(m_parent.GetLocation()).Rotate180()));
-                    m_parent.MoveTo(nextMove);
+                    nextMove.Copy(_parent.GetLocation().Add(_transfer.Minus(_parent.GetLocation()).Rotate180()));
+                    _parent.MoveTo(nextMove);
                 }
             }
         }

@@ -8,106 +8,106 @@ namespace OGUR.Skills
 {
     public class SkillPool
     {
-        private readonly List<string> m_skills = new List<string>();
-        private int m_currentSkillSlot = 0;
-        private string m_currentSkill;
-        private readonly ICreature m_owner;
-        private Dictionary<string, int> m_usageCounter = new Dictionary<string, int>();
+        private readonly List<string> _skills = new List<string>();
+        private int _currentSkillSlot = 0;
+        private string _currentSkill;
+        private readonly ICreature _owner;
+        private Dictionary<string, int> _usageCounter = new Dictionary<string, int>();
 
         public SkillPool(ICreature owner)
         {
-            m_owner = owner;
-            m_currentSkill=SkillId.NO_SKILL;
+            _owner = owner;
+            _currentSkill=SkillId.NO_SKILL;
         }
 
         public void Add(string skill)
         {
-            if(skill.Equals(null)&&m_skills.Count==0)
+            if(skill.Equals(null)&&_skills.Count==0)
             {
-                m_skills.Add(SkillId.NO_SKILL);
+                _skills.Add(SkillId.NO_SKILL);
                 FindCurrent();
                 return;
             }
-            m_skills.Add(skill);
-            if (m_skills.Contains(SkillId.NO_SKILL))
+            _skills.Add(skill);
+            if (_skills.Contains(SkillId.NO_SKILL))
             {
-                m_skills.Remove(SkillId.NO_SKILL);
-                m_currentSkillSlot = m_skills.IndexOf(skill);
+                _skills.Remove(SkillId.NO_SKILL);
+                _currentSkillSlot = _skills.IndexOf(skill);
             }
         }
 
         private string FindCurrent()
         {
-            return m_currentSkill = m_skills[m_currentSkillSlot];
+            return _currentSkill = _skills[_currentSkillSlot];
         }
 
         public void Add(IEnumerable<string> getLevelSkills)
         {
             if(!getLevelSkills.Any())
             {
-                m_skills.Add(SkillId.NO_SKILL);
+                _skills.Add(SkillId.NO_SKILL);
                 return;
             }
             foreach(var skill in getLevelSkills)
             {
-                if (!m_skills.Contains(skill))
+                if (!_skills.Contains(skill))
                 {
-                    m_skills.Add(skill);
+                    _skills.Add(skill);
                 }
             }
         }
 
         public void Cycle(int velocity)
         {
-            m_currentSkillSlot = (m_currentSkillSlot + velocity)%m_skills.Count;
-            if(m_currentSkillSlot<0)
+            _currentSkillSlot = (_currentSkillSlot + velocity)%_skills.Count;
+            if(_currentSkillSlot<0)
             {
-                m_currentSkillSlot = m_skills.Count() - 1;
+                _currentSkillSlot = _skills.Count() - 1;
             }
             FindCurrent();
         }
 
         public string GetActiveName()
         {
-            return m_skills.Count>0 ? FindCurrent() : "No Skill";
+            return _skills.Count>0 ? FindCurrent() : "No Skill";
         }
 
         private void RemoveNone()
         {
-            m_skills.Remove(SkillId.NO_SKILL);
+            _skills.Remove(SkillId.NO_SKILL);
         }
         public void UseActive()
         {
             if (FindCurrent() == SkillId.NO_SKILL)
             {
                 RemoveNone();
-                m_currentSkillSlot = 0;
+                _currentSkillSlot = 0;
             }
-            if (m_skills.Count > 0)
+            if (_skills.Count > 0)
             {
-                SkillFactory.Create(FindCurrent()).Activate(m_owner);
-                if(!m_usageCounter.ContainsKey(FindCurrent()))
+                SkillFactory.Create(FindCurrent()).Activate(_owner);
+                if(!_usageCounter.ContainsKey(FindCurrent()))
                 {
-                    m_usageCounter.Add(FindCurrent(),0);
+                    _usageCounter.Add(FindCurrent(),0);
                 }
-                m_usageCounter[FindCurrent()]++;
+                _usageCounter[FindCurrent()]++;
             }
         }
 
         string _leastUsed;
         public void RemoveLeastUsed()
         {
-            foreach (var skillId in m_skills)
+            foreach (var skillId in _skills)
             {
-                if (!m_usageCounter.ContainsKey(skillId))
+                if (!_usageCounter.ContainsKey(skillId))
                 {
-                    m_usageCounter.Add(skillId, 0);
+                    _usageCounter.Add(skillId, 0);
                 }
             }
             _leastUsed = null;
-            foreach (var keyValue in m_usageCounter)
+            foreach (var keyValue in _usageCounter)
             {
-                if ((_leastUsed == null || _leastUsed == SkillId.FORGET_SKILL || m_usageCounter[keyValue.Key] < m_usageCounter[_leastUsed]) 
+                if ((_leastUsed == null || _leastUsed == SkillId.FORGET_SKILL || _usageCounter[keyValue.Key] < _usageCounter[_leastUsed]) 
                      && keyValue.Key != SkillId.FORGET_SKILL)
                 {
                     _leastUsed = keyValue.Key;
@@ -115,13 +115,13 @@ namespace OGUR.Skills
             }
             if (_leastUsed != SkillId.FORGET_SKILL)
             {
-                m_skills.Remove(_leastUsed);
+                _skills.Remove(_leastUsed);
             }
         }
 
         public int Count()
         {
-            return m_skills.Count();
+            return _skills.Count();
         }
     }
 }

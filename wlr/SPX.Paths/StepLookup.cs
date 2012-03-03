@@ -8,25 +8,25 @@ namespace SPX.Paths
 {
     class StepLookup
     {
-        private static Dictionary<Point2,Point2>[] s_lookups = new Dictionary<Point2,Point2>[1000];
-        private static int m_index = 0;
+        private static Dictionary<Point2,Point2>[] __lookups = new Dictionary<Point2,Point2>[1000];
+        private static int _index = 0;
 
         public static Dictionary<Point2,Point2> Copy(Dictionary<Point2,Point2> walk)
         {
-            if (s_lookups[0] == null)
+            if (__lookups[0] == null)
             {
-                for (int ii = 0; ii < s_lookups.Count(); ii++)
+                for (int ii = 0; ii < __lookups.Count(); ii++)
                 {
-                    s_lookups[ii] = new Dictionary<Point2,Point2>(200);
+                    __lookups[ii] = new Dictionary<Point2,Point2>(200);
                 }
             }
-            m_index = (m_index + 1) % s_lookups.Count();
-            s_lookups[m_index].Clear();
+            _index = (_index + 1) % __lookups.Count();
+            __lookups[_index].Clear();
             foreach (var keyval in walk)
             {
-                s_lookups[m_index].Add(keyval.Key,keyval.Value);
+                __lookups[_index].Add(keyval.Key,keyval.Value);
             }
-            return s_lookups[m_index];
+            return __lookups[_index];
         }
     }
 }

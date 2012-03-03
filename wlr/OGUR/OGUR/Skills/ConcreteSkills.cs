@@ -27,10 +27,10 @@ namespace OGUR.Skills
         { Add(Elements.LIGHT); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) 
         {
-            target.ApplyDamage(10,m_source);
-            m_source.ApplyDamage(-10);
-            target.ApplyDamage(10, m_source, true, StatType.MANA);
-            m_source.ApplyDamage(-10, m_source, true, StatType.MANA);
+            target.ApplyDamage(10,_source);
+            _source.ApplyDamage(-10);
+            target.ApplyDamage(10, _source, true, StatType.MANA);
+            _source.ApplyDamage(-10, _source, true, StatType.MANA);
         }
     }
     public class AcidDripSkill : ISkill
@@ -38,7 +38,7 @@ namespace OGUR.Skills
         public AcidDripSkill() : base(SkillId.ACID_DRIP, AnimationType.STATIONARY) { StartOffCenter = true; AddCost(StatType.MANA, 10); Add(Elements.WATER); }
         public override void Affect(ICreature target)
         {
-            target.ApplyDamage(20, m_source);
+            target.ApplyDamage(20, _source);
         }
     }
     public class AcidNozzleSkill : ISkill
@@ -46,7 +46,7 @@ namespace OGUR.Skills
         public AcidNozzleSkill() : base(SkillId.ACID_NOZZLE, AnimationType.STATIONARY) { AddCost(StatType.MANA, 10); }
         public override void Activate(ICreature source)
         {
-            CreatureFactory.CreateMinion(m_implementationId, source);
+            CreatureFactory.CreateMinion(_implementationId, source);
         }
     }
     public class CavalrySkill : ISkill
@@ -78,7 +78,7 @@ namespace OGUR.Skills
         { Add(Elements.AIR, Elements.PHYSICAL); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) 
         {
-            target.ApplyDamage(10,m_source);
+            target.ApplyDamage(10,_source);
             if (!target.IsActive())
             {
                 for (int ii = -1; ii < 2; ii++)
@@ -112,7 +112,7 @@ namespace OGUR.Skills
         public DartSkill() : base(SkillId.DART, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.DARK); }
         public override void Affect(ICreature target)
         {
-            StatusFactory.Apply(target, Status.Poison); target.ApplyDamage(5, m_source);
+            StatusFactory.Apply(target, Status.Poison); target.ApplyDamage(5, _source);
         }
     }
     public class DartTrapSkill : ISkill
@@ -120,7 +120,7 @@ namespace OGUR.Skills
         public DartTrapSkill() : base(SkillId.DART_TRAP, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.DARK); }
         public override void Cleanup(Entity target,SkillEffect source)
         {
-            CreatureFactory.CreateMinion(m_implementationId, m_source,source,target.GetLocation());
+            CreatureFactory.CreateMinion(_implementationId, _source,source,target.GetLocation());
         }
     }
     public class ElectrifySkill : ISkill
@@ -152,7 +152,7 @@ namespace OGUR.Skills
         { Add(Elements.FIRE); AddCost(StatType.MANA, 0); }
         public override void Affect(ICreature target)
         {
-            target.ApplyDamage(10,m_source,true);
+            target.ApplyDamage(10,_source,true);
         }
     }
     public class FireballSkill : ISkill
@@ -163,7 +163,7 @@ namespace OGUR.Skills
 
         public override void Affect(ICreature target)
         {
-            target.ApplyDamage(20, m_source);
+            target.ApplyDamage(20, _source);
         }
     }
     public class FlameHammerSkill : ISkill
@@ -173,7 +173,7 @@ namespace OGUR.Skills
         { Add(Elements.FIRE); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target)
         {
-            target.ApplyDamage(3f, m_source);
+            target.ApplyDamage(3f, _source);
         }
     }
     public class FloorSpikesSkill : ISkill
@@ -181,7 +181,7 @@ namespace OGUR.Skills
         public FloorSpikesSkill() : base(SkillId.FLOOR_SPIKES, AnimationType.STATIONARY, float.MaxValue, true) { AddCost(StatType.MANA, 20); Add(Elements.EARTH); }
         public override void Affect(ICreature target)
         {
-            target.ApplyDamage(80, m_source);
+            target.ApplyDamage(80, _source);
         }
     }
     public class ForgetSkill : ISkill
@@ -192,7 +192,7 @@ namespace OGUR.Skills
         public override void Activate(ICreature source)
         {
             base.Activate(source);
-            m_source.RemoveLeastUsedSkill();
+            _source.RemoveLeastUsedSkill();
         }
     }
     public class GushSkill : ISkill
@@ -202,7 +202,7 @@ namespace OGUR.Skills
         { Add(Elements.WATER); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) 
         {
-            target.ApplyDamage(10, m_source, true);
+            target.ApplyDamage(10, _source, true);
         }
     }
     public class HorderSkill : ISkill
@@ -274,38 +274,38 @@ namespace OGUR.Skills
     }
     public class RemoteMineSkill : ISkill
     {
-        private static Dictionary<ICreature, RemoteMineSkill> m_cache = new Dictionary<ICreature, RemoteMineSkill>();
+        private static Dictionary<ICreature, RemoteMineSkill> _cache = new Dictionary<ICreature, RemoteMineSkill>();
         public RemoteMineSkill() : base(SkillId.REMOTE_MINE, AnimationType.STATIONARY) { AddCost(StatType.MANA, 10); Add(Elements.FIRE); }
         public override void Activate(ICreature source)
         {
             
-            if (!m_cache.ContainsKey(source))
+            if (!_cache.ContainsKey(source))
             {
-                m_cache.Add(source, this);
+                _cache.Add(source, this);
                 base.Activate(source);
             }
             else
             {
-                if (m_cache[source].IsActive())
+                if (_cache[source].IsActive())
                 {
-                    m_cache[source].Explode(source);
-                    m_cache[source].Cleanup(source, null);
-                    m_cache.Remove(source);
+                    _cache[source].Explode(source);
+                    _cache[source].Cleanup(source, null);
+                    _cache.Remove(source);
                     Cleanup(source, null);
                 }
                 else
                 {
-                    m_cache.Remove(source);
-                    m_cache.Add(source, this);
+                    _cache.Remove(source);
+                    _cache.Add(source, this);
                     base.Activate(source);
                 }
             }
         }
         private void Explode(ICreature source)
         {
-            if (m_behavior.GetGraphic() != null)
+            if (_behavior.GetGraphic() != null)
             {
-                CreatureFactory.CreateMinion(SkillId.EXPLODE, m_source, m_behavior.GetGraphic(), m_behavior.GetGraphic().GetLocation());
+                CreatureFactory.CreateMinion(SkillId.EXPLODE, _source, _behavior.GetGraphic(), _behavior.GetGraphic().GetLocation());
             }
         }
     }
@@ -317,7 +317,7 @@ namespace OGUR.Skills
         { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) 
         {
-            target.ApplyDamage(5,m_source,true,StatType.Values[_rand.Next(0,3)]);
+            target.ApplyDamage(5,_source,true,StatType.Values[_rand.Next(0,3)]);
         }
     }
     public class SoulReinforcementSkill : ISkill
@@ -363,7 +363,7 @@ namespace OGUR.Skills
         {
             if (_rand.Next(100) > 0)
             {
-                m_source.PickupItem(ItemFactory.CreateRandomPlain());
+                _source.PickupItem(ItemFactory.CreateRandomPlain());
             }
         }
     }
@@ -395,7 +395,7 @@ namespace OGUR.Skills
         }
         public override void Affect(ICreature target)
         {
-            target.ApplyDamage(_itemStrength, m_source);
+            target.ApplyDamage(_itemStrength, _source);
         }
     }
     public class ValedictorianSkill : ISkill
@@ -417,13 +417,13 @@ namespace OGUR.Skills
         public VaporImplantSkill() : base(SkillId.VAPOR_IMPLANT, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.PHYSICAL, Elements.AIR); }
         public override void  Affect(IEntity target)
         {
-            CreatureFactory.CreateMinion(SkillId.VAPOR_CLOUD, m_source,null,target.GetLocation());
+            CreatureFactory.CreateMinion(SkillId.VAPOR_CLOUD, _source,null,target.GetLocation());
         }
     }
     public class VenomFistSkill : ISkill
     {
         public VenomFistSkill()
-            : base(SkillId.VENOM_FIST, AnimationType.SELF)
+            : base(SkillId.VENO_FIST, AnimationType.SELF)
         { Add(Elements.DARK); AddCost(StatType.MANA, 10); }
         public override void  Activate(ICreature source)
         {

@@ -10,7 +10,7 @@ namespace OGUR.Strategies
         {
             foreach (var targetType in targetTypes)
             {
-                m_targets.AddTargetTypes(targetType);
+                _targets.AddTargetTypes(targetType);
             }
         }
 
@@ -18,18 +18,18 @@ namespace OGUR.Strategies
         {
             if (AbleToMove())
             {
-                if (SkillFactory.IsSkill(m_parent.GetActiveSkillName(), AnimationType.RANGED))
+                if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
                 {
-                    m_parent.SetSkillVector(CalculateTargetVector(m_parent.GetLocation(), opponent.GetLocation()));
-                    if (m_parent.GetSkillVector().GridX != 0 || m_parent.GetSkillVector().GridY != 0)
+                    _parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
+                    if (_parent.GetSkillVector().GridX != 0 || _parent.GetSkillVector().GridY != 0)
                     {
-                        m_parent.UseActiveSkill();
+                        _parent.UseActiveSkill();
                     }
                 }
                 if (targetPath.HasMoves())
                 {
                     nextMove.Copy(targetPath.GetNextMove());
-                    m_parent.MoveTo(nextMove);
+                    _parent.MoveTo(nextMove);
                 }
             }
         }

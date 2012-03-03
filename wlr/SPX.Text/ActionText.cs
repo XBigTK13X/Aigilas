@@ -11,12 +11,12 @@ namespace SPX.Text
     public class ActionText:Text
     {
 
-        protected int m_lifeSpan = 0;
-        protected float m_scalePercent = 1;
+        protected int _lifeSpan = 0;
+        protected float _scalePercent = 1;
         public ActionText(string contents, int lifeSpan, int x, int y)
             : base(contents, x, y,TextType.Action)
         {
-            m_lifeSpan = lifeSpan;
+            _lifeSpan = lifeSpan;
         }
         public ActionText()
         {
@@ -24,20 +24,20 @@ namespace SPX.Text
         }
         public void Reset(string contents, int lifespan, int x, int y)
         {
-            m_scalePercent = 1;
-            m_lifeSpan = lifespan;
+            _scalePercent = 1;
+            _lifeSpan = lifespan;
             Reset(contents, x, y);
         }
         public override int Update()
         {
-            m_scalePercent *= .98f;
-            return m_lifeSpan--;
+            _scalePercent *= .98f;
+            return _lifeSpan--;
         }
         public override void Draw()
         {
-            var fontCenter = TextManager.GetFont().MeasureString(m_contents) / 2;
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.Black, 0, fontCenter, 1.15f * m_scalePercent, SpriteEffects.None, Depth.ActionTextBG);
-            XnaManager.Renderer.DrawString(TextManager.GetFont(), m_contents, m_position, Color.White, 0, fontCenter, 1.0f * m_scalePercent, SpriteEffects.None, Depth.ActionText);
+            var fontCenter = TextManager.GetFont().MeasureString(_contents) / 2;
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), _contents, _position, Color.Black, 0, fontCenter, 1.15f * _scalePercent, SpriteEffects.None, Depth.ActionTextBG);
+            XnaManager.Renderer.DrawString(TextManager.GetFont(), _contents, _position, Color.White, 0, fontCenter, 1.0f * _scalePercent, SpriteEffects.None, Depth.ActionText);
         }
     }
 }

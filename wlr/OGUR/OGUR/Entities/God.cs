@@ -45,11 +45,11 @@ namespace OGUR.Gods
     {
         public static God Get(int name)
         {
-            return s_gods.Where(o => o.m_name == name).FirstOrDefault();
+            return __gods.Where(o => o._name == name).FirstOrDefault();
         }
 
 
-        private static readonly List<God> s_gods = new List<God>()
+        private static readonly List<God> __gods = new List<God>()
                                               {
                                                   new God(Color.Pink, GodId.LUST, ItemClass.Leggings, ItemClass.Melee_Weapon),
                                                   new God(Color.Gold, GodId.GREED, ItemClass.Head_Gear, ItemClass.Gloves),
@@ -60,30 +60,30 @@ namespace OGUR.Gods
                                                   new God(Color.LightBlue, GodId.PRIDE, ItemClass.Ring, ItemClass.Feet)
                                               };
 
-        private Color m_color;
-        private int m_name;
-        private int m_goodSacrificeClass;
-        private int m_badSacrificeClass;
+        private Color _color;
+        private int _name;
+        private int _goodSacrificeClass;
+        private int _badSacrificeClass;
 
         public string NameText;
 
         protected God(Color color, int name, int goodSacrifice, int badSacrifice)
         {
-            m_color = color;
-            m_name = name;
-            m_goodSacrificeClass = goodSacrifice;
-            m_badSacrificeClass = badSacrifice;
-            NameText = GodId.Names[m_name];
+            _color = color;
+            _name = name;
+            _goodSacrificeClass = goodSacrifice;
+            _badSacrificeClass = badSacrifice;
+            NameText = GodId.Names[_name];
         }
 
         public Color GetColor()
         {
-            return m_color;
+            return _color;
         }
 
         public CreatureClass GetClass()
         {
-            switch (m_name)
+            switch (_name)
             {
                 case GodId.ENVY: return new EnvyAcolyte();
                 case GodId.GLUTTONY: return new GluttonyAcolyte();
@@ -98,12 +98,12 @@ namespace OGUR.Gods
 
         public bool IsGoodSacrifice(int sacrifice)
         {
-            return sacrifice == m_goodSacrificeClass;
+            return sacrifice == _goodSacrificeClass;
         }
 
         public bool IsBadSacrifice(int sacrifice)
         {
-            return sacrifice == m_badSacrificeClass;
+            return sacrifice == _badSacrificeClass;
         }
     }
 }   

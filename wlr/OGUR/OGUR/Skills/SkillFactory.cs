@@ -25,7 +25,7 @@ namespace OGUR.Skills
         //Envy
         public const string CONFUSION = "Confusion";
         public const string WEAK_KNEEES = "Weak Knees";
-        public const string VENOM_FIST = "Venom Fist";
+        public const string VENO_FIST = "Venom Fist";
         public const string ABSORB = "Absorb";
         public const string MUTINY = "Mutiny";
         //Greed
@@ -97,7 +97,7 @@ namespace OGUR.Skills
             SkillId.THROW_ITEM,
             SkillId.VALEDICTORIAN,
             SkillId.VAPOR_IMPLANT,
-            SkillId.VENOM_FIST,
+            SkillId.VENO_FIST,
             SkillId.WALL_PUNCH,
             SkillId.WEAK_KNEEES,
             SkillId.VAPOR_CLOUD
@@ -144,7 +144,7 @@ namespace OGUR.Skills
                 case SkillId.THROW_ITEM: return new ThrowItemSkill();
                 case SkillId.VALEDICTORIAN: return new ValedictorianSkill();
                 case SkillId.VAPOR_IMPLANT:return new VaporImplantSkill();
-                case SkillId.VENOM_FIST: return new VenomFistSkill();
+                case SkillId.VENO_FIST: return new VenomFistSkill();
                 case SkillId.WALL_PUNCH:return new WallPunchSkill();
                 case SkillId.WEAK_KNEEES:return new WeakKneesSkill();
                 case SkillId.VAPOR_CLOUD: return new VaporCloudSkill();
@@ -153,12 +153,12 @@ namespace OGUR.Skills
             }
         }
 
-        private static Dictionary<int, List<string>> s_elementMap = new Dictionary<int, List<string>>();
-        private static Dictionary<string, int> s_skillAnimationMap = new Dictionary<string,int>();
+        private static Dictionary<int, List<string>> __elementMap = new Dictionary<int, List<string>>();
+        private static Dictionary<string, int> __skillAnimationMap = new Dictionary<string,int>();
 
         private static void GenerateStaticSkillMaps()
         {
-            if (s_elementMap.Count() == 0)
+            if (__elementMap.Count() == 0)
             {
                 ISkill skill;
                 foreach (var skillId in SkillId.Values)
@@ -168,16 +168,16 @@ namespace OGUR.Skills
                         skill = Create(skillId);
                         foreach (var elem in skill.GetElements())
                         {
-                            if (!s_elementMap.ContainsKey(elem))
+                            if (!__elementMap.ContainsKey(elem))
                             {
-                                s_elementMap.Add(elem, new List<string>());
+                                __elementMap.Add(elem, new List<string>());
                             }
-                            s_elementMap[elem].Add(skillId);
+                            __elementMap[elem].Add(skillId);
                         }
-                        s_skillAnimationMap[skillId] = skill.GetAnimationType();
+                        __skillAnimationMap[skillId] = skill.GetAnimationType();
                     }
                 }
-                s_skillAnimationMap.Add(SkillId.NO_SKILL, -1);
+                __skillAnimationMap.Add(SkillId.NO_SKILL, -1);
             }
         }
 
@@ -189,15 +189,15 @@ namespace OGUR.Skills
             GenerateStaticSkillMaps();
             while (InvalidRandomSkills.Contains(SkillId.Values[skillPick]))
             {
-                skillPick = rand.Next(0, s_elementMap[elementId].Count());
+                skillPick = rand.Next(0, __elementMap[elementId].Count());
             }
-            return s_elementMap[elementId][skillPick];
+            return __elementMap[elementId][skillPick];
         }
 
         public static bool IsSkill(string skillId,int animationType)
         {
             GenerateStaticSkillMaps();
-            return s_skillAnimationMap[skillId] == animationType;
+            return __skillAnimationMap[skillId] == animationType;
         }
 
         public static SkillBehavior Create(int animation,int skillGraphic,ISkill parentSkill)

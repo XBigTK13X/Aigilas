@@ -11,18 +11,18 @@ namespace OGUR.Strategies
 {
     public class TargetSet
     {
-        private List<ICreature> m_targets = new List<ICreature>();
-        private List<int> m_targetTypes = new List<int>(); 
-        private readonly ICreature m_parent;
+        private List<ICreature> _targets = new List<ICreature>();
+        private List<int> _targetTypes = new List<int>(); 
+        private readonly ICreature _parent;
 
         public TargetSet(ICreature parent)
         {
-            m_parent = parent;
+            _parent = parent;
         }
 
         public ICreature AddTarget(ICreature target)
         {
-            m_targets.Add(target);
+            _targets.Add(target);
             return target;
         }
 
@@ -30,52 +30,52 @@ namespace OGUR.Strategies
         {
             foreach(var type in actorTypes)
             {
-                m_targetTypes.Add(type);
+                _targetTypes.Add(type);
             }
         }
 
         public void AddTargets(ICreature source)
         {
-            m_targets.AddRange(source.GetTargets().m_targets);
-            m_targetTypes.AddRange(source.GetTargets().m_targetTypes);
+            _targets.AddRange(source.GetTargets()._targets);
+            _targetTypes.AddRange(source.GetTargets()._targetTypes);
         }
 
         public IEnumerable<ICreature> AddTargets(IEnumerable<ICreature> targets)
         {
             if (targets != null)
             {
-                m_targets.AddRange(targets);
+                _targets.AddRange(targets);
             }
             return targets;
         }
 
 
-        private List<ICreature> m_calculatedTargets;
+        private List<ICreature> _calculatedTargets;
         private float dist;
         ICreature closest;
         public ICreature FindClosest()
         {
             closest = null;
             var closestDistance = float.MaxValue;
-            if (m_targets != null)
+            if (_targets != null)
             {
-                foreach (var target in m_targets)
+                foreach (var target in _targets)
                 {
-                    dist = Point2.DistanceSquared(target.GetLocation(), m_parent.GetLocation());
+                    dist = Point2.DistanceSquared(target.GetLocation(), _parent.GetLocation());
                     if (dist < closestDistance)
                     {
                         closest = target;
                         closestDistance = dist;
                     }
                 }
-                foreach(var actorType in m_targetTypes)
+                foreach(var actorType in _targetTypes)
                 {
-                    m_calculatedTargets = EntityManager.GetActors(actorType).Select(a=>a as ICreature).ToList();
-                    foreach(var creature in m_calculatedTargets)
+                    _calculatedTargets = EntityManager.GetActors(actorType).Select(a=>a as ICreature).ToList();
+                    foreach(var creature in _calculatedTargets)
                     {
-                        if (creature != m_parent)
+                        if (creature != _parent)
                         {
-                            dist = Point2.DistanceSquared(creature.GetLocation(), m_parent.GetLocation());
+                            dist = Point2.DistanceSquared(creature.GetLocation(), _parent.GetLocation());
                             if (dist < closestDistance)
                             {
                                 closest = creature;
@@ -90,7 +90,7 @@ namespace OGUR.Strategies
 
         public IEntity GetCollidedTarget(Entity source)
         {
-            foreach(var target in m_targets)
+            foreach(var target in _targets)
             {
                 if(target.Contains(source.GetLocation()))
                 {
@@ -98,7 +98,7 @@ namespace OGUR.Strategies
                 }
             }
 
-            foreach (var actorType in m_targetTypes)
+            foreach (var actorType in _targetTypes)
             {
                 foreach (var target in EntityManager.GetActorsAt(source.GetLocation()))
                 {

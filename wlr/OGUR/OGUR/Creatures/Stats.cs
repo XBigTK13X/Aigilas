@@ -13,12 +13,12 @@ namespace OGUR.Creatures
         public const float DefaultCoolDown = 36;
         public const float DefaultRegenRate = 1;
 
-        private readonly Dictionary<string, float> m_stats = new Dictionary<string, float>();
-        private readonly List<StatBuff> m_buffs = new List<StatBuff>(); 
+        private readonly Dictionary<string, float> _stats = new Dictionary<string, float>();
+        private readonly List<StatBuff> _buffs = new List<StatBuff>(); 
 
         public Stats(Stats target)
         {
-            m_stats = new Dictionary<string, float>(target.m_stats);
+            _stats = new Dictionary<string, float>(target._stats);
         }
         public Stats
             (
@@ -42,22 +42,22 @@ namespace OGUR.Creatures
         {
             for (var ii = 0; ii < stats.Count; ii++)
             {
-                m_stats.Add(StatType.Values[ii], stats[ii]);
+                _stats.Add(StatType.Values[ii], stats[ii]);
             }
         }
         private float statSum = 0;
         public float Get(string stat)
         {
-            if (m_buffs != null)
+            if (_buffs != null)
             {
-                if (!m_buffs.Contains(null))
+                if (!_buffs.Contains(null))
                 {
                     statSum = 0;
-                    for (int ii = 0; ii < m_buffs.Count(); ii++)
+                    for (int ii = 0; ii < _buffs.Count(); ii++)
                     {
-                        if (m_buffs[ii].Stat == stat)
+                        if (_buffs[ii].Stat == stat)
                         {
-                            statSum += m_buffs[ii].Amount;
+                            statSum += _buffs[ii].Amount;
                         }
                     }
                     return GetRaw(stat) + statSum;
@@ -68,22 +68,22 @@ namespace OGUR.Creatures
 
         public float GetRaw(string stat)
         {
-            return m_stats[stat];
+            return _stats[stat];
         }
 
         public float Set(string stat, float value)
         {
-            return m_stats[stat] = value;
+            return _stats[stat] = value;
         }
 
         public void AddBuff(StatBuff buff)
         {
-            if(m_buffs.Contains(buff))
+            if(_buffs.Contains(buff))
             {
-                m_buffs.Remove(buff);
+                _buffs.Remove(buff);
                 return;
             }
-            m_buffs.Add(buff);
+            _buffs.Add(buff);
         }
 
         private readonly List<float> deltas = new List<float>();
@@ -92,7 +92,7 @@ namespace OGUR.Creatures
             deltas.Clear();
             foreach (var stat in StatType.Values)
             {
-                deltas.Add(m_stats[stat] - stats.m_stats[stat]);
+                deltas.Add(_stats[stat] - stats._stats[stat]);
             }
             return deltas;
         }
@@ -100,30 +100,30 @@ namespace OGUR.Creatures
         public Stats GetLevelBonuses(int level)
         {
             var result = new Stats(this);
-            foreach(var stat in result.m_stats.Keys)
+            foreach(var stat in result._stats.Keys)
             {
-                result.m_stats[stat] += result.m_stats[stat]*level;
+                result._stats[stat] += result._stats[stat]*level;
             }
             return result;
         }
 
         public float GetBonus(int level, string stat)
         {
-            return m_stats[stat]*level;
+            return _stats[stat]*level;
         }
 
         public float GetSum()
         {
-            return m_stats.Keys.Where(o=>o!=StatType.HEALTH&&o!=StatType.MOVE_COOL_DOWN&&o!=StatType.REGEN).Sum(stat => m_stats[stat]);
+            return _stats.Keys.Where(o=>o!=StatType.HEALTH&&o!=StatType.MOVE_COOL_DOWN&&o!=StatType.REGEN).Sum(stat => _stats[stat]);
         }
 
         float hash = 0;
         public override int GetHashCode()
         {
             hash = 0;
-            foreach(var key in m_stats.Keys)
+            foreach(var key in _stats.Keys)
             {
-                hash += m_stats[key];
+                hash += _stats[key];
             }
             return hash.GetHashCode();
         }

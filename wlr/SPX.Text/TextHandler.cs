@@ -11,7 +11,7 @@ namespace SPX.Text
         private DefaultHudText[] defaultPool = new DefaultHudText[100];
         private int defaultIndex = 0;
 
-        private List<Text> m_contents = new List<Text>();
+        private List<Text> _contents = new List<Text>();
 
         public TextHandler()
         {
@@ -30,24 +30,24 @@ namespace SPX.Text
 
         public void Add(Text textToAdd)
         {
-            if(!m_contents.Contains(textToAdd))
+            if(!_contents.Contains(textToAdd))
             {
-                m_contents.Add(textToAdd);    
+                _contents.Add(textToAdd);    
             }
         }
 
         public void Clear()
         {
-            m_contents.Clear();
+            _contents.Clear();
         }
 
         public void Update()
         {
-            for (var ii = 0; ii < m_contents.Count; ii++)
+            for (var ii = 0; ii < _contents.Count; ii++)
             {
-                if(m_contents[ii].Update()<=0)
+                if(_contents[ii].Update()<=0)
                 {
-                    m_contents.Remove(m_contents[ii]);
+                    _contents.Remove(_contents[ii]);
                     ii--;
                 }
             }
@@ -58,7 +58,7 @@ namespace SPX.Text
 
             if (XnaManager.Renderer != null)
             {
-                foreach (var component in m_contents)
+                foreach (var component in _contents)
                 {
                     component.Draw();
                 }

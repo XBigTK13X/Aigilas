@@ -7,27 +7,27 @@ namespace SPX.States
 {
     public class StateManager
     {
-        private static State m_state;
+        private static State _state;
 
         public static void LoadState(State state)
         {
-            m_state = state;
-            m_state.LoadContent();
+            _state = state;
+            _state.LoadContent();
         }
 
         public static void Draw()
         {
-            m_state.Draw();
+            _state.Draw();
         }
 
         public static void LoadContent()
         {
-            m_state.LoadContent();
+            _state.LoadContent();
         }
 
         public static void Update()
         {   
-            m_state.Update();
+            _state.Update();
         }
     }
 }

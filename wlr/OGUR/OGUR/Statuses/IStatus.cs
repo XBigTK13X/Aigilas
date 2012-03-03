@@ -14,86 +14,86 @@ namespace OGUR.Statuses
     }
     public class IStatus
     {
-        protected bool m_stopsMovement = false;
-        protected bool m_stopsAttacking = false;
-        protected bool m_hitAnything = false;
-        protected bool m_wasPassed = false;
-        protected int m_strength = 0;
-        protected int m_maxStrength = 100;        
-        protected bool m_isActive = true;
-        protected ICreature m_target;
-        protected StatBuff m_buff = null;
-        protected Dictionary<StatusComponent,List<int>> m_passables = new Dictionary<StatusComponent,List<int>>();
+        protected bool _stopsMovement = false;
+        protected bool _stopsAttacking = false;
+        protected bool _hitAnything = false;
+        protected bool _wasPassed = false;
+        protected int _strength = 0;
+        protected int _maxStrength = 100;        
+        protected bool _isActive = true;
+        protected ICreature _target;
+        protected StatBuff _buff = null;
+        protected Dictionary<StatusComponent,List<int>> _passables = new Dictionary<StatusComponent,List<int>>();
 
         protected IStatus(bool stopMovement,bool stopAttacking,ICreature target)
         {
-            m_stopsAttacking = stopAttacking;
-            m_stopsMovement = stopMovement;
-            m_strength = m_maxStrength;
-            m_target = target;
+            _stopsAttacking = stopAttacking;
+            _stopsMovement = stopMovement;
+            _strength = _maxStrength;
+            _target = target;
             Setup();
         }
 
         public bool HitAnything()
         {
-            return m_hitAnything;
+            return _hitAnything;
         }
 
         public bool IsActive()
         {
-            return m_isActive;
+            return _isActive;
         }
 
         public bool StopMovement()
         {
-            return m_stopsMovement;
+            return _stopsMovement;
         }
 
         public bool StopAttack()
         {
-            return m_stopsMovement;
+            return _stopsMovement;
         }
 
         public void PassOn(ICreature target,StatusComponent componentType)
         {
-            if (m_passables.ContainsKey(componentType))
+            if (_passables.ContainsKey(componentType))
             {
-                foreach (var contagion in m_passables[componentType])
+                foreach (var contagion in _passables[componentType])
                 {
                     StatusFactory.Apply(target, contagion);
                 }
-                m_wasPassed = m_passables.ContainsKey(componentType);
+                _wasPassed = _passables.ContainsKey(componentType);
             }
            
         }
 
         protected void Add(int statusId, StatusComponent componentType)
         {
-            if(!m_passables.ContainsKey(componentType))
+            if(!_passables.ContainsKey(componentType))
             {
-                m_passables.Add(componentType,new List<int>());
+                _passables.Add(componentType,new List<int>());
             }
-            m_passables[componentType].Add(statusId);
+            _passables[componentType].Add(statusId);
         }
 
         public virtual void Update()
         {
-            if (m_isActive)
+            if (_isActive)
             {
-                m_strength--;
-                if (m_strength <= 0)
+                _strength--;
+                if (_strength <= 0)
                 {
                     Cleanup();
-                    m_isActive = false;
+                    _isActive = false;
                 }
             }
         }
 
         private void CycleBuff()
         {
-            if (m_buff != null)
+            if (_buff != null)
             {
-                m_target.AddBuff(m_buff);
+                _target.AddBuff(_buff);
             }
         }
 

@@ -10,24 +10,24 @@ namespace SPX.Text
 {
     public class Text
     {
-        protected string m_contents;
-        protected Vector2 m_position = new Vector2(0,0);
-        protected int m_textType = TextType.Inventory;
+        protected string _contents;
+        protected Vector2 _position = new Vector2(0,0);
+        protected int _textType = TextType.Inventory;
 
         public Text()
         { }
 
         public void Reset(string contents, int x, int y)
         {
-            m_contents = contents;
-            m_position.X = x;
-            m_position.Y = y;
+            _contents = contents;
+            _position.X = x;
+            _position.Y = y;
         }
 
         public Text(string contents,int x, int y,int type)
         {
             Reset(contents, x, y);
-            m_textType = type;
+            _textType = type;
         }
         public virtual int Update()
         {
@@ -36,7 +36,7 @@ namespace SPX.Text
 
         public int GetTextType()
         {
-            return m_textType;
+            return _textType;
         }
 
         protected virtual void DrawText(SpriteBatch target)

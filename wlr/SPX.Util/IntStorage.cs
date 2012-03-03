@@ -7,15 +7,15 @@ namespace SPX.Util
 {
     public class IntStorage
     {
-        private static readonly Dictionary<float, int> s_slots = new Dictionary<float, int>();
+        private static readonly Dictionary<float, int> __slots = new Dictionary<float, int>();
 
         public static int Get(float value)
         {
-            if (!s_slots.ContainsKey(value))
+            if (!__slots.ContainsKey(value))
             {
-                s_slots.Add(value, (int)value);
+                __slots.Add(value, (int)value);
             }
-            return s_slots[value];
+            return __slots[value];
         }
     }
 }

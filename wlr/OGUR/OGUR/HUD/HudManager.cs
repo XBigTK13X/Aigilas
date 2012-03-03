@@ -12,9 +12,9 @@ namespace OGUR.HUD
 {
     public class HudManager
     {
-        private InventoryHud m_inventory;
-        private SkillHud m_skill;
-        private ICreature m_parent;
+        private InventoryHud _inventory;
+        private SkillHud _skill;
+        private ICreature _parent;
 
         private static List<Vector2> playerHudPositions = new List<Vector2>()
         {
@@ -26,29 +26,29 @@ namespace OGUR.HUD
 
         public HudManager(ICreature parent,Inventory inventory,Equipment equipment)
         {
-            m_parent = parent;
-            m_inventory = new InventoryHud(parent, inventory, equipment);
-            m_skill = new SkillHud(parent);
-            m_skill.Toggle();
+            _parent = parent;
+            _inventory = new InventoryHud(parent, inventory, equipment);
+            _skill = new SkillHud(parent);
+            _skill.Toggle();
         }
 
         public bool ToggleInventory()
         {
-            m_inventory.Toggle();
-            m_skill.Toggle();
-            return m_inventory.IsVisible();
+            _inventory.Toggle();
+            _skill.Toggle();
+            return _inventory.IsVisible();
         }
 
         public void Update()
         {
-            m_inventory.Update();
-            m_skill.Update();
+            _inventory.Update();
+            _skill.Update();
         }
 
         public void Draw()
         {
-            m_inventory.Draw();
-            m_skill.Draw();
+            _inventory.Draw();
+            _skill.Draw();
         }
     }
 }

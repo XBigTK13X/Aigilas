@@ -7,8 +7,8 @@ namespace OGUR.Strategies
 {
     public abstract class IStrategy
     {
-        protected TargetSet m_targets;
-        protected ICreature m_parent;
+        protected TargetSet _targets;
+        protected ICreature _parent;
         
         protected const int throttleMin = 10;
         protected const int throttleMax = 20;
@@ -21,18 +21,18 @@ namespace OGUR.Strategies
 
         protected IStrategy(ICreature parent)
         {
-            m_targets = new TargetSet(parent);
-            m_parent = parent;
+            _targets = new TargetSet(parent);
+            _parent = parent;
         }
         public abstract void Act();
 
         public TargetSet GetTargets()
         {
-            return m_targets;
+            return _targets;
         }
         public void AddTargets(ICreature source)
         {
-            m_targets.AddTargets(source);
+            _targets.AddTargets(source);
         }
 
         protected bool AbleToMove()
@@ -40,17 +40,17 @@ namespace OGUR.Strategies
             throttle--;
             if (throttle <= 0)
             {
-                opponent = m_targets.FindClosest();
+                opponent = _targets.FindClosest();
                 //Every player is dead
                 if (null != opponent)
                 {
-                    targetPath.Copy(PathFinder.FindNextMove(m_parent.GetLocation(), opponent.GetLocation()));
+                    targetPath.Copy(PathFinder.FindNextMove(_parent.GetLocation(), opponent.GetLocation()));
                 }
                 throttle = rand.Next(throttleMin, throttleMax);
             }
             if (null != targetPath)
             {
-                if (targetPath.HasMoves() && m_parent.Get(StatType.MOVE_COOL_DOWN) >= m_parent.GetMax(StatType.MOVE_COOL_DOWN))
+                if (targetPath.HasMoves() && _parent.Get(StatType.MOVE_COOL_DOWN) >= _parent.GetMax(StatType.MOVE_COOL_DOWN))
                 {
                     return true;
                 }

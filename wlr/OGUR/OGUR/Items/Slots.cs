@@ -8,10 +8,10 @@ namespace OGUR.Items
 {
     public class Slots
     {
-       private List<int> m_slots; 
+       private List<int> _slots; 
        public Slots(IEnumerable<int> itemSlots)
        {
-           m_slots = new List<int>(itemSlots);
+           _slots = new List<int>(itemSlots);
        }
        
     }

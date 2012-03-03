@@ -11,38 +11,38 @@ namespace OGUR.Entities
 {
     public class Altar : Entity
     {
-        private readonly God m_god;
-        private Player m_currentTarget;
-        private List<IEntity> m_offerings;
+        private readonly God _god;
+        private Player _currentTarget;
+        private List<IEntity> _offerings;
 
         public Altar(Point2 location,int godName)
         {
-            m_god = God.Get(godName);
-            m_graphic.SetColor(m_god.GetColor());
+            _god = God.Get(godName);
+            _graphic.SetColor(_god.GetColor());
             Initialize(location, SpriteType.ALTAR, OGUR.EntityType.ALTAR,ZDepth.Altar);
         }
 
         public override void Update()
         {
-            m_currentTarget = EntityManager.GetTouchingCreature(this) as Player;
-            if (m_currentTarget != null)
+            _currentTarget = EntityManager.GetTouchingCreature(this) as Player;
+            if (_currentTarget != null)
             {
-                if (m_currentTarget.IsInteracting())
+                if (_currentTarget.IsInteracting())
                 {
-                    m_currentTarget.Pray(m_god);
+                    _currentTarget.Pray(_god);
                 }
-                m_offerings = EntityManager.GetEntities(OGUR.EntityType.ITEM, m_location);
-                foreach (GenericItem offering in m_offerings)
+                _offerings = EntityManager.GetEntities(OGUR.EntityType.ITEM, _location);
+                foreach (GenericItem offering in _offerings)
                 {
-                    m_currentTarget.Sacrifice(m_god, offering);
+                    _currentTarget.Sacrifice(_god, offering);
                 }
-                TextManager.Add(new ActionText(m_god.NameText, 1, (int) GetLocation().PosX, (int) GetLocation().PosY));
+                TextManager.Add(new ActionText(_god.NameText, 1, (int) GetLocation().PosX, (int) GetLocation().PosY));
             }
         }
 
         public God GetGod()
         {
-            return m_god;
+            return _god;
         }
     }
 }

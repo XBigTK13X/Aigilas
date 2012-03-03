@@ -8,17 +8,17 @@ namespace OGUR.Creatures
 {
     public class CreatureFactory
     {
-        private static int s_playerCount = 0;
-        private static Random s_rand;
+        private static int __playerCount = 0;
+        private static Random __rand;
         public static ICreature Create(int actorType, Point2 position)
         {
-            if (s_rand == null)
-                s_rand = new Random();
+            if (__rand == null)
+                __rand = new Random();
             AbstractCreature result;
             switch (actorType)
             {
                 case OgurActorType.PLAYER:
-                    result = new Player(s_playerCount++);
+                    result = new Player(__playerCount++);
                     break;
                 default:
                     result = GenerateCreature(actorType);
@@ -44,7 +44,7 @@ namespace OGUR.Creatures
 
         public static ICreature CreateRandom(Point2 randomPoint)
         {
-            var val = s_rand.Next(0, Generate.Randoms.Count);
+            var val = __rand.Next(0, Generate.Randoms.Count);
             return Create(Generate.Randoms[val], randomPoint);
         }
 
@@ -71,17 +71,17 @@ namespace OGUR.Creatures
 
         public static void ResetPlayerCount()
         {
-            s_playerCount = 0;
+            __playerCount = 0;
         }
 
         public static void IncreasePlayerCount()
         {
-            s_playerCount ++;
+            __playerCount ++;
         }
 
         public static int GetPlayerCount()
         {
-            return s_playerCount;
+            return __playerCount;
         }
     }
 }

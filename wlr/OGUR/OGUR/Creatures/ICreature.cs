@@ -33,33 +33,33 @@ namespace OGUR.Creatures
 
     public abstract class ICreature : Entity,IActor
     {
-        protected IStrategy m_strategy;
+        protected IStrategy _strategy;
 
-        protected CreatureClass m_class;
-        protected Stats m_baseStats;
-        protected Stats m_maxStats;
-        protected God m_god;
-        protected ICreature m_master;
+        protected CreatureClass _class;
+        protected Stats _baseStats;
+        protected Stats _maxStats;
+        protected God _god;
+        protected ICreature _master;
 
-        protected SkillPool m_skills;
-        protected Point2 m_skillVector = new Point2(0,0);
-        protected ComboMeter m_combo;
-        protected StatusPool m_statuses = new StatusPool();
+        protected SkillPool _skills;
+        protected Point2 _skillVector = new Point2(0,0);
+        protected ComboMeter _combo;
+        protected StatusPool _statuses = new StatusPool();
 
-        protected Inventory m_inventory;
-        protected Equipment m_equipment;
+        protected Inventory _inventory;
+        protected Equipment _equipment;
 
-        protected HudManager m_hudManager;
-        protected readonly ActionTextHandler m_damageText = new ActionTextHandler();
+        protected HudManager _hudManager;
+        protected readonly ActionTextHandler _damageText = new ActionTextHandler();
 
-        protected int m_playerIndex = -1;
-        protected bool m_isPlaying = true;
-        protected int m_currentLevel = 1;
-        protected float m_experience;
-        protected const float s_levelUpAmonut = 50;
-        protected float m_nextLevelExperience = s_levelUpAmonut;
+        protected int _playerIndex = -1;
+        protected bool _isPlaying = true;
+        protected int _currentLevel = 1;
+        protected float _experience;
+        protected const float __levelUpAmonut = 50;
+        protected float _nextLevelExperience = __levelUpAmonut;
 
-        protected int m_actorType;
+        protected int _actorType;
 
         private int SpriteFromCreature(int type)
         {
@@ -74,20 +74,20 @@ namespace OGUR.Creatures
 
         protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
-            m_entityType = OGUR.EntityType.ACTOR;
+            _entityType = OGUR.EntityType.ACTOR;
             Initialize(location, SpriteFromCreature(type), OGUR.EntityType.ACTOR,OGUR.ZDepth.Creature);
             Init(type,stats,creatureClass,setClass);
         }
         protected void SetClass(CreatureClass cClass)
         {
-            if (m_class != cClass || cClass == null || cClass == CreatureClass.NULL)
+            if (_class != cClass || cClass == null || cClass == CreatureClass.NULL)
             {
-                m_class = cClass ?? CreatureClass.NULL;
-                m_skills = new SkillPool(this);
-                m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
-                foreach (var elem in m_composition)
+                _class = cClass ?? CreatureClass.NULL;
+                _skills = new SkillPool(this);
+                _skills.Add(_class.GetLevelSkills(_currentLevel));
+                foreach (var elem in _composition)
                 {
-                    m_skills.Add(SkillFactory.GetElementalSkill(elem));
+                    _skills.Add(SkillFactory.GetElementalSkill(elem));
                 }
             }
         }
@@ -98,37 +98,37 @@ namespace OGUR.Creatures
             {
                 SetClass(creatureClass);
             }
-            m_inventory = new Inventory(this);
-            m_equipment = new Equipment(this);
-            m_combo = new ComboMeter(this);
-            if (m_playerIndex > -1)
+            _inventory = new Inventory(this);
+            _equipment = new Equipment(this);
+            _combo = new ComboMeter(this);
+            if (_playerIndex > -1)
             {
-                m_hudManager = new HudManager(this,m_inventory,m_equipment);
+                _hudManager = new HudManager(this,_inventory,_equipment);
             }
-            m_isBlocking = true;
-            m_actorType = type;
-            m_baseStats = new Stats(stats);
-            m_maxStats = new Stats(m_baseStats);
+            _isBlocking = true;
+            _actorType = type;
+            _baseStats = new Stats(stats);
+            _maxStats = new Stats(_baseStats);
         }
 
         public void PickupItem(GenericItem item)
         {
-            m_inventory.Add(item);
+            _inventory.Add(item);
             EntityManager.RemoveObject(item);
         }
 
         public void Equip(GenericItem item)
         {
-            if (m_inventory.GetItemCount(item) > 0 && !m_equipment.IsRegistered(item))
+            if (_inventory.GetItemCount(item) > 0 && !_equipment.IsRegistered(item))
             {
-                m_equipment.Register(item);
-                m_inventory.Remove(item);
+                _equipment.Register(item);
+                _inventory.Remove(item);
             }
             else
             {
-                if (m_equipment.IsRegistered(item))
+                if (_equipment.IsRegistered(item))
                 {
-                    m_equipment.Unregister(item);
+                    _equipment.Unregister(item);
                 }
             }
         }
@@ -138,18 +138,18 @@ namespace OGUR.Creatures
             if (item != null)
             {
 
-                if (m_inventory.GetItemCount(item) > 0)
+                if (_inventory.GetItemCount(item) > 0)
                 {
                     EntityManager.AddObject(new GenericItem(item, GetLocation()));
-                    m_inventory.Remove(item);
+                    _inventory.Remove(item);
                 }
                 else
                 {
-                    if (m_inventory.GetItemCount(item) == 0)
+                    if (_inventory.GetItemCount(item) == 0)
                     {
-                        m_equipment.Unregister(item);
+                        _equipment.Unregister(item);
                         EntityManager.AddObject(new GenericItem(item, GetLocation()));
-                        m_inventory.Remove(item);
+                        _inventory.Remove(item);
                     }
                 }
             }
@@ -157,24 +157,24 @@ namespace OGUR.Creatures
 
         public GenericItem DestroyRandomItemFromInventory()
         {
-            var item = m_inventory.GetNonZeroEntry();
+            var item = _inventory.GetNonZeroEntry();
             if (item != null)
             {
-                m_inventory.Remove(item);
+                _inventory.Remove(item);
             }
             return item;
         }
 
         public override void Update()
         {
-            m_statuses.Update();
+            _statuses.Update();
             if (Get(StatType.HEALTH) <= 0)
             {
-                m_isActive = false;
+                _isActive = false;
             }
-            if (m_statuses.CanMove())
+            if (_statuses.CanMove())
             {
-                if (m_isPlaying)
+                if (_isPlaying)
                 {
                     if (Get(StatType.MOVE_COOL_DOWN) < GetMax(StatType.MOVE_COOL_DOWN))
                     {
@@ -182,17 +182,17 @@ namespace OGUR.Creatures
                     }
                     Regenerate();
                 }
-                if (m_strategy != null)
+                if (_strategy != null)
                 {
-                    m_strategy.Act();
-                    m_combo.Update();
+                    _strategy.Act();
+                    _combo.Update();
                 }
             }
-            if (m_hudManager != null)
+            if (_hudManager != null)
             {
-                m_hudManager.Update();
+                _hudManager.Update();
             }
-            m_damageText.Update();
+            _damageText.Update();
         }
         private void Regenerate()
         {
@@ -200,9 +200,9 @@ namespace OGUR.Creatures
             {
                 if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN)
                 {
-                    if (m_baseStats.GetRaw(stat) < m_maxStats.GetRaw(stat))
+                    if (_baseStats.GetRaw(stat) < _maxStats.GetRaw(stat))
                     {
-                        Adjust(stat, m_baseStats.Get(StatType.REGEN) / 50);
+                        Adjust(stat, _baseStats.Get(StatType.REGEN) / 50);
                     }
                 }
             }
@@ -210,73 +210,73 @@ namespace OGUR.Creatures
         public override void Draw()
         {
             base.Draw();
-            if (m_hudManager != null)
+            if (_hudManager != null)
             {
-                m_hudManager.Draw();
+                _hudManager.Draw();
             }
-            m_damageText.Draw();
+            _damageText.Draw();
         }
 
         public bool ToggleInventoryVisibility()
         {
-            if (m_hudManager != null)
+            if (_hudManager != null)
             {
-                return m_hudManager.ToggleInventory();
+                return _hudManager.ToggleInventory();
             }
             return false;
         }
 
         public void SetPlaying(bool isPlaying)
         {
-            m_isPlaying = isPlaying;
+            _isPlaying = isPlaying;
         }
 
         public bool IsPlaying()
         {
-            return m_isPlaying;
+            return _isPlaying;
         }
 
         public float Get(string stat)
         {
-            return m_baseStats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
+            return _baseStats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
         }
 
         private float GetRaw(string stat,bool isMax=false)
         {
-            return isMax ? m_maxStats.GetRaw(stat) : m_baseStats.GetRaw(stat);
+            return isMax ? _maxStats.GetRaw(stat) : _baseStats.GetRaw(stat);
         }
 
         private float CalculateInstrinsicBonus(string stat)
         {
-            if (m_class == null)
+            if (_class == null)
             {
                 return 0;
             }
-            return m_class.GetBonus(m_currentLevel, stat);
+            return _class.GetBonus(_currentLevel, stat);
         }
 
         private float CalculateEquipmentBonus(string stat)
         {
-            if (m_equipment != null)
+            if (_equipment != null)
             {
-                return m_equipment.CalculateBonus(stat);
+                return _equipment.CalculateBonus(stat);
             }
             return 0;
         }
 
         public float GetMax(string stat)
         {
-            return (int)m_maxStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
+            return (int)_maxStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
         }
 
         public float Set(string stat,float value)
         {
-            return m_baseStats.Set(stat,value);
+            return _baseStats.Set(stat,value);
         }
 
         public float SetMax(string stat,float value)
         {
-            return m_maxStats.Set(stat,value);
+            return _maxStats.Set(stat,value);
         }
 
         public float Set(string stat,float value,bool setMax=false)
@@ -286,18 +286,18 @@ namespace OGUR.Creatures
 
         protected void InitStat(string stat, float value)
         {
-            m_maxStats.Set(stat, value);
-            m_baseStats.Set(stat, value);
+            _maxStats.Set(stat, value);
+            _baseStats.Set(stat, value);
         }
 
         public int GetPlayerIndex()
         {
-            return m_playerIndex;
+            return _playerIndex;
         }
 
         public int GetActorType()
         {
-            return m_actorType;
+            return _actorType;
         }
 
         protected float Adjust(string stat, float adjustment,bool adjustMax = false)
@@ -322,7 +322,7 @@ namespace OGUR.Creatures
             }
             if (statType == null)
             {
-                damage -= m_baseStats.Get(StatType.DEFENSE);
+                damage -= _baseStats.Get(StatType.DEFENSE);
             }
             if (damage <= 0 && statType==null)
             {
@@ -330,7 +330,7 @@ namespace OGUR.Creatures
             }
             if (showDamage)
             {
-                m_damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
+                _damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
             }
             if(damage>0 && statType==null)
             {
@@ -338,7 +338,7 @@ namespace OGUR.Creatures
             }
             if (Get(StatType.HEALTH) <= 0)
             {
-                m_isActive = false;
+                _isActive = false;
                 if (attacker != null)
                 {
                     attacker.AddExperience(CalculateExperience());
@@ -363,7 +363,7 @@ namespace OGUR.Creatures
 
         public void AddBuff(StatBuff buff)
         {
-            m_baseStats.AddBuff(buff);
+            _baseStats.AddBuff(buff);
         }
 
         protected float CalculateDamage()
@@ -375,7 +375,7 @@ namespace OGUR.Creatures
         private List<ICreature> creatures;
         public void MoveIfPossible(float xVel, float yVel)
         {
-            if (m_statuses.CanMove())
+            if (_statuses.CanMove())
             {
                 if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN))
                 {
@@ -387,7 +387,7 @@ namespace OGUR.Creatures
                     }
                     else
                     {
-                        if(m_statuses.CanAttack())
+                        if(_statuses.CanAttack())
                         {
                             creatures = EntityManager.GetActorsAt(target).Select(a=>a as ICreature).ToList();
                             if (creatures.Count() > 0)
@@ -396,10 +396,10 @@ namespace OGUR.Creatures
                                 {
                                     if (creature != this)
                                     {
-                                        if ((creature.GetActorType() != OgurActorType.PLAYER && m_actorType == OgurActorType.PLAYER)
+                                        if ((creature.GetActorType() != OgurActorType.PLAYER && _actorType == OgurActorType.PLAYER)
                                             ||
-                                            (creature.GetActorType() == OgurActorType.PLAYER && m_actorType != OgurActorType.PLAYER)
-                                            || m_statuses.WillHitAnything())
+                                            (creature.GetActorType() == OgurActorType.PLAYER && _actorType != OgurActorType.PLAYER)
+                                            || _statuses.WillHitAnything())
                                         {
                                             creature.ApplyDamage(CalculateDamage(), this);
                                             if (!creature.IsActive())
@@ -423,17 +423,17 @@ namespace OGUR.Creatures
 
         public Point2 GetSkillVector()
         {
-            if(null == m_skillVector)
+            if(null == _skillVector)
             {
                 return null;
             }
-            return m_skillVector;
+            return _skillVector;
         }
         
         public void SetSkillVector(Point2 skillVector)
         {
-            m_skillVector.SetX(skillVector.X);
-            m_skillVector.SetY(skillVector.Y);
+            _skillVector.SetX(skillVector.X);
+            _skillVector.SetY(skillVector.Y);
         }
 
         public void AddExperience(float amount)
@@ -442,22 +442,22 @@ namespace OGUR.Creatures
             while (amount > 0)
             {
                 var diff = amount;
-                if (amount > m_nextLevelExperience)
+                if (amount > _nextLevelExperience)
                 {
-                    diff = m_nextLevelExperience;
-                    amount -= m_nextLevelExperience;
+                    diff = _nextLevelExperience;
+                    amount -= _nextLevelExperience;
                 }
                 else
                 {
                     amount = 0;
                 }
-                m_experience += diff;
-                if (m_experience > m_nextLevelExperience)
+                _experience += diff;
+                if (_experience > _nextLevelExperience)
                 {
-                    m_nextLevelExperience += s_levelUpAmonut;
-                    m_experience = 0;
-                    m_currentLevel++;
-                    m_skills.Add(m_class.GetLevelSkills(m_currentLevel));
+                    _nextLevelExperience += __levelUpAmonut;
+                    _experience = 0;
+                    _currentLevel++;
+                    _skills.Add(_class.GetLevelSkills(_currentLevel));
                     TextManager.Add(new ActionText("LEVEL UP!", 100, (int)GetLocation().PosX, (int)GetLocation().PosY));
                 }
             }
@@ -465,37 +465,37 @@ namespace OGUR.Creatures
 
         public float CalculateExperience()
         {
-            return m_currentLevel + m_baseStats.GetSum();
+            return _currentLevel + _baseStats.GetSum();
         }
 
         public void CycleActiveSkill(int velocity)
         {
-            m_skills.Cycle(velocity);
+            _skills.Cycle(velocity);
         }
 
         public string GetActiveSkillName()
         {
-            return m_skills.GetActiveName();
+            return _skills.GetActiveName();
         }
 
         float lastSum = 0;
         public void UseActiveSkill()
         {
-            lastSum = m_baseStats.GetSum();
-            m_skills.UseActive();
-            if (lastSum != m_baseStats.GetSum())
+            lastSum = _baseStats.GetSum();
+            _skills.UseActive();
+            if (lastSum != _baseStats.GetSum())
             {
-                m_damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
+                _damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
             }
         }
 
         public TargetSet GetTargets()
         {
-            if (m_strategy == null)
+            if (_strategy == null)
             {
-                return m_master.GetTargets();
+                return _master.GetTargets();
             }
-            return m_strategy.GetTargets();
+            return _strategy.GetTargets();
         }
 
         
@@ -515,8 +515,8 @@ namespace OGUR.Creatures
         public void Sacrifice(God god, GenericItem sacrifice)
         {
             AssignGod(god);
-            Adjust(StatType.PIETY, sacrifice.Modifers.GetSum() * ((m_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((m_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1), true);
-            Adjust(StatType.PIETY,sacrifice.Modifers.GetSum() * ((m_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((m_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1));
+            Adjust(StatType.PIETY, sacrifice.Modifers.GetSum() * ((_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1), true);
+            Adjust(StatType.PIETY,sacrifice.Modifers.GetSum() * ((_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1));
             sacrifice.SetInactive();
         }
 
@@ -541,61 +541,61 @@ namespace OGUR.Creatures
 
         protected void AssignGod(God god)
         {
-            if (m_god != god && m_god != null)
+            if (_god != god && _god != null)
             {
                 ApplyDamage(Get(StatType.PIETY));
                 Set(StatType.PIETY, 0);
                 SetClass(god.GetClass());
             }
-            m_god = god;
+            _god = god;
         }
 
         public void Combo(List<int> attack)
         {
             foreach(var element in attack)
             {
-                m_combo.Add(element);
+                _combo.Add(element);
             }
         }
 
         public void AddStatus(IStatus status)
         {
-            m_statuses.Add(status);
+            _statuses.Add(status);
         }
 
         public void PassOn(ICreature target,StatusComponent componentType)
         {
-            m_statuses.PassOn(target, componentType);
+            _statuses.PassOn(target, componentType);
         }
 
 
         public void SetStrategy(IStrategy strategy)
         {
-            m_strategy = strategy;
+            _strategy = strategy;
         }
 
         public Type GetStrategyType()
         {
-            return m_strategy.GetType();
+            return _strategy.GetType();
         }
 
         public float GetInventoryCount()
         {
-            return m_inventory.NonZeroCount();
+            return _inventory.NonZeroCount();
         }
 
         public void RemoveLeastUsedSkill()
         {
-            m_skills.RemoveLeastUsed();
+            _skills.RemoveLeastUsed();
         }
 
         public void React(string skillId)
         {
-            if (m_actorType == OgurActorType.PLAYER && skillId != SkillId.FORGET_SKILL && m_god.NameText == GodId.Names[GodId.GLUTTONY])
+            if (_actorType == OgurActorType.PLAYER && skillId != SkillId.FORGET_SKILL && _god.NameText == GodId.Names[GodId.GLUTTONY])
             {
-                if (m_skills.Count() < m_currentLevel)
+                if (_skills.Count() < _currentLevel)
                 {
-                    m_skills.Add(skillId);
+                    _skills.Add(skillId);
                 }
             }
         }

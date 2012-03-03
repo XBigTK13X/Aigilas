@@ -9,52 +9,52 @@ namespace OGUR.Skills
 {
     public class SkillComponents
     {
-        protected List<int> m_elements;
-        protected StatBuff m_buff;
-        protected float m_effectStrength = 0;
-        protected bool m_isPersistent = false;
-        protected List<int> m_targetTypes = new List<int>(){OGUR.EntityType.WALL};
+        protected List<int> _elements;
+        protected StatBuff _buff;
+        protected float _effectStrength = 0;
+        protected bool _isPersistent = false;
+        protected List<int> _targetTypes = new List<int>(){OGUR.EntityType.WALL};
 
         public SkillComponents(float strength,bool isPersistent)
         {
-            m_effectStrength = strength;
-            m_isPersistent = isPersistent;
-            m_elements = new List<int>() {};
+            _effectStrength = strength;
+            _isPersistent = isPersistent;
+            _elements = new List<int>() {};
         }
 
         public void AddElements(params int[] elements)
         {
-            m_elements.AddRange(elements);
+            _elements.AddRange(elements);
         }
 
         public void Buff(ICreature target)
         {
-            target.AddBuff(m_buff);
+            target.AddBuff(_buff);
         }
 
         public void SetBuff(string stat, float amount)
         {
-            m_buff = new StatBuff(stat, amount);
+            _buff = new StatBuff(stat, amount);
         }
 
         public float GetStrength()
         {
-            return m_effectStrength;
+            return _effectStrength;
         }
 
         public bool IsPersistent()
         {
-            return m_isPersistent;
+            return _isPersistent;
         }
 
         public List<int> GetElements()
         {
-            return m_elements;
+            return _elements;
         }
 
         public List<int> GetTargetTypes()
         {
-            return m_targetTypes;
+            return _targetTypes;
         }
     }
 }

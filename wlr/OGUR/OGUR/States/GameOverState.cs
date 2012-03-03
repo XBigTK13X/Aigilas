@@ -8,18 +8,18 @@ namespace OGUR.States
 {
     public class GameOverState : State
     {
-        private readonly Texture2D m_menuBase;
+        private readonly Texture2D _menuBase;
 
         public GameOverState()
         {
-            m_menuBase = XnaManager.GetGameOverAsset();
+            _menuBase = XnaManager.GetGameOverAsset();
         }
 
         public void Draw()
         {
-            var x = (XnaManager.WindowWidth - m_menuBase.Bounds.Right)/2;
-            var y = (XnaManager.WindowHeight - m_menuBase.Bounds.Bottom) / 2;
-            XnaManager.Renderer.Draw(m_menuBase, new Vector2(x,y), Color.White);
+            var x = (XnaManager.WindowWidth - _menuBase.Bounds.Right)/2;
+            var y = (XnaManager.WindowHeight - _menuBase.Bounds.Bottom) / 2;
+            XnaManager.Renderer.Draw(_menuBase, new Vector2(x,y), Color.White);
         }
 
         public void Update()

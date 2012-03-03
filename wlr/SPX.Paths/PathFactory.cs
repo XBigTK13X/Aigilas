@@ -8,8 +8,8 @@ namespace SPX.Paths
 {
     class PathFactory
     {
-        private static readonly Path[] s_paths = new Path[50];
-        private static int s_pathIndex = 0;
+        private static readonly Path[] __paths = new Path[50];
+        private static int __pathIndex = 0;
 
         public static Path Create(Point2 source,Point2 dest)
         {
@@ -23,15 +23,15 @@ namespace SPX.Paths
 
         private static Path GetNext()
         {
-            if (s_paths[0] == null)
+            if (__paths[0] == null)
             {
-                for (int ii = 0; ii < s_paths.Length; ii++)
+                for (int ii = 0; ii < __paths.Length; ii++)
                 {
-                    s_paths[ii] = new Path();
+                    __paths[ii] = new Path();
                 }
             }
-            s_pathIndex = (++s_pathIndex) % s_paths.Length;
-            return s_paths[s_pathIndex];
+            __pathIndex = (++__pathIndex) % __paths.Length;
+            return __paths[__pathIndex];
         }
     }
 }

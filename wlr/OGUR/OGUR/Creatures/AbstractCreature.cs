@@ -11,25 +11,25 @@ namespace OGUR.Creatures
         public AbstractCreature(int actorType,int spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
         {
             SetClass(cClass);
-            m_actorType = actorType;
-            m_baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
-            m_maxStats = new Stats(m_baseStats);
+            _actorType = actorType;
+            _baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
+            _maxStats = new Stats(_baseStats);
         }
         public void Setup(Point2 position)
         {
-            Setup(position, m_actorType, m_baseStats, m_class);
-            if (m_strategy == null)
+            Setup(position, _actorType, _baseStats, _class);
+            if (_strategy == null)
             {
-                m_strategy = new AttackStrategy(this,OgurActorType.PLAYER);
+                _strategy = new AttackStrategy(this,OgurActorType.PLAYER);
             }
         }
         protected void Add(string skillId)
         {
-            if (m_skills == null)
+            if (_skills == null)
             {
-                m_skills = new SkillPool(this);
+                _skills = new SkillPool(this);
             }
-            m_skills.Add(skillId);
+            _skills.Add(skillId);
         }
         protected void Strengths(params string[] stats)
         {
@@ -47,7 +47,7 @@ namespace OGUR.Creatures
         }
         protected void Compose(params int[] elems)
         {
-            m_composition.AddRange(elems);
+            _composition.AddRange(elems);
         }
     }
 }

@@ -12,8 +12,8 @@ namespace OGUR.Dungeons
 {
     public class Dungeon
     {
-        private static readonly int m_blocksHigh = DungeonFactory.BlocksHigh;
-        private static readonly int m_blocksWide = DungeonFactory.BlocksWide;
+        private static readonly int _blocksHigh = DungeonFactory.BlocksHigh;
+        private static readonly int _blocksWide = DungeonFactory.BlocksWide;
 
         //Top level game config
         private const int playerCount = 1;
@@ -26,9 +26,9 @@ namespace OGUR.Dungeons
         private static int enemyCapModifier = 0;
         private static int enemyBaseModifier = 0;
 
-        private readonly List<Room> m_rooms = new List<Room>();
-        private List<IEntity> m_contents = new List<IEntity>();
-        private readonly IEntity[,] dungeon = new IEntity[m_blocksWide,m_blocksHigh];
+        private readonly List<Room> _rooms = new List<Room>();
+        private List<IEntity> _contents = new List<IEntity>();
+        private readonly IEntity[,] dungeon = new IEntity[_blocksWide,_blocksHigh];
         private Point2 downSpawnLocation = new Point2(0, 0);
         private Point2 upSpawnLocation = new Point2(0, 0);
         private static readonly Random rand = new Random();
@@ -85,9 +85,9 @@ namespace OGUR.Dungeons
             foreach (ICreature player in playerCache)
             {
                 player.SetLocation(GetRandomNeighbor(ref neighbors));
-                m_contents.Add(player);
+                _contents.Add(player);
             }
-            foreach (var item in m_contents)
+            foreach (var item in _contents)
             {
                 EntityManager.AddObject(item);
             }
@@ -100,12 +100,12 @@ namespace OGUR.Dungeons
                 DungeonFactory.AddToCache(player as Entity);
                 EntityManager.RemoveObject(player);
             }
-            m_contents = new List<IEntity>(EntityManager.GetEntitiesToCache());
+            _contents = new List<IEntity>(EntityManager.GetEntitiesToCache());
         }
 
         private void Init()
         {
-            m_rooms.Add(new Room(m_blocksHigh, m_blocksWide, 0, 0));
+            _rooms.Add(new Room(_blocksHigh, _blocksWide, 0, 0));
         }
 
         private void TransferDungeonState()
@@ -116,7 +116,7 @@ namespace OGUR.Dungeons
                 {
                     if (tile.GetEntityType() != OGUR.EntityType.FLOOR)
                     {
-                        m_contents.Add(tile);
+                        _contents.Add(tile);
                     }
                     EntityManager.AddObject(tile);
                 }
@@ -129,7 +129,7 @@ namespace OGUR.Dungeons
             {
                 for (int ii = 0; ii < playerCount; ii++)
                 {
-                    m_contents.Add(CreatureFactory.Create(OgurActorType.PLAYER, GetRandomNeighbor(ref neighbors)));
+                    _contents.Add(CreatureFactory.Create(OgurActorType.PLAYER, GetRandomNeighbor(ref neighbors)));
                 }
             }
             else
@@ -139,7 +139,7 @@ namespace OGUR.Dungeons
                     player.SetLocation(GetRandomNeighbor(ref neighbors));
                 }
                 EntityManager.AddObjects(cache);
-                m_contents.AddRange(cache);
+                _contents.AddRange(cache);
             }
             
             //Give player random objects
@@ -178,9 +178,9 @@ namespace OGUR.Dungeons
 
         private void PlaceFloor()
         {
-            for (var ii = 1; ii < m_blocksWide-1; ii++)
+            for (var ii = 1; ii < _blocksWide-1; ii++)
             {
-                for(var jj = 1;jj<m_blocksHigh-1;jj++)
+                for(var jj = 1;jj<_blocksHigh-1;jj++)
                 {
                     EntityManager.AddObject(new Floor(new Point2(ii,jj)));
                 }
@@ -206,8 +206,8 @@ namespace OGUR.Dungeons
             while (attemptCount < 1000 && roomsToPlace > 0)
             {
                 attemptCount++;
-                var startX = rand.Next(0, m_blocksWide - 5);
-                var startY = rand.Next(0, m_blocksHigh - 5);
+                var startX = rand.Next(0, _blocksWide - 5);
+                var startY = rand.Next(0, _blocksHigh - 5);
                 var startWidth = 5 + rand.Next(0, 2);
                 var startHeight = 5 + rand.Next(0, 2);
                 roomsToPlace--;
@@ -224,7 +224,7 @@ namespace OGUR.Dungeons
             }
             foreach (var room in newRooms)
             {
-                m_rooms.Add(room);
+                _rooms.Add(room);
             }
         }
 
@@ -232,8 +232,8 @@ namespace OGUR.Dungeons
         {
             while (true)
             {
-                var x = rand.Next(0, m_blocksWide);
-                var y = rand.Next(0, m_blocksHigh);
+                var x = rand.Next(0, _blocksWide);
+                var y = rand.Next(0, _blocksHigh);
                 if (dungeon[x, y].GetEntityType() == OGUR.EntityType.FLOOR)
                 {
                     return new Point2(x, y);
@@ -263,7 +263,7 @@ namespace OGUR.Dungeons
         {
             var roomCount = 0;
             var dungeonEntrances = new List<PointPoint>();
-            foreach (var room in m_rooms)
+            foreach (var room in _rooms)
             {
                 var entrances = new List<PointPoint>();
                 for (var ii = room.X; ii < room.RightSide; ii++)
@@ -274,7 +274,7 @@ namespace OGUR.Dungeons
                         {
                             if (!room.Corners.Contains(new Point2(ii, jj)))
                             {
-                                if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < m_blocksWide))
+                                if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < _blocksWide))
                                 {
                                     if (IsFloor(ii - 1, jj) && IsFloor(ii + 1, jj))
                                     {
@@ -282,7 +282,7 @@ namespace OGUR.Dungeons
                                     }
                                 }
                                 if ((jj == room.Y && jj > 0) ||
-                                    (jj == room.BottomSide && jj < m_blocksHigh))
+                                    (jj == room.BottomSide && jj < _blocksHigh))
                                 {
                                     if (IsFloor(ii, jj - 1) && IsFloor(ii, jj + 1))
                                     {
@@ -313,7 +313,7 @@ namespace OGUR.Dungeons
             {
                 if (entrance.isHorizontal())
                 {
-                    for(var ii = 1;ii<m_blocksWide-1;ii++)
+                    for(var ii = 1;ii<_blocksWide-1;ii++)
                     {
                         var currentTarget = new Point2(ii, entrance.Y);
                         if(dungeon[currentTarget.GridX,currentTarget.GridY].GetEntityType()==OGUR.EntityType.WALL)
@@ -324,7 +324,7 @@ namespace OGUR.Dungeons
                 }
                 else
                 {
-                    for (var ii = 1; ii < m_blocksHigh - 1; ii++)
+                    for (var ii = 1; ii < _blocksHigh - 1; ii++)
                     {
                         var currentTarget = new Point2(entrance.X, ii);
                         if (dungeon[currentTarget.GridX, currentTarget.GridY].GetEntityType() == OGUR.EntityType.WALL)

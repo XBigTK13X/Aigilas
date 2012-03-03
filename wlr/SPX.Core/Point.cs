@@ -20,7 +20,7 @@ namespace SPX.Core
         public float PosCenterX { get; private set; }
         public float PosCenterY { get; private set; }
 
-        public static Point2[] m_rotateTargets = 
+        public static Point2[] _rotateTargets = 
             {
                 new Point2(1, 0),
                 new Point2(1, 1),
@@ -32,7 +32,7 @@ namespace SPX.Core
                 new Point2(1, -1)
             };
 
-        public static readonly Point2[,] m_locations = new Point2[GameManager.TileMapHeight, GameManager.TileMapWidth];
+        public static readonly Point2[,] _locations = new Point2[GameManager.TileMapHeight, GameManager.TileMapWidth];
 
         public Point2(float x, float y, int weight = 0)
         {
@@ -128,31 +128,31 @@ namespace SPX.Core
             return (float) (Math.Pow(source.PosY - target.PosY, 2) + Math.Pow(source.PosX - target.PosX, 2));
         }
 
-        private static readonly List<Point2> m_neighbors = new List<Point2>();
+        private static readonly List<Point2> _neighbors = new List<Point2>();
         public List<Point2> GetNeighbors()
         {
-            if (m_locations[0,0]==null)
+            if (_locations[0,0]==null)
             {
                 for (int ii = 0; ii < GameManager.TileMapHeight; ii++)
                 {
                     for (int jj = 0; jj < GameManager.TileMapWidth; jj++)
                     {
-                        m_locations[ii,jj] = new Point2(jj, ii);
+                        _locations[ii,jj] = new Point2(jj, ii);
                     }
                 }
             }
-            m_neighbors.Clear();
+            _neighbors.Clear();
             for (var ii = -1; ii < 2; ii++)
             {
                 for (var jj = -1; jj < 2; jj++)
                 {
                     if (ii != 0 || jj != 0)
                     {
-                        m_neighbors.Add(m_locations[GridY + ii,GridX + jj]);
+                        _neighbors.Add(_locations[GridY + ii,GridX + jj]);
                     }
                 }
             }
-            return m_neighbors;
+            return _neighbors;
         }
 
         public bool IsSameSpot(Point2 target)
@@ -166,41 +166,41 @@ namespace SPX.Core
             {
                 if (GridY == -1)
                 {
-                    return m_rotateTargets[0];
+                    return _rotateTargets[0];
                 }
                 if (GridY == 0)
                 {
-                    return m_rotateTargets[1];
+                    return _rotateTargets[1];
                 }
                 if (GridY == 1)
                 {
-                    return m_rotateTargets[2];
+                    return _rotateTargets[2];
                 }
             }
             if (GridX == -1)
             {
                 if (GridY == -1)
                 {
-                    return m_rotateTargets[3];
+                    return _rotateTargets[3];
                 }
                 if (GridY == 0)
                 {
-                    return m_rotateTargets[4];
+                    return _rotateTargets[4];
                 }
                 if (GridY == 1)
                 {
-                    return m_rotateTargets[5];
+                    return _rotateTargets[5];
                 }
             }
             if (GridX == 0)
             {
                 if (GridY == 1)
                 {
-                    return m_rotateTargets[6];
+                    return _rotateTargets[6];
                 }
                 if (GridY == -1)
                 {
-                    return m_rotateTargets[7];
+                    return _rotateTargets[7];
                 }
             }
             return Zero;

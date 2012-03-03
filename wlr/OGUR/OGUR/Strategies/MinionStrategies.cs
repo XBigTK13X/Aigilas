@@ -12,12 +12,12 @@ namespace OGUR.Strategies
 
         public override void Act()
         {
-            if (m_parent.Get(StatType.MOVE_COOL_DOWN) >= m_parent.GetMax(StatType.MOVE_COOL_DOWN))
+            if (_parent.Get(StatType.MOVE_COOL_DOWN) >= _parent.GetMax(StatType.MOVE_COOL_DOWN))
             {
-                m_parent.SetSkillVector(m_parent.GetSkillVector().RotateClockwise());
-                m_parent.UseActiveSkill();
-                m_parent.ApplyDamage(5, null, false);
-                m_parent.Set(StatType.MOVE_COOL_DOWN, 0);
+                _parent.SetSkillVector(_parent.GetSkillVector().RotateClockwise());
+                _parent.UseActiveSkill();
+                _parent.ApplyDamage(5, null, false);
+                _parent.Set(StatType.MOVE_COOL_DOWN, 0);
             }
         }
     }
@@ -30,11 +30,11 @@ namespace OGUR.Strategies
         }
         public override void Act()
         {
-            if (m_parent.Get(StatType.MOVE_COOL_DOWN) >= m_parent.GetMax(StatType.MOVE_COOL_DOWN))
+            if (_parent.Get(StatType.MOVE_COOL_DOWN) >= _parent.GetMax(StatType.MOVE_COOL_DOWN))
             {
-                m_parent.UseActiveSkill();
-                m_parent.ApplyDamage(5, null, false);
-                m_parent.Set(StatType.MOVE_COOL_DOWN, 0);
+                _parent.UseActiveSkill();
+                _parent.ApplyDamage(5, null, false);
+                _parent.Set(StatType.MOVE_COOL_DOWN, 0);
             }
         }
     }
@@ -48,8 +48,8 @@ namespace OGUR.Strategies
         }
         public override void Act()
         {
-            m_parent.UseActiveSkill();
-            m_parent.SetInactive();   
+            _parent.UseActiveSkill();
+            _parent.SetInactive();   
         }
     }
 
@@ -62,8 +62,8 @@ namespace OGUR.Strategies
         }
         public override void Act()
         {
-            m_parent.UseActiveSkill();
-            m_parent.SetInactive();
+            _parent.UseActiveSkill();
+            _parent.SetInactive();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace SPX.Sprites
 {
     public class SpriteSheetManager
     {
-        private static Dictionary<int, SpriteInfo> m_manager = new Dictionary<int, SpriteInfo>()
+        private static Dictionary<int, SpriteInfo> _manager = new Dictionary<int, SpriteInfo>()
         {
             {SpriteType.EMPTY, new SpriteInfo(0, 1)},
             {SpriteType.PLAYER_STAND,new SpriteInfo(1, 2)},
@@ -26,7 +26,7 @@ namespace SPX.Sprites
 
         public static SpriteInfo GetSpriteInfo(int spriteName)
         {
-            return m_manager[spriteName];
+            return _manager[spriteName];
         }
     }
 }

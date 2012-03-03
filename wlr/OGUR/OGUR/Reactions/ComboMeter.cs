@@ -9,54 +9,54 @@ namespace OGUR.Reactions
 {
     public class ComboMeter
     {
-        private static Dictionary<int, int> s_reactions = new Dictionary<int, int>()
+        private static Dictionary<int, int> __reactions = new Dictionary<int, int>()
         {
             {12,ReactionId.SWEAT},
             {13,ReactionId.MAGMA},
             {14,ReactionId.EXPLOSION}
         };
 
-        private ICreature m_parent;
-        private List<int> m_elements = new List<int>();
+        private ICreature _parent;
+        private List<int> _elements = new List<int>();
         
         public ComboMeter(ICreature parent)
         {
-            m_parent = parent;
+            _parent = parent;
         }
 
         public void Add(int element)
         {
-            if (!m_elements.Contains(element))
+            if (!_elements.Contains(element))
             {
-                if (m_elements.Count() == 2)
+                if (_elements.Count() == 2)
                 {
-                    if (m_elements[0] > element)
+                    if (_elements[0] > element)
                     {
-                        m_elements.Insert(0, element);
+                        _elements.Insert(0, element);
                     }
-                    else if (m_elements[1] > element)
+                    else if (_elements[1] > element)
                     {
-                        m_elements.Insert(1, element);
+                        _elements.Insert(1, element);
                     }
                     else
                     {
-                        m_elements.Add(element);
+                        _elements.Add(element);
                     }
                 }
-                else if (m_elements.Count() == 1)
+                else if (_elements.Count() == 1)
                 {
-                    if (m_elements[0] > element)
+                    if (_elements[0] > element)
                     {
-                        m_elements.Insert(0, element);
+                        _elements.Insert(0, element);
                     }
                     else
                     {
-                        m_elements.Add(element);
+                        _elements.Add(element);
                     }
                 }
-                if (m_elements.Count() == 0)
+                if (_elements.Count() == 0)
                 {
-                    m_elements.Add(element);
+                    _elements.Add(element);
                 }
             }
         }
@@ -65,28 +65,28 @@ namespace OGUR.Reactions
         public void Update()
         {
             int key = 0;
-            if (m_elements.Count() == 3)
+            if (_elements.Count() == 3)
             {
-                key = (int)m_elements[0] * 100 + (int)m_elements[1] * 10 + (int)m_elements[2];
+                key = (int)_elements[0] * 100 + (int)_elements[1] * 10 + (int)_elements[2];
                 React(key);
             }
-            if (m_elements.Count() == 2)
+            if (_elements.Count() == 2)
             {
-                key = (int)m_elements[0] * 10 + (int)m_elements[1];
+                key = (int)_elements[0] * 10 + (int)_elements[1];
                 React(key);
             }
         }
         private void React(int reactionId)
         {
-            if (s_reactions.Keys.Contains(reactionId))
+            if (__reactions.Keys.Contains(reactionId))
             {
-                reaction = ReactionFactory.Create(s_reactions[reactionId]);
+                reaction = ReactionFactory.Create(__reactions[reactionId]);
                 if (reaction != null)
                 {
-                    reaction.Affect(m_parent);
+                    reaction.Affect(_parent);
                 }
             }
-            m_elements.Clear();
+            _elements.Clear();
         }
     }
 }

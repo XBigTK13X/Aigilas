@@ -11,16 +11,16 @@ namespace OGUR.Items
     {
         public Stats Modifers;
         public String Name;
-        private string m_suffix;
-        private string m_prefix;
-        private int m_type;
-        private Slots m_targetSlots;
+        private string _suffix;
+        private string _prefix;
+        private int _type;
+        private Slots _targetSlots;
 
-        private const string s_spacingCharacter = " ";
+        private const string __spacingCharacter = " ";
 
         public int GetItemClass()
         {
-            switch (m_type)
+            switch (_type)
             {
                 case ItemName.Sword:
                     return ItemClass.Melee_Weapon;
@@ -48,19 +48,19 @@ namespace OGUR.Items
         private void Initialize(string suffix, string prefix,int type, Slots targetSlots,Stats modifiers,Point2 location)
         {
             Setup(location, type);
-            m_suffix = suffix;
-            m_prefix = prefix;
-            m_type = type;
-            m_targetSlots = GetSlotFromType(type);
-            Name = (m_prefix == ItemPrefix.NULL ? String.Empty :  m_prefix + s_spacingCharacter) +
-                    ItemName.Names[m_type] +
-                   (m_suffix == ItemSuffix.NULL ? String.Empty : s_spacingCharacter + m_suffix);
+            _suffix = suffix;
+            _prefix = prefix;
+            _type = type;
+            _targetSlots = GetSlotFromType(type);
+            Name = (_prefix == ItemPrefix.NULL ? String.Empty :  _prefix + __spacingCharacter) +
+                    ItemName.Names[_type] +
+                   (_suffix == ItemSuffix.NULL ? String.Empty : __spacingCharacter + _suffix);
             Modifers = new Stats(modifiers);
         }
 
         public GenericItem(GenericItem item,Point2 location)
         {
-            Initialize(item.m_suffix, item.m_prefix, item.m_type,item.m_targetSlots, item.Modifers,location);
+            Initialize(item._suffix, item._prefix, item._type,item._targetSlots, item.Modifers,location);
         }
 
         public GenericItem(Stats modifiers, string suffix, string prefix, int type, Point2 location,bool onGround = true)
@@ -69,7 +69,7 @@ namespace OGUR.Items
             {
                 throw new Exception("Invalid type NULL passed into the GenericItem factory!");
             }
-            Initialize(m_suffix,m_prefix,type,GetSlotFromType(type),modifiers,location);
+            Initialize(_suffix,_prefix,type,GetSlotFromType(type),modifiers,location);
         }
 
         protected void Setup(Point2 location, int type)
@@ -77,18 +77,18 @@ namespace OGUR.Items
             Initialize(location, SpriteFromItem(type), OGUR.EntityType.ITEM,ZDepth.Item);
         }
 
-        private Player m_currentTarget;
+        private Player _currentTarget;
         public override void Update()
         {
             base.Update();
-            if (m_isOnBoard)
+            if (_isOnBoard)
             {
-                m_currentTarget = EntityManager.GetTouchingCreature(this) as Player;
-                if (m_currentTarget != null)
+                _currentTarget = EntityManager.GetTouchingCreature(this) as Player;
+                if (_currentTarget != null)
                 {
-                    if (m_currentTarget.IsInteracting())
+                    if (_currentTarget.IsInteracting())
                     {
-                        m_currentTarget.PickupItem(this);
+                        _currentTarget.PickupItem(this);
                     }
                 }
             }

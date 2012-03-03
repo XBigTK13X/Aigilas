@@ -7,31 +7,31 @@ namespace OGUR.Skills
 {
     public class SkillBehavior
     {
-        protected SideEffects m_sideEffects;
-        protected ISkill m_parent;
-        protected bool m_used = false;
-        protected Stats m_cost;
+        protected SideEffects _sideEffects;
+        protected ISkill _parent;
+        protected bool _used = false;
+        protected Stats _cost;
 
         public SkillBehavior(int effectGraphic, int animation,ISkill parentSkill)
         {
-            m_parent = parentSkill;
-            m_sideEffects = new SideEffects(effectGraphic, animation,m_parent);
-            m_cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            _parent = parentSkill;
+            _sideEffects = new SideEffects(effectGraphic, animation,_parent);
+            _cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
-        public int GetSpriteType() { return m_sideEffects.GetSpriteType(); }
+        public int GetSpriteType() { return _sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
         public virtual void Cleanup(Entity target,SkillEffect source) { }
         public bool IsActive()
         {
-            return !m_used;
+            return !_used;
         }
         public SkillEffect GetGraphic()
         {
-            return m_sideEffects.GetFirstGraphic();
+            return _sideEffects.GetFirstGraphic();
         }
         public void AddCost(string stat, float cost)
         {
-            m_cost.AddBuff(new StatBuff(stat, cost));
+            _cost.AddBuff(new StatBuff(stat, cost));
         }
         protected bool SubtractCost(ICreature owner)
         {
@@ -40,7 +40,7 @@ namespace OGUR.Skills
             {
                 if (stat != StatType.REGEN)
                 {
-                    if (owner.LowerStat(stat, m_cost.Get(stat)))
+                    if (owner.LowerStat(stat, _cost.Get(stat)))
                     {
                         costPaid = true;
                     }
@@ -55,14 +55,14 @@ namespace OGUR.Skills
             hitTarget = source.GetTargets().GetCollidedTarget(graphic);
             if (null != hitTarget && hitTarget!=source)
             {
-                m_parent.Affect(hitTarget);
+                _parent.Affect(hitTarget);
                 hitCreature = hitTarget.IsCreature();
                 if (hitCreature != null)
                 {
-                    hitCreature.Combo(m_parent.GetElements());
-                    hitCreature.React(m_parent.GetSkillId());
+                    hitCreature.Combo(_parent.GetElements());
+                    hitCreature.React(_parent.GetSkillId());
                 }
-                if (!m_parent.IsPersistent())
+                if (!_parent.IsPersistent())
                 {
                     return false;
                 }
@@ -71,26 +71,26 @@ namespace OGUR.Skills
         }
         internal int GetAnimationType()
         {
-            return m_sideEffects.GetAnimationType();
+            return _sideEffects.GetAnimationType();
         }
     }
     public class RangedBehavior: SkillBehavior
     {
         public RangedBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.RANGED, parentSkill) { }
-        public override void Activate(ICreature target) { if (SubtractCost(target)) { m_sideEffects.Generate(target.GetLocation().Add(target.GetSkillVector()), target.GetSkillVector(), target); } }
+        public override void Activate(ICreature target) { if (SubtractCost(target)) { _sideEffects.Generate(target.GetLocation().Add(target.GetSkillVector()), target.GetSkillVector(), target); } }
     }
     public class SelfBehavior:SkillBehavior
     {
         public SelfBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.SELF, parentSkill) { }
-        public override void Activate(ICreature target) { if (SubtractCost(target)) { m_sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target); } }
+        public override void Activate(ICreature target) { if (SubtractCost(target)) { _sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target); } }
         public override bool AffectTarget(ICreature source, SkillEffect graphic)
         {
-            if (!m_used)
+            if (!_used)
             {
-                source.Combo(m_parent.GetElements());
-                source.React(m_parent.GetSkillId());
-                m_parent.Affect(source);
-                m_used = true;
+                source.Combo(_parent.GetElements());
+                source.React(_parent.GetSkillId());
+                _parent.Affect(source);
+                _used = true;
             }
             return true;
         }
@@ -102,14 +102,14 @@ namespace OGUR.Skills
         {
             if(SubtractCost(target))
             {
-                if (m_parent.StartOffCenter)
+                if (_parent.StartOffCenter)
                 {
                     var location = new Point2(target.GetLocation().GridX + target.GetSkillVector().GridX, target.GetLocation().GridY + target.GetSkillVector().GridY);
-                    m_sideEffects.Generate(location, new Point2(0,0), target);
+                    _sideEffects.Generate(location, new Point2(0,0), target);
                 }
                 else
                 {
-                    m_sideEffects.Generate(target.GetLocation(), new Point2(0,0), target);
+                    _sideEffects.Generate(target.GetLocation(), new Point2(0,0), target);
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace OGUR.Skills
                         if (ii != 0 || jj != 0)
                         {
                             var cloudPosition = new Point2(referencePoint.GridX + ii, referencePoint.GridY + jj);
-                            m_sideEffects.Generate(cloudPosition, new Point2(0, 0), target);
+                            _sideEffects.Generate(cloudPosition, new Point2(0, 0), target);
                         }
                     }
                 }
@@ -141,7 +141,7 @@ namespace OGUR.Skills
         public RotateBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.ROTATE, parentSkill) { }
         public override void Activate(ICreature target)
         {
-            m_sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target);
+            _sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target);
         }
     }
 }

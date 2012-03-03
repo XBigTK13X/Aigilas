@@ -9,17 +9,17 @@ namespace OGUR.Dungeons
     {
         public readonly int X;
         public readonly int Y;
-        private readonly bool m_isHorizontal;
+        private readonly bool _isHorizontal;
 
         public PointPoint(int x, int y, bool destroyHorizontal = false)
         {
             X = x;
             Y = y;
-            m_isHorizontal = destroyHorizontal;
+            _isHorizontal = destroyHorizontal;
         }
         public bool isHorizontal()
         {
-            return m_isHorizontal;
+            return _isHorizontal;
         }
     }
 }

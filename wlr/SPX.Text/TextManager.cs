@@ -14,19 +14,19 @@ namespace SPX.Text
     public class TextManager
     {
         static private SpriteFont actionFont;
-        static private List<Text> m_contents = new List<Text>();
+        static private List<Text> _contents = new List<Text>();
 
         public static void Add(Text textToAdd)
         {
-            if(!m_contents.Contains(textToAdd))
+            if(!_contents.Contains(textToAdd))
             {
-                m_contents.Add(textToAdd);    
+                _contents.Add(textToAdd);    
             }
         }
 
         public static void Clear()
         {
-            m_contents.Clear();
+            _contents.Clear();
         }
 
         static public SpriteFont GetFont()
@@ -36,11 +36,11 @@ namespace SPX.Text
 
         public static void Update()
         {
-            for (int ii = 0; ii < m_contents.Count; ii++)
+            for (int ii = 0; ii < _contents.Count; ii++)
             {
-                if(m_contents[ii].Update()<=0)
+                if(_contents[ii].Update()<=0)
                 {
-                    m_contents.Remove(m_contents[ii]);
+                    _contents.Remove(_contents[ii]);
                     ii--;
                 }
             }
@@ -48,7 +48,7 @@ namespace SPX.Text
 
         public static void Draw()
         {
-            foreach (Text component in m_contents)
+            foreach (Text component in _contents)
             {
                 if (XnaManager.Renderer != null)
                 {

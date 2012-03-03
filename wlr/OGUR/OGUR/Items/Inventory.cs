@@ -7,84 +7,84 @@ namespace OGUR.Items
 {
     public class Inventory
     {
-        Dictionary<GenericItem,int> m_contents = new Dictionary<GenericItem, int>(); 
-        private ICreature m_parent;
+        Dictionary<GenericItem,int> _contents = new Dictionary<GenericItem, int>(); 
+        private ICreature _parent;
 
         public Inventory(ICreature parent)
         {
-            m_parent = parent;
+            _parent = parent;
         }
         
         public ICreature GetParent()
         {
-            return m_parent;
+            return _parent;
         }
 
         public GenericItem GetNonZeroEntry()
         {
-            return m_contents.Keys.Where(k=>m_contents[k]>0).FirstOrDefault();
+            return _contents.Keys.Where(k=>_contents[k]>0).FirstOrDefault();
         }
 
         public void Add(GenericItem item)
         {
             if(Contains(item))
             {
-                m_contents[item]++;
+                _contents[item]++;
             }
             else
             {
-                m_contents.Add(item, 1);
+                _contents.Add(item, 1);
             }
         }
 
-        private readonly Dictionary<GenericItem, int> m_itemResult = new Dictionary<GenericItem, int>();
+        private readonly Dictionary<GenericItem, int> _itemResult = new Dictionary<GenericItem, int>();
         public Dictionary<GenericItem, int> GetItems(int iClass)
         {
-            m_itemResult.Clear();
-            foreach (var key in m_contents.Keys)
+            _itemResult.Clear();
+            foreach (var key in _contents.Keys)
             {
                 if (key.GetItemClass() == iClass)
                 {
-                    m_itemResult.Add(key, m_contents[key]);
+                    _itemResult.Add(key, _contents[key]);
                 }
             }
-            //return m_contents.Where(element => element.Key.GetItemClass() == iClass).ToDictionary(element => element.Key, element => element.Value);
-            return m_itemResult;
+            //return _contents.Where(element => element.Key.GetItemClass() == iClass).ToDictionary(element => element.Key, element => element.Value);
+            return _itemResult;
         }
 
         public void Remove(GenericItem item)
         {
             if(Contains(item))
             {
-                m_contents[item]--;
-                if(m_contents[item]<=-1)
+                _contents[item]--;
+                if(_contents[item]<=-1)
                 {
-                    m_contents.Remove(item);
+                    _contents.Remove(item);
                 }
             }
         }
 
         public bool Contains(GenericItem item)
         {
-            return m_contents.ContainsKey(item);
+            return _contents.ContainsKey(item);
         }
 
         public int GetItemCount(GenericItem item)
         {
-            if(m_contents.Keys.Contains(item))
+            if(_contents.Keys.Contains(item))
             {
-                return m_contents[item];
+                return _contents[item];
             }
             return 0;
         }
 
         public void DropAll()
         {
-            foreach(var item in m_contents.Keys)
+            foreach(var item in _contents.Keys)
             {
-                while(m_contents[item]>0)
+                while(_contents[item]>0)
                 {
-                    EntityManager.AddObject(new GenericItem(item,m_parent.GetLocation()));
+                    EntityManager.AddObject(new GenericItem(item,_parent.GetLocation()));
                     Remove(item);
                 }
             }
@@ -94,7 +94,7 @@ namespace OGUR.Items
         public float NonZeroCount()
         {
             _nonZeroResult = 0;
-            foreach(var item in m_contents.Where(c=>c.Value>0))
+            foreach(var item in _contents.Where(c=>c.Value>0))
             {
                 _nonZeroResult += item.Value;
             }

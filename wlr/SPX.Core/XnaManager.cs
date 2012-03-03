@@ -12,67 +12,67 @@ namespace SPX.Core
     {
         public static readonly int WindowHeight = GameManager.SpriteHeight*20;
         public static readonly int WindowWidth = GameManager.SpriteWidth*30;
-        private static ContentManager s_assetHandler;
-        private static Camera s_camera = new Camera();
-        private static GraphicsDeviceManager s_graphicsDevice;
+        private static ContentManager __assetHandler;
+        private static Camera __camera = new Camera();
+        private static GraphicsDeviceManager __graphicsDevice;
         public static SpriteBatch Renderer;
 
-        private const string s_menuBaseSprite = "MenuBase";
-        private const string s_gameplaySheetSprite = "GameplaySheet";
-        private const string s_gameOverSprite = "GameOver";
-        private const string s_fontName = "Action";
+        private const string __menuBaseSprite = "MenuBase";
+        private const string __gameplaySheetSprite = "GameplaySheet";
+        private const string __gameOverSprite = "GameOver";
+        private const string __fontName = "Action";
 
         public static void SetContentManager(ContentManager assetHandler)
         {
-            s_assetHandler = assetHandler;
+            __assetHandler = assetHandler;
         }
 
         private static Texture2D GetAsset(string resourceName)
         {
-            return s_assetHandler.Load<Texture2D>(resourceName);
+            return __assetHandler.Load<Texture2D>(resourceName);
         }
 
         public static Texture2D GetMenuBaseAsset()
         {
-            return GetAsset(s_menuBaseSprite);
+            return GetAsset(__menuBaseSprite);
         }
 
         public static Texture2D GetSpriteAsset()
         {
-            return GetAsset(s_gameplaySheetSprite);
+            return GetAsset(__gameplaySheetSprite);
         }
 
         public static Texture2D GetGameOverAsset()
         {
-            return GetAsset(s_gameOverSprite);
+            return GetAsset(__gameOverSprite);
         }
 
         private static SpriteFont GetFont(string resourceName)
         {
-            return s_assetHandler.Load<SpriteFont>(resourceName);
+            return __assetHandler.Load<SpriteFont>(resourceName);
         }
 
         public static SpriteFont GetActionFont()
         {
-            return GetFont(s_fontName);
+            return GetFont(__fontName);
         }
 
         public static void SetupCamera(GraphicsDeviceManager graphicsDevice)
         {
-            s_camera.Pos = new Vector2(GameManager.SpriteWidth*15, GameManager.SpriteHeight*10);
-            s_graphicsDevice = graphicsDevice;
-            s_camera.Zoom = 1f;
-            //s_graphicsDevice.IsFullScreen = true;
+            __camera.Pos = new Vector2(GameManager.SpriteWidth*15, GameManager.SpriteHeight*10);
+            __graphicsDevice = graphicsDevice;
+            __camera.Zoom = 1f;
+            //__graphicsDevice.IsFullScreen = true;
         }
 
         public static Camera GetCamera()
         {
-            return s_camera;
+            return __camera;
         }
 
         public static GraphicsDeviceManager GetGraphicsDevice()
         {
-            return s_graphicsDevice;
+            return __graphicsDevice;
         }
 
         public static Vector2 GetCenter()

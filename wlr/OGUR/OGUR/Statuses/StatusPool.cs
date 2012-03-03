@@ -8,13 +8,13 @@ namespace OGUR.Statuses
 {
     public class StatusPool
     {
-        private List<IStatus> m_statuses = new List<IStatus>();
+        private List<IStatus> _statuses = new List<IStatus>();
 
         public bool CanMove()
         {
-            for (int ii = 0; ii < m_statuses.Count(); ii++)
+            for (int ii = 0; ii < _statuses.Count(); ii++)
             {
-                if (m_statuses[ii].StopMovement())
+                if (_statuses[ii].StopMovement())
                 {
                     return false;
                 }
@@ -24,9 +24,9 @@ namespace OGUR.Statuses
 
         public bool CanAttack()
         {
-            for (int ii = 0; ii < m_statuses.Count(); ii++)
+            for (int ii = 0; ii < _statuses.Count(); ii++)
             {
-                if (m_statuses[ii].StopAttack())
+                if (_statuses[ii].StopAttack())
                 {
                     return false;
                 }
@@ -36,9 +36,9 @@ namespace OGUR.Statuses
 
         public bool WillHitAnything()
         {
-            for (int ii = 0; ii < m_statuses.Count(); ii++)
+            for (int ii = 0; ii < _statuses.Count(); ii++)
             {
-                if (m_statuses[ii].HitAnything())
+                if (_statuses[ii].HitAnything())
                 {
                     return true;
                 }
@@ -48,17 +48,17 @@ namespace OGUR.Statuses
 
         public void Add(IStatus status)
         {
-            m_statuses.Add(status);
+            _statuses.Add(status);
         }
 
         public void Update()
         {
-            for (int ii = 0; ii < m_statuses.Count(); ii++)
+            for (int ii = 0; ii < _statuses.Count(); ii++)
             {
-                m_statuses[ii].Update();
-                if (!m_statuses[ii].IsActive())
+                _statuses[ii].Update();
+                if (!_statuses[ii].IsActive())
                 {
-                    m_statuses.Remove(m_statuses[ii]);
+                    _statuses.Remove(_statuses[ii]);
                     ii--;
                 }
             }
@@ -66,9 +66,9 @@ namespace OGUR.Statuses
 
         public void PassOn(ICreature target,StatusComponent componentType)
         {
-            for (int ii = 0; ii < m_statuses.Count; ii++)
+            for (int ii = 0; ii < _statuses.Count; ii++)
             {
-                m_statuses[ii].PassOn(target, componentType);
+                _statuses[ii].PassOn(target, componentType);
             }
         }
     }

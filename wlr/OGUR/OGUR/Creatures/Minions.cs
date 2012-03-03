@@ -15,13 +15,13 @@ namespace OGUR.Creatures
     {
         public Minion(int actorType = OgurActorType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
-            m_actorType = actorType;
-            m_baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
+            _actorType = actorType;
+            _baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
         }
         public void Init(ICreature source,SkillEffect effectGraphic)
         {
-            m_master = source;
-            Setup(source.GetLocation(), m_actorType, m_baseStats,null,false);
+            _master = source;
+            Setup(source.GetLocation(), _actorType, _baseStats,null,false);
             if (null != effectGraphic)
             {
                 SetSkillVector(effectGraphic.GetDirection().Rotate180());
@@ -30,15 +30,15 @@ namespace OGUR.Creatures
             {
                 SetSkillVector(new Point2(0, 1));
             }
-            m_strategy.AddTargets(m_master);
+            _strategy.AddTargets(_master);
         }
         protected void Add(string skill)
         {
-            if (m_skills == null)
+            if (_skills == null)
             {
-                m_skills = new SkillPool(this);
+                _skills = new SkillPool(this);
             }
-            m_skills.Add(skill);
+            _skills.Add(skill);
         }
     }
 
@@ -48,8 +48,8 @@ namespace OGUR.Creatures
             : base(OgurActorType.MINION,50f)
         {
             Add(SkillId.ACID_DRIP);
-            m_composition.Add(Elements.EARTH);
-            m_strategy = new MinionRotate(this);
+            _composition.Add(Elements.EARTH);
+            _strategy = new MinionRotate(this);
         }
     }
 
@@ -58,9 +58,9 @@ namespace OGUR.Creatures
         public DartTrap()
             : base(OgurActorType.MINION)
         {
-            m_strategy = new MinionFire(this);
+            _strategy = new MinionFire(this);
             Add(SkillId.DART);
-            m_composition.Add(Elements.DARK);
+            _composition.Add(Elements.DARK);
         }
     }
 
@@ -69,42 +69,42 @@ namespace OGUR.Creatures
         public Explosion()
             : base(OgurActorType.MINION)
         {
-            m_strategy = new MinionExplode(this);
+            _strategy = new MinionExplode(this);
             Add(SkillId.EXPLODE);
-            m_composition.Add(Elements.FIRE);
+            _composition.Add(Elements.FIRE);
         }
     }
 
     class VaporCloud : Minion
     {
-        private ICreature m_host = null;
+        private ICreature _host = null;
         public VaporCloud()
             : base(OgurActorType.MINION)
         {
-            m_strategy = new MinionCloud(this);
+            _strategy = new MinionCloud(this);
             Add(SkillId.VAPOR_CLOUD);
-            m_composition.Add(Elements.WATER);
+            _composition.Add(Elements.WATER);
         }
         public override void Update()
         {
             base.Update();
-            if (m_host == null)
+            if (_host == null)
             {
-                foreach (var creature in EntityManager.GetActorsAt(m_location))
+                foreach (var creature in EntityManager.GetActorsAt(_location))
                 {
                     if (creature != this)
                     {
-                        m_host = creature as ICreature;
+                        _host = creature as ICreature;
                     }
                 }
-                if (m_host == null)
+                if (_host == null)
                 {
                     SetInactive();
                 }
             }
-            if (m_host != null)
+            if (_host != null)
             {
-                SetLocation(m_host.GetLocation());
+                SetLocation(_host.GetLocation());
             }
         }
     }

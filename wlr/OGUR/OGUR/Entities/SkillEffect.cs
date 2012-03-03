@@ -7,47 +7,47 @@ namespace OGUR.Entities
 {
     public class SkillEffect:Entity
     {
-        private const float m_strengthDecayAmount = .75f;
+        private const float _strengthDecayAmount = .75f;
         public const float DefaultStrength = 1;
         
-        private readonly Point2 m_velocity = new Point2(0,0);
-        private readonly ICreature m_source;
-        private readonly ISkill m_skill;
-        private float m_currentStrength = 0;
-        private float m_startingStrength = 0;
-        private SkillAnimation m_animation;
-        private float m_coolDown = CoolDown;
+        private readonly Point2 _velocity = new Point2(0,0);
+        private readonly ICreature _source;
+        private readonly ISkill _skill;
+        private float _currentStrength = 0;
+        private float _startingStrength = 0;
+        private SkillAnimation _animation;
+        private float _coolDown = CoolDown;
         private const float CoolDown = Stats.DefaultCoolDown/8;
-        private readonly Point2 m_direction = new Point2(0, 0);
+        private readonly Point2 _direction = new Point2(0, 0);
 
         public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill)
         {
-            m_skill = skill;
-            Initialize(gridLocation, m_skill.GetSpriteType(), OGUR.EntityType.SKILL_EFFECT,.7f);
-            m_velocity.Copy(velocity);
-            m_direction.Copy(velocity);
-            m_source = source;
-            m_startingStrength = m_currentStrength = m_skill.GetStrength();
-            m_animation = SkillFactory.Create(m_skill.GetAnimationType());
-            m_graphic.SetColor(skill.GetElementColor());
+            _skill = skill;
+            Initialize(gridLocation, _skill.GetSpriteType(), OGUR.EntityType.SKILL_EFFECT,.7f);
+            _velocity.Copy(velocity);
+            _direction.Copy(velocity);
+            _source = source;
+            _startingStrength = _currentStrength = _skill.GetStrength();
+            _animation = SkillFactory.Create(_skill.GetAnimationType());
+            _graphic.SetColor(skill.GetElementColor());
         }
 
         private IEntity hitTarget;
 
         public void Cleanup(Entity target)
         {
-            m_isActive = false;
-            m_skill.Cleanup(target,this);
+            _isActive = false;
+            _skill.Cleanup(target,this);
         }
 
         public Point2 GetDirection()
         {
-            return m_direction;
+            return _direction;
         }
 
         public override void Update()
         {
-            foreach (var targetType in m_skill.GetTargetTypes())
+            foreach (var targetType in _skill.GetTargetTypes())
             {
                 var targets = EntityManager.GetEntities(targetType, this.GetLocation());
                 if (targets != null && targets.Count > 0)
@@ -55,30 +55,30 @@ namespace OGUR.Entities
                     hitTarget = targets[0];
                     if (null != hitTarget && hitTarget != this)
                     {
-                        m_skill.Affect(hitTarget);
+                        _skill.Affect(hitTarget);
                         Cleanup(this);
                     }
                 }
             }
-            if(m_currentStrength<.001)
+            if(_currentStrength<.001)
             {
-                Cleanup(m_source);
+                Cleanup(_source);
             }
             else
             {
-                m_coolDown--;
-                if (m_coolDown <= 0)
+                _coolDown--;
+                if (_coolDown <= 0)
                 {
-                    if (m_startingStrength == 0)
+                    if (_startingStrength == 0)
                     {
-                        m_startingStrength = m_currentStrength;
+                        _startingStrength = _currentStrength;
                     }
-                    m_currentStrength *= m_strengthDecayAmount;
-                    m_velocity.SetX(m_velocity.X * m_currentStrength);
-                    m_velocity.SetY(m_velocity.Y * m_currentStrength);
-                    m_animation.Animate(this, m_source, m_velocity);
-                    m_isActive = m_skill.AffectTarget(m_source, this);
-                    m_coolDown = CoolDown;
+                    _currentStrength *= _strengthDecayAmount;
+                    _velocity.SetX(_velocity.X * _currentStrength);
+                    _velocity.SetY(_velocity.Y * _currentStrength);
+                    _animation.Animate(this, _source, _velocity);
+                    _isActive = _skill.AffectTarget(_source, this);
+                    _coolDown = CoolDown;
                 }
             }
         }

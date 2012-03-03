@@ -12,44 +12,44 @@ namespace OGUR.Skills
 {
     public class SideEffects
     {
-        protected ISkill m_parent;
+        protected ISkill _parent;
 
-        protected int m_animation;
-        protected List<SkillEffect> m_effectGraphics = new List<SkillEffect>();
-        protected int m_effectSprite = SpriteType.SKILL_EFFECT;
-        protected float m_effectStrength;
-        protected bool m_isPersistent = false;
+        protected int _animation;
+        protected List<SkillEffect> _effectGraphics = new List<SkillEffect>();
+        protected int _effectSprite = SpriteType.SKILL_EFFECT;
+        protected float _effectStrength;
+        protected bool _isPersistent = false;
 
         public SideEffects(int effectGraphic,int animation,ISkill parent)
         {
-            m_parent = parent;
-            m_effectStrength = parent.GetStrength();
-            m_effectSprite = effectGraphic;
-            m_animation = animation;
+            _parent = parent;
+            _effectStrength = parent.GetStrength();
+            _effectSprite = effectGraphic;
+            _animation = animation;
         }
 
         public void Generate(Point2 gridLocation,Point2 velocity,ICreature source)
         {
-            var effect = new SkillEffect(gridLocation, velocity, source, m_parent);
-            m_effectGraphics.Add(effect);
+            var effect = new SkillEffect(gridLocation, velocity, source, _parent);
+            _effectGraphics.Add(effect);
             EntityManager.AddObject(effect);
         }
 
         public SkillEffect GetFirstGraphic()
         {
-            if(m_effectGraphics.Count()>0)
-                return m_effectGraphics[0];
+            if(_effectGraphics.Count()>0)
+                return _effectGraphics[0];
             return null;
         }
 
         public int GetSpriteType()
         {
-            return m_effectSprite;
+            return _effectSprite;
         }
 
         public int GetAnimationType()
         {
-            return m_animation;
+            return _animation;
         }
     }    
 }

@@ -34,7 +34,7 @@ namespace SPX.Core
     public class Input
     {        
         //Maps a playerId to a context
-        private static readonly Dictionary<int, int> m_contexts = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> _contexts = new Dictionary<int, int>()
                                                                   {
                                                                       {0, Contexts.Free},
                                                                       {1, Contexts.Free},
@@ -42,65 +42,65 @@ namespace SPX.Core
                                                                       {3, Contexts.Free}
                                                                   };
         //Lists what commands are locked for a given player
-        private static readonly List<CommandLock> s_locks = new List<CommandLock>(); 
+        private static readonly List<CommandLock> __locks = new List<CommandLock>(); 
 
         //The commands that cannot be used by simply holding down the command's input depending on the given context
-        private static readonly Dictionary<int, int> s_lockOnPress = new Dictionary<int, int>();
+        private static readonly Dictionary<int, int> __lockOnPress = new Dictionary<int, int>();
 
-        private static readonly Dictionary<int, Keys> m_keyboardMapping = new Dictionary<int, Keys>();
+        private static readonly Dictionary<int, Keys> _keyboardMapping = new Dictionary<int, Keys>();
 
-        private static readonly Dictionary<int, Buttons> m_gamePadMapping = new Dictionary<int, Buttons>();
+        private static readonly Dictionary<int, Buttons> _gamePadMapping = new Dictionary<int, Buttons>();
 
-        private static readonly List<PlayerIndex> m_playerIndex = new List<PlayerIndex>()
+        private static readonly List<PlayerIndex> _playerIndex = new List<PlayerIndex>()
                                                                       {
                                                                           PlayerIndex.One,
                                                                           PlayerIndex.Two,
                                                                           PlayerIndex.Three,
                                                                           PlayerIndex.Four
                                                                       };
-        private static readonly Dictionary<int, bool> s_inputs = new Dictionary<int, bool>();
-        private static bool s_isInputActive = false;
-        private static bool s_isDown = false;
+        private static readonly Dictionary<int, bool> __inputs = new Dictionary<int, bool>();
+        private static bool __isInputActive = false;
+        private static bool __isDown = false;
 
         public static void Setup(IInputInitializer initializer)
         {
             foreach (var command in initializer.GetCommands())
             {
-                m_keyboardMapping.Add(command.Command, command.Keyboard);
-                m_gamePadMapping.Add(command.Command, command.Gamepad);
+                _keyboardMapping.Add(command.Command, command.Keyboard);
+                _gamePadMapping.Add(command.Command, command.Gamepad);
                 if (command.LockContext >= 0)
                 {
-                    s_lockOnPress.Add(command.Command, command.LockContext);
+                    __lockOnPress.Add(command.Command, command.LockContext);
                 }
             }
         }
 
         private static bool IsDown(int command, int playerIndex)
         {
-            if (!s_inputs.ContainsKey(playerIndex))
+            if (!__inputs.ContainsKey(playerIndex))
             {
-                s_inputs.Add(playerIndex, GamePad.GetState(m_playerIndex[playerIndex]).IsConnected);
+                __inputs.Add(playerIndex, GamePad.GetState(_playerIndex[playerIndex]).IsConnected);
             } 
             else
             {
-                if (s_inputs[playerIndex])
+                if (__inputs[playerIndex])
                 {
-                    s_isDown = GamePad.GetState(m_playerIndex[playerIndex]).IsButtonDown(m_gamePadMapping[command]);
+                    __isDown = GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command]);
                 }
                 else
                 {
-                    s_isDown = Keyboard.GetState().IsKeyDown(m_keyboardMapping[command]);
+                    __isDown = Keyboard.GetState().IsKeyDown(_keyboardMapping[command]);
                 }
             }
-            return s_isDown;
+            return __isDown;
         }
 
         public static bool IsPressed(int command, int playerIndex,bool failIfLocked=true)
         {
             
-            s_isInputActive = IsDown(command,playerIndex);
+            __isInputActive = IsDown(command,playerIndex);
             
-            if (!s_isInputActive)
+            if (!__isInputActive)
             {
                 if (ShouldLock(command,playerIndex))
                 {
@@ -113,7 +113,7 @@ namespace SPX.Core
                 return false;
             }
 
-            if (s_isInputActive)
+            if (__isInputActive)
             {
                 if(ShouldLock(command,playerIndex))
                 {
@@ -121,18 +121,18 @@ namespace SPX.Core
                 }
             }
 
-            return s_isInputActive;
+            return __isInputActive;
         }
 
         private static bool ShouldLock(int command,int playerIndex)
         {
-            foreach(var key in s_lockOnPress.Keys)
+            foreach(var key in __lockOnPress.Keys)
             {
                 if (key == command)
                 {
-                    if (s_lockOnPress[key] == m_contexts[playerIndex] ||
-                        (s_lockOnPress[key] == Contexts.Nonfree && m_contexts[playerIndex] != Contexts.Free) ||
-                        s_lockOnPress[key] == Contexts.All)
+                    if (__lockOnPress[key] == _contexts[playerIndex] ||
+                        (__lockOnPress[key] == Contexts.Nonfree && _contexts[playerIndex] != Contexts.Free) ||
+                        __lockOnPress[key] == Contexts.All)
                     {
                         return true;
                     }
@@ -143,15 +143,15 @@ namespace SPX.Core
 
         public static void SetContext(int context,int playerIndex)
         {
-            m_contexts[playerIndex] = context;
+            _contexts[playerIndex] = context;
         }
         public static bool IsContext(int context,int playerIndex)
         {
-            return m_contexts[playerIndex] == context;
+            return _contexts[playerIndex] == context;
         }
         public static bool IsLocked(int command,int playerIndex)
         {
-            foreach (var pair in s_locks)
+            foreach (var pair in __locks)
             {
                 if (pair.Command == command && pair.PlayerIndex == playerIndex)
                 {
@@ -162,15 +162,15 @@ namespace SPX.Core
         }
         public static void Lock(int command,int playerIndex)
         {
-            s_locks.Add(new CommandLock(command,playerIndex));
+            __locks.Add(new CommandLock(command,playerIndex));
         }
         public static void Unlock(int command, int playerIndex)
         {
-            for(int ii = 0;ii<s_locks.Count();ii++)
+            for(int ii = 0;ii<__locks.Count();ii++)
             {
-                if(s_locks[ii].Command==command && s_locks[ii].PlayerIndex==playerIndex)
+                if(__locks[ii].Command==command && __locks[ii].PlayerIndex==playerIndex)
                 {
-                    s_locks.Remove(s_locks[ii]);
+                    __locks.Remove(__locks[ii]);
                     ii--;
                 }
             }
@@ -178,11 +178,11 @@ namespace SPX.Core
 
         public static void Update()
         {
-            for(int ii = 0;ii<s_locks.Count();ii++)
+            for(int ii = 0;ii<__locks.Count();ii++)
             {
-                if (!IsDown(s_locks[ii].Command, s_locks[ii].PlayerIndex))
+                if (!IsDown(__locks[ii].Command, __locks[ii].PlayerIndex))
                 {
-                    s_locks.Remove(s_locks[ii]);
+                    __locks.Remove(__locks[ii]);
                     ii--;
                 }
             }

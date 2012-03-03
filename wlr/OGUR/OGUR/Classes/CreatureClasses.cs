@@ -9,15 +9,15 @@ namespace OGUR.Classes
 {
     public abstract class CreatureClass
     {
-        private readonly Stats m_stats;
-        protected List<KeyValuePair<int, string>> m_skillUnlocks = new List<KeyValuePair<int, string>>();
+        private readonly Stats _stats;
+        protected List<KeyValuePair<int, string>> _skillUnlocks = new List<KeyValuePair<int, string>>();
         public static readonly CreatureClass NULL = new NoClass();
 
         protected CreatureClass(){}
-        protected CreatureClass(Stats stats){m_stats = new Stats(stats);}
-        public float GetBonus(int level,string stat){return m_stats.GetBonus(level,stat);}
-        public IEnumerable<string> GetLevelSkills(int level){return (from skill in m_skillUnlocks where skill.Key <= level select skill.Value);}
-        protected void Add(int level, string skillId){m_skillUnlocks.Add(new KeyValuePair<int, string>(level,skillId));}
+        protected CreatureClass(Stats stats){_stats = new Stats(stats);}
+        public float GetBonus(int level,string stat){return _stats.GetBonus(level,stat);}
+        public IEnumerable<string> GetLevelSkills(int level){return (from skill in _skillUnlocks where skill.Key <= level select skill.Value);}
+        protected void Add(int level, string skillId){_skillUnlocks.Add(new KeyValuePair<int, string>(level,skillId));}
     }
     class NoClass : CreatureClass
     {
@@ -43,7 +43,7 @@ namespace OGUR.Classes
         {
             Add(1, SkillId.CONFUSION);
             Add(2, SkillId.WEAK_KNEEES);
-            Add(3, SkillId.VENOM_FIST);
+            Add(3, SkillId.VENO_FIST);
             Add(4, SkillId.ABSORB);
             Add(5, SkillId.MUTINY);
         }
