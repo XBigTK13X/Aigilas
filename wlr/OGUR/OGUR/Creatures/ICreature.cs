@@ -603,7 +603,7 @@ namespace OGUR.Creatures
         public void PerformInteraction()
         {
             SetInteracting(false);
-            InputManager.Lock(Commands.Confirm, GetPlayerIndex());
+            Input.Lock(Commands.Confirm, GetPlayerIndex());
         }
     }
 }

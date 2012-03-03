@@ -28,10 +28,10 @@ namespace SPX.Core
         public const int Free = 2;
         public const int Inventory = 3;
     }
-    public class InputManager
+    public class Input
     {
         
-
+        //Maps a playerId to a context
         private static readonly Dictionary<int, int> m_contexts = new Dictionary<int, int>()
                                                                   {
                                                                       {0, Contexts.Free},

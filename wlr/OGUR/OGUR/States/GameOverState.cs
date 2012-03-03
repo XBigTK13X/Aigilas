@@ -23,7 +23,7 @@ namespace OGUR.States
 
         public void Update()
         {
-            if(InputManager.IsPressed(Commands.Confirm,0,true))
+            if(Input.IsPressed(Commands.Confirm,0,true))
             {
                 StateManager.LoadState(new GameplayState());
             }

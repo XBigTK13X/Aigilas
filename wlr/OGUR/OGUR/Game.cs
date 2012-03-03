@@ -54,7 +54,7 @@ namespace OGUR
                 }
             }
 
-            InputManager.Update();
+            Input.Update();
             StateManager.Update();
             TextManager.Update();
             base.Update(gameTime);
