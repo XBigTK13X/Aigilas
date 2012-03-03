@@ -5,6 +5,7 @@ using OGUR.States;
 using SPX.States;
 using SPX.Core;
 using SPX.Text;
+using OGUR.Management;
 
 namespace OGUR
 {
@@ -26,6 +27,7 @@ namespace OGUR
         {
             XnaManager.SetContentManager(this.Content);
             StateManager.LoadState(new GameplayState());
+            Input.Setup(new InputInitializer());
             base.Initialize();
         }
 

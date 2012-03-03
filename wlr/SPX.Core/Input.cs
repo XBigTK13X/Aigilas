@@ -6,20 +6,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SPX.Core
 {
-    public class Commands
+    public interface IInputInitializer
     {
-        public const int MoveUp = 0;
-        public const int MoveDown = 1;
-        public const int MoveLeft = 2;
-        public const int MoveRight = 3;
-        public const int Confirm = 4;
-        public const int Inventory = 5;
-        public const int Skill = 6;
-        public const int CycleLeft = 7;
-        public const int CycleRight = 8;
-        public const int Cancel = 9;
-        public const int Start = 10;
-        public const int Back = 11;
+        ICollection<CommandDefinition> GetCommands();
     }
     public class Contexts
     {
@@ -28,9 +17,22 @@ namespace SPX.Core
         public const int Free = 2;
         public const int Inventory = 3;
     }
-    public class Input
+    public class CommandDefinition
     {
-        
+        public CommandDefinition(int command, Keys key, Buttons button, int lockContext)
+        {
+            Command = command;
+            Gamepad = button;
+            Keyboard = key;
+            LockContext = lockContext;
+        }
+        public int Command{get;set;}
+        public Buttons Gamepad{get;set;}
+        public Keys Keyboard{get;set;}
+        public int LockContext { get; set; }
+    }
+    public class Input
+    {        
         //Maps a playerId to a context
         private static readonly Dictionary<int, int> m_contexts = new Dictionary<int, int>()
                                                                   {
@@ -38,57 +40,16 @@ namespace SPX.Core
                                                                       {1, Contexts.Free},
                                                                       {2, Contexts.Free},
                                                                       {3, Contexts.Free}
-
                                                                   };
+        //Lists what commands are locked for a given player
         private static readonly List<CommandLock> s_locks = new List<CommandLock>(); 
 
-        private static readonly Dictionary<int,int> s_lockOnPress = new Dictionary<int,int>()
-                                                          {
-                                                              {Commands.Confirm,Contexts.All},
-                                                              {Commands.Inventory,Contexts.All},
-                                                              {Commands.Cancel,Contexts.All},
-                                                              {Commands.Start,Contexts.All},
-                                                              {Commands.Back,Contexts.All},
-                                                              {Commands.MoveRight,Contexts.Nonfree},
-                                                              {Commands.MoveLeft,Contexts.Nonfree},
-                                                              {Commands.MoveUp,Contexts.Nonfree},
-                                                              {Commands.MoveDown,Contexts.Nonfree},
-                                                              {Commands.CycleLeft,Contexts.All},
-                                                              {Commands.CycleRight,Contexts.All},
-                                                              {Commands.Skill,Contexts.All}
-                                                          }; 
+        //The commands that cannot be used by simply holding down the command's input depending on the given context
+        private static readonly Dictionary<int, int> s_lockOnPress = new Dictionary<int, int>();
 
-        private static readonly Dictionary<int, Keys> m_keyboardMapping = new Dictionary<int, Keys>()
-                                                                                   {
-                                                                                       {Commands.MoveUp, Keys.Up},
-                                                                                       {Commands.MoveDown, Keys.Down},
-                                                                                       {Commands.MoveRight, Keys.Right},
-                                                                                       {Commands.MoveLeft, Keys.Left},
-                                                                                       {Commands.Inventory,Keys.E},
-                                                                                       {Commands.Confirm, Keys.Space},
-                                                                                       {Commands.Cancel,Keys.R},
-                                                                                       {Commands.Start,Keys.Enter},
-                                                                                       {Commands.Back,Keys.Back},
-                                                                                       {Commands.CycleLeft,Keys.A},
-                                                                                       {Commands.CycleRight,Keys.D},
-                                                                                       {Commands.Skill,Keys.S}
-                                                                                   };
+        private static readonly Dictionary<int, Keys> m_keyboardMapping = new Dictionary<int, Keys>();
 
-        private static readonly Dictionary<int, Buttons> m_gamePadMapping = new Dictionary<int, Buttons>()
-                                                                                     {
-                                                                                         {Commands.MoveUp,Buttons.LeftThumbstickUp},
-                                                                                         {Commands.MoveDown,Buttons.LeftThumbstickDown},
-                                                                                         {Commands.MoveRight,Buttons.LeftThumbstickRight},
-                                                                                         {Commands.MoveLeft,Buttons.LeftThumbstickLeft},
-                                                                                         {Commands.Confirm,Buttons.A},
-                                                                                         {Commands.Inventory,Buttons.Y},
-                                                                                         {Commands.Cancel,Buttons.X},
-                                                                                         {Commands.Start,Buttons.Start},
-                                                                                         {Commands.Back,Buttons.Back},
-                                                                                         {Commands.CycleLeft,Buttons.LeftShoulder},
-                                                                                         {Commands.CycleRight,Buttons.RightShoulder},
-                                                                                         {Commands.Skill,Buttons.RightTrigger}
-                                                                                     };
+        private static readonly Dictionary<int, Buttons> m_gamePadMapping = new Dictionary<int, Buttons>();
 
         private static readonly List<PlayerIndex> m_playerIndex = new List<PlayerIndex>()
                                                                       {
@@ -100,6 +61,19 @@ namespace SPX.Core
         private static readonly Dictionary<int, bool> s_inputs = new Dictionary<int, bool>();
         private static bool s_isInputActive = false;
         private static bool s_isDown = false;
+
+        public static void Setup(IInputInitializer initializer)
+        {
+            foreach (var command in initializer.GetCommands())
+            {
+                m_keyboardMapping.Add(command.Command, command.Keyboard);
+                m_gamePadMapping.Add(command.Command, command.Gamepad);
+                if (command.LockContext >= 0)
+                {
+                    s_lockOnPress.Add(command.Command, command.LockContext);
+                }
+            }
+        }
 
         private static bool IsDown(int command, int playerIndex)
         {
@@ -213,16 +187,15 @@ namespace SPX.Core
                 }
             }
         }
-    }
-
-    public class CommandLock
-    {
-        public CommandLock(int command, int playerIndex)
+        private class CommandLock
         {
-            Command = command;
-            PlayerIndex = playerIndex;
+            public CommandLock(int command, int playerIndex)
+            {
+                Command = command;
+                PlayerIndex = playerIndex;
+            }
+            public int Command;
+            public int PlayerIndex { get; set; }
         }
-        public int Command;
-        public int PlayerIndex{ get; set; }
     }
 }

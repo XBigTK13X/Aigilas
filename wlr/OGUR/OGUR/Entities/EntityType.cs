@@ -8,13 +8,12 @@ namespace OGUR
 {
     public class EntityType:SPX.Entities.EntityType
     {
-        public const int FLOOR = 2;
-        public const int WALL = 3;
-        public const int UPSTAIRS = 4;
-        public const int DOWNSTAIRS = 5;
-        public const int ITEM = 7;
-        public const int SKILL_EFFECT = 8;
-        public const int SKILL_EFFECT_GENERATOR = 9;
-        public const int ALTAR = 10;
+        public const int WALL = 2;
+        public const int UPSTAIRS = 3;
+        public const int DOWNSTAIRS = 4;
+        public const int ITEM = 5;
+        public const int SKILL_EFFECT = 6;
+        public const int SKILL_EFFECT_GENERATOR = 7;
+        public const int ALTAR = 8;
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using SPX.States;
 using SPX.Core;
+using OGUR.Management;
 
 namespace OGUR.States
 {

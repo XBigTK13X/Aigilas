@@ -14,6 +14,7 @@ using SPX.Entities;
 using SPX.Sprites;
 using SPX.Text;
 using SPX.Util;
+using OGUR.Management;
 
 namespace OGUR.Creatures
 {
