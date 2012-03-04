@@ -29,55 +29,58 @@ namespace OGUR.Strategies
             }
             if (_parent.IsPlaying())
             {
-                var leftVelocity = (Input.IsPressed(Commands.MoveLeft,_parent.GetPlayerIndex())? -Stats.DefaultMoveSpeed: 0);
-                var rightVelocity = ((Input.IsPressed(Commands.MoveRight, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
-                _keyVelocity.SetX(rightVelocity + leftVelocity);
-
-                var downVelocity = ((Input.IsPressed(Commands.MoveDown, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
-                var upVelocity = ((Input.IsPressed(Commands.MoveUp, _parent.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
-                _keyVelocity.SetY(upVelocity + downVelocity);
-
-                if (Input.IsContext(Contexts.Free,_parent.GetPlayerIndex()))
+                if (!Input.IsContext(Contexts.Inventory,_parent.GetPlayerIndex()))
                 {
-                    var skillCycleVelocity =
-                        ((Input.IsPressed(Commands.CycleLeft, _parent.GetPlayerIndex()))? -1: 0)
-                        +
-                        ((Input.IsPressed(Commands.CycleRight, _parent.GetPlayerIndex()))? 1: 0);
-                    _parent.CycleActiveSkill(skillCycleVelocity);
+                    var leftVelocity = (Input.IsPressed(Commands.MoveLeft, _parent.GetPlayerIndex()) ? -Stats.DefaultMoveSpeed : 0);
+                    var rightVelocity = ((Input.IsPressed(Commands.MoveRight, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                    _keyVelocity.SetX(rightVelocity + leftVelocity);
 
-                    if (!_isCasting)
-                    {
-                        _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
-                    }
-                    var isPress = Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex());
-                    if (!isPress)
-                    {
-                        _parent.SetInteraction(false);
-                    }
-                    if (isPress && !_parent.IsInteracting())
-                    {
-                        _parent.SetInteraction(true);
-                    }
-                }
-                if (Input.IsPressed(Commands.Skill, _parent.GetPlayerIndex()))
-                {
-                    _isCasting = true;
-                }
+                    var downVelocity = ((Input.IsPressed(Commands.MoveDown, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                    var upVelocity = ((Input.IsPressed(Commands.MoveUp, _parent.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
+                    _keyVelocity.SetY(upVelocity + downVelocity);
 
-                if(_isCasting)
-                {
-                    if (!_keyVelocity.IsZero())
+                    if (Input.IsContext(Contexts.Free, _parent.GetPlayerIndex()))
                     {
-                        _parent.SetSkillVector(_keyVelocity);
+                        var skillCycleVelocity =
+                            ((Input.IsPressed(Commands.CycleLeft, _parent.GetPlayerIndex())) ? -1 : 0)
+                            +
+                            ((Input.IsPressed(Commands.CycleRight, _parent.GetPlayerIndex())) ? 1 : 0);
+                        _parent.CycleActiveSkill(skillCycleVelocity);
+
+                        if (!_isCasting)
+                        {
+                            _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
+                        }
+                        var isPress = Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex());
+                        if (!isPress)
+                        {
+                            _parent.SetInteraction(false);
+                        }
+                        if (isPress && !_parent.IsInteracting())
+                        {
+                            _parent.SetInteraction(true);
+                        }
                     }
-                    if (_parent.GetSkillVector() == null)
+                    if (Input.IsPressed(Commands.Skill, _parent.GetPlayerIndex()))
                     {
-                        _parent.SetSkillVector(new Point2(1, 0));
+                        _isCasting = true;
                     }
-                    if (!_parent.GetSkillVector().IsZero())
+
+                    if (_isCasting)
                     {
-                        _parent.UseActiveSkill();
-                        _isCasting = false;
+                        if (!_keyVelocity.IsZero())
+                        {
+                            _parent.SetSkillVector(_keyVelocity);
+                        }
+                        if (_parent.GetSkillVector() == null)
+                        {
+                            _parent.SetSkillVector(new Point2(1, 0));
+                        }
+                        if (!_parent.GetSkillVector().IsZero())
+                        {
+                            _parent.UseActiveSkill();
+                            _isCasting = false;
+                        }
                     }
                 }
                 
