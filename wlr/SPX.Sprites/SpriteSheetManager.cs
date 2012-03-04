@@ -6,27 +6,35 @@ using Microsoft.Xna.Framework;
 
 namespace SPX.Sprites
 {
+    public class SpriteDefinition
+    {
+        public SpriteDefinition(int type, int index, int frames)
+        {
+            Type = type;
+            Info = new SpriteInfo(index, frames);
+        }
+        public int Type { get; set; }
+        public SpriteInfo Info { get; set; }
+    }
+    public interface ISpriteInitializer
+    {
+        ICollection<SpriteDefinition> GetSprites();
+    }
     public class SpriteSheetManager
     {
-        private static Dictionary<int, SpriteInfo> _manager = new Dictionary<int, SpriteInfo>()
-        {
-            {SpriteType.EMPTY, new SpriteInfo(0, 1)},
-            {SpriteType.PLAYER_STAND,new SpriteInfo(1, 2)},
-            {SpriteType.FLOOR, new SpriteInfo(2, 1)},
-            {SpriteType.WALL, new SpriteInfo(3, 1)},
-            {SpriteType.UPSTAIRS,new SpriteInfo(4, 1)},
-            {SpriteType.DOWNSTAIRS,new SpriteInfo(5, 1)},            
-            {SpriteType.CREATURE,new SpriteInfo(6, 1)},
-            {SpriteType.ITEM,new SpriteInfo(7, 1)},
-            {SpriteType.SKILL_EFFECT,new SpriteInfo(8, 1)},
-            {SpriteType.ALTAR,new SpriteInfo(9, 1)},
-            {SpriteType.ZORB,new SpriteInfo(10,1)},
-            {SpriteType.MINION,new SpriteInfo(11,1)}
-        };
+        private static Dictionary<int, SpriteInfo> __manager = new Dictionary<int, SpriteInfo>();
 
         public static SpriteInfo GetSpriteInfo(int spriteName)
         {
-            return _manager[spriteName];
+            return __manager[spriteName];
+        }
+
+        public static void Setup(ISpriteInitializer initializer)
+        {
+            foreach (var sprite in initializer.GetSprites())
+            {
+                __manager.Add(sprite.Type, sprite.Info);
+            }
         }
     }
 }

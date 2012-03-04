@@ -48,7 +48,6 @@ namespace OGUR.Items
                     _itemResult.Add(key, _contents[key]);
                 }
             }
-            //return _contents.Where(element => element.Key.GetItemClass() == iClass).ToDictionary(element => element.Key, element => element.Value);
             return _itemResult;
         }
 

@@ -34,7 +34,7 @@ namespace SPX.Core
     public class Input
     {        
         //Maps a playerId to a context
-        private static readonly Dictionary<int, int> _contexts = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> __contexts = new Dictionary<int, int>()
                                                                   {
                                                                       {0, Contexts.Free},
                                                                       {1, Contexts.Free},
@@ -130,8 +130,8 @@ namespace SPX.Core
             {
                 if (key == command)
                 {
-                    if (__lockOnPress[key] == _contexts[playerIndex] ||
-                        (__lockOnPress[key] == Contexts.Nonfree && _contexts[playerIndex] != Contexts.Free) ||
+                    if (__lockOnPress[key] == __contexts[playerIndex] ||
+                        (__lockOnPress[key] == Contexts.Nonfree && __contexts[playerIndex] != Contexts.Free) ||
                         __lockOnPress[key] == Contexts.All)
                     {
                         return true;
@@ -143,11 +143,11 @@ namespace SPX.Core
 
         public static void SetContext(int context,int playerIndex)
         {
-            _contexts[playerIndex] = context;
+            __contexts[playerIndex] = context;
         }
         public static bool IsContext(int context,int playerIndex)
         {
-            return _contexts[playerIndex] == context;
+            return __contexts[playerIndex] == context;
         }
         public static bool IsLocked(int command,int playerIndex)
         {

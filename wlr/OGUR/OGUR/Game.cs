@@ -6,6 +6,7 @@ using SPX.States;
 using SPX.Core;
 using SPX.Text;
 using OGUR.Management;
+using SPX.Sprites;
 
 namespace OGUR
 {
@@ -26,8 +27,9 @@ namespace OGUR
         protected override void Initialize()
         {
             XnaManager.SetContentManager(this.Content);
-            StateManager.LoadState(new GameplayState());
             Input.Setup(new InputInitializer());
+            SpriteSheetManager.Setup(new SpriteInitializer());
+            StateManager.LoadState(new GameplayState());
             base.Initialize();
         }
 

@@ -160,6 +160,7 @@
     <Compile Include="HUD\InventoryHud.cs" />
     <Compile Include="Items\ItemClass.cs" />
     <Compile Include="Management\InputInitializer.cs" />
+    <Compile Include="Management\SpriteInitializer.cs" />
     <Compile Include="Reactions\ConcreteReactions.cs" />
     <Compile Include="Reactions\IReaction.cs" />
     <Compile Include="Reactions\ReactionFactory.cs" />
