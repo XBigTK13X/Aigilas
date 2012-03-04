@@ -40,6 +40,7 @@ namespace OGUR.Creatures
         protected Stats _maxStats;
         protected God _god;
         protected ICreature _master;
+        protected List<int> _composition = new List<int>() { };
 
         protected SkillPool _skills;
         protected Point2 _skillVector = new Point2(0,0);

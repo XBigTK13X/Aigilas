@@ -19,10 +19,10 @@ namespace SPX.Entities
         protected int _assetName;
         protected int _objectType;
         protected bool _isOnBoard = true;
-        protected List<int> _composition = new List<int>(){};
         private bool _isInteracting = false;
         protected Point2 _location = new Point2(0,0);
         protected int _entityType;
+
         public void LoadContent()
         {
             _graphic.LoadContent(_assetName);
