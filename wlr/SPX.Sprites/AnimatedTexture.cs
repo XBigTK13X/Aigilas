@@ -11,8 +11,6 @@ namespace SPX.Sprites
 {
     public class AnimatedTexture
     {
-        private const int _ANIMATE_SPEED = 20;
-
         private int _currentFrame;
         private SpriteInfo _spriteInfo;
         private Rectangle _currentCell;
@@ -28,7 +26,7 @@ namespace SPX.Sprites
         {
             _spriteInfo = SpriteSheetManager.GetSpriteInfo(assetName);
             _currentFrame = 0;
-            _animationTimer = _ANIMATE_SPEED;
+            _animationTimer = GameManager.AnimationFps;
         }
 
         public void Draw()
@@ -50,7 +48,7 @@ namespace SPX.Sprites
                 if (_animationTimer <= 0)
                 {
                     _currentFrame = (_currentFrame + 1)%_spriteInfo.MaxFrame;
-                    _animationTimer = _ANIMATE_SPEED;
+                    _animationTimer = GameManager.AnimationFps;
                 }
             }
         }
