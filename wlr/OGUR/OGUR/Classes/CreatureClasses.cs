@@ -51,11 +51,11 @@ namespace OGUR.Classes
     class GreedAcolyte : CreatureClass
     {      public GreedAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
-            Add(2, SkillId.SOUL_REINFORCEMENT);
+            Add(1, SkillId.SOUL_REINFORCEMENT);
             Add(2, SkillId.HORDER);
-            Add(2, SkillId.SPAWN_ITEM);
-            Add(2, SkillId.THROW_ITEM);
-            Add(1, SkillId.STEAL_ITEM);
+            Add(3, SkillId.SPAWN_ITEM);
+            Add(4, SkillId.THROW_ITEM);
+            Add(5, SkillId.STEAL_ITEM);
         }
     }
     class WrathAcolyte : CreatureClass
@@ -74,7 +74,6 @@ namespace OGUR.Classes
         public GluttonyAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
             Add(1, SkillId.FORGET_SKILL);
-            Add(1, SkillId.FIREBALL);
         }
     }
     class LustAcolyte : CreatureClass

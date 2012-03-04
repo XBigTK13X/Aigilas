@@ -20,7 +20,10 @@ namespace OGUR.Strategies
             {
                 if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
                 {
-                    _parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
+                    if (opponent != null)
+                    {
+                        _parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
+                    }
                     if (_parent.GetSkillVector().GridX != 0 || _parent.GetSkillVector().GridY != 0)
                     {
                         _parent.UseActiveSkill();
