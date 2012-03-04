@@ -1,7 +1,7 @@
 ﻿using OGUR.Creatures;
 using OGUR.Dungeons;
 using SPX.Entities;
-using SPX.Sprites;
+using OGUR.Management;
 using SPX.Core;
 
 namespace OGUR.Entities

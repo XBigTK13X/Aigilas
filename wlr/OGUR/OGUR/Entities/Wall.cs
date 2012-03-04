@@ -1,5 +1,5 @@
 ﻿using SPX.Core;
-using SPX.Sprites;
+using OGUR.Management;
 using SPX.Entities;
 
 namespace OGUR.Entities

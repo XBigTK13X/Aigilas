@@ -5,7 +5,7 @@ using System.Text;
 using OGUR.Skills;
 using OGUR.Strategies;
 using OGUR.Classes;
-using SPX.Sprites;
+using OGUR.Management;
 using Microsoft.Xna.Framework;
 using OGUR.Entities;
 using OGUR.Gods;

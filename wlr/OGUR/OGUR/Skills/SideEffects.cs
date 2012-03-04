@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OGUR.Entities;
-using SPX.Sprites;
+using OGUR.Management;
 using SPX.Entities;
 using OGUR.Creatures;
 using SPX.Core;

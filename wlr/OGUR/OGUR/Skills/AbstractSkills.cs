@@ -4,7 +4,7 @@ using OGUR.Creatures;
 using OGUR.Entities;
 using OGUR.Statuses;
 using SPX.Entities;
-using SPX.Sprites;
+using OGUR.Management;
 
 namespace OGUR.Skills
 {

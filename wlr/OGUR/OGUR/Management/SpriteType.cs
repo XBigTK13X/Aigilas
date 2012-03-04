@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SPX.Sprites
+namespace OGUR.Management
 {
     public class SpriteType
     {

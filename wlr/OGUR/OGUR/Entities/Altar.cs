@@ -6,6 +6,7 @@ using SPX.Core;
 using SPX.Entities;
 using SPX.Sprites;
 using SPX.Text;
+using OGUR.Management;
 
 namespace OGUR.Entities
 {

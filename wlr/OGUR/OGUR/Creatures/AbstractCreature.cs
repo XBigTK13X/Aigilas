@@ -1,8 +1,8 @@
-﻿using OGUR.Strategies;
-using OGUR.Classes;
+﻿using OGUR.Classes;
 using OGUR.Skills;
-using SPX.Sprites;
+using OGUR.Strategies;
 using SPX.Core;
+using OGUR.Management;
 
 namespace OGUR.Creatures
 {

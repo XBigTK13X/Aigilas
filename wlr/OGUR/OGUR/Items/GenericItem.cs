@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OGUR.Creatures;
 using SPX.Core;
 using SPX.Entities;
-using SPX.Sprites;
+using OGUR.Management;
 
 namespace OGUR.Items
 {

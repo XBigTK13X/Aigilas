@@ -2,7 +2,7 @@
 using OGUR.Dungeons;
 using SPX.Core;
 using SPX.Entities;
-using SPX.Sprites;
+using OGUR.Management;
 
 namespace OGUR.Entities
 {
