@@ -94,9 +94,9 @@ namespace SPX.Entities
         {
             isNeg = (amount < 0)? -1:1;
             amount = Math.Abs(amount);
-            factorsOfSpriteHeight = (int)Math.Floor(amount/SpriteInfo.Height);
+            factorsOfSpriteHeight = (int)Math.Floor(amount / GameManager.SpriteHeight);
             factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount!=0) ? 1 : factorsOfSpriteHeight;
-            return (SpriteInfo.Height*factorsOfSpriteHeight*isNeg);
+            return (GameManager.SpriteHeight * factorsOfSpriteHeight * isNeg);
         }
 
         public bool IsActive()

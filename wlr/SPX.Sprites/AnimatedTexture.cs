@@ -36,8 +36,8 @@ namespace SPX.Sprites
             UpdateAnimation();
             _currentCell = new Rectangle((_currentFrame * _spriteInfo.X) + (_currentFrame+1), (_spriteInfo.SpriteIndex * _spriteInfo.Y) + (_spriteInfo.SpriteIndex+1),
                                           _spriteInfo.X, _spriteInfo.Y);
-            
-            _target = new Rectangle((int)_position.X,(int)_position.Y,SpriteInfo.Width,SpriteInfo.Height);
+
+            _target = new Rectangle((int)_position.X, (int)_position.Y, GameManager.SpriteWidth, GameManager.SpriteHeight);
             XnaManager.Renderer.Draw(_texture, _target,_currentCell,_color,0f,Vector2.Zero,SpriteEffects.None,_layerDepth);
             
         }
