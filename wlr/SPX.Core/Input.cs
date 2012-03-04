@@ -99,22 +99,18 @@ namespace SPX.Core
         {
             
             __isInputActive = IsDown(command,playerIndex);
-            if(command == 1 && __isInputActive)Console.WriteLine("IsDown: " + __isInputActive);
             if (!__isInputActive && ShouldLock(command,playerIndex))
             {
-                if (command == 1 && __isInputActive) Console.WriteLine("Unlocking");
                 Unlock(command, playerIndex);
             }
 
             if (IsLocked(command, playerIndex) && failIfLocked)
             {
-                if (command == 1 && __isInputActive) Console.WriteLine("Its locked and we are failing on lock");
                 return false;
             }
 
             if (__isInputActive && ShouldLock(command,playerIndex))
             {
-                if (command == 1 && __isInputActive) Console.WriteLine("Lock that bitch up!");
                 Lock(command,playerIndex);
             }
 
