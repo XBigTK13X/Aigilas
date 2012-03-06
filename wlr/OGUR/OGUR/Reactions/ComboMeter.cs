@@ -11,9 +11,34 @@ namespace OGUR.Reactions
     {
         private static Dictionary<int, int> __reactions = new Dictionary<int, int>()
         {
-            {12,ReactionId.SWEAT},
-            {13,ReactionId.MAGMA},
-            {14,ReactionId.EXPLOSION}
+            {12,ReactionId.ATROPHY},
+            {13,ReactionId.BLANK},
+            {14,ReactionId.BLIND},
+            {15,ReactionId.CONFUSE},
+            {16,ReactionId.CRAFTSMAN},
+            {17,ReactionId.DRENCH},
+            {18,ReactionId.DROWN},
+            {23,ReactionId.ECLIPSE},
+            {24,ReactionId.ENLIGHTEN},
+            {25,ReactionId.EXPLOSION},
+            {26,ReactionId.EXPOSE},
+            {27,ReactionId.FAST_FORWARD},
+            {28,ReactionId.FLASH},
+            {34,ReactionId.LACTIC_ACID},
+            {35,ReactionId.LOBOTOMY},
+            {36,ReactionId.MAGMA},
+            {37,ReactionId.METABOLISM},
+            {38,ReactionId.MIND_BLOWN},
+            {45,ReactionId.NEUROSIS},
+            {46,ReactionId.PNEUMONIA},
+            {47,ReactionId.PURIFY},
+            {48,ReactionId.REFLECT},
+            {56,ReactionId.RESPECT},
+            {57,ReactionId.RUST},
+            {58,ReactionId.SCORCH},
+            {67,ReactionId.SWEAT},
+            {68,ReactionId.VENT},
+            {78,ReactionId.YIN_YANG}
         };
 
         private ICreature _parent;
