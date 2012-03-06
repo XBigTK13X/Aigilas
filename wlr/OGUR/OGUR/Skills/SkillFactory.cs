@@ -10,10 +10,8 @@ namespace OGUR.Skills
 {
     public class SkillId
     {
-        public const string BULK = "Bulk";
         public const string FIREBALL = "Fireball";
         public const string NO_SKILL = "No Skill";
-        public const string THRASH = "Thrash";
         //Sloth
         public const string FLOOR_SPIKES = "Floor Spikes";
         public const string DART = "Dart";

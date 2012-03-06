@@ -6,12 +6,8 @@ using OGUR.Creatures;
 
 namespace OGUR.Reactions
 {
-    public abstract class IReaction
+    public interface IReaction
     {
-        public IReaction()
-        {
-
-        }
-        public abstract void Affect(ICreature target);
+        void Affect(ICreature target);
     }
 }
