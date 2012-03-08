@@ -31,6 +31,21 @@ namespace OGUR.Statuses
                 case Status.Berserk: target.AddStatus(new BerserkStatus(target)); break;
                 case Status.RandomBuff: target.AddStatus(new RandomBuffStatus(target)); break;
                 case Status.Hord: target.AddStatus(new HordStatus(target)); break;
+                case Status.LockSkillCycle: target.AddStatus(new LockSkillCycleStatus(target)); break;
+                case Status.WeakenStrength: target.AddStatus(new WeakenStrengthStatus(target)); break;
+                case Status.SelfMutilation: target.AddStatus(new SelfMutilationStatus(target)); break;
+                case Status.PreventMentalUsage: target.AddStatus(new PreventMentalUsageStatus(target)); break;
+                case Status.PreventRegeneration: target.AddStatus(new PreventRegenerationStatus(target)); break;
+                case Status.PreventLightUsage: target.AddStatus(new PreventLightUsageStatus(target)); break;
+                case Status.PreventDarkUsage: target.AddStatus(new PreventDarkUsageStatus(target)); break;
+                case Status.FragileItems: target.AddStatus(new FragileItemsStatus(target)); break;
+                case Status.IntDown: target.AddStatus(new IntDownStatus(target)); break;
+                case Status.SoakingWet: target.AddStatus(new SoakingWetStatus(target)); break;
+                case Status.HealReflect: target.AddStatus(new HealReflectStatus(target)); break;
+                case Status.Mute: target.AddStatus(new MuteStatus(target)); break;
+                case Status.SlowDown: target.AddStatus(new SlowDownStatus(target)); break;
+                case Status.WeakMuscles: target.AddStatus(new WeakMusclesStatus(target)); break;
+                case Status.Blind: target.AddStatus(new BlindStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

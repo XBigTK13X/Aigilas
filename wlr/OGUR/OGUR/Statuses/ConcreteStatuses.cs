@@ -28,6 +28,21 @@ namespace OGUR.Statuses
         public const int Berserk = 16;
         public const int RandomBuff = 17;
         public const int Hord = 18;
+        public const int LockSkillCycle = 19;
+        public const int WeakenStrength = 20;
+        public const int SelfMutilation = 21;
+        public const int PreventMentalUsage = 22;
+        public const int PreventRegeneration = 23;
+        public const int PreventLightUsage = 24;
+        public const int PreventDarkUsage = 25;
+        public const int FragileItems = 26;
+        public const int IntDown = 27;
+        public const int SoakingWet = 28;
+        public const int HealReflect = 29;
+        public const int Mute = 30;
+        public const int SlowDown = 31;
+        public const int WeakMuscles = 32;
+        public const int Blind = 33;
 
         public static readonly int[] Values =
         {
@@ -49,7 +64,22 @@ namespace OGUR.Statuses
             Flee,
             Berserk,
             RandomBuff,
-            Hord
+            Hord,
+            LockSkillCycle,
+            WeakenStrength,
+            SelfMutilation,
+            PreventMentalUsage,
+            PreventRegeneration,
+            PreventLightUsage,
+            PreventDarkUsage,
+            FragileItems,
+            IntDown,
+            SoakingWet,
+            HealReflect,
+            Mute,
+            SlowDown,
+            WeakMuscles,
+            Blind
         };
     }
 
@@ -257,4 +287,125 @@ namespace OGUR.Statuses
             Setup();
         }
     }
+    public class LockSkillCycleStatus : IStatus
+    {
+        public LockSkillCycleStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class WeakenStrengthStatus : IStatus
+    {
+        public WeakenStrengthStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class SelfMutilationStatus : IStatus
+    {
+        public SelfMutilationStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class PreventMentalUsageStatus : IStatus
+    {
+        public PreventMentalUsageStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class PreventRegenerationStatus : IStatus
+    {
+        public PreventRegenerationStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class PreventLightUsageStatus : IStatus
+    {
+        public PreventLightUsageStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class PreventDarkUsageStatus : IStatus
+    {
+        public PreventDarkUsageStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class FragileItemsStatus : IStatus
+    {
+        public FragileItemsStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class IntDownStatus : IStatus
+    {
+        public IntDownStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class SoakingWetStatus : IStatus
+    {
+        public SoakingWetStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class HealReflectStatus : IStatus
+    {
+        public HealReflectStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class MuteStatus : IStatus
+    {
+        public MuteStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class SlowDownStatus : IStatus
+    {
+        public SlowDownStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class WeakMusclesStatus : IStatus
+    {
+        public WeakMusclesStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class BlindStatus : IStatus
+    {
+        public BlindStatus(ICreature target)
+            : base(false, false, target)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
