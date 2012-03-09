@@ -29,6 +29,7 @@ namespace OGUR.Creatures
         public const int MinionCloud = 6;
         public const int Mutiny = 7;
         public const int Flee = 8;
+        public const int AttackSelf = 9;
     }
 
     public abstract class ICreature : Entity,IActor
@@ -471,7 +472,10 @@ namespace OGUR.Creatures
 
         public void CycleActiveSkill(int velocity)
         {
-            _skills.Cycle(velocity);
+            if (!_statuses.StopSkillCycle())
+            {
+                _skills.Cycle(velocity);
+            }
         }
 
         public string GetActiveSkillName()

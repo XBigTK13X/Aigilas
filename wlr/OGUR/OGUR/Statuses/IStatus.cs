@@ -12,10 +12,21 @@ namespace OGUR.Statuses
         Contagion,
         KillReward
     }
+    public enum ActionComponent
+    {
+        Movement,
+        Attacking,
+        SkillCycle,
+        Regeneration,
+        HitAnything,
+
+    }
     public class IStatus
     {
         protected bool _stopsMovement = false;
         protected bool _stopsAttacking = false;
+        protected bool _stopsSkillCycling = false;
+        protected bool _stopRegeneration = false;
         protected bool _hitAnything = false;
         protected bool _wasPassed = false;
         protected int _strength = 0;
@@ -23,6 +34,8 @@ namespace OGUR.Statuses
         protected bool _isActive = true;
         protected ICreature _target;
         protected StatBuff _buff = null;
+        protected IList<int> _blockedElements = new List<int>();
+
         protected Dictionary<StatusComponent,List<int>> _passables = new Dictionary<StatusComponent,List<int>>();
 
         protected IStatus(bool stopMovement,bool stopAttacking,ICreature target)
@@ -34,24 +47,21 @@ namespace OGUR.Statuses
             Setup();
         }
 
-        public bool HitAnything()
-        {
-            return _hitAnything;
-        }
+        public bool IsActive(){return _isActive;}
 
-        public bool IsActive()
-        {
-            return _isActive;
-        }
+        public bool HitAnything() { return _hitAnything; }
 
-        public bool StopMovement()
-        {
-            return _stopsMovement;
-        }
+        public bool StopMovement(){return _stopsMovement;}
 
-        public bool StopAttack()
+        public bool StopAttack(){return _stopsMovement;}
+
+        public bool StopSkillCycle() { return _stopsSkillCycling; }
+
+        public bool StopRegeneration() { return _stopRegeneration; }
+
+        public bool IsElementBlocked(int element)
         {
-            return _stopsMovement;
+            return _blockedElements.Any(e => e == element);
         }
 
         public void PassOn(ICreature target,StatusComponent componentType)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OGUR.Creatures;
 using OGUR.Strategies;
+using OGUR.Entities;
 
 namespace OGUR.Statuses
 {
@@ -292,7 +293,7 @@ namespace OGUR.Statuses
         public LockSkillCycleStatus(ICreature target)
             : base(false, false, target)
         {
-            throw new NotImplementedException();
+            _stopsSkillCycling = true;
         }
     }
     public class WeakenStrengthStatus : IStatus
@@ -300,15 +301,28 @@ namespace OGUR.Statuses
         public WeakenStrengthStatus(ICreature target)
             : base(false, false, target)
         {
-            throw new NotImplementedException();
+            _buff = new StatBuff(StatType.STRENGTH, -10);
+            Setup();
         }
     }
     public class SelfMutilationStatus : IStatus
     {
+        private int previousStrategy;
         public SelfMutilationStatus(ICreature target)
             : base(false, false, target)
         {
             throw new NotImplementedException();
+        }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            _target.SetStrategy(StrategyFactory.Create(Strategy.AttackSelf, _target));
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
         }
     }
     public class PreventMentalUsageStatus : IStatus
@@ -316,7 +330,7 @@ namespace OGUR.Statuses
         public PreventMentalUsageStatus(ICreature target)
             : base(false, false, target)
         {
-            throw new NotImplementedException();
+            _blockedElements.Add(Elements.MENTAL);
         }
     }
     public class PreventRegenerationStatus : IStatus
@@ -324,7 +338,7 @@ namespace OGUR.Statuses
         public PreventRegenerationStatus(ICreature target)
             : base(false, false, target)
         {
-            throw new NotImplementedException();
+            _stopRegeneration = true;
         }
     }
     public class PreventLightUsageStatus : IStatus

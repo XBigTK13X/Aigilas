@@ -71,5 +71,22 @@ namespace OGUR.Statuses
                 _statuses[ii].PassOn(target, componentType);
             }
         }
+
+        public bool IsElementBlocked(int element)
+        {
+            return _statuses.Any(s => s.IsElementBlocked(element));
+        }
+
+        public bool StopSkillCycle()
+        {
+            for (int ii = 0; ii < _statuses.Count(); ii++)
+            {
+                if (_statuses[ii].StopSkillCycle())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

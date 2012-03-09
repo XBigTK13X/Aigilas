@@ -20,6 +20,7 @@ namespace OGUR.Strategies
                 case Strategy.MinionCloud: return new MinionCloud(target);
                 case Strategy.Mutiny: return new AttackStrategy(target, OgurActorType.NONPLAYER);
                 case Strategy.Flee: return new FleeStrategy(target,OgurActorType.PLAYER);
+                case Strategy.AttackSelf: return new AttackSelfStrategy(target);
                 default: throw new Exception("An undefined strategy was passed into the strategy factory: " + strategy);
             }
         }
@@ -55,6 +56,10 @@ namespace OGUR.Strategies
                 return Strategy.MinionExplode;
             }
             if (strategyType == typeof(FleeStrategy))
+            {
+                return Strategy.Flee;
+            }
+            if (strategyType == typeof(AttackSelfStrategy))
             {
                 return Strategy.Flee;
             }
