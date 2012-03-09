@@ -185,7 +185,7 @@ namespace OGUR.Reactions
     {
         public void Affect(ICreature target)
         {
-            throw new NotImplementedException();
+            StatusFactory.Apply(target, Status.Mutiny);
         }
     }
     public class AtrophyReaction : IReaction
