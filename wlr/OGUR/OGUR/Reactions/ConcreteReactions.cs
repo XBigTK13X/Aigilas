@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Creatures;
 using OGUR.Statuses;
 using OGUR.Items;
+using SPX.Entities;
 
 namespace OGUR.Reactions
 {
@@ -27,7 +28,10 @@ namespace OGUR.Reactions
     {
         public void Affect(ICreature target)
         {
-            throw new NotImplementedException();
+            foreach (var creature in EntityManager.GetActorsSurrounding(target.GetLocation(), 2))
+            {
+                (creature as ICreature).ApplyDamage(10);
+            }
         }
     }
     public class ScorchReaction : IReaction

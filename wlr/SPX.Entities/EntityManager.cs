@@ -115,6 +115,25 @@ namespace SPX.Entities
             return creatures;
         }
 
+        public static List<IActor> GetActorsSurrounding(Point2 target,int distance)
+        {
+            creatures.Clear();
+            for (int ii = -distance; ii < distance+1; ii++)
+            {
+                for (int jj = -distance; jj < distance+1; jj++)
+                {
+                    if (ii != 0 || jj != 0)
+                    {
+                        foreach (var creature in GetActorsAt(target.Add(new Point2(ii, jj))))
+                        {
+                            creatures.Add(creature);
+                        }
+                    }
+                }
+            }
+            return creatures;
+        }
+
         public static bool IsLocationBlocked(Point2 location)
         {
             foreach(IEntity elem in _gridContents[location])

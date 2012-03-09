@@ -73,6 +73,7 @@ namespace OGUR.Skills
     }
     public class CombustSkill : ISkill
     {
+        private const int CombustDistance = 1;
         public CombustSkill()
             : base(SkillId.COMBUST, AnimationType.RANGED)
         { Add(Elements.AIR, Elements.PHYSICAL); AddCost(StatType.MANA, 10); }
@@ -81,18 +82,9 @@ namespace OGUR.Skills
             target.ApplyDamage(10,_source);
             if (!target.IsActive())
             {
-                for (int ii = -1; ii < 2; ii++)
+                foreach (var creature in EntityManager.GetActorsSurrounding(target.GetLocation(), CombustDistance))
                 {
-                    for (int jj = -1;jj<2;jj++)
-                    {
-                        if (ii != 0 || jj != 0)
-                        {
-                            foreach(var creature in EntityManager.GetActorsAt(target.GetLocation().Add(new Point2(ii,jj))))
-                            {
-                                StatusFactory.Apply(creature as ICreature, Status.Burn);
-                            }
-                        }
-                    }
+                    StatusFactory.Apply(creature as ICreature, Status.Burn);
                 }
             }
         }
