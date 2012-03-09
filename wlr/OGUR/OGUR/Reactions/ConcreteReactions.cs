@@ -143,7 +143,7 @@ namespace OGUR.Reactions
     {
         public void Affect(ICreature target)
         {
-            throw new NotImplementedException();
+            target.SetLocation(EntityManager.GetEmptyLocation());
         }
     }
     public class MetabolismReaction : IReaction

@@ -282,5 +282,12 @@ namespace SPX.Entities
         {
             return _contents.Where(c=>c.GetEntityType() == EntityType.ACTOR).SingleOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
         }
+
+        private static IEnumerable<Point2> emptyLocations;
+        public static Point2 GetEmptyLocation()
+        {
+            emptyLocations = _gridContents.Where(gc=>gc.Value.Any(e=>e.GetEntityType() == EntityType.ACTOR)).Select(gc=>gc.Key);
+            return emptyLocations.ElementAt(RNG.Rand.Next(0,emptyLocations.Count()));
+        }
     }
 }
