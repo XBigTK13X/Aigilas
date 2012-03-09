@@ -36,58 +36,22 @@ namespace OGUR.Statuses
         public const int PreventRegeneration = 23;
         public const int PreventLightUsage = 24;
         public const int PreventDarkUsage = 25;
-        public const int FragileItems = 26;
         public const int IntDown = 27;
         public const int SoakingWet = 28;
         public const int HealReflect = 29;
         public const int Mute = 30;
         public const int SlowDown = 31;
         public const int WeakMuscles = 32;
-        public const int Blind = 33;
-
-        public static readonly int[] Values =
-        {
-            Poison,
-            Regen,
-            StrengthUp,
-            Confusion,
-            WeakKnees,
-            VenomFist,
-            Mutiny,
-            ManaUp,
-            SpeedUp,
-            Electrify,
-            Zap,
-            PoisonOneHit,
-            DefenseUp,
-            ColdShoulder,
-            Burn,
-            Flee,
-            Berserk,
-            RandomBuff,
-            Hord,
-            LockSkillCycle,
-            WeakenStrength,
-            SelfMutilation,
-            PreventMentalUsage,
-            PreventRegeneration,
-            PreventLightUsage,
-            PreventDarkUsage,
-            FragileItems,
-            IntDown,
-            SoakingWet,
-            HealReflect,
-            Mute,
-            SlowDown,
-            WeakMuscles,
-            Blind
-        };
+        public const int Blind = 33;      
     }
 
     public class ConfusionStatus : IStatus
     {
         private int previousStrategy;
-        public ConfusionStatus(ICreature target) : base(false, false, target) { _hitAnything = true; }
+        public ConfusionStatus(ICreature target) : base(target) 
+        { 
+            _prevents.Add(OAction.WontHitNonTargets); 
+        }
         public override void Setup()
         {
             base.Setup();
@@ -104,7 +68,10 @@ namespace OGUR.Statuses
     {
         private int previousStrategy;
         private StatBuff buff = new StatBuff(StatType.MOVE_COOL_DOWN, 10);
-        public MutinyStatus(ICreature target) : base(false, false, target) { _hitAnything = true; }
+        public MutinyStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.WontHitNonTargets);
+        }
         public override void Setup()
         {
             base.Setup();
@@ -120,7 +87,10 @@ namespace OGUR.Statuses
     public class FleeStatus : IStatus
     {
         private int previousStrategy;
-        public FleeStatus(ICreature target) : base(false, false, target) { _hitAnything = true; }
+        public FleeStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.WontHitNonTargets);
+        }
         public override void Setup()
         {
             base.Setup();
@@ -135,7 +105,7 @@ namespace OGUR.Statuses
     }
     public class PoisonStatus:IStatus
     {
-        public PoisonStatus(ICreature target): base(false, false,target){}
+        public PoisonStatus(ICreature target): base(target){}
         public override void Update()
         {
             base.Update();
@@ -145,7 +115,7 @@ namespace OGUR.Statuses
 
     public class RegenStatus : IStatus
     {
-        public RegenStatus(ICreature target) : base(false, false, target) { }
+        public RegenStatus(ICreature target) : base(target) { }
         public override void Update()
         {
             base.Update();
@@ -155,7 +125,7 @@ namespace OGUR.Statuses
 
     public class StrengthUpStatus : IStatus
     {
-        public StrengthUpStatus(ICreature target) : base(false, false, target)
+        public StrengthUpStatus(ICreature target) : base(target)
         {
             _buff = new StatBuff(StatType.STRENGTH, 10f);
             Setup();
@@ -165,7 +135,7 @@ namespace OGUR.Statuses
     public class VenomFistStatus : IStatus
     {
         public VenomFistStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
             Add(Status.Poison,StatusComponent.Contagion);
         }
@@ -173,12 +143,16 @@ namespace OGUR.Statuses
 
     public class WeakKneesStatus : IStatus
     {
-        public WeakKneesStatus(ICreature target) : base(true, true, target) { }
+        public WeakKneesStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.Movement);
+            _prevents.Add(OAction.Attacking);
+        }
     }
 
     public class ManaUpStatus : IStatus
     {
-        public ManaUpStatus(ICreature target) : base(false, false, target) 
+        public ManaUpStatus(ICreature target) : base(target) 
         {
             _buff = new StatBuff(StatType.MANA, 20f);
             Setup();
@@ -186,7 +160,7 @@ namespace OGUR.Statuses
     }
     public class SpeedUpStatus: IStatus
     {
-        public SpeedUpStatus(ICreature target) : base(false, false, target)
+        public SpeedUpStatus(ICreature target) : base(target)
         {
             _buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);
             Setup();
@@ -195,7 +169,7 @@ namespace OGUR.Statuses
     public class ElectrifyStatus: IStatus
     {
         public ElectrifyStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
             Add(Status.Zap,StatusComponent.Passive );
         }
@@ -203,7 +177,7 @@ namespace OGUR.Statuses
     public class ZapStatus : IStatus
     {
         public ZapStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {}
         public override void Setup()
         {
@@ -215,7 +189,7 @@ namespace OGUR.Statuses
     public class PoisonOneHitStatus : IStatus
     {
         public PoisonOneHitStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
             Add(Status.Poison,StatusComponent.Contagion);
         }
@@ -231,7 +205,7 @@ namespace OGUR.Statuses
     public class BurnOneHitStatus : IStatus
     {
         public BurnOneHitStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
             Add(Status.Burn, StatusComponent.Contagion);
         }
@@ -247,7 +221,7 @@ namespace OGUR.Statuses
     public class DefenseUpStatus : IStatus
     {
         public DefenseUpStatus(ICreature target)
-        : base(false, false, target)
+        : base(target)
         {
             _buff = new StatBuff(StatType.DEFENSE, 10);
             Setup();
@@ -255,7 +229,10 @@ namespace OGUR.Statuses
     }
     public class BurnStatus : IStatus
     {
-        public BurnStatus(ICreature target) : base(true, false, target) { }
+        public BurnStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.Movement);
+        }
         public override void Update()
         {
             base.Update();
@@ -264,7 +241,7 @@ namespace OGUR.Statuses
     }
     public class BerserkStatus : IStatus
     {
-        public BerserkStatus(ICreature target) : base(false, false, target) 
+        public BerserkStatus(ICreature target) : base(target) 
         {
             Add(Status.RandomBuff, StatusComponent.KillReward);
         }
@@ -273,7 +250,7 @@ namespace OGUR.Statuses
     {
         private Random rand = new Random();
         public RandomBuffStatus(ICreature target)
-        : base(false, false, target)
+        : base(target)
         {
             _buff = new StatBuff(StatType.Values[rand.Next(0,3)], 10);
             Setup();
@@ -282,7 +259,7 @@ namespace OGUR.Statuses
     public class HordStatus : IStatus
     {
         public HordStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
             _buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
             Setup();
@@ -291,15 +268,15 @@ namespace OGUR.Statuses
     public class LockSkillCycleStatus : IStatus
     {
         public LockSkillCycleStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            _stopsSkillCycling = true;
+            _prevents.Add(OAction.SkillCycle);
         }
     }
     public class WeakenStrengthStatus : IStatus
     {
         public WeakenStrengthStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
             _buff = new StatBuff(StatType.STRENGTH, -10);
             Setup();
@@ -309,9 +286,8 @@ namespace OGUR.Statuses
     {
         private int previousStrategy;
         public SelfMutilationStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
         }
         public override void Setup()
         {
@@ -328,7 +304,7 @@ namespace OGUR.Statuses
     public class PreventMentalUsageStatus : IStatus
     {
         public PreventMentalUsageStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
             _blockedElements.Add(Elements.MENTAL);
         }
@@ -336,89 +312,84 @@ namespace OGUR.Statuses
     public class PreventRegenerationStatus : IStatus
     {
         public PreventRegenerationStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            _stopRegeneration = true;
+            _prevents.Add(OAction.Regeneration);
         }
     }
     public class PreventLightUsageStatus : IStatus
     {
         public PreventLightUsageStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _blockedElements.Add(Elements.LIGHT);
         }
     }
     public class PreventDarkUsageStatus : IStatus
     {
         public PreventDarkUsageStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
-        }
-    }
-    public class FragileItemsStatus : IStatus
-    {
-        public FragileItemsStatus(ICreature target)
-            : base(false, false, target)
-        {
-            throw new NotImplementedException();
+            _blockedElements.Add(Elements.DARK);
         }
     }
     public class IntDownStatus : IStatus
     {
         public IntDownStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _buff = new StatBuff(StatType.WISDOM, -10);
+            Setup();
         }
     }
     public class SoakingWetStatus : IStatus
     {
         public SoakingWetStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _blockedElements.Add(Elements.FIRE);
         }
     }
-    public class HealReflectStatus : IStatus
+    public class BlockHealingStatus : IStatus
     {
-        public HealReflectStatus(ICreature target)
-            : base(false, false, target)
+        public BlockHealingStatus(ICreature target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _prevents.Add(OAction.ReceiveHealing);
         }
     }
     public class MuteStatus : IStatus
     {
         public MuteStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _prevents.Add(OAction.SkillUsage);
         }
     }
     public class SlowDownStatus : IStatus
     {
         public SlowDownStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _buff = new StatBuff(StatType.MOVE_COOL_DOWN, -10);
+            Setup();
         }
     }
     public class WeakMusclesStatus : IStatus
     {
         public WeakMusclesStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _buff = new StatBuff(StatType.STRENGTH, -10);
+            Setup();
         }
     }
     public class BlindStatus : IStatus
     {
         public BlindStatus(ICreature target)
-            : base(false, false, target)
+            : base(target)
         {
-            throw new NotImplementedException();
+            _prevents.Add(OAction.WontHitNonTargets);
         }
     }
 

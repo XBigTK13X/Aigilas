@@ -10,40 +10,16 @@ namespace OGUR.Statuses
     {
         private List<IStatus> _statuses = new List<IStatus>();
 
-        public bool CanMove()
+        public bool Allows(OAction action)
         {
             for (int ii = 0; ii < _statuses.Count(); ii++)
             {
-                if (_statuses[ii].StopMovement())
+                if (_statuses[ii].Prevents(action))
                 {
                     return false;
                 }
             }
             return true;
-        }
-
-        public bool CanAttack()
-        {
-            for (int ii = 0; ii < _statuses.Count(); ii++)
-            {
-                if (_statuses[ii].StopAttack())
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public bool WillHitAnything()
-        {
-            for (int ii = 0; ii < _statuses.Count(); ii++)
-            {
-                if (_statuses[ii].HitAnything())
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         public void Add(IStatus status)
@@ -75,18 +51,6 @@ namespace OGUR.Statuses
         public bool IsElementBlocked(int element)
         {
             return _statuses.Any(s => s.IsElementBlocked(element));
-        }
-
-        public bool StopSkillCycle()
-        {
-            for (int ii = 0; ii < _statuses.Count(); ii++)
-            {
-                if (_statuses[ii].StopSkillCycle())
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

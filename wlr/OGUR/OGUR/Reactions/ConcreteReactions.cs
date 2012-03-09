@@ -104,7 +104,7 @@ namespace OGUR.Reactions
     {
         public void Affect(ICreature target)
         {
-            StatusFactory.Apply(target, Status.FragileItems);
+            target.DestroyRandomItemFromInventory();
         }
     }
     public class PurifyReaction : IReaction

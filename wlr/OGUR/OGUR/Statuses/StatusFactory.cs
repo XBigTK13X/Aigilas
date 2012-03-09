@@ -38,10 +38,9 @@ namespace OGUR.Statuses
                 case Status.PreventRegeneration: target.AddStatus(new PreventRegenerationStatus(target)); break;
                 case Status.PreventLightUsage: target.AddStatus(new PreventLightUsageStatus(target)); break;
                 case Status.PreventDarkUsage: target.AddStatus(new PreventDarkUsageStatus(target)); break;
-                case Status.FragileItems: target.AddStatus(new FragileItemsStatus(target)); break;
                 case Status.IntDown: target.AddStatus(new IntDownStatus(target)); break;
                 case Status.SoakingWet: target.AddStatus(new SoakingWetStatus(target)); break;
-                case Status.HealReflect: target.AddStatus(new HealReflectStatus(target)); break;
+                case Status.HealReflect: target.AddStatus(new BlockHealingStatus(target)); break;
                 case Status.Mute: target.AddStatus(new MuteStatus(target)); break;
                 case Status.SlowDown: target.AddStatus(new SlowDownStatus(target)); break;
                 case Status.WeakMuscles: target.AddStatus(new WeakMusclesStatus(target)); break;

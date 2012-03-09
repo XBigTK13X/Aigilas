@@ -11,23 +11,11 @@ namespace OGUR.Statuses
         Passive,
         Contagion,
         KillReward
-    }
-    public enum ActionComponent
-    {
-        Movement,
-        Attacking,
-        SkillCycle,
-        Regeneration,
-        HitAnything,
-
-    }
+    }    
     public class IStatus
     {
-        protected bool _stopsMovement = false;
-        protected bool _stopsAttacking = false;
-        protected bool _stopsSkillCycling = false;
-        protected bool _stopRegeneration = false;
-        protected bool _hitAnything = false;
+        protected IList<OAction> _prevents = new List<OAction>();
+
         protected bool _wasPassed = false;
         protected int _strength = 0;
         protected int _maxStrength = 100;        
@@ -38,10 +26,8 @@ namespace OGUR.Statuses
 
         protected Dictionary<StatusComponent,List<int>> _passables = new Dictionary<StatusComponent,List<int>>();
 
-        protected IStatus(bool stopMovement,bool stopAttacking,ICreature target)
+        protected IStatus(ICreature target)
         {
-            _stopsAttacking = stopAttacking;
-            _stopsMovement = stopMovement;
             _strength = _maxStrength;
             _target = target;
             Setup();
@@ -49,15 +35,10 @@ namespace OGUR.Statuses
 
         public bool IsActive(){return _isActive;}
 
-        public bool HitAnything() { return _hitAnything; }
-
-        public bool StopMovement(){return _stopsMovement;}
-
-        public bool StopAttack(){return _stopsMovement;}
-
-        public bool StopSkillCycle() { return _stopsSkillCycling; }
-
-        public bool StopRegeneration() { return _stopRegeneration; }
+        public bool Prevents(OAction action)
+        {
+            return _prevents.Any(p => p == action);
+        }
 
         public bool IsElementBlocked(int element)
         {

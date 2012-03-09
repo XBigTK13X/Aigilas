@@ -174,7 +174,7 @@ namespace OGUR.Creatures
             {
                 _isActive = false;
             }
-            if (_statuses.CanMove())
+            if (_statuses.Allows(OAction.Movement))
             {
                 if (_isPlaying)
                 {
@@ -198,13 +198,16 @@ namespace OGUR.Creatures
         }
         private void Regenerate()
         {
-            foreach (string stat in StatType.Values)
+            if (_statuses.Allows(OAction.Regeneration))
             {
-                if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN)
+                foreach (string stat in StatType.Values)
                 {
-                    if (_baseStats.GetRaw(stat) < _maxStats.GetRaw(stat))
+                    if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN)
                     {
-                        Adjust(stat, _baseStats.Get(StatType.REGEN) / 50);
+                        if (_baseStats.GetRaw(stat) < _maxStats.GetRaw(stat))
+                        {
+                            Adjust(stat, _baseStats.Get(StatType.REGEN) / 50);
+                        }
                     }
                 }
             }
@@ -334,7 +337,7 @@ namespace OGUR.Creatures
             {
                 _damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
             }
-            if(damage>0 && statType==null)
+            if(damage>0 && statType==null && _statuses.Allows(OAction.ReceiveHealing))
             {
                 Adjust(statType??StatType.HEALTH, -damage);
             }
@@ -377,7 +380,7 @@ namespace OGUR.Creatures
         private List<ICreature> creatures;
         public void MoveIfPossible(float xVel, float yVel)
         {
-            if (_statuses.CanMove())
+            if (_statuses.Allows(OAction.Movement))
             {
                 if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN))
                 {
@@ -389,7 +392,7 @@ namespace OGUR.Creatures
                     }
                     else
                     {
-                        if(_statuses.CanAttack())
+                        if(_statuses.Allows(OAction.Attacking))
                         {
                             creatures = EntityManager.GetActorsAt(target).Select(a=>a as ICreature).ToList();
                             if (creatures.Count() > 0)
@@ -401,7 +404,7 @@ namespace OGUR.Creatures
                                         if ((creature.GetActorType() != OgurActorType.PLAYER && _actorType == OgurActorType.PLAYER)
                                             ||
                                             (creature.GetActorType() == OgurActorType.PLAYER && _actorType != OgurActorType.PLAYER)
-                                            || _statuses.WillHitAnything())
+                                            || !_statuses.Allows(OAction.WontHitNonTargets))
                                         {
                                             creature.ApplyDamage(CalculateDamage(), this);
                                             if (!creature.IsActive())
@@ -472,7 +475,7 @@ namespace OGUR.Creatures
 
         public void CycleActiveSkill(int velocity)
         {
-            if (!_statuses.StopSkillCycle())
+            if (_statuses.Allows(OAction.SkillCycle))
             {
                 _skills.Cycle(velocity);
             }
@@ -486,11 +489,14 @@ namespace OGUR.Creatures
         float lastSum = 0;
         public void UseActiveSkill()
         {
-            lastSum = _baseStats.GetSum();
-            _skills.UseActive();
-            if (lastSum != _baseStats.GetSum())
+            if (_statuses.Allows(OAction.SkillUsage))
             {
-                _damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
+                lastSum = _baseStats.GetSum();
+                _skills.UseActive();
+                if (lastSum != _baseStats.GetSum())
+                {
+                    _damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
+                }
             }
         }
 
