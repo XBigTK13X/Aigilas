@@ -26,7 +26,7 @@ namespace SPX
         {
             if (Writer == null)
             {
-                Writer = new TextWriterTraceListener(@"c:\Users\kretst\Desktop\log\"+DateTime.Now.ToString("ddMMyyyyHHmmss")+"_"+DateTime.Now.Ticks.ToString()+".log");
+                Writer = new TextWriterTraceListener(@"c:\Users\kretst\Desktop\log\"+DateTime.Now.ToString("ddMMyyyyHHmmss")+"_"+Guid.NewGuid().ToString()+".log");
                 Trace.Listeners.Clear();
                 Trace.Listeners.Add(Writer);
                 Trace.TraceInformation("START: " + DateTime.Now.ToString());

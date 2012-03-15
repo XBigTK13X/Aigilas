@@ -17,11 +17,14 @@ namespace OGUR.Strategies
         private IEntity _stairsTarget;
         public override void Act()
         {
-            if (RNG.Rand.Next(0, 100) == 2)
+            if (RNG.Rand.Next(0, 1000) == 2)
             {
                 _parent.CycleActiveSkill(1);
             }
-            _parent.UseActiveSkill();
+            if (RNG.Rand.Next(0, 100) <= 1)
+            {
+                _parent.UseActiveSkill();
+            }
             if (AbleToMove())
             {
                 if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
