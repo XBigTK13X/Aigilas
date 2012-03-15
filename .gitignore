@@ -6,3 +6,4 @@ bin/
 _ReSharper.OGUR/
 suo
 *suo*
+*testsettings*

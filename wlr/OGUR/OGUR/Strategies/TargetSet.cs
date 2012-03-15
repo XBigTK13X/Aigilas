@@ -12,7 +12,8 @@ namespace OGUR.Strategies
     public class TargetSet
     {
         private List<ICreature> _targets = new List<ICreature>();
-        private List<int> _targetTypes = new List<int>(); 
+        private List<int> _targetTypes = new List<int>();
+        private List<int> _targetEntityTypes = new List<int>();
         private readonly ICreature _parent;
 
         public TargetSet(ICreature parent)
@@ -34,6 +35,14 @@ namespace OGUR.Strategies
             }
         }
 
+        public void AddEntityTypes(params int[] entityTypes)
+        {
+            foreach (var type in entityTypes)
+            {
+                _targetEntityTypes.Add(type);
+            }
+        }
+
         public void AddTargets(ICreature source)
         {
             _targets.AddRange(source.GetTargets()._targets);
@@ -48,7 +57,6 @@ namespace OGUR.Strategies
             }
             return targets;
         }
-
 
         private List<ICreature> _calculatedTargets;
         private float dist;

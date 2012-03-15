@@ -26,7 +26,6 @@ namespace OGUR.Entities
                 {
                     player.PerformInteraction();
                     DungeonFactory.GetNextFloor(GetTargetLocation());
-
                 }
             }
         }
