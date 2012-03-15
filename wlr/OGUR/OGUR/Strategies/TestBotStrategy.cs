@@ -2,6 +2,7 @@
 using OGUR.Skills;
 using SPX.Entities;
 using SPX.Paths;
+using SPX.Core;
 
 namespace OGUR.Strategies
 {
@@ -16,6 +17,11 @@ namespace OGUR.Strategies
         private IEntity _stairsTarget;
         public override void Act()
         {
+            if (RNG.Rand.Next(0, 100) == 2)
+            {
+                _parent.CycleActiveSkill(1);
+            }
+            _parent.UseActiveSkill();
             if (AbleToMove())
             {
                 if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
