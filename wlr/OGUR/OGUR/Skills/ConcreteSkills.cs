@@ -82,9 +82,10 @@ namespace OGUR.Skills
             target.ApplyDamage(10,_source);
             if (!target.IsActive())
             {
-                foreach (var creature in EntityManager.GetActorsSurrounding(target.GetLocation(), CombustDistance))
+                var targets = EntityManager.GetActorsSurrounding(target.GetLocation(), CombustDistance);
+                for(int ii = 0; ii < targets.Count;ii++)
                 {
-                    StatusFactory.Apply(creature as ICreature, Status.Burn);
+                    StatusFactory.Apply(targets[ii] as ICreature, Status.Burn);
                 }
             }
         }
