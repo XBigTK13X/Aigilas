@@ -21,6 +21,10 @@ namespace OGUR.Management
         public const int Cancel = 9;
         public const int Start = 10;
         public const int Back = 11;
+        public const int LockSkill = 12;
+        public const int HotSkill1 = 13;
+        public const int HotSkill2 = 14;
+        public const int HotSkill3 = 15;
     }
     public class InputInitializer:IInputInitializer
     {
@@ -39,13 +43,17 @@ namespace OGUR.Management
                 Make(Commands.MoveLeft,Keys.Left,Buttons.LeftThumbstickLeft,Contexts.Nonfree),
                 Make(Commands.MoveRight,Keys.Right,Buttons.LeftThumbstickRight,Contexts.Nonfree),
                 Make(Commands.Confirm,Keys.Space,Buttons.A,Contexts.All),
-                Make(Commands.Inventory,Keys.E,Buttons.Y,Contexts.All),
+                Make(Commands.Inventory,Keys.E,Buttons.DPadUp,Contexts.All),
                 Make(Commands.Cancel,Keys.R,Buttons.X,Contexts.All),
                 Make(Commands.Start,Keys.Enter,Buttons.Start,Contexts.All),
                 Make(Commands.Back,Keys.Back,Buttons.Back,Contexts.All),
                 Make(Commands.CycleRight,Keys.D,Buttons.RightShoulder,Contexts.All),
                 Make(Commands.CycleLeft,Keys.A,Buttons.LeftShoulder,Contexts.All),
-                Make(Commands.Skill,Keys.S,Buttons.RightTrigger,Contexts.All)
+                Make(Commands.Skill,Keys.S,Buttons.RightTrigger,Contexts.All),
+                Make(Commands.LockSkill,Keys.RightControl,Buttons.LeftTrigger,Contexts.All),
+                Make(Commands.HotSkill1,Keys.D1,Buttons.X,Contexts.All),
+                Make(Commands.HotSkill2,Keys.D2,Buttons.Y,Contexts.All),
+                Make(Commands.HotSkill3,Keys.D3,Buttons.B,Contexts.All)
             };
         }
     }

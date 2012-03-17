@@ -5,12 +5,20 @@ using OGUR.Entities;
 using OGUR.Management;
 using OGUR.Creatures;
 using SPX.Core;
+using System.Collections.Generic;
 namespace OGUR.Strategies
 {
     public class ControlledByPlayer : IStrategy
     {
         private bool _isCasting = false;
         private Point2 _keyVelocity = new Point2(0, 0);
+
+        private static readonly List<int> __hotkeys = new List<int>()
+        {
+            Commands.HotSkill1,
+            Commands.HotSkill2,
+            Commands.HotSkill3
+        };
 
         public ControlledByPlayer(ICreature parent) : base(parent)
         {
@@ -64,6 +72,24 @@ namespace OGUR.Strategies
                     if (Input.IsPressed(Commands.Skill, _parent.GetPlayerIndex()))
                     {
                         _isCasting = true;
+                    }
+
+                    foreach (var hotkey in __hotkeys)
+                    {
+                        if (Input.IsPressed(hotkey,_parent.GetPlayerIndex()))
+                        {
+                            if (!Input.IsPressed(Commands.LockSkill, _parent.GetPlayerIndex(), false))
+                            {
+                                if (_parent.SetHotSkillActive(hotkey))
+                                {
+                                    _isCasting = true;
+                                }
+                            }
+                            else
+                            {
+                                _parent.MarkHotSkill(hotkey);
+                            }
+                        }
                     }
 
                     if (_isCasting)

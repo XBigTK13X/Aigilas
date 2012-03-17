@@ -15,6 +15,7 @@ namespace OGUR.HUD
         private InventoryHud _inventory;
         private SkillHud _skill;
         private ICreature _parent;
+        private HotkeyHud _hotkey;
 
         private static List<Vector2> playerHudPositions = new List<Vector2>()
         {
@@ -30,6 +31,7 @@ namespace OGUR.HUD
             _inventory = new InventoryHud(parent, inventory, equipment);
             _skill = new SkillHud(parent);
             _skill.Toggle();
+            _hotkey = new HotkeyHud(parent);
         }
 
         public bool ToggleInventory()

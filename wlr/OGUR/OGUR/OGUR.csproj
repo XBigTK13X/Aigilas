@@ -118,6 +118,7 @@
     <Compile Include="Dungeons\PointPoint.cs" />
     <Compile Include="Entities\Depth.cs" />
     <Compile Include="Entities\Extensions.cs" />
+    <Compile Include="HUD\HotkeyHud.cs" />
     <Compile Include="HUD\HudManager.cs" />
     <Compile Include="Creatures\Minions.cs" />
     <Compile Include="Creatures\StatBuff.cs" />

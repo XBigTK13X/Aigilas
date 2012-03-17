@@ -611,11 +611,20 @@ namespace OGUR.Creatures
             }
         }
 
-
         public void PerformInteraction()
         {
             SetInteracting(false);
             Input.Lock(Commands.Confirm, GetPlayerIndex());
+        }
+
+        public void MarkHotSkill(int hotSkillSlot)
+        {
+            _skills.MakeActiveSkillHot(hotSkillSlot);
+        }
+
+        public bool SetHotSkillActive(int hotkey)
+        {
+            return _skills.SetHotSkillsActive(hotkey);
         }
     }
 }
