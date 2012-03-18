@@ -57,33 +57,25 @@ namespace SPX.Core
             return GetFont(__fontName);
         }
 
+        private static float CalculateCameraZoom()
+        {
+            if (WindowHeight > WindowWidth)
+            {
+                return 1 + ((float)(WindowWidth - ((float)GameManager.SpriteWidth * GameManager.TileMapWidth)) / WindowWidth);
+            }
+            return 1 + (((float)WindowHeight - ((float)GameManager.SpriteHeight * GameManager.TileMapHeight)) / WindowHeight);
+        }
+
         public static void SetupCamera(GraphicsDeviceManager graphicsDevice,bool isFullScreen)
         {
             //Camera is on the gameboard center
-            __camera.Pos = new Vector2(GameManager.SpriteWidth * 15, GameManager.SpriteHeight * 10);
+            __camera.Pos = new Vector2(GameManager.SpriteWidth * GameManager.TileMapWidth/2, GameManager.SpriteHeight * GameManager.TileMapHeight/2);
             __graphicsDevice = graphicsDevice;
             __graphicsDevice.IsFullScreen = isFullScreen;
             Resolution.Init(ref graphicsDevice);
             Resolution.SetVirtualResolution(WindowWidth, WindowHeight);
             Resolution.SetResolution(WindowWidth, WindowHeight, isFullScreen);
-            if (XnaManager.WindowHeight > XnaManager.WindowWidth)
-            {
-                __camera.Zoom = 1 + ((float)(XnaManager.WindowWidth - ((float)GameManager.SpriteWidth * GameManager.TileMapWidth)) / XnaManager.WindowWidth);
-            }
-            else
-            {
-                __camera.Zoom = 1 + (((float)XnaManager.WindowHeight - ((float)GameManager.SpriteHeight * GameManager.TileMapHeight)) / XnaManager.WindowHeight);
-            }
-        }
-
-        public static Camera GetCamera()
-        {
-            return __camera;
-        }
-
-        public static GraphicsDeviceManager GetGraphicsDevice()
-        {
-            return __graphicsDevice;
+            __camera.Zoom = CalculateCameraZoom();
         }
 
         public static Vector2 GetCenter()
@@ -94,6 +86,16 @@ namespace SPX.Core
         public static Vector2 GetDimensions()
         {
             return new Vector2(WindowWidth,WindowHeight);
+        }
+
+        private static Matrix __scalingMatrix;
+        public static Matrix GetScalingMatrix()
+        {
+            if (__scalingMatrix == null)
+            {
+                __scalingMatrix = __camera.GetTransformation(__graphicsDevice.GraphicsDevice) * Resolution.getTransformationMatrix();
+            }
+            return __scalingMatrix;
         }
     }
 }

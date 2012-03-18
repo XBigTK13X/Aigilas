@@ -78,7 +78,7 @@ namespace OGUR
                          null,
                          null,
                          null,
-                         XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice) * Resolution.getTransformationMatrix());
+                         XnaManager.GetScalingMatrix());
             StateManager.Draw();
             TextManager.Draw();
             base.Draw(gameTime);
