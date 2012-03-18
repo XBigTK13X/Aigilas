@@ -10,8 +10,8 @@ namespace SPX.Core
 {
     public static class XnaManager
     {
-        public static readonly int WindowHeight = GameManager.SpriteHeight*20;
-        public static readonly int WindowWidth = GameManager.SpriteWidth*30;
+        public static readonly int WindowHeight = GameManager.SpriteHeight*20; //720
+        public static readonly int WindowWidth = GameManager.SpriteWidth*30; //1280
         private static ContentManager __assetHandler;
         private static Camera __camera = new Camera();
         private static GraphicsDeviceManager __graphicsDevice;
@@ -57,12 +57,23 @@ namespace SPX.Core
             return GetFont(__fontName);
         }
 
-        public static void SetupCamera(GraphicsDeviceManager graphicsDevice)
+        public static void SetupCamera(GraphicsDeviceManager graphicsDevice,bool isFullScreen)
         {
-            __camera.Pos = new Vector2(GameManager.SpriteWidth*15, GameManager.SpriteHeight*10);
+            //Camera is on the gameboard center
+            __camera.Pos = new Vector2(GameManager.SpriteWidth * 15, GameManager.SpriteHeight * 10);
             __graphicsDevice = graphicsDevice;
-            __camera.Zoom = 1f;
-            //__graphicsDevice.IsFullScreen = true;
+            __graphicsDevice.IsFullScreen = isFullScreen;
+            Resolution.Init(ref graphicsDevice);
+            Resolution.SetVirtualResolution(WindowWidth, WindowHeight);
+            Resolution.SetResolution(WindowWidth, WindowHeight, isFullScreen);
+            if (XnaManager.WindowHeight > XnaManager.WindowWidth)
+            {
+                __camera.Zoom = 1 + ((float)(XnaManager.WindowWidth - ((float)GameManager.SpriteWidth * GameManager.TileMapWidth)) / XnaManager.WindowWidth);
+            }
+            else
+            {
+                __camera.Zoom = 1 + (((float)XnaManager.WindowHeight - ((float)GameManager.SpriteHeight * GameManager.TileMapHeight)) / XnaManager.WindowHeight);
+            }
         }
 
         public static Camera GetCamera()

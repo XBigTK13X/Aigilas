@@ -20,7 +20,7 @@ namespace OGUR
             graphics.PreferredBackBufferHeight = XnaManager.WindowHeight;
             graphics.PreferredBackBufferWidth = XnaManager.WindowWidth;
             graphics.ApplyChanges();
-            XnaManager.SetupCamera(graphics);
+            XnaManager.SetupCamera(graphics,false);
             Content.RootDirectory = "Content";
         }
 
@@ -71,13 +71,14 @@ namespace OGUR
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
+            Resolution.BeginDraw();
             XnaManager.Renderer.Begin(SpriteSortMode.FrontToBack,
                          BlendState.AlphaBlend,
                          null,
                          null,
                          null,
                          null,
-                         XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice));
+                         XnaManager.GetCamera().GetTransformation(XnaManager.GetGraphicsDevice().GraphicsDevice) * Resolution.getTransformationMatrix());
             StateManager.Draw();
             TextManager.Draw();
             base.Draw(gameTime);
