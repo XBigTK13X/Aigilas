@@ -122,7 +122,7 @@ namespace SPX.Core
             // and clear that
             // This way we are gonna have black bars if aspect ratio requires it and
             // the clear color on the rest
-            _Device.GraphicsDevice.Clear(Color.Black);
+            _Device.GraphicsDevice.Clear(Color.CornflowerBlue);
         }
 
         static private void RecreateScaleMatrix()
@@ -144,10 +144,6 @@ namespace SPX.Core
             _Device.GraphicsDevice.Viewport = vp;
         }
 
-        /// <summary>
-        /// Get virtual Mode Aspect Ratio
-        /// </summary>
-        /// <returns>aspect ratio</returns>
         static public float getVirtualAspectRatio()
         {
             return (float)_VWidth / (float)_VHeight;

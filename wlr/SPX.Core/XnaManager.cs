@@ -88,14 +88,9 @@ namespace SPX.Core
             return new Vector2(WindowWidth,WindowHeight);
         }
 
-        private static Matrix __scalingMatrix;
         public static Matrix GetScalingMatrix()
         {
-            if (__scalingMatrix == null)
-            {
-                __scalingMatrix = __camera.GetTransformation(__graphicsDevice.GraphicsDevice) * Resolution.getTransformationMatrix();
-            }
-            return __scalingMatrix;
+            return __camera.GetTransformation(__graphicsDevice.GraphicsDevice) * Resolution.getTransformationMatrix();
         }
     }
 }
