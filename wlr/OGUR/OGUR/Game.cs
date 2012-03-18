@@ -17,10 +17,7 @@ namespace OGUR
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = XnaManager.WindowHeight;
-            graphics.PreferredBackBufferWidth = XnaManager.WindowWidth;
-            graphics.ApplyChanges();
-            XnaManager.SetupCamera(graphics,false);
+            XnaManager.SetupCamera(ref graphics,false);
             Content.RootDirectory = "Content";
         }
 
