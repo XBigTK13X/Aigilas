@@ -10,8 +10,8 @@ namespace SPX.Core
 {
     public static class XnaManager
     {
-        public static readonly int RenderHeight = 720;
-        public static readonly int RenderWidth = 1280;
+        public static readonly int RenderHeight = 1080;
+        public static readonly int RenderWidth = 1920;
         public static readonly int WindowHeight = GameManager.SpriteHeight * GameManager.TileMapHeight; //720 //1050
         public static readonly int WindowWidth = GameManager.SpriteWidth * GameManager.TileMapWidth; //1280 //1680
         private static ContentManager __assetHandler;
@@ -96,7 +96,7 @@ namespace SPX.Core
 
         public static Matrix GetScalingMatrix()
         {
-            return __camera.GetTransformation(__graphics.GraphicsDevice) * Resolution.getTransformationMatrix();
+            return Resolution.getTransformationMatrix();
         }
     }
 }

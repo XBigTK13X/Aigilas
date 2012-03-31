@@ -17,7 +17,7 @@ namespace OGUR
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
-            XnaManager.SetupCamera(ref graphics,false);
+            XnaManager.SetupCamera(ref graphics,true);
             Content.RootDirectory = "Content";
         }
 

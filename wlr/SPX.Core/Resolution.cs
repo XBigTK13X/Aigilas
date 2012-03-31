@@ -122,7 +122,7 @@ namespace SPX.Core
             // and clear that
             // This way we are gonna have black bars if aspect ratio requires it and
             // the clear color on the rest
-            _Device.GraphicsDevice.Clear(Color.CornflowerBlue);
+            _Device.GraphicsDevice.Clear(Color.Black);
         }
 
         static private void RecreateScaleMatrix()
