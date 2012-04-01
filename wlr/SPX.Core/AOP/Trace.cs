@@ -59,11 +59,15 @@ namespace SPX
                     Trace.Flush();
                 }
             }
-            catch (Exception swallow){}
-            Process ogur = new Process();
-            ogur.StartInfo.FileName = @"C:\z\dev\git\ogur\wlr\OGUR\OGUR\bin\x86\Debug\OGUR.exe";
-            ogur.Start();
-            Environment.Exit(0);
+            catch (Exception){}
+
+            if (false)
+            {
+                var ogur = new Process();
+                ogur.StartInfo.FileName = @"C:\z\dev\git\ogur\wlr\OGUR\OGUR\bin\x86\Debug\OGUR.exe";
+                ogur.Start();
+                Environment.Exit(0);
+            }
         }
     }
 }

@@ -49,16 +49,6 @@ namespace OGUR.Strategies
 
                     if (Input.IsContext(Contexts.Free, _parent.GetPlayerIndex()))
                     {
-                        var skillCycleVelocity =
-                            ((Input.IsPressed(Commands.CycleLeft, _parent.GetPlayerIndex())) ? -1 : 0)
-                            +
-                            ((Input.IsPressed(Commands.CycleRight, _parent.GetPlayerIndex())) ? 1 : 0);
-                        _parent.CycleActiveSkill(skillCycleVelocity);
-
-                        if (!_isCasting)
-                        {
-                            _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
-                        }
                         var isPress = Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex());
                         if (!isPress)
                         {
@@ -67,6 +57,23 @@ namespace OGUR.Strategies
                         if (isPress && !_parent.IsInteracting())
                         {
                             _parent.SetInteraction(true);
+                        }
+                        var skillCycleVelocity =
+                            ((Input.IsPressed(Commands.CycleLeft, _parent.GetPlayerIndex())) ? -1 : 0)
+                            +
+                            ((Input.IsPressed(Commands.CycleRight, _parent.GetPlayerIndex())) ? 1 : 0);
+                        _parent.CycleActiveSkill(skillCycleVelocity);
+
+                        if (!_isCasting)
+                        {
+                            if (!Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex(),false))
+                            {
+                                _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
+                            }
+                            if (!_keyVelocity.IsZero())
+                            {
+                                _parent.SetSkillVector(_keyVelocity);
+                            }
                         }
                     }
                     if (Input.IsPressed(Commands.Skill, _parent.GetPlayerIndex()))
@@ -94,10 +101,6 @@ namespace OGUR.Strategies
 
                     if (_isCasting)
                     {
-                        if (!_keyVelocity.IsZero())
-                        {
-                            _parent.SetSkillVector(_keyVelocity);
-                        }
                         if (_parent.GetSkillVector() == null)
                         {
                             _parent.SetSkillVector(new Point2(1, 0));

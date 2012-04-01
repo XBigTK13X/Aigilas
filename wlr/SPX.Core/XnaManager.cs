@@ -10,10 +10,10 @@ namespace SPX.Core
 {
     public static class XnaManager
     {
-        public static readonly int RenderHeight = 720;
-        public static readonly int RenderWidth = 1050;
         public static readonly int WindowHeight = GameManager.SpriteHeight * GameManager.TileMapHeight; //720 //1050
         public static readonly int WindowWidth = GameManager.SpriteWidth * GameManager.TileMapWidth; //1280 //1680
+        public static readonly int RenderHeight = WindowHeight;
+        public static readonly int RenderWidth = WindowWidth;
         private static ContentManager __assetHandler;
         private static GraphicsDeviceManager __graphics;
         public static SpriteBatch Renderer;
