@@ -10,12 +10,11 @@ namespace SPX.Core
 {
     public static class XnaManager
     {
-        public static readonly int RenderHeight = 1080;
-        public static readonly int RenderWidth = 1920;
+        public static readonly int RenderHeight = 720;
+        public static readonly int RenderWidth = 1050;
         public static readonly int WindowHeight = GameManager.SpriteHeight * GameManager.TileMapHeight; //720 //1050
         public static readonly int WindowWidth = GameManager.SpriteWidth * GameManager.TileMapWidth; //1280 //1680
         private static ContentManager __assetHandler;
-        private static Camera __camera = new Camera();
         private static GraphicsDeviceManager __graphics;
         public static SpriteBatch Renderer;
 
@@ -59,20 +58,8 @@ namespace SPX.Core
             return GetFont(__fontName);
         }
 
-        private static float CalculateCameraZoom()
-        {
-            float screenMult = 1;// 5 / 3f;
-            if (WindowHeight > WindowWidth)
-            {
-                return 1 + ((float)(WindowWidth - ((float)GameManager.SpriteWidth * GameManager.TileMapWidth)) / WindowWidth) * screenMult;
-            }
-            return 1 + (((float)WindowHeight - ((float)GameManager.SpriteHeight * GameManager.TileMapHeight)) / WindowHeight) * screenMult;
-        }
-
         public static void SetupCamera(ref GraphicsDeviceManager graphics,bool isFullScreen)
         {
-            //Camera is on the gameboard center
-            __camera.Pos = new Vector2(GameManager.SpriteWidth * GameManager.TileMapWidth/2, GameManager.SpriteHeight * GameManager.TileMapHeight/2);
             __graphics = graphics;
             __graphics.PreferredBackBufferHeight = XnaManager.WindowHeight;
             __graphics.PreferredBackBufferWidth = XnaManager.WindowWidth;
@@ -81,7 +68,6 @@ namespace SPX.Core
             Resolution.Init(ref __graphics);
             Resolution.SetVirtualResolution(WindowWidth, WindowHeight);
             Resolution.SetResolution(RenderWidth, RenderHeight, isFullScreen);
-            __camera.Zoom = 1f;
         }
 
         public static Vector2 GetCenter()
