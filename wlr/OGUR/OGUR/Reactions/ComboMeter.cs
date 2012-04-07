@@ -43,10 +43,34 @@ namespace OGUR.Reactions
 
         private ICreature _parent;
         private List<int> _elements = new List<int>();
+        private List<ComboMarker> _markers = new List<ComboMarker>();
+        private const int _maxTimer = 120;
+        private int _reactionTimer = _maxTimer;
         
+
         public ComboMeter(ICreature parent)
         {
             _parent = parent;
+        }
+
+        private void ResetComboDisplay()
+        {
+            _markers.Clear();
+            int ii = 0;
+            foreach (var element in _elements)
+            {
+                _markers.Add(new ComboMarker(_parent,element,ii));
+                ii++;
+                _markers.Last().LoadContent();
+            }
+        }
+
+        public void Draw()
+        {
+            foreach (var marker in _markers)
+            {
+                marker.Draw();
+            }
         }
 
         public void Add(int element)
@@ -83,12 +107,17 @@ namespace OGUR.Reactions
                 {
                     _elements.Add(element);
                 }
+                ResetComboDisplay();
             }
         }
 
         private IReaction reaction;
         public void Update()
         {
+            foreach (var marker in _markers)
+            {
+                marker.Update();
+            }
             int key = 0;
             if (_elements.Count() == 3)
             {
@@ -103,15 +132,22 @@ namespace OGUR.Reactions
         }
         private void React(int reactionId)
         {
-            if (__reactions.Keys.Contains(reactionId))
+            _reactionTimer--;
+            if (_reactionTimer <= 0)
             {
-                reaction = ReactionFactory.Create(__reactions[reactionId]);
-                if (reaction != null)
+                
+                if (__reactions.Keys.Contains(reactionId))
                 {
-                    reaction.Affect(_parent);
+                    reaction = ReactionFactory.Create(__reactions[reactionId]);
+                    if (reaction != null)
+                    {
+                        reaction.Affect(_parent);
+                    }
                 }
+                _elements.Clear();
+                ResetComboDisplay();
+                _reactionTimer = _maxTimer;
             }
-            _elements.Clear();
         }
     }
 }

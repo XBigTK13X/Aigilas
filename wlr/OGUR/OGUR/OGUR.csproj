@@ -116,6 +116,7 @@
     <Compile Include="Creatures\CreatureAction.cs" />
     <Compile Include="Creatures\CreatureFactory.cs" />
     <Compile Include="Dungeons\PointPoint.cs" />
+    <Compile Include="Entities\ComboMarker.cs" />
     <Compile Include="Entities\Depth.cs" />
     <Compile Include="Entities\Extensions.cs" />
     <Compile Include="HUD\HotkeyHud.cs" />

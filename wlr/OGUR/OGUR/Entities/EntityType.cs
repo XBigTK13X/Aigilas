@@ -15,5 +15,6 @@ namespace OGUR
         public const int SKILL_EFFECT = 6;
         public const int SKILL_EFFECT_GENERATOR = 7;
         public const int ALTAR = 8;
+        public const int COMBO_MARKER = 9;
     }
 }

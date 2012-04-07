@@ -20,5 +20,6 @@ namespace OGUR.Management
         public const int MINION = 10;
         public const int ALTAR = 11;
         public const int ZORB = 12;
+        public const int COMBO_MARKER = 13;
     }
 }

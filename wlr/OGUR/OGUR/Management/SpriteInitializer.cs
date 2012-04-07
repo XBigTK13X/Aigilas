@@ -27,7 +27,8 @@ namespace OGUR.Management
                 Make(SpriteType.SKILL_EFFECT,8, 1),
                 Make(SpriteType.ALTAR,9, 1),
                 Make(SpriteType.ZORB,10,1),
-                Make(SpriteType.MINION,11,1)
+                Make(SpriteType.MINION,11,1),
+                Make(SpriteType.COMBO_MARKER,13,1)
             };
         }
     }

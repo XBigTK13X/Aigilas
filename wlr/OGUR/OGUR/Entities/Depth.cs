@@ -15,5 +15,6 @@ namespace OGUR
         public const float Creature = .5f;
         public const float Player = .7f;
         public const float SkillEffect = .75f;
+        public const float ComboMarker = .999f;
     }
 }

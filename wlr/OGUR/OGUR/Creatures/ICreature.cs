@@ -217,8 +217,9 @@ namespace OGUR.Creatures
             base.Draw();
             if (_hudManager != null)
             {
-                _hudManager.Draw();
+                _hudManager.Draw();                
             }
+            _combo.Draw();
             _damageText.Draw();
         }
 
