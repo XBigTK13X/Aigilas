@@ -35,6 +35,38 @@ namespace OGUR.Reactions
         public const int ATROPHY = 25;
         public const int NEUROSIS = 26;
         public const int CONFUSE = 27;
+
+        public static readonly List<string> Names = new List<string>()
+        {
+            "SWEAT",
+            "MAGMA",
+            "EXPLOSION",
+            "SCORCH",
+            "BLIND",
+            "LACTIC ACID",
+            "MIND BLOWN",
+            "VENT",
+            "DROWN",
+            "REFLECT",
+            "DRENCH",
+            "PNEUMONIA",
+            "LOBOTOMY",
+            "RUST",
+            "PURIFY",
+            "ECLIPSE",
+            "RESPECT",
+            "CRAFTSMAN",
+            "FLASH",
+            "METABOLISM",
+            "FAST FORWARD",
+            "BLANK",
+            "YIN YANG",
+            "EXPOSE",
+            "ENLIGHTEN",
+            "ATROPHY",
+            "NEUROSIS",
+            "CONFUSE"
+        };
     }
     public class ReactionFactory
     {

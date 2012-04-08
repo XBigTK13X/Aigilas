@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OGUR.Creatures;
 using OGUR.Entities;
+using SPX.Text;
 
 namespace OGUR.Reactions
 {
@@ -135,13 +136,13 @@ namespace OGUR.Reactions
             _reactionTimer--;
             if (_reactionTimer <= 0)
             {
-                
                 if (__reactions.Keys.Contains(reactionId))
                 {
                     reaction = ReactionFactory.Create(__reactions[reactionId]);
                     if (reaction != null)
                     {
                         reaction.Affect(_parent);
+                        TextManager.Add(new ActionText(ReactionId.Names[__reactions[reactionId]], 10, (int)_parent.GetLocation().PosX, (int)_parent.GetLocation().PosY));
                     }
                 }
                 _elements.Clear();
