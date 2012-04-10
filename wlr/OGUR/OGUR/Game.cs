@@ -7,6 +7,7 @@ using SPX.Core;
 using SPX.Text;
 using OGUR.Management;
 using SPX.Sprites;
+using Microsoft.Xna.Framework.Media;
 
 namespace OGUR
 {
@@ -35,6 +36,7 @@ namespace OGUR
             XnaManager.Renderer = new SpriteBatch(GraphicsDevice); ;
             StateManager.LoadContent();
             TextManager.LoadContent();
+            MediaPlayer.Play(Content.Load<Song>("MainTheme"));
         }
 
         protected override void UnloadContent()
