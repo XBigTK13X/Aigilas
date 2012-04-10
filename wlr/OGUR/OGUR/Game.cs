@@ -37,6 +37,7 @@ namespace OGUR
             StateManager.LoadContent();
             TextManager.LoadContent();
             MediaPlayer.Play(Content.Load<Song>("MainTheme"));
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void UnloadContent()

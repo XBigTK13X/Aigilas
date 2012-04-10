@@ -10,7 +10,7 @@ namespace OGUR.Creatures
     public class Stats
     {
         public static readonly float DefaultMoveSpeed = GameManager.SpriteHeight;
-        public const float DefaultCoolDown = 36;
+        public const float DefaultCoolDown = 40;
         public const float DefaultRegenRate = 1;
 
         private readonly Dictionary<string, float> _stats = new Dictionary<string, float>();
