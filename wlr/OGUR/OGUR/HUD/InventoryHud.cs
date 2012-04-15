@@ -36,7 +36,7 @@ namespace OGUR.HUD
         {
             if (_isVisible)
             {
-                XnaManager.Renderer.Draw(_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,ZDepth.HudBG);
+                XnaManager.Renderer.Draw(_menuBase,GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.Black, 0f, new Vector2(0,0), XnaManager.GetCenter(), SpriteEffects.None,ZDepth.HudBG);
                 _textHandler.Draw();
                 _deltas.Draw();
                 _equipHud.Draw();
