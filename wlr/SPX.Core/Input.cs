@@ -34,13 +34,15 @@ namespace SPX.Core
     public class Input
     {        
         //Maps a playerId to a context
-        private static readonly Dictionary<int, int> __contexts = new Dictionary<int, int>()
-                                                                  {
-                                                                      {0, Contexts.Free},
-                                                                      {1, Contexts.Free},
-                                                                      {2, Contexts.Free},
-                                                                      {3, Contexts.Free}
-                                                                  };
+        private static readonly Dictionary<int, int> __contexts = 
+            new Dictionary<int, int>()
+            {
+                {0, Contexts.Free},
+                {1, Contexts.Free},
+                {2, Contexts.Free},
+                {3, Contexts.Free}
+            };
+
         //Lists what commands are locked for a given player
         private static readonly List<CommandLock> __locks = new List<CommandLock>(); 
 
@@ -62,6 +64,13 @@ namespace SPX.Core
         private static bool __isInputActive = false;
         private static bool __isDown = false;
 
+        private static int __controllerCount = 0;
+
+        public static int GetPlayerCount()
+        {
+            return __controllerCount;
+        }
+
         public static void Setup(IInputInitializer initializer)
         {
             foreach (var command in initializer.GetCommands())
@@ -73,24 +82,20 @@ namespace SPX.Core
                     __lockOnPress.Add(command.Command, command.LockContext);
                 }
             }
+
+            //Call an update to detect controllers that are connected
+            Update();
         }
 
         private static bool IsDown(int command, int playerIndex)
         {
-            if (!__inputs.ContainsKey(playerIndex))
+            if (__inputs[playerIndex])
             {
-                __inputs.Add(playerIndex, GamePad.GetState(_playerIndex[playerIndex]).IsConnected);
-            } 
+                __isDown = GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command]);
+            }
             else
             {
-                if (__inputs[playerIndex])
-                {
-                    __isDown = GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command]);
-                }
-                else
-                {
-                    __isDown = Keyboard.GetState().IsKeyDown(_keyboardMapping[command]);
-                }
+                __isDown = Keyboard.GetState().IsKeyDown(_keyboardMapping[command]);
             }
             return __isDown;
         }
@@ -170,8 +175,17 @@ namespace SPX.Core
             }
         }
 
+        private static readonly List<PlayerIndex> __playerIndices = new List<PlayerIndex>()
+        {
+            PlayerIndex.One,
+            PlayerIndex.Two,
+            PlayerIndex.Three,
+            PlayerIndex.Four,
+        };
+
         public static void Update()
         {
+            //Remove command locks if the associated key/button isn't being pressed
             for(int ii = 0;ii<__locks.Count();ii++)
             {
                 if (!IsDown(__locks[ii].Command, __locks[ii].PlayerIndex))
@@ -180,6 +194,16 @@ namespace SPX.Core
                     ii--;
                 }
             }
+
+            //Update the number of players currently connected via controller
+            for(int ii = 0;ii<__playerIndices.Count();ii++)
+            {
+                __controllerCount += (GamePad.GetState(__playerIndices[ii]).IsConnected)?1:0;
+                if (!__inputs.ContainsKey(ii))
+                {
+                    __inputs.Add(ii, GamePad.GetState(_playerIndex[ii]).IsConnected);
+                } 
+            }          
         }
         private class CommandLock
         {
