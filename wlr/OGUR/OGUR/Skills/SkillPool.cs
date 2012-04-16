@@ -158,10 +158,14 @@ namespace OGUR.Skills
             }
             return false;
         }
-
-        internal IList<string> GetHotSkillNames()
+        
+        public string GetHotSkillName(int hotSkillSlot)
         {
-            return _hotSkills.Values.ToList();
+            if (_hotSkills.ContainsKey(hotSkillSlot))
+            {
+                return _hotSkills[hotSkillSlot];
+            }
+            return "";
         }
     }
 }

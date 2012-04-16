@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using OGUR.Creatures;
 using SPX.Util;
 using SPX.Core;
+using OGUR.Management;
 
 namespace OGUR.HUD
 {
@@ -10,8 +11,8 @@ namespace OGUR.HUD
     {
         private static string __separator = "|";
         
-        private Vector2 _manaPosition = new Vector2();
-        
+        private Vector2 _manaPosition = new Vector2();        
+
         public SkillHud(ICreature owner) : base(owner,GameManager.SpriteWidth,XnaManager.WindowHeight / 4) 
         {
             _manaPosition = new Vector2(GetHudOrigin().X, GetHudOrigin().Y + XnaManager.WindowHeight / 4);
@@ -24,13 +25,10 @@ namespace OGUR.HUD
 
         private string GetSkillStrings()
         {
-            var result = "";
-            foreach(var hotSkill in _parent.GetHotSkillNames())
-            {
-                result += hotSkill + __separator;
-            }
-            result += _parent.GetActiveSkillName();
-            return result;
+            return "A:" + _parent.GetActiveSkillName() + __separator +
+                     "X:" + _parent.GetHotSkillName(Commands.HotSkill1) + __separator +
+                     "Y:" + _parent.GetHotSkillName(Commands.HotSkill2) + __separator +
+                     "B:" + _parent.GetHotSkillName(Commands.HotSkill3) + __separator;
         }
 
         public void Update()

@@ -628,9 +628,9 @@ namespace OGUR.Creatures
             return _skills.SetHotSkillsActive(hotkey);
         }
 
-        public IList<string> GetHotSkillNames()
+        internal object GetHotSkillName(int hotSkillSlot)
         {
-            return _skills.GetHotSkillNames();
+            return _skills.GetHotSkillName(hotSkillSlot);
         }
     }
 }
