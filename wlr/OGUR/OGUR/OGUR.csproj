@@ -189,6 +189,7 @@
     <Compile Include="Statuses\StatusPool.cs" />
     <Compile Include="Strategies\ConfusedStrategy.cs" />
     <Compile Include="Strategies\AttackSelfStrategy.cs" />
+    <Compile Include="Strategies\StraightLineStrategy.cs" />
     <Compile Include="Strategies\TestBotStrategy.cs" />
     <Compile Include="Strategies\FleeStrategy.cs" />
     <Compile Include="Strategies\MinionStrategies.cs" />

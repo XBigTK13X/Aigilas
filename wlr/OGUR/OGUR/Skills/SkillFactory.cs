@@ -12,7 +12,7 @@ namespace OGUR.Skills
     {
         public const string FIREBALL = "Fireball";
         public const string NO_SKILL = "No Skill";
-        //Sloth
+        //Sloth Acolyte
         public const string FLOOR_SPIKES = "Floor Spikes";
         public const string DART = "Dart";
         public const string DART_TRAP = "Dart Trap";
@@ -20,34 +20,34 @@ namespace OGUR.Skills
         public const string ACID_NOZZLE = "Acid Nozzle";
         public const string REMOTE_MINE = "Remote Mine";
         public const string VAPOR_IMPLANT = "Vapor Implant";
-        //Envy
+        //Envy Acolyte
         public const string CONFUSION = "Confusion";
         public const string WEAK_KNEEES = "Weak Knees";
         public const string VENO_FIST = "Venom Fist";
         public const string ABSORB = "Absorb";
         public const string MUTINY = "Mutiny";
-        //Greed
+        //Greed Acolyte
         public const string SOUL_REINFORCEMENT = "Soul Reinforcement";
         public const string HORDER = "Horder";
         public const string SPAWN_ITEM = "Drop Rate (+)";
         public const string THROW_ITEM = "Throw Item";
         public const string STEAL_ITEM = "Steal Item";
-        //Wrath
+        //Wrath Acolyte
         public const string FLAME_HAMMER = "Flame Hammer";
         public const string GUSH = "Gush";
         public const string SOUL_CRUSH = "Soul Crush";
         public const string COMBUST = "Combust";
         public const string HORRIFY = "Horrify";
-        //Gluttony
+        //Gluttony Acolyte
         public const string FORGET_SKILL = "Forget Skill";
-        //Lust
+        //Lust Acolyte
         public const string REGEN_ALL = "Regen All";
         public const string SPEED_UP = "Speed (+) All";
         public const string ENVENOM = "Envenom";
         public const string MAGIC_MAP = "Magic Map";
         public const string COLD_SHOULDER = "Cold Shoulder";
         public const string CAVALRY = "Cavalry";
-        //Pride
+        //Pride Acolyte
         public const string STRENGTH_UP = "Strength (+)";
         public const string MANA_UP = "Mana (+)";
         public const string ELECTRIFY = "Electrify";
@@ -57,6 +57,10 @@ namespace OGUR.Skills
 
         public const string EXPLODE = "Explode";
         public const string VAPOR_CLOUD = "Vapor Cloud";
+
+        //Wrath
+        public const string DISMEMBERMENT = "Dismemberment";
+
 
         public static readonly string[] Values = 
         {
@@ -98,7 +102,8 @@ namespace OGUR.Skills
             SkillId.VENO_FIST,
             SkillId.WALL_PUNCH,
             SkillId.WEAK_KNEEES,
-            SkillId.VAPOR_CLOUD
+            SkillId.VAPOR_CLOUD,
+            SkillId.DISMEMBERMENT
         };
     }
     class SkillFactory
@@ -116,6 +121,7 @@ namespace OGUR.Skills
                 case SkillId.CONFUSION:return new ConfusionSkill();
                 case SkillId.DART:return new DartSkill();
                 case SkillId.DART_TRAP: return new DartTrapSkill();
+                case SkillId.DISMEMBERMENT: return new DismembermentSkill();
                 case SkillId.ELECTRIFY: return new ElectrifySkill();
                 case SkillId.ENVENOM: return new EnvenomSkill();
                 case SkillId.EXPLODE: return new ExplodeSkill();
@@ -147,7 +153,7 @@ namespace OGUR.Skills
                 case SkillId.WEAK_KNEEES:return new WeakKneesSkill();
                 case SkillId.VAPOR_CLOUD: return new VaporCloudSkill();
                 default:
-                    throw new Exception("You forgot to define the new skill in the Factory...YOU FOOL!"); 
+                    throw new Exception("A SkillId to Skill mapping was not defined in the SkillFactory for ("+idSkill+"). This is 100% the fault of whoever wrote the code."); 
             }
         }
 

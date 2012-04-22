@@ -451,4 +451,18 @@ namespace OGUR.Skills
             StatusFactory.Apply(target, Status.WeakKnees);
         }
     }
+
+    public class DismembermentSkill : ISkill
+    {
+        public DismembermentSkill()
+            : base(SkillId.DISMEMBERMENT, AnimationType.SELF)
+        { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 1); }
+        public override void Activate(ICreature target) 
+        {
+            for (int ii = 1; ii < GameManager.TileMapWidth - 1; ii++)
+            {
+                CreatureFactory.Create(OgurActorType.HAND, new Point2(ii, 1));
+            }
+        }
+    }
 }

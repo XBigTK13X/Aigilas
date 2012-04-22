@@ -17,6 +17,8 @@ namespace OGUR.Dungeons
         public static int BlocksHigh = 20;
         public static int BlocksWide = 30;
 
+        private static int __floorCount = 0;
+
         private static Dictionary<int, DungeonSet> _world = new Dictionary<int, DungeonSet>();
         private static List<Entity> _cache = new List<Entity>(); 
 
@@ -48,9 +50,19 @@ namespace OGUR.Dungeons
             _cache = new List<Entity>();
             _world.Add(Location.Depths,new DungeonSet(Location.Start));
         }
+
+        public static int GetFloorCount()
+        {
+            return __floorCount;
+        }
+
+        public static void IncreaseFloorCount()
+        {
+            __floorCount++;
+        }
     }
 
-    internal class DungeonSet
+    public class DungeonSet
     {
         private int _currentFloor = 0;
         private readonly Dictionary<int,Dungeon> _floors = new Dictionary<int, Dungeon>();
@@ -87,6 +99,7 @@ namespace OGUR.Dungeons
             if (!_floors.ContainsKey(_currentFloor))
             {
                 _floors.Add(_currentFloor, new Dungeon());
+                DungeonFactory.IncreaseFloorCount();
             }
             _floors[_currentFloor].LoadTiles(goingUp);
         }

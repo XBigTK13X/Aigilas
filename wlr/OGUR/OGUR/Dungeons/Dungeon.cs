@@ -22,6 +22,7 @@ namespace OGUR.Dungeons
         private const int itemCap = 4;
         private const int itemBase = 1;
         private const int startingItemAmount = 55;
+        private const int bossLevelMod = 0;
 
         private static int enemyCapModifier = 0;
         private static int enemyBaseModifier = 0;
@@ -56,7 +57,7 @@ namespace OGUR.Dungeons
             Init();
             PlaceRooms();
             ConvertRoomsToWalls();
-            PlaceStairs();
+            PlaceStairs();            
             PlaceCreatures(rand.Next(enemyBase+enemyBaseModifier, enemyCap+enemyCapModifier));
             PlaceItems(rand.Next(itemBase, itemCap));
             PlaceFloor();
@@ -145,7 +146,9 @@ namespace OGUR.Dungeons
             //Give player random objects
             for (int ii = 0; ii < startingItemAmount; ii++)
             {
-                (EntityManager.GetActors(OgurActorType.PLAYER).ElementAt(rand.Next(playerCount)) as ICreature).PickupItem(ItemFactory.CreateRandomPlain());
+                (EntityManager.GetActors(OgurActorType.PLAYER)
+                    .ElementAt((playerCount==1)?0:rand.Next(playerCount)) as ICreature)
+                    .PickupItem(ItemFactory.CreateRandomPlain());
             }
            
         }
@@ -189,11 +192,20 @@ namespace OGUR.Dungeons
 
         private void PlaceCreatures(int amountOfCreatures)
         {
-            while(amountOfCreatures>0)
+            //if (DungeonFactory.GetFloorCount() % bossLevelMod == 1)
+            if(true)
             {
-                amountOfCreatures--;
                 var randomPoint = new Point2(FindRandomFreeTile());
-                dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.CreateRandom(randomPoint);
+                dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.Create(OgurActorType.WRATH,randomPoint);
+            }
+            else
+            {
+                while (amountOfCreatures > 0)
+                {
+                    amountOfCreatures--;
+                    var randomPoint = new Point2(FindRandomFreeTile());
+                    dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.CreateRandom(randomPoint);
+                }
             }
         }
 

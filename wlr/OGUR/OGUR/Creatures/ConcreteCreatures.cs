@@ -45,4 +45,23 @@ namespace OGUR.Creatures
             Add(SkillId.FIREBALL);
         }
     }
+    class Wrath : AbstractCreature
+    {
+        public Wrath(): base(OgurActorType.WRATH,SpriteType.WRATH)
+        {
+            Compose(Elements.PHYSICAL);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            Add(SkillId.DISMEMBERMENT);
+        }
+    }
+    class Hand: AbstractCreature
+    {
+        public Hand(): base(OgurActorType.HAND,SpriteType.HAND)
+        {
+            Compose(Elements.PHYSICAL);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            _isBlocking = false;
+            _strategy = new StraightLineStrategy(this);
+        }
+    }
 }

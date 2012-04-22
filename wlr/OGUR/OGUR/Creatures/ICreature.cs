@@ -70,6 +70,8 @@ namespace OGUR.Creatures
                 case OgurActorType.MINION: return SpriteType.MINION;
                 case OgurActorType.PLAYER:return SpriteType.PLAYER_STAND;
                 case OgurActorType.ZORB:return SpriteType.ZORB;
+                case OgurActorType.WRATH: return SpriteType.WRATH;
+                case OgurActorType.HAND: return SpriteType.HAND;
                 default:return SpriteType.CREATURE;
             }
         }
@@ -85,7 +87,10 @@ namespace OGUR.Creatures
             if (_class != cClass || cClass == null || cClass == CreatureClass.NULL)
             {
                 _class = cClass ?? CreatureClass.NULL;
-                _skills = new SkillPool(this);
+                if (_skills == null)
+                {
+                    _skills = new SkillPool(this);
+                }
                 _skills.Add(_class.GetLevelSkills(_currentLevel));
                 foreach (var elem in _composition)
                 {
@@ -386,7 +391,7 @@ namespace OGUR.Creatures
                 if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN))
                 {
                     target.Reset(xVel + GetLocation().PosX, yVel + GetLocation().PosY);
-                    if (!CoordVerifier.IsBlocked(target))
+                    if (!IsBlocking() || !CoordVerifier.IsBlocked(target))
                     {
                         Move(xVel, yVel);
                         Set(StatType.MOVE_COOL_DOWN, 0);

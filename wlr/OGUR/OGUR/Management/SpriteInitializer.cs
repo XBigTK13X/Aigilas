@@ -28,7 +28,9 @@ namespace OGUR.Management
                 Make(SpriteType.ALTAR,9, 1),
                 Make(SpriteType.ZORB,10,1),
                 Make(SpriteType.MINION,11,1),
-                Make(SpriteType.COMBO_MARKER,13,1)
+                Make(SpriteType.COMBO_MARKER,13,1),
+                Make(SpriteType.WRATH,14,1),
+                Make(SpriteType.HAND,15,1)
             };
         }
     }

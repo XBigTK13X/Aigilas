@@ -21,5 +21,7 @@ namespace OGUR.Management
         public const int ALTAR = 11;
         public const int ZORB = 12;
         public const int COMBO_MARKER = 13;
+        public const int WRATH = 14;
+        public const int HAND = 15;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using OGUR.Creatures;
 using OGUR.Skills;
+using SPX.Core;
 
 namespace OGUR.Strategies
 {
@@ -18,6 +19,10 @@ namespace OGUR.Strategies
         {
             if (AbleToMove())
             {
+                if (RNG.Rand.Next(0, 10) == 2)
+                {
+                    _parent.CycleActiveSkill(1);
+                }
                 if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
                 {
                     if (opponent != null)
@@ -28,6 +33,10 @@ namespace OGUR.Strategies
                     {
                         _parent.UseActiveSkill();
                     }
+                }
+                else
+                {
+                    _parent.UseActiveSkill();
                 }
                 if (targetPath.HasMoves())
                 {

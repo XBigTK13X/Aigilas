@@ -33,12 +33,11 @@ namespace OGUR.Creatures
         {
             switch(actorType)
             {
-                case OgurActorType.PEON:
-                    return new Peon();
-                case OgurActorType.ZORB:
-                    return new Zorb();
-                default:
-                    throw new Exception("You forgot to define Factory generation logic for: "+actorType);
+                case OgurActorType.PEON:return new Peon();
+                case OgurActorType.ZORB:return new Zorb();
+                case OgurActorType.WRATH:return new Wrath();
+                case OgurActorType.HAND: return new Hand();
+                default:throw new Exception("No Factory generation logic for: "+actorType);
             }
         }
 

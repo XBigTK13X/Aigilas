@@ -14,5 +14,7 @@ namespace OGUR.Creatures
         public const int ZORB = 6;
         public const int NONPLAYER = 7;
         public const int DART_TRAP = 8;
+        public const int WRATH = 9;
+        public const int HAND = 10;
     }
 }
