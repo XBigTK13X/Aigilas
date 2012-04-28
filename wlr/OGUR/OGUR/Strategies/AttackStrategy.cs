@@ -6,6 +6,9 @@ namespace OGUR.Strategies
 {
     public class AttackStrategy : IStrategy
     {
+        private int _skillCooldown = 0;
+        private int _skillCooldownMax = 10;
+
         public AttackStrategy(ICreature parent,params int[] targetTypes)
             : base(parent)
         {
@@ -23,20 +26,25 @@ namespace OGUR.Strategies
                 {
                     _parent.CycleActiveSkill(1);
                 }
-                if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
+                _skillCooldown--;
+                if (_skillCooldown <= 0)
                 {
-                    if (opponent != null)
+                    if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
                     {
-                        _parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
+                        if (opponent != null)
+                        {
+                            _parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
+                        }
+                        if (_parent.GetSkillVector().GridX != 0 || _parent.GetSkillVector().GridY != 0)
+                        {
+                            _parent.UseActiveSkill();
+                        }
                     }
-                    if (_parent.GetSkillVector().GridX != 0 || _parent.GetSkillVector().GridY != 0)
+                    else
                     {
                         _parent.UseActiveSkill();
                     }
-                }
-                else
-                {
-                    _parent.UseActiveSkill();
+                    _skillCooldown = _skillCooldownMax;
                 }
                 if (targetPath.HasMoves())
                 {

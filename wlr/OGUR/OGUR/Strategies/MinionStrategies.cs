@@ -12,7 +12,7 @@ namespace OGUR.Strategies
 
         public override void Act()
         {
-            if (_parent.Get(StatType.MOVE_COOL_DOWN) >= _parent.GetMax(StatType.MOVE_COOL_DOWN))
+            if (_parent.IsCooledDown())
             {
                 _parent.SetSkillVector(_parent.GetSkillVector().RotateClockwise());
                 _parent.UseActiveSkill();
@@ -30,7 +30,7 @@ namespace OGUR.Strategies
         }
         public override void Act()
         {
-            if (_parent.Get(StatType.MOVE_COOL_DOWN) >= _parent.GetMax(StatType.MOVE_COOL_DOWN))
+            if (_parent.IsCooledDown())
             {
                 _parent.UseActiveSkill();
                 _parent.ApplyDamage(5, null, false);

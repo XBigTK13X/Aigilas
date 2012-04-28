@@ -172,6 +172,11 @@ namespace OGUR.Creatures
             return item;
         }
 
+        public bool IsCooledDown()
+        {
+            return Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN);
+        }
+
         public override void Update()
         {
             _statuses.Update();
@@ -183,7 +188,7 @@ namespace OGUR.Creatures
             {
                 if (_isPlaying)
                 {
-                    if (Get(StatType.MOVE_COOL_DOWN) < GetMax(StatType.MOVE_COOL_DOWN))
+                    if (!IsCooledDown())
                     {
                         Adjust(StatType.MOVE_COOL_DOWN, 1);
                     }
@@ -388,7 +393,7 @@ namespace OGUR.Creatures
         {
             if (_statuses.Allows(OAction.Movement))
             {
-                if ((xVel != 0 || yVel != 0) && Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN))
+                if ((xVel != 0 || yVel != 0) && IsCooledDown())
                 {
                     target.Reset(xVel + GetLocation().PosX, yVel + GetLocation().PosY);
                     if (!IsBlocking() || !CoordVerifier.IsBlocked(target))

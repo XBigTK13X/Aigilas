@@ -50,7 +50,7 @@ namespace OGUR.Strategies
             }
             if (null != targetPath)
             {
-                if (targetPath.HasMoves() && _parent.Get(StatType.MOVE_COOL_DOWN) >= _parent.GetMax(StatType.MOVE_COOL_DOWN))
+                if (targetPath.HasMoves() && _parent.IsCooledDown())
                 {
                     return true;
                 }

@@ -456,7 +456,7 @@ namespace OGUR.Skills
     {
         public DismembermentSkill()
             : base(SkillId.DISMEMBERMENT, AnimationType.SELF)
-        { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 1); }
+        { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 3); }
         public override void Activate(ICreature target) 
         {
             for (int ii = 1; ii < GameManager.TileMapWidth - 1; ii++)
