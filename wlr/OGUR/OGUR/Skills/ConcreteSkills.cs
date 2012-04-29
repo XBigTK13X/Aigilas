@@ -459,9 +459,13 @@ namespace OGUR.Skills
         { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 3); }
         public override void Activate(ICreature target) 
         {
+            int openCell = RNG.Rand.Next(1, GameManager.TileMapWidth - 1);
             for (int ii = 1; ii < GameManager.TileMapWidth - 1; ii++)
             {
-                CreatureFactory.Create(OgurActorType.HAND, new Point2(ii, 1));
+                if (ii != openCell)
+                {
+                    CreatureFactory.Create(OgurActorType.HAND, new Point2(ii, 1));
+                }
             }
         }
     }
