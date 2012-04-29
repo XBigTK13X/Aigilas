@@ -280,7 +280,7 @@ namespace SPX.Entities
         }
         public static IActor GetTouchingCreature(IEntity entity)
         {
-            return _contents.Where(c=>c.GetEntityType() == EntityType.ACTOR).SingleOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
+            return _contents.Where(c=>c.GetEntityType() == EntityType.ACTOR).FirstOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
         }
 
         private static IEnumerable<Point2> emptyLocations;

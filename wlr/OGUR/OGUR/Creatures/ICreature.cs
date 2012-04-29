@@ -432,6 +432,7 @@ namespace OGUR.Creatures
                 }
             }
         }
+
         public void MoveTo(Point2 targetPosition)
         {
             MoveIfPossible(targetPosition.PosX - GetLocation().PosX, targetPosition.PosY - GetLocation().PosY);

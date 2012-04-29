@@ -19,10 +19,10 @@ namespace OGUR.Strategies
             }
         }
 
-        private Point2 _transfer = new Point2(0, 0);
         public override void Act()
         {
-            _parent.Move(0, 1);
+            Console.WriteLine(_parent.Get(StatType.MOVE_COOL_DOWN));
+            _parent.MoveIfPossible(0, 1);
         }
     }
 }
