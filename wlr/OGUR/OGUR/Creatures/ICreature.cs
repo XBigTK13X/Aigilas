@@ -112,7 +112,8 @@ namespace OGUR.Creatures
             {
                 _hudManager = new HudManager(this,_inventory,_equipment);
             }
-            _isBlocking = true;
+            if(_isBlocking == null)
+                _isBlocking = true;
             _actorType = type;
             _baseStats = new Stats(stats);
             _maxStats = new Stats(_baseStats);

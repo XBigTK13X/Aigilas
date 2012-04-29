@@ -21,8 +21,11 @@ namespace OGUR.Strategies
 
         public override void Act()
         {
-            Console.WriteLine(_parent.Get(StatType.MOVE_COOL_DOWN));
             _parent.MoveIfPossible(0, 1);
+            if(_parent.GetLocation().GridY >= GameManager.TileMapHeight-1)
+            {
+                _parent.SetInactive();
+            }
         }
     }
 }

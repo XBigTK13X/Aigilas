@@ -15,7 +15,7 @@ namespace SPX.Entities
         protected AnimatedTexture _graphic = new AnimatedTexture();
 
         protected bool _isActive = true;
-        protected bool _isBlocking = false;
+        protected bool? _isBlocking;
         protected int _assetName;
         protected int _objectType;
         protected bool _isOnBoard = true;
@@ -111,7 +111,7 @@ namespace SPX.Entities
 
         public bool IsBlocking()
         {
-            return _isBlocking;
+            return _isBlocking??false;
         }
 
         public int GetAssetType()
