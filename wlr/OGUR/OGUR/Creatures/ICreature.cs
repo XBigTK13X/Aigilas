@@ -504,6 +504,7 @@ namespace OGUR.Creatures
             {
                 lastSum = _baseStats.GetSum();
                 _skills.UseActive();
+                Console.WriteLine(_skills.GetActiveName());
                 if (lastSum != _baseStats.GetSum())
                 {
                     _damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));

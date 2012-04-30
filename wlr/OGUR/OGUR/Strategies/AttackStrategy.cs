@@ -22,13 +22,10 @@ namespace OGUR.Strategies
         {
             if (AbleToMove())
             {
-                if (RNG.Rand.Next(0, 10) == 2)
-                {
-                    _parent.CycleActiveSkill(1);
-                }
                 _skillCooldown--;
                 if (_skillCooldown <= 0)
                 {
+                    _parent.CycleActiveSkill(1);
                     if (SkillFactory.IsSkill(_parent.GetActiveSkillName(), AnimationType.RANGED))
                     {
                         if (opponent != null)
