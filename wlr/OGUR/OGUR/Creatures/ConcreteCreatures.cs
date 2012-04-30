@@ -64,4 +64,64 @@ namespace OGUR.Creatures
             _strategy = new StraightLineStrategy(this);
         }
     }
+    class Envy : AbstractCreature
+    {
+        public Envy()
+            : base(OgurActorType.ENVY, SpriteType.ENVY)
+        {
+            Compose(Elements.WATER);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            Add(SkillId.DISMEMBERMENT);
+        }
+    }
+    class Gluttony : AbstractCreature
+    {
+        public Gluttony()
+            : base(OgurActorType.GLUTTONY, SpriteType.GLUTTONY)
+        {
+            Compose(Elements.MENTAL);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            Add(SkillId.DISMEMBERMENT);
+        }
+    }
+    class Sloth: AbstractCreature
+    {
+        public Sloth()
+            : base(OgurActorType.SLOTH, SpriteType.SLOTH)
+        {
+            Compose(Elements.EARTH);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            Add(SkillId.DISMEMBERMENT);
+        }
+    }
+    class Pride: AbstractCreature
+    {
+        public Pride()
+            : base(OgurActorType.PRIDE, SpriteType.PRIDE)
+        {
+            Compose(Elements.DARK);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            Add(SkillId.DISMEMBERMENT);
+        }
+    }
+    class Greed: AbstractCreature
+    {
+        public Greed()
+            : base(OgurActorType.GREED, SpriteType.GREED)
+        {
+            Compose(Elements.AIR);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            Add(SkillId.DISMEMBERMENT);
+        }
+    }
+    class Lust: AbstractCreature
+    {
+        public Lust()
+            : base(OgurActorType.LUST, SpriteType.LUST)
+        {
+            Compose(Elements.FIRE);
+            Strengths(StatType.STRENGTH, StatType.STRENGTH);
+            Add(SkillId.DISMEMBERMENT);
+        }
+    }
 }

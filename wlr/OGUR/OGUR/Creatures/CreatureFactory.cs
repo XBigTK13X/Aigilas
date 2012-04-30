@@ -37,6 +37,12 @@ namespace OGUR.Creatures
                 case OgurActorType.ZORB:return new Zorb();
                 case OgurActorType.WRATH:return new Wrath();
                 case OgurActorType.HAND: return new Hand();
+                case OgurActorType.PRIDE: return new Pride();
+                case OgurActorType.ENVY: return new Envy();
+                case OgurActorType.GLUTTONY: return new Gluttony();
+                case OgurActorType.LUST: return new Lust();
+                case OgurActorType.SLOTH: return new Sloth();
+                case OgurActorType.GREED: return new Greed();
                 default:throw new Exception("No Factory generation logic for: "+actorType);
             }
         }

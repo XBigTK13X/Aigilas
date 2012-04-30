@@ -10,6 +10,51 @@ namespace OGUR.Skills
 {
     public class SkillId
     {
+        public static readonly string[] Values = 
+        {
+            SkillId.ABSORB,
+            SkillId.ACID_DRIP,
+            SkillId.ACID_NOZZLE,
+            SkillId.CAVALRY,
+            SkillId.COLD_SHOULDER,
+            SkillId.COMBUST,
+            SkillId.CONFUSION,
+            SkillId.DART,
+            SkillId.DART_TRAP,
+            SkillId.ELECTRIFY,
+            SkillId.ENVENOM,
+            SkillId.EXPLODE,
+            SkillId.FIREBALL,
+            SkillId.FLAME_HAMMER,
+            SkillId.FLOOR_SPIKES,
+            SkillId.FORGET_SKILL,
+            SkillId.GUSH,
+            SkillId.HORDER,
+            SkillId.HORRIFY,
+            SkillId.MAGIC_MAP,
+            SkillId.MANA_UP,
+            SkillId.MIMIC,
+            SkillId.MUTINY,
+            SkillId.NO_SKILL,
+            SkillId.REGEN_ALL,
+            SkillId.REMOTE_MINE,
+            SkillId.SOUL_CRUSH,
+            SkillId.SOUL_REINFORCEMENT,
+            SkillId.SPAWN_ITEM,
+            SkillId.SPEED_UP,
+            SkillId.STEAL_ITEM,
+            SkillId.STRENGTH_UP,
+            SkillId.THROW_ITEM,
+            SkillId.VALEDICTORIAN,
+            SkillId.VAPOR_IMPLANT,
+            SkillId.VENO_FIST,
+            SkillId.WALL_PUNCH,
+            SkillId.WEAK_KNEEES,
+            SkillId.VAPOR_CLOUD,
+            SkillId.DISMEMBERMENT,
+            SkillId.HYPOTHERMIA
+        };
+
         public const string FIREBALL = "Fireball";
         public const string NO_SKILL = "No Skill";
         //Sloth Acolyte
@@ -60,51 +105,8 @@ namespace OGUR.Skills
 
         //Wrath
         public const string DISMEMBERMENT = "Dismemberment";
-
-
-        public static readonly string[] Values = 
-        {
-            SkillId.ABSORB,
-            SkillId.ACID_DRIP,
-            SkillId.ACID_NOZZLE,
-            SkillId.CAVALRY,
-            SkillId.COLD_SHOULDER,
-            SkillId.COMBUST,
-            SkillId.CONFUSION,
-            SkillId.DART,
-            SkillId.DART_TRAP,
-            SkillId.ELECTRIFY,
-            SkillId.ENVENOM,
-            SkillId.EXPLODE,
-            SkillId.FIREBALL,
-            SkillId.FLAME_HAMMER,
-            SkillId.FLOOR_SPIKES,
-            SkillId.FORGET_SKILL,
-            SkillId.GUSH,
-            SkillId.HORDER,
-            SkillId.HORRIFY,
-            SkillId.MAGIC_MAP,
-            SkillId.MANA_UP,
-            SkillId.MIMIC,
-            SkillId.MUTINY,
-            SkillId.NO_SKILL,
-            SkillId.REGEN_ALL,
-            SkillId.REMOTE_MINE,
-            SkillId.SOUL_CRUSH,
-            SkillId.SOUL_REINFORCEMENT,
-            SkillId.SPAWN_ITEM,
-            SkillId.SPEED_UP,
-            SkillId.STEAL_ITEM,
-            SkillId.STRENGTH_UP,
-            SkillId.THROW_ITEM,
-            SkillId.VALEDICTORIAN,
-            SkillId.VAPOR_IMPLANT,
-            SkillId.VENO_FIST,
-            SkillId.WALL_PUNCH,
-            SkillId.WEAK_KNEEES,
-            SkillId.VAPOR_CLOUD,
-            SkillId.DISMEMBERMENT
-        };
+        //Envy
+        public const string HYPOTHERMIA = "Hypothermia";
     }
     class SkillFactory
     {
@@ -132,6 +134,7 @@ namespace OGUR.Skills
                 case SkillId.GUSH: return new GushSkill();
                 case SkillId.HORDER: return new HorderSkill();
                 case SkillId.HORRIFY: return new HorrifySkill();
+                case SkillId.HYPOTHERMIA: return new HypothermiaSkill();
                 case SkillId.MAGIC_MAP: return new MagicMapSkill();
                 case SkillId.MANA_UP: return new ManaUpSkill();
                 case SkillId.MIMIC: return new MimicSkill();

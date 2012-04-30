@@ -273,6 +273,14 @@ namespace SPX.Entities
             return _players;
         }
 
+        //Returns a space that has no creatures on it
+        private static IEnumerable<Point2> emptyLocations;
+        public static Point2 GetEmptyLocation()
+        {
+            emptyLocations = _gridContents.Where(gc => gc.Value.Any(e => e.GetEntityType() == EntityType.ACTOR)).Select(gc => gc.Key);
+            return emptyLocations.ElementAt(RNG.Rand.Next(0, emptyLocations.Count()));
+        }
+
         //Deprecated methods
         public static ICollection<IEntity> GetEntitiesToCache()
         {
@@ -281,13 +289,6 @@ namespace SPX.Entities
         public static IActor GetTouchingCreature(IEntity entity)
         {
             return _contents.Where(c=>c.GetEntityType() == EntityType.ACTOR).FirstOrDefault(c => c.Contains(entity.GetLocation())) as IActor;
-        }
-
-        private static IEnumerable<Point2> emptyLocations;
-        public static Point2 GetEmptyLocation()
-        {
-            emptyLocations = _gridContents.Where(gc=>gc.Value.Any(e=>e.GetEntityType() == EntityType.ACTOR)).Select(gc=>gc.Key);
-            return emptyLocations.ElementAt(RNG.Rand.Next(0,emptyLocations.Count()));
         }
     }
 }

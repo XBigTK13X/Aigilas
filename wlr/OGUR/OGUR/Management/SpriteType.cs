@@ -22,6 +22,12 @@ namespace OGUR.Management
         public const int ZORB = 12;
         public const int COMBO_MARKER = 13;
         public const int WRATH = 14;
-        public const int HAND = 15;
+        public const int PRIDE = 15;
+        public const int ENVY = 16;
+        public const int GLUTTONY = 17;
+        public const int LUST = 18;
+        public const int GREED = 19;
+        public const int SLOTH = 20;
+        public const int HAND = 21;
     }
 }

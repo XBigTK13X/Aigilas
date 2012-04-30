@@ -402,32 +402,30 @@ namespace OGUR.Creatures
                         Move(xVel, yVel);
                         Set(StatType.MOVE_COOL_DOWN, 0);
                     }
-                    else
+                    if(_statuses.Allows(OAction.Attacking))
                     {
-                        if(_statuses.Allows(OAction.Attacking))
+                        creatures = EntityManager.GetActorsAt(target).Select(a=>a as ICreature).ToList();
+                        if (creatures.Count() > 0)
                         {
-                            creatures = EntityManager.GetActorsAt(target).Select(a=>a as ICreature).ToList();
-                            if (creatures.Count() > 0)
+                            foreach (var creature in creatures)
                             {
-                                foreach (var creature in creatures)
+                                if (creature != this)
                                 {
-                                    if (creature != this)
+                                    if ((creature.GetActorType() != OgurActorType.PLAYER && _actorType == OgurActorType.PLAYER)
+                                        ||
+                                        (creature.GetActorType() == OgurActorType.PLAYER && _actorType != OgurActorType.PLAYER)
+                                        || 
+                                        !_statuses.Allows(OAction.WontHitNonTargets))
                                     {
-                                        if ((creature.GetActorType() != OgurActorType.PLAYER && _actorType == OgurActorType.PLAYER)
-                                            ||
-                                            (creature.GetActorType() == OgurActorType.PLAYER && _actorType != OgurActorType.PLAYER)
-                                            || !_statuses.Allows(OAction.WontHitNonTargets))
+                                        creature.ApplyDamage(CalculateDamage(), this);
+                                        if (!creature.IsActive())
                                         {
-                                            creature.ApplyDamage(CalculateDamage(), this);
-                                            if (!creature.IsActive())
-                                            {
-                                                AddExperience(creature.CalculateExperience());
-                                            }
+                                            AddExperience(creature.CalculateExperience());
                                         }
                                     }
                                 }
-                                Set(StatType.MOVE_COOL_DOWN, 0);
                             }
+                            Set(StatType.MOVE_COOL_DOWN, 0);
                         }
                     }
                 }

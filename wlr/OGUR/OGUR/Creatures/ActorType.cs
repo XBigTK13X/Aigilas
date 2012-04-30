@@ -16,5 +16,11 @@ namespace OGUR.Creatures
         public const int DART_TRAP = 8;
         public const int WRATH = 9;
         public const int HAND = 10;
+        public const int ENVY = 11;
+        public const int PRIDE = 12;
+        public const int SLOTH = 13;
+        public const int GREED = 14;
+        public const int GLUTTONY = 15;
+        public const int LUST = 16;
     }
 }

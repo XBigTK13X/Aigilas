@@ -116,6 +116,23 @@ namespace OGUR.Skills
             CreatureFactory.CreateMinion(_implementationId, _source,source,target.GetLocation());
         }
     }
+    public class DismembermentSkill : ISkill
+    {
+        public DismembermentSkill()
+            : base(SkillId.DISMEMBERMENT, AnimationType.SELF)
+        { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 3); }
+        public override void Activate(ICreature target)
+        {
+            int openCell = RNG.Rand.Next(1, GameManager.TileMapWidth - 1);
+            for (int ii = 1; ii < GameManager.TileMapWidth - 1; ii++)
+            {
+                if (ii != openCell)
+                {
+                    CreatureFactory.Create(OgurActorType.HAND, new Point2(ii, 1));
+                }
+            }
+        }
+    }
     public class ElectrifySkill : ISkill
     {
         public ElectrifySkill()
@@ -217,6 +234,16 @@ namespace OGUR.Skills
         public override void Affect(ICreature target) 
         {
             StatusFactory.Apply(target, Status.Flee);
+        }
+    }
+    public class HypothermiaSkill : ISkill
+    {
+        public HypothermiaSkill()
+            : base(SkillId.DISMEMBERMENT, AnimationType.SELF)
+        { Add(Elements.WATER); AddCost(StatType.MANA, 3); }
+        public override void Activate(ICreature target)
+        {
+
         }
     }
     public class MagicMapSkill : ISkill
@@ -449,24 +476,6 @@ namespace OGUR.Skills
         public override void Affect(ICreature target) 
         {
             StatusFactory.Apply(target, Status.WeakKnees);
-        }
-    }
-
-    public class DismembermentSkill : ISkill
-    {
-        public DismembermentSkill()
-            : base(SkillId.DISMEMBERMENT, AnimationType.SELF)
-        { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 3); }
-        public override void Activate(ICreature target) 
-        {
-            int openCell = RNG.Rand.Next(1, GameManager.TileMapWidth - 1);
-            for (int ii = 1; ii < GameManager.TileMapWidth - 1; ii++)
-            {
-                if (ii != openCell)
-                {
-                    CreatureFactory.Create(OgurActorType.HAND, new Point2(ii, 1));
-                }
-            }
         }
     }
 }
