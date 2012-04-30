@@ -243,7 +243,20 @@ namespace OGUR.Skills
         { Add(Elements.WATER); AddCost(StatType.MANA, 3); }
         public override void Activate(ICreature target)
         {
-
+            for (int ii = 0; ii < 4; ii++)
+            {
+                CreatureFactory.CreateMinion(SkillId.ICE_SHARD, target, _behavior.GetGraphic(), EntityManager.GetEmptyLocation());
+            }
+        }
+    }
+    public class IceShardSkill : ISkill
+    {
+        public IceShardSkill()
+            : base(SkillId.ICE_SHARD, AnimationType.CLOUD)
+        { Add(Elements.WATER); AddCost(StatType.MANA, 0); }
+        public override void Affect(ICreature target)
+        {
+            target.ApplyDamage(10, _source, true);
         }
     }
     public class MagicMapSkill : ISkill

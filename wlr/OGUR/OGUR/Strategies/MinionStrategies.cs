@@ -39,9 +39,9 @@ namespace OGUR.Strategies
         }
     }
 
-    public class MinionExplode : IStrategy
+    public class MinionOneUse : IStrategy
     {
-        public MinionExplode(ICreature parent)
+        public MinionOneUse(ICreature parent)
             : base(parent)
         {
             parent.SetSkillVector(parent.GetSkillVector());

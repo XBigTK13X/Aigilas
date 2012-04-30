@@ -11,7 +11,7 @@ using SPX.Core;
 
 namespace OGUR.Creatures
 {
-    class Minion : ICreature
+    public class Minion : ICreature
     {
         public Minion(int actorType = OgurActorType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
@@ -69,9 +69,20 @@ namespace OGUR.Creatures
         public Explosion()
             : base(OgurActorType.MINION)
         {
-            _strategy = new MinionExplode(this);
+            _strategy = new MinionOneUse(this);
             Add(SkillId.EXPLODE);
             _composition.Add(Elements.FIRE);
+        }
+    }
+
+    public class IceShard : Minion
+    {
+        public IceShard()
+            : base(OgurActorType.MINION)
+        {
+            _strategy = new MinionOneUse(this);
+            Add(SkillId.ICE_SHARD);
+            _composition.Add(Elements.WATER);
         }
     }
 

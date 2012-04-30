@@ -31,6 +31,7 @@ namespace OGUR.Skills
             SkillId.GUSH,
             SkillId.HORDER,
             SkillId.HORRIFY,
+            SkillId.ICE_SHARD,
             SkillId.MAGIC_MAP,
             SkillId.MANA_UP,
             SkillId.MIMIC,
@@ -107,6 +108,7 @@ namespace OGUR.Skills
         public const string DISMEMBERMENT = "Dismemberment";
         //Envy
         public const string HYPOTHERMIA = "Hypothermia";
+        public const string ICE_SHARD = "Ice Shard";
     }
     class SkillFactory
     {
@@ -135,6 +137,7 @@ namespace OGUR.Skills
                 case SkillId.HORDER: return new HorderSkill();
                 case SkillId.HORRIFY: return new HorrifySkill();
                 case SkillId.HYPOTHERMIA: return new HypothermiaSkill();
+                case SkillId.ICE_SHARD: return new IceShardSkill();
                 case SkillId.MAGIC_MAP: return new MagicMapSkill();
                 case SkillId.MANA_UP: return new ManaUpSkill();
                 case SkillId.MIMIC: return new MimicSkill();

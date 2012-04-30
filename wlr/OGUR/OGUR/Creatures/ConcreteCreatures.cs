@@ -71,7 +71,7 @@ namespace OGUR.Creatures
         {
             Compose(Elements.WATER);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
-            Add(SkillId.DISMEMBERMENT);
+            Add(SkillId.HYPOTHERMIA);
         }
     }
     class Gluttony : AbstractCreature
