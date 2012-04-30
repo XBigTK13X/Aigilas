@@ -40,6 +40,14 @@ namespace OGUR.Statuses
             }
         }
 
+        public void Act()
+        {
+            for (int ii = 0; ii < _statuses.Count(); ii++)
+            {
+                _statuses[ii].Act();
+            }
+        }
+
         public void PassOn(ICreature target,StatusComponent componentType)
         {
             for (int ii = 0; ii < _statuses.Count; ii++)

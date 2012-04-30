@@ -37,6 +37,8 @@ namespace OGUR.Skills
             SkillId.MIMIC,
             SkillId.MUTINY,
             SkillId.NO_SKILL,
+            SkillId.POISON_CLOUD,
+            SkillId.PLAGUE,
             SkillId.REGEN_ALL,
             SkillId.REMOTE_MINE,
             SkillId.SOUL_CRUSH,
@@ -109,6 +111,9 @@ namespace OGUR.Skills
         //Envy
         public const string HYPOTHERMIA = "Hypothermia";
         public const string ICE_SHARD = "Ice Shard";
+        //Gluttony
+        public const string PLAGUE = "Plague";
+        public const string POISON_CLOUD = "Poison Cloud";
     }
     class SkillFactory
     {
@@ -143,6 +148,8 @@ namespace OGUR.Skills
                 case SkillId.MIMIC: return new MimicSkill();
                 case SkillId.MUTINY: return new MutinySkill();
                 case SkillId.NO_SKILL:return new NoSkill();
+                case SkillId.PLAGUE: return new PlagueSkill();
+                case SkillId.POISON_CLOUD: return new PoisonCloudSkill();
                 case SkillId.REGEN_ALL: return new RegenAllSkill();
                 case SkillId.REMOTE_MINE:return new RemoteMineSkill();
                 case SkillId.SOUL_CRUSH: return new SoulCrushSkill();

@@ -193,6 +193,10 @@ namespace OGUR.Creatures
                     {
                         Adjust(StatType.MOVE_COOL_DOWN, 1);
                     }
+                    else
+                    {
+                        _statuses.Act();
+                    }
                     Regenerate();
                 }
                 if (_strategy != null)

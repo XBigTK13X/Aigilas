@@ -86,6 +86,17 @@ namespace OGUR.Creatures
         }
     }
 
+    class PoisonCloud : Minion
+    {
+        public PoisonCloud()
+            : base(OgurActorType.MINION)
+        {
+            _strategy = new MinionOneUse(this);
+            Add(SkillId.POISON_CLOUD);
+            _composition.Add(Elements.MENTAL);
+        }
+    }
+
     class VaporCloud : Minion
     {
         private ICreature _host = null;

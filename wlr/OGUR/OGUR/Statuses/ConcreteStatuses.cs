@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Creatures;
 using OGUR.Strategies;
 using OGUR.Entities;
+using OGUR.Skills;
 
 namespace OGUR.Statuses
 {
@@ -42,7 +43,8 @@ namespace OGUR.Statuses
         public const int Mute = 30;
         public const int SlowDown = 31;
         public const int WeakMuscles = 32;
-        public const int Blind = 33;      
+        public const int Blind = 33;
+        public const int Toxic = 34;
     }
 
     public class ConfusionStatus : IStatus
@@ -392,5 +394,16 @@ namespace OGUR.Statuses
             _prevents.Add(OAction.WontHitNonTargets);
         }
     }
-
+    public class ToxicStatus : IStatus
+    {
+        public ToxicStatus(ICreature target)
+            : base(target)
+        {
+            _target = target;
+        }
+        public override void Act()
+        {
+            CreatureFactory.CreateMinion(SkillId.PLAGUE, _target, null, _target.GetLocation());
+        }
+    }
 }

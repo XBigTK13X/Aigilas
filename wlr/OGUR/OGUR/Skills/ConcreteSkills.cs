@@ -294,6 +294,27 @@ namespace OGUR.Skills
             StatusFactory.Apply(target, Status.Mutiny);
         }
     }
+    public class PlagueSkill : ISkill
+    {
+        public PlagueSkill()
+            : base(SkillId.STRENGTH_UP, AnimationType.SELF)
+        { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
+        public override void Activate(ICreature source)
+        {
+            base.Activate(source);
+            StatusFactory.Apply(source, Status.Toxic);
+        }
+    }
+    public class PoisonCloudSkill : ISkill
+    {
+        public PoisonCloudSkill()
+            : base(SkillId.POISON_CLOUD, AnimationType.CLOUD)
+        { Add(Elements.MENTAL); AddCost(StatType.MANA, 0); }
+        public override void Affect(ICreature target)
+        {
+            StatusFactory.Apply(target, Status.Poison);
+        }
+    }
     public class RegenAllSkill : ISkill
     {
         public RegenAllSkill()

@@ -196,7 +196,7 @@ namespace OGUR.Dungeons
             if(true)
             {
                 var randomPoint = new Point2(FindRandomFreeTile());
-                dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.Create(OgurActorType.ENVY,randomPoint);
+                dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.Create(OgurActorType.GLUTTONY,randomPoint);
             }
             else
             {

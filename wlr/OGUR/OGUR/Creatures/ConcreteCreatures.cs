@@ -81,7 +81,7 @@ namespace OGUR.Creatures
         {
             Compose(Elements.MENTAL);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
-            Add(SkillId.DISMEMBERMENT);
+            Add(SkillId.PLAGUE);
         }
     }
     class Sloth: AbstractCreature

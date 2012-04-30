@@ -79,6 +79,10 @@ namespace OGUR.Statuses
                 }
             }
         }
+        public virtual void Act()
+        {
+
+        }
 
         private void CycleBuff()
         {
