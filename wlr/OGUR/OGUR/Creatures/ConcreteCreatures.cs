@@ -91,7 +91,7 @@ namespace OGUR.Creatures
         {
             Compose(Elements.EARTH);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
-            Add(SkillId.DISMEMBERMENT);
+            Add(SkillId.SERPENT_SUPPER);
         }
     }
     class Pride: AbstractCreature
@@ -122,6 +122,17 @@ namespace OGUR.Creatures
             Compose(Elements.FIRE);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
             Add(SkillId.DISMEMBERMENT);
+        }
+    }
+
+    public class Serpent : AbstractCreature
+    {
+        public Serpent()
+            : base(OgurActorType.SERPENT, SpriteType.MINION)
+        {
+            Compose(Elements.EARTH);
+            Strengths(StatType.HEALTH, StatType.HEALTH, StatType.HEALTH);
+            _strategy = new ConfusedAndDyingStrategy(this);
         }
     }
 }

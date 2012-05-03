@@ -22,5 +22,6 @@ namespace OGUR.Creatures
         public const int GREED = 14;
         public const int GLUTTONY = 15;
         public const int LUST = 16;
+        public const int SERPENT = 17;
     }
 }

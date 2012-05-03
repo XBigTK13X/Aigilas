@@ -123,6 +123,7 @@ namespace OGUR.Skills
         { Add(Elements.PHYSICAL); AddCost(StatType.MANA, 3); }
         public override void Activate(ICreature target)
         {
+            base.Activate(target);
             int openCell = RNG.Rand.Next(1, GameManager.TileMapWidth - 1);
             for (int ii = 1; ii < GameManager.TileMapWidth - 1; ii++)
             {
@@ -360,6 +361,29 @@ namespace OGUR.Skills
             if (_behavior.GetGraphic() != null)
             {
                 CreatureFactory.CreateMinion(SkillId.EXPLODE, _source, _behavior.GetGraphic(), _behavior.GetGraphic().GetLocation());
+            }
+        }
+    }
+    public class SerpentSupperSkill : ISkill
+    {
+        public SerpentSupperSkill()
+            : base(SkillId.SERPENT_SUPPER, AnimationType.SELF)
+        { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
+        public override void  Activate(ICreature source)
+        {
+            for (int ii = 1; ii < GameManager.TileMapWidth - 1; ii++)
+            {
+                if (ii != GameManager.TileMapHeight/2)
+                {
+                    CreatureFactory.Create(OgurActorType.SERPENT, new Point2(ii, GameManager.TileMapHeight/2));
+                }
+            }
+            for (int ii = 1; ii < GameManager.TileMapHeight - 1; ii++)
+            {
+                if (ii != GameManager.TileMapWidth / 2)
+                {
+                    CreatureFactory.Create(OgurActorType.SERPENT, new Point2(GameManager.TileMapWidth / 2,ii));
+                }
             }
         }
     }

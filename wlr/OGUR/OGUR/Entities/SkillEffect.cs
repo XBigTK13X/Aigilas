@@ -60,7 +60,7 @@ namespace OGUR.Entities
                     }
                 }
             }
-            if(_currentStrength<.001)
+            if(_currentStrength<.001 || !_source.IsActive())
             {
                 Cleanup(_source);
             }

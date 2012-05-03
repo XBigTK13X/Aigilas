@@ -43,6 +43,7 @@ namespace OGUR.Creatures
                 case OgurActorType.LUST: return new Lust();
                 case OgurActorType.SLOTH: return new Sloth();
                 case OgurActorType.GREED: return new Greed();
+                case OgurActorType.SERPENT: return new Serpent();
                 default:throw new Exception("No Factory generation logic for: "+actorType);
             }
         }

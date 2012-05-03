@@ -233,7 +233,7 @@ namespace OGUR.Creatures
             if (_hudManager != null)
             {
                 _hudManager.Draw();                
-            }
+            }       
             _combo.Draw();
             _damageText.Draw();
         }
@@ -508,7 +508,7 @@ namespace OGUR.Creatures
             {
                 lastSum = _baseStats.GetSum();
                 _skills.UseActive();
-                Console.WriteLine(_skills.GetActiveName());
+                //$$$Console.WriteLine(_skills.GetActiveName());
                 if (lastSum != _baseStats.GetSum())
                 {
                     _damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));

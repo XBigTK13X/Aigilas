@@ -41,6 +41,7 @@ namespace OGUR.Skills
             SkillId.PLAGUE,
             SkillId.REGEN_ALL,
             SkillId.REMOTE_MINE,
+            SkillId.SERPENT_SUPPER,
             SkillId.SOUL_CRUSH,
             SkillId.SOUL_REINFORCEMENT,
             SkillId.SPAWN_ITEM,
@@ -114,6 +115,8 @@ namespace OGUR.Skills
         //Gluttony
         public const string PLAGUE = "Plague";
         public const string POISON_CLOUD = "Poison Cloud";
+        //Sloth
+        public const string SERPENT_SUPPER = "Serpent Supper";
     }
     class SkillFactory
     {
@@ -152,6 +155,7 @@ namespace OGUR.Skills
                 case SkillId.POISON_CLOUD: return new PoisonCloudSkill();
                 case SkillId.REGEN_ALL: return new RegenAllSkill();
                 case SkillId.REMOTE_MINE:return new RemoteMineSkill();
+                case SkillId.SERPENT_SUPPER: return new SerpentSupperSkill();
                 case SkillId.SOUL_CRUSH: return new SoulCrushSkill();
                 case SkillId.SOUL_REINFORCEMENT: return new SoulReinforcementSkill();
                 case SkillId.SPAWN_ITEM: return new SpawnItemSkill();
