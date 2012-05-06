@@ -94,6 +94,16 @@ namespace OGUR.Creatures
             Add(SkillId.SERPENT_SUPPER);
         }
     }
+    public class Serpent : AbstractCreature
+    {
+        public Serpent()
+            : base(OgurActorType.SERPENT, SpriteType.MINION)
+        {
+            Compose(Elements.EARTH);
+            Strengths(StatType.HEALTH, StatType.HEALTH, StatType.HEALTH);
+            _strategy = new ConfusedAndDyingStrategy(this);
+        }
+    }
     class Pride: AbstractCreature
     {
         public Pride()
@@ -101,7 +111,7 @@ namespace OGUR.Creatures
         {
             Compose(Elements.DARK);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
-            Add(SkillId.DISMEMBERMENT);
+            Add(SkillId.BREAKING_WHEEL);
         }
     }
     class Greed: AbstractCreature
@@ -124,15 +134,14 @@ namespace OGUR.Creatures
             Add(SkillId.DISMEMBERMENT);
         }
     }
-
-    public class Serpent : AbstractCreature
+    public class BreakingWheel : AbstractCreature
     {
-        public Serpent()
-            : base(OgurActorType.SERPENT, SpriteType.MINION)
+        public BreakingWheel()
+            : base(OgurActorType.BREAKING_WHEEL)
         {
-            Compose(Elements.EARTH);
-            Strengths(StatType.HEALTH, StatType.HEALTH, StatType.HEALTH);
-            _strategy = new ConfusedAndDyingStrategy(this);
+            _strategy = new StraightLineRotate(this);
+            _composition.Add(Elements.DARK);
+            Strengths(StatType.MOVE_COOL_DOWN, StatType.MOVE_COOL_DOWN);
         }
     }
 }

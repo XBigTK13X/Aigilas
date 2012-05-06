@@ -49,6 +49,16 @@ namespace OGUR.Skills
             CreatureFactory.CreateMinion(_implementationId, source);
         }
     }
+    public class BreakingWheelSkill: ISkill
+    {
+        public BreakingWheelSkill()
+            : base(SkillId.BREAKING_WHEEL, AnimationType.SELF)
+        { Add(Elements.DARK); AddCost(StatType.MANA, 10); }
+        public override void Activate(ICreature source)
+        {
+            CreatureFactory.Create(OgurActorType.BREAKING_WHEEL, EntityManager.GetEmptyLocation());
+        }
+    }
     public class CavalrySkill : ISkill
     {
         public CavalrySkill()

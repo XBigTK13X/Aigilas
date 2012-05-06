@@ -277,7 +277,11 @@ namespace SPX.Entities
         private static IEnumerable<Point2> emptyLocations;
         public static Point2 GetEmptyLocation()
         {
-            emptyLocations = _gridContents.Where(gc => !gc.Value.Any(e => e.GetEntityType() == EntityType.ACTOR)).Select(gc => gc.Key);
+            emptyLocations = _gridContents.Where(gc =>
+                !gc.Value.Any(e => e.GetEntityType() == EntityType.ACTOR) &&
+                gc.Key.GridX > 0 && gc.Key.GridY > 0 &&
+                gc.Key.GridX < GameManager.TileMapWidth - 1 && gc.Key.GridY < GameManager.TileMapHeight - 1).
+                Select(gc => gc.Key);
             return emptyLocations.ElementAt(RNG.Rand.Next(0, emptyLocations.Count()));
         }
 

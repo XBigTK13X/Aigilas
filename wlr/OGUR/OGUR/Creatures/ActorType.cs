@@ -23,5 +23,6 @@ namespace OGUR.Creatures
         public const int GLUTTONY = 15;
         public const int LUST = 16;
         public const int SERPENT = 17;
+        public const int BREAKING_WHEEL = 18;
     }
 }

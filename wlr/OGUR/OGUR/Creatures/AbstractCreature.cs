@@ -31,18 +31,21 @@ namespace OGUR.Creatures
             }
             _skills.Add(skillId);
         }
+        float multiplier = 0f;        
         protected void Strengths(params string[] stats)
         {
             foreach (string stat in stats)
             {
-                InitStat(stat, Get(stat) * 2);
+                multiplier = (stat == StatType.MOVE_COOL_DOWN) ? .5f : 2;
+                InitStat(stat, Get(stat) * multiplier);
             }
         }
         protected void Weaknesses(params string[] stats)
         {
             foreach (string stat in stats)
             {
-                InitStat(stat, Get(stat) * .5f);
+                multiplier = (stat == StatType.MOVE_COOL_DOWN) ? 2 : .5f;
+                InitStat(stat, Get(stat) * multiplier);
             }
         }
         protected void Compose(params int[] elems)

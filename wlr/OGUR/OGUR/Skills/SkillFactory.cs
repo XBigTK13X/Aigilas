@@ -15,6 +15,7 @@ namespace OGUR.Skills
             SkillId.ABSORB,
             SkillId.ACID_DRIP,
             SkillId.ACID_NOZZLE,
+            SkillId.BREAKING_WHEEL,
             SkillId.CAVALRY,
             SkillId.COLD_SHOULDER,
             SkillId.COMBUST,
@@ -117,6 +118,8 @@ namespace OGUR.Skills
         public const string POISON_CLOUD = "Poison Cloud";
         //Sloth
         public const string SERPENT_SUPPER = "Serpent Supper";
+        //Pride
+        public const string BREAKING_WHEEL = "Breaking Wheel";
     }
     class SkillFactory
     {
@@ -127,6 +130,7 @@ namespace OGUR.Skills
                 case SkillId.ABSORB:return new AbsorbSkill();
                 case SkillId.ACID_DRIP:return new AcidDripSkill();
                 case SkillId.ACID_NOZZLE:return new AcidNozzleSkill();
+                case SkillId.BREAKING_WHEEL: return new BreakingWheelSkill();
                 case SkillId.CAVALRY:return new CavalrySkill();
                 case SkillId.COLD_SHOULDER: return new ColdShoulderSkill();
                 case SkillId.COMBUST: return new CombustSkill();
