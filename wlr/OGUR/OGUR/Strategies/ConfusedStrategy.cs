@@ -1,5 +1,6 @@
 ﻿using System;
 using OGUR.Creatures;
+using SPX.Core;
 
 namespace OGUR.Strategies
 {
@@ -11,7 +12,7 @@ namespace OGUR.Strategies
         }
         public override void Act()
         {
-            _parent.MoveIfPossible(rand.Next(3) - 1,rand.Next(3) - 1);
+            _parent.MoveIfPossible(RNG.Rand.Next(3) - 1, RNG.Rand.Next(3) - 1);
         }
     }
 

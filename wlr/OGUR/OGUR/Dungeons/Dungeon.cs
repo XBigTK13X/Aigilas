@@ -32,7 +32,6 @@ namespace OGUR.Dungeons
         private readonly IEntity[,] dungeon = new IEntity[_blocksWide,_blocksHigh];
         private Point2 downSpawnLocation = new Point2(0, 0);
         private Point2 upSpawnLocation = new Point2(0, 0);
-        private static readonly Random rand = new Random();
 
         public Dungeon()
         {
@@ -57,9 +56,9 @@ namespace OGUR.Dungeons
             Init();
             PlaceRooms();
             ConvertRoomsToWalls();
-            PlaceStairs();            
-            PlaceCreatures(rand.Next(enemyBase+enemyBaseModifier, enemyCap+enemyCapModifier));
-            PlaceItems(rand.Next(itemBase, itemCap));
+            PlaceStairs();
+            PlaceCreatures(RNG.Rand.Next(enemyBase + enemyBaseModifier, enemyCap + enemyCapModifier));
+            PlaceItems(RNG.Rand.Next(itemBase, itemCap));
             PlaceFloor();
             TransferDungeonState();
         }
@@ -147,7 +146,7 @@ namespace OGUR.Dungeons
             for (int ii = 0; ii < startingItemAmount; ii++)
             {
                 (EntityManager.GetActors(OgurActorType.PLAYER)
-                    .ElementAt((playerCount==1)?0:rand.Next(playerCount)) as ICreature)
+                    .ElementAt((playerCount == 1) ? 0 : RNG.Rand.Next(playerCount)) as ICreature)
                     .PickupItem(ItemFactory.CreateRandomPlain());
             }
            
@@ -158,7 +157,7 @@ namespace OGUR.Dungeons
         {
             while (neighbors.Count() > 0)
             {
-                int neighborIndex = rand.Next(0, neighbors.Count());
+                int neighborIndex = RNG.Rand.Next(0, neighbors.Count());
                 neighborTemp = neighbors[neighborIndex];
                 neighbors.RemoveAt(neighborIndex);
                 if (!dungeon[neighborTemp.GridX,neighborTemp.GridY].IsBlocking())
@@ -213,15 +212,15 @@ namespace OGUR.Dungeons
         {
             var newRooms = new List<Room>();
             const int maxRoomCount = 15;
-            var roomsToPlace = 3 + rand.Next(0, maxRoomCount);
+            var roomsToPlace = 3 + RNG.Rand.Next(0, maxRoomCount);
             var attemptCount = 0;
             while (attemptCount < 1000 && roomsToPlace > 0)
             {
                 attemptCount++;
-                var startX = rand.Next(0, _blocksWide - 5);
-                var startY = rand.Next(0, _blocksHigh - 5);
-                var startWidth = 5 + rand.Next(0, 2);
-                var startHeight = 5 + rand.Next(0, 2);
+                var startX = RNG.Rand.Next(0, _blocksWide - 5);
+                var startY = RNG.Rand.Next(0, _blocksHigh - 5);
+                var startWidth = 5 + RNG.Rand.Next(0, 2);
+                var startHeight = 5 + RNG.Rand.Next(0, 2);
                 roomsToPlace--;
                 var nextRoom = new Room(startHeight, startWidth, startX, startY);
                 var collides = false;
@@ -244,8 +243,8 @@ namespace OGUR.Dungeons
         {
             while (true)
             {
-                var x = rand.Next(0, _blocksWide);
-                var y = rand.Next(0, _blocksHigh);
+                var x = RNG.Rand.Next(0, _blocksWide);
+                var y = RNG.Rand.Next(0, _blocksHigh);
                 if (dungeon[x, y].GetEntityType() == OGUR.EntityType.FLOOR)
                 {
                     return new Point2(x, y);
@@ -312,7 +311,7 @@ namespace OGUR.Dungeons
                 }
                 if (roomCount > 0 && entrances.Count() > 0)
                 {
-                    var index = new Random().Next(0, entrances.Count() - 1);
+                    var index = RNG.Rand.Next(0, entrances.Count() - 1);
                     var entrance = entrances[index];
                     if (dungeon[entrance.X, entrance.Y].GetEntityType() != OGUR.EntityType.FLOOR)
                     {

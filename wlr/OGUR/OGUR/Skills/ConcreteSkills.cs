@@ -429,13 +429,12 @@ namespace OGUR.Skills
     }
     public class SoulCrushSkill : ISkill
     {
-        private Random _rand = new Random();
         public SoulCrushSkill()
             : base(SkillId.SOUL_CRUSH, AnimationType.RANGED)
         { Add(Elements.MENTAL); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) 
         {
-            target.ApplyDamage(5,_source,true,StatType.Values[_rand.Next(0,3)]);
+            target.ApplyDamage(5, _source, true, StatType.Values[RNG.Rand.Next(0, 3)]);
         }
     }
     public class SoulReinforcementSkill : ISkill
@@ -473,13 +472,12 @@ namespace OGUR.Skills
     }
     public class StealItemSkill : ISkill
     {
-        private Random _rand = new Random();
         public StealItemSkill()
             : base(SkillId.STEAL_ITEM, AnimationType.ROTATE)
         { Add(Elements.WATER, Elements.AIR); AddCost(StatType.MANA, 10); }
         public override void Affect(ICreature target) 
         {
-            if (_rand.Next(100) > 0)
+            if (RNG.Rand.Next(100) > 0)
             {
                 _source.PickupItem(ItemFactory.CreateRandomPlain());
             }

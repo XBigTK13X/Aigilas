@@ -9,11 +9,8 @@ namespace OGUR.Creatures
     public class CreatureFactory
     {
         private static int __playerCount = 0;
-        private static Random __rand;
         public static ICreature Create(int actorType, Point2 position)
         {
-            if (__rand == null)
-                __rand = new Random();
             AbstractCreature result;
             switch (actorType)
             {
@@ -51,7 +48,7 @@ namespace OGUR.Creatures
 
         public static ICreature CreateRandom(Point2 randomPoint)
         {
-            var val = __rand.Next(0, Generate.Randoms.Count);
+            var val = RNG.Rand.Next(0, Generate.Randoms.Count);
             return Create(Generate.Randoms[val], randomPoint);
         }
 

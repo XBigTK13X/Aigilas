@@ -5,6 +5,7 @@ using System.Text;
 using OGUR.Creatures;
 using SPX.Sprites;
 using OGUR.Entities;
+using SPX.Core;
 
 namespace OGUR.Skills
 {
@@ -214,7 +215,6 @@ namespace OGUR.Skills
             }
         }
 
-        private static Random rand = new Random();
         private static int skillPick = 0;
         private static List<string> InvalidRandomSkills = new List<string>() 
         { 
@@ -235,7 +235,7 @@ namespace OGUR.Skills
             GenerateStaticSkillMaps();
             while (InvalidRandomSkills.Contains(SkillId.Values[skillPick]))
             {
-                skillPick = rand.Next(0, __elementMap[elementId].Count());
+                skillPick = RNG.Rand.Next(0, __elementMap[elementId].Count());
             }
             return __elementMap[elementId][skillPick];
         }

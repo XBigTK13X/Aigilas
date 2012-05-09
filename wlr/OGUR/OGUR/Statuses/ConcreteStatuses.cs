@@ -6,6 +6,7 @@ using OGUR.Creatures;
 using OGUR.Strategies;
 using OGUR.Entities;
 using OGUR.Skills;
+using SPX.Core;
 
 namespace OGUR.Statuses
 {
@@ -251,11 +252,10 @@ namespace OGUR.Statuses
     }
     public class RandomBuffStatus : IStatus
     {
-        private Random rand = new Random();
         public RandomBuffStatus(ICreature target)
         : base(target)
         {
-            _buff = new StatBuff(StatType.Values[rand.Next(0,3)], 10);
+            _buff = new StatBuff(StatType.Values[RNG.Rand.Next(0, 3)], 10);
             Setup();
         }
     }

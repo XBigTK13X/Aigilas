@@ -14,8 +14,6 @@ namespace SPX.Paths
         private static Path path;
         private static List<Point2> neighbors = new List<Point2>();
 
-        private static readonly Random rand = new Random();
-
         public static Path FindNextMove(Point2 start,Point2 destination,bool nextMoveOnly = true)
         {
             queue.Clear();
@@ -42,7 +40,7 @@ namespace SPX.Paths
                 
                 while(neighbors.Count>0)
                 {
-                    node = neighbors[rand.Next(0, neighbors.Count())];
+                    node = neighbors[RNG.Rand.Next(0, neighbors.Count())];
                     foreach(var neighbor in neighbors)
                     {
                         if (neighbor.Weight < node.Weight)

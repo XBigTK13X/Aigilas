@@ -8,7 +8,6 @@ namespace OGUR.Items
 {
     public class ItemFactory
     {
-        private static Random rand = new Random();
         private const int itemGrowth = 3;
         private static int itemType;
 
@@ -22,7 +21,7 @@ namespace OGUR.Items
             itemType = SelectRandomType();
             return
                 (GenericItem)
-                EntityManager.AddObject(new GenericItem(new Stats(rand.Next(itemGrowth), rand.Next(itemGrowth), rand.Next(itemGrowth), 0, 0, 0, 0, 0, 0, 0),
+                EntityManager.AddObject(new GenericItem(new Stats(RNG.Rand.Next(itemGrowth), RNG.Rand.Next(itemGrowth), RNG.Rand.Next(itemGrowth), 0, 0, 0, 0, 0, 0, 0),
                                                                 ItemSuffix.NULL, ItemPrefix.NULL, itemType,
                                                                 location,onFloor));
         }
@@ -37,7 +36,7 @@ namespace OGUR.Items
         }
         private static int SelectRandomType()
         {
-            return ItemName.Values[(rand.Next(1, ItemName.Values.Length))];
+            return ItemName.Values[(RNG.Rand.Next(1, ItemName.Values.Length))];
         }
     }
 }

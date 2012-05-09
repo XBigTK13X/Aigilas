@@ -17,7 +17,6 @@ namespace OGUR.Strategies
         protected ICreature opponent;
         protected readonly Path targetPath = new Path();
         protected readonly Point2 nextMove = new Point2(0, 0);
-        protected static readonly Random rand = new Random();
 
         protected IStrategy(ICreature parent)
         {
@@ -46,7 +45,7 @@ namespace OGUR.Strategies
                 {
                     targetPath.Copy(PathFinder.FindNextMove(_parent.GetLocation(), opponent.GetLocation()));
                 }
-                throttle = rand.Next(throttleMin, throttleMax);
+                throttle = RNG.Rand.Next(throttleMin, throttleMax);
             }
             if (null != targetPath)
             {
