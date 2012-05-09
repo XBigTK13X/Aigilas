@@ -131,7 +131,7 @@ namespace OGUR.Creatures
         {
             Compose(Elements.FIRE);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
-            Add(SkillId.DISMEMBERMENT);
+            Add(SkillId.BRIMSTONE);
         }
     }
     public class BreakingWheel : AbstractCreature

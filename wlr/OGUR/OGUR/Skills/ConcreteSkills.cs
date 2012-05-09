@@ -49,6 +49,26 @@ namespace OGUR.Skills
             CreatureFactory.CreateMinion(_implementationId, source);
         }
     }
+    public class BrimstoneSkill : ISkill
+    {
+        private Point2 _direction = new Point2(0, 0);
+        public BrimstoneSkill() : base(SkillId.ACID_NOZZLE, AnimationType.STATIONARY) { AddCost(StatType.MANA, 10); }
+        public override void Activate(ICreature source)
+        {
+            for (int ii = -1; ii < 2; ii++)
+            {
+                for (int jj = -1; jj < 2; jj++)
+                {
+                    if (ii != 0 || jj != 0)
+                    {
+                        _direction.Reset(ii, jj);
+                        source.SetSkillVector(_direction);
+                        SkillFactory.Create(SkillId.FIREBALL).Activate(source);
+                    }
+                }
+            }
+        }
+    }
     public class BoilSkill : ISkill
     {
         public BoilSkill()

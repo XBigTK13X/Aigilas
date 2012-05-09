@@ -15,6 +15,7 @@ namespace OGUR.Skills
             SkillId.ABSORB,
             SkillId.ACID_DRIP,
             SkillId.ACID_NOZZLE,
+            SkillId.BRIMSTONE,
             SkillId.BOIL,
             SkillId.BREAKING_WHEEL,
             SkillId.CAVALRY,
@@ -123,6 +124,8 @@ namespace OGUR.Skills
         public const string BREAKING_WHEEL = "Breaking Wheel";
         //Greed
         public const string BOIL = "Boil";
+        //Lust
+        public const string BRIMSTONE = "Brimstone";
     }
     class SkillFactory
     {
@@ -133,6 +136,7 @@ namespace OGUR.Skills
                 case SkillId.ABSORB:return new AbsorbSkill();
                 case SkillId.ACID_DRIP:return new AcidDripSkill();
                 case SkillId.ACID_NOZZLE:return new AcidNozzleSkill();
+                case SkillId.BRIMSTONE: return new BrimstoneSkill();
                 case SkillId.BOIL: return new BoilSkill();
                 case SkillId.BREAKING_WHEEL: return new BreakingWheelSkill();
                 case SkillId.CAVALRY:return new CavalrySkill();
