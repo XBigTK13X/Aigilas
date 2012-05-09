@@ -216,7 +216,20 @@ namespace OGUR.Skills
 
         private static Random rand = new Random();
         private static int skillPick = 0;
-        private static List<string> InvalidRandomSkills = new List<string>() { SkillId.VAPOR_CLOUD, SkillId.VAPOR_IMPLANT, SkillId.ACID_NOZZLE, SkillId.DART_TRAP };
+        private static List<string> InvalidRandomSkills = new List<string>() 
+        { 
+            SkillId.VAPOR_CLOUD, 
+            SkillId.VAPOR_IMPLANT, 
+            SkillId.ACID_NOZZLE, 
+            SkillId.DART_TRAP,
+            SkillId.BRIMSTONE,
+            SkillId.BOIL,
+            SkillId.SERPENT_SUPPER,
+            SkillId.BREAKING_WHEEL,
+            SkillId.DISMEMBERMENT,
+            SkillId.HYPOTHERMIA,
+            SkillId.PLAGUE
+        };
         public static string GetElementalSkill(int elementId)
         {
             GenerateStaticSkillMaps();
