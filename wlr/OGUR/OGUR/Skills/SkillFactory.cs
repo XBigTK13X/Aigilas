@@ -54,7 +54,7 @@ namespace OGUR.Skills
             SkillId.THROW_ITEM,
             SkillId.VALEDICTORIAN,
             SkillId.VAPOR_IMPLANT,
-            SkillId.VENO_FIST,
+            SkillId.VENOM_FIST,
             SkillId.WALL_PUNCH,
             SkillId.WEAK_KNEEES,
             SkillId.VAPOR_CLOUD,
@@ -75,7 +75,7 @@ namespace OGUR.Skills
         //Envy Acolyte
         public const string CONFUSION = "Confusion";
         public const string WEAK_KNEEES = "Weak Knees";
-        public const string VENO_FIST = "Venom Fist";
+        public const string VENOM_FIST = "Venom Fist";
         public const string ABSORB = "Absorb";
         public const string MUTINY = "Mutiny";
         //Greed Acolyte
@@ -177,7 +177,7 @@ namespace OGUR.Skills
                 case SkillId.THROW_ITEM: return new ThrowItemSkill();
                 case SkillId.VALEDICTORIAN: return new ValedictorianSkill();
                 case SkillId.VAPOR_IMPLANT:return new VaporImplantSkill();
-                case SkillId.VENO_FIST: return new VenomFistSkill();
+                case SkillId.VENOM_FIST: return new VenomFistSkill();
                 case SkillId.WALL_PUNCH:return new WallPunchSkill();
                 case SkillId.WEAK_KNEEES:return new WeakKneesSkill();
                 case SkillId.VAPOR_CLOUD: return new VaporCloudSkill();

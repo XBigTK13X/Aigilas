@@ -43,7 +43,7 @@ namespace OGUR.Classes
         {
             Add(1, SkillId.CONFUSION);
             Add(2, SkillId.WEAK_KNEEES);
-            Add(3, SkillId.VENO_FIST);
+            Add(3, SkillId.VENOM_FIST);
             Add(4, SkillId.ABSORB);
             Add(5, SkillId.MUTINY);
         }
