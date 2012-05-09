@@ -49,7 +49,7 @@ namespace OGUR.Creatures
         {
             Add(SkillId.ACID_DRIP);
             _composition.Add(Elements.EARTH);
-            _strategy = new MinionRotate(this);
+            _strategy = StrategyFactory.Create(Strategy.MinionRotate,this);
         }
     }
 
@@ -58,7 +58,7 @@ namespace OGUR.Creatures
         public DartTrap()
             : base(OgurActorType.MINION)
         {
-            _strategy = new MinionFire(this);
+            _strategy = StrategyFactory.Create(Strategy.MinionFire, this);
             Add(SkillId.DART);
             _composition.Add(Elements.DARK);
         }
@@ -69,7 +69,7 @@ namespace OGUR.Creatures
         public Explosion()
             : base(OgurActorType.MINION)
         {
-            _strategy = new MinionOneUse(this);
+            _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
             Add(SkillId.EXPLODE);
             _composition.Add(Elements.FIRE);
         }
@@ -80,7 +80,7 @@ namespace OGUR.Creatures
         public IceShard()
             : base(OgurActorType.MINION)
         {
-            _strategy = new MinionOneUse(this);
+            _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
             Add(SkillId.ICE_SHARD);
             _composition.Add(Elements.WATER);
         }
@@ -91,7 +91,7 @@ namespace OGUR.Creatures
         public PoisonCloud()
             : base(OgurActorType.MINION)
         {
-            _strategy = new MinionOneUse(this);
+            _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
             Add(SkillId.POISON_CLOUD);
             _composition.Add(Elements.MENTAL);
         }
@@ -103,7 +103,7 @@ namespace OGUR.Creatures
         public VaporCloud()
             : base(OgurActorType.MINION)
         {
-            _strategy = new MinionCloud(this);
+            _strategy = StrategyFactory.Create(Strategy.MinionCloud, this);
             Add(SkillId.VAPOR_CLOUD);
             _composition.Add(Elements.WATER);
         }

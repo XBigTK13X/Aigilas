@@ -8,12 +8,12 @@ using SPX.Core;
 
 namespace OGUR.Strategies
 {
-    class StraightLineRotate:IStrategy
+    class StraightLineRotateStrategy:IStrategy
     {
         private Point2 _direction = new Point2(0, 1);
 
-        public StraightLineRotate(ICreature parent, params int[] targetTypes)
-            : base(parent)
+        public StraightLineRotateStrategy(ICreature parent, params int[] targetTypes)
+            : base(parent,Strategy.StraightLineRotate)
         {
             foreach (var targetType in targetTypes)
             {

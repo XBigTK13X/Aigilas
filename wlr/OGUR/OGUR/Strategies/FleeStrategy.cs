@@ -11,7 +11,7 @@ namespace OGUR.Strategies
     class FleeStrategy:IStrategy
     {
         public FleeStrategy(ICreature parent, params int[] targetTypes)
-            : base(parent)
+            : base(parent,Strategy.Flee)
         {
             foreach (var targetType in targetTypes)
             {

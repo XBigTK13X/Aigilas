@@ -7,7 +7,7 @@ namespace OGUR.Strategies
     public class ConfusedStrategy : IStrategy
     {
         public ConfusedStrategy(ICreature parent)
-            : base(parent)
+            : base(parent,Strategy.Confused)
         {
         }
         public override void Act()

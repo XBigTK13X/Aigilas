@@ -18,7 +18,9 @@ namespace OGUR.Strategies
         protected readonly Path targetPath = new Path();
         protected readonly Point2 nextMove = new Point2(0, 0);
 
-        protected IStrategy(ICreature parent)
+        protected int _strategyId;
+
+        protected IStrategy(ICreature parent,int strategyId)
         {
             _targets = new TargetSet(parent);
             _parent = parent;
@@ -90,6 +92,11 @@ namespace OGUR.Strategies
                 diff.SetY(0);
             }
             return diff;
+        }
+
+        public int GetId()
+        {
+            return _strategyId;
         }
     }
 }

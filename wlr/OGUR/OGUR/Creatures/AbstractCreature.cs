@@ -20,7 +20,7 @@ namespace OGUR.Creatures
             Setup(position, _actorType, _baseStats, _class);
             if (_strategy == null)
             {
-                _strategy = new AttackStrategy(this,OgurActorType.PLAYER);
+                _strategy = StrategyFactory.Create(Strategy.Attack,this,OgurActorType.PLAYER);
             }
         }
         protected void Add(string skillId)

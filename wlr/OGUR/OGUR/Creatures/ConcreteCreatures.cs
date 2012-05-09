@@ -61,7 +61,7 @@ namespace OGUR.Creatures
             Compose(Elements.PHYSICAL);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
             _isBlocking = false;
-            _strategy = new StraightLineStrategy(this);
+            _strategy = StrategyFactory.Create(Strategy.StraightLine, this);
         }
     }
     class Envy : AbstractCreature
@@ -101,7 +101,7 @@ namespace OGUR.Creatures
         {
             Compose(Elements.EARTH);
             Strengths(StatType.HEALTH, StatType.HEALTH, StatType.HEALTH);
-            _strategy = new ConfusedAndDyingStrategy(this);
+            _strategy = StrategyFactory.Create(Strategy.ConfusedAndDying,this);
         }
     }
     class Pride: AbstractCreature
@@ -139,7 +139,7 @@ namespace OGUR.Creatures
         public BreakingWheel()
             : base(OgurActorType.BREAKING_WHEEL)
         {
-            _strategy = new StraightLineRotate(this);
+            _strategy = StrategyFactory.Create(Strategy.StraightLineRotate,this);
             _composition.Add(Elements.DARK);
             Strengths(StatType.MOVE_COOL_DOWN, StatType.MOVE_COOL_DOWN);
         }

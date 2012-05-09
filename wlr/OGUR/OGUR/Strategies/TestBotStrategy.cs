@@ -9,7 +9,7 @@ namespace OGUR.Strategies
     public class TestBotStrategy : IStrategy
     {
         public TestBotStrategy(ICreature parent)
-            : base(parent)
+            : base(parent,Strategy.TestBot)
         {
             _targets.AddTargetTypes(ActorType.NONPLAYER);
         }

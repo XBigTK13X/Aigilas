@@ -10,7 +10,7 @@ namespace OGUR.Strategies
         private int _skillCooldownMax = 10;
 
         public AttackStrategy(ICreature parent,params int[] targetTypes)
-            : base(parent)
+            : base(parent,Strategy.Attack)
         {
             foreach (var targetType in targetTypes)
             {

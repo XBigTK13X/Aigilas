@@ -11,7 +11,7 @@ namespace OGUR.Strategies
     class StraightLineStrategy:IStrategy
     {
         public StraightLineStrategy(ICreature parent, params int[] targetTypes)
-            : base(parent)
+            : base(parent,Strategy.StraightLine)
         {
             foreach (var targetType in targetTypes)
             {

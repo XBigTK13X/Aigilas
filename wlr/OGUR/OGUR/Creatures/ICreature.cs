@@ -592,9 +592,9 @@ namespace OGUR.Creatures
             _strategy = strategy;
         }
 
-        public Type GetStrategyType()
+        public int GetStrategyId()
         {
-            return _strategy.GetType();
+            return _strategy.GetId();
         }
 
         public float GetInventoryCount()

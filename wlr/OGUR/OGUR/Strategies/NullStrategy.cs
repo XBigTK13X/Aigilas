@@ -8,7 +8,7 @@ namespace OGUR.Strategies
     {
 
         public NullStrategy(ICreature parent, params int[] targetTypes)
-            : base(parent)
+            : base(parent,Strategy.Null)
         {
             foreach (var targetType in targetTypes)
             {

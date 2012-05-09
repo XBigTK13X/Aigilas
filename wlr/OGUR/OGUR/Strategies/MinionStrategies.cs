@@ -3,9 +3,9 @@ using SPX.Core;
 
 namespace OGUR.Strategies
 {
-    public class MinionRotate : IStrategy
+    public class MinionRotateStrategy : IStrategy
     {
-        public MinionRotate(ICreature parent) : base(parent)//TODO pass master into strategy to copy targets here.
+        public MinionRotateStrategy(ICreature parent) : base(parent,Strategy.MinionRotate)//TODO pass master into strategy to copy targets here.
         {
             parent.SetSkillVector(new Point2(1,0));
         }
@@ -21,10 +21,10 @@ namespace OGUR.Strategies
             }
         }
     }
-    public class MinionFire : IStrategy
+    public class MinionFireStrategy : IStrategy
     {
-        public MinionFire(ICreature parent)
-            : base(parent)
+        public MinionFireStrategy(ICreature parent)
+            : base(parent,Strategy.MinionFire)
         {
             parent.SetSkillVector(parent.GetSkillVector());
         }
@@ -39,10 +39,10 @@ namespace OGUR.Strategies
         }
     }
 
-    public class MinionOneUse : IStrategy
+    public class MinionOneUseStrategy : IStrategy
     {
-        public MinionOneUse(ICreature parent)
-            : base(parent)
+        public MinionOneUseStrategy(ICreature parent)
+            : base(parent,Strategy.MinionOneUse)
         {
             parent.SetSkillVector(parent.GetSkillVector());
         }
@@ -53,10 +53,10 @@ namespace OGUR.Strategies
         }
     }
 
-    public class MinionCloud : IStrategy
+    public class MinionCloudStrategy : IStrategy
     {
-        public MinionCloud(ICreature parent)
-            : base(parent)
+        public MinionCloudStrategy(ICreature parent)
+            : base(parent,Strategy.MinionCloud)
         {
             parent.SetSkillVector(parent.GetSkillVector());
         }

@@ -59,7 +59,7 @@ namespace OGUR.Statuses
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            previousStrategy = _target.GetStrategyId();
             _target.SetStrategy(StrategyFactory.Create(Strategy.Confused,_target));
         }
         public override void Cleanup()
@@ -79,7 +79,7 @@ namespace OGUR.Statuses
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            previousStrategy = _target.GetStrategyId();
             _target.SetStrategy(StrategyFactory.Create(Strategy.Mutiny, _target));
         }
         public override void Cleanup()
@@ -98,7 +98,7 @@ namespace OGUR.Statuses
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            previousStrategy = _target.GetStrategyId();
             _target.SetStrategy(StrategyFactory.Create(Strategy.Flee, _target));
         }
         public override void Cleanup()
@@ -295,7 +295,7 @@ namespace OGUR.Statuses
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            previousStrategy = _target.GetStrategyId();
             _target.SetStrategy(StrategyFactory.Create(Strategy.AttackSelf, _target));
         }
         public override void Cleanup()
@@ -423,7 +423,7 @@ namespace OGUR.Statuses
         public override void Setup()
         {
             base.Setup();
-            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            previousStrategy = _target.GetStrategyId();
             _target.SetStrategy(StrategyFactory.Create(Strategy.Null, _target));
             _target.GetTargets().AddTargetTypes(OgurActorType.PLAYER);
         }

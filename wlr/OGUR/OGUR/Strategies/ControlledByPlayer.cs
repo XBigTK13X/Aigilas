@@ -20,7 +20,7 @@ namespace OGUR.Strategies
             Commands.HotSkill3
         };
 
-        public ControlledByPlayer(ICreature parent) : base(parent)
+        public ControlledByPlayer(ICreature parent) : base(parent,Strategy.ControlledByPlayer)
         {
             _targets.AddTargetTypes(ActorType.NONPLAYER);
         }

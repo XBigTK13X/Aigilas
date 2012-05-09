@@ -6,7 +6,7 @@ namespace OGUR.Strategies
     public class AttackSelfStrategy : IStrategy
     {
         public AttackSelfStrategy(ICreature parent)
-            : base(parent)
+            : base(parent,Strategy.AttackSelf)
         {
         }
 
