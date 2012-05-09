@@ -22,7 +22,7 @@ namespace OGUR.Dungeons
         private const int itemCap = 4;
         private const int itemBase = 1;
         private const int startingItemAmount = 55;
-        private const int bossLevelMod = 0;
+        private const int bossLevelMod = 2;
 
         private static int enemyCapModifier = 0;
         private static int enemyBaseModifier = 0;
@@ -191,11 +191,10 @@ namespace OGUR.Dungeons
 
         private void PlaceCreatures(int amountOfCreatures)
         {
-            //if (DungeonFactory.GetFloorCount() % bossLevelMod == 1)
-            if(true)
+            if (DungeonFactory.GetFloorCount() % bossLevelMod == 1)
             {
                 var randomPoint = new Point2(FindRandomFreeTile());
-                dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.Create(OgurActorType.LUST,randomPoint);
+                dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.CreateNextBoss(randomPoint);
             }
             else
             {

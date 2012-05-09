@@ -3,6 +3,7 @@ using OGUR.Entities;
 using OGUR.Skills;
 using SPX.Core;
 using SPX.Entities;
+using System.Collections.Generic;
 
 namespace OGUR.Creatures
 {
@@ -88,6 +89,23 @@ namespace OGUR.Creatures
         public static int GetPlayerCount()
         {
             return __playerCount;
+        }
+
+        private static List<int> __remainingBosses = new List<int>()
+        {
+            OgurActorType.WRATH,
+            OgurActorType.ENVY,
+            OgurActorType.PRIDE,
+            OgurActorType.SLOTH,
+            OgurActorType.GREED,
+            OgurActorType.LUST,
+            OgurActorType.GLUTTONY
+        };
+        public static IEntity CreateNextBoss(Point2 randomPoint)
+        {
+            int nextBoss = __remainingBosses[RNG.Rand.Next(0,__remainingBosses.Count)];
+            __remainingBosses.Remove(nextBoss);
+            return Create(nextBoss,randomPoint);
         }
     }
 }
