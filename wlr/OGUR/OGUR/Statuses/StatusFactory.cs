@@ -46,6 +46,7 @@ namespace OGUR.Statuses
                 case Status.WeakMuscles: target.AddStatus(new WeakMusclesStatus(target)); break;
                 case Status.Blind: target.AddStatus(new BlindStatus(target)); break;
                 case Status.Toxic: target.AddStatus(new ToxicStatus(target)); break;
+                case Status.Boil: target.AddStatus(new BoilStatus(target)); break;
                 default:
                     throw new Exception(String.Format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
             }

@@ -190,6 +190,7 @@
     <Compile Include="Statuses\StatusPool.cs" />
     <Compile Include="Strategies\ConfusedStrategy.cs" />
     <Compile Include="Strategies\AttackSelfStrategy.cs" />
+    <Compile Include="Strategies\NullStrategy.cs" />
     <Compile Include="Strategies\StraightLineStrategy.cs" />
     <Compile Include="Strategies\StraightLineRotate.cs" />
     <Compile Include="Strategies\TestBotStrategy.cs" />

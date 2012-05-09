@@ -49,6 +49,16 @@ namespace OGUR.Skills
             CreatureFactory.CreateMinion(_implementationId, source);
         }
     }
+    public class BoilSkill : ISkill
+    {
+        public BoilSkill()
+            : base(SkillId.BOIL, AnimationType.SELF)
+        { Add(Elements.AIR); AddCost(StatType.MANA, 10); }
+        public override void Activate(ICreature source)
+        {
+            StatusFactory.Apply(source, Status.Boil);
+        }
+    }
     public class BreakingWheelSkill: ISkill
     {
         public BreakingWheelSkill()

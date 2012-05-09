@@ -121,7 +121,7 @@ namespace OGUR.Creatures
         {
             Compose(Elements.AIR);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
-            Add(SkillId.DISMEMBERMENT);
+            Add(SkillId.BOIL);
         }
     }
     class Lust: AbstractCreature

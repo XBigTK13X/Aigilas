@@ -45,6 +45,7 @@ namespace OGUR.Statuses
         public const int WeakMuscles = 32;
         public const int Blind = 33;
         public const int Toxic = 34;
+        public const int Boil = 35;
     }
 
     public class ConfusionStatus : IStatus
@@ -404,6 +405,55 @@ namespace OGUR.Statuses
         public override void Act()
         {
             CreatureFactory.CreateMinion(SkillId.PLAGUE, _target, null, _target.GetLocation());
+        }
+    }
+    public class BoilStatus : IStatus
+    {
+        private int previousStrategy;
+        private float _previousHealth = 0;
+        private bool _countDownFailed = false;
+        private const int _countdownMax = 10;
+        private int _countdown = _countdownMax;
+        
+        public BoilStatus(ICreature target)
+            : base(target)
+        {
+            
+        }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = StrategyFactory.GetId(_target.GetStrategyType());
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Null, _target));
+            _target.GetTargets().AddTargetTypes(OgurActorType.PLAYER);
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            if (!_countDownFailed)
+            {
+                _target.GetTargets().FindClosest().ApplyDamage(30);
+            }
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (_target.IsCooledDown())
+            {
+                _countdown--;
+                _target.Write(SPX.Util.StringStorage.Get(_strength));
+                if (_countdown <= 0)
+                {
+                    _countdown = _countdownMax;
+                }
+            }
+            if (_target.Get(StatType.HEALTH) < _previousHealth)
+            {
+                _countDownFailed = true;
+                Cleanup();
+            }
+            _previousHealth = _target.Get(StatType.HEALTH);
         }
     }
 }

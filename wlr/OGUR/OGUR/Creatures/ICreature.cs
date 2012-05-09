@@ -18,20 +18,6 @@ using OGUR.Management;
 
 namespace OGUR.Creatures
 {
-    public abstract class Strategy
-    {
-        public const int AttackPlayers = 0;
-        public const int ControlledByPlayer = 1;
-        public const int Confused = 2;
-        public const int MinionRotate = 3;
-        public const int MinionFire = 4;
-        public const int MinionExplode = 5;
-        public const int MinionCloud = 6;
-        public const int Mutiny = 7;
-        public const int Flee = 8;
-        public const int AttackSelf = 9;
-    }
-
     public abstract class ICreature : Entity,IActor
     {
         protected IStrategy _strategy;
@@ -236,6 +222,11 @@ namespace OGUR.Creatures
             }       
             _combo.Draw();
             _damageText.Draw();
+        }
+
+        public void Write(string text)
+        {
+            _damageText.WriteAction(text, 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
         }
 
         public bool ToggleInventoryVisibility()
