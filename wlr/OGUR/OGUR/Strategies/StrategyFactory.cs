@@ -41,6 +41,7 @@ namespace OGUR.Strategies
                 case Strategy.MinionCloud: return new MinionCloudStrategy(target);
                 case Strategy.MinionExplode: return new MinionOneUseStrategy(target);
                 case Strategy.MinionFire: return new MinionFireStrategy(target);
+                case Strategy.MinionOneUse: return new MinionOneUseStrategy(target);
                 case Strategy.MinionRotate: return new MinionRotateStrategy(target);             
                 case Strategy.Mutiny: return new AttackStrategy(target, OgurActorType.NONPLAYER);
                 case Strategy.Null: return new NullStrategy(target);
