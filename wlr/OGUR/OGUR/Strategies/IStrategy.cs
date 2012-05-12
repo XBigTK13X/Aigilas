@@ -2,6 +2,7 @@
 using OGUR.Creatures;
 using SPX.Core;
 using SPX.Paths;
+using System.Collections.Generic;
 
 namespace OGUR.Strategies
 {
@@ -97,6 +98,11 @@ namespace OGUR.Strategies
         public int GetId()
         {
             return _strategyId;
+        }
+
+        public IEnumerable<int> GetTargetActorTypes()
+        {
+            return _targets.GetTargetActorTypes();
         }
     }
 }

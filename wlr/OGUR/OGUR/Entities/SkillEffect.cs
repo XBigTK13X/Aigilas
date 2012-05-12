@@ -2,6 +2,7 @@
 using OGUR.Skills;
 using SPX.Core;
 using SPX.Entities;
+using System;
 
 namespace OGUR.Entities
 {
@@ -53,14 +54,27 @@ namespace OGUR.Entities
                 if (targets != null && targets.Count > 0)
                 {
                     hitTarget = targets[0];
-                    if (null != hitTarget && hitTarget != this)
+                    if (null != hitTarget && hitTarget != this && hitTarget != _source)
                     {
                         _skill.Affect(hitTarget);
                         Cleanup(this);
                     }
                 }
             }
-            if(_currentStrength<.001 || !_source.IsActive())
+            foreach (var targetType in _source.GetTargetActorTypes())
+            {
+                var targets = EntityManager.GetActorsAt(this.GetLocation(),targetType);
+                if (targets != null && targets.Count > 0)
+                {
+                    hitTarget = targets[0];
+                    if (null != hitTarget && hitTarget != this && hitTarget != _source)
+                    {
+                        _skill.Affect(hitTarget);
+                        Cleanup(this);
+                    }
+                }
+            }
+            if(_currentStrength < .001 || !_source.IsActive())
             {
                 Cleanup(_source);
             }

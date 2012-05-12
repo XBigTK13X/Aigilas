@@ -20,7 +20,7 @@ namespace OGUR.Skills
         }
         public int GetSpriteType() { return _sideEffects.GetSpriteType(); }
         public virtual void Activate(ICreature target) { }
-        public virtual void Cleanup(Entity target,SkillEffect source) { }
+        public virtual void Cleanup(Entity target, SkillEffect source) { }
         public bool IsActive()
         {
             return !_used;

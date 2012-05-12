@@ -41,7 +41,6 @@ namespace OGUR.Skills
         {
             _source = source;
             _behavior.Activate(source);
-            
         }
         public virtual void Affect(IEntity target)
         {

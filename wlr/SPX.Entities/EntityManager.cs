@@ -101,15 +101,22 @@ namespace SPX.Entities
             }
             return creatures;
         }
-        
-        public static List<IActor> GetActorsAt(Point2 target)
+
+        private static IActor _nextResult;
+        public static List<IActor> GetActorsAt(Point2 target,int actorType = -1)
         {
             creatures.Clear();
             foreach (var elem in _gridContents[target])
             {
                 if (elem.GetEntityType() == EntityType.ACTOR)
                 {
-                    creatures.Add(((IActor)elem));
+                    _nextResult = (IActor)elem;
+                    if (actorType == -1 
+                        || _nextResult.GetActorType() == actorType
+                        || (actorType == ActorType.NONPLAYER && _nextResult.GetActorType() != ActorType.PLAYER))
+                    {
+                        creatures.Add(_nextResult);
+                    }
                 }
             }
             return creatures;

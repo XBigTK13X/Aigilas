@@ -638,5 +638,10 @@ namespace OGUR.Creatures
         {
             return _skills.GetHotSkillName(hotSkillSlot);
         }
+
+        public IEnumerable<int> GetTargetActorTypes()
+        {
+            return _strategy.GetTargetActorTypes();
+        }
     }
 }

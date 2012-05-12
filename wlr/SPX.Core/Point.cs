@@ -233,6 +233,11 @@ namespace SPX.Core
             return RotateClockwise().RotateClockwise().RotateClockwise().RotateClockwise();
         }
 
+        public override String ToString()
+        {
+            return "(gX,gY) - (posX,posY): (" + GridX + "," + GridY + ") - ("+PosX+","+PosY+")";
+        }
+
         public static float DistanceSquared(Point2 source, Point2 target)
         {
             return (float)(Math.Pow(source.PosX - target.PosX, 2) + Math.Pow(source.PosY - target.PosY, 2));

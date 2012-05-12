@@ -12,7 +12,7 @@ namespace OGUR.Strategies
     public class TargetSet
     {
         private List<ICreature> _targets = new List<ICreature>();
-        private List<int> _targetTypes = new List<int>();
+        private List<int> _targetActorTypes = new List<int>();
         private List<int> _targetEntityTypes = new List<int>();
         private readonly ICreature _parent;
 
@@ -31,7 +31,7 @@ namespace OGUR.Strategies
         {
             foreach(var type in actorTypes)
             {
-                _targetTypes.Add(type);
+                _targetActorTypes.Add(type);
             }
         }
 
@@ -46,7 +46,7 @@ namespace OGUR.Strategies
         public void AddTargets(ICreature source)
         {
             _targets.AddRange(source.GetTargets()._targets);
-            _targetTypes.AddRange(source.GetTargets()._targetTypes);
+            _targetActorTypes.AddRange(source.GetTargets()._targetActorTypes);
         }
 
         public IEnumerable<ICreature> AddTargets(IEnumerable<ICreature> targets)
@@ -76,7 +76,7 @@ namespace OGUR.Strategies
                         closestDistance = dist;
                     }
                 }
-                foreach(var actorType in _targetTypes)
+                foreach(var actorType in _targetActorTypes)
                 {
                     _calculatedTargets = EntityManager.GetActors(actorType).Select(a=>a as ICreature).ToList();
                     foreach(var creature in _calculatedTargets)
@@ -106,7 +106,7 @@ namespace OGUR.Strategies
                 }
             }
 
-            foreach (var actorType in _targetTypes)
+            foreach (var actorType in _targetActorTypes)
             {
                 foreach (var target in EntityManager.GetActorsAt(source.GetLocation()))
                 {
@@ -119,6 +119,11 @@ namespace OGUR.Strategies
                 }
             }
             return null;
+        }
+
+        internal IEnumerable<int> GetTargetActorTypes()
+        {
+            return _targetActorTypes;
         }
     }
 }
