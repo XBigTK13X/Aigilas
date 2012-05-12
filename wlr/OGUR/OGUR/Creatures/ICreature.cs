@@ -468,7 +468,10 @@ namespace OGUR.Creatures
                     _nextLevelExperience += __levelUpAmonut;
                     _experience = 0;
                     _currentLevel++;
-                    _skills.Add(_class.GetLevelSkills(_currentLevel));
+                    if (_class != null)
+                    {
+                        _skills.Add(_class.GetLevelSkills(_currentLevel));
+                    }
                     TextManager.Add(new ActionText("LEVEL UP!", 100, (int)GetLocation().PosX, (int)GetLocation().PosY));
                 }
             }
