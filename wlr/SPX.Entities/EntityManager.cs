@@ -122,9 +122,10 @@ namespace SPX.Entities
             return creatures;
         }
 
+        private static List<IActor> creatures2 = new List<IActor>();
         public static List<IActor> GetActorsSurrounding(Point2 target,int distance)
         {
-            creatures.Clear();
+            creatures2.Clear();
             for (int ii = -distance; ii < distance+1; ii++)
             {
                 for (int jj = -distance; jj < distance+1; jj++)
@@ -133,12 +134,12 @@ namespace SPX.Entities
                     {
                         foreach (var creature in GetActorsAt(target.Add(new Point2(ii, jj))))
                         {
-                            creatures.Add(creature);
+                            creatures2.Add(creature);
                         }
                     }
                 }
             }
-            return creatures;
+            return creatures2;
         }
 
         public static bool IsLocationBlocked(Point2 location)
