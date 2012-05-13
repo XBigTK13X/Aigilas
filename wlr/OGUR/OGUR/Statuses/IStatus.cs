@@ -22,6 +22,7 @@ namespace OGUR.Statuses
         protected bool _isActive = true;
         protected ICreature _target;
         protected StatBuff _buff = null;
+        protected bool _buffMax = false;
         protected IList<int> _blockedElements = new List<int>();
 
         protected Dictionary<StatusComponent,List<int>> _passables = new Dictionary<StatusComponent,List<int>>();
@@ -88,7 +89,7 @@ namespace OGUR.Statuses
         {
             if (_buff != null)
             {
-                _target.AddBuff(_buff);
+                _target.AddBuff(_buff,_buffMax);
             }
         }
 

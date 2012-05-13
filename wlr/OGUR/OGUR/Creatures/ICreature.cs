@@ -317,9 +317,9 @@ namespace OGUR.Creatures
             var result = GetRaw(stat) + adjustment;
             if (!adjustMax)
             {
-                if (result > GetRaw(stat, true))
+                if (result > GetMax(stat))
                 {
-                    result = GetRaw(stat, true);
+                    result = GetMax(stat);
                 }
             }
             return Set(stat, (result),adjustMax);
@@ -373,9 +373,16 @@ namespace OGUR.Creatures
             return true;
         }
 
-        public void AddBuff(StatBuff buff)
+        public void AddBuff(StatBuff buff,bool applyToMax = false)
         {
-            _baseStats.AddBuff(buff);
+            if (!applyToMax)
+            {
+                _baseStats.AddBuff(buff);
+            }
+            else
+            {
+                _maxStats.AddBuff(buff);
+            }
         }
 
         protected float CalculateDamage()
@@ -502,7 +509,6 @@ namespace OGUR.Creatures
             {
                 lastSum = _baseStats.GetSum();
                 _skills.UseActive();
-                //$$$Console.WriteLine(_skills.GetActiveName());
                 if (lastSum != _baseStats.GetSum())
                 {
                     _damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));

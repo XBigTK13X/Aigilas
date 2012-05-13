@@ -13,7 +13,7 @@ namespace OGUR.Reactions
     {
         public void Affect(Creatures.ICreature target)
         {
-            target.AddBuff(new StatBuff(StatType.MOVE_COOL_DOWN, 10));
+            StatusFactory.Apply(target, Status.SlowDown);
         }
     }
     public class MagmaReaction : IReaction

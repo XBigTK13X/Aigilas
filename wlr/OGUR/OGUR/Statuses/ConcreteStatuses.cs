@@ -374,7 +374,8 @@ namespace OGUR.Statuses
         public SlowDownStatus(ICreature target)
             : base(target)
         {
-            _buff = new StatBuff(StatType.MOVE_COOL_DOWN, -10);
+            _buff = new StatBuff(StatType.MOVE_COOL_DOWN, 10);
+            _buffMax = true;
             Setup();
         }
     }
