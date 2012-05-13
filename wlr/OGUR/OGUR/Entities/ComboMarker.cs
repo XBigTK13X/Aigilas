@@ -4,6 +4,7 @@ using SPX.Core;
 using SPX.Entities;
 using OGUR.Management;
 using System.Collections.Generic;
+using System;
 
 namespace OGUR.Entities
 {
@@ -29,9 +30,10 @@ namespace OGUR.Entities
 
         public override void Update()
         {
-            float dX = (GameManager.SpriteWidth / 2) * __dMults[_index].X;
-            float dY = (GameManager.SpriteHeight / 2) * __dMults[_index].Y;
+            float dX = (GameManager.SpriteWidth / 16) * __dMults[_index].X;
+            float dY = (GameManager.SpriteHeight / 16) * __dMults[_index].Y;
             SetLocation(new Point2(_parent.GetLocation().PosX + dX, _parent.GetLocation().PosY + dY));
+            Console.WriteLine(GetLocation().ToString());
         }
 
         public override void Draw()

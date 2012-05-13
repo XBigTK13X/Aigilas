@@ -43,24 +43,14 @@ namespace SPX.Core
             Weight = weight;
         }
 
+        public Point2(Point2 target) : this(target.X, target.Y, 0) { }
+
+        public Point2(Vector2 target) : this(target.X, target.Y, 0) { }
+
         public void Reset(float x, float y)
         {
             SetX(x);
             SetY(y);
-        }
-
-        public Point2(Point2 target)
-        {
-            SetX(target.X);
-            SetY(target.Y);
-            Weight = 0;
-        }
-
-        public Point2(Vector2 target)
-        {
-            SetX(target.X);
-            SetY(target.Y);
-            Weight = 0;
         }
 
         public void Copy(Point2 point)
@@ -109,7 +99,7 @@ namespace SPX.Core
         public void SetY(float yValue)
         {
             Y = yValue;
-            var isGrid = (Math.Abs(Y) < GameManager.TileMapHeight);
+            var isGrid = (Math.Abs(Y) < GameManager.TileMapWidth);
             PosY = (isGrid) ? Y * GameManager.SpriteHeight: Y;
             PosCenterY = PosY+halfHeight;
             GridY = (isGrid) ? (int)Y : (int)(Y / GameManager.SpriteHeight);
@@ -233,14 +223,14 @@ namespace SPX.Core
             return RotateClockwise().RotateClockwise().RotateClockwise().RotateClockwise();
         }
 
-        public override String ToString()
-        {
-            return "(gX,gY) - (posX,posY): (" + GridX + "," + GridY + ") - ("+PosX+","+PosY+")";
-        }
-
         public static float DistanceSquared(Point2 source, Point2 target)
         {
             return (float)(Math.Pow(source.PosX - target.PosX, 2) + Math.Pow(source.PosY - target.PosY, 2));
-        }                
+        }
+
+        public override String ToString()
+        {
+            return "(gX,gY) - (posX,posY): (" + GridX + "," + GridY + ") - (" + PosX + "," + PosY + ")";
+        }
     }
 }
