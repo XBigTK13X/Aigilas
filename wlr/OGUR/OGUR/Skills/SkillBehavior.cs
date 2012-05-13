@@ -86,8 +86,7 @@ namespace OGUR.Skills
         public override bool AffectTarget(ICreature source, SkillEffect graphic)
         {
             if (!_used)
-            {
-                source.Combo(_parent.GetElements());
+            {                
                 source.React(_parent.GetSkillId());
                 _parent.Affect(source);
                 _used = true;
