@@ -33,7 +33,6 @@ namespace OGUR.Entities
             float dX = (GameManager.SpriteWidth / 16) * __dMults[_index].X;
             float dY = (GameManager.SpriteHeight / 16) * __dMults[_index].Y;
             SetLocation(new Point2(_parent.GetLocation().PosX + dX, _parent.GetLocation().PosY + dY));
-            Console.WriteLine(GetLocation().ToString());
         }
 
         public override void Draw()

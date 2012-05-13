@@ -218,10 +218,6 @@ namespace OGUR.Skills
         private static int skillPick = 0;
         private static List<string> InvalidRandomSkills = new List<string>() 
         { 
-            SkillId.VAPOR_CLOUD, 
-            SkillId.VAPOR_IMPLANT, 
-            SkillId.ACID_NOZZLE, 
-            SkillId.DART_TRAP,
             SkillId.BRIMSTONE,
             SkillId.BOIL,
             SkillId.SERPENT_SUPPER,
