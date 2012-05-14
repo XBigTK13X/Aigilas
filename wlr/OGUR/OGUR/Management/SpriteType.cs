@@ -29,5 +29,6 @@ namespace OGUR.Management
         public const int GREED = 19;
         public const int SLOTH = 20;
         public const int HAND = 21;
+        public const int WHEEL = 22;
     }
 }

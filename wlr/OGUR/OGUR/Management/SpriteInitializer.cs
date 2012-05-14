@@ -30,13 +30,14 @@ namespace OGUR.Management
                 Make(SpriteType.MINION, 11, 1),
                 Make(SpriteType.COMBO_MARKER, 13, 1),
                 Make(SpriteType.WRATH, 14, 1),
-                Make(SpriteType.HAND, 15, 1),
-                Make(SpriteType.PRIDE, 14, 1),
-                Make(SpriteType.ENVY, 14, 1),
-                Make(SpriteType.SLOTH, 14, 1),
-                Make(SpriteType.GREED, 14, 1),
-                Make(SpriteType.GLUTTONY, 14, 1),
-                Make(SpriteType.LUST, 14, 1)
+                Make(SpriteType.HAND, 15, 1),                
+                Make(SpriteType.ENVY, 16, 1),
+                Make(SpriteType.SLOTH, 17, 1),
+                Make(SpriteType.GREED, 18, 1),
+                Make(SpriteType.GLUTTONY, 19, 1),
+                Make(SpriteType.LUST, 20, 1),
+                Make(SpriteType.PRIDE, 21, 1),
+                Make(SpriteType.WHEEL, 22, 1)
             };
         }
     }

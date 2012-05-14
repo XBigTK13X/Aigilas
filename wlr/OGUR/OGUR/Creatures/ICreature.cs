@@ -58,6 +58,13 @@ namespace OGUR.Creatures
                 case OgurActorType.ZORB:return SpriteType.ZORB;
                 case OgurActorType.WRATH: return SpriteType.WRATH;
                 case OgurActorType.HAND: return SpriteType.HAND;
+                case OgurActorType.ENVY: return SpriteType.ENVY;
+                case OgurActorType.PRIDE: return SpriteType.PRIDE;
+                case OgurActorType.SLOTH: return SpriteType.SLOTH;
+                case OgurActorType.GREED: return SpriteType.GREED;
+                case OgurActorType.GLUTTONY: return SpriteType.GLUTTONY;
+                case OgurActorType.LUST: return SpriteType.LUST;
+                case OgurActorType.BREAKING_WHEEL: return SpriteType.WHEEL;
                 default:return SpriteType.CREATURE;
             }
         }

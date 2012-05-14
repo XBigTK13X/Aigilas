@@ -97,7 +97,7 @@ namespace OGUR.Creatures
     public class Serpent : AbstractCreature
     {
         public Serpent()
-            : base(OgurActorType.SERPENT, SpriteType.MINION)
+            : base(OgurActorType.SERPENT, SpriteType.SLOTH)
         {
             Compose(Elements.EARTH);
             Strengths(StatType.HEALTH, StatType.HEALTH, StatType.HEALTH);
