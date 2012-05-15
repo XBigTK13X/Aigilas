@@ -62,7 +62,6 @@ namespace SPX.Core
                                                                       };
         private static readonly Dictionary<int, bool> __inputs = new Dictionary<int, bool>();
         private static bool __isInputActive = false;
-        private static bool __isDown = false;
 
         private static int __controllerCount = 0;
 

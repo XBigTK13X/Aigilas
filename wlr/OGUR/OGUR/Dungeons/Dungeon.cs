@@ -16,7 +16,7 @@ namespace OGUR.Dungeons
         private static readonly int _blocksWide = DungeonFactory.BlocksWide;
 
         //Top level game config
-        private int playerCount = (Input.GetPlayerCount() == 0) ? 1 : Input.GetPlayerCount();
+        private int playerCount = RNG.Rand.Next(0, 4);//Input.GetPlayerCount();
         private const int enemyCap = 5;
         private const int enemyBase = 2;
         private const int itemCap = 4;
@@ -140,16 +140,7 @@ namespace OGUR.Dungeons
                 }
                 EntityManager.AddObjects(cache);
                 _contents.AddRange(cache);
-            }
-            
-            //Give player random objects
-            for (int ii = 0; ii < startingItemAmount; ii++)
-            {
-                (EntityManager.GetActors(OgurActorType.PLAYER)
-                    .ElementAt((playerCount == 1) ? 0 : RNG.Rand.Next(playerCount)) as ICreature)
-                    .PickupItem(ItemFactory.CreateRandomPlain());
-            }
-           
+            }           
         }
 
         Point2 neighborTemp = new Point2(0, 0);
