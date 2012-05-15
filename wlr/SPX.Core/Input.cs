@@ -197,7 +197,11 @@ namespace SPX.Core
                 {
                     __inputs.Add(ii, GamePad.GetState(_playerIndex[ii]).IsConnected);
                 } 
-            }          
+            }
+            if (__controllerCount == 0)
+            {
+                __controllerCount = 1;
+            }
         }
         private class CommandLock
         {

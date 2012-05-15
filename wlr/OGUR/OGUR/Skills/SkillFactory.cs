@@ -275,5 +275,19 @@ namespace OGUR.Skills
                     return new NoAnimation();
             }
         }
+
+        public static Dictionary<int, List<string>> __actorToSkillMapping = new Dictionary<int, List<string>>();
+        public static ICollection<string> GetElementalSkills(int actorType, List<int> _elementalComposition)
+        {
+            if (!__actorToSkillMapping.ContainsKey(actorType))
+            {
+                __actorToSkillMapping.Add(actorType,new List<string>());
+                foreach (var elem in _elementalComposition)
+                {
+                    __actorToSkillMapping[actorType].Add(SkillFactory.GetElementalSkill(elem));
+                }
+            }
+            return __actorToSkillMapping[actorType];
+        }
     }
 }

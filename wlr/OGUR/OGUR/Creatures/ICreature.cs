@@ -84,11 +84,11 @@ namespace OGUR.Creatures
                 {
                     _skills = new SkillPool(this);
                 }
-                _skills.Add(_class.GetLevelSkills(_currentLevel));
-                foreach (var elem in _composition)
+                foreach (var skillId in SkillFactory.GetElementalSkills(GetActorType(),_composition))
                 {
-                    _skills.Add(SkillFactory.GetElementalSkill(elem));
+                    _skills.Add(skillId);
                 }
+                _skills.Add(_class.GetLevelSkills(_currentLevel));                
             }
         }
 
