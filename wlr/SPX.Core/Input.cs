@@ -89,15 +89,9 @@ namespace SPX.Core
 
         private static bool IsDown(int command, int playerIndex)
         {
-            if (__inputs[playerIndex])
-            {
-                __isDown = GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command]);
-            }
-            else
-            {
-                __isDown = Keyboard.GetState().IsKeyDown(_keyboardMapping[command]);
-            }
-            return __isDown;
+            return GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command])
+            || 
+            (playerIndex == 0 && Keyboard.GetState().IsKeyDown(_keyboardMapping[command]));
         }
 
         public static bool IsPressed(int command, int playerIndex,bool failIfLocked=true)
