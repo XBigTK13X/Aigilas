@@ -65,6 +65,7 @@ namespace OGUR.Creatures
                 case OgurActorType.GLUTTONY: return SpriteType.GLUTTONY;
                 case OgurActorType.LUST: return SpriteType.LUST;
                 case OgurActorType.BREAKING_WHEEL: return SpriteType.WHEEL;
+                case OgurActorType.SERPENT: return SpriteType.SLOTH;
                 default:return SpriteType.CREATURE;
             }
         }

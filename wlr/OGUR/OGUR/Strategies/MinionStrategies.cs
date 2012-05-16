@@ -1,5 +1,6 @@
 ﻿using OGUR.Creatures;
 using SPX.Core;
+using System;
 
 namespace OGUR.Strategies
 {
@@ -41,6 +42,7 @@ namespace OGUR.Strategies
 
     public class MinionOneUseStrategy : IStrategy
     {
+        private bool f;
         public MinionOneUseStrategy(ICreature parent)
             : base(parent,Strategy.MinionOneUse)
         {
@@ -48,8 +50,8 @@ namespace OGUR.Strategies
         }
         public override void Act()
         {
-            _parent.UseActiveSkill();
-            _parent.SetInactive();   
+            _parent.UseActiveSkill();             
+            _parent.SetInactive();
         }
     }
 

@@ -44,7 +44,7 @@ namespace OGUR.Dungeons
             ConvertRoomsToWalls();
             PlaceAltars();
             PlaceStairs();
-            PlaceFloor();
+            PlaceFloor();            
             TransferDungeonState();
         }
 
@@ -57,7 +57,7 @@ namespace OGUR.Dungeons
             PlaceRooms();
             ConvertRoomsToWalls();
             PlaceStairs();
-            PlaceCreatures(RNG.Rand.Next(enemyBase + enemyBaseModifier, enemyCap + enemyCapModifier));
+            PlaceCreatures(RNG.Rand.Next(enemyBase + enemyBaseModifier, enemyCap + enemyCapModifier));            
             PlaceItems(RNG.Rand.Next(itemBase, itemCap));
             PlaceFloor();
             TransferDungeonState();
@@ -182,6 +182,9 @@ namespace OGUR.Dungeons
 
         private void PlaceCreatures(int amountOfCreatures)
         {
+            //var random = new Point2(FindRandomFreeTile());
+            //dungeon[random.GridX, random.GridY] = CreatureFactory.Create(OgurActorType.ENVY, random);
+            //return;
             if (DungeonFactory.GetFloorCount() % bossLevelMod == 1)
             {
                 var randomPoint = new Point2(FindRandomFreeTile());
