@@ -41,6 +41,7 @@ namespace OGUR.States
                 switch (_selection)
                 {
                     case 0:
+                        Input.SetContext(Contexts.Free, 0);
                         StateManager.LoadState(new GameplayState());
                         return;
                     case 1:
