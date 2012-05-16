@@ -183,6 +183,8 @@
     <Compile Include="Skills\SkillFactory.cs" />
     <Compile Include="HUD\SkillHud.cs" />
     <Compile Include="Skills\SkillPool.cs" />
+    <Compile Include="States\OptionsState.cs" />
+    <Compile Include="States\MainMenuState.cs" />
     <Compile Include="States\GameOverState.cs" />
     <Compile Include="Statuses\ConcreteStatuses.cs" />
     <Compile Include="Statuses\IStatus.cs" />

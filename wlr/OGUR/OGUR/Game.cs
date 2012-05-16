@@ -27,7 +27,7 @@ namespace OGUR
             XnaManager.SetContentManager(this.Content);
             Input.Setup(new InputInitializer());
             SpriteSheetManager.Setup(new SpriteInitializer());
-            StateManager.LoadState(new GameplayState());
+            StateManager.LoadState(new MainMenuState());
             base.Initialize();
         }
 
