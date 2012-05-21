@@ -189,7 +189,7 @@ namespace SPX.Core
             }
 
             //Update the number of players currently connected via controller
-            for(int ii = 0;ii<__playerIndices.Count();ii++)
+            for(int ii = 1;ii<__playerIndices.Count();ii++)
             {
                 __controllerCount += (GamePad.GetState(__playerIndices[ii]).IsConnected)?1:0;
                 if (!__inputs.ContainsKey(ii))
