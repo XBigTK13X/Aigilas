@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPX.Text", "SPX.Text\SPX.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPX.States", "SPX.States\SPX.States.csproj", "{5D0E626A-F05F-48D5-866F-6855C858C2B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPX.Saves", "SPX.Save\SPX.Saves.csproj", "{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OGUR.vsmdi
@@ -164,6 +166,20 @@ Global
 		{5D0E626A-F05F-48D5-866F-6855C858C2B6}.Release|Windows Phone.ActiveCfg = Release|Any CPU
 		{5D0E626A-F05F-48D5-866F-6855C858C2B6}.Release|x86.ActiveCfg = Release|Any CPU
 		{5D0E626A-F05F-48D5-866F-6855C858C2B6}.Release|Xbox 360.ActiveCfg = Release|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Debug|Windows Phone.ActiveCfg = Debug|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Release|Windows Phone.ActiveCfg = Release|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Release|x86.ActiveCfg = Release|Any CPU
+		{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}.Release|Xbox 360.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
