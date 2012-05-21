@@ -660,5 +660,10 @@ namespace OGUR.Creatures
         {
             return _strategy.GetTargetActorTypes();
         }
+
+        public float GetCurrentSkillCost()
+        {
+            return _skills.GetCurrentCost();
+        }
     }
 }

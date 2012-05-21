@@ -289,5 +289,10 @@ namespace OGUR.Skills
             }
             return __actorToSkillMapping[actorType];
         }
+
+        internal static float GetCost(string skillId)
+        {
+            return Create(skillId).GetCost();
+        }
     }
 }

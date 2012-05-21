@@ -69,9 +69,14 @@ namespace OGUR.Skills
             }
             return true;
         }
-        internal int GetAnimationType()
+        public int GetAnimationType()
         {
             return _sideEffects.GetAnimationType();
+        }
+
+        public float GetCost()
+        {
+            return _cost.Get(StatType.MANA);
         }
     }
     public class RangedBehavior: SkillBehavior

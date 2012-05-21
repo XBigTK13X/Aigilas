@@ -79,5 +79,10 @@ namespace OGUR.Skills
         {
             return _implementationId;
         }
+
+        public float GetCost()
+        {
+            return _behavior.GetCost();
+        }
     }
 }

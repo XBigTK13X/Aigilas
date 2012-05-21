@@ -23,6 +23,11 @@ namespace OGUR.HUD
             return new Vector2(_dimensions.X,(_parent.Get(statType) / _parent.GetMax(statType)) * _dimensions.Y);
         }
 
+        private Vector2 CostOfCurrentSkill()
+        {
+            return new Vector2(_dimensions.X * .5f, _parent.GetCurrentSkillCost() / _parent.GetMax(StatType.MANA) * _dimensions.Y);
+        }
+
         private string GetSkillStrings()
         {
             return "A:" + _parent.GetActiveSkillName() + __separator +
@@ -46,6 +51,7 @@ namespace OGUR.HUD
             if (!_isVisible) return;
 
             XnaManager.Renderer.Draw(_menuBase, GetHudOrigin(), new Rectangle(0, 0, 1, 1), Color.Green, 0f, Vector2.Zero, CalculateHeight(StatType.HEALTH), SpriteEffects.None, ZDepth.HudBG);
+            XnaManager.Renderer.Draw(_menuBase, _manaPosition, new Rectangle(0, 0, 1, 1), Color.Yellow, 0f, Vector2.Zero, CostOfCurrentSkill(), SpriteEffects.None, ZDepth.HudBG);
             XnaManager.Renderer.Draw(_menuBase, _manaPosition, new Rectangle(0, 0, 1, 1), Color.Blue, 0f, Vector2.Zero, CalculateHeight(StatType.MANA), SpriteEffects.None, ZDepth.HudBG);
 
             _textHandler.Draw();

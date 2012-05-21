@@ -167,5 +167,10 @@ namespace OGUR.Skills
             }
             return "";
         }
+
+        public float GetCurrentCost()
+        {
+            return SkillFactory.GetCost(FindCurrent());
+        }
     }
 }
