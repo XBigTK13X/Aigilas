@@ -170,6 +170,7 @@
     <Compile Include="Management\InputInitializer.cs" />
     <Compile Include="Management\SpriteInitializer.cs" />
     <Compile Include="Management\SpriteType.cs" />
+    <Compile Include="OgurSave.cs" />
     <Compile Include="Reactions\ConcreteReactions.cs" />
     <Compile Include="Reactions\IReaction.cs" />
     <Compile Include="Reactions\ReactionFactory.cs" />
@@ -232,6 +233,10 @@
     <ProjectReference Include="..\..\SPX.Paths\SPX.Paths.csproj">
       <Project>{89607996-AE50-442C-8931-DF9B9648234D}</Project>
       <Name>SPX.Paths</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SPX.Save\SPX.Saves.csproj">
+      <Project>{141F2D80-05D0-44E7-A188-E3DD7E1FDA98}</Project>
+      <Name>SPX.Saves</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SPX.Sprites\SPX.Sprites.csproj">
       <Project>{9846DC75-EF80-47DF-AACB-2CB75EA2F1B3}</Project>

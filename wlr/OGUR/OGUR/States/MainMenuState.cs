@@ -5,6 +5,7 @@ using OGUR.Dungeons;
 using SPX.Text;
 using SPX.Util;
 using SPX.Core;
+using SPX.Saves;
 using OGUR.Management;
 using System;
 
@@ -20,6 +21,7 @@ namespace OGUR.States
         private const string SelectionText = "--<";
 
         private int _selection;
+        private int _selectionMax = 3;
 
         public MainMenuState()
         {
@@ -34,7 +36,7 @@ namespace OGUR.States
 
             _selection += (Input.IsPressed(Commands.MoveDown, 0) ? 1 : 0)
                 + (Input.IsPressed(Commands.MoveUp, 0) ? -1 : 0);
-            _selection %= 3;
+            _selection %= _selectionMax;
 
             if (Input.IsPressed(Commands.Confirm, 0))
             {
