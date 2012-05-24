@@ -8,6 +8,7 @@ using SPX.Text;
 using OGUR.Management;
 using SPX.Sprites;
 using Microsoft.Xna.Framework.Media;
+using SPX.Saves;
 
 namespace OGUR
 {
@@ -61,6 +62,7 @@ namespace OGUR
             Input.Update();
             StateManager.Update();
             TextManager.Update();
+            Save<OgurSave>.Update();
             base.Update(gameTime);
         }
 

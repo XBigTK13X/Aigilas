@@ -7,6 +7,7 @@ using OGUR.Gods;
 using OGUR.Items;
 using SPX.Core;
 using SPX.Entities;
+using SPX.Saves;
 
 namespace OGUR.Dungeons
 {
@@ -40,6 +41,7 @@ namespace OGUR.Dungeons
 
         public Dungeon(int target)
         {
+            Save<OgurSave>.Init(new OgurSave());
             Init();
             ConvertRoomsToWalls();
             PlaceAltars();

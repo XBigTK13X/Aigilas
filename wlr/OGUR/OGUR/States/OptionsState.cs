@@ -7,6 +7,7 @@ using SPX.Util;
 using SPX.Core;
 using OGUR.Management;
 using System;
+using SPX.Saves;
 
 namespace OGUR.States
 {
@@ -16,6 +17,7 @@ namespace OGUR.States
 
         private const string PlayText = "Play Game";
         private const string OptionsText = "Options";
+        private const string LoadText = "Continue";
         private const string QuitText = "Quit Game";
         private const string SelectionText = "--<";
 
@@ -29,12 +31,20 @@ namespace OGUR.States
         {
             _text.WriteAction(PlayText, 1, 300, 100);
             _text.WriteAction(OptionsText, 1, 300, 200);
-            _text.WriteAction(QuitText, 1, 300, 300);
+            if (Save<OgurSave>.AnyExist())
+            {
+                _text.WriteAction(LoadText, 1, 300, 300);
+                _text.WriteAction(QuitText, 1, 300, 400);
+            }
+            else
+            {
+                _text.WriteAction(QuitText, 1, 300, 300);
+            }
 
 
             _selection += (Input.IsPressed(Commands.MoveDown, 0) ? 1 : 0)
                 + (Input.IsPressed(Commands.MoveUp, 0) ? -1 : 0);
-            _selection %= 3;
+            _selection %= (Save<OgurSave>.AnyExist()) ? 4 : 3;
 
             if (Input.IsPressed(Commands.Confirm, 0))
             {
@@ -48,6 +58,17 @@ namespace OGUR.States
                         StateManager.LoadState(new OptionsState());
                         return;
                     case 2:
+                        if (Save<OgurSave>.AnyExist())
+                        {
+                            Console.WriteLine(Save<OgurSave>.Read().Example);
+                            return;
+                        }
+                        else
+                        {
+                            Environment.Exit(0);
+                            return;
+                        }
+                    case 3:
                         Environment.Exit(0);
                         return;
                     default: break;

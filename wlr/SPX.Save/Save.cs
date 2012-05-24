@@ -7,6 +7,8 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 // http://stackoverflow.com/questions/3723287/good-example-of-xna-4-0-to-save-game-data
 
@@ -29,20 +31,27 @@ namespace SPX.Saves
         private static IAsyncResult asyncResult;
         private static StorageDevice storageDevice;
         private static StorageContainer storageContainer;
-        private static string fileName = "./ogur.sav";
+        private static string fileName = @"./ogur.sav";
         private static T gameData;
 
-        public static T Read(string fileName)
+        public static T Read()
         {
-            return (T)new Object();
+            T target;
+            using (Stream stream = File.Open(fileName, FileMode.Open))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                target =
+                    (T)formatter.Deserialize(stream);
+            }
+            return target;
         }
 
         public static bool AnyExist()
         {
-            return true;
+            return File.Exists(fileName);
         }
 
-        public static void InitSave(T saveGameData)
+        public static void Init(T saveGameData)
         {
             if (savingState == SavingState.NotSaving)
             {
@@ -118,6 +127,8 @@ namespace SPX.Saves
                         }
                     }
                     break;
+                case SavingState.NotSaving:
+                    break;
             }
         }
 
@@ -133,10 +144,10 @@ namespace SPX.Saves
         {
             if (gameData != null)
             {
-                using (Stream stream = storageContainer.CreateFile(fileName))
+                using (Stream stream = File.Create(fileName))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    serializer.Serialize(stream, gameData);
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, gameData);;
                 }
             }
         }

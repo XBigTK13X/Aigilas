@@ -17,11 +17,12 @@ namespace OGUR.States
 
         private const string PlayText = "Play Game";
         private const string OptionsText = "Options";
+        private const string LoadText = "Continue";
         private const string QuitText = "Quit Game";
         private const string SelectionText = "--<";
 
         private int _selection;
-        private int _selectionMax = 3;
+        private int _selectionMax = (Save<OgurSave>.AnyExist())? 4 : 3;
 
         public MainMenuState()
         {
@@ -31,7 +32,15 @@ namespace OGUR.States
         {
             _text.WriteAction(PlayText, 1, 300, 100);
             _text.WriteAction(OptionsText, 1, 300, 200);
-            _text.WriteAction(QuitText, 1, 300, 300);
+            if (Save<OgurSave>.AnyExist())
+            {
+                _text.WriteAction(LoadText, 1, 300, 300);
+                _text.WriteAction(QuitText, 1, 300, 400);
+            }
+            else
+            {
+                _text.WriteAction(QuitText, 1, 300, 300);
+            }
 
 
             _selection += (Input.IsPressed(Commands.MoveDown, 0) ? 1 : 0)
@@ -50,6 +59,17 @@ namespace OGUR.States
                         StateManager.LoadState(new OptionsState());
                         return;
                     case 2:
+                        if (Save<OgurSave>.AnyExist())
+                        {
+                            Console.WriteLine(Save<OgurSave>.Read().Example);
+                            return;
+                        }
+                        else
+                        {
+                            Environment.Exit(0);
+                            return;
+                        }
+                    case 3:
                         Environment.Exit(0);
                         return;
                     default: break;
