@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OGUR.Entities;
 using SPX.Entities;
+using System.Runtime.Serialization;
 
 namespace OGUR.Dungeons
 {
@@ -12,6 +13,7 @@ namespace OGUR.Dungeons
         public const int Start = 0;
         public const int Depths = 1;
     }
+    [Serializable()]
     public static class DungeonFactory
     {
         public static int BlocksHigh = 20;
@@ -49,6 +51,13 @@ namespace OGUR.Dungeons
             _world = new Dictionary<int, DungeonSet>();
             _cache = new List<Entity>();
             _world.Add(Location.Depths,new DungeonSet(Location.Start));
+        }
+
+        public static void Start(Dictionary<int,DungeonSet> dungeonMap,List<Entity> cache,int floorCount)
+        {
+            _world = dungeonMap;
+            _cache = cache;
+            __floorCount = floorCount;
         }
 
         public static int GetFloorCount()

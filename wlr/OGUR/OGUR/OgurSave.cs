@@ -10,6 +10,10 @@
     public class OgurSave: ISerializable
     {
         public string Example;
+        public Dictionary<int, Dungeons.DungeonSet> dungeonMap;
+        public List<SPX.Entities.Entity> cache;
+        public int floorCount;
+
         public OgurSave()
         {
             Example = "TEST";
