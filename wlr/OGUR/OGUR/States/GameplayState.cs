@@ -19,7 +19,7 @@ namespace OGUR.States
             }
             else
             {
-                DungeonFactory.Start(saveData.dungeonMap, saveData.cache, saveData.floorCount);
+                DungeonFactory.Start(saveData);
             }
             Console.WriteLine(Input.GetPlayerCount());
         }
