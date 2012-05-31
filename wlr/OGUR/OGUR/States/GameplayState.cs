@@ -9,11 +9,18 @@ namespace OGUR.States
 {
     public class GameplayState : State
     {
-        public GameplayState()
+        public GameplayState(OgurSave saveData = null)
         {
             EntityManager.Reset();
             CreatureFactory.ResetPlayerCount();
-            DungeonFactory.Start();
+            if (saveData == null)
+            {
+                DungeonFactory.Start();
+            }
+            else
+            {
+                DungeonFactory.Start(saveData.dungeonMap, saveData.cache, saveData.floorCount);
+            }
             Console.WriteLine(Input.GetPlayerCount());
         }
         public void Update()

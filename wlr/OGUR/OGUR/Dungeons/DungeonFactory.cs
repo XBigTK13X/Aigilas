@@ -14,6 +14,7 @@ namespace OGUR.Dungeons
         public const int Start = 0;
         public const int Depths = 1;
     }
+    [Serializable()]
     public static class DungeonFactory
     {
         public static int BlocksHigh = 20;
@@ -64,6 +65,7 @@ namespace OGUR.Dungeons
         {
             _world = saveData.World;
             _cache = saveData.Cache;
+            __floorCount = saveData.FloorCount;
         }
 
         public static int GetFloorCount()

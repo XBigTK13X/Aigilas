@@ -21,8 +21,7 @@ namespace SPX.Saves
             NotSaving,
             ReadyToSelectStorageDevice,
             SelectingStorageDevice,
-
-            ReadyToOpenStorageContainer,    // once we have a storage device start here
+            ReadyToOpenStorageContainer,
             OpeningStorageContainer,
             ReadyToSave
         }
@@ -116,7 +115,6 @@ namespace SPX.Saves
                         }
                         catch (IOException e)
                         {
-                            // Replace with in game dialog notifying user of error
                             Debug.WriteLine(e.Message);
                         }
                         finally
