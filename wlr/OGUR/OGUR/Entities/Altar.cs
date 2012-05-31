@@ -7,9 +7,12 @@ using SPX.Entities;
 using SPX.Sprites;
 using SPX.Text;
 using OGUR.Management;
+using System;
+using System.Runtime.Serialization;
 
 namespace OGUR.Entities
 {
+    [Serializable()]
     public class Altar : Entity
     {
         private readonly God _god;

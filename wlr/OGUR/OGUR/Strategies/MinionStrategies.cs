@@ -42,7 +42,6 @@ namespace OGUR.Strategies
 
     public class MinionOneUseStrategy : IStrategy
     {
-        private bool f;
         public MinionOneUseStrategy(ICreature parent)
             : base(parent,Strategy.MinionOneUse)
         {

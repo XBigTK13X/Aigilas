@@ -8,10 +8,12 @@ using OGUR.Items;
 using SPX.Core;
 using SPX.Entities;
 using SPX.Saves;
+using System.Runtime.Serialization;
 
 namespace OGUR.Dungeons
 {
-    public class Dungeon
+    [Serializable()]
+    public class Dungeon: ISerializable
     {
         private static readonly int _blocksHigh = DungeonFactory.BlocksHigh;
         private static readonly int _blocksWide = DungeonFactory.BlocksWide;
@@ -41,13 +43,26 @@ namespace OGUR.Dungeons
 
         public Dungeon(int target)
         {
-            Save<OgurSave>.Init(new OgurSave());
             Init();
             ConvertRoomsToWalls();
             PlaceAltars();
             PlaceStairs();
             PlaceFloor();            
             TransferDungeonState();
+        }
+
+        public Dungeon(SerializationInfo info, StreamingContext context)
+        {
+            _contents = (List<IEntity>)info.GetValue("Dungeon.Contents", typeof(List<IEntity>));
+            downSpawnLocation = (Point2)info.GetValue("Dungeon.DownSpawnLocation", typeof(Point2));
+            upSpawnLocation = (Point2)info.GetValue("Dungeon.UpSpawnLocation", typeof(Point2));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Dungeon.Contents", _contents);
+            info.AddValue("Dungeon.DownSpawnLocation", downSpawnLocation);
+            info.AddValue("Dungeon.UpSpawnLocation", upSpawnLocation);
         }
 
         private void Generate()

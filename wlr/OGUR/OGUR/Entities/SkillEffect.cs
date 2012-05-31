@@ -6,6 +6,7 @@ using System;
 
 namespace OGUR.Entities
 {
+    [Serializable()]
     public class SkillEffect:Entity
     {
         private const float _strengthDecayAmount = .75f;

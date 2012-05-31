@@ -8,6 +8,7 @@ using System;
 
 namespace OGUR.Entities
 {
+    [Serializable()]
     public class ComboMarker:Entity
     {
         private ICreature _parent;

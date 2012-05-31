@@ -6,6 +6,7 @@ using SPX.Entities;
 
 namespace OGUR
 {
+    
     public class EntityType:SPX.Entities.EntityType
     {
         public const int WALL = 2;

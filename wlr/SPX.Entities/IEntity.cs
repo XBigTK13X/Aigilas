@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SPX.Core;
+using System.Runtime.Serialization;
 
 namespace SPX.Entities
 {
-    public interface IEntity
+    public interface IEntity:ISerializable
     {
         bool Contains(Point2 target);
         void Draw();

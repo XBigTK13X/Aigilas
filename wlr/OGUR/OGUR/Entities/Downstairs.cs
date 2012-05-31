@@ -3,9 +3,11 @@ using OGUR.Dungeons;
 using SPX.Core;
 using SPX.Entities;
 using OGUR.Management;
+using System;
 
 namespace OGUR.Entities
 {
+    [Serializable()]
     public class Downstairs : Entity
     {
         public Downstairs(Point2 location)

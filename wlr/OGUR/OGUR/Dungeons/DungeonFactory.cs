@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using OGUR.Entities;
 using SPX.Entities;
+using SPX.Saves;
+using System.Runtime.Serialization;
 
 namespace OGUR.Dungeons
 {
@@ -20,16 +22,23 @@ namespace OGUR.Dungeons
         private static int __floorCount = 0;
 
         private static Dictionary<int, DungeonSet> _world = new Dictionary<int, DungeonSet>();
-        private static List<Entity> _cache = new List<Entity>(); 
+        private static List<Entity> _cache = new List<Entity>();
+
+        private static void SaveGame()
+        {
+            Save<OgurSave>.Init(new OgurSave(_world, _cache,__floorCount));
+        }
 
         public static void GetNextFloor(int area)
         {
             _world[area].GotoNext(area);
+            SaveGame();
         }
 
         public static void GetPreviousFloor(int area)
         {
             _world[area].GotoPrevious(area);
+            SaveGame();
         }
 
         public static void AddToCache(Entity content)
@@ -51,6 +60,12 @@ namespace OGUR.Dungeons
             _world.Add(Location.Depths,new DungeonSet(Location.Start));
         }
 
+        public static void Start(OgurSave saveData)
+        {
+            _world = saveData.World;
+            _cache = saveData.Cache;
+        }
+
         public static int GetFloorCount()
         {
             return __floorCount;
@@ -62,10 +77,11 @@ namespace OGUR.Dungeons
         }
     }
 
-    public class DungeonSet
+    [Serializable()]
+    public class DungeonSet:ISerializable
     {
         private int _currentFloor = 0;
-        private readonly Dictionary<int,Dungeon> _floors = new Dictionary<int, Dungeon>();
+        private Dictionary<int,Dungeon> _floors = new Dictionary<int, Dungeon>();
 
         public DungeonSet()
         {
@@ -102,6 +118,18 @@ namespace OGUR.Dungeons
                 DungeonFactory.IncreaseFloorCount();
             }
             _floors[_currentFloor].LoadTiles(goingUp);
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("DungeonFactory.CurrentFloor", _currentFloor);
+            info.AddValue("DungeonFactory.Floors", _floors);
+        }
+
+        public DungeonSet(SerializationInfo info, StreamingContext context)
+        {
+            _currentFloor = (int)info.GetValue("DungeonFactory.CurrentFloor", typeof(int));
+            _floors = (Dictionary<int, Dungeon>)info.GetValue("DungeonFactory.Floors", typeof(Dictionary<int, Dungeon>));
         }
     }
 }

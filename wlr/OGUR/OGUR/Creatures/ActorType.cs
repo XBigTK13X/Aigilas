@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System;
 namespace OGUR.Creatures
 {
     public class Generate
     {
         public static List<int> Randoms = new List<int>() { OgurActorType.PEON, OgurActorType.ZORB };
     }
+    [Serializable()]
     public class OgurActorType
     {
         public const int MINION = 2;

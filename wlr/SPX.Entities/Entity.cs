@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SPX.Sprites;
 using SPX.Core;
+using System.Runtime.Serialization;
 
 namespace SPX.Entities
 {
@@ -22,6 +23,32 @@ namespace SPX.Entities
         private bool _isInteracting = false;
         protected Point2 _location = new Point2(0,0);
         protected int _entityType;
+
+        public Entity() { }
+
+        public Entity(SerializationInfo info, StreamingContext context)
+        {
+            _graphic = (AnimatedTexture)info.GetValue("Entity.Graphic",typeof(AnimatedTexture));
+            _isBlocking = (bool)info.GetValue("Entity.IsBlocking", typeof(bool));
+            _assetName = (int)info.GetValue("Entity.AssetName", typeof(int));
+            _objectType = (int)info.GetValue("Entity.ObjectType",typeof(bool));
+            _isOnBoard = (bool)info.GetValue("Entity.IsOnBoard",typeof(bool));
+            _isInteracting = (bool)info.GetValue("Entity.IsInteracting",typeof(bool));
+            _location = (Point2)info.GetValue("Entity.Location",typeof(Point2));
+            _entityType = (int)info.GetValue("Entity.EntityType",typeof(int));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Entity.Graphic", _graphic);
+            info.AddValue("Entity.IsBlocking", _isBlocking);
+            info.AddValue("Entity.AssetName", _assetName);
+            info.AddValue("Entity.ObjectType", _objectType);
+            info.AddValue("Entity.IsOnBoard", _isOnBoard);
+            info.AddValue("Entity.IsInteracting", _isInteracting);
+            info.AddValue("Entity.Location", _location);
+            info.AddValue("Entity.EntityType", _entityType);            
+        }
 
         public void LoadContent()
         {
@@ -157,6 +184,6 @@ namespace SPX.Entities
         public int GetEntityType()
         {
             return _objectType;
-        }
+        }        
     }
 }
