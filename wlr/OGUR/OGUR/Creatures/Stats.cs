@@ -7,6 +7,7 @@ using SPX.Core;
 
 namespace OGUR.Creatures
 {
+    [Serializable]
     public class Stats
     {
         public static readonly float DefaultMoveSpeed = GameManager.SpriteHeight;

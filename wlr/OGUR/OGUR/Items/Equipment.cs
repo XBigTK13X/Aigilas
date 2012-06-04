@@ -6,6 +6,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Items
 {
+    [Serializable]
     public class Equipment
     {
         public static int ClassToSlot(int iClass)

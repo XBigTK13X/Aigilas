@@ -8,6 +8,7 @@ using SPX.Core;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     class StraightLineStrategy:IStrategy
     {
         public StraightLineStrategy(ICreature parent, params int[] targetTypes)

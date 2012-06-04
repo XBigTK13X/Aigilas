@@ -4,6 +4,7 @@ using SPX.Core;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class ConfusedStrategy : IStrategy
     {
         public ConfusedStrategy(ICreature parent)
@@ -16,6 +17,7 @@ namespace OGUR.Strategies
         }
     }
 
+    [Serializable]
     public class ConfusedAndDyingStrategy: ConfusedStrategy
     {
         public ConfusedAndDyingStrategy(ICreature parent)

@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SPX.Core;
+using System;
 
 namespace SPX.Text
 {
+    [Serializable]
     class DefaultHudText:Text
     {
         private Color _color;

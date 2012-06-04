@@ -14,7 +14,7 @@ using System.Runtime.Serialization;
 
 namespace OGUR.Creatures
 {
-    [Serializable()]
+    [Serializable]
     public class Player : AbstractCreature
     {
         private static readonly List<Color> __colors = new List<Color>() { Color.Red,Color.Green,Color.Blue,Color.White};
@@ -29,7 +29,7 @@ namespace OGUR.Creatures
             Compose(Elements.PHYSICAL);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Peon : AbstractCreature
     {
         public Peon(): base(OgurActorType.PEON)
@@ -38,13 +38,9 @@ namespace OGUR.Creatures
             Compose(Elements.EARTH);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Zorb : AbstractCreature
     {
-        public Zorb(SerializationInfo info, StreamingContext context):base(info,context)
-        {
-
-        }
         public Zorb(): base(OgurActorType.ZORB)
         {
             Compose(Elements.PHYSICAL, Elements.FIRE);
@@ -53,7 +49,7 @@ namespace OGUR.Creatures
             Add(SkillId.FIREBALL);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Wrath : AbstractCreature
     {
         public Wrath(): base(OgurActorType.WRATH,SpriteType.WRATH)
@@ -63,7 +59,7 @@ namespace OGUR.Creatures
             Add(SkillId.DISMEMBERMENT);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Hand: AbstractCreature
     {
         public Hand(): base(OgurActorType.HAND,SpriteType.HAND)
@@ -74,7 +70,7 @@ namespace OGUR.Creatures
             _strategy = StrategyFactory.Create(Strategy.StraightLine, this);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Envy : AbstractCreature
     {
         public Envy()
@@ -85,7 +81,7 @@ namespace OGUR.Creatures
             Add(SkillId.HYPOTHERMIA);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Gluttony : AbstractCreature
     {
         public Gluttony()
@@ -96,7 +92,7 @@ namespace OGUR.Creatures
             Add(SkillId.PLAGUE);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Sloth: AbstractCreature
     {
         public Sloth()
@@ -107,7 +103,7 @@ namespace OGUR.Creatures
             Add(SkillId.SERPENT_SUPPER);
         }
     }
-    [Serializable()]
+    [Serializable]
     public class Serpent : AbstractCreature
     {
         public Serpent()
@@ -118,7 +114,7 @@ namespace OGUR.Creatures
             _strategy = StrategyFactory.Create(Strategy.ConfusedAndDying,this);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Pride: AbstractCreature
     {
         public Pride()
@@ -129,7 +125,7 @@ namespace OGUR.Creatures
             Add(SkillId.BREAKING_WHEEL);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Greed: AbstractCreature
     {
         public Greed()
@@ -140,7 +136,7 @@ namespace OGUR.Creatures
             Add(SkillId.BOIL);
         }
     }
-    [Serializable()]
+    [Serializable]
     class Lust: AbstractCreature
     {
         public Lust()
@@ -151,7 +147,7 @@ namespace OGUR.Creatures
             Add(SkillId.BRIMSTONE);
         }
     }
-    [Serializable()]
+    [Serializable]
     public class BreakingWheel : AbstractCreature
     {
         public BreakingWheel()

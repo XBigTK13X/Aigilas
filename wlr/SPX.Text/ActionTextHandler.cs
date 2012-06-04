@@ -4,9 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using SPX.Core;
 using SPX.Text;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace SPX.Text
 {
+    [Serializable]
     public class ActionTextHandler
     {
         private ActionText[] defaultPool = new ActionText[100];

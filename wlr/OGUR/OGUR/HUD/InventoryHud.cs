@@ -11,6 +11,7 @@ using OGUR.Management;
 
 namespace OGUR.HUD
 {
+    [Serializable]
     public class InventoryHud:IHud
     {
         private int _currentClass = ItemClass.Values[1];

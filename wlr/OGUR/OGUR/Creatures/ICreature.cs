@@ -19,8 +19,8 @@ using System.Runtime.Serialization;
 
 namespace OGUR.Creatures
 {
-    [Serializable()]
-    public abstract class ICreature : Entity,IActor,ISerializable
+    [Serializable]
+    public abstract class ICreature : Entity,IActor
     {
         protected IStrategy _strategy;
 
@@ -70,58 +70,6 @@ namespace OGUR.Creatures
                 case OgurActorType.SERPENT: return SpriteType.SLOTH;
                 default:return SpriteType.CREATURE;
             }
-        }
-
-        public ICreature(SerializationInfo info, StreamingContext context):base(info, context){
-            _strategy = (IStrategy)info.GetValue("ICreautre.Strategy", typeof(IStrategy));
-            _class = (CreatureClass)info.GetValue("ICreature.Class", typeof(CreatureClass));
-            _baseStats = (Stats)info.GetValue("ICreature.BaseStats", typeof(Stats));
-            _maxStats = (Stats)info.GetValue("ICreature.MaxStats", typeof(Stats));
-            _god = (God)info.GetValue("ICreature.God", typeof(God));
-            _master = (ICreature)info.GetValue("ICreature.Master", typeof(ICreature));
-            _composition = (List<int>)info.GetValue("ICreature.Composition", typeof(List<int>));
-            _skills = (SkillPool)info.GetValue("ICreature.Skills", typeof(SkillPool));
-            _skillVector = (Point2)info.GetValue("ICreature.SkillVector", typeof(Point2));
-            _combo = (ComboMeter)info.GetValue("ICreature.Combo", typeof(ComboMeter));
-            _statuses = (StatusPool)info.GetValue("ICreature.Statuses", typeof(StatusPool));
-            info.GetValue("ICreature.Inventory", typeof(_inventory));
-            info.GetValue("ICreature.Equipment", typeof(_equipment));
-            info.GetValue("ICreature.HudManager", typeof(_hudManager));
-            info.GetValue("ICreature.DamageText", typeof(_damageText));
-            info.GetValue("ICreature.PlayerIndex", typeof(_playerIndex));
-            info.GetValue("ICreature.IsPlaying", typeof(_isPlaying));
-            info.GetValue("ICreature.CurrentLevel", typeof(_currentLevel));
-            info.GetValue("ICreature.Experience", typeof(_experience));
-            info.GetValue("ICreature.LevelUpAmount", typeof(__levelUpAmonut));
-            info.GetValue("ICreature.NextLevelExperience", typeof(_nextLevelExperience));
-            info.GetValue("ICreature.ActorType", typeof(_actorType));
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            info.AddValue("ICreautre.Strategy",_strategy);
-            info.AddValue("ICreature.Class",_class);
-            info.AddValue("ICreature.BaseStats",_baseStats);
-            info.AddValue("ICreature.MaxStats",_maxStats);
-            info.AddValue("ICreature.God",_god);
-            info.AddValue("ICreature.Master",_master);
-            info.AddValue("ICreature.Composition",_composition);
-            info.AddValue("ICreature.Skills",_skills);
-            info.AddValue("ICreature.SkillVector",_skillVector);
-            info.AddValue("ICreature.Combo",_combo);
-            info.AddValue("ICreature.Statuses",_statuses);
-            info.AddValue("ICreature.Inventory",_inventory);
-            info.AddValue("ICreature.Equipment",_equipment);
-            info.AddValue("ICreature.HudManager",_hudManager);
-            info.AddValue("ICreature.DamageText",_damageText);
-            info.AddValue("ICreature.PlayerIndex",_playerIndex);
-            info.AddValue("ICreature.IsPlaying",_isPlaying);
-            info.AddValue("ICreature.CurrentLevel",_currentLevel);
-            info.AddValue("ICreature.Experience",_experience);
-            info.AddValue("ICreature.LevelUpAmount",__levelUpAmonut);
-            info.AddValue("ICreature.NextLevelExperience",_nextLevelExperience);
-            info.AddValue("ICreature.ActorType",_actorType);
         }
 
         protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)

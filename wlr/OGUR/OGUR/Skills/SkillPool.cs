@@ -6,6 +6,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Skills
 {
+    [Serializable]
     public class SkillPool
     {
         private readonly List<string> _skills = new List<string>();

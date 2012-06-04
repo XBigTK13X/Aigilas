@@ -6,6 +6,7 @@ using SPX.Core;
 
 namespace OGUR.HUD
 {
+    [Serializable]
     public class DeltasHud:IHud
     {
         private Equipment _equipment;

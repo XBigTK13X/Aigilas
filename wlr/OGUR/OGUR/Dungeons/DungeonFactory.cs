@@ -14,7 +14,7 @@ namespace OGUR.Dungeons
         public const int Start = 0;
         public const int Depths = 1;
     }
-    [Serializable()]
+    [Serializable]
     public static class DungeonFactory
     {
         public static int BlocksHigh = 20;
@@ -79,8 +79,8 @@ namespace OGUR.Dungeons
         }
     }
 
-    [Serializable()]
-    public class DungeonSet:ISerializable
+    [Serializable]
+    public class DungeonSet
     {
         private int _currentFloor = 0;
         private Dictionary<int,Dungeon> _floors = new Dictionary<int, Dungeon>();
@@ -120,18 +120,6 @@ namespace OGUR.Dungeons
                 DungeonFactory.IncreaseFloorCount();
             }
             _floors[_currentFloor].LoadTiles(goingUp);
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("DungeonFactory.CurrentFloor", _currentFloor);
-            info.AddValue("DungeonFactory.Floors", _floors);
-        }
-
-        public DungeonSet(SerializationInfo info, StreamingContext context)
-        {
-            _currentFloor = (int)info.GetValue("DungeonFactory.CurrentFloor", typeof(int));
-            _floors = (Dictionary<int, Dungeon>)info.GetValue("DungeonFactory.Floors", typeof(Dictionary<int, Dungeon>));
         }
     }
 }

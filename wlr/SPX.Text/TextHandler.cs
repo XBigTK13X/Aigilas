@@ -3,9 +3,11 @@ using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
 using SPX.Core;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace SPX.Text
 {
+    [Serializable]
     public class TextHandler
     {
         private DefaultHudText[] defaultPool = new DefaultHudText[100];

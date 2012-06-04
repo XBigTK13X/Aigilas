@@ -6,9 +6,11 @@ using SPX.Entities;
 using OGUR.Creatures;
 using OGUR.Entities;
 using SPX.Core;
+using System;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class TargetSet
     {
         private List<ICreature> _targets = new List<ICreature>();

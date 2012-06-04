@@ -8,6 +8,7 @@ using SPX.Text;
 
 namespace OGUR.Reactions
 {
+    [Serializable]
     public class ComboMeter
     {
         private static Dictionary<int, int> __reactions = new Dictionary<int, int>()

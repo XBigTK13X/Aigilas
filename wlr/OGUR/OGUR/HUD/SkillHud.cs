@@ -4,9 +4,11 @@ using OGUR.Creatures;
 using SPX.Util;
 using SPX.Core;
 using OGUR.Management;
+using System;
 
 namespace OGUR.HUD
 {
+    [Serializable]
     public class SkillHud:IHud
     {
         private static string __separator = "|";

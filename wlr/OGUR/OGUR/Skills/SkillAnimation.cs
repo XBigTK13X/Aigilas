@@ -1,16 +1,20 @@
 ﻿using OGUR.Creatures;
 using OGUR.Entities;
 using SPX.Core;
+using System;
 
 namespace OGUR.Skills
 {
+    [Serializable]
     class SkillAnimation
     {
         protected SkillAnimation(){}
         public virtual void Animate(SkillEffect skill,ICreature source,Point2 velocity){}
     }
+    [Serializable]
     class NoAnimation : SkillAnimation { }
 
+    [Serializable]
     class SelfAnimation : SkillAnimation
     {
         public override void Animate(SkillEffect skill,ICreature source,Point2 velocity)
@@ -19,6 +23,7 @@ namespace OGUR.Skills
         }
     }
 
+    [Serializable]
     class RangedAnimation : SkillAnimation
     {
         public override void Animate(SkillEffect skill, ICreature source, Point2 velocity)
@@ -30,6 +35,7 @@ namespace OGUR.Skills
         }
     }
 
+    [Serializable]
     class RotateAnimation : SkillAnimation
     {
         private Point2 rotation;

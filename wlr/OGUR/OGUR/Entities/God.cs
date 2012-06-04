@@ -41,6 +41,7 @@ namespace OGUR.Gods
             "Pride"
         };
     }
+    [Serializable]
     public class God
     {
         public static God Get(int name)

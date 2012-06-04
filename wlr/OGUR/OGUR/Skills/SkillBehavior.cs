@@ -2,9 +2,11 @@
 using OGUR.Entities;
 using SPX.Core;
 using SPX.Entities;
+using System;
 
 namespace OGUR.Skills
 {
+    [Serializable]
     public class SkillBehavior
     {
         protected SideEffects _sideEffects;
@@ -79,11 +81,13 @@ namespace OGUR.Skills
             return _cost.Get(StatType.MANA);
         }
     }
+    [Serializable]
     public class RangedBehavior: SkillBehavior
     {
         public RangedBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.RANGED, parentSkill) { }
         public override void Activate(ICreature target) { if (SubtractCost(target)) { _sideEffects.Generate(target.GetLocation().Add(target.GetSkillVector()), target.GetSkillVector(), target); } }
     }
+    [Serializable]
     public class SelfBehavior:SkillBehavior
     {
         public SelfBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.SELF, parentSkill) { }
@@ -99,6 +103,7 @@ namespace OGUR.Skills
             return true;
         }
     }
+    [Serializable]
     public class StationaryBehavior : SkillBehavior
     {
         public StationaryBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.STATIONARY, parentSkill) { }
@@ -118,6 +123,7 @@ namespace OGUR.Skills
             }
         }
     }
+    [Serializable]
     public class CloudBehavior:SkillBehavior
     {
         public CloudBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.CLOUD, parentSkill) { }
@@ -140,6 +146,7 @@ namespace OGUR.Skills
             }
         }
     }
+    [Serializable]
     public class RotateBehavior : SkillBehavior
     {
         public RotateBehavior(int effectGraphic, ISkill parentSkill) : base(effectGraphic, AnimationType.ROTATE, parentSkill) { }

@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace SPX.Core
 {
     [Serializable()]
-    public class Point2:ISerializable
+    public class Point2
     {
         private static readonly Point2 Zero = new Point2(0, 0);
         private static readonly float halfHeight = GameManager.SpriteHeight/2;
@@ -48,19 +48,7 @@ namespace SPX.Core
         public Point2(Point2 target) : this(target.X, target.Y, 0) { }
 
         public Point2(Vector2 target) : this(target.X, target.Y, 0) { }
-
-        public Point2(SerializationInfo info, StreamingContext context)
-        {
-            SetX((float)info.GetValue("Point.X", typeof(float)));
-            SetY((float)info.GetValue("Point.Y", typeof(float)));
-        }
-        
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Point.X", X);
-            info.AddValue("Point.Y", Y);
-        }
-
+     
         public void Reset(float x, float y)
         {
             SetX(x);

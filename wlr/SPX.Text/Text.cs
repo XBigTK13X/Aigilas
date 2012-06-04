@@ -8,6 +8,7 @@ using SPX.Core;
 
 namespace SPX.Text
 {
+    [Serializable]
     public class Text
     {
         protected string _contents;

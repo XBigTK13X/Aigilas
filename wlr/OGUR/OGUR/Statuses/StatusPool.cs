@@ -6,6 +6,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Statuses
 {
+    [Serializable]
     public class StatusPool
     {
         private List<IStatus> _statuses = new List<IStatus>();

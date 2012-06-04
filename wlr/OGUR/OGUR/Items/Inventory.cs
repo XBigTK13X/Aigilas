@@ -2,9 +2,11 @@
 using System.Linq;
 using OGUR.Creatures;
 using SPX.Entities;
+using System;
 
 namespace OGUR.Items
 {
+    [Serializable]
     public class Inventory
     {
         Dictionary<GenericItem,int> _contents = new Dictionary<GenericItem, int>(); 

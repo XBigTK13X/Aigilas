@@ -4,14 +4,12 @@ using SPX.Entities;
 using OGUR.Management;
 using SPX.Core;
 using System;
-using System.Runtime.Serialization;
 
 namespace OGUR.Entities
 {
     [Serializable()]
     public class Upstairs : Entity
     {
-        public Upstairs(SerializationInfo info, StreamingContext context):base(info, context){}
         public Upstairs(Point2 location)
         {
             Initialize(location, SpriteType.UPSTAIRS, OGUR.EntityType.UPSTAIRS,ZDepth.Stairs);

@@ -10,6 +10,7 @@ using SPX.Core;
 
 namespace OGUR.Skills
 {
+    [Serializable]
     public class SideEffects
     {
         protected ISkill _parent;

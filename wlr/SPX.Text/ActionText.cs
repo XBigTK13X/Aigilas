@@ -8,6 +8,7 @@ using SPX.Core;
 
 namespace SPX.Text
 {
+    [Serializable]
     public class ActionText:Text
     {
 

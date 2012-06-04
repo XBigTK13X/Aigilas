@@ -8,7 +8,7 @@ using SPX.Core;
 
 namespace SPX.Paths
 {
-
+    [Serializable]
     public class Path
     {
         public Point2 Finish = new Point2(0, 0);

@@ -3,9 +3,11 @@ using OGUR.Skills;
 using SPX.Entities;
 using SPX.Paths;
 using SPX.Core;
+using System;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class TestBotStrategy : IStrategy
     {
         public TestBotStrategy(ICreature parent)

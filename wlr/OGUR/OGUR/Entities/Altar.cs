@@ -8,18 +8,16 @@ using SPX.Sprites;
 using SPX.Text;
 using OGUR.Management;
 using System;
-using System.Runtime.Serialization;
 
 namespace OGUR.Entities
 {
-    [Serializable()]
+    [Serializable]
     public class Altar : Entity
     {
         private readonly God _god;
         private Player _currentTarget;
         private List<IEntity> _offerings;
 
-        public Altar(SerializationInfo info, StreamingContext context):base(info, context){}
         public Altar(Point2 location,int godName)
         {
             _god = God.Get(godName);

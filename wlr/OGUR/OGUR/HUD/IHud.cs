@@ -4,9 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using OGUR.Creatures;
 using SPX.Text;
 using SPX.Core;
+using System;
 
 namespace OGUR.HUD
 {
+    [Serializable]
     public class IHud
     {
         protected bool _isVisible = false;

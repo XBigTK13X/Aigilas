@@ -8,12 +8,11 @@ using OGUR.Items;
 using SPX.Core;
 using SPX.Entities;
 using SPX.Saves;
-using System.Runtime.Serialization;
 
 namespace OGUR.Dungeons
 {
-    [Serializable()]
-    public class Dungeon: ISerializable
+    [Serializable]
+    public class Dungeon
     {
         private static readonly int _blocksHigh = DungeonFactory.BlocksHigh;
         private static readonly int _blocksWide = DungeonFactory.BlocksWide;
@@ -30,9 +29,11 @@ namespace OGUR.Dungeons
         private static int enemyCapModifier = 0;
         private static int enemyBaseModifier = 0;
 
+        [NonSerialized]
         private readonly List<Room> _rooms = new List<Room>();
+        [NonSerialized]
+        private readonly IEntity[,] dungeon = new IEntity[_blocksWide, _blocksHigh];
         private List<IEntity> _contents = new List<IEntity>();
-        private readonly IEntity[,] dungeon = new IEntity[_blocksWide,_blocksHigh];
         private Point2 downSpawnLocation = new Point2(0, 0);
         private Point2 upSpawnLocation = new Point2(0, 0);
 
@@ -49,20 +50,6 @@ namespace OGUR.Dungeons
             PlaceStairs();
             PlaceFloor();            
             TransferDungeonState();
-        }
-
-        public Dungeon(SerializationInfo info, StreamingContext context)
-        {
-            _contents = (List<IEntity>)info.GetValue("Dungeon.Contents", typeof(List<IEntity>));
-            downSpawnLocation = (Point2)info.GetValue("Dungeon.DownSpawnLocation", typeof(Point2));
-            upSpawnLocation = (Point2)info.GetValue("Dungeon.UpSpawnLocation", typeof(Point2));
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Dungeon.Contents", _contents);
-            info.AddValue("Dungeon.DownSpawnLocation", downSpawnLocation);
-            info.AddValue("Dungeon.UpSpawnLocation", upSpawnLocation);
         }
 
         private void Generate()

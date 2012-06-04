@@ -10,6 +10,7 @@ using SPX.Core;
 
 namespace OGUR.HUD
 {
+    [Serializable]
     public class HudManager
     {
         private InventoryHud _inventory;

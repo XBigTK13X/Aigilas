@@ -10,6 +10,7 @@ using System.Collections.Generic;
 
 namespace OGUR.HUD
 {
+    [Serializable]
     public class HotkeyHud:IHud
     {
         public HotkeyHud(ICreature owner)

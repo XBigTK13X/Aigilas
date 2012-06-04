@@ -5,6 +5,7 @@ using System;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class AttackStrategy : IStrategy
     {
         private int _skillCooldown = 0;

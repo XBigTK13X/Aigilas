@@ -1,5 +1,7 @@
-﻿namespace OGUR.Creatures
+﻿using System;
+namespace OGUR.Creatures
 {
+    [Serializable]
     public class StatBuff
     {
         public string Stat { get; private set; }

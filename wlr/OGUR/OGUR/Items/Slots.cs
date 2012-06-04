@@ -6,6 +6,7 @@ using OGUR.Entities;
 
 namespace OGUR.Items
 {
+    [Serializable]
     public class Slots
     {
        private List<int> _slots; 

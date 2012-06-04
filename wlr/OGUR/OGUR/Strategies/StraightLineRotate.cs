@@ -8,6 +8,7 @@ using SPX.Core;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     class StraightLineRotateStrategy:IStrategy
     {
         private Point2 _direction = new Point2(0, 1);

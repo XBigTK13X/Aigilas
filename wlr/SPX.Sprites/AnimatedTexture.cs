@@ -6,40 +6,24 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using SPX.Core;
-using System.Runtime.Serialization;
 
 namespace SPX.Sprites
 {
-    [Serializable()]
-    public class AnimatedTexture:ISerializable
+    [Serializable]
+    public class AnimatedTexture
     {
+        [NonSerialized]
+        private readonly Texture2D _texture = XnaManager.GetSpriteAsset();
         private int _currentFrame;
         private SpriteInfo _spriteInfo;
         private Rectangle _currentCell;
         private Rectangle _target;
         private int _animationTimer;
         private Color _color = Color.White;
-        private readonly Texture2D _texture = XnaManager.GetSpriteAsset();
         private float _layerDepth = 0f;
         protected Vector2 _position = Vector2.Zero;
 
         public AnimatedTexture() { }
-
-        public AnimatedTexture(SerializationInfo info, StreamingContext context)
-        {
-            _spriteInfo = (SpriteInfo)info.GetValue("AnimatedTexture.SpriteInfo", typeof(SpriteInfo));
-            _position = (Vector2)info.GetValue("AnimatedTexture.Position", typeof(Vector2));
-            _color = (Color)info.GetValue("AnimatedTexture.Color", typeof(Color));
-            _layerDepth = (float)info.GetValue("AnimatedTexture.Depth", typeof(float));
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("AnimatedTexture.SpriteInfo", _spriteInfo);
-            info.AddValue("AnimatedTexture.Position", _position);
-            info.AddValue("AnimatedTexture.Color", _color);
-            info.AddValue("AnimatedTexture.Depth", _layerDepth);
-        }
 
         public void LoadContent(int assetName)
         {

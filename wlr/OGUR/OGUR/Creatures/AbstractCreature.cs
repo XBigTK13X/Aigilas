@@ -3,16 +3,13 @@ using OGUR.Skills;
 using OGUR.Strategies;
 using SPX.Core;
 using OGUR.Management;
-using System.Runtime.Serialization;
+using System;
 
 namespace OGUR.Creatures
 {
+    [Serializable]
     public class AbstractCreature:ICreature
     {
-        public AbstractCreature(SerializationInfo info, StreamingContext context):base(info,context)
-        {
-
-        }
         public AbstractCreature(int actorType,int spriteType = SpriteType.CREATURE,CreatureClass cClass = null) 
         {
             SetClass(cClass);

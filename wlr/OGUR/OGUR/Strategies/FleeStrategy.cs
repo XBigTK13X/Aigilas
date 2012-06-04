@@ -8,6 +8,7 @@ using SPX.Core;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     class FleeStrategy:IStrategy
     {
         public FleeStrategy(ICreature parent, params int[] targetTypes)

@@ -4,6 +4,7 @@ using System;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class MinionRotateStrategy : IStrategy
     {
         public MinionRotateStrategy(ICreature parent) : base(parent,Strategy.MinionRotate)//TODO pass master into strategy to copy targets here.
@@ -22,6 +23,7 @@ namespace OGUR.Strategies
             }
         }
     }
+    [Serializable]
     public class MinionFireStrategy : IStrategy
     {
         public MinionFireStrategy(ICreature parent)
@@ -39,7 +41,7 @@ namespace OGUR.Strategies
             }
         }
     }
-
+    [Serializable]
     public class MinionOneUseStrategy : IStrategy
     {
         public MinionOneUseStrategy(ICreature parent)
@@ -53,7 +55,7 @@ namespace OGUR.Strategies
             _parent.SetInactive();
         }
     }
-
+    [Serializable]
     public class MinionCloudStrategy : IStrategy
     {
         public MinionCloudStrategy(ICreature parent)

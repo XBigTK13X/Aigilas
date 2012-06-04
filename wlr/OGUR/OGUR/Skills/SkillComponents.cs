@@ -7,6 +7,7 @@ using OGUR.Entities;
 
 namespace OGUR.Skills
 {
+    [Serializable]
     public class SkillComponents
     {
         protected List<int> _elements;

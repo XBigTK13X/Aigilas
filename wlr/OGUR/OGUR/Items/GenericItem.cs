@@ -7,7 +7,7 @@ using OGUR.Management;
 
 namespace OGUR.Items
 {
-    [Serializable()]
+    [Serializable]
     public class GenericItem : Entity
     {
         public Stats Modifers;

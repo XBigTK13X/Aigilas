@@ -8,10 +8,9 @@ using System.Runtime.Serialization;
 
 namespace OGUR.Entities
 {
-    [Serializable()]
+    [Serializable]
     public class Downstairs : Entity
     {
-        public Downstairs(SerializationInfo info, StreamingContext context):base(info, context){}
         public Downstairs(Point2 location)
         {
             Initialize(location, SpriteType.DOWNSTAIRS, OGUR.EntityType.DOWNSTAIRS,ZDepth.Stairs);

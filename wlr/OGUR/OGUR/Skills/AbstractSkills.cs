@@ -5,6 +5,7 @@ using OGUR.Entities;
 using OGUR.Statuses;
 using SPX.Entities;
 using OGUR.Management;
+using System;
 
 namespace OGUR.Skills
 {
@@ -17,6 +18,7 @@ namespace OGUR.Skills
         public const int STATIONARY = 4;
         public const int ROTATE = 5;
     }
+    [Serializable]
     public abstract class ISkill
     {
         protected ICreature _source;       

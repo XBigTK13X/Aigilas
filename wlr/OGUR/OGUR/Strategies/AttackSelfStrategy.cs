@@ -1,8 +1,10 @@
 ﻿using OGUR.Creatures;
 using OGUR.Skills;
+using System;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class AttackSelfStrategy : IStrategy
     {
         public AttackSelfStrategy(ICreature parent)

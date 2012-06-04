@@ -2,9 +2,11 @@
 using OGUR.Items;
 using SPX.Util;
 using SPX.Core;
+using System;
 
 namespace OGUR.HUD
 {
+    [Serializable]
     public class EquipmentHud:IHud
     {
         private Equipment _equipment;

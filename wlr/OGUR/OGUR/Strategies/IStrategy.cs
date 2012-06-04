@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public abstract class IStrategy
     {
         protected TargetSet _targets;

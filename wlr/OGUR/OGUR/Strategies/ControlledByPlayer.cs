@@ -8,6 +8,7 @@ using SPX.Core;
 using System.Collections.Generic;
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class ControlledByPlayer : IStrategy
     {
         private bool _isCasting = false;

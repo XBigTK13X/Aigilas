@@ -7,6 +7,7 @@ using OGUR.Skills;
 
 namespace OGUR.Classes
 {
+    [Serializable]
     public abstract class CreatureClass
     {
         private readonly Stats _stats;
@@ -19,6 +20,7 @@ namespace OGUR.Classes
         public IEnumerable<string> GetLevelSkills(int level){return (from skill in _skillUnlocks where skill.Key <= level select skill.Value);}
         protected void Add(int level, string skillId){_skillUnlocks.Add(new KeyValuePair<int, string>(level,skillId));}
     }
+    [Serializable]
     class NoClass : CreatureClass
     {
         public NoClass()
@@ -26,6 +28,7 @@ namespace OGUR.Classes
         {
         }
     }
+    [Serializable]
     class SlothAcolyte:CreatureClass
     {
         public SlothAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
@@ -37,6 +40,7 @@ namespace OGUR.Classes
             Add(5, SkillId.DART_TRAP);
         }
     }
+    [Serializable]
     class EnvyAcolyte : CreatureClass
     {
         public EnvyAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
@@ -48,6 +52,7 @@ namespace OGUR.Classes
             Add(5, SkillId.MUTINY);
         }
     }
+    [Serializable]
     class GreedAcolyte : CreatureClass
     {      public GreedAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
         {
@@ -58,6 +63,7 @@ namespace OGUR.Classes
             Add(5, SkillId.STEAL_ITEM);
         }
     }
+    [Serializable]
     class WrathAcolyte : CreatureClass
     {
         public WrathAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
@@ -71,6 +77,7 @@ namespace OGUR.Classes
             Add(5, SkillId.HORRIFY);
         }
     }
+    [Serializable]
     class GluttonyAcolyte : CreatureClass
     {
         public GluttonyAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
@@ -78,6 +85,7 @@ namespace OGUR.Classes
             Add(1, SkillId.FORGET_SKILL);
         }
     }
+    [Serializable]
     class LustAcolyte : CreatureClass
     {
         public LustAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))
@@ -89,6 +97,7 @@ namespace OGUR.Classes
             Add(5, SkillId.CAVALRY);
         }
     }
+    [Serializable]
     class PrideAcolyte : CreatureClass
     {
         public PrideAcolyte(): base(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0))

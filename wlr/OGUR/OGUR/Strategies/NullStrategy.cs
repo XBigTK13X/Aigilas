@@ -1,9 +1,11 @@
 ﻿using OGUR.Creatures;
 using OGUR.Skills;
 using SPX.Core;
+using System;
 
 namespace OGUR.Strategies
 {
+    [Serializable]
     public class NullStrategy : IStrategy
     {
 

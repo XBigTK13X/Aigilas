@@ -11,7 +11,8 @@ namespace OGUR.Statuses
         Passive,
         Contagion,
         KillReward
-    }    
+    }
+    [Serializable]
     public class IStatus
     {
         protected IList<OAction> _prevents = new List<OAction>();
