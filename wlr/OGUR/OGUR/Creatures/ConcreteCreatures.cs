@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using OGUR.Entities;
 using OGUR.Gods;
 using OGUR.Creatures;
+using System.Runtime.Serialization;
 
 namespace OGUR.Creatures
 {
@@ -40,6 +41,10 @@ namespace OGUR.Creatures
     [Serializable()]
     class Zorb : AbstractCreature
     {
+        public Zorb(SerializationInfo info, StreamingContext context):base(info,context)
+        {
+
+        }
         public Zorb(): base(OgurActorType.ZORB)
         {
             Compose(Elements.PHYSICAL, Elements.FIRE);

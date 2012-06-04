@@ -19,6 +19,7 @@ namespace OGUR.Entities
         private Player _currentTarget;
         private List<IEntity> _offerings;
 
+        public Altar(SerializationInfo info, StreamingContext context):base(info, context){}
         public Altar(Point2 location,int godName)
         {
             _god = God.Get(godName);

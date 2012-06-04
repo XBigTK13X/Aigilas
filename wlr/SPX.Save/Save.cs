@@ -39,8 +39,7 @@ namespace SPX.Saves
             using (Stream stream = File.Open(fileName, FileMode.Open))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                target =
-                    (T)formatter.Deserialize(stream);
+                target = (T)formatter.Deserialize(stream);
             }
             return target;
         }

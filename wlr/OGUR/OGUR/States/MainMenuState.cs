@@ -61,7 +61,8 @@ namespace OGUR.States
                     case 2:
                         if (Save<OgurSave>.AnyExist())
                         {
-                            Console.WriteLine(Save<OgurSave>.Read().FloorCount);
+                            var save = Save<OgurSave>.Read();
+                            Console.WriteLine(save.FloorCount);
                             return;
                         }
                         else

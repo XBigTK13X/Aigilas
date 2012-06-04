@@ -29,16 +29,16 @@ namespace SPX.Entities
         public Entity(SerializationInfo info, StreamingContext context)
         {
             _graphic = (AnimatedTexture)info.GetValue("Entity.Graphic",typeof(AnimatedTexture));
-            _isBlocking = (bool)info.GetValue("Entity.IsBlocking", typeof(bool));
+            _isBlocking = (bool?)info.GetValue("Entity.IsBlocking", typeof(bool?));
             _assetName = (int)info.GetValue("Entity.AssetName", typeof(int));
-            _objectType = (int)info.GetValue("Entity.ObjectType",typeof(bool));
+            _objectType = (int)info.GetValue("Entity.ObjectType",typeof(int));
             _isOnBoard = (bool)info.GetValue("Entity.IsOnBoard",typeof(bool));
             _isInteracting = (bool)info.GetValue("Entity.IsInteracting",typeof(bool));
             _location = (Point2)info.GetValue("Entity.Location",typeof(Point2));
             _entityType = (int)info.GetValue("Entity.EntityType",typeof(int));
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Entity.Graphic", _graphic);
             info.AddValue("Entity.IsBlocking", _isBlocking);

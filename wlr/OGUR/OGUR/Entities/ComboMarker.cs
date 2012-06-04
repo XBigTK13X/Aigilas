@@ -5,6 +5,7 @@ using SPX.Entities;
 using OGUR.Management;
 using System.Collections.Generic;
 using System;
+using System.Runtime.Serialization;
 
 namespace OGUR.Entities
 {
@@ -13,6 +14,8 @@ namespace OGUR.Entities
     {
         private ICreature _parent;
         private int _index;
+
+        public ComboMarker(SerializationInfo info, StreamingContext context):base(info, context){}
 
         public ComboMarker(ICreature source,int elementId,int index)
         {
