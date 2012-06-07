@@ -113,7 +113,7 @@ namespace OGUR.Reactions
             }
         }
 
-        private IReaction reaction;
+        private Reaction reaction;
         public void Update()
         {
             foreach (var marker in _markers)

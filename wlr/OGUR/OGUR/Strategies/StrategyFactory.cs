@@ -6,7 +6,7 @@ using OGUR.Creatures;
 
 namespace OGUR.Strategies
 {
-    public abstract class Strategy
+    public class Strategy
     {
         // max = 15
         public const int Null = -1;

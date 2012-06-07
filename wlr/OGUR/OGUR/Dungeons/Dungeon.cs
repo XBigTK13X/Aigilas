@@ -32,8 +32,8 @@ namespace OGUR.Dungeons
         [NonSerialized]
         private readonly List<Room> _rooms = new List<Room>();
         [NonSerialized]
-        private readonly IEntity[,] dungeon = new IEntity[_blocksWide, _blocksHigh];
-        private List<IEntity> _contents = new List<IEntity>();
+        private readonly Entity[,] dungeon = new Entity[_blocksWide, _blocksHigh];
+        private List<Entity> _contents = new List<Entity>();
         private Point2 downSpawnLocation = new Point2(0, 0);
         private Point2 upSpawnLocation = new Point2(0, 0);
 
@@ -104,7 +104,7 @@ namespace OGUR.Dungeons
                 DungeonFactory.AddToCache(player as Entity);
                 EntityManager.RemoveObject(player);
             }
-            _contents = new List<IEntity>(EntityManager.GetEntitiesToCache());
+            _contents = new List<Entity>(EntityManager.GetEntitiesToCache());
         }
 
         private void Init()

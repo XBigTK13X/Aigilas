@@ -23,15 +23,15 @@ namespace OGUR.States
             }
             Console.WriteLine(Input.GetPlayerCount());
         }
-        public void Update()
+        public override void Update()
         {
             EntityManager.Update();
         }
-        public void LoadContent()
+        public override void LoadContent()
         {
             EntityManager.LoadContent();
         }
-        public void Draw()
+        public override void Draw()
         {
             EntityManager.Draw();
         }

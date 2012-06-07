@@ -11,7 +11,7 @@ using SPX.Core;
 namespace SPX.Entities
 {
     [Serializable]
-    public class Entity: IEntity
+    public class Entity
     {
         protected AnimatedTexture _graphic = new AnimatedTexture();
 

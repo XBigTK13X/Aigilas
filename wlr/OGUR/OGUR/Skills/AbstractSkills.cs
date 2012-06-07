@@ -19,7 +19,7 @@ namespace OGUR.Skills
         public const int ROTATE = 5;
     }
     [Serializable]
-    public abstract class ISkill
+    public class ISkill
     {
         protected ICreature _source;       
         protected string _implementationId;        
@@ -44,7 +44,7 @@ namespace OGUR.Skills
             _source = source;
             _behavior.Activate(source);
         }
-        public virtual void Affect(IEntity target)
+        public virtual void Affect(Entity target)
         {
             var creature = target.IsCreature();
             if (creature != null)

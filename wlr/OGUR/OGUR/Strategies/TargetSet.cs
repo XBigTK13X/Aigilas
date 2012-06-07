@@ -98,7 +98,7 @@ namespace OGUR.Strategies
             return closest;
         }
 
-        public IEntity GetCollidedTarget(Entity source)
+        public Entity GetCollidedTarget(Entity source)
         {
             foreach(var target in _targets)
             {
@@ -116,7 +116,7 @@ namespace OGUR.Strategies
                         (actorType == ActorType.NONPLAYER && target.GetActorType() != ActorType.PLAYER) ||
                         (actorType == ActorType.PLAYER && target.GetActorType() == ActorType.PLAYER))
                     {
-                        return target as IEntity;
+                        return target as Entity;
                     }
                 }
             }

@@ -9,24 +9,24 @@ using SPX.Entities;
 
 namespace OGUR.Reactions
 {
-    public class SweatReaction : IReaction
+    public class SweatReaction : Reaction
     {
-        public void Affect(Creatures.ICreature target)
+        public override void Affect(Creatures.ICreature target)
         {
             StatusFactory.Apply(target, Status.SlowDown);
         }
     }
-    public class MagmaReaction : IReaction
+    public class MagmaReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             target.ApplyDamage(30f);
         }
     }
 
-    public class ExplosionReaction : IReaction
+    public class ExplosionReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             foreach (var creature in EntityManager.GetActorsSurrounding(target.GetLocation(), 2))
             {
@@ -34,177 +34,177 @@ namespace OGUR.Reactions
             }
         }
     }
-    public class ScorchReaction : IReaction
+    public class ScorchReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.WeakKnees);
         }
     }
-    public class BlindReaction : IReaction
+    public class BlindReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.Blind);
         }
     }
-    public class LacticAcidReaction : IReaction
+    public class LacticAcidReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.WeakMuscles);
         }
     }
-    public class MindBlownReaction : IReaction
+    public class MindBlownReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             target.ApplyDamage(10, null, true, StatType.MANA);
         }
     }
-    public class VentReaction : IReaction
+    public class VentReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.SlowDown);
         }
     }
-    public class DrownReaction : IReaction
+    public class DrownReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.Mute);
         }
     }
-    public class ReflectReaction : IReaction
+    public class ReflectReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.HealReflect);
         }
     }
-    public class DrenchReaction : IReaction
+    public class DrenchReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.SoakingWet);
         }
     }
-    public class PneumoniaReaction : IReaction
+    public class PneumoniaReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.Poison);
         }
     }
-    public class LobotomyReaction : IReaction
+    public class LobotomyReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.IntDown);
         }
     }
-    public class RustReaction : IReaction
+    public class RustReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             target.DestroyRandomItemFromInventory();
         }
     }
-    public class PurifyReaction : IReaction
+    public class PurifyReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.PreventDarkUsage);
         }
     }
-    public class EclipseReaction : IReaction
+    public class EclipseReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.PreventLightUsage);
         }
     }
-    public class RespectReaction : IReaction
+    public class RespectReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.Mutiny);
         }
     }
-    public class CraftsmanReaction : IReaction
+    public class CraftsmanReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             ItemFactory.CreateRandomPlain(target.GetLocation());
         }
     }
-    public class FlashReaction : IReaction
+    public class FlashReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             target.SetLocation(EntityManager.GetEmptyLocation());
         }
     }
-    public class MetabolismReaction : IReaction
+    public class MetabolismReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.PreventRegeneration);
         }
     }
-    public class FastForwardReaction : IReaction
+    public class FastForwardReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             target.ApplyDamage(-1, null, false, StatType.AGE);
         }
     }
-    public class BlankReaction : IReaction
+    public class BlankReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.PreventMentalUsage);
         }
     }
-    public class YinYangReaction : IReaction
+    public class YinYangReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.SelfMutilation);
         }
     }
-    public class ExposeReaction : IReaction
+    public class ExposeReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.Flee);
         }
     }
-    public class EnlightenReaction : IReaction
+    public class EnlightenReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.Mutiny);
         }
     }
-    public class AtrophyReaction : IReaction
+    public class AtrophyReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.WeakenStrength);
         }
     }
-    public class NeurosisReaction : IReaction
+    public class NeurosisReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.LockSkillCycle);
         }
     }
-    public class ConfuseReaction : IReaction
+    public class ConfuseReaction : Reaction
     {
-        public void Affect(ICreature target)
+        public override void Affect(ICreature target)
         {
             StatusFactory.Apply(target, Status.Confusion);
         }

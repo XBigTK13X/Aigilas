@@ -70,7 +70,7 @@ namespace OGUR.Reactions
     }
     public class ReactionFactory
     {
-        public static IReaction Create(int id)
+        public static Reaction Create(int id)
         {
             switch(id)
             {

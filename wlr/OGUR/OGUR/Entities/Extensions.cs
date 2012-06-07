@@ -7,7 +7,7 @@ namespace OGUR.Entities
 {
     public static class Extensions
     {
-        public static ICreature IsCreature(this IEntity entity)
+        public static ICreature IsCreature(this Entity entity)
         {
             if (entity.GetEntityType() == OGUR.EntityType.ACTOR)
             {

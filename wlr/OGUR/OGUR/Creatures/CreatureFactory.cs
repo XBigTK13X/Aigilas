@@ -101,7 +101,7 @@ namespace OGUR.Creatures
             OgurActorType.LUST,
             OgurActorType.GLUTTONY
         };
-        public static IEntity CreateNextBoss(Point2 randomPoint)
+        public static Entity CreateNextBoss(Point2 randomPoint)
         {
             int nextBoss = __remainingBosses[RNG.Rand.Next(0,__remainingBosses.Count)];
             __remainingBosses.Remove(nextBoss);

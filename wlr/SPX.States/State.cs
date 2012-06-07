@@ -5,10 +5,10 @@ using System.Text;
 
 namespace SPX.States
 {
-    public interface State
+    public class State
     {
-        void Draw();
-        void Update();
-        void LoadContent();
+        public virtual void Draw() { }
+        public virtual void Update() { }
+        public virtual void LoadContent() { }
     }
 }

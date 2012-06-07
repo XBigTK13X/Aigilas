@@ -12,7 +12,7 @@ namespace OGUR.Management
         {
             return new SpriteDefinition(type, index, frames);
         }
-        public ICollection<SpriteDefinition> GetSprites()
+        public override ICollection<SpriteDefinition> GetSprites()
         {
             return new List<SpriteDefinition>()
             {

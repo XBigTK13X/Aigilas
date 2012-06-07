@@ -34,7 +34,7 @@ namespace OGUR.Entities
             _graphic.SetColor(skill.GetElementColor());
         }
 
-        private IEntity hitTarget;
+        private Entity hitTarget;
 
         public void Cleanup(Entity target)
         {

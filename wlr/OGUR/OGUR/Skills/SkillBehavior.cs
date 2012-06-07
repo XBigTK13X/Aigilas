@@ -50,7 +50,7 @@ namespace OGUR.Skills
             }
             return costPaid;
         }
-        private IEntity hitTarget;
+        private Entity hitTarget;
         private ICreature hitCreature;
         public virtual bool AffectTarget(ICreature source,SkillEffect graphic)
         {

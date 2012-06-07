@@ -18,7 +18,7 @@ namespace OGUR.Skills
     {
         public NoSkill() : base(SkillId.NO_SKILL, AnimationType.NONE) { }
         public override void Activate(ICreature source) { }
-        public override void Affect(IEntity target) { }
+        public override void Affect(Entity target) { }
         public override void Affect(ICreature target) { }
     }
     [Serializable]
@@ -577,7 +577,7 @@ namespace OGUR.Skills
     public class VaporImplantSkill : ISkill
     {
         public VaporImplantSkill() : base(SkillId.VAPOR_IMPLANT, AnimationType.RANGED) { AddCost(StatType.MANA, 10); Add(Elements.PHYSICAL, Elements.AIR); }
-        public override void Affect(IEntity target)
+        public override void Affect(Entity target)
         {
             CreatureFactory.CreateMinion(SkillId.VAPOR_CLOUD, _source, null, target.GetLocation());
         }
@@ -600,7 +600,7 @@ namespace OGUR.Skills
         public WallPunchSkill()
             : base(SkillId.WALL_PUNCH, AnimationType.RANGED)
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
-        public override void Affect(IEntity target)
+        public override void Affect(Entity target)
         {
             if (target.GetEntityType() == OGUR.EntityType.WALL)
             {

@@ -27,7 +27,7 @@ namespace OGUR.States
         {
             Input.SetContext(Contexts.Nonfree, 0);
         }
-        public void Update()
+        public override void Update()
         {
             _text.WriteAction(PlayText, 1, 300, 100);
             _text.WriteAction(OptionsText, 1, 300, 200);
@@ -77,11 +77,11 @@ namespace OGUR.States
 
             _text.WriteAction(SelectionText,1,225,100*(_selection+1));
         }
-        public void LoadContent()
+        public override void LoadContent()
         {
 
         }
-        public void Draw()
+        public override void Draw()
         {
             _text.Draw();
             _text.Clear();

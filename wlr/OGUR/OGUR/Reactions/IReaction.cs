@@ -6,8 +6,9 @@ using OGUR.Creatures;
 
 namespace OGUR.Reactions
 {
-    public interface IReaction
+    [Serializable]
+    public class Reaction
     {
-        void Affect(ICreature target);
+        public virtual void Affect(ICreature target) { }
     }
 }

@@ -20,7 +20,7 @@ using System.Runtime.Serialization;
 namespace OGUR.Creatures
 {
     [Serializable]
-    public abstract class ICreature : Entity,IActor
+    public class ICreature : IActor
     {
         protected IStrategy _strategy;
 
@@ -317,7 +317,7 @@ namespace OGUR.Creatures
             return _playerIndex;
         }
 
-        public int GetActorType()
+        public override int GetActorType()
         {
             return _actorType;
         }
@@ -637,7 +637,7 @@ namespace OGUR.Creatures
             }
         }
 
-        public void PerformInteraction()
+        public override void PerformInteraction()
         {
             SetInteracting(false);
             Input.Lock(Commands.Confirm, GetPlayerIndex());

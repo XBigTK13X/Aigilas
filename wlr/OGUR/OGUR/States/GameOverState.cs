@@ -15,14 +15,14 @@ namespace OGUR.States
             _menuBase = XnaManager.GetGameOverAsset();
         }
 
-        public void Draw()
+        public override void Draw()
         {
             var x = (XnaManager.WindowWidth - _menuBase.Bounds.Right)/2;
             var y = (XnaManager.WindowHeight - _menuBase.Bounds.Bottom) / 2;
             XnaManager.Renderer.Draw(_menuBase, new Vector2(x,y), Color.White);
         }
 
-        public void Update()
+        public override void Update()
         {
             if(Input.IsPressed(Commands.Confirm,0,true))
             {
@@ -30,7 +30,7 @@ namespace OGUR.States
             }
         }
 
-        public void LoadContent()
+        public override void LoadContent()
         {
 
         }

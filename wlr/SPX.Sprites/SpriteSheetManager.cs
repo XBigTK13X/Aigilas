@@ -16,9 +16,9 @@ namespace SPX.Sprites
         public int Type { get; set; }
         public SpriteInfo Info { get; set; }
     }
-    public interface ISpriteInitializer
+    public class ISpriteInitializer
     {
-        ICollection<SpriteDefinition> GetSprites();
+        public virtual ICollection<SpriteDefinition> GetSprites() { return null; }
     }
     public class SpriteSheetManager
     {

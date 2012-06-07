@@ -44,6 +44,18 @@ namespace SPX.Saves
             return target;
         }
 
+        private static void Write()
+        {
+            if (gameData != null)
+            {
+                using (Stream stream = File.Create(fileName))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, gameData); ;
+                }
+            }
+        }
+
         public static bool AnyExist()
         {
             return File.Exists(fileName);
@@ -134,18 +146,6 @@ namespace SPX.Saves
             if (storageContainer.FileExists(fileName))
             {
                 storageContainer.DeleteFile(fileName);
-            }
-        }
-
-        private static void Write()
-        {
-            if (gameData != null)
-            {
-                using (Stream stream = File.Create(fileName))
-                {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, gameData);;
-                }
             }
         }
     }

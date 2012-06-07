@@ -16,7 +16,7 @@ namespace OGUR.Strategies
             _targets.AddTargetTypes(ActorType.NONPLAYER);
         }
 
-        private IEntity _stairsTarget;
+        private Entity _stairsTarget;
         public override void Act()
         {
             if (RNG.Rand.Next(0, 1000) == 2)

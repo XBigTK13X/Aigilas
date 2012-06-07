@@ -16,7 +16,7 @@ namespace OGUR.Entities
     {
         private readonly God _god;
         private Player _currentTarget;
-        private List<IEntity> _offerings;
+        private List<Entity> _offerings;
 
         public Altar(Point2 location,int godName)
         {

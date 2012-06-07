@@ -5,7 +5,7 @@ namespace SPX.Entities
 {
     public static class HitTest
     {
-        public static bool IsTouching(IEntity source, IEntity target)
+        public static bool IsTouching(Entity source, Entity target)
         {
             if (IsClose(source, target))
             {
@@ -14,7 +14,7 @@ namespace SPX.Entities
             return false;
         }
 
-        private static bool IsClose(IEntity source, IEntity target)
+        private static bool IsClose(Entity source, Entity target)
         {
             return IsClose(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY,
                            target.GetLocation().PosY);
@@ -25,7 +25,7 @@ namespace SPX.Entities
             return GetDistanceSquare(x1,x2,y1,y2) < GameManager.SpriteRadius;
         }
 
-        public static float GetDistanceSquare(IEntity source, IEntity target)
+        public static float GetDistanceSquare(Entity source, Entity target)
         {
             return GetDistanceSquare(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY,
                                      target.GetLocation().PosY);

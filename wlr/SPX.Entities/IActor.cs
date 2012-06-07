@@ -9,9 +9,10 @@ using SPX.Core;
 
 namespace SPX.Entities
 {
-    public interface IActor:IEntity
+    [Serializable]
+    public class IActor:Entity
     {
-        int GetActorType();
-        void PerformInteraction();
+        public virtual int GetActorType() { return Int32.MinValue; }
+        public virtual void PerformInteraction() { }
     }
 }

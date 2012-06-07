@@ -8,7 +8,7 @@ using OGUR.Skills;
 namespace OGUR.Classes
 {
     [Serializable]
-    public abstract class CreatureClass
+    public class CreatureClass
     {
         private readonly Stats _stats;
         protected List<KeyValuePair<int, string>> _skillUnlocks = new List<KeyValuePair<int, string>>();

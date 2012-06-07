@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace OGUR.Strategies
 {
     [Serializable]
-    public abstract class IStrategy
+    public class IStrategy
     {
         protected TargetSet _targets;
         protected ICreature _parent;
@@ -27,7 +27,7 @@ namespace OGUR.Strategies
             _targets = new TargetSet(parent);
             _parent = parent;
         }
-        public abstract void Act();
+        public virtual void Act() { }
 
         public TargetSet GetTargets()
         {
