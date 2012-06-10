@@ -27,7 +27,7 @@ Prerequisites:
 Open Aigilas.sln in Visual Studio and launch the project. The game should launch shortly after that.
 
 ## Supported Platforms ##
-Currently, onyl Windows 7 is tested and supported. A PoC has been done that shows Aigilas can run on MonoGame, which would open up support for Linux and Mac OS X.
+Currently, only Windows 7 is tested and supported. A PoC has been done that shows Aigilas can run on MonoGame, which would open up support for Linux and Mac OS X.
 
 The game originally targeted Xbox 360, but then I graduated college and lost my Creators Club account. Should this game ever raise enough interest (and money) to sustain a new account, then I will resume testing on the 360.
 
