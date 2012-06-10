@@ -1,4 +1,4 @@
-# Aigilas #
+# Aigilas - Currently in Open Alpha Development#
 > A battle to become an ambassador to Earth from the Underworld.
 
 ## Backstory ##
