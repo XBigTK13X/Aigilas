@@ -8,11 +8,11 @@ using SPX;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Aigilas1")]
+[assembly: AssemblyTitle("Aigilas")]
 [assembly: AssemblyProduct("Aigilas")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCompany("Timothy 'XBigTK13X' Kretschmer")]
+[assembly: AssemblyCopyright("Copyright © Timothy Kretschmer 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -37,4 +37,4 @@ using SPX;
 //      Revision
 //
 
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.5.0.0")]
