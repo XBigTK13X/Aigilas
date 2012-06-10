@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
-using Agilas.Entities;
+using Aigilas.Creatures;
+using Aigilas.Entities;
 using SPX.Text;
 
-namespace Agilas.Reactions
+namespace Aigilas.Reactions
 {
     public class ComboMeter
     {

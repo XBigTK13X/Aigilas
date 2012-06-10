@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 
-namespace Agilas.Reactions
+namespace Aigilas.Reactions
 {
     public interface IReaction
     {

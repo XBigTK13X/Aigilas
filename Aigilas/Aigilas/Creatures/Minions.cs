@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Skills;
+using Aigilas.Skills;
 using SPX.Sprites;
-using Agilas.Strategies;
-using Agilas.Entities;
+using Aigilas.Strategies;
+using Aigilas.Entities;
 using SPX.Entities;
 using SPX.Core;
 
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public class Minion : ICreature
     {
-        public Minion(int actorType = AgilasActorType.MINION,float coolDown = Stats.DefaultCoolDown)
+        public Minion(int actorType = AigilasActorType.MINION,float coolDown = Stats.DefaultCoolDown)
         {
             _actorType = actorType;
             _baseStats = new Stats(80f,999f,0f,0f,0f,0f,0f,0f,0f,coolDown);
@@ -45,7 +45,7 @@ namespace Agilas.Creatures
     class AcidNozzle : Minion
     {
         public AcidNozzle()
-            : base(AgilasActorType.MINION,50f)
+            : base(AigilasActorType.MINION,50f)
         {
             Add(SkillId.ACID_DRIP);
             _composition.Add(Elements.EARTH);
@@ -56,7 +56,7 @@ namespace Agilas.Creatures
     class DartTrap : Minion
     {
         public DartTrap()
-            : base(AgilasActorType.MINION)
+            : base(AigilasActorType.MINION)
         {
             _strategy = StrategyFactory.Create(Strategy.MinionFire, this);
             Add(SkillId.DART);
@@ -67,7 +67,7 @@ namespace Agilas.Creatures
     class Explosion : Minion
     {
         public Explosion()
-            : base(AgilasActorType.MINION)
+            : base(AigilasActorType.MINION)
         {
             _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
             Add(SkillId.EXPLODE);
@@ -78,7 +78,7 @@ namespace Agilas.Creatures
     public class IceShard : Minion
     {
         public IceShard()
-            : base(AgilasActorType.MINION)
+            : base(AigilasActorType.MINION)
         {
             _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
             Add(SkillId.ICE_SHARD);
@@ -89,7 +89,7 @@ namespace Agilas.Creatures
     class PoisonCloud : Minion
     {
         public PoisonCloud()
-            : base(AgilasActorType.MINION)
+            : base(AigilasActorType.MINION)
         {
             _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
             Add(SkillId.POISON_CLOUD);
@@ -101,7 +101,7 @@ namespace Agilas.Creatures
     {
         private ICreature _host = null;
         public VaporCloud()
-            : base(AgilasActorType.MINION)
+            : base(AigilasActorType.MINION)
         {
             _strategy = StrategyFactory.Create(Strategy.MinionCloud, this);
             Add(SkillId.VAPOR_CLOUD);

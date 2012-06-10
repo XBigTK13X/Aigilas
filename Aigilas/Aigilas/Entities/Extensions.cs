@@ -1,15 +1,15 @@
-﻿using Agilas.Creatures;
+﻿using Aigilas.Creatures;
 using SPX.Entities;
 using SPX.Core;
 using System.Collections.Generic;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public static class Extensions
     {
         public static ICreature IsCreature(this IEntity entity)
         {
-            if (entity.GetEntityType() == Agilas.EntityType.ACTOR)
+            if (entity.GetEntityType() == Aigilas.EntityType.ACTOR)
             {
                 return entity as ICreature;
             }

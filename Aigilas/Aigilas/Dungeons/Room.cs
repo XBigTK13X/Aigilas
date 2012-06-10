@@ -3,7 +3,7 @@ using System.Linq;
 using SPX.Entities;
 using SPX.Core;
 
-namespace Agilas.Dungeons
+namespace Aigilas.Dungeons
 {
     public class Room
     {

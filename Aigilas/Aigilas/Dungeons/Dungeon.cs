@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Agilas.Creatures;
-using Agilas.Entities;
-using Agilas.Gods;
-using Agilas.Items;
+using Aigilas.Creatures;
+using Aigilas.Entities;
+using Aigilas.Gods;
+using Aigilas.Items;
 using SPX.Core;
 using SPX.Entities;
 
-namespace Agilas.Dungeons
+namespace Aigilas.Dungeons
 {
     public class Dungeon
     {
@@ -95,7 +95,7 @@ namespace Agilas.Dungeons
 
         public void CacheContents()
         {
-            foreach (var player in EntityManager.GetActors(AgilasActorType.PLAYER))
+            foreach (var player in EntityManager.GetActors(AigilasActorType.PLAYER))
             {
                 DungeonFactory.AddToCache(player as Entity);
                 EntityManager.RemoveObject(player);
@@ -114,7 +114,7 @@ namespace Agilas.Dungeons
             {
                 if (tile != null)
                 {
-                    if (tile.GetEntityType() != Agilas.EntityType.FLOOR)
+                    if (tile.GetEntityType() != Aigilas.EntityType.FLOOR)
                     {
                         _contents.Add(tile);
                     }
@@ -129,7 +129,7 @@ namespace Agilas.Dungeons
             {
                 for (int ii = 0; ii < playerCount; ii++)
                 {
-                    _contents.Add(CreatureFactory.Create(AgilasActorType.PLAYER, GetRandomNeighbor(ref neighbors)));
+                    _contents.Add(CreatureFactory.Create(AigilasActorType.PLAYER, GetRandomNeighbor(ref neighbors)));
                 }
             }
             else
@@ -183,7 +183,7 @@ namespace Agilas.Dungeons
         private void PlaceCreatures(int amountOfCreatures)
         {
             //var random = new Point2(FindRandomFreeTile());
-            //dungeon[random.GridX, random.GridY] = CreatureFactory.Create(AgilasActorType.ENVY, random);
+            //dungeon[random.GridX, random.GridY] = CreatureFactory.Create(AigilasActorType.ENVY, random);
             //return;
             if (DungeonFactory.GetFloorCount() % bossLevelMod == 1)
             {
@@ -238,7 +238,7 @@ namespace Agilas.Dungeons
             {
                 var x = RNG.Rand.Next(0, _blocksWide);
                 var y = RNG.Rand.Next(0, _blocksHigh);
-                if (dungeon[x, y].GetEntityType() == Agilas.EntityType.FLOOR)
+                if (dungeon[x, y].GetEntityType() == Aigilas.EntityType.FLOOR)
                 {
                     return new Point2(x, y);
                 }
@@ -294,11 +294,11 @@ namespace Agilas.Dungeons
                                     }
                                 }
                             }
-                            dungeon[ii, jj] = EntityFactory.Create(Agilas.EntityType.WALL, new Point2(ii, jj));
+                            dungeon[ii, jj] = EntityFactory.Create(Aigilas.EntityType.WALL, new Point2(ii, jj));
                         }
                         else
                         {
-                            dungeon[ii, jj] = EntityFactory.Create(Agilas.EntityType.FLOOR, new Point2(ii, jj));
+                            dungeon[ii, jj] = EntityFactory.Create(Aigilas.EntityType.FLOOR, new Point2(ii, jj));
                         }
                     }
                 }
@@ -306,7 +306,7 @@ namespace Agilas.Dungeons
                 {
                     var index = RNG.Rand.Next(0, entrances.Count() - 1);
                     var entrance = entrances[index];
-                    if (dungeon[entrance.X, entrance.Y].GetEntityType() != Agilas.EntityType.FLOOR)
+                    if (dungeon[entrance.X, entrance.Y].GetEntityType() != Aigilas.EntityType.FLOOR)
                     {
                         dungeonEntrances.Add(entrance);
                     }
@@ -320,9 +320,9 @@ namespace Agilas.Dungeons
                     for(var ii = 1;ii<_blocksWide-1;ii++)
                     {
                         var currentTarget = new Point2(ii, entrance.Y);
-                        if(dungeon[currentTarget.GridX,currentTarget.GridY].GetEntityType()==Agilas.EntityType.WALL)
+                        if(dungeon[currentTarget.GridX,currentTarget.GridY].GetEntityType()==Aigilas.EntityType.WALL)
                         {
-                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(Agilas.EntityType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(Aigilas.EntityType.FLOOR, currentTarget);
                         }
                     }
                 }
@@ -331,9 +331,9 @@ namespace Agilas.Dungeons
                     for (var ii = 1; ii < _blocksHigh - 1; ii++)
                     {
                         var currentTarget = new Point2(entrance.X, ii);
-                        if (dungeon[currentTarget.GridX, currentTarget.GridY].GetEntityType() == Agilas.EntityType.WALL)
+                        if (dungeon[currentTarget.GridX, currentTarget.GridY].GetEntityType() == Aigilas.EntityType.WALL)
                         {
-                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(Agilas.EntityType.FLOOR, currentTarget);
+                            dungeon[currentTarget.GridX, currentTarget.GridY] = EntityFactory.Create(Aigilas.EntityType.FLOOR, currentTarget);
                         }
                     }
                 }
@@ -342,7 +342,7 @@ namespace Agilas.Dungeons
 
         private bool IsFloor(int x, int y)
         {
-            return dungeon[x, y].GetEntityType() == Agilas.EntityType.FLOOR;
+            return dungeon[x, y].GetEntityType() == Aigilas.EntityType.FLOOR;
         }
     }
 }

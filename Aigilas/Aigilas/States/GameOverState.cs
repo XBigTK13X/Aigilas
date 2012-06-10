@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using SPX.States;
 using SPX.Core;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.States
+namespace Aigilas.States
 {
     public class GameOverState : State
     {

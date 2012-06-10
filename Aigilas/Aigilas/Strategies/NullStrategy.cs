@@ -1,8 +1,8 @@
-﻿using Agilas.Creatures;
-using Agilas.Skills;
+﻿using Aigilas.Creatures;
+using Aigilas.Skills;
 using SPX.Core;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class NullStrategy : IStrategy
     {

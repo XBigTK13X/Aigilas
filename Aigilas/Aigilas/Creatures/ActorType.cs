@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public class Generate
     {
-        public static List<int> Randoms = new List<int>() { AgilasActorType.PEON, AgilasActorType.ZORB };
+        public static List<int> Randoms = new List<int>() { AigilasActorType.PEON, AigilasActorType.ZORB };
     }
-    public class AgilasActorType
+    public class AigilasActorType
     {
         public const int MINION = 2;
         public const int PLAYER = 3;

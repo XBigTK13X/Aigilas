@@ -1,12 +1,12 @@
 ﻿using System;
 using SPX.Entities;
-using Agilas.Dungeons;
-using Agilas.Entities;
-using Agilas.Management;
-using Agilas.Creatures;
+using Aigilas.Dungeons;
+using Aigilas.Entities;
+using Aigilas.Management;
+using Aigilas.Creatures;
 using SPX.Core;
 using System.Collections.Generic;
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class ControlledByPlayer : IStrategy
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Agilas.Creatures;
-using Agilas.Entities;
+using Aigilas.Creatures;
+using Aigilas.Entities;
 
-namespace Agilas.Items
+namespace Aigilas.Items
 {
     public class Slots
     {

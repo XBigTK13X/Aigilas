@@ -1,15 +1,15 @@
 ﻿using SPX.Entities;
-using Agilas.Management;
+using Aigilas.Management;
 using SPX.Core;
-using Agilas.Entities;
+using Aigilas.Entities;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public class Floor : Entity
     {
         public Floor(Point2 location)
         {
-            Initialize(location, SpriteType.FLOOR, Agilas.EntityType.FLOOR,ZDepth.Floor);
+            Initialize(location, SpriteType.FLOOR, Aigilas.EntityType.FLOOR,ZDepth.Floor);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Agilas.Management
+namespace Aigilas.Management
 {
     public class SpriteType
     {

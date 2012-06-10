@@ -1,8 +1,8 @@
-﻿using Agilas.Creatures;
+﻿using Aigilas.Creatures;
 using SPX.Core;
 using System;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class MinionRotateStrategy : IStrategy
     {

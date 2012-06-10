@@ -1,12 +1,12 @@
-﻿using Agilas.Creatures;
-using Agilas.Skills;
+﻿using Aigilas.Creatures;
+using Aigilas.Skills;
 using SPX.Core;
 using SPX.Entities;
-using Agilas.Management;
+using Aigilas.Management;
 using System.Collections.Generic;
 using System;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public class ComboMarker:Entity
     {
@@ -15,7 +15,7 @@ namespace Agilas.Entities
 
         public ComboMarker(ICreature source,int elementId,int index)
         {
-            Initialize(source.GetLocation(), SpriteType.COMBO_MARKER, Agilas.EntityType.COMBO_MARKER,ZDepth.ComboMarker);
+            Initialize(source.GetLocation(), SpriteType.COMBO_MARKER, Aigilas.EntityType.COMBO_MARKER,ZDepth.ComboMarker);
             _parent = source;
             _graphic.SetColor(Elements.Colors[elementId]);
             _index = index;                   

@@ -1,8 +1,8 @@
 ﻿using System;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Entities;
 
-namespace Agilas.Management
+namespace Aigilas.Management
 {
     public class AIManager
     {
@@ -50,7 +50,7 @@ namespace Agilas.Management
         {
             var minDist = float.PositiveInfinity;
             Player result = null;
-            foreach(Player o in EntityManager.GetActors(AgilasActorType.PLAYER))
+            foreach(Player o in EntityManager.GetActors(AigilasActorType.PLAYER))
             {
                 var dist = Math.Abs(o.GetLocation().PosX - o.GetLocation().PosX) + Math.Abs(o.GetLocation().PosY - o.GetLocation().PosY);
                 if (dist < minDist)

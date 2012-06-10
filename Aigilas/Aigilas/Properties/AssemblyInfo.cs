@@ -8,8 +8,8 @@ using SPX;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Agilas1")]
-[assembly: AssemblyProduct("Agilas")]
+[assembly: AssemblyTitle("Aigilas1")]
+[assembly: AssemblyProduct("Aigilas")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2011")]

@@ -1,8 +1,8 @@
-﻿using Agilas.Creatures;
-using Agilas.Entities;
+﻿using Aigilas.Creatures;
+using Aigilas.Entities;
 using SPX.Core;
 
-namespace Agilas.Skills
+namespace Aigilas.Skills
 {
     class SkillAnimation
     {

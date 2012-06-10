@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Entities;
 
-namespace Agilas.Items
+namespace Aigilas.Items
 {
     public class Inventory
     {

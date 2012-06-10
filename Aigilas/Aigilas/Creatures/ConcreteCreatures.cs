@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Skills;
-using Agilas.Strategies;
-using Agilas.Classes;
-using Agilas.Management;
+using Aigilas.Skills;
+using Aigilas.Strategies;
+using Aigilas.Classes;
+using Aigilas.Management;
 using Microsoft.Xna.Framework;
-using Agilas.Entities;
-using Agilas.Gods;
-using Agilas.Creatures;
+using Aigilas.Entities;
+using Aigilas.Gods;
+using Aigilas.Creatures;
 
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public class Player : AbstractCreature
     {
         private static readonly List<Color> __colors = new List<Color>() { Color.Red,Color.Green,Color.Blue,Color.White};
-        public Player(int playerIndex): base(AgilasActorType.PLAYER, SpriteType.PLAYER_STAND, new WrathAcolyte())
+        public Player(int playerIndex): base(AigilasActorType.PLAYER, SpriteType.PLAYER_STAND, new WrathAcolyte())
         {
             _playerIndex = playerIndex;
             _graphic.SetColor(__colors[_playerIndex]);
@@ -29,7 +29,7 @@ namespace Agilas.Creatures
     }
     class Peon : AbstractCreature
     {
-        public Peon(): base(AgilasActorType.PEON)
+        public Peon(): base(AigilasActorType.PEON)
         {
             Weaknesses(StatType.STRENGTH, StatType.HEALTH,StatType.MOVE_COOL_DOWN);
             Compose(Elements.EARTH);
@@ -37,7 +37,7 @@ namespace Agilas.Creatures
     }
     class Zorb : AbstractCreature
     {
-        public Zorb(): base(AgilasActorType.ZORB)
+        public Zorb(): base(AigilasActorType.ZORB)
         {
             Compose(Elements.PHYSICAL, Elements.FIRE);
             Strengths(StatType.MANA,StatType.HEALTH);
@@ -47,7 +47,7 @@ namespace Agilas.Creatures
     }
     class Wrath : AbstractCreature
     {
-        public Wrath(): base(AgilasActorType.WRATH,SpriteType.WRATH)
+        public Wrath(): base(AigilasActorType.WRATH,SpriteType.WRATH)
         {
             Compose(Elements.PHYSICAL);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -56,7 +56,7 @@ namespace Agilas.Creatures
     }
     class Hand: AbstractCreature
     {
-        public Hand(): base(AgilasActorType.HAND,SpriteType.HAND)
+        public Hand(): base(AigilasActorType.HAND,SpriteType.HAND)
         {
             Compose(Elements.PHYSICAL);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -67,7 +67,7 @@ namespace Agilas.Creatures
     class Envy : AbstractCreature
     {
         public Envy()
-            : base(AgilasActorType.ENVY, SpriteType.ENVY)
+            : base(AigilasActorType.ENVY, SpriteType.ENVY)
         {
             Compose(Elements.WATER);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -77,7 +77,7 @@ namespace Agilas.Creatures
     class Gluttony : AbstractCreature
     {
         public Gluttony()
-            : base(AgilasActorType.GLUTTONY, SpriteType.GLUTTONY)
+            : base(AigilasActorType.GLUTTONY, SpriteType.GLUTTONY)
         {
             Compose(Elements.MENTAL);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -87,7 +87,7 @@ namespace Agilas.Creatures
     class Sloth: AbstractCreature
     {
         public Sloth()
-            : base(AgilasActorType.SLOTH, SpriteType.SLOTH)
+            : base(AigilasActorType.SLOTH, SpriteType.SLOTH)
         {
             Compose(Elements.EARTH);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -97,7 +97,7 @@ namespace Agilas.Creatures
     public class Serpent : AbstractCreature
     {
         public Serpent()
-            : base(AgilasActorType.SERPENT, SpriteType.SLOTH)
+            : base(AigilasActorType.SERPENT, SpriteType.SLOTH)
         {
             Compose(Elements.EARTH);
             Strengths(StatType.HEALTH, StatType.HEALTH, StatType.HEALTH);
@@ -107,7 +107,7 @@ namespace Agilas.Creatures
     class Pride: AbstractCreature
     {
         public Pride()
-            : base(AgilasActorType.PRIDE, SpriteType.PRIDE)
+            : base(AigilasActorType.PRIDE, SpriteType.PRIDE)
         {
             Compose(Elements.DARK);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -117,7 +117,7 @@ namespace Agilas.Creatures
     class Greed: AbstractCreature
     {
         public Greed()
-            : base(AgilasActorType.GREED, SpriteType.GREED)
+            : base(AigilasActorType.GREED, SpriteType.GREED)
         {
             Compose(Elements.AIR);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -127,7 +127,7 @@ namespace Agilas.Creatures
     class Lust: AbstractCreature
     {
         public Lust()
-            : base(AgilasActorType.LUST, SpriteType.LUST)
+            : base(AigilasActorType.LUST, SpriteType.LUST)
         {
             Compose(Elements.FIRE);
             Strengths(StatType.STRENGTH, StatType.STRENGTH);
@@ -137,7 +137,7 @@ namespace Agilas.Creatures
     public class BreakingWheel : AbstractCreature
     {
         public BreakingWheel()
-            : base(AgilasActorType.BREAKING_WHEEL)
+            : base(AigilasActorType.BREAKING_WHEEL)
         {
             _strategy = StrategyFactory.Create(Strategy.StraightLineRotate,this);
             _composition.Add(Elements.DARK);

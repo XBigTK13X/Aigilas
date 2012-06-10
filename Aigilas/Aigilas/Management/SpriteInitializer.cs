@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SPX.Sprites;
 
-namespace Agilas.Management
+namespace Aigilas.Management
 {
     class SpriteInitializer: ISpriteInitializer
     {

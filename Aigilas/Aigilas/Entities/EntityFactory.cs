@@ -2,7 +2,7 @@
 using SPX.Entities;
 using SPX.Core;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public class EntityFactory
     {
@@ -10,13 +10,13 @@ namespace Agilas.Entities
         {
             switch (type)
             {
-                case Agilas.EntityType.FLOOR:
+                case Aigilas.EntityType.FLOOR:
                     return new Floor(location);
-                case Agilas.EntityType.WALL:
+                case Aigilas.EntityType.WALL:
                     return new Wall(location);
-                case Agilas.EntityType.DOWNSTAIRS:
+                case Aigilas.EntityType.DOWNSTAIRS:
                     return new Downstairs(location);
-                case Agilas.EntityType.UPSTAIRS:
+                case Aigilas.EntityType.UPSTAIRS:
                     return new Upstairs(location);
                 default:
                     throw new Exception("An undefined int case was passed into the EntityFactory.");

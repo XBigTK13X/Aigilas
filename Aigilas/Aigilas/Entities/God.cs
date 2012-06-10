@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Agilas.Creatures;
-using Agilas.Items;
-using Agilas.Classes;
+using Aigilas.Creatures;
+using Aigilas.Items;
+using Aigilas.Classes;
 
-namespace Agilas.Gods
+namespace Aigilas.Gods
 {
     public class GodId
     {

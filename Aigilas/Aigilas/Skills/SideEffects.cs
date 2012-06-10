@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Entities;
-using Agilas.Management;
+using Aigilas.Entities;
+using Aigilas.Management;
 using SPX.Entities;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Core;
 
-namespace Agilas.Skills
+namespace Aigilas.Skills
 {
     public class SideEffects
     {

@@ -1,11 +1,11 @@
 ﻿using System;
-using Agilas.Entities;
-using Agilas.Skills;
+using Aigilas.Entities;
+using Aigilas.Skills;
 using SPX.Core;
 using SPX.Entities;
 using System.Collections.Generic;
 
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public class CreatureFactory
     {
@@ -15,7 +15,7 @@ namespace Agilas.Creatures
             AbstractCreature result;
             switch (actorType)
             {
-                case AgilasActorType.PLAYER:
+                case AigilasActorType.PLAYER:
                     result = new Player(__playerCount++);
                     break;
                 default:
@@ -31,18 +31,18 @@ namespace Agilas.Creatures
         {
             switch(actorType)
             {
-                case AgilasActorType.PEON:return new Peon();
-                case AgilasActorType.ZORB:return new Zorb();
-                case AgilasActorType.WRATH:return new Wrath();
-                case AgilasActorType.HAND: return new Hand();
-                case AgilasActorType.PRIDE: return new Pride();
-                case AgilasActorType.ENVY: return new Envy();
-                case AgilasActorType.GLUTTONY: return new Gluttony();
-                case AgilasActorType.LUST: return new Lust();
-                case AgilasActorType.SLOTH: return new Sloth();
-                case AgilasActorType.GREED: return new Greed();
-                case AgilasActorType.SERPENT: return new Serpent();
-                case AgilasActorType.BREAKING_WHEEL: return new BreakingWheel();
+                case AigilasActorType.PEON:return new Peon();
+                case AigilasActorType.ZORB:return new Zorb();
+                case AigilasActorType.WRATH:return new Wrath();
+                case AigilasActorType.HAND: return new Hand();
+                case AigilasActorType.PRIDE: return new Pride();
+                case AigilasActorType.ENVY: return new Envy();
+                case AigilasActorType.GLUTTONY: return new Gluttony();
+                case AigilasActorType.LUST: return new Lust();
+                case AigilasActorType.SLOTH: return new Sloth();
+                case AigilasActorType.GREED: return new Greed();
+                case AigilasActorType.SERPENT: return new Serpent();
+                case AigilasActorType.BREAKING_WHEEL: return new BreakingWheel();
                 default:throw new Exception("No Factory generation logic for: "+actorType);
             }
         }
@@ -93,13 +93,13 @@ namespace Agilas.Creatures
 
         private static List<int> __remainingBosses = new List<int>()
         {
-            AgilasActorType.WRATH,
-            AgilasActorType.ENVY,
-            AgilasActorType.PRIDE,
-            AgilasActorType.SLOTH,
-            AgilasActorType.GREED,
-            AgilasActorType.LUST,
-            AgilasActorType.GLUTTONY
+            AigilasActorType.WRATH,
+            AigilasActorType.ENVY,
+            AigilasActorType.PRIDE,
+            AigilasActorType.SLOTH,
+            AigilasActorType.GREED,
+            AigilasActorType.LUST,
+            AigilasActorType.GLUTTONY
         };
         public static IEntity CreateNextBoss(Point2 randomPoint)
         {

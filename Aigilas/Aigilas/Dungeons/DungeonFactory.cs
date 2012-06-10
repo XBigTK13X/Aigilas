@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Entities;
+using Aigilas.Entities;
 using SPX.Entities;
 
-namespace Agilas.Dungeons
+namespace Aigilas.Dungeons
 {
     public class Location
     {

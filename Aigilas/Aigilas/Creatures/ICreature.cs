@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Agilas.Classes;
-using Agilas.Gods;
-using Agilas.HUD;
-using Agilas.Items;
-using Agilas.Reactions;
-using Agilas.Skills;
-using Agilas.Statuses;
-using Agilas.Strategies;
+using Aigilas.Classes;
+using Aigilas.Gods;
+using Aigilas.HUD;
+using Aigilas.Items;
+using Aigilas.Reactions;
+using Aigilas.Skills;
+using Aigilas.Statuses;
+using Aigilas.Strategies;
 using SPX.Core;
 using SPX.Entities;
 using SPX.Sprites;
 using SPX.Text;
 using SPX.Util;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public abstract class ICreature : Entity,IActor
     {
@@ -53,27 +53,27 @@ namespace Agilas.Creatures
         {
             switch (type)
             {
-                case AgilasActorType.MINION: return SpriteType.MINION;
-                case AgilasActorType.PLAYER:return SpriteType.PLAYER_STAND;
-                case AgilasActorType.ZORB:return SpriteType.ZORB;
-                case AgilasActorType.WRATH: return SpriteType.WRATH;
-                case AgilasActorType.HAND: return SpriteType.HAND;
-                case AgilasActorType.ENVY: return SpriteType.ENVY;
-                case AgilasActorType.PRIDE: return SpriteType.PRIDE;
-                case AgilasActorType.SLOTH: return SpriteType.SLOTH;
-                case AgilasActorType.GREED: return SpriteType.GREED;
-                case AgilasActorType.GLUTTONY: return SpriteType.GLUTTONY;
-                case AgilasActorType.LUST: return SpriteType.LUST;
-                case AgilasActorType.BREAKING_WHEEL: return SpriteType.WHEEL;
-                case AgilasActorType.SERPENT: return SpriteType.SLOTH;
+                case AigilasActorType.MINION: return SpriteType.MINION;
+                case AigilasActorType.PLAYER:return SpriteType.PLAYER_STAND;
+                case AigilasActorType.ZORB:return SpriteType.ZORB;
+                case AigilasActorType.WRATH: return SpriteType.WRATH;
+                case AigilasActorType.HAND: return SpriteType.HAND;
+                case AigilasActorType.ENVY: return SpriteType.ENVY;
+                case AigilasActorType.PRIDE: return SpriteType.PRIDE;
+                case AigilasActorType.SLOTH: return SpriteType.SLOTH;
+                case AigilasActorType.GREED: return SpriteType.GREED;
+                case AigilasActorType.GLUTTONY: return SpriteType.GLUTTONY;
+                case AigilasActorType.LUST: return SpriteType.LUST;
+                case AigilasActorType.BREAKING_WHEEL: return SpriteType.WHEEL;
+                case AigilasActorType.SERPENT: return SpriteType.SLOTH;
                 default:return SpriteType.CREATURE;
             }
         }
 
         protected void Setup(Point2 location, int type, Stats stats, CreatureClass creatureClass = null,bool setClass = true)
         {
-            _entityType = Agilas.EntityType.ACTOR;
-            Initialize(location, SpriteFromCreature(type), Agilas.EntityType.ACTOR,Agilas.ZDepth.Creature);
+            _entityType = Aigilas.EntityType.ACTOR;
+            Initialize(location, SpriteFromCreature(type), Aigilas.EntityType.ACTOR,Aigilas.ZDepth.Creature);
             Init(type,stats,creatureClass,setClass);
         }
         protected void SetClass(CreatureClass cClass)
@@ -421,9 +421,9 @@ namespace Agilas.Creatures
                             {
                                 if (creature != this)
                                 {
-                                    if ((creature.GetActorType() != AgilasActorType.PLAYER && _actorType == AgilasActorType.PLAYER)
+                                    if ((creature.GetActorType() != AigilasActorType.PLAYER && _actorType == AigilasActorType.PLAYER)
                                         ||
-                                        (creature.GetActorType() == AgilasActorType.PLAYER && _actorType != AgilasActorType.PLAYER)
+                                        (creature.GetActorType() == AigilasActorType.PLAYER && _actorType != AigilasActorType.PLAYER)
                                         || 
                                         !_statuses.Allows(OAction.WontHitNonTargets))
                                     {
@@ -626,7 +626,7 @@ namespace Agilas.Creatures
 
         public void React(string skillId)
         {
-            if (_actorType == AgilasActorType.PLAYER && skillId != SkillId.FORGET_SKILL && _god.NameText == GodId.Names[GodId.GLUTTONY])
+            if (_actorType == AigilasActorType.PLAYER && skillId != SkillId.FORGET_SKILL && _god.NameText == GodId.Names[GodId.GLUTTONY])
             {
                 if (_skills.Count() < _currentLevel)
                 {

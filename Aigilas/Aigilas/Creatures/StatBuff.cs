@@ -1,4 +1,4 @@
-﻿namespace Agilas.Creatures
+﻿namespace Aigilas.Creatures
 {
     public class StatBuff
     {

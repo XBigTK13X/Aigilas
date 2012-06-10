@@ -1,14 +1,14 @@
 ﻿using SPX.States;
 using SPX.Entities;
-using Agilas.Creatures;
-using Agilas.Dungeons;
+using Aigilas.Creatures;
+using Aigilas.Dungeons;
 using SPX.Text;
 using SPX.Util;
 using SPX.Core;
-using Agilas.Management;
+using Aigilas.Management;
 using System;
 
-namespace Agilas.States
+namespace Aigilas.States
 {
     public class OptionsState : State
     {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Entities;
 using SPX.Core;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     class StraightLineStrategy:IStrategy
     {

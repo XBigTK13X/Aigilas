@@ -5,7 +5,7 @@ using System.Text;
 using SPX.Core;
 using Microsoft.Xna.Framework.Input;
 
-namespace Agilas.Management
+namespace Aigilas.Management
 {
     public class Commands
     {

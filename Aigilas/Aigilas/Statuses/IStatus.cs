@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 
-namespace Agilas.Statuses
+namespace Aigilas.Statuses
 {
     public enum StatusComponent
     {

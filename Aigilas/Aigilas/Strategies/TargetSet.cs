@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using SPX.Entities;
-using Agilas.Creatures;
-using Agilas.Entities;
+using Aigilas.Creatures;
+using Aigilas.Entities;
 using SPX.Core;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class TargetSet
     {

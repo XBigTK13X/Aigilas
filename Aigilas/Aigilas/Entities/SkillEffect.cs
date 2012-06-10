@@ -1,10 +1,10 @@
-﻿using Agilas.Creatures;
-using Agilas.Skills;
+﻿using Aigilas.Creatures;
+using Aigilas.Skills;
 using SPX.Core;
 using SPX.Entities;
 using System;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public class SkillEffect:Entity
     {
@@ -24,7 +24,7 @@ namespace Agilas.Entities
         public SkillEffect(Point2 gridLocation,Point2 velocity,ICreature source,ISkill skill)
         {
             _skill = skill;
-            Initialize(gridLocation, _skill.GetSpriteType(), Agilas.EntityType.SKILL_EFFECT,.7f);
+            Initialize(gridLocation, _skill.GetSpriteType(), Aigilas.EntityType.SKILL_EFFECT,.7f);
             _velocity.Copy(velocity);
             _direction.Copy(velocity);
             _source = source;

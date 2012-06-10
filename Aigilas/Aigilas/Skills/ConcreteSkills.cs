@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
-using Agilas.Entities;
-using Agilas.Skills;
+using Aigilas.Creatures;
+using Aigilas.Entities;
+using Aigilas.Skills;
 using SPX.Sprites;
-using Agilas.Statuses;
-using Agilas.Items;
+using Aigilas.Statuses;
+using Aigilas.Items;
 using SPX.Entities;
 using SPX.Core;
 
-namespace Agilas.Skills
+namespace Aigilas.Skills
 {
     public class NoSkill : ISkill
     {
@@ -86,7 +86,7 @@ namespace Agilas.Skills
         { Add(Elements.DARK); AddCost(StatType.MANA, 10); }
         public override void Activate(ICreature source)
         {
-            CreatureFactory.Create(AgilasActorType.BREAKING_WHEEL, EntityManager.GetEmptyLocation());
+            CreatureFactory.Create(AigilasActorType.BREAKING_WHEEL, EntityManager.GetEmptyLocation());
         }
     }
     public class CavalrySkill : ISkill
@@ -169,7 +169,7 @@ namespace Agilas.Skills
             {
                 if (ii != openCell)
                 {
-                    CreatureFactory.Create(AgilasActorType.HAND, new Point2(ii, 1));
+                    CreatureFactory.Create(AigilasActorType.HAND, new Point2(ii, 1));
                 }
             }
         }
@@ -416,14 +416,14 @@ namespace Agilas.Skills
             {
                 if (ii != GameManager.TileMapHeight/2)
                 {
-                    CreatureFactory.Create(AgilasActorType.SERPENT, new Point2(ii, GameManager.TileMapHeight/2));
+                    CreatureFactory.Create(AigilasActorType.SERPENT, new Point2(ii, GameManager.TileMapHeight/2));
                 }
             }
             for (int ii = 1; ii < GameManager.TileMapHeight - 1; ii++)
             {
                 if (ii != GameManager.TileMapWidth / 2)
                 {
-                    CreatureFactory.Create(AgilasActorType.SERPENT, new Point2(GameManager.TileMapWidth / 2,ii));
+                    CreatureFactory.Create(AigilasActorType.SERPENT, new Point2(GameManager.TileMapWidth / 2,ii));
                 }
             }
         }
@@ -555,7 +555,7 @@ namespace Agilas.Skills
         { Add(Elements.EARTH); AddCost(StatType.MANA, 10); }
         public override void  Affect(IEntity target)
         {
-            if (target.GetEntityType() == Agilas.EntityType.WALL)
+            if (target.GetEntityType() == Aigilas.EntityType.WALL)
             {
                 if (target.GetLocation().GridX > 0 && target.GetLocation().GridX < Dungeons.DungeonFactory.BlocksWide-1 &&
                     target.GetLocation().GridY > 0 && target.GetLocation().GridY < Dungeons.DungeonFactory.BlocksHigh-1)

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Agilas.Creatures;
-using Agilas.Gods;
-using Agilas.Items;
+using Aigilas.Creatures;
+using Aigilas.Gods;
+using Aigilas.Items;
 using SPX.Core;
 using SPX.Entities;
 using SPX.Sprites;
 using SPX.Text;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public class Altar : Entity
     {
@@ -20,7 +20,7 @@ namespace Agilas.Entities
         {
             _god = God.Get(godName);
             _graphic.SetColor(_god.GetColor());
-            Initialize(location, SpriteType.ALTAR, Agilas.EntityType.ALTAR,ZDepth.Altar);
+            Initialize(location, SpriteType.ALTAR, Aigilas.EntityType.ALTAR,ZDepth.Altar);
         }
 
         public override void Update()
@@ -32,7 +32,7 @@ namespace Agilas.Entities
                 {
                     _currentTarget.Pray(_god);
                 }
-                _offerings = EntityManager.GetEntities(Agilas.EntityType.ITEM, _location);
+                _offerings = EntityManager.GetEntities(Aigilas.EntityType.ITEM, _location);
                 foreach (GenericItem offering in _offerings)
                 {
                     _currentTarget.Sacrifice(_god, offering);

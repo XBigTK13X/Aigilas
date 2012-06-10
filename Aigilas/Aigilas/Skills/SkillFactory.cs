@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Sprites;
-using Agilas.Entities;
+using Aigilas.Entities;
 using SPX.Core;
 
-namespace Agilas.Skills
+namespace Aigilas.Skills
 {
     public class SkillId
     {

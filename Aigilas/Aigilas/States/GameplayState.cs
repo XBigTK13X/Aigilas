@@ -1,11 +1,11 @@
 ﻿using SPX.States;
 using SPX.Entities;
-using Agilas.Creatures;
-using Agilas.Dungeons;
+using Aigilas.Creatures;
+using Aigilas.Dungeons;
 using SPX.Core;
 using System;
 
-namespace Agilas.States
+namespace Aigilas.States
 {
     public class GameplayState : State
     {

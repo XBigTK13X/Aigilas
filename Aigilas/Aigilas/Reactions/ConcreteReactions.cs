@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
-using Agilas.Statuses;
-using Agilas.Items;
+using Aigilas.Creatures;
+using Aigilas.Statuses;
+using Aigilas.Items;
 using SPX.Entities;
 
-namespace Agilas.Reactions
+namespace Aigilas.Reactions
 {
     public class SweatReaction : IReaction
     {

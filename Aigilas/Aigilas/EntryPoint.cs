@@ -1,6 +1,6 @@
 using System;
 
-namespace Agilas
+namespace Aigilas
 {
 #if WINDOWS || XBOX
     internal static class EntryPoint

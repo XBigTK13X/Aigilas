@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Agilas.Creatures;
-using Agilas.Entities;
-using Agilas.Statuses;
+using Aigilas.Creatures;
+using Aigilas.Entities;
+using Aigilas.Statuses;
 using SPX.Entities;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.Skills
+namespace Aigilas.Skills
 {
     public class AnimationType
     {

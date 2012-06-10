@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using Microsoft.Xna.Framework;
-using Agilas.Management;
-using Agilas.Items;
+using Aigilas.Management;
+using Aigilas.Items;
 using SPX.Core;
 
-namespace Agilas.HUD
+namespace Aigilas.HUD
 {
     public class HudManager
     {

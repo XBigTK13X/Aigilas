@@ -1,10 +1,10 @@
-﻿using Agilas.Classes;
-using Agilas.Skills;
-using Agilas.Strategies;
+﻿using Aigilas.Classes;
+using Aigilas.Skills;
+using Aigilas.Strategies;
 using SPX.Core;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public class AbstractCreature:ICreature
     {
@@ -20,7 +20,7 @@ namespace Agilas.Creatures
             Setup(position, _actorType, _baseStats, _class);
             if (_strategy == null)
             {
-                _strategy = StrategyFactory.Create(Strategy.Attack,this,AgilasActorType.PLAYER);
+                _strategy = StrategyFactory.Create(Strategy.Attack,this,AigilasActorType.PLAYER);
             }
         }
         protected void Add(string skillId)

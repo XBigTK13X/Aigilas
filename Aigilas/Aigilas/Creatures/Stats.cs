@@ -5,7 +5,7 @@ using System.Linq;
 using SPX.Util;
 using SPX.Core;
 
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public class Stats
     {

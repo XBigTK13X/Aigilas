@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Util;
 using SPX.Core;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.HUD
+namespace Aigilas.HUD
 {
     public class SkillHud:IHud
     {

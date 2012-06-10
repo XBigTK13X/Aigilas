@@ -1,7 +1,7 @@
-﻿using Agilas.Creatures;
-using Agilas.Skills;
+﻿using Aigilas.Creatures;
+using Aigilas.Skills;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class AttackSelfStrategy : IStrategy
     {

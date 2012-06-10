@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-namespace Agilas.Creatures
+namespace Aigilas.Creatures
 {
     public class StatType
     {

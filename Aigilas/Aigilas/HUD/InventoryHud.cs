@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Agilas.Creatures;
-using Agilas.Items;
+using Aigilas.Creatures;
+using Aigilas.Items;
 using SPX.Util;
 using SPX.Core;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.HUD
+namespace Aigilas.HUD
 {
     public class InventoryHud:IHud
     {

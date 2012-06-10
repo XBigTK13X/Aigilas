@@ -1,9 +1,9 @@
-﻿using Agilas.Creatures;
-using Agilas.Items;
+﻿using Aigilas.Creatures;
+using Aigilas.Items;
 using SPX.Util;
 using SPX.Core;
 
-namespace Agilas.HUD
+namespace Aigilas.HUD
 {
     public class EquipmentHud:IHud
     {

@@ -1,9 +1,9 @@
-﻿using Agilas.Creatures;
-using Agilas.Skills;
+﻿using Aigilas.Creatures;
+using Aigilas.Skills;
 using SPX.Core;
 using System;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class AttackStrategy : IStrategy
     {

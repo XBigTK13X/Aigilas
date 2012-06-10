@@ -1,9 +1,9 @@
 ﻿using System;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Core;
 using SPX.Entities;
 
-namespace Agilas.Items
+namespace Aigilas.Items
     
 {
     public class ItemFactory

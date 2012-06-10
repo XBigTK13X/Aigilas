@@ -18,7 +18,7 @@ using SPX;
 
 // Statically woven attributes used to automate exception logging, disabled to remove the PostSharp dependency
 // [assembly: Trace(AttributeTargetTypes = "SPX.*", AttributeTargetTypeAttributes = MulticastAttributes.Public, AttributeTargetMemberAttributes = MulticastAttributes.Public)]
-// [assembly: Trace(AttributeTargetTypes = "Agilas.*", AttributeTargetTypeAttributes = MulticastAttributes.Public, AttributeTargetMemberAttributes = MulticastAttributes.Public)]
+// [assembly: Trace(AttributeTargetTypes = "Aigilas.*", AttributeTargetTypeAttributes = MulticastAttributes.Public, AttributeTargetMemberAttributes = MulticastAttributes.Public)]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

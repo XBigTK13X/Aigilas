@@ -1,15 +1,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Agilas.States;
+using Aigilas.States;
 using SPX.States;
 using SPX.Core;
 using SPX.Text;
-using Agilas.Management;
+using Aigilas.Management;
 using SPX.Sprites;
 using Microsoft.Xna.Framework.Media;
 
-namespace Agilas
+namespace Aigilas
 {
     public class Game : Microsoft.Xna.Framework.Game
     {

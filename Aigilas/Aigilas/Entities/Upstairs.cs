@@ -1,16 +1,16 @@
-﻿using Agilas.Creatures;
-using Agilas.Dungeons;
+﻿using Aigilas.Creatures;
+using Aigilas.Dungeons;
 using SPX.Entities;
-using Agilas.Management;
+using Aigilas.Management;
 using SPX.Core;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public class Upstairs : Entity
     {
         public Upstairs(Point2 location)
         {
-            Initialize(location, SpriteType.UPSTAIRS, Agilas.EntityType.UPSTAIRS,ZDepth.Stairs);
+            Initialize(location, SpriteType.UPSTAIRS, Aigilas.EntityType.UPSTAIRS,ZDepth.Stairs);
         }
         public int GetTargetLocation()
         {

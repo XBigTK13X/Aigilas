@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SPX.Entities;
 
-namespace Agilas
+namespace Aigilas
 {
     public class EntityType:SPX.Entities.EntityType
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Core;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class ConfusedStrategy : IStrategy
     {

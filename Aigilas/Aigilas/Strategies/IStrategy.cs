@@ -1,10 +1,10 @@
 ﻿using System;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Core;
 using SPX.Paths;
 using System.Collections.Generic;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public abstract class IStrategy
     {

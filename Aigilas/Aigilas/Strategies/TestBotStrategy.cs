@@ -1,10 +1,10 @@
-﻿using Agilas.Creatures;
-using Agilas.Skills;
+﻿using Aigilas.Creatures;
+using Aigilas.Skills;
 using SPX.Entities;
 using SPX.Paths;
 using SPX.Core;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public class TestBotStrategy : IStrategy
     {

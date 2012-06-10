@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
-using Agilas.Strategies;
-using Agilas.Entities;
-using Agilas.Skills;
+using Aigilas.Creatures;
+using Aigilas.Strategies;
+using Aigilas.Entities;
+using Aigilas.Skills;
 using SPX.Core;
 
-namespace Agilas.Statuses
+namespace Aigilas.Statuses
 {
     public class Status
     {
@@ -426,7 +426,7 @@ namespace Agilas.Statuses
             base.Setup();
             previousStrategy = _target.GetStrategyId();
             _target.SetStrategy(StrategyFactory.Create(Strategy.Null, _target));
-            _target.GetTargets().AddTargetTypes(AgilasActorType.PLAYER);
+            _target.GetTargets().AddTargetTypes(AigilasActorType.PLAYER);
         }
         public override void Cleanup()
         {

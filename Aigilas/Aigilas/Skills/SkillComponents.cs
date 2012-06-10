@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
-using Agilas.Entities;
+using Aigilas.Creatures;
+using Aigilas.Entities;
 
-namespace Agilas.Skills
+namespace Aigilas.Skills
 {
     public class SkillComponents
     {
@@ -13,7 +13,7 @@ namespace Agilas.Skills
         protected StatBuff _buff;
         protected float _effectStrength = 0;
         protected bool _isPersistent = false;
-        protected List<int> _targetTypes = new List<int>(){Agilas.EntityType.WALL};
+        protected List<int> _targetTypes = new List<int>(){Aigilas.EntityType.WALL};
 
         public SkillComponents(float strength,bool isPersistent)
         {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Text;
 using SPX.Core;
 
-namespace Agilas.HUD
+namespace Aigilas.HUD
 {
     public class IHud
     {

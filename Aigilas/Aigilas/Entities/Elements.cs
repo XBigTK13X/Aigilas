@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Agilas.Entities
+namespace Aigilas.Entities
 {
     public class Elements
     {

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
-using Agilas.Skills;
+using Aigilas.Creatures;
+using Aigilas.Skills;
 
-namespace Agilas.Classes
+namespace Aigilas.Classes
 {
     public abstract class CreatureClass
     {

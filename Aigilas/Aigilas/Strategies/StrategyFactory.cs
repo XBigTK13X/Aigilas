@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 
-namespace Agilas.Strategies
+namespace Aigilas.Strategies
 {
     public abstract class Strategy
     {
@@ -28,22 +28,22 @@ namespace Agilas.Strategies
     }
     public class StrategyFactory
     {
-        public static IStrategy Create(int strategy,ICreature target,params int[] AgilasActorTypes)
+        public static IStrategy Create(int strategy,ICreature target,params int[] AigilasActorTypes)
         {
             switch (strategy)
             {
-                case Strategy.Attack: return new AttackStrategy(target,AgilasActorType.PLAYER);
+                case Strategy.Attack: return new AttackStrategy(target,AigilasActorType.PLAYER);
                 case Strategy.AttackSelf: return new AttackSelfStrategy(target);
                 case Strategy.Confused: return new ConfusedStrategy(target);
                 case Strategy.ConfusedAndDying: return new ConfusedAndDyingStrategy(target);
                 case Strategy.ControlledByPlayer: return new ControlledByPlayer(target);               
-                case Strategy.Flee: return new FleeStrategy(target,AgilasActorType.PLAYER);
+                case Strategy.Flee: return new FleeStrategy(target,AigilasActorType.PLAYER);
                 case Strategy.MinionCloud: return new MinionCloudStrategy(target);
                 case Strategy.MinionExplode: return new MinionOneUseStrategy(target);
                 case Strategy.MinionFire: return new MinionFireStrategy(target);
                 case Strategy.MinionOneUse: return new MinionOneUseStrategy(target);
                 case Strategy.MinionRotate: return new MinionRotateStrategy(target);             
-                case Strategy.Mutiny: return new AttackStrategy(target, AgilasActorType.NONPLAYER);
+                case Strategy.Mutiny: return new AttackStrategy(target, AigilasActorType.NONPLAYER);
                 case Strategy.Null: return new NullStrategy(target);
                 case Strategy.StraightLineRotate: return new StraightLineRotateStrategy(target);
                 case Strategy.StraightLine: return new StraightLineStrategy(target);

@@ -1,9 +1,9 @@
-﻿using Agilas.Creatures;
-using Agilas.Entities;
+﻿using Aigilas.Creatures;
+using Aigilas.Entities;
 using SPX.Core;
 using SPX.Entities;
 
-namespace Agilas.Skills
+namespace Aigilas.Skills
 {
     public class SkillBehavior
     {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-namespace Agilas.Items
+namespace Aigilas.Items
 {
     public class ItemSuffix
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Agilas.Creatures;
+using Aigilas.Creatures;
 using SPX.Core;
 using SPX.Entities;
-using Agilas.Management;
+using Aigilas.Management;
 
-namespace Agilas.Items
+namespace Aigilas.Items
 {
     public class GenericItem : Entity
     {
@@ -74,7 +74,7 @@ namespace Agilas.Items
 
         protected void Setup(Point2 location, int type)
         {
-            Initialize(location, SpriteFromItem(type), Agilas.EntityType.ITEM,ZDepth.Item);
+            Initialize(location, SpriteFromItem(type), Aigilas.EntityType.ITEM,ZDepth.Item);
         }
 
         private Player _currentTarget;
