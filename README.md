@@ -26,6 +26,9 @@ Prerequisites:
 
 Open Aigilas.sln in Visual Studio and launch the project. The game should launch shortly after that.
 
+## How to Play the Game##
+Please refer to <https://github.com/XBigTK13X/Aigilas/wiki/Instruction-Manual>
+
 ## Supported Platforms ##
 Currently, only Windows 7 is tested and supported. A PoC has been done that shows Aigilas can run on MonoGame, which would open up support for Linux and Mac OS X.
 
