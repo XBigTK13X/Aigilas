@@ -22,6 +22,7 @@ namespace SPX.Core
         private const string __gameplaySheetSprite = "GameplaySheet";
         private const string __gameOverSprite = "GameOver";
         private const string __fontName = "Action";
+        private const string __particleSprite = "Particle";
 
         public static void SetContentManager(ContentManager assetHandler)
         {
@@ -31,6 +32,11 @@ namespace SPX.Core
         private static Texture2D GetAsset(string resourceName)
         {
             return __assetHandler.Load<Texture2D>(resourceName);
+        }
+
+        public static Texture2D GetParticleAsset()
+        {
+            return GetAsset(__particleSprite);
         }
 
         public static Texture2D GetMenuBaseAsset()

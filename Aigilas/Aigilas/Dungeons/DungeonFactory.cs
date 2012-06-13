@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Aigilas.Entities;
 using SPX.Entities;
+using SPX.Particles;
 
 namespace Aigilas.Dungeons
 {
@@ -101,6 +102,7 @@ namespace Aigilas.Dungeons
                 _floors.Add(_currentFloor, new Dungeon());
                 DungeonFactory.IncreaseFloorCount();
             }
+            ParticleEngine.Reset();
             _floors[_currentFloor].LoadTiles(goingUp);
         }
     }

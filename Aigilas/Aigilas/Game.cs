@@ -8,6 +8,7 @@ using SPX.Text;
 using Aigilas.Management;
 using SPX.Sprites;
 using Microsoft.Xna.Framework.Media;
+using SPX.Particles;
 
 namespace Aigilas
 {
@@ -28,6 +29,7 @@ namespace Aigilas
             Input.Setup(new InputInitializer());
             SpriteSheetManager.Setup(new SpriteInitializer());
             StateManager.LoadState(new MainMenuState());
+            ParticleEngine.Reset();
             base.Initialize();
         }
 
@@ -56,9 +58,14 @@ namespace Aigilas
                     Exit();
                     return;
                 }
+                if (Input.IsPressed(Commands.CycleLeft, 0, false))
+                {
+                    ParticleEngine.Emit(RadiateBehavior.GetInstance(), new Point2(RNG.Rand.Next(0, XnaManager.WindowWidth), RNG.Rand.Next(0, XnaManager.WindowHeight)));
+                }
             }
 
             Input.Update();
+            ParticleEngine.Update();
             StateManager.Update();
             TextManager.Update();
             base.Update(gameTime);
@@ -80,6 +87,7 @@ namespace Aigilas
                          null,
                          XnaManager.GetScalingMatrix());
             StateManager.Draw();
+            ParticleEngine.Draw();
             TextManager.Draw();
             base.Draw(gameTime);
             XnaManager.Renderer.End();
