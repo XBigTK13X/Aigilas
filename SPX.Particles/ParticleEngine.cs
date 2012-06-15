@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SPX.Core;
+using SPX.Entities;
 
 namespace SPX.Particles
 {
@@ -35,7 +36,16 @@ namespace SPX.Particles
             }
 
             __emitters[__emitterIndex].Reset(behavior, position);
-            __emitters[__emitterIndex].IsActive = true;
+        }
+
+        public static void Emit(ParticleBehavior behavior, IEntity entity)
+        {
+            while (__emitters[__emitterIndex].IsActive)
+            {
+                __emitterIndex = (__emitterIndex + 1) % __emitters.Length;
+            }
+
+            __emitters[__emitterIndex].Reset(behavior, entity);
         }
         
         public static void Update()
@@ -57,14 +67,24 @@ namespace SPX.Particles
         private static int __particleIndex;
         public static Particle2 CreateParticle(ParticleBehavior behavior, Point2 position)
         {
+            SetIndexToInactiveParticle();
+            __particles[__particleIndex].Reset(behavior, position);
+            return __particles[__particleIndex];
+        }
+
+        public static Particle2 CreateParticle(ParticleBehavior behavior, IEntity entity)      
+        {
+            SetIndexToInactiveParticle();
+            __particles[__particleIndex].Reset(behavior, entity);
+            return __particles[__particleIndex];
+        }
+
+        private static void SetIndexToInactiveParticle()
+        {
             while (__particles[__particleIndex].IsActive)
             {
-                __particleIndex = (__particleIndex + 1) % __particles.Length;                
+                __particleIndex = (__particleIndex + 1) % __particles.Length;
             }
-            
-            __particles[__particleIndex].Reset(behavior, position);
-            __particles[__particleIndex].IsActive = true;
-            return __particles[__particleIndex];
         }
     }
 }

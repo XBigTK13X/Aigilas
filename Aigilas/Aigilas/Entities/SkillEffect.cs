@@ -3,6 +3,7 @@ using Aigilas.Skills;
 using SPX.Core;
 using SPX.Entities;
 using System;
+using SPX.Particles;
 
 namespace Aigilas.Entities
 {
@@ -31,6 +32,7 @@ namespace Aigilas.Entities
             _startingStrength = _currentStrength = _skill.GetStrength();
             _animation = SkillFactory.Create(_skill.GetAnimationType());
             _graphic.SetColor(skill.GetElementColor());
+            ParticleEngine.Emit(FollowBehavior.GetInstance(), this);
         }
 
         private IEntity hitTarget;

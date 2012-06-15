@@ -5,6 +5,7 @@ using System.Text;
 using SPX.Core;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using SPX.Entities;
 
 namespace SPX.Particles
 {
@@ -15,12 +16,13 @@ namespace SPX.Particles
         private int Height = RNG.Rand.Next(2, 15);
         private int Width = RNG.Rand.Next(2, 15);
 
+        private IEntity _entity;
         private Point2 _position = new Point2(0, 0);
         private float _life = DefaultLife;
         private Texture2D _texture = XnaManager.GetParticleAsset();
         private Rectangle _currentCell;
         private Rectangle _target;
-        private float _layerDepth = 0f;
+        private float _layerDepth = .99999f;
         private Color _color = Color.White;
         private float _alpha = 1;
         public float MoveSpeed = 5f;
@@ -46,13 +48,32 @@ namespace SPX.Particles
 
         public void Reset(ParticleBehavior behavior, Point2 position)
         {
+            Init(behavior, position, null);
+        }
+
+        public void Reset(ParticleBehavior behavior, IEntity entity)
+        {
+            Init(behavior, null, entity);
+        }
+
+        private void Init(ParticleBehavior behavior, Point2 position, IEntity entity)
+        {
             _behavior = behavior;
-            _origin.Reset(position.X, position.Y);
-            _position.Reset(position.X, position.Y);
+            if (position != null)
+            {
+                _origin.Reset(position.X, position.Y);
+                _position.Reset(position.X, position.Y);
+            }
+            if (entity != null)
+            {
+                _entity = entity;
+                _origin.Reset(_entity.GetLocation().PosX, _entity.GetLocation().PosY);
+                _position.Reset(_entity.GetLocation().PosX, _entity.GetLocation().PosY);
+            }
             angle = RNG.Angle();
             IsActive = true;
             _color = new Color((byte)RNG.Rand.Next(60, 190), (byte)RNG.Rand.Next(60, 190), (byte)RNG.Rand.Next(60, 190));
-            MoveSpeed = 10 - (10f * ((Height + Width) / 30f));
+            MoveSpeed = 15f - (10f * ((Height + Width) / 30f));
         }
 
         public void Update()
@@ -63,7 +84,7 @@ namespace SPX.Particles
             {
                 IsActive = false;
             }
-            _position.Copy(_behavior.Update(_position, _origin, angle,this));
+            _position.Copy(_behavior.Update(_position, _origin, angle,this,_entity));
         }
     }
 }

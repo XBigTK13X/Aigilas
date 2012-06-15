@@ -54,6 +54,10 @@
       <Project>{5BF5C616-63E5-4975-94FC-2FF2035D01F8}</Project>
       <Name>SPX.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SPX.Entities\SPX.Entities.csproj">
+      <Project>{D3C6D6AE-3DF2-4A5F-B4F3-167776319AF7}</Project>
+      <Name>SPX.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

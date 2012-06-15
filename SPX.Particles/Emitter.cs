@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SPX.Core;
+using SPX.Entities;
 
 namespace SPX.Particles
 {
@@ -49,6 +50,18 @@ namespace SPX.Particles
             while (_index < behavior.GetParticleCount())
             {
                 _particles[_index] = ParticleEngine.CreateParticle(behavior,position);
+                _index++;
+            }
+        }
+
+        public void Reset(ParticleBehavior behavior, IEntity entity)
+        {
+            IsActive = true;
+            _behavior = behavior;
+            _index = 0;
+            while (_index < behavior.GetParticleCount())
+            {
+                _particles[_index] = ParticleEngine.CreateParticle(behavior, entity);
                 _index++;
             }
         }
