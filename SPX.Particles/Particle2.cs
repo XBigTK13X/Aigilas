@@ -16,8 +16,7 @@ namespace SPX.Particles
         private int Height = RNG.Rand.Next(2, 15);
         private int Width = RNG.Rand.Next(2, 15);
 
-        private IEntity _entity;
-        private Point2 _position = new Point2(0, 0);
+        
         private float _life = DefaultLife;
         private Texture2D _texture = XnaManager.GetParticleAsset();
         private Rectangle _currentCell;
@@ -25,10 +24,14 @@ namespace SPX.Particles
         private float _layerDepth = .99999f;
         private Color _color = Color.White;
         private float _alpha = 1;
-        public float MoveSpeed = 5f;
         
-        private Point2 _origin = new Point2(0, 0);
-        private double angle;
+        public float MoveSpeed = 5f;
+
+        public IEntity Entity;
+        public Point2 Position = new Point2(0, 0);
+        public Point2 Origin = new Point2(0, 0);
+        public double Angle;
+        public float Radius;
 
         private ParticleBehavior _behavior;
 
@@ -41,50 +44,66 @@ namespace SPX.Particles
             if (IsActive)
             {
                 _currentCell = new Rectangle(0, 0, 6, 6);
-                _target = new Rectangle((int)_position.X, (int)_position.Y, Width, Width);
+                _target = new Rectangle((int)Position.X, (int)Position.Y, Width, Width);
                 XnaManager.Renderer.Draw(_texture, _target, _currentCell, _color*_alpha, 0f, Vector2.Zero, SpriteEffects.None, _layerDepth);
             }
         }
 
-        public void Reset(ParticleBehavior behavior, Point2 position)
+        public void Reset(ParticleBehavior behavior, Point2 position,Color baseColor)
         {
-            Init(behavior, position, null);
+            Init(behavior, position, null, baseColor);
         }
 
-        public void Reset(ParticleBehavior behavior, IEntity entity)
+        public void Reset(ParticleBehavior behavior, IEntity entity,Color baseColor)
         {
-            Init(behavior, null, entity);
+            Init(behavior, null, entity, baseColor);
         }
 
-        private void Init(ParticleBehavior behavior, Point2 position, IEntity entity)
+        private void Init(ParticleBehavior behavior, Point2 position, IEntity entity,Color baseColor)
         {
             _behavior = behavior;
             if (position != null)
             {
-                _origin.Reset(position.X, position.Y);
-                _position.Reset(position.X, position.Y);
+                Origin.Reset(position.X, position.Y);
+                Position.Reset(position.X, position.Y);                
             }
             if (entity != null)
             {
-                _entity = entity;
-                _origin.Reset(_entity.GetLocation().PosX, _entity.GetLocation().PosY);
-                _position.Reset(_entity.GetLocation().PosX, _entity.GetLocation().PosY);
+                Entity = entity;
+                Origin.Reset(Entity.GetLocation().PosX, Entity.GetLocation().PosY);
+                Position.Reset(Entity.GetLocation().PosX, Entity.GetLocation().PosY);               
+            }           
+            if (baseColor != null)
+            {
+                _color = Darken(baseColor, RNG.Rand.Next(10, 50) / 100f);
             }
-            angle = RNG.Angle();
+            else
+            {
+                _color = new Color((byte)RNG.Rand.Next(60, 190), (byte)RNG.Rand.Next(60, 190), (byte)RNG.Rand.Next(60, 190));
+            }
+            Angle = RNG.Angle();
             IsActive = true;
-            _color = new Color((byte)RNG.Rand.Next(60, 190), (byte)RNG.Rand.Next(60, 190), (byte)RNG.Rand.Next(60, 190));
             MoveSpeed = 15f - (10f * ((Height + Width) / 30f));
+        }
+
+        private static Color Darken(Color inColor, float inAmount)
+        {
+            return new Color(
+              (int)MathHelper.Clamp(((float)inColor.R) - 255 * inAmount, 0, 255),
+              (int)MathHelper.Clamp(((float)inColor.G) - 255 * inAmount, 0, 255),
+              (int)MathHelper.Clamp(((float)inColor.B) - 255 * inAmount, 0, 255),
+              255);
         }
 
         public void Update()
         {
             _life *= .85f;
             _alpha *= .999f;
-            if (_life <= .001)
+            if (_life <= .001 && (Entity == null || (Entity != null && !Entity.IsActive())))
             {
-                IsActive = false;
+                IsActive = false;            
             }
-            _position.Copy(_behavior.Update(_position, _origin, angle,this,_entity));
+            _behavior.Update(this);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SPX.Core;
 using SPX.Entities;
+using Microsoft.Xna.Framework;
 
 namespace SPX.Particles
 {
@@ -42,26 +43,26 @@ namespace SPX.Particles
             }
         }
 
-        public void Reset(ParticleBehavior behavior, Point2 position)
+        public void Reset(ParticleBehavior behavior, Point2 position,Color baseColor)
         {
             IsActive = true;
             _behavior = behavior;
             _index = 0;
             while (_index < behavior.GetParticleCount())
             {
-                _particles[_index] = ParticleEngine.CreateParticle(behavior,position);
+                _particles[_index] = ParticleEngine.CreateParticle(behavior, position, baseColor);
                 _index++;
             }
         }
 
-        public void Reset(ParticleBehavior behavior, IEntity entity)
+        public void Reset(ParticleBehavior behavior, IEntity entity, Color baseColor)
         {
             IsActive = true;
             _behavior = behavior;
             _index = 0;
             while (_index < behavior.GetParticleCount())
             {
-                _particles[_index] = ParticleEngine.CreateParticle(behavior, entity);
+                _particles[_index] = ParticleEngine.CreateParticle(behavior, entity, baseColor);
                 _index++;
             }
         }

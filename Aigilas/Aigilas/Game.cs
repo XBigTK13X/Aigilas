@@ -58,10 +58,6 @@ namespace Aigilas
                     Exit();
                     return;
                 }
-                if (Input.IsPressed(Commands.CycleLeft, 0, false))
-                {
-                    ParticleEngine.Emit(RadiateBehavior.GetInstance(), new Point2(RNG.Rand.Next(0, XnaManager.WindowWidth), RNG.Rand.Next(0, XnaManager.WindowHeight)));
-                }
             }
 
             Input.Update();

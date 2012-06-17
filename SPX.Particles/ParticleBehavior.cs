@@ -9,26 +9,16 @@ namespace SPX.Particles
 {
     public abstract class ParticleBehavior
     {
-        protected static ParticleBehavior __instance;
-
-        protected Point2 result = new Point2(0, 0);
-
         public virtual int GetParticleCount()
         {
             return 10;
         }
-        public abstract Point2 Update(Point2 position, Point2 origin, double angle, Particle2 particle, IEntity entity);
+        public abstract void Update(Particle2 particle);
     }
 
     public class RadiateBehavior : ParticleBehavior
     {
-        private float _moveSpeed = 5f;
-
-        public override int GetParticleCount()
-        {
-            return 10;
-        }
-
+        protected static ParticleBehavior __instance;
         public static ParticleBehavior GetInstance()
         {
             if (__instance == null)
@@ -38,21 +28,16 @@ namespace SPX.Particles
             return __instance;
         }
 
-        public override Point2 Update(Point2 position, Point2 origin, double angle, Particle2 particle, IEntity entity)
+        public override void Update(Particle2 particle)
         {            
-            result.SetX(position.X + (float)Math.Cos(angle) * particle.MoveSpeed);
-            result.SetY(position.Y + (float)Math.Sin(angle) * particle.MoveSpeed);
-            return result;
+            particle.Position.SetX(particle.Position.X + (float)Math.Cos(particle.Angle) * particle.MoveSpeed);
+            particle.Position.SetY(particle.Position.Y + (float)Math.Sin(particle.Angle) * particle.MoveSpeed);
         }
     }
 
     public class FollowBehavior : ParticleBehavior
     {
-        public override int GetParticleCount()
-        {
-            return 10;
-        }
-
+        protected static ParticleBehavior __instance;
         public static ParticleBehavior GetInstance()
         {
             if (__instance == null)
@@ -62,14 +47,20 @@ namespace SPX.Particles
             return __instance;
         }
 
-        public override Point2 Update(Point2 position, Point2 origin, double angle, Particle2 particle, IEntity entity)
+        public override void Update(Particle2 particle)
         {
-            if (entity != null)
+            if (particle.Entity != null)
             {
-                result.SetX(entity.GetLocation().PosX + RNG.Rand.Next(0, GameManager.SpriteWidth / 2));
-                result.SetY(entity.GetLocation().PosY + RNG.Rand.Next(0, GameManager.SpriteHeight / 2));
+                if (particle.Radius <= 3)
+                {
+                    particle.Radius = RNG.Rand.Next(20, 40);
+                    particle.Angle = RNG.Angle();
+                }
+                particle.Radius *= particle.MoveSpeed/15;
+                particle.Angle += Math.PI / 30;
+                particle.Position.SetX(particle.Entity.GetLocation().PosCenterX + (float)Math.Cos(particle.Angle)*particle.Radius);
+                particle.Position.SetY(particle.Entity.GetLocation().PosCenterY + (float)Math.Sin(particle.Angle)*particle.Radius);
             }
-            return result;
         }
     }
 }

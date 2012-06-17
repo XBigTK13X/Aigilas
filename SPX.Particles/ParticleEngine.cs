@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SPX.Core;
 using SPX.Entities;
+using Microsoft.Xna.Framework;
 
 namespace SPX.Particles
 {
@@ -28,24 +29,24 @@ namespace SPX.Particles
         }
 
         private static int __emitterIndex;
-        public static void Emit(ParticleBehavior behavior, Point2 position)
+        public static void Emit(ParticleBehavior behavior, Point2 position, Color baseColor)
         {
             while (__emitters[__emitterIndex].IsActive)
             {
                 __emitterIndex = (__emitterIndex + 1) % __emitters.Length;
             }
 
-            __emitters[__emitterIndex].Reset(behavior, position);
+            __emitters[__emitterIndex].Reset(behavior, position, baseColor);
         }
 
-        public static void Emit(ParticleBehavior behavior, IEntity entity)
+        public static void Emit(ParticleBehavior behavior, IEntity entity,Color baseColor)
         {
             while (__emitters[__emitterIndex].IsActive)
             {
                 __emitterIndex = (__emitterIndex + 1) % __emitters.Length;
             }
 
-            __emitters[__emitterIndex].Reset(behavior, entity);
+            __emitters[__emitterIndex].Reset(behavior, entity, baseColor);
         }
         
         public static void Update()
@@ -65,17 +66,17 @@ namespace SPX.Particles
         }
 
         private static int __particleIndex;
-        public static Particle2 CreateParticle(ParticleBehavior behavior, Point2 position)
+        public static Particle2 CreateParticle(ParticleBehavior behavior, Point2 position,Color baseColor)
         {
             SetIndexToInactiveParticle();
-            __particles[__particleIndex].Reset(behavior, position);
+            __particles[__particleIndex].Reset(behavior, position,baseColor);
             return __particles[__particleIndex];
         }
 
-        public static Particle2 CreateParticle(ParticleBehavior behavior, IEntity entity)      
+        public static Particle2 CreateParticle(ParticleBehavior behavior, IEntity entity, Color baseColor)      
         {
             SetIndexToInactiveParticle();
-            __particles[__particleIndex].Reset(behavior, entity);
+            __particles[__particleIndex].Reset(behavior, entity,baseColor);
             return __particles[__particleIndex];
         }
 

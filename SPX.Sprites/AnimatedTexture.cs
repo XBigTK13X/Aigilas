@@ -31,13 +31,15 @@ namespace SPX.Sprites
 
         public void Draw()
         {
-            UpdateAnimation();
-            _currentCell = new Rectangle((_currentFrame * _spriteInfo.X) + (_currentFrame+1), (_spriteInfo.SpriteIndex * _spriteInfo.Y) + (_spriteInfo.SpriteIndex+1),
-                                          _spriteInfo.X, _spriteInfo.Y);
+            if (_color.A > 0)
+            {
+                UpdateAnimation();
+                _currentCell = new Rectangle((_currentFrame * _spriteInfo.X) + (_currentFrame + 1), (_spriteInfo.SpriteIndex * _spriteInfo.Y) + (_spriteInfo.SpriteIndex + 1),
+                                              _spriteInfo.X, _spriteInfo.Y);
 
-            _target = new Rectangle((int)_position.X, (int)_position.Y, GameManager.SpriteWidth, GameManager.SpriteHeight);
-            XnaManager.Renderer.Draw(_texture, _target,_currentCell,_color,0f,Vector2.Zero,SpriteEffects.None,_layerDepth);
-            
+                _target = new Rectangle((int)_position.X, (int)_position.Y, GameManager.SpriteWidth, GameManager.SpriteHeight);
+                XnaManager.Renderer.Draw(_texture, _target, _currentCell, _color, 0f, Vector2.Zero, SpriteEffects.None, _layerDepth);
+            }
         }
 
         private void UpdateAnimation()
@@ -78,7 +80,12 @@ namespace SPX.Sprites
             _color = color;
         }
 
-        public void SetAlpha(float alpha)
+        public Color GetColor()
+        {
+            return _color;
+        }
+
+        public void SetAlpha(int alpha)
         {
             _color = new Color(_color.R, _color.G, _color.B,alpha);
         }

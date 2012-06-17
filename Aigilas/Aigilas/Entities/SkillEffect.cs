@@ -32,7 +32,8 @@ namespace Aigilas.Entities
             _startingStrength = _currentStrength = _skill.GetStrength();
             _animation = SkillFactory.Create(_skill.GetAnimationType());
             _graphic.SetColor(skill.GetElementColor());
-            ParticleEngine.Emit(FollowBehavior.GetInstance(), this);
+            _graphic.SetAlpha(0);
+            ParticleEngine.Emit(FollowBehavior.GetInstance(), this,_graphic.GetColor());
         }
 
         private IEntity hitTarget;
