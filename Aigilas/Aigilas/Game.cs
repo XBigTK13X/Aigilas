@@ -49,7 +49,6 @@ namespace Aigilas
 
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
             for (int ii = 0; ii < 4;ii++)
             {
                 var player = (PlayerIndex) ii;
@@ -67,10 +66,6 @@ namespace Aigilas
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);

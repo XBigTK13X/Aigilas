@@ -13,8 +13,8 @@ namespace SPX.Particles
     {
         public const int DefaultLife = 100;
 
-        private int Height = RNG.Rand.Next(2, 15);
-        private int Width = RNG.Rand.Next(2, 15);
+        public int Height = RNG.Rand.Next(2, 15);
+        public int Width = RNG.Rand.Next(2, 15);
 
         
         private float _life = DefaultLife;
@@ -83,6 +83,11 @@ namespace SPX.Particles
             }
             Angle = RNG.Angle();
             IsActive = true;
+            SetMoveSpeed();
+        }
+
+        private void SetMoveSpeed()
+        {
             MoveSpeed = 15f - (10f * ((Height + Width) / 30f));
         }
 
@@ -93,6 +98,13 @@ namespace SPX.Particles
               (int)MathHelper.Clamp(((float)inColor.G) - 255 * inAmount, 0, 255),
               (int)MathHelper.Clamp(((float)inColor.B) - 255 * inAmount, 0, 255),
               255);
+        }
+
+        public void SetSize(int height, int width)
+        {
+            Height = height;
+            Width = width;
+            SetMoveSpeed();
         }
 
         public void Update()

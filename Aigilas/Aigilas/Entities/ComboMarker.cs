@@ -5,6 +5,7 @@ using SPX.Entities;
 using Aigilas.Management;
 using System.Collections.Generic;
 using System;
+using SPX.Particles;
 
 namespace Aigilas.Entities
 {
@@ -16,8 +17,10 @@ namespace Aigilas.Entities
         public ComboMarker(ICreature source,int elementId,int index)
         {
             Initialize(source.GetLocation(), SpriteType.COMBO_MARKER, Aigilas.EntityType.COMBO_MARKER,ZDepth.ComboMarker);
-            _parent = source;
             _graphic.SetColor(Elements.Colors[elementId]);
+            _graphic.SetAlpha(0);
+            ParticleEngine.Emit(SPX.Particles.RotateBehavior.GetInstance(), this, _graphic.GetColor());
+            _parent = source;
             _index = index;                   
         }
 
