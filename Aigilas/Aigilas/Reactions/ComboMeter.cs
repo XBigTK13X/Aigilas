@@ -56,12 +56,17 @@ namespace Aigilas.Reactions
 
         private void ResetComboDisplay()
         {
+            _reactionTimer = _maxTimer;
+            for (int ii = 0; ii < _markers.Count(); ii++)
+            {
+                _markers[ii].SetInactive();
+            }
             _markers.Clear();
-            int ii = 0;
+            int jj = 0;
             foreach (var element in _elements)
             {
-                _markers.Add(new ComboMarker(_parent,element,ii));
-                ii++;
+                _markers.Add(new ComboMarker(_parent,element,jj));
+                jj++;
                 _markers.Last().LoadContent();
             }
         }
@@ -129,6 +134,10 @@ namespace Aigilas.Reactions
             {
                 key = (int)_elements[0] * 10 + (int)_elements[1];
                 React(key);
+            }
+            if (_elements.Count() == 1)
+            {
+                React((int)_elements[0]);
             }
         }
         private void React(int reactionId)

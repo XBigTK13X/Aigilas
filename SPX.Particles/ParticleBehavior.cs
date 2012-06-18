@@ -51,15 +51,29 @@ namespace SPX.Particles
         {
             if (particle.Entity != null)
             {
-                if (particle.Radius <= 3)
+                if (particle.Radius < 5)
                 {
-                    particle.Radius = RNG.Rand.Next(20, 40);
-                    particle.Angle = RNG.Angle();
+                    particle.Radius = 5;
+                    particle.Toggle = true;
                 }
-                particle.Radius *= particle.MoveSpeed/15;
-                particle.Angle += Math.PI / 30;
-                particle.Position.SetX(particle.Entity.GetLocation().PosCenterX + (float)Math.Cos(particle.Angle)*particle.Radius);
-                particle.Position.SetY(particle.Entity.GetLocation().PosCenterY + (float)Math.Sin(particle.Angle)*particle.Radius);
+                else if (particle.Radius > 16)
+                {
+                    particle.Radius = 16;
+                    particle.Toggle = false;
+                }
+                if (particle.Toggle)
+                {
+                    particle.Radius += particle.MoveSpeed/10;
+                    particle.Angle += Math.PI / 300;
+                }
+                else
+                {
+                    particle.Radius -= particle.MoveSpeed/10;
+                    particle.Angle -= Math.PI / 150;
+                }
+
+                particle.Position.SetX(particle.Entity.GetLocation().PosCenterX - particle.Width / 2 + (float)Math.Cos(particle.Angle) * particle.Radius);
+                particle.Position.SetY(particle.Entity.GetLocation().PosCenterY - particle.Height / 2 + (float)Math.Sin(particle.Angle) * particle.Radius);
             }
         }
     }
@@ -85,8 +99,8 @@ namespace SPX.Particles
         {
             if (particle.Entity != null)
             {
-                particle.Radius = 15;
-                particle.SetSize(10, 10);
+                particle.Radius = 18;
+                particle.SetSize(15, 15);
                 particle.Angle += Math.PI / 30;
                 particle.Position.SetX(particle.Entity.GetLocation().PosCenterX - particle.Width/2 + (float)Math.Cos(particle.Angle) * particle.Radius);
                 particle.Position.SetY(particle.Entity.GetLocation().PosCenterY -particle.Height/2 + (float)Math.Sin(particle.Angle) * particle.Radius);

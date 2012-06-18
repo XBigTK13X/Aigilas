@@ -66,7 +66,7 @@ namespace Aigilas.Skills
                 {
                     return false;
                 }
-            }
+            }            
             return true;
         }
         public int GetAnimationType()

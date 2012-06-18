@@ -32,6 +32,7 @@ namespace SPX.Particles
         public Point2 Origin = new Point2(0, 0);
         public double Angle;
         public float Radius;
+        public bool Toggle;
 
         private ParticleBehavior _behavior;
 
@@ -83,6 +84,7 @@ namespace SPX.Particles
             }
             Angle = RNG.Angle();
             IsActive = true;
+            Radius = 0;
             SetMoveSpeed();
         }
 
@@ -111,7 +113,7 @@ namespace SPX.Particles
         {
             _life *= .85f;
             _alpha *= .999f;
-            if (_life <= .001 && (Entity == null || (Entity != null && !Entity.IsActive())))
+            if ((_life <= .001 && Entity == null) || (Entity != null && !Entity.IsActive()))
             {
                 IsActive = false;            
             }
