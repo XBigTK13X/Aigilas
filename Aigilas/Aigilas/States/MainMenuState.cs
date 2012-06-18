@@ -35,6 +35,10 @@ namespace Aigilas.States
             _selection += (Input.IsPressed(Commands.MoveDown, 0) ? 1 : 0)
                 + (Input.IsPressed(Commands.MoveUp, 0) ? -1 : 0);
             _selection %= 3;
+            if (_selection < 0)
+            {
+                _selection = 0;
+            }
 
             if (Input.IsPressed(Commands.Confirm, 0))
             {
