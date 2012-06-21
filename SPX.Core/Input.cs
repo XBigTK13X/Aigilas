@@ -90,7 +90,9 @@ namespace SPX.Core
         {
             return GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command])
             || 
-            (playerIndex == 0 && Keyboard.GetState().IsKeyDown(_keyboardMapping[command]));
+            (playerIndex == 0 && Keyboard.GetState().IsKeyDown(_keyboardMapping[command]))
+            ||
+            Client.IsCommandActive(command,playerIndex);
         }
 
         public static bool IsPressed(int command, int playerIndex,bool failIfLocked=true)
