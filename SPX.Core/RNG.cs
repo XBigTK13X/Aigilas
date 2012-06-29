@@ -7,7 +7,7 @@ namespace SPX.Core
 {
     public class RNG
     {
-        public static readonly Random Rand = new Random();
+        public static Random Rand;
 
         public static double Angle()
         {
@@ -22,6 +22,11 @@ namespace SPX.Core
         public static bool CoinFlip()
         {
             return RNG.Rand.Next(0, 2) == 1;
+        }
+
+        public static void Seed(int seed)
+        {
+            Rand = new Random(seed);
         }
     }
 }
