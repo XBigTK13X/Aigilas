@@ -67,7 +67,7 @@ namespace SPX.Core
 
         public static int GetPlayerCount()
         {
-            return __controllerCount + (Client.GetConnectionCount() - __controllerCount);
+            return __controllerCount;
         }
 
         public static void Setup(IInputInitializer initializer)
@@ -90,12 +90,12 @@ namespace SPX.Core
         {
             return GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command])
             ||
-            (playerIndex == 0 && Keyboard.GetState().IsKeyDown(_keyboardMapping[command]));
+            (playerIndex == Client.Get().GetFirstPlayerIndex() && Keyboard.GetState().IsKeyDown(_keyboardMapping[command]));
         }
 
         private static bool IsDown(int command, int playerIndex)
         {   
-            return Client.IsCommandActive(command, playerIndex);
+            return Client.Get().IsActive(command, playerIndex);
         }
 
         public static bool IsPressed(int command, int playerIndex,bool failIfLocked=true)
@@ -195,7 +195,7 @@ namespace SPX.Core
 
             foreach (var command in _gamePadMapping.Keys)
             {
-                Client.SetState(command, 0, DetectState(command, 0));
+                Client.Get().SetState(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex()));
             }
 
             //Update the number of players currently connected via controller

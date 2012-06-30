@@ -12,7 +12,6 @@ namespace Aigilas.States
         public GameplayState()
         {
             EntityManager.Reset();
-            CreatureFactory.ResetPlayerCount();
             DungeonFactory.Start();
             Console.WriteLine(Input.GetPlayerCount());
         }

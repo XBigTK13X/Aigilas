@@ -13,8 +13,8 @@ namespace SPX.Particles
     {
         public const int DefaultLife = 100;
 
-        public int Height = RNG.Rand.Next(2, 15);
-        public int Width = RNG.Rand.Next(2, 15);
+        public int Height = 1;
+        public int Width = 1;
 
         
         private float _life = DefaultLife;

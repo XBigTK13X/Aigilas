@@ -9,14 +9,13 @@ namespace Aigilas.Creatures
 {
     public class CreatureFactory
     {
-        private static int __playerCount = 0;
         public static ICreature Create(int actorType, Point2 position)
         {
             AbstractCreature result;
             switch (actorType)
             {
                 case AigilasActorType.PLAYER:
-                    result = new Player(__playerCount++);
+                    result = new Player(Input.GetPlayerCount()-1);
                     break;
                 default:
                     result = GenerateCreature(actorType);
@@ -74,21 +73,6 @@ namespace Aigilas.Creatures
             }
             EntityManager.AddObject(result);
             return result;
-        }
-
-        public static void ResetPlayerCount()
-        {
-            __playerCount = 0;
-        }
-
-        public static void IncreasePlayerCount()
-        {
-            __playerCount ++;
-        }
-
-        public static int GetPlayerCount()
-        {
-            return __playerCount;
         }
 
         private static List<int> __remainingBosses = new List<int>()

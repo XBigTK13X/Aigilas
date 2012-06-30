@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Lidgren.Network;
 using System.Net;
+using System.Threading;
 
 namespace SPX.Core
 {
@@ -14,24 +15,18 @@ namespace SPX.Core
         public const string ConnectionName = "Aigilas";
         private static Server __instance;
         
-        public static void Setup()
+        public static Server Get()
         {
-            try
+            if (__instance == null)
             {
-                __instance = new Server();
+                Setup();
             }
-            catch (Exception)
-            {
-
-            }
+            return __instance;
         }
 
-        public static void Update()
+        public static void Setup()
         {
-            if (__instance != null)
-            {
-                __instance.Listen();
-            }
+            __instance = new Server();
         }
 
         private NetIncomingMessage _message;
@@ -42,22 +37,34 @@ namespace SPX.Core
 
         private Server()
         {
-            _config = new NetPeerConfiguration(ConnectionName) { Port = Port };
-            _config.MaximumConnections = 200;
-            _config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
-            _server = new NetServer(_config);
-            _server.Start();
+            try
+            {
+                _config = new NetPeerConfiguration(ConnectionName) { Port = Port };
+                _config.MaximumConnections = 200;
+                _config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
+                _server = new NetServer(_config);
+                _server.Start();
+            }
+            catch (Exception)
+            {
+            }
         }        
         
-        public void Listen()
+        public void Update()
         {
             while ((_message = _server.ReadMessage()) != null)
             {
                 switch (_message.MessageType)
                 {
                     case NetIncomingMessageType.ConnectionApproval:
+                        Console.WriteLine("SERVER: New Connection {"+_server.ConnectionsCount+" total}");
                         _message.SenderConnection.Approve();
-                        Reply(_rngSeed, _message.SenderConnection);
+                        Thread.Sleep(100);
+                        _announcement = _server.CreateMessage();
+                        _announcement.Write((byte)ClientMessageType.CONNECT);
+                        _announcement.Write(_rngSeed);
+                        _announcement.Write(_server.ConnectionsCount);
+                        _server.SendMessage(_announcement, _message.SenderConnection, NetDeliveryMethod.ReliableOrdered,0);                        
                         break;
                     case NetIncomingMessageType.Data:
                         switch (_message.ReadByte())
@@ -66,7 +73,6 @@ namespace SPX.Core
                                 Announce(_message.Data);
                                 break;
                             case (byte)ClientMessageType.RANDOM_SEED:
-                                Reply(_rngSeed, _message.SenderConnection);
                                 break;
                             default:
                                 break;
@@ -79,18 +85,11 @@ namespace SPX.Core
         }
 
         private NetOutgoingMessage _announcement;
-        public void Announce(byte[] message)
+        private void Announce(byte[] message)
         {
             _announcement = _server.CreateMessage();
             _announcement.Write(message);
             _server.SendMessage(_announcement,_server.Connections,NetDeliveryMethod.ReliableOrdered,0);
-        }
-
-        public void Reply(Int32 message, NetConnection target)
-        {
-            _announcement = _server.CreateMessage();
-            _announcement.Write(message);
-            _server.SendMessage(_announcement, target, NetDeliveryMethod.ReliableOrdered,0);
         }
     }
 }

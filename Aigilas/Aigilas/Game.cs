@@ -27,9 +27,6 @@ namespace Aigilas
         {
             XnaManager.SetContentManager(this.Content);
             Input.Setup(new InputInitializer());
-            Server.Setup();
-            Client.Init();
-            RNG.Seed(Client.GetRngSeed());
             SpriteSheetManager.Setup(new SpriteInitializer());
             StateManager.LoadState(new MainMenuState());
             ParticleEngine.Reset();
@@ -61,8 +58,6 @@ namespace Aigilas
                     return;
                 }
             }
-            Server.Update();
-            Client.Update();
             Input.Update();
             ParticleEngine.Update();
             StateManager.Update();

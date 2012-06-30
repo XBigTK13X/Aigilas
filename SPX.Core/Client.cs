@@ -16,13 +16,13 @@ namespace SPX.Core
     public class Client
     {
         private static Client __instance;
-        public static bool IsCommandActive(int command, int playerIndex)
+        public static Client Get()
         {
             if (__instance == null)
             {
-                return false;
+                Init();
             }
-            return __instance.IsActive(command, playerIndex);
+            return __instance;
         }
 
         public static void Init()
@@ -35,36 +35,13 @@ namespace SPX.Core
             return true;
         }
 
-        public static int GetRngSeed()
-        {
-            return __instance.GetRngSeedValue();
-        }
-
-        public static int GetConnectionCount()
-        {
-            return __instance.GetPlayerCount();
-        }
-
-        public static void SetState(int command, int playerIndex, bool isActive)
-        {
-            if (__instance != null)
-            {
-                __instance.ChangeState(command, playerIndex, isActive);
-            }
-        }
-
-        public static void Update()
-        {
-            __instance.Discuss();
-        }
-
-
         private NetClient _client;
         private NetPeerConfiguration _config;
         private NetIncomingMessage _message;
         private NetOutgoingMessage _outMessage;
         private Dictionary<int, Dictionary<int, bool>> _playerStatus = new Dictionary<int, Dictionary<int, bool>>();
-        private int _rngSeed;
+        private Int32 _rngSeed;
+        private Int32 _initialPlayerIndex;
 
         private Client()
         {
@@ -87,17 +64,22 @@ namespace SPX.Core
             return false;
         }
 
+        public int GetFirstPlayerIndex()
+        {
+            return _initialPlayerIndex;
+        }
+
         public int GetPlayerCount()
         {
             return _playerStatus.Keys.Count();
         }
 
-        public int GetRngSeedValue()
+        public int GetRngSeed()
         {
             return _rngSeed;
         }
 
-        public void Discuss()
+        public void Update()
         {
             while ((_message = _client.ReadMessage()) != null)
             {
@@ -106,6 +88,12 @@ namespace SPX.Core
                     case NetIncomingMessageType.Data:
                         switch (_message.ReadByte())
                         {
+                            case (byte)ClientMessageType.CONNECT:
+                                Int32 seed = _message.ReadInt32();
+                                Int32 connectionCount = _message.ReadInt32();
+                                RNG.Seed(seed);
+                                _initialPlayerIndex = connectionCount;
+                                break;
                             case (byte)ClientMessageType.MOVEMENT:
                                 int command = _message.ReadByte();
                                 int playerIndex = _message.ReadByte();
@@ -133,7 +121,7 @@ namespace SPX.Core
             }
         }
 
-        public void ChangeState(int command, int playerIndex, bool isActive)
+        public void SetState(int command, int playerIndex, bool isActive)
         {
             bool stateHasChanged = false;
             if (!_playerStatus.ContainsKey(playerIndex))
