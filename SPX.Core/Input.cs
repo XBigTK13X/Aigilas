@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
 
 namespace SPX.Core
 {
@@ -94,13 +95,12 @@ namespace SPX.Core
         }
 
         private static bool IsDown(int command, int playerIndex)
-        {   
-            return Client.Get().IsActive(command, playerIndex);
+        {
+            return Client.Get().IsActive(command, playerIndex) || DetectState(command, playerIndex) ;
         }
 
         public static bool IsPressed(int command, int playerIndex,bool failIfLocked=true)
         {
-            
             __isInputActive = IsDown(command,playerIndex);
             if (!__isInputActive && ShouldLock(command,playerIndex))
             {
@@ -193,19 +193,14 @@ namespace SPX.Core
                 }
             }
 
-            foreach (var command in _gamePadMapping.Keys)
-            {
-                Client.Get().SetState(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex()));
-            }
-
             //Update the number of players currently connected via controller
             for(int ii = 1;ii<__playerIndices.Count();ii++)
             {
-                __controllerCount += (GamePad.GetState(__playerIndices[ii]).IsConnected)?1:0;
+                __controllerCount += (GamePad.GetState(__playerIndices[ii]).IsConnected)? 1:0;
                 if (!__inputs.ContainsKey(ii))
                 {
                     __inputs.Add(ii, GamePad.GetState(_playerIndex[ii]).IsConnected);
-                } 
+                }
             }
             if (__controllerCount == 0)
             {
