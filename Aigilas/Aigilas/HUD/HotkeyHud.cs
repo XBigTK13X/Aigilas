@@ -31,11 +31,11 @@ namespace Aigilas.HUD
 
         public void Update(GenericItem item, bool refresh)
         {
-            if (Input.IsPressed(Commands.LockSkill, _parent.GetPlayerIndex(), false))
+            if (Input.IsActive(Commands.LockSkill, _parent.GetPlayerIndex(), false))
             {
                 foreach (var hotSkill in _hotSkills)
                 {
-                    if (Input.IsPressed(hotSkill, _parent.GetPlayerIndex(), false))
+                    if (Input.IsActive(hotSkill, _parent.GetPlayerIndex(), false))
                     {
                         _parent.MarkHotSkill(hotSkill);
                     }

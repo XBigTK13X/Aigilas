@@ -24,7 +24,7 @@ namespace Aigilas.States
 
         public void Update()
         {
-            if(Input.IsPressed(Commands.Confirm,0,true))
+            if(Input.IsActive(Commands.Confirm,0,true))
             {
                 StateManager.LoadState(new GameplayState());
             }

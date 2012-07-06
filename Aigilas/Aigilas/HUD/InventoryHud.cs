@@ -45,7 +45,7 @@ namespace Aigilas.HUD
 
         private void HandleInput()
         {
-            if (Input.IsPressed(Commands.CycleLeft, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.CycleLeft, _parent.GetPlayerIndex()))
             {
                 _currentClass--;
                 if (_currentClass <= ItemClass.NULL)
@@ -57,7 +57,7 @@ namespace Aigilas.HUD
                 forceRefresh = true;
             }
 
-            if (Input.IsPressed(Commands.CycleRight, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.CycleRight, _parent.GetPlayerIndex()))
             {
                 _currentClass++;
                 if (_currentClass >= ItemClass.LAST)
@@ -69,7 +69,7 @@ namespace Aigilas.HUD
                 forceRefresh = true;
             }
 
-            if (Input.IsPressed(Commands.MoveDown, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.MoveDown, _parent.GetPlayerIndex()))
             {
                 if (_startingItem < _currentClassItems.Count() - 1)
                 {
@@ -79,7 +79,7 @@ namespace Aigilas.HUD
                 }
             }
 
-            if (Input.IsPressed(Commands.MoveUp, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.MoveUp, _parent.GetPlayerIndex()))
             {
                 if (_startingItem > 0)
                 {
@@ -88,12 +88,12 @@ namespace Aigilas.HUD
                     forceRefresh = true;
                 }
             }
-            if (Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex()))
             {
                 _parent.Equip(_currentSelectedItem);
                 forceRefresh = true;
             }
-            if (Input.IsPressed(Commands.Cancel, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.Cancel, _parent.GetPlayerIndex()))
             {
                 _parent.Drop(_currentSelectedItem);
                 forceRefresh = true;

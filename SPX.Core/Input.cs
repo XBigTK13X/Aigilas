@@ -96,10 +96,10 @@ namespace SPX.Core
 
         private static bool IsDown(int command, int playerIndex)
         {
-            return Client.Get().IsActive(command, playerIndex) || DetectState(command, playerIndex) ;
+            return Client.Get().IsActive(command, playerIndex);
         }
 
-        public static bool IsPressed(int command, int playerIndex,bool failIfLocked=true)
+        public static bool IsActive(int command, int playerIndex,bool failIfLocked=true)
         {
             __isInputActive = IsDown(command,playerIndex);
             if (!__isInputActive && ShouldLock(command,playerIndex))
@@ -142,10 +142,12 @@ namespace SPX.Core
         {
             __contexts[playerIndex] = context;
         }
+        
         public static bool IsContext(int context,int playerIndex)
         {
             return __contexts[playerIndex] == context;
         }
+
         public static bool IsLocked(int command,int playerIndex)
         {
             foreach (var pair in __locks)
@@ -157,10 +159,12 @@ namespace SPX.Core
             }
             return false;
         }
+
         public static void Lock(int command,int playerIndex)
         {
             __locks.Add(new CommandLock(command,playerIndex));
         }
+
         public static void Unlock(int command, int playerIndex)
         {
             for(int ii = 0;ii<__locks.Count();ii++)
@@ -190,6 +194,15 @@ namespace SPX.Core
                 {
                     __locks.Remove(__locks[ii]);
                     ii--;
+                }
+            }
+
+            foreach (int command in _keyboardMapping.Keys)
+            {
+                if (Client.Get().StateHasChanged(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex())))
+                {
+                    Client.Get().SetState(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex()));
+                    Thread.Sleep(10);
                 }
             }
 

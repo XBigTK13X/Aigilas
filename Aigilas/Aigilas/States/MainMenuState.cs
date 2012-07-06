@@ -31,15 +31,15 @@ namespace Aigilas.States
             _text.WriteAction(OptionsText, 1, 300, 200);
             _text.WriteAction(QuitText, 1, 300, 300);
 
-            _selection += (Input.IsPressed(Commands.MoveDown, Client.Get().GetFirstPlayerIndex()) ? 1 : 0)
-                + (Input.IsPressed(Commands.MoveUp, Client.Get().GetFirstPlayerIndex()) ? -1 : 0);
+            _selection += (Input.IsActive(Commands.MoveDown, Client.Get().GetFirstPlayerIndex()) ? 1 : 0)
+                + (Input.IsActive(Commands.MoveUp, Client.Get().GetFirstPlayerIndex()) ? -1 : 0);
             _selection %= 3;
             if (_selection < 0)
             {
                 _selection = 0;
             }
 
-            if (Input.IsPressed(Commands.Confirm, Client.Get().GetFirstPlayerIndex()))
+            if (Input.IsActive(Commands.Confirm, Client.Get().GetFirstPlayerIndex()))
             {
                 switch (_selection)
                 {

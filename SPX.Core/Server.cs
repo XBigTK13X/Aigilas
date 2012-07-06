@@ -63,7 +63,7 @@ namespace SPX.Core
                         _announcement = _server.CreateMessage();
                         _announcement.Write((byte)ClientMessageType.CONNECT);
                         _announcement.Write(_rngSeed);
-                        _announcement.Write(_server.ConnectionsCount);
+                        _announcement.Write(_server.ConnectionsCount-1);
                         _server.SendMessage(_announcement, _message.SenderConnection, NetDeliveryMethod.ReliableOrdered,0);                        
                         break;
                     case NetIncomingMessageType.Data:

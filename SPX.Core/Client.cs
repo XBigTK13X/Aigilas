@@ -59,7 +59,6 @@ namespace SPX.Core
         {
             if (_playerStatus.ContainsKey(playerIndex) && _playerStatus[playerIndex].ContainsKey(command))
             {
-                Console.WriteLine(_playerStatus[playerIndex][command]);
                 return _playerStatus[playerIndex][command];
             }
             return false;
@@ -80,8 +79,7 @@ namespace SPX.Core
             return _rngSeed;
         }
 
-
-        public void SetState(int command, int playerIndex, bool isActive)
+        public bool StateHasChanged(int command, int playerIndex, bool isActive)
         {
             bool stateHasChanged = false;
             if (!_playerStatus.ContainsKey(playerIndex))
@@ -102,16 +100,17 @@ namespace SPX.Core
                     }
                 }
             }
-            if (stateHasChanged)
-            {
-                Console.WriteLine("StateChange");
-                _outMessage = _client.CreateMessage();
-                _outMessage.Write((byte)ClientMessageType.MOVEMENT);
-                _outMessage.Write((byte)command);
-                _outMessage.Write((byte)playerIndex);
-                _outMessage.Write(isActive);
-                _client.SendMessage(_outMessage, NetDeliveryMethod.ReliableOrdered);
-            }
+            return stateHasChanged;
+        }
+
+        public void SetState(int command, int playerIndex, bool isActive)
+        {
+            _outMessage = _client.CreateMessage();
+            _outMessage.Write((byte)ClientMessageType.MOVEMENT);
+            _outMessage.Write((byte)command);
+            _outMessage.Write((byte)playerIndex);
+            _outMessage.Write(isActive);
+            _client.SendMessage(_outMessage, NetDeliveryMethod.ReliableOrdered);
         }
 
         public void Update()

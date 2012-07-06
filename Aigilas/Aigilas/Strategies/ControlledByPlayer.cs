@@ -27,11 +27,11 @@ namespace Aigilas.Strategies
 
         public override void Act()
         {
-            if (Input.IsPressed(Commands.Start, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.Start, _parent.GetPlayerIndex()))
             {
                 _parent.SetPlaying(true);
             }
-            if (Input.IsPressed(Commands.Back, _parent.GetPlayerIndex()))
+            if (Input.IsActive(Commands.Back, _parent.GetPlayerIndex()))
             {
                 _parent.SetPlaying(false);
             }
@@ -39,17 +39,17 @@ namespace Aigilas.Strategies
             {
                 if (!Input.IsContext(Contexts.Inventory,_parent.GetPlayerIndex()))
                 {
-                    var leftVelocity = (Input.IsPressed(Commands.MoveLeft, _parent.GetPlayerIndex()) ? -Stats.DefaultMoveSpeed : 0);
-                    var rightVelocity = ((Input.IsPressed(Commands.MoveRight, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                    var leftVelocity = (Input.IsActive(Commands.MoveLeft, _parent.GetPlayerIndex()) ? -Stats.DefaultMoveSpeed : 0);
+                    var rightVelocity = ((Input.IsActive(Commands.MoveRight, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
                     _keyVelocity.SetX(rightVelocity + leftVelocity);
 
-                    var downVelocity = ((Input.IsPressed(Commands.MoveDown, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
-                    var upVelocity = ((Input.IsPressed(Commands.MoveUp, _parent.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
+                    var downVelocity = ((Input.IsActive(Commands.MoveDown, _parent.GetPlayerIndex())) ? Stats.DefaultMoveSpeed : 0);
+                    var upVelocity = ((Input.IsActive(Commands.MoveUp, _parent.GetPlayerIndex())) ? -Stats.DefaultMoveSpeed : 0);
                     _keyVelocity.SetY(upVelocity + downVelocity);
 
                     if (Input.IsContext(Contexts.Free, _parent.GetPlayerIndex()))
                     {
-                        var isPress = Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex());
+                        var isPress = Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex());
                         if (!isPress)
                         {
                             _parent.SetInteraction(false);
@@ -59,14 +59,14 @@ namespace Aigilas.Strategies
                             _parent.SetInteraction(true);
                         }
                         var skillCycleVelocity =
-                            ((Input.IsPressed(Commands.CycleLeft, _parent.GetPlayerIndex())) ? -1 : 0)
+                            ((Input.IsActive(Commands.CycleLeft, _parent.GetPlayerIndex())) ? -1 : 0)
                             +
-                            ((Input.IsPressed(Commands.CycleRight, _parent.GetPlayerIndex())) ? 1 : 0);
+                            ((Input.IsActive(Commands.CycleRight, _parent.GetPlayerIndex())) ? 1 : 0);
                         _parent.CycleActiveSkill(skillCycleVelocity);
 
                         if (!_isCasting)
                         {
-                            if (!Input.IsPressed(Commands.Confirm, _parent.GetPlayerIndex(),false))
+                            if (!Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex(),false))
                             {
                                 _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
                             }
@@ -76,16 +76,16 @@ namespace Aigilas.Strategies
                             }
                         }
                     }
-                    if (Input.IsPressed(Commands.Skill, _parent.GetPlayerIndex()))
+                    if (Input.IsActive(Commands.Skill, _parent.GetPlayerIndex()))
                     {
                         _isCasting = true;
                     }
 
                     foreach (var hotkey in __hotkeys)
                     {
-                        if (Input.IsPressed(hotkey,_parent.GetPlayerIndex()))
+                        if (Input.IsActive(hotkey,_parent.GetPlayerIndex()))
                         {
-                            if (!Input.IsPressed(Commands.LockSkill, _parent.GetPlayerIndex(), false))
+                            if (!Input.IsActive(Commands.LockSkill, _parent.GetPlayerIndex(), false))
                             {
                                 if (_parent.SetHotSkillActive(hotkey))
                                 {
@@ -113,7 +113,7 @@ namespace Aigilas.Strategies
                     }
                 }
                 
-                if (Input.IsPressed(Commands.Inventory, _parent.GetPlayerIndex()))
+                if (Input.IsActive(Commands.Inventory, _parent.GetPlayerIndex()))
                 {
                     Input.SetContext(_parent.ToggleInventoryVisibility()? Contexts.Inventory: Contexts.Free, _parent.GetPlayerIndex());
                 }
