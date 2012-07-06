@@ -39,21 +39,28 @@ namespace Aigilas.States
                 _selection = 0;
             }
 
-            if (Input.IsActive(Commands.Confirm, Client.Get().GetFirstPlayerIndex()))
+            if (Client.Get().IsGameStarting())
             {
-                switch (_selection)
+                Input.SetContext(Contexts.Free, Client.Get().GetFirstPlayerIndex());
+                StateManager.LoadState(new GameplayState());
+            }
+            else
+            {
+                if (Input.IsActive(Commands.Confirm, Client.Get().GetFirstPlayerIndex()))
                 {
-                    case 0:
-                        Input.SetContext(Contexts.Free, Client.Get().GetFirstPlayerIndex());
-                        StateManager.LoadState(new GameplayState());
-                        return;
-                    case 1:
-                        StateManager.LoadState(new OptionsState());
-                        return;
-                    case 2:
-                        Environment.Exit(0);
-                        return;
-                    default: break;
+                    switch (_selection)
+                    {
+                        case 0:
+                            Client.Get().StartGame();
+                            return;
+                        case 1:
+                            StateManager.LoadState(new OptionsState());
+                            return;
+                        case 2:
+                            Environment.Exit(0);
+                            return;
+                        default: break;
+                    }
                 }
             }
 

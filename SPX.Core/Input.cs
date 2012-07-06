@@ -68,7 +68,7 @@ namespace SPX.Core
 
         public static int GetPlayerCount()
         {
-            return __controllerCount;
+            return __controllerCount - 1 +;
         }
 
         public static void Setup(IInputInitializer initializer)

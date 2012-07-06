@@ -10,7 +10,8 @@ namespace SPX.Core
     {
         CONNECT,
         MOVEMENT,
-        RANDOM_SEED
+        RANDOM_SEED,
+        START_GAME
     }
 
     public class Client
@@ -42,6 +43,7 @@ namespace SPX.Core
         private Dictionary<int, Dictionary<int, bool>> _playerStatus = new Dictionary<int, Dictionary<int, bool>>();
         private Int32 _rngSeed;
         private Int32 _initialPlayerIndex;
+        private bool _isGameStarting;
 
         private Client()
         {
@@ -54,6 +56,17 @@ namespace SPX.Core
             _client.Connect("localhost", Server.Port, init);
         }
 
+        public void StartGame()
+        {
+            _outMessage = _client.CreateMessage();
+            _outMessage.Write((byte)ClientMessageType.START_GAME);
+            _client.SendMessage(_outMessage, NetDeliveryMethod.ReliableOrdered);
+        }
+
+        public bool IsGameStarting()
+        {
+            return _isGameStarting;
+        }
 
         public bool IsActive(int command, int playerIndex)
         {
@@ -144,6 +157,9 @@ namespace SPX.Core
                                 break;
                             case (byte)ClientMessageType.RANDOM_SEED:
                                 _rngSeed = _message.ReadInt32();
+                                break;
+                            case (byte)ClientMessageType.START_GAME:
+                                _isGameStarting = true;
                                 break;
                             default:
                                 break;

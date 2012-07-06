@@ -47,6 +47,7 @@ namespace SPX.Core
             }
             catch (Exception)
             {
+                Console.WriteLine("SERVER: Failure to start. If this isn't the host, then this message is harmless.");
             }
         }        
         
@@ -73,6 +74,9 @@ namespace SPX.Core
                                 Announce(_message.Data);
                                 break;
                             case (byte)ClientMessageType.RANDOM_SEED:
+                                break;
+                            case (byte)ClientMessageType.START_GAME:
+                                Announce(_message.Data);
                                 break;
                             default:
                                 break;
