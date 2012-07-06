@@ -64,13 +64,6 @@ namespace SPX.Core
         private static readonly Dictionary<int, bool> __inputs = new Dictionary<int, bool>();
         private static bool __isInputActive = false;
 
-        private static int __controllerCount = 0;
-
-        public static int GetPlayerCount()
-        {
-            return __controllerCount;
-        }
-
         public static void Setup(IInputInitializer initializer)
         {
             foreach (var command in initializer.GetCommands())
@@ -204,20 +197,6 @@ namespace SPX.Core
                     Client.Get().SetState(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex()));
                     Thread.Sleep(10);
                 }
-            }
-
-            //Update the number of players currently connected via controller
-            for(int ii = 1;ii<__playerIndices.Count();ii++)
-            {
-                __controllerCount += (GamePad.GetState(__playerIndices[ii]).IsConnected)? 1:0;
-                if (!__inputs.ContainsKey(ii))
-                {
-                    __inputs.Add(ii, GamePad.GetState(_playerIndex[ii]).IsConnected);
-                }
-            }
-            if (__controllerCount == 0)
-            {
-                __controllerCount = 1;
             }
         }
         private class CommandLock

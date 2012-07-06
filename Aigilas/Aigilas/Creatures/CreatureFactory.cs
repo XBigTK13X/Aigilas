@@ -9,13 +9,15 @@ namespace Aigilas.Creatures
 {
     public class CreatureFactory
     {
+        private static int __playerCount = 0;
+
         public static ICreature Create(int actorType, Point2 position)
         {
             AbstractCreature result;
             switch (actorType)
             {
                 case AigilasActorType.PLAYER:
-                    result = new Player(Input.GetPlayerCount()-1);
+                    result = new Player(__playerCount++);
                     break;
                 default:
                     result = GenerateCreature(actorType);

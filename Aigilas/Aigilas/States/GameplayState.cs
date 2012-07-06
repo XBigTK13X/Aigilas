@@ -13,7 +13,7 @@ namespace Aigilas.States
         {
             EntityManager.Reset();
             DungeonFactory.Start();
-            Console.WriteLine("Player count:" +Input.GetPlayerCount());
+            Console.WriteLine("Player count:" + Client.Get().GetPlayerCount());
         }
         public void Update()
         {
