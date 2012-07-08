@@ -4,6 +4,7 @@ using Aigilas.Creatures;
 using Aigilas.Dungeons;
 using SPX.Core;
 using System;
+using Aigilas.IO;
 
 namespace Aigilas.States
 {

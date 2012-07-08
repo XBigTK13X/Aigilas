@@ -20,7 +20,6 @@ namespace SPX.Core
 
             public override void Draw()
             {                
-                XnaManager.Renderer.DrawString(TextManager.GetFont(), _contents, _position, Color.Black, 0, Vector2.Zero, 1.15f, SpriteEffects.None,.9994f);
                 XnaManager.Renderer.DrawString(TextManager.GetFont(), _contents, _position, Color.White, 0, Vector2.Zero, 1.0f, SpriteEffects.None, .9995f);
             }
 
@@ -42,7 +41,7 @@ namespace SPX.Core
 
         private ConsoleText[] _contents = new ConsoleText[10];
         private int _index = 0;
-        private bool _isVisible;
+        private bool _isVisible = true;
         private Color _bgColor;
 
         private DevConsole()

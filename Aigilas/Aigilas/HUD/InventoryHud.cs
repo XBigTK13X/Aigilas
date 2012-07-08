@@ -8,6 +8,7 @@ using Aigilas.Items;
 using SPX.Util;
 using SPX.Core;
 using Aigilas.Management;
+using SPX.IO;
 
 namespace Aigilas.HUD
 {

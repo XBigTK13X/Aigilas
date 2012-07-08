@@ -9,6 +9,8 @@ using Aigilas.Management;
 using SPX.Sprites;
 using Microsoft.Xna.Framework.Media;
 using SPX.Particles;
+using SPX.IO;
+using Aigilas.IO;
 
 namespace Aigilas
 {
@@ -58,7 +60,7 @@ namespace Aigilas
                     return;
                 }
             }
-            if(Input.IsActive(Commands.ToggleDevConsole,0))
+            if(Input.IsActive(Commands.ToggleDevConsole,Client.Get().GetFirstPlayerIndex()))
             {
                 DevConsole.Get().Toggle();
             }

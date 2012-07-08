@@ -247,6 +247,10 @@
       <Project>{D3C6D6AE-3DF2-4A5F-B4F3-167776319AF7}</Project>
       <Name>SPX.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SPX.IO\SPX.IO.csproj">
+      <Project>{7E78F323-E6C5-4607-BA1F-04DFA5E15745}</Project>
+      <Name>SPX.IO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SPX.Particles\SPX.Particles.csproj">
       <Project>{91C38650-89DC-461A-8652-234EA94A0A68}</Project>
       <Name>SPX.Particles</Name>

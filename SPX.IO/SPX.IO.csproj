@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5BF5C616-63E5-4975-94FC-2FF2035D01F8}</ProjectGuid>
+    <ProjectGuid>{7E78F323-E6C5-4607-BA1F-04DFA5E15745}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPX.Core</RootNamespace>
-    <AssemblyName>SPX.Core</AssemblyName>
+    <RootNamespace>SPX.IO</RootNamespace>
+    <AssemblyName>SPX.IO</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,12 +33,9 @@
   <ItemGroup>
     <Reference Include="Lidgren.Network, Version=2012.1.7.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Lidgren.Network.dll</HintPath>
+      <HintPath>..\SPX.Core\lib\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Microsoft.Xna.Framework.Video, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,16 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Depth.cs" />
-    <Compile Include="GameManager.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Input.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resolution.cs" />
-    <Compile Include="RNG.cs" />
-    <Compile Include="XnaManager.cs" />
+    <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\SPX.Core\SPX.Core.csproj">
+      <Project>{5BF5C616-63E5-4975-94FC-2FF2035D01F8}</Project>
+      <Name>SPX.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPX.DevTools\SPX.DevTools.csproj">
+      <Project>{ACF20487-E1F2-446C-8F8F-E5F7622D803C}</Project>
+      <Name>SPX.DevTools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Lidgren.Network;
+using SPX.Core;
 
-namespace SPX.Core
+namespace Aigilas.IO
 {
     public enum ClientMessageType
     {
@@ -154,6 +155,7 @@ namespace SPX.Core
                                     _playerStatus[playerIndex].Add(command, isActive);
                                 }
                                 _playerStatus[playerIndex][command] = isActive;
+                                DevConsole.Get().Add(String.Format("(player,command,active) : ({0},{1},{2})", playerIndex,command, isActive));
                                 break;
                             case (byte)ClientMessageType.RANDOM_SEED:
                                 _rngSeed = _message.ReadInt32();

@@ -6,7 +6,7 @@ using Lidgren.Network;
 using System.Net;
 using System.Threading;
 
-namespace SPX.Core
+namespace Aigilas.IO
 {
     public class Server
     {

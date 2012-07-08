@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Aigilas.Management;
 using System.Collections.Generic;
+using SPX.IO;
 
 namespace Aigilas.HUD
 {

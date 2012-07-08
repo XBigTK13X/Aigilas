@@ -6,6 +6,7 @@ using Aigilas.Management;
 using Aigilas.Creatures;
 using SPX.Core;
 using System.Collections.Generic;
+using SPX.IO;
 namespace Aigilas.Strategies
 {
     public class ControlledByPlayer : IStrategy

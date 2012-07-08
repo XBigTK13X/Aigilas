@@ -16,6 +16,7 @@ using SPX.Text;
 using SPX.Util;
 using Aigilas.Management;
 using Aigilas.Entities;
+using SPX.IO;
 
 namespace Aigilas.Creatures
 {
