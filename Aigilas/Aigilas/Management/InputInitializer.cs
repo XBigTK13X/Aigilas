@@ -25,6 +25,7 @@ namespace Aigilas.Management
         public const int HotSkill1 = 13;
         public const int HotSkill2 = 14;
         public const int HotSkill3 = 15;
+        public const int ToggleDevConsole = 16;
     }
     public class InputInitializer:IInputInitializer
     {
@@ -53,7 +54,8 @@ namespace Aigilas.Management
                 Make(Commands.LockSkill,Keys.RightControl,Buttons.LeftTrigger,Contexts.All),
                 Make(Commands.HotSkill1,Keys.D1,Buttons.X,Contexts.All),
                 Make(Commands.HotSkill2,Keys.D2,Buttons.Y,Contexts.All),
-                Make(Commands.HotSkill3,Keys.D3,Buttons.B,Contexts.All)
+                Make(Commands.HotSkill3,Keys.D3,Buttons.B,Contexts.All),
+                Make(Commands.ToggleDevConsole,Keys.OemTilde,Buttons.DPadDown,Contexts.All)         
             };
         }
     }

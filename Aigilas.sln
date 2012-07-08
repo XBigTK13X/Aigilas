@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPX.States", "SPX.States\SP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPX.Particles", "SPX.Particles\SPX.Particles.csproj", "{91C38650-89DC-461A-8652-234EA94A0A68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPX.DevTools", "SPX.DevTools\SPX.DevTools.csproj", "{ACF20487-E1F2-446C-8F8F-E5F7622D803C}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Aigilas.vsmdi
@@ -180,6 +182,20 @@ Global
 		{91C38650-89DC-461A-8652-234EA94A0A68}.Release|Windows Phone.ActiveCfg = Release|Any CPU
 		{91C38650-89DC-461A-8652-234EA94A0A68}.Release|x86.ActiveCfg = Release|Any CPU
 		{91C38650-89DC-461A-8652-234EA94A0A68}.Release|Xbox 360.ActiveCfg = Release|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Debug|Windows Phone.ActiveCfg = Debug|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Release|Windows Phone.ActiveCfg = Release|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Release|x86.ActiveCfg = Release|Any CPU
+		{ACF20487-E1F2-446C-8F8F-E5F7622D803C}.Release|Xbox 360.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

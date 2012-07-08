@@ -58,6 +58,11 @@ namespace Aigilas
                     return;
                 }
             }
+            if(Input.IsActive(Commands.ToggleDevConsole,0))
+            {
+                DevConsole.Get().Toggle();
+            }
+
             Input.Update();
             ParticleEngine.Update();
             StateManager.Update();
@@ -79,6 +84,7 @@ namespace Aigilas
             StateManager.Draw();
             ParticleEngine.Draw();
             TextManager.Draw();
+            DevConsole.Get().Draw();
             base.Draw(gameTime);
             XnaManager.Renderer.End();
         }
