@@ -23,6 +23,11 @@ namespace SPX.Core
                 XnaManager.Renderer.DrawString(TextManager.GetFont(), _contents, _position, Color.Black, 0, Vector2.Zero, 1.15f, SpriteEffects.None,.9994f);
                 XnaManager.Renderer.DrawString(TextManager.GetFont(), _contents, _position, Color.White, 0, Vector2.Zero, 1.0f, SpriteEffects.None, .9995f);
             }
+
+            public string GetContent()
+            {
+                return _contents;
+            }
         }
 
         private static DevConsole __instance;
@@ -49,7 +54,18 @@ namespace SPX.Core
 
         public void Add(string message)
         {
-            _contents[++_index] = new ConsoleText(50,_index*50,message);
+            if (_index < _contents.Length)
+            {
+                _contents[_index++] = new ConsoleText(50, _index * 50 + 50, message);
+            }
+            else
+            {
+                for (int ii = 0; ii < _contents.Length-1; ii++)
+                {
+                    _contents[ii] = new ConsoleText(50,ii * 50 + 50,_contents[ii+1].GetContent());
+                }
+                _contents[_contents.Length - 1] = new ConsoleText(50, (_contents.Length-1) * 50 + 50, message);
+            }
         }
 
         public void Draw()
