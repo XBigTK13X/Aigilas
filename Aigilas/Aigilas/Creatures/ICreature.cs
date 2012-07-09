@@ -17,6 +17,7 @@ using SPX.Util;
 using Aigilas.Management;
 using Aigilas.Entities;
 using SPX.IO;
+using SPX.DevTools;
 
 namespace Aigilas.Creatures
 {

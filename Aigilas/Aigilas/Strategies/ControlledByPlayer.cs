@@ -7,6 +7,7 @@ using Aigilas.Creatures;
 using SPX.Core;
 using System.Collections.Generic;
 using SPX.IO;
+using SPX.DevTools;
 namespace Aigilas.Strategies
 {
     public class ControlledByPlayer : IStrategy
@@ -23,7 +24,6 @@ namespace Aigilas.Strategies
 
         public ControlledByPlayer(ICreature parent) : base(parent,Strategy.ControlledByPlayer)
         {
-            DevConsole.Get().Add("Player Index:" + parent.GetPlayerIndex());
             _targets.AddTargetTypes(ActorType.NONPLAYER);
         }
 
@@ -68,16 +68,8 @@ namespace Aigilas.Strategies
 
                         if (!_isCasting)
                         {
-                            if (_parent.GetPlayerIndex() == 0)
-                            {
-                                DevConsole.Get().Add("Checking whether or not confirm is locked.") ;
-                            }
                             if (!Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex(),false))
                             {
-                                if (_parent.GetPlayerIndex() == 0)
-                                {
-                                    DevConsole.Get().Add("It wasn't attempting to move");
-                                }
                                 _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
                             }
                             if (!_keyVelocity.IsZero())

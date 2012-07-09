@@ -8,6 +8,7 @@ using Aigilas.Items;
 using SPX.Core;
 using SPX.Entities;
 using Aigilas.IO;
+using SPX.DevTools;
 
 namespace Aigilas.Dungeons
 {
@@ -128,7 +129,6 @@ namespace Aigilas.Dungeons
             
             if (cache.Count() == 0)
             {
-                DevConsole.Get().Add("Player gen max: " + playerCount);
                 for (int ii = 0; ii < playerCount; ii++)
                 {
                     _contents.Add(CreatureFactory.Create(AigilasActorType.PLAYER, GetRandomNeighbor(ref neighbors)));

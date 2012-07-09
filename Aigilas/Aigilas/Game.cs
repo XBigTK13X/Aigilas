@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Media;
 using SPX.Particles;
 using SPX.IO;
 using Aigilas.IO;
+using System.Threading;
+using SPX.DevTools;
 
 namespace Aigilas
 {
@@ -20,6 +22,10 @@ namespace Aigilas
 
         public Game()
         {
+            Server.Get().Update();
+            Thread.Sleep(100);
+            Client.Get().Update();
+            Thread.Sleep(100);
             graphics = new GraphicsDeviceManager(this);
             XnaManager.SetupCamera(ref graphics,false);
             Content.RootDirectory = "Content";
@@ -51,6 +57,8 @@ namespace Aigilas
 
         protected override void Update(GameTime gameTime)
         {
+            Server.Get().Update();
+            Client.Get().Update();
             for (int ii = 0; ii < 4;ii++)
             {
                 var player = (PlayerIndex) ii;

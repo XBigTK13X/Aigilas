@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Lidgren.Network;
 using SPX.Core;
+using SPX.DevTools;
 
 namespace Aigilas.IO
 {
@@ -140,7 +141,6 @@ namespace Aigilas.IO
                                 Int32 seed = _message.ReadInt32();
                                 Int32 connectionCount = _message.ReadInt32();
                                 RNG.Seed(seed);
-                                DevConsole.Get().Add("Initial Index:" + connectionCount);
                                 _initialPlayerIndex = connectionCount;
                                 break;
                             case (byte)ClientMessageType.MOVEMENT:

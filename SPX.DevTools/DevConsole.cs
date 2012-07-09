@@ -5,8 +5,9 @@ using System.Text;
 using SPX.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SPX.Core;
 
-namespace SPX.Core
+namespace SPX.DevTools
 {
     public class DevConsole
     {
@@ -41,7 +42,7 @@ namespace SPX.Core
 
         private ConsoleText[] _contents = new ConsoleText[10];
         private int _index = 0;
-        private bool _isVisible = true;
+        private bool _isVisible;
         private Color _bgColor;
 
         private DevConsole()
