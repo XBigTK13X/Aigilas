@@ -140,6 +140,7 @@ namespace Aigilas.IO
                                 Int32 seed = _message.ReadInt32();
                                 Int32 connectionCount = _message.ReadInt32();
                                 RNG.Seed(seed);
+                                DevConsole.Get().Add("Initial Index:" + connectionCount);
                                 _initialPlayerIndex = connectionCount;
                                 break;
                             case (byte)ClientMessageType.MOVEMENT:
@@ -155,7 +156,7 @@ namespace Aigilas.IO
                                     _playerStatus[playerIndex].Add(command, isActive);
                                 }
                                 _playerStatus[playerIndex][command] = isActive;
-                                DevConsole.Get().Add(String.Format("(player,command,active) : ({0},{1},{2})", playerIndex,command, isActive));
+                                //DevConsole.Get().Add(String.Format("(player,command,active) : ({0},{1},{2})", playerIndex,command, isActive));
                                 break;
                             case (byte)ClientMessageType.RANDOM_SEED:
                                 _rngSeed = _message.ReadInt32();

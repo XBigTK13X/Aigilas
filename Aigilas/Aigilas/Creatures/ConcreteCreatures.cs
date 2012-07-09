@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using Aigilas.Entities;
 using Aigilas.Gods;
 using Aigilas.Creatures;
+using SPX.Core;
 
 namespace Aigilas.Creatures
 {
@@ -18,6 +19,7 @@ namespace Aigilas.Creatures
         private static readonly List<Color> __colors = new List<Color>() { Color.Red,Color.Green,Color.Blue,Color.White};
         public Player(int playerIndex): base(AigilasActorType.PLAYER, SpriteType.PLAYER_STAND, new WrathAcolyte())
         {
+            DevConsole.Get().Add("Constructed PI: "+playerIndex);
             _playerIndex = playerIndex;
             _graphic.SetColor(__colors[_playerIndex]);
             _strategy = StrategyFactory.Create(Strategy.ControlledByPlayer, this);

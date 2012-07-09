@@ -408,6 +408,7 @@ namespace Aigilas.Creatures
             {
                 if ((xVel != 0 || yVel != 0) && IsCooledDown())
                 {
+                    DevConsole.Get().Add("Moving");
                     target.Reset(xVel + GetLocation().PosX, yVel + GetLocation().PosY);
                     if (!IsBlocking() || !CoordVerifier.IsBlocked(target))
                     {

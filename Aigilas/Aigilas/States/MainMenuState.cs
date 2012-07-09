@@ -25,7 +25,7 @@ namespace Aigilas.States
 
         public MainMenuState()
         {
-            Input.SetContext(Contexts.Nonfree, 0);
+            Input.SetContext(Contexts.Nonfree, Client.Get().GetFirstPlayerIndex());
         }
         public void Update()
         {
