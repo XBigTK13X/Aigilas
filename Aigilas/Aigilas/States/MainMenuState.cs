@@ -43,7 +43,10 @@ namespace Aigilas.States
 
             if (Client.Get().IsGameStarting())
             {
-                Input.SetContext(Contexts.Free, Client.Get().GetFirstPlayerIndex());
+                for (int ii = 0; ii < Client.Get().GetPlayerCount(); ii++)
+                {
+                    Input.SetContext(Contexts.Free, ii);
+                }            
                 StateManager.LoadState(new GameplayState());
             }
             else

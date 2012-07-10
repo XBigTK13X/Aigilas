@@ -8,6 +8,7 @@ using SPX.Core;
 using Aigilas.Management;
 using System;
 using SPX.IO;
+using Aigilas.IO;
 
 namespace Aigilas.States
 {
@@ -24,7 +25,7 @@ namespace Aigilas.States
 
         public OptionsState()
         {
-            Input.SetContext(Contexts.Nonfree, 0);
+            Input.SetContext(Contexts.Nonfree, Client.Get().GetFirstPlayerIndex());
         }
         public void Update()
         {
@@ -37,12 +38,12 @@ namespace Aigilas.States
                 + (Input.IsActive(Commands.MoveUp, 0) ? -1 : 0);
             _selection %= 3;
 
-            if (Input.IsActive(Commands.Confirm, 0))
+            if (Input.IsActive(Commands.Confirm, Client.Get().GetFirstPlayerIndex()))
             {
                 switch (_selection)
                 {
                     case 0:
-                        Input.SetContext(Contexts.Free, 0);
+                        Input.SetContext(Contexts.Free, Client.Get().GetFirstPlayerIndex());
                         StateManager.LoadState(new GameplayState());
                         return;
                     case 1:

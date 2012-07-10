@@ -405,11 +405,15 @@ namespace Aigilas.Creatures
         private List<ICreature> creatures;
         public void MoveIfPossible(float xVel, float yVel)
         {
+            if (xVel != 0 && yVel != 0)
+            {
+                DevConsole.Get().Add("Player " + GetPlayerIndex() + ": Trying to move");
+            }
             if (_statuses.Allows(OAction.Movement))
             {
                 if ((xVel != 0 || yVel != 0) && IsCooledDown())
                 {
-                    DevConsole.Get().Add("Moving");
+                    DevConsole.Get().Add("Player "+GetPlayerIndex()+": Moving");
                     target.Reset(xVel + GetLocation().PosX, yVel + GetLocation().PosY);
                     if (!IsBlocking() || !CoordVerifier.IsBlocked(target))
                     {
