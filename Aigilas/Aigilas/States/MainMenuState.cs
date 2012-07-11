@@ -47,6 +47,7 @@ namespace Aigilas.States
                 {
                     Input.SetContext(Contexts.Free, ii);
                 }            
+
                 StateManager.LoadState(new GameplayState());
             }
             else

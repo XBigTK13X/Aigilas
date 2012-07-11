@@ -42,7 +42,7 @@ namespace SPX.DevTools
 
         private ConsoleText[] _contents = new ConsoleText[10];
         private int _index = 0;
-        private bool _isVisible;
+        private bool _isVisible = true;
         private Color _bgColor;
 
         private DevConsole()

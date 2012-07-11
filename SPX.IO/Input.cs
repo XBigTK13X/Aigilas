@@ -190,13 +190,12 @@ namespace SPX.IO
                     ii--;
                 }
             }
-
+            
             foreach (int command in _keyboardMapping.Keys)
             {
                 if (Client.Get().StateHasChanged(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex())))
                 {
                     Client.Get().SetState(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex()));
-                    Thread.Sleep(10);
                 }
             }
         }

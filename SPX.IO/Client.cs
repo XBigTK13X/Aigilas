@@ -25,6 +25,8 @@ namespace Aigilas.IO
             {
                 Init();
             }
+            //Ensure that the client will always check for updates from the server before being used
+            __instance.Update();
             return __instance;
         }
 
