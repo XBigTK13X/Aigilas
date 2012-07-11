@@ -12,10 +12,6 @@ namespace Aigilas.Entities
         {
             Initialize(location, SpriteType.UPSTAIRS, Aigilas.EntityType.UPSTAIRS,ZDepth.Stairs);
         }
-        public int GetTargetLocation()
-        {
-            return Location.Depths;
-        }
 
         ICreature player;
         public override void  Update()
@@ -26,7 +22,7 @@ namespace Aigilas.Entities
                 if (player.IsInteracting())
                 {
                     player.PerformInteraction();
-                    DungeonFactory.GetPreviousFloor(GetTargetLocation());
+                    DungeonFactory.GetPreviousFloor();
                 }    
             }
         }

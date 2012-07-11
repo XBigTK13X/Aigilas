@@ -87,6 +87,12 @@ namespace Aigilas.Creatures
             AigilasActorType.LUST,
             AigilasActorType.GLUTTONY
         };
+
+        public static int BossesRemaining()
+        {
+            return __remainingBosses.Count;
+        }
+
         public static IEntity CreateNextBoss(Point2 randomPoint)
         {
             int nextBoss = __remainingBosses[RNG.Rand.Next(0,__remainingBosses.Count)];

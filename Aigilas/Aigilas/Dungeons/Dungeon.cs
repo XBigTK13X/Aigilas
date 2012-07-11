@@ -35,34 +35,34 @@ namespace Aigilas.Dungeons
         private Point2 downSpawnLocation = new Point2(0, 0);
         private Point2 upSpawnLocation = new Point2(0, 0);
 
+        private static bool _firstDungeonMade;
+
         public Dungeon()
         {
-            Generate();
-        }
-
-        public Dungeon(int target)
-        {
-            Init();
-            ConvertRoomsToWalls();
-            PlaceAltars();
-            PlaceStairs();
-            PlaceFloor();            
-            TransferDungeonState();
-        }
-
-        private void Generate()
-        {
-            enemyCapModifier++;
-            enemyBaseModifier = enemyBase + (int)(enemyCapModifier / 5);
-            EntityManager.Clear();
-            Init();
-            PlaceRooms();
-            ConvertRoomsToWalls();
-            PlaceStairs();
-            PlaceCreatures(RNG.Rand.Next(enemyBase + enemyBaseModifier, enemyCap + enemyCapModifier));            
-            PlaceItems(RNG.Rand.Next(itemBase, itemCap));
-            PlaceFloor();
-            TransferDungeonState();
+            if (!_firstDungeonMade)
+            {
+                Init();
+                ConvertRoomsToWalls();
+                PlaceAltars();
+                PlaceStairs();
+                PlaceFloor();
+                TransferDungeonState();
+                _firstDungeonMade = true;
+            }
+            else
+            {
+                enemyCapModifier++;
+                enemyBaseModifier = enemyBase + (int)(enemyCapModifier / 5);
+                EntityManager.Clear();
+                Init();
+                PlaceRooms();
+                ConvertRoomsToWalls();
+                PlaceStairs();
+                PlaceCreatures(RNG.Rand.Next(enemyBase + enemyBaseModifier, enemyCap + enemyCapModifier));
+                PlaceItems(RNG.Rand.Next(itemBase, itemCap));
+                PlaceFloor();
+                TransferDungeonState();                
+            }
         }
 
         private void PlaceAltars()
@@ -187,7 +187,7 @@ namespace Aigilas.Dungeons
             //var random = new Point2(FindRandomFreeTile());
             //dungeon[random.GridX, random.GridY] = CreatureFactory.Create(AigilasActorType.ENVY, random);
             //return;
-            if (DungeonFactory.GetFloorCount() % bossLevelMod == 1)
+            if (DungeonFactory.GetFloorCount() % bossLevelMod == 1 && CreatureFactory.BossesRemaining() > 0)
             {
                 var randomPoint = new Point2(FindRandomFreeTile());
                 dungeon[randomPoint.GridX, randomPoint.GridY] = CreatureFactory.CreateNextBoss(randomPoint);

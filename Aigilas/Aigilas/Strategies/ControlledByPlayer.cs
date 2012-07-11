@@ -66,19 +66,10 @@ namespace Aigilas.Strategies
                             ((Input.IsActive(Commands.CycleRight, _parent.GetPlayerIndex())) ? 1 : 0);
                         _parent.CycleActiveSkill(skillCycleVelocity);
 
-                        if (_keyVelocity.X != 0 || _keyVelocity.Y != 0)
-                        {
-                            DevConsole.Get().Add("Player " + _parent.GetPlayerIndex() + ": The context is correct");
-                        }
-
                         if (!_isCasting)
                         {
                             if (!Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex(),false))
                             {
-                                if (_keyVelocity.X != 0 || _keyVelocity.Y != 0)
-                                {
-                                    DevConsole.Get().Add("Player " + _parent.GetPlayerIndex() + ": We are going to try and move");
-                                }
                                 _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
                             }
                             if (!_keyVelocity.IsZero())

@@ -5,6 +5,8 @@ using System.Text;
 using Aigilas.Entities;
 using SPX.Entities;
 using SPX.Particles;
+using SPX.DevTools;
+using Aigilas.Creatures;
 
 namespace Aigilas.Dungeons
 {
@@ -23,14 +25,14 @@ namespace Aigilas.Dungeons
         private static Dictionary<int, DungeonSet> _world = new Dictionary<int, DungeonSet>();
         private static List<Entity> _cache = new List<Entity>(); 
 
-        public static void GetNextFloor(int area)
+        public static void GetNextFloor()
         {
-            _world[area].GotoNext(area);
+            _world[Location.Depths].GotoNext();
         }
 
-        public static void GetPreviousFloor(int area)
+        public static bool GetPreviousFloor()
         {
-            _world[area].GotoPrevious(area);
+            return _world[Location.Depths].GotoPrevious();
         }
 
         public static void AddToCache(Entity content)
@@ -49,7 +51,12 @@ namespace Aigilas.Dungeons
         {
             _world = new Dictionary<int, DungeonSet>();
             _cache = new List<Entity>();
-            _world.Add(Location.Depths,new DungeonSet(Location.Start));
+            _world.Add(Location.Depths, new DungeonSet());
+            while (CreatureFactory.BossesRemaining() > 0)
+            {
+                GetNextFloor();
+            }
+            while (GetPreviousFloor()) { }
         }
 
         public static int GetFloorCount()
@@ -68,31 +75,32 @@ namespace Aigilas.Dungeons
         private int _currentFloor = 0;
         private readonly Dictionary<int,Dungeon> _floors = new Dictionary<int, Dungeon>();
 
+        /*
+         * This whole "area" thing is very messy and doesn't work in an intuitive way.
+         * In order to pre-load, we need to make sure we can easily get back to start.
+         * */
         public DungeonSet()
         {
-            _floors.Add(_currentFloor,new Dungeon());
+            _floors.Add(_currentFloor, new Dungeon());
         }
 
-        public DungeonSet(int target)
-        {
-            _floors.Add(_currentFloor, new Dungeon(target));
-        }
-
-        public void GotoNext(int area)
+        public void GotoNext()
         {
             _floors[_currentFloor].CacheContents();
             _currentFloor++;
             LoadOrCreateDungeon(false);
         }
 
-        public void GotoPrevious(int area)
+        public bool GotoPrevious()
         {
             if (_currentFloor > 0)
             {
                 _floors[_currentFloor].CacheContents();
                 _currentFloor--;
                 LoadOrCreateDungeon(true);
+                return true;
             }
+            return false;
         }
 
         private void LoadOrCreateDungeon(bool goingUp)
