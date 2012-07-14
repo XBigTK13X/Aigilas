@@ -8,7 +8,6 @@ using SPX.Core;
 using Aigilas.Management;
 using System;
 using SPX.IO;
-using SPX.IO;
 using SPX.DevTools;
 
 namespace Aigilas.States
@@ -58,6 +57,7 @@ namespace Aigilas.States
                     switch (_selection)
                     {
                         case 0:
+                            Console.WriteLine("Starting the game");
                             Client.Get().StartGame();
                             return;
                         case 1:

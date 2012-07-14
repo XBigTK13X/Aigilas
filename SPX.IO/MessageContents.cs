@@ -16,26 +16,61 @@ namespace SPX.IO
         public int RngSeed { get; set; }
         public int PlayerCount { get; set; }
 
-        public MessageContents() { }
+        private MessageContents() { }
 
-        public MessageContents(ClientMessageType messageType)
+        public static MessageContents Empty()
         {
-            MessageType = messageType;
+            return new MessageContents();
         }
 
-        public MessageContents(ClientMessageType messageType, int playerIndex, int command, bool isActive)
+        public static MessageContents CreatePlayerCount(int playerCount)
         {
-            MessageType = messageType;
-            PlayerIndex = playerIndex;
-            Command = command;
-            IsActive = isActive;
+            return new MessageContents()
+            {
+                MessageType = ClientMessageType.PLAYER_COUNT,
+                PlayerCount = playerCount
+            };
         }
-        public MessageContents(ClientMessageType messageType, int playerCount, int rngSeed)
+
+        public static MessageContents Create(ClientMessageType messageType)
         {
-            MessageType = messageType;
-            PlayerCount = playerCount;
-            RngSeed = rngSeed;
+            return new MessageContents()
+            {
+                MessageType = messageType
+            };
         }
+
+        public static MessageContents CreateInit(int playerCount, int rngSeed)
+        {
+            return new MessageContents()
+            {
+                MessageType = ClientMessageType.CONNECT,
+                PlayerCount = playerCount,
+                RngSeed = rngSeed
+            };
+        }
+
+        public static MessageContents CreateCheckState(int command, int playerIndex)
+        {
+            return new MessageContents()
+            {
+                MessageType = ClientMessageType.CHECK_STATE,
+                Command = command,
+                PlayerIndex = playerIndex
+            };
+        }
+
+        public static MessageContents CreateMovement(int command, int playerIndex, bool isActive)
+        {
+            return new MessageContents()
+            {
+                MessageType = ClientMessageType.MOVEMENT,
+                PlayerIndex = playerIndex,
+                Command = command,
+                IsActive = isActive
+            };
+        }       
+
         public void FromBytes(byte[] bytes)
         {
             MessageType = (ClientMessageType)bytes[0];
@@ -55,6 +90,6 @@ namespace SPX.IO
             result[4] = (byte)RngSeed;
             result[5] = (byte)PlayerCount;
             return result;
-        }
+        }        
     }
 }

@@ -34,7 +34,9 @@ namespace SPX.IO
         private NetIncomingMessage _message;
         private NetPeerConfiguration _config;
         private NetServer _server;
-        private Int32 _rngSeed = Environment.TickCount;
+
+        private Dictionary<int, Dictionary<int, bool>> _playerStatus = new Dictionary<int, Dictionary<int, bool>>();
+        private int _rngSeed = Environment.TickCount;
 
         private Server()
         {
@@ -53,7 +55,7 @@ namespace SPX.IO
             }
         }
 
-        private MessageContents _contents = new MessageContents();
+        private MessageContents _contents = MessageContents.Empty();
         public void Update()
         {
             while ((_message = _server.ReadMessage()) != null)
@@ -61,26 +63,52 @@ namespace SPX.IO
                 switch (_message.MessageType)
                 {
                     case NetIncomingMessageType.ConnectionApproval:
-                        Console.WriteLine("SERVER: New Connection {"+_server.ConnectionsCount+" total}");
-                        _message.SenderConnection.Approve();
+                        _message.SenderConnection.Approve();                        
                         Thread.Sleep(100);
-                        Announce(new MessageContents(ClientMessageType.CONNECT, _server.ConnectionsCount - 1, _rngSeed));
+                        InitPlayer(_server.ConnectionsCount - 1, 0);
+                        Reply(MessageContents.CreateInit(_server.ConnectionsCount - 1, _rngSeed),_message.SenderConnection);
                         break;
                     case NetIncomingMessageType.Data:
                         _contents.FromBytes(_message.ReadBytes(MessageContents.ByteCount));
-                        switch (_contents.MessageType)
+                         switch (_contents.MessageType)
                             {
+                                case ClientMessageType.CHECK_STATE:
+                                    InitPlayer(_contents.PlayerIndex, _contents.Command);
+                                    _contents.IsActive = _playerStatus[_contents.PlayerIndex][_contents.Command];
+                                    Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
+                                    Reply(_contents,_message.SenderConnection);                                    
+                                    break;
                                 case ClientMessageType.MOVEMENT:
+                                    InitPlayer(_contents.PlayerIndex,_contents.Command);
+                                    _playerStatus[_contents.PlayerIndex][_contents.Command] = _contents.IsActive;
+                                    Console.WriteLine("SERVER: Moves: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _contents.IsActive);
+                                    break;
                                 case ClientMessageType.START_GAME:
                                     Announce(_contents);
+                                    break;
+                                case ClientMessageType.PLAYER_COUNT:
+                                    Reply(MessageContents.CreatePlayerCount(_playerStatus.Keys.Count),_message.SenderConnection);
                                     break;
                                 default:
                                     break;
                             }
                             break;
                     default:
+                        Console.WriteLine("SERVER: An unhandled MessageType was received: " + _message.ReadString());
                         break;
                 }
+            }
+        }
+
+        private void InitPlayer(int playerIndex, int command)
+        {
+            if (!_playerStatus.ContainsKey(playerIndex))
+            {
+                _playerStatus.Add(playerIndex, new Dictionary<int, bool>());
+            }
+            if (!_playerStatus[playerIndex].ContainsKey(command))
+            {
+                _playerStatus[playerIndex].Add(command, false);
             }
         }
 
@@ -90,6 +118,14 @@ namespace SPX.IO
             _announcement = _server.CreateMessage();
             _announcement.Write(contents.ToBytes());
             _server.SendMessage(_announcement,_server.Connections,NetDeliveryMethod.ReliableOrdered,0);
+        }
+
+        private NetOutgoingMessage _reply;
+        private void Reply(MessageContents contents, NetConnection target)
+        {
+            _reply = _server.CreateMessage();
+            _reply.Write(contents.ToBytes());
+            _server.SendMessage(_reply, target, NetDeliveryMethod.ReliableOrdered, 0);
         }
     }
 }

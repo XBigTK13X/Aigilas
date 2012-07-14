@@ -8,7 +8,6 @@ using SPX.Core;
 using Aigilas.Management;
 using System;
 using SPX.IO;
-using SPX.IO;
 
 namespace Aigilas.States
 {

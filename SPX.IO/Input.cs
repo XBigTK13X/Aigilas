@@ -75,9 +75,6 @@ namespace SPX.IO
                     __lockOnPress.Add(command.Command, command.LockContext);
                 }
             }
-
-            //Call an update to detect controllers that are connected
-            Update();
         }
 
         private static bool DetectState(int command, int playerIndex)
@@ -192,10 +189,7 @@ namespace SPX.IO
             
             foreach (int command in _keyboardMapping.Keys)
             {
-                if (Client.Get().StateHasChanged(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex())))
-                {
-                    Client.Get().SetState(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex()));
-                }
+                Client.Get().SetState(command, Client.Get().GetFirstPlayerIndex(), DetectState(command, Client.Get().GetFirstPlayerIndex()));
             }
         }
         private class CommandLock
