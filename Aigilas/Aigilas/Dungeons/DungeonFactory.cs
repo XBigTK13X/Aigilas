@@ -48,15 +48,15 @@ namespace Aigilas.Dungeons
         }
 
         public static void Start()
-        {
+        {           
             _world = new Dictionary<int, DungeonSet>();
             _cache = new List<Entity>();
-            _world.Add(Location.Depths, new DungeonSet());
+            _world.Add(Location.Depths, new DungeonSet());            
             while (CreatureFactory.BossesRemaining() > 0)
             {
                 GetNextFloor();
             }
-            while (GetPreviousFloor()) { }
+            while (GetPreviousFloor()) { }            
         }
 
         public static int GetFloorCount()

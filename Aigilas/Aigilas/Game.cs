@@ -10,7 +10,7 @@ using SPX.Sprites;
 using Microsoft.Xna.Framework.Media;
 using SPX.Particles;
 using SPX.IO;
-using Aigilas.IO;
+using SPX.IO;
 using System.Threading;
 using SPX.DevTools;
 

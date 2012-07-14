@@ -7,7 +7,7 @@ using Aigilas.Gods;
 using Aigilas.Items;
 using SPX.Core;
 using SPX.Entities;
-using Aigilas.IO;
+using SPX.IO;
 using SPX.DevTools;
 
 namespace Aigilas.Dungeons

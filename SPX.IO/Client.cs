@@ -6,13 +6,12 @@ using Lidgren.Network;
 using SPX.Core;
 using SPX.DevTools;
 
-namespace Aigilas.IO
+namespace SPX.IO
 {
     public enum ClientMessageType
     {
         CONNECT,
         MOVEMENT,
-        RANDOM_SEED,
         START_GAME
     }
 
@@ -25,8 +24,6 @@ namespace Aigilas.IO
             {
                 Init();
             }
-            //Ensure that the client will always check for updates from the server before being used
-            __instance.Update();
             return __instance;
         }
 
@@ -63,7 +60,7 @@ namespace Aigilas.IO
         public void StartGame()
         {
             _outMessage = _client.CreateMessage();
-            _outMessage.Write((byte)ClientMessageType.START_GAME);
+            _outMessage.Write(new MessageContents(ClientMessageType.START_GAME).ToBytes());
             _client.SendMessage(_outMessage, NetDeliveryMethod.ReliableOrdered);
         }
 
@@ -123,52 +120,35 @@ namespace Aigilas.IO
         public void SetState(int command, int playerIndex, bool isActive)
         {
             _outMessage = _client.CreateMessage();
-            _outMessage.Write((byte)ClientMessageType.MOVEMENT);
-            _outMessage.Write((byte)command);
-            _outMessage.Write((byte)playerIndex);
-            _outMessage.Write(isActive);
+            _outMessage.Write(new MessageContents(ClientMessageType.MOVEMENT,playerIndex,command,isActive).ToBytes());
             _client.SendMessage(_outMessage, NetDeliveryMethod.ReliableOrdered);
         }
 
+        private MessageContents _contents = new MessageContents();
         public void Update()
         {
-            while ((_message = _client.ReadMessage()) != null)
+            while ((_message = _client.ReadMessage()) != null && _message.MessageType == NetIncomingMessageType.Data)
             {
-                switch (_message.MessageType)
+                _contents.FromBytes(_message.ReadBytes(MessageContents.ByteCount));
+                switch (_contents.MessageType)
                 {
-                    case NetIncomingMessageType.Data:
-                        switch (_message.ReadByte())
+                    case ClientMessageType.CONNECT:
+                        RNG.Seed(_contents.RngSeed);
+                        _initialPlayerIndex = _contents.PlayerCount;
+                        break;
+                    case ClientMessageType.MOVEMENT:
+                        if (!_playerStatus.ContainsKey(_contents.PlayerIndex))
                         {
-                            case (byte)ClientMessageType.CONNECT:
-                                Int32 seed = _message.ReadInt32();
-                                Int32 connectionCount = _message.ReadInt32();
-                                RNG.Seed(seed);
-                                _initialPlayerIndex = connectionCount;
-                                break;
-                            case (byte)ClientMessageType.MOVEMENT:
-                                int command = _message.ReadByte();
-                                int playerIndex = _message.ReadByte();
-                                bool isActive = _message.ReadBoolean();
-                                if (!_playerStatus.ContainsKey(playerIndex))
-                                {
-                                    _playerStatus.Add(playerIndex, new Dictionary<int, bool>());
-                                }
-                                if (!_playerStatus[playerIndex].ContainsKey(command))
-                                {
-                                    _playerStatus[playerIndex].Add(command, isActive);
-                                }
-                                _playerStatus[playerIndex][command] = isActive;
-                                //DevConsole.Get().Add(String.Format("(player,command,active) : ({0},{1},{2})", playerIndex,command, isActive));
-                                break;
-                            case (byte)ClientMessageType.RANDOM_SEED:
-                                _rngSeed = _message.ReadInt32();
-                                break;
-                            case (byte)ClientMessageType.START_GAME:
-                                _isGameStarting = true;
-                                break;
-                            default:
-                                break;
+                            _playerStatus.Add(_contents.PlayerIndex, new Dictionary<int, bool>());
                         }
+                        if (!_playerStatus[_contents.PlayerIndex].ContainsKey(_contents.Command))
+                        {
+                            _playerStatus[_contents.PlayerIndex].Add(_contents.Command, _contents.IsActive);
+                        }
+                        _playerStatus[_contents.PlayerIndex][_contents.Command] = _contents.IsActive;
+                        break;
+                    case ClientMessageType.START_GAME:
+                        _isGameStarting = true;
                         break;
                     default:
                         break;
