@@ -75,13 +75,13 @@ namespace SPX.IO
                                 case ClientMessageType.CHECK_STATE:
                                     InitPlayer(_contents.PlayerIndex, _contents.Command);
                                     _contents.IsActive = _playerStatus[_contents.PlayerIndex][_contents.Command];
-                                    Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
+                                    //Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
                                     Reply(_contents,_message.SenderConnection);                                    
                                     break;
                                 case ClientMessageType.MOVEMENT:
                                     InitPlayer(_contents.PlayerIndex,_contents.Command);
                                     _playerStatus[_contents.PlayerIndex][_contents.Command] = _contents.IsActive;
-                                    Console.WriteLine("SERVER: Moves: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _contents.IsActive);
+                                    //Console.WriteLine("SERVER: Moves: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _contents.IsActive);
                                     break;
                                 case ClientMessageType.START_GAME:
                                     Announce(_contents);
@@ -94,7 +94,7 @@ namespace SPX.IO
                             }
                             break;
                     default:
-                        Console.WriteLine("SERVER: An unhandled MessageType was received: " + _message.ReadString());
+                        //Console.WriteLine("SERVER: An unhandled MessageType was received: " + _message.ReadString());
                         break;
                 }
             }

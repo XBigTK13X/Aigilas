@@ -101,7 +101,7 @@ namespace SPX.IO
         //Client<->Server communication
         public bool IsActive(int command, int playerIndex)
         {
-            Console.WriteLine("CLIENT: Check PI({0}) CMD({1})", playerIndex, command);
+            //Console.WriteLine("CLIENT: Check PI({0}) CMD({1})", playerIndex, command);
             SendMessage(MessageContents.CreateCheckState(command, playerIndex));
             AwaitReply(ClientMessageType.CHECK_STATE);
             return _contents.IsActive;
@@ -112,7 +112,7 @@ namespace SPX.IO
             InitPlayer(playerIndex, command);
             if (_playerStatus[playerIndex][command] != isActive)
             {
-                Console.WriteLine("CLIENT: Moves: CMD({0}) PI({1}) AC({2})", command, playerIndex, isActive);
+                //Console.WriteLine("CLIENT: Moves: CMD({0}) PI({1}) AC({2})", command, playerIndex, isActive);
                 _playerStatus[playerIndex][command] = isActive;
                 SendMessage(MessageContents.CreateMovement(command, playerIndex, isActive));
             }
@@ -140,25 +140,36 @@ namespace SPX.IO
         //Be careful using this method.
         //If the server doesn't reply at some point with the messageType you expect
         //Then the client will hang in an infinite loop.
+        private int DelayMax = 1000;
+        private int _delay;
         private void AwaitReply(ClientMessageType messageType)
         {
-            Server.Get().Update();
-            _message = _client.ReadMessage();
-            if (_message != null)
+            //Console.WriteLine("Waiting for reply");
+            _delay = DelayMax;
+            while (true)
             {
-                _contents.FromBytes(_message.ReadBytes(MessageContents.ByteCount));
-                if (_contents.MessageType == messageType)
+                _delay--;
+                //Console.WriteLine("Listen for message");
+                _delay = DelayMax;
+                Server.Get().Update();
+                _message = _client.ReadMessage();
+                if (_message != null)
                 {
-                    return;
-                }
-                else
-                {
-                    if (_message.MessageType == NetIncomingMessageType.Data)
+                    _contents.FromBytes(_message.ReadBytes(MessageContents.ByteCount));
+                    if (_contents.MessageType == messageType)
                     {
-                        HandleResponse(_contents);
+                        //Console.WriteLine("Message received");
+                        return;
                     }
-                }
-            }            
+                    else
+                    {
+                        if (_message.MessageType == NetIncomingMessageType.Data)
+                        {
+                            HandleResponse(_contents);
+                        }
+                    }
+                }           
+            }
         }
 
         private void HandleResponse(MessageContents contents)
