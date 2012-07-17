@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lidgren.Network, Version=2012.1.7.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lidgren.Network, Version=2011.3.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SPX.Core\lib\Lidgren.Network.dll</HintPath>
     </Reference>

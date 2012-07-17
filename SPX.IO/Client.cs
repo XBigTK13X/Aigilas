@@ -5,6 +5,7 @@ using System.Text;
 using Lidgren.Network;
 using SPX.Core;
 using SPX.DevTools;
+using System.Threading;
 
 namespace SPX.IO
 {
@@ -36,24 +37,19 @@ namespace SPX.IO
 
     public class Client
     {
+        public const bool DEBUG = false;
         private static Client __instance;
         public static Client Get()
         {
             if (__instance == null)
             {
-                Init();
+                __instance = new Client();
+                while (!__instance.IsConnected()) 
+                {
+                    __instance.Update();
+                }
             }
             return __instance;
-        }
-
-        public static void Init()
-        {
-            __instance = new Client();
-        }
-
-        public static bool IsInUse()
-        {
-            return true;
         }
 
         private NetClient _client;
@@ -62,6 +58,7 @@ namespace SPX.IO
         private NetOutgoingMessage _outMessage;        
         private Int32 _initialPlayerIndex;
         private bool _isGameStarting;
+        private bool _isConnected;
 
         private Client()
         {
@@ -77,6 +74,11 @@ namespace SPX.IO
         public bool IsGameStarting()
         {
             return _isGameStarting;
+        }
+
+        public bool IsConnected()
+        {
+            return _isConnected;
         }
 
         private Dictionary<int, Dictionary<int, bool>> _playerStatus = new Dictionary<int, Dictionary<int, bool>>();
@@ -101,7 +103,7 @@ namespace SPX.IO
         //Client<->Server communication
         public bool IsActive(int command, int playerIndex)
         {
-            //Console.WriteLine("CLIENT: Check PI({0}) CMD({1})", playerIndex, command);
+            if (DEBUG) Console.WriteLine("CLIENT: Check PI({0}) CMD({1})", playerIndex, command);
             SendMessage(MessageContents.CreateCheckState(command, playerIndex));
             AwaitReply(ClientMessageType.CHECK_STATE);
             return _contents.IsActive;
@@ -140,35 +142,37 @@ namespace SPX.IO
         //Be careful using this method.
         //If the server doesn't reply at some point with the messageType you expect
         //Then the client will hang in an infinite loop.
-        private int DelayMax = 1000;
-        private int _delay;
+
         private void AwaitReply(ClientMessageType messageType)
         {
-            //Console.WriteLine("Waiting for reply");
-            _delay = DelayMax;
+            if (DEBUG) Console.WriteLine("CLIENT: Waiting for " + messageType);          
             while (true)
             {
-                _delay--;
-                //Console.WriteLine("Listen for message");
-                _delay = DelayMax;
-                Server.Get().Update();
+                if (DEBUG) Console.WriteLine("CLIENT: Waiting");
+                _client.MessageReceivedEvent.WaitOne();
                 _message = _client.ReadMessage();
                 if (_message != null)
                 {
-                    _contents.FromBytes(_message.ReadBytes(MessageContents.ByteCount));
-                    if (_contents.MessageType == messageType)
+                   
+                    if (_message.MessageType == NetIncomingMessageType.Data)
                     {
-                        //Console.WriteLine("Message received");
-                        return;
+                        _contents.FromBytes(_message.ReadBytes(MessageContents.ByteCount));
+                        if (_contents.MessageType == messageType)
+                        {
+                            if (DEBUG) Console.WriteLine("CLIENT: Right message received");
+                            return;
+                        }
+                        else
+                        {
+                            if (DEBUG) Console.WriteLine("CLIENT: Wrong message received");
+                            HandleResponse(_contents);
+                        }                            
                     }
                     else
                     {
-                        if (_message.MessageType == NetIncomingMessageType.Data)
-                        {
-                            HandleResponse(_contents);
-                        }
+                        if (DEBUG) Console.WriteLine("CLIENT: Unexpected : " + _message.MessageType + ": " + _message.ReadString());
                     }
-                }           
+                }
             }
         }
 
@@ -177,8 +181,10 @@ namespace SPX.IO
             switch (contents.MessageType)
             {
                 case ClientMessageType.CONNECT:
+                    if (DEBUG) Console.WriteLine("CLIENT: Handshake successful. Starting player id: " + contents.PlayerIndex);
                     RNG.Seed(contents.RngSeed);
                     _initialPlayerIndex = contents.PlayerCount;
+                    _isConnected = true;
                     break;
                 case ClientMessageType.START_GAME:
                     _isGameStarting = true;

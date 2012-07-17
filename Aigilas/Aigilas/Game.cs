@@ -12,6 +12,7 @@ using SPX.Particles;
 using SPX.IO;
 using System.Threading;
 using SPX.DevTools;
+using System;
 
 namespace Aigilas
 {
@@ -21,10 +22,8 @@ namespace Aigilas
 
         public Game()
         {
-            Server.Get().Update();
-            Thread.Sleep(100);
-            Client.Get().Update();
-            Thread.Sleep(100);
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 10.0f);
+            Client.Get();
             graphics = new GraphicsDeviceManager(this);
             XnaManager.SetupCamera(ref graphics,false);
             Content.RootDirectory = "Content";
@@ -56,7 +55,6 @@ namespace Aigilas
 
         protected override void Update(GameTime gameTime)
         {
-            Server.Get().Update();
             Client.Get().Update();
             for (int ii = 0; ii < 4;ii++)
             {
@@ -71,7 +69,6 @@ namespace Aigilas
             {
                 DevConsole.Get().Toggle();
             }
-
             Input.Update();
             ParticleEngine.Update();
             StateManager.Update();
