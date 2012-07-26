@@ -10,7 +10,7 @@ namespace Aigilas.Creatures
     public class Stats
     {
         public static readonly float DefaultMoveSpeed = GameManager.SpriteHeight;
-        public const float DefaultCoolDown = 10;
+        public const float DefaultCoolDown = 15;
         public const float DefaultRegenRate = 1;
 
         private readonly Dictionary<string, float> _stats = new Dictionary<string, float>();

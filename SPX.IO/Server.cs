@@ -54,11 +54,15 @@ namespace SPX.IO
             }
         }
 
+        private int throttle = 0;
+        private const int throttleMax = 100;
         private MessageContents _contents = MessageContents.Empty();
+        private bool _firstMessageReceived = false;
         public virtual void Update()
         {
             while((_message = _server.ReadMessage()) != null)
             {
+                _firstMessageReceived = true;
                 switch (_message.MessageType)
                 {
                     case NetIncomingMessageType.ConnectionApproval:
@@ -68,15 +72,16 @@ namespace SPX.IO
                         InitPlayer(_server.ConnectionsCount - 1, 0);
                         Reply(MessageContents.CreateInit(_server.ConnectionsCount - 1, _rngSeed), _message.SenderConnection);
                         if (DEBUG) Console.WriteLine("SERVER: Accepted new connection");
+                        Thread.Sleep(100);
                         break;
                     case NetIncomingMessageType.Data:
-                        _contents.FromBytes(_message.ReadBytes(MessageContents.ByteCount));
+                        _contents.Deserialize(ref _message);
                         switch (_contents.MessageType)
                         {
                             case ClientMessageType.CHECK_STATE:
                                 InitPlayer(_contents.PlayerIndex, _contents.Command);
                                 _contents.IsActive = _playerStatus[_contents.PlayerIndex][_contents.Command];
-                                if(DEBUG)Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
+                                if (DEBUG) Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
                                 Reply(_contents, _message.SenderConnection);
                                 break;
                             case ClientMessageType.MOVEMENT:
@@ -85,6 +90,7 @@ namespace SPX.IO
                                 if (DEBUG) Console.WriteLine("SERVER: Moves: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _contents.IsActive);
                                 break;
                             case ClientMessageType.START_GAME:
+                                Console.WriteLine("SERVER: Announcing game commencement.");
                                 Announce(_contents);
                                 break;
                             case ClientMessageType.PLAYER_COUNT:
@@ -101,6 +107,13 @@ namespace SPX.IO
                         break;
                 }
             }
+            if (throttle <= 0 && _firstMessageReceived && _playerStatus.Keys.Count > 0 && _playerStatus[0].Keys.Count > 0)
+            {
+                if(DEBUG)Console.WriteLine("SERVER: Announcing player input status.");
+                throttle = throttleMax;       
+                Announce(MessageContents.CreatePlayerState(_playerStatus));
+            }
+            throttle--;
         }
 
         private void InitPlayer(int playerIndex, int command)
@@ -118,16 +131,16 @@ namespace SPX.IO
         private NetOutgoingMessage _announcement;
         private void Announce(MessageContents contents)
         {
-            _announcement = _server.CreateMessage();
-            _announcement.Write(contents.ToBytes());
+            _announcement = _server.CreateMessage(50);
+            contents.Serialize(ref _announcement);
             _server.SendMessage(_announcement,_server.Connections,NetDeliveryMethod.ReliableOrdered,0);
         }
 
         private NetOutgoingMessage _reply;
         private void Reply(MessageContents contents, NetConnection target)
         {
-            _reply = _server.CreateMessage();
-            _reply.Write(contents.ToBytes());
+            _reply = _server.CreateMessage(50);
+            contents.Serialize(ref _reply);
             _server.SendMessage(_reply, target, NetDeliveryMethod.ReliableOrdered, 0);
         }
 
