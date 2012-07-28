@@ -40,7 +40,7 @@ namespace SPX.IO
 
     public class Client
     {
-        public const bool DEBUG = false;
+        public const bool DEBUG = true;
         private static Client __instance;
         public static Client Get()
         {
@@ -63,9 +63,19 @@ namespace SPX.IO
         private bool _isGameStarting;
         private bool _isConnected;
 
+        private Dictionary<int, Dictionary<int, bool>> _playerStatus = new Dictionary<int, Dictionary<int, bool>>();
+
         private Client()
         {
-            _config = new NetPeerConfiguration(Server.ConnectionName);      
+            _config = new NetPeerConfiguration(Server.ConnectionName);
+            for (int ii = 0; ii < MessageContents.PlayerMax; ii++)
+            {
+                _playerStatus.Add(ii, new Dictionary<int, bool>());
+                for (int jj = 0; jj < MessageContents.CommandMax; jj++)
+                {
+                    _playerStatus[ii].Add(jj, false);
+                }
+            }
             _client = new NetClient(_config);
             _client.Start();
             var init = _client.CreateMessage();
@@ -84,7 +94,6 @@ namespace SPX.IO
             return _isConnected;
         }
 
-        private Dictionary<int, Dictionary<int, bool>> _playerStatus = new Dictionary<int, Dictionary<int, bool>>();
         private void InitPlayer(int playerIndex, int command)
         {
             if (!_playerStatus.ContainsKey(playerIndex))
@@ -124,11 +133,16 @@ namespace SPX.IO
             }
         }
 
+        int _playerCount = 0;
         public int GetPlayerCount()
         {
-            SendMessage(MessageContents.CreatePlayerCount(0));
-            AwaitReply(ClientMessageType.PLAYER_COUNT);
-            return _contents.PlayerCount;
+            if (_playerCount == 0)
+            {
+                SendMessage(MessageContents.CreatePlayerCount(0));
+                AwaitReply(ClientMessageType.PLAYER_COUNT);
+                _playerCount = _contents.PlayerCount;
+            }
+            return _playerCount;
         }
 
         public void StartGame()
@@ -138,8 +152,8 @@ namespace SPX.IO
 
         private void SendMessage(MessageContents contents)
         {
-            _outMessage = _client.CreateMessage(50);
-            contents.Serialize(ref _outMessage);
+            _outMessage = _client.CreateMessage(MessageContents.ByteCount);
+            contents.Serialize(_outMessage);
             _client.SendMessage(_outMessage, NetDeliveryMethod.ReliableOrdered);
         }
 
@@ -160,7 +174,7 @@ namespace SPX.IO
                    
                     if (_message.MessageType == NetIncomingMessageType.Data)
                     {
-                        _contents.Deserialize(ref _message);
+                        _contents.Deserialize(_message);
                         if (_contents.MessageType == messageType)
                         {
                             if (DEBUG) Console.WriteLine("CLIENT: Right message received");
@@ -176,7 +190,8 @@ namespace SPX.IO
                     {
                         if (DEBUG) Console.WriteLine("CLIENT: Unexpected : " + _message.MessageType + ": " + _message.ReadString());
                     }
-                }
+                    _client.Recycle(_message);
+                }                
             }
         }
 
@@ -196,7 +211,7 @@ namespace SPX.IO
                     break;
                 case ClientMessageType.SYNC_STATE:
                     if (DEBUG) Console.WriteLine("CLIENT: Input state received");
-                    _playerStatus = contents.ReadPlayerState();
+                    contents.ReadPlayerState(ref _playerStatus);
                     break;
                 default:
                     break;
@@ -208,8 +223,9 @@ namespace SPX.IO
         {
             while ((_message = _client.ReadMessage()) != null && _message.MessageType == NetIncomingMessageType.Data)
             {
-                _contents.Deserialize(ref _message);
+                _contents.Deserialize(_message);
                 HandleResponse(_contents);
+                _client.Recycle(_message);
             }
         }        
     }

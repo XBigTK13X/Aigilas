@@ -11,13 +11,23 @@ namespace SPX.IO
     {
         private const bool DEBUG = false;
 
+        public const int CommandMax = 16;
+        public const int PlayerMax = 4;
+        public const int ByteCount = 80;
+
+        private const byte TrueByte = (byte)1;
+        private const byte FalseByte = (byte)0;
+
         public byte MessageType;
         public byte PlayerIndex;
         public byte Command;
         public bool IsActive;
         public Int32 RngSeed;
         public byte PlayerCount;
-        public string PlayerState;
+        public byte[] PlayerOneState = new byte[16];
+        public byte[] PlayerTwoState = new byte[16];
+        public byte[] PlayerThreeState = new byte[16];
+        public byte[] PlayerFourState = new byte[16];
 
         private MessageContents() { }
 
@@ -82,7 +92,7 @@ namespace SPX.IO
             return result;
         }
 
-        internal void Deserialize(ref NetIncomingMessage _message)
+        internal void Deserialize(NetIncomingMessage _message)
         {
             MessageType = _message.ReadByte();
             if (DEBUG) Console.WriteLine("Serial, mType: " + MessageType);
@@ -96,11 +106,13 @@ namespace SPX.IO
             if (DEBUG) Console.WriteLine("Serial, rngSeed: " + RngSeed);
             PlayerCount = _message.ReadByte();
             if (DEBUG) Console.WriteLine("Serial, pCount: " + PlayerCount);
-            PlayerState = _message.ReadString();
-            if (DEBUG) Console.WriteLine("Serial, pState: " + PlayerState);
+            PlayerOneState = _message.ReadBytes(16);
+            PlayerTwoState = _message.ReadBytes(16);
+            PlayerThreeState = _message.ReadBytes(16);
+            PlayerFourState = _message.ReadBytes(16);
         }
 
-        internal void Serialize(ref NetOutgoingMessage _announcement)
+        internal void Serialize(NetOutgoingMessage _announcement)
         {
             _announcement.Write(MessageType);
             if (DEBUG) Console.WriteLine("Serial, mType: " + MessageType);
@@ -114,47 +126,60 @@ namespace SPX.IO
             if (DEBUG) Console.WriteLine("Serial, rngSeed: " + RngSeed);
             _announcement.Write(PlayerCount);
             if (DEBUG) Console.WriteLine("Serial, pCount: " + PlayerCount);
-            _announcement.Write(PlayerState);
-            if (DEBUG) Console.WriteLine("Serial, pState: " + PlayerState);
+            _announcement.Write(PlayerOneState);
+            _announcement.Write(PlayerTwoState);
+            _announcement.Write(PlayerThreeState);
+            _announcement.Write(PlayerFourState);           
         }
 
         public void WritePlayerState(Dictionary<int,Dictionary<int,bool>> state)
         {
-            PlayerState = String.Empty;
-            for (int jj = 0; jj < state.Keys.Count; jj++)
+            for (int jj = 0; jj < PlayerMax; jj++)
             {
-                for (int ii = 0; ii < state[jj].Keys.Count; ii++)
+                for (int ii = 0; ii < CommandMax; ii++)
                 {
-                    PlayerState += ii + "," + ((state[jj][state[jj].Keys.ElementAt(ii)])?"T":"F");
-                    if (ii < state[jj].Keys.Count-1)
+                    switch (jj)
                     {
-                        PlayerState += ":";
-                    }
-                }
-                PlayerState += ";";
-            }
-        }
-
-        public Dictionary<int, Dictionary<int, bool>> ReadPlayerState()
-        {
-            if (String.IsNullOrEmpty(PlayerState))
-            {
-                return null;
-            }
-            Dictionary<int, Dictionary<int, bool>> _state = new Dictionary<int, Dictionary<int, bool>>();
-            int index = -1;
-            foreach(var map in PlayerState.Split(';'))
-            {
-                index++;
-                _state.Add(index, new Dictionary<int, bool>());
-                foreach (var entry in map.Split(':'))
-                {
-                    if(!String.IsNullOrEmpty(entry)){
-                        _state[index].Add(Byte.Parse(entry.Split(',')[0]),(entry.Split(',')[1]=="F")?false:true);
+                        case 0:
+                            PlayerOneState[ii] = (state[jj][ii])? TrueByte: FalseByte;
+                            break;
+                        case 1:
+                            PlayerTwoState[ii] = (state[jj][ii]) ? TrueByte : FalseByte;
+                            break;
+                        case 2:
+                            PlayerThreeState[ii] = (state[jj][ii]) ? TrueByte : FalseByte;
+                            break;
+                        case 3:
+                            PlayerFourState[ii] = (state[jj][ii]) ? TrueByte : FalseByte;
+                            break;
                     }                    
                 }
             }
-            return _state;
+        }
+
+        public void ReadPlayerState(ref Dictionary<int,Dictionary<int,bool>> result)
+        {
+            for (int jj = 0; jj < PlayerMax; jj++)
+            {
+                for (int ii = 0; ii < CommandMax; ii++)
+                {
+                    switch (jj)
+                    {
+                        case 0:
+                            result[jj][ii] = (PlayerOneState[ii] == TrueByte)? true: false;
+                            break;
+                        case 1:
+                            result[jj][ii] = (PlayerTwoState[ii] == TrueByte) ? true : false;
+                            break;
+                        case 2:
+                            result[jj][ii] = (PlayerThreeState[ii] == TrueByte) ? true : false;
+                            break;
+                        case 3:
+                            result[jj][ii] = (PlayerFourState[ii] == TrueByte) ? true : false;
+                            break;
+                    }
+                }
+            }          
         }        
     }
 }
