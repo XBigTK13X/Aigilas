@@ -17,6 +17,7 @@ namespace Aigilas.States
         }
         public void Update()
         {
+            Client.Get().NextTurn();
             EntityManager.Update();
         }
         public void LoadContent()

@@ -40,7 +40,7 @@ namespace SPX.IO
 
     public class Client
     {
-        public const bool DEBUG = true;
+        public const bool DEBUG = false;
         private static Client __instance;
         public static Client Get()
         {
@@ -92,6 +92,12 @@ namespace SPX.IO
         public bool IsConnected()
         {
             return _isConnected;
+        }
+
+        public void NextTurn()
+        {
+            _client.MessageReceivedEvent.WaitOne();
+            AwaitReply(ClientMessageType.SYNC_STATE);
         }
 
         private void InitPlayer(int playerIndex, int command)

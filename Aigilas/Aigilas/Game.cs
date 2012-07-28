@@ -22,7 +22,7 @@ namespace Aigilas
 
         public Game()
         {
-            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 30.0f);
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 24.0f);
             Client.Get();
             graphics = new GraphicsDeviceManager(this);
             XnaManager.SetupCamera(ref graphics,false);

@@ -12,11 +12,12 @@ namespace SPX.IO
 
     public class Server
     {
-        public const bool DEBUG = true;
+        public const bool DEBUG = false;
         public const int Port = 53216;
         public const string ConnectionName = "Aigilas";
         private static Server __instance;
         private static bool __otherServerExists;
+        private const int Throttle = 10;
 
         public static Server Get()
         {
@@ -121,7 +122,7 @@ namespace SPX.IO
             {
                 if(DEBUG)Console.WriteLine("SERVER: Announcing player input status.");
                 Announce(MessageContents.CreatePlayerState(_playerStatus));
-                Thread.Sleep(300);
+                Thread.Sleep(Throttle);
             }
         }
 
