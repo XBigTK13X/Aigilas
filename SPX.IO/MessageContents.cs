@@ -41,7 +41,7 @@ namespace SPX.IO
         {
             return new MessageContents()
             {
-                MessageType = ClientMessageType.PLAYER_COUNT,
+                MessageType = MessageTypes.PLAYER_COUNT,
                 PlayerCount = (byte)playerCount
             };
         }
@@ -58,7 +58,7 @@ namespace SPX.IO
         {
             return new MessageContents()
             {
-                MessageType = ClientMessageType.CONNECT,
+                MessageType = MessageTypes.CONNECT,
                 PlayerCount = (byte)playerCount,
                 RngSeed = rngSeed
             };
@@ -68,7 +68,7 @@ namespace SPX.IO
         {
             return new MessageContents()
             {
-                MessageType = ClientMessageType.CHECK_STATE,
+                MessageType = MessageTypes.CHECK_STATE,
                 Command = (byte)command,
                 PlayerIndex = (byte)playerIndex
             };
@@ -78,7 +78,7 @@ namespace SPX.IO
         {
             return new MessageContents()
             {
-                MessageType = ClientMessageType.MOVEMENT,
+                MessageType = MessageTypes.MOVEMENT,
                 PlayerIndex = (byte)playerIndex,
                 Command = (byte)command,
                 IsActive = isActive
@@ -88,7 +88,7 @@ namespace SPX.IO
         public static MessageContents CreatePlayerState(Dictionary<int, Dictionary<int, bool>> playerStatus,Int32 turnCount)
         {
             var result = new MessageContents();
-            result.MessageType = ClientMessageType.SYNC_STATE;
+            result.MessageType = MessageTypes.SYNC_STATE;
             result.WritePlayerState(playerStatus);
             result.TurnCount = turnCount;
             return result;
@@ -184,6 +184,14 @@ namespace SPX.IO
                     }
                 }
             }          
+        }
+
+        public static MessageContents CreateReadyForNextTurn()
+        {
+            return new MessageContents()
+            {
+                MessageType = MessageTypes.READY_FOR_NEXT_TURN
+            };
         }
 
         public void Clear()

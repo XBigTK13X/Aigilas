@@ -11,33 +11,6 @@ using System.IO;
 
 namespace SPX.IO
 {
-    public class ClientMessageType
-    {
-        public const byte CONNECT = 1;
-        public const byte MOVEMENT = 2;
-        public const byte START_GAME = 3;
-        public const byte CHECK_STATE = 4;
-        public const byte PLAYER_COUNT = 5;
-        public const byte SYNC_STATE = 6;
-    }
-
-    public static class CmtString
-    {
-
-        public static string Get(byte messageType)
-        {
-            switch(messageType)
-            {
-                case ClientMessageType.CONNECT: return "CONNECT";
-                case ClientMessageType.MOVEMENT: return "MOVEMENT";
-                case ClientMessageType.START_GAME: return "START_GAME";
-                case ClientMessageType.CHECK_STATE: return "CHECK_STATE";
-                case ClientMessageType.PLAYER_COUNT: return "PLAYER_COUNT";
-            }
-            return "INVALID MESSAGE TYPE";
-        }
-    }
-
     public class Client
     {
         public const bool DEBUG = false;
@@ -79,7 +52,7 @@ namespace SPX.IO
             _client = new NetClient(_config);
             _client.Start();
             var init = _client.CreateMessage();
-            init.Write(ClientMessageType.CONNECT);      
+            init.Write(MessageTypes.CONNECT);      
             _client.Connect("localhost", Server.Port, init);
         }
 
@@ -94,16 +67,27 @@ namespace SPX.IO
             return _isConnected;
         }
 
+
+        private int _heartBeat = 15;
+        public void HeartBeat()
+        {
+            _heartBeat--;
+            if (_heartBeat <= 0)
+            {
+                PrepareForNextTurn();
+            }
+        }
+
         public bool NextTurn()
         {
-            bool result = false;
             _contents.Clear();
             Update();
-            if (_contents.MessageType == ClientMessageType.SYNC_STATE)
+            if (_contents.MessageType == MessageTypes.SYNC_STATE)
             {
                 DevConsole.Get().Add("CLIENT: Synced : " + _contents.TurnCount);
+                _heartBeat = 15;
             }
-            return _contents.MessageType == ClientMessageType.SYNC_STATE;
+            return _contents.MessageType == MessageTypes.SYNC_STATE;
         }
 
         private void InitPlayer(int playerIndex, int command)
@@ -151,7 +135,7 @@ namespace SPX.IO
             if (_playerCount == 0)
             {
                 SendMessage(MessageContents.CreatePlayerCount(0));
-                AwaitReply(ClientMessageType.PLAYER_COUNT);
+                AwaitReply(MessageTypes.PLAYER_COUNT);
                 _playerCount = _contents.PlayerCount;
             }
             return _playerCount;
@@ -159,7 +143,7 @@ namespace SPX.IO
 
         public void StartGame()
         {
-            SendMessage(MessageContents.Create(ClientMessageType.START_GAME));
+            SendMessage(MessageContents.Create(MessageTypes.START_GAME));
         }
 
         private void SendMessage(MessageContents contents)
@@ -211,17 +195,17 @@ namespace SPX.IO
         {
             switch (contents.MessageType)
             {
-                case ClientMessageType.CONNECT:
+                case MessageTypes.CONNECT:
                     if (DEBUG) Console.WriteLine("CLIENT: Handshake successful. Starting player id: " + contents.PlayerIndex);
                     RNG.Seed(contents.RngSeed);
                     _initialPlayerIndex = contents.PlayerCount;
                     _isConnected = true;
                     break;
-                case ClientMessageType.START_GAME:
+                case MessageTypes.START_GAME:
                     Console.WriteLine("CLIENT: Start game reply has been received");
                     _isGameStarting = true;
                     break;
-                case ClientMessageType.SYNC_STATE:
+                case MessageTypes.SYNC_STATE:
                     if (DEBUG) Console.WriteLine("CLIENT: Input state received");
                     contents.ReadPlayerState(ref _playerStatus);
                     break;
@@ -239,6 +223,11 @@ namespace SPX.IO
                 HandleResponse(_contents);
                 _client.Recycle(_message);
             }
-        }        
+        }
+
+        public void PrepareForNextTurn()
+        {
+            SendMessage(MessageContents.CreateReadyForNextTurn());
+        }
     }
 }
