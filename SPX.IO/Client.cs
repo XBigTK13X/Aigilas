@@ -13,12 +13,12 @@ namespace SPX.IO
 {
     public class ClientMessageType
     {
-        public const byte CONNECT = 0;
-        public const byte MOVEMENT = 1;
-        public const byte START_GAME = 2;
-        public const byte CHECK_STATE = 3;
-        public const byte PLAYER_COUNT = 4;
-        public const byte SYNC_STATE = 5;
+        public const byte CONNECT = 1;
+        public const byte MOVEMENT = 2;
+        public const byte START_GAME = 3;
+        public const byte CHECK_STATE = 4;
+        public const byte PLAYER_COUNT = 5;
+        public const byte SYNC_STATE = 6;
     }
 
     public static class CmtString
@@ -94,10 +94,16 @@ namespace SPX.IO
             return _isConnected;
         }
 
-        public void NextTurn()
+        public bool NextTurn()
         {
-            _client.MessageReceivedEvent.WaitOne();
-            AwaitReply(ClientMessageType.SYNC_STATE);
+            bool result = false;
+            _contents.Clear();
+            Update();
+            if (_contents.MessageType == ClientMessageType.SYNC_STATE)
+            {
+                DevConsole.Get().Add("CLIENT: Synced : " + _contents.TurnCount);
+            }
+            return _contents.MessageType == ClientMessageType.SYNC_STATE;
         }
 
         private void InitPlayer(int playerIndex, int command)
@@ -188,7 +194,7 @@ namespace SPX.IO
                         }
                         else
                         {
-                            if (DEBUG) Console.WriteLine("CLIENT: Wrong message received");
+                            if(DEBUG)Console.WriteLine("CLIENT: Wrong message received: "+_contents.MessageType+" Expected: "+messageType);
                             HandleResponse(_contents);
                         }                            
                     }

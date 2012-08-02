@@ -18,6 +18,7 @@ namespace SPX.IO
         private const byte TrueByte = (byte)1;
         private const byte FalseByte = (byte)0;
 
+        public Int32 TurnCount;
         public byte MessageType;
         public byte PlayerIndex;
         public byte Command;
@@ -84,11 +85,12 @@ namespace SPX.IO
             };
         }
 
-        public static MessageContents CreatePlayerState(Dictionary<int, Dictionary<int, bool>> playerStatus)
+        public static MessageContents CreatePlayerState(Dictionary<int, Dictionary<int, bool>> playerStatus,Int32 turnCount)
         {
             var result = new MessageContents();
             result.MessageType = ClientMessageType.SYNC_STATE;
             result.WritePlayerState(playerStatus);
+            result.TurnCount = turnCount;
             return result;
         }
 
@@ -110,26 +112,28 @@ namespace SPX.IO
             PlayerTwoState = _message.ReadBytes(16);
             PlayerThreeState = _message.ReadBytes(16);
             PlayerFourState = _message.ReadBytes(16);
+            TurnCount = _message.ReadInt32();
         }
 
-        internal void Serialize(NetOutgoingMessage _announcement)
+        internal void Serialize(NetOutgoingMessage _message)
         {
-            _announcement.Write(MessageType);
+            _message.Write(MessageType);
             if (DEBUG) Console.WriteLine("Serial, mType: " + MessageType);
-            _announcement.Write(PlayerIndex);
+            _message.Write(PlayerIndex);
             if (DEBUG) Console.WriteLine("Serial, pIndex: " + PlayerIndex);
-            _announcement.Write(Command);
+            _message.Write(Command);
             if (DEBUG) Console.WriteLine("Serial, command: " + Command);
-            _announcement.Write(IsActive);
+            _message.Write(IsActive);
             if (DEBUG) Console.WriteLine("Serial, iActive: " + IsActive);
-            _announcement.Write(RngSeed);
+            _message.Write(RngSeed);
             if (DEBUG) Console.WriteLine("Serial, rngSeed: " + RngSeed);
-            _announcement.Write(PlayerCount);
+            _message.Write(PlayerCount);
             if (DEBUG) Console.WriteLine("Serial, pCount: " + PlayerCount);
-            _announcement.Write(PlayerOneState);
-            _announcement.Write(PlayerTwoState);
-            _announcement.Write(PlayerThreeState);
-            _announcement.Write(PlayerFourState);           
+            _message.Write(PlayerOneState);
+            _message.Write(PlayerTwoState);
+            _message.Write(PlayerThreeState);
+            _message.Write(PlayerFourState);
+            _message.Write(TurnCount);
         }
 
         public void WritePlayerState(Dictionary<int,Dictionary<int,bool>> state)
@@ -180,6 +184,11 @@ namespace SPX.IO
                     }
                 }
             }          
-        }        
+        }
+
+        public void Clear()
+        {
+            MessageType = 0;
+        }
     }
 }

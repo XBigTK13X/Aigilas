@@ -55,25 +55,27 @@ namespace Aigilas
 
         protected override void Update(GameTime gameTime)
         {
-            Client.Get().Update();
-            for (int ii = 0; ii < 4;ii++)
-            {
-                var player = (PlayerIndex) ii;
-                if (GamePad.GetState(player).Buttons.Back == ButtonState.Pressed && GamePad.GetState(player).Buttons.Start==ButtonState.Pressed)
-                {
-                    Exit();
-                    return;
-                }
-            }
-            if(Input.IsActive(Commands.ToggleDevConsole,Client.Get().GetFirstPlayerIndex()))
-            {
-                DevConsole.Get().Toggle();
-            }
             Input.Update();
-            ParticleEngine.Update();
-            StateManager.Update();
-            TextManager.Update();
-            base.Update(gameTime);
+            if (Client.Get().NextTurn())
+            {
+                for (int ii = 0; ii < 4; ii++)
+                {
+                    var player = (PlayerIndex)ii;
+                    if (GamePad.GetState(player).Buttons.Back == ButtonState.Pressed && GamePad.GetState(player).Buttons.Start == ButtonState.Pressed)
+                    {
+                        Exit();
+                        return;
+                    }
+                }
+                if (Input.IsActive(Commands.ToggleDevConsole, Client.Get().GetFirstPlayerIndex()))
+                {
+                    DevConsole.Get().Toggle();
+                }
+                ParticleEngine.Update();
+                StateManager.Update();
+                TextManager.Update();
+                base.Update(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)

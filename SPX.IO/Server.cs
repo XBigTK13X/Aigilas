@@ -67,6 +67,7 @@ namespace SPX.IO
         private const int throttleMax = 100;
         private MessageContents _contents = MessageContents.Empty();
         private bool _firstMessageReceived = false;
+        private Int32 _turnCount = 0;
         public virtual void Update()
         {
             while((_message = _server.ReadMessage()) != null)
@@ -80,6 +81,7 @@ namespace SPX.IO
                         InitPlayer(_server.ConnectionsCount - 1, 0);
                         Reply(MessageContents.CreateInit(_server.ConnectionsCount - 1, _rngSeed), _message.SenderConnection);
                         if (DEBUG) Console.WriteLine("SERVER: Accepted new connection");
+                        _turnCount = 0;
                         Thread.Sleep(100);
                         break;
                     case NetIncomingMessageType.Data:
@@ -88,12 +90,11 @@ namespace SPX.IO
                         {
                             case ClientMessageType.CHECK_STATE:
                                 InitPlayer(_contents.PlayerIndex, _contents.Command);
-                                _contents.IsActive = _playerStatus[_contents.PlayerIndex][_contents.Command];
+                                _contents.IsActive = _playerStatus[_contents.PlayerIndex][_contents.Command];                                
                                 if (DEBUG) Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
                                 Reply(_contents, _message.SenderConnection);
                                 break;
-                            case ClientMessageType.MOVEMENT:
-                                _firstMessageReceived = true;
+                            case ClientMessageType.MOVEMENT:                                
                                 InitPlayer(_contents.PlayerIndex, _contents.Command);
                                 _playerStatus[_contents.PlayerIndex][_contents.Command] = _contents.IsActive;
                                 if (DEBUG) Console.WriteLine("SERVER: Moves: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _contents.IsActive);
@@ -117,13 +118,10 @@ namespace SPX.IO
                 }
                 _server.Recycle(_message);
             }
-            
-            if (_firstMessageReceived)
-            {
-                if(DEBUG)Console.WriteLine("SERVER: Announcing player input status.");
-                Announce(MessageContents.CreatePlayerState(_playerStatus));
-                Thread.Sleep(Throttle);
-            }
+
+            if(DEBUG)Console.WriteLine("SERVER: Announcing player input status.");
+            Announce(MessageContents.CreatePlayerState(_playerStatus,_turnCount++));
+            Thread.Sleep(Throttle);
         }
 
         private void InitPlayer(int playerIndex, int command)
@@ -141,9 +139,12 @@ namespace SPX.IO
         private NetOutgoingMessage _announcement;
         private void Announce(MessageContents contents)
         {
-            _announcement = _server.CreateMessage(MessageContents.ByteCount);
-            contents.Serialize(_announcement);
-            _server.SendMessage(_announcement,_server.Connections,NetDeliveryMethod.ReliableOrdered,0);
+            if (_server.ConnectionsCount > 0)
+            {
+                _announcement = _server.CreateMessage(MessageContents.ByteCount);
+                contents.Serialize(_announcement);
+                _server.SendMessage(_announcement, _server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            }
         }
 
         private NetOutgoingMessage _reply;
