@@ -14,6 +14,8 @@ These hellbound souls are the main characters in Aigilas. Each player selects a 
 * Support for couch co-op and LAN multiplayer with up to four players
 * Built on top of the SimplePathXna library, XNA, and Lidgren
 
+## How to Play the Game##
+Please refer to <https://github.com/XBigTK13X/Aigilas/wiki/Instruction-Manual>
 
 ## How to Build the Game##
 Prerequisites:
@@ -22,9 +24,6 @@ Prerequisites:
 * XNA 4.0 (which is included in Windows Phone Developer Tools)
 
 Open Aigilas.sln in Visual Studio and launch the project. The game should launch shortly after that.
-
-## How to Play the Game##
-Please refer to <https://github.com/XBigTK13X/Aigilas/wiki/Instruction-Manual>
 
 ## Supported Platforms ##
 Currently, only Windows 7 is tested and supported. A PoC has been done that shows Aigilas can run on MonoGame, which would open up support for Linux and Mac OS X.
