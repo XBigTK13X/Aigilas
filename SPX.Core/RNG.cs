@@ -26,7 +26,7 @@ namespace SPX.Core
 
         public static void Seed(int seed)
         {
-            Rand = new Random(seed);
+            Rand = new Random(seed);            
         }
     }
 }

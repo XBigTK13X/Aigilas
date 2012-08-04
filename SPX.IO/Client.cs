@@ -53,7 +53,7 @@ namespace SPX.IO
             _client.Start();
             var init = _client.CreateMessage();
             init.Write(MessageTypes.CONNECT);      
-            _client.Connect("localhost", Server.Port, init);
+            _client.Connect(Server.IP, Server.Port, init);
         }
 
         //Client<->Game communication
@@ -68,14 +68,26 @@ namespace SPX.IO
         }
 
 
-        private int _heartBeat = 15;
+        private int _heartBeat = 30;
         public void HeartBeat()
         {
-            _heartBeat--;
-            if (_heartBeat <= 0)
+            if (!_dungeonHasLoaded)
             {
-                PrepareForNextTurn();
+                _heartBeat--;
+                if (_heartBeat <= 0)
+                {
+                    Console.WriteLine("CLIENT: Heartbeating...");
+                    SendMessage(MessageContents.CreateHeartBeat());
+                    _heartBeat = 15;
+                }
             }
+        }
+
+        private bool _dungeonHasLoaded = false;
+        public void DungeonHasLoaded()
+        {
+            Console.WriteLine("CLIENT: Dungeon has finished loading...");
+            _dungeonHasLoaded = true;
         }
 
         public bool NextTurn()
@@ -84,7 +96,10 @@ namespace SPX.IO
             Update();
             if (_contents.MessageType == MessageTypes.SYNC_STATE)
             {
-                DevConsole.Get().Add("CLIENT: Synced : " + _contents.TurnCount);
+                if (DEBUG) DevConsole.Get().Add("RNG Test Broke?: " + RNG.Rand.Next(0, 100000));
+                if (DEBUG) DevConsole.Get().Add("CLIENT: Synced : " + _contents.TurnCount + ". Seeding: " + _contents.RngSeed);
+                RNG.Seed(_contents.RngSeed);
+                if (DEBUG) DevConsole.Get().Add("RNG Test: " + RNG.Rand.Next(0, 100000) + ": Turn - " + _contents.TurnCount);
                 _heartBeat = 15;
             }
             return _contents.MessageType == MessageTypes.SYNC_STATE;
@@ -124,7 +139,6 @@ namespace SPX.IO
             if (_playerStatus[playerIndex][command] != isActive)
             {
                 if(DEBUG)Console.WriteLine("CLIENT: Moves: CMD({0}) PI({1}) AC({2})", command, playerIndex, isActive);
-                _playerStatus[playerIndex][command] = isActive;
                 SendMessage(MessageContents.CreateMovement(command, playerIndex, isActive));
             }
         }

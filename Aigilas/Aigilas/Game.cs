@@ -41,7 +41,7 @@ namespace Aigilas
 
         protected override void LoadContent()
         {
-            XnaManager.Renderer = new SpriteBatch(GraphicsDevice); ;
+            XnaManager.Renderer = new SpriteBatch(GraphicsDevice);
             StateManager.LoadContent();
             TextManager.LoadContent();
             //$$$MediaPlayer.Play(Content.Load<Song>("MainTheme"));
@@ -56,6 +56,10 @@ namespace Aigilas
         protected override void Update(GameTime gameTime)
         {
             Input.Update();
+            if (Input.DetectState(Commands.ToggleDevConsole, Client.Get().GetFirstPlayerIndex()))
+            {
+                DevConsole.Get().Toggle();
+            }
             if (Client.Get().NextTurn())
             {
                 for (int ii = 0; ii < 4; ii++)
@@ -66,10 +70,6 @@ namespace Aigilas
                         Exit();
                         return;
                     }
-                }
-                if (Input.IsActive(Commands.ToggleDevConsole, Client.Get().GetFirstPlayerIndex()))
-                {
-                    DevConsole.Get().Toggle();
                 }
                 ParticleEngine.Update();
                 StateManager.Update();

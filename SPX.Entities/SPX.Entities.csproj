@@ -58,6 +58,10 @@
       <Project>{5BF5C616-63E5-4975-94FC-2FF2035D01F8}</Project>
       <Name>SPX.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SPX.DevTools\SPX.DevTools.csproj">
+      <Project>{ACF20487-E1F2-446C-8F8F-E5F7622D803C}</Project>
+      <Name>SPX.DevTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPX.Sprites\SPX.Sprites.csproj">
       <Project>{9846DC75-EF80-47DF-AACB-2CB75EA2F1B3}</Project>
       <Name>SPX.Sprites</Name>

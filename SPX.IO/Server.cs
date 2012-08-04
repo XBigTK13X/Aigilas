@@ -15,9 +15,11 @@ namespace SPX.IO
         public const bool DEBUG = false;
         public const int Port = 53216;
         public const string ConnectionName = "Aigilas";
+        public const string IP = "192.168.1.114";
         private static Server __instance;
         private static bool __otherServerExists;
         private const int Throttle = 10;
+        
 
         public static Server Get()
         {
@@ -102,7 +104,7 @@ namespace SPX.IO
                                 break;
                             case MessageTypes.START_GAME:
                                 Console.WriteLine("SERVER: Announcing game commencement.");
-                                Announce(_contents);
+                                Announce(_contents);                                
                                 break;
                             case MessageTypes.PLAYER_COUNT:
                                 if (DEBUG) Console.WriteLine("SERVER: PLAYER COUNT");
@@ -111,6 +113,9 @@ namespace SPX.IO
                             case MessageTypes.READY_FOR_NEXT_TURN:
                                 if (DEBUG) Console.WriteLine("SERVER: Received ready signal from client");
                                 _readyCheckIn[_addressToIndexMap[_message.SenderConnection]] = true;                                
+                                break;
+                            case MessageTypes.HEART_BEAT:
+                                _readyCheckIn[_addressToIndexMap[_message.SenderConnection]] = true;
                                 break;
                             default:
                                 if (DEBUG) Console.WriteLine("SERVER: Unknown message");
@@ -132,7 +137,6 @@ namespace SPX.IO
             {
                 if (DEBUG) Console.WriteLine("SERVER: Announcing player input status.");
                 Announce(MessageContents.CreatePlayerState(_playerStatus, _turnCount++));
-                Thread.Sleep(Throttle);
                 for (int ii = 0; ii < _readyCheckIn.Length; ii++)
                 {
                     _readyCheckIn[ii] = false;

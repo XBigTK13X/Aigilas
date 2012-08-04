@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Threading;
+using SPX.DevTools;
 
 namespace SPX.IO
 {
@@ -77,7 +78,7 @@ namespace SPX.IO
             }
         }
 
-        private static bool DetectState(int command, int playerIndex)
+        public static bool DetectState(int command, int playerIndex)
         {
             return GamePad.GetState(_playerIndex[playerIndex]).IsButtonDown(_gamePadMapping[command])
             ||
@@ -86,7 +87,7 @@ namespace SPX.IO
 
         private static bool IsDown(int command, int playerIndex)
         {
-            return Client.Get().IsActive(command, playerIndex);
+            return Client.Get().IsActive(command, playerIndex);            
         }
 
         public static bool IsActive(int command, int playerIndex,bool failIfLocked=true)

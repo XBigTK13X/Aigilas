@@ -284,7 +284,6 @@ namespace Aigilas.Skills
         { Add(Elements.WATER); AddCost(StatType.MANA, 3); }
         public override void Activate(ICreature target)
         {
-            Console.WriteLine("Activating HYPOTHERMIA.");
             for (int ii = 0; ii < 4; ii++)
             {
                 CreatureFactory.CreateMinion(SkillId.ICE_SHARD, target, _behavior.GetGraphic(), EntityManager.GetEmptyLocation());

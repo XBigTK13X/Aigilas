@@ -12,8 +12,10 @@ namespace Aigilas.States
     {
         public GameplayState()
         {
+            Console.WriteLine("Generating the dungeon...");
             EntityManager.Reset();
             DungeonFactory.Start();
+            Client.Get().DungeonHasLoaded();
         }
         public void Update()
         {

@@ -4,6 +4,7 @@ using Aigilas.Skills;
 using SPX.Core;
 using SPX.Entities;
 using System.Collections.Generic;
+using SPX.DevTools;
 
 namespace Aigilas.Creatures
 {
@@ -49,9 +50,8 @@ namespace Aigilas.Creatures
         }
 
         public static ICreature CreateRandom(Point2 randomPoint)
-        {
-            var val = RNG.Rand.Next(0, Generate.Randoms.Count);
-            return Create(Generate.Randoms[val], randomPoint);
+        {            
+            return Create(Generate.Randoms[RNG.Rand.Next(0, Generate.Randoms.Count)], randomPoint);
         }
 
         public static ICreature CreateMinion(string skillId, ICreature source,SkillEffect effectGraphic=null,Point2 location=null)

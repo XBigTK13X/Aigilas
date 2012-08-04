@@ -91,7 +91,24 @@ namespace SPX.IO
             result.MessageType = MessageTypes.SYNC_STATE;
             result.WritePlayerState(playerStatus);
             result.TurnCount = turnCount;
+            result.RngSeed = Environment.TickCount;
             return result;
+        }
+
+        public static MessageContents CreateReadyForNextTurn()
+        {
+            return new MessageContents()
+            {
+                MessageType = MessageTypes.READY_FOR_NEXT_TURN
+            };
+        }
+
+        public static MessageContents CreateHeartBeat()
+        {
+            return new MessageContents()
+            {
+                MessageType = MessageTypes.HEART_BEAT
+            };
         }
 
         internal void Deserialize(NetIncomingMessage _message)
@@ -184,14 +201,6 @@ namespace SPX.IO
                     }
                 }
             }          
-        }
-
-        public static MessageContents CreateReadyForNextTurn()
-        {
-            return new MessageContents()
-            {
-                MessageType = MessageTypes.READY_FOR_NEXT_TURN
-            };
         }
 
         public void Clear()
