@@ -8,14 +8,11 @@ At the turn of each century, Lucifer gathers his seven closest demons to partici
 
 These hellbound souls are the main characters in Aigilas. Each player selects a sin to represent, and is granted specific powers depending on their chosen leader. In order to win the tournament, an embodiment of every sin must be defeated. Along their journey, the acolytes will face many other hellbound who want to win it all, so players will need to stay on their toes throughout this challenge.
 
-## Default Controls ##
-Refer to <https://github.com/XBigTK13X/Aigilas/blob/master/Aigilas/Aigilas/Management/InputInitializer.cs>
-
 ## Features of the Game ##
 * Reactive skill system (similar to combos)
 * Procedurally generated dungeons and enemies means the game is never the same twice.
-* Support for local co-op with up to four players (with Xbox 360 controllers)
-* Built on top of my own SimplePathXna framework
+* Support for couch co-op and LAN multiplayer with up to four players
+* Built on top of the SimplePathXna library, XNA, and Lidgren
 
 
 ## How to Build the Game##
@@ -44,4 +41,4 @@ The name is a reversal of the mneumonic "SALIGIA", which is a term from the 14th
 "A-JILL-US" (similar to ageless, but without a hard stop between age and less)
 
 ## Under what licenses is this game? ##
-Please refer to LICENSE.txt, which must be contained in any distribution of source code or binaries.
+I am a fan of permissive licenses. Please refer to LICENSE.txt for more details, which must be contained in any distribution of source code or binaries. Aigilas is intended to be a project that I can use to help teach others how to make games. I believe that a permissive license makes that goal easier to reach.
