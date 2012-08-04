@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Lidgren.Network;
+using SPX.Core;
 
 namespace SPX.IO
 {
     [Serializable]
     public class MessageContents
     {
-        private const bool DEBUG = false;
-
         public const int CommandMax = 16;
         public const int PlayerMax = 4;
         public const int ByteCount = 80;
@@ -114,17 +113,17 @@ namespace SPX.IO
         internal void Deserialize(NetIncomingMessage _message)
         {
             MessageType = _message.ReadByte();
-            if (DEBUG) Console.WriteLine("Serial, mType: " + MessageType);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, mType: " + MessageType);
             PlayerIndex = _message.ReadByte();
-            if (DEBUG) Console.WriteLine("Serial, pIndex: " + PlayerIndex);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, pIndex: " + PlayerIndex);
             Command = _message.ReadByte();
-            if (DEBUG) Console.WriteLine("Serial, command: " + Command); 
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, command: " + Command); 
             IsActive = _message.ReadBoolean();
-            if (DEBUG) Console.WriteLine("Serial, iActive: " + IsActive);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, iActive: " + IsActive);
             RngSeed = _message.ReadInt32();
-            if (DEBUG) Console.WriteLine("Serial, rngSeed: " + RngSeed);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, rngSeed: " + RngSeed);
             PlayerCount = _message.ReadByte();
-            if (DEBUG) Console.WriteLine("Serial, pCount: " + PlayerCount);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, pCount: " + PlayerCount);
             PlayerOneState = _message.ReadBytes(16);
             PlayerTwoState = _message.ReadBytes(16);
             PlayerThreeState = _message.ReadBytes(16);
@@ -135,17 +134,17 @@ namespace SPX.IO
         internal void Serialize(NetOutgoingMessage _message)
         {
             _message.Write(MessageType);
-            if (DEBUG) Console.WriteLine("Serial, mType: " + MessageType);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, mType: " + MessageType);
             _message.Write(PlayerIndex);
-            if (DEBUG) Console.WriteLine("Serial, pIndex: " + PlayerIndex);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, pIndex: " + PlayerIndex);
             _message.Write(Command);
-            if (DEBUG) Console.WriteLine("Serial, command: " + Command);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, command: " + Command);
             _message.Write(IsActive);
-            if (DEBUG) Console.WriteLine("Serial, iActive: " + IsActive);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, iActive: " + IsActive);
             _message.Write(RngSeed);
-            if (DEBUG) Console.WriteLine("Serial, rngSeed: " + RngSeed);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, rngSeed: " + RngSeed);
             _message.Write(PlayerCount);
-            if (DEBUG) Console.WriteLine("Serial, pCount: " + PlayerCount);
+            if (Settings.Get().GetMessageContentsVerbose()) Console.WriteLine("Serial, pCount: " + PlayerCount);
             _message.Write(PlayerOneState);
             _message.Write(PlayerTwoState);
             _message.Write(PlayerThreeState);

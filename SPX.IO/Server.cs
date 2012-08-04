@@ -6,20 +6,16 @@ using Lidgren.Network;
 using System.Net;
 using System.Threading;
 using SPX.DevTools;
+using SPX.Core;
 
 namespace SPX.IO
 {
 
     public class Server
     {
-        public const bool DEBUG = false;
-        public const int Port = 53216;
-        public const string ConnectionName = "Aigilas";
-        public const string IP = "192.168.1.114";
+        public const string ConnectionName = "Aigilas";   
         private static Server __instance;
-        private static bool __otherServerExists;
-        private const int Throttle = 10;
-        
+        private static bool __otherServerExists;        
 
         public static Server Get()
         {
@@ -41,7 +37,7 @@ namespace SPX.IO
         {
             try
             {
-                _config = new NetPeerConfiguration(ConnectionName) { Port = Port };
+                _config = new NetPeerConfiguration(ConnectionName) { Port = Settings.Get().GetPort() };
                 _config.MaximumConnections = 20;
                 _config.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
                 _server = new NetServer(_config);
@@ -83,7 +79,7 @@ namespace SPX.IO
                         InitPlayer(_server.ConnectionsCount - 1, 0);
                         Reply(MessageContents.CreateInit(_server.ConnectionsCount - 1, _rngSeed), _message.SenderConnection);
                         _addressToIndexMap.Add(_message.SenderConnection, _server.ConnectionsCount - 1);
-                        if (DEBUG) Console.WriteLine("SERVER: Accepted new connection");
+                        if (Settings.Get().GetServerVerbose()) Console.WriteLine("SERVER: Accepted new connection");
                         _turnCount = 0;
                         Thread.Sleep(100);
                         break;
@@ -94,31 +90,31 @@ namespace SPX.IO
                             case MessageTypes.CHECK_STATE:
                                 InitPlayer(_contents.PlayerIndex, _contents.Command);
                                 _contents.IsActive = _playerStatus[_contents.PlayerIndex][_contents.Command];                                
-                                if (DEBUG) Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
+                                if (Settings.Get().GetServerVerbose()) Console.WriteLine("SERVER: Check: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _playerStatus[_contents.PlayerIndex][_contents.Command]);
                                 Reply(_contents, _message.SenderConnection);
                                 break;
                             case MessageTypes.MOVEMENT:                                
                                 InitPlayer(_contents.PlayerIndex, _contents.Command);
                                 _playerStatus[_contents.PlayerIndex][_contents.Command] = _contents.IsActive;
-                                if (DEBUG) Console.WriteLine("SERVER: Moves: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _contents.IsActive);
+                                if (Settings.Get().GetServerVerbose()) Console.WriteLine("SERVER: Moves: CMD({1}) PI({0}) AC({2})", _contents.PlayerIndex, _contents.Command, _contents.IsActive);
                                 break;
                             case MessageTypes.START_GAME:
                                 Console.WriteLine("SERVER: Announcing game commencement.");
                                 Announce(_contents);                                
                                 break;
                             case MessageTypes.PLAYER_COUNT:
-                                if (DEBUG) Console.WriteLine("SERVER: PLAYER COUNT");
+                                if (Settings.Get().GetServerVerbose()) Console.WriteLine("SERVER: PLAYER COUNT");
                                 Reply(MessageContents.CreatePlayerCount(_server.ConnectionsCount), _message.SenderConnection);
                                 break;
                             case MessageTypes.READY_FOR_NEXT_TURN:
-                                if (DEBUG) Console.WriteLine("SERVER: Received ready signal from client");
+                                if (Settings.Get().GetServerVerbose()) Console.WriteLine("SERVER: Received ready signal from client");
                                 _readyCheckIn[_addressToIndexMap[_message.SenderConnection]] = true;                                
                                 break;
                             case MessageTypes.HEART_BEAT:
                                 _readyCheckIn[_addressToIndexMap[_message.SenderConnection]] = true;
                                 break;
                             default:
-                                if (DEBUG) Console.WriteLine("SERVER: Unknown message");
+                                if (Settings.Get().GetServerVerbose()) Console.WriteLine("SERVER: Unknown message");
                                 break;
                         }
                         break;
@@ -135,7 +131,7 @@ namespace SPX.IO
             }
             if (readyCount >= _server.ConnectionsCount)
             {
-                if (DEBUG) Console.WriteLine("SERVER: Announcing player input status.");
+                if (Settings.Get().GetServerVerbose()) Console.WriteLine("SERVER: Announcing player input status.");
                 Announce(MessageContents.CreatePlayerState(_playerStatus, _turnCount++));
                 for (int ii = 0; ii < _readyCheckIn.Length; ii++)
                 {
@@ -178,6 +174,11 @@ namespace SPX.IO
         public bool IsOnlyInstance()
         {
             return !__otherServerExists;
+        }
+
+        public void Close()
+        {
+            _server.Shutdown("SERVER: Shutting down");
         }
     }
 }

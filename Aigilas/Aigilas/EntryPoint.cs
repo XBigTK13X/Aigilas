@@ -30,6 +30,8 @@ namespace Aigilas
             {
                 game.Run();
             }
+            Server.Get().Close();
+            Client.Get().Close();
             Console.WriteLine("Finished being a client");
         }
     }

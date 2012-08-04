@@ -13,7 +13,6 @@ namespace SPX.IO
 {
     public class Client
     {
-        public const bool DEBUG = false;
         private static Client __instance;
         public static Client Get()
         {
@@ -53,7 +52,7 @@ namespace SPX.IO
             _client.Start();
             var init = _client.CreateMessage();
             init.Write(MessageTypes.CONNECT);      
-            _client.Connect(Server.IP, Server.Port, init);
+            _client.Connect(Settings.Get().GetIp(), Settings.Get().GetPort(), init);
         }
 
         //Client<->Game communication
@@ -96,10 +95,10 @@ namespace SPX.IO
             Update();
             if (_contents.MessageType == MessageTypes.SYNC_STATE)
             {
-                if (DEBUG) DevConsole.Get().Add("RNG Test Broke?: " + RNG.Rand.Next(0, 100000));
-                if (DEBUG) DevConsole.Get().Add("CLIENT: Synced : " + _contents.TurnCount + ". Seeding: " + _contents.RngSeed);
+                if (Settings.Get().GetClientVerbose()) DevConsole.Get().Add("RNG Test Broke?: " + RNG.Rand.Next(0, 100000));
+                if (Settings.Get().GetClientVerbose()) DevConsole.Get().Add("CLIENT: Synced : " + _contents.TurnCount + ". Seeding: " + _contents.RngSeed);
                 RNG.Seed(_contents.RngSeed);
-                if (DEBUG) DevConsole.Get().Add("RNG Test: " + RNG.Rand.Next(0, 100000) + ": Turn - " + _contents.TurnCount);
+                if (Settings.Get().GetClientVerbose()) DevConsole.Get().Add("RNG Test: " + RNG.Rand.Next(0, 100000) + ": Turn - " + _contents.TurnCount);
                 _heartBeat = 15;
             }
             return _contents.MessageType == MessageTypes.SYNC_STATE;
@@ -138,7 +137,7 @@ namespace SPX.IO
             InitPlayer(playerIndex, command);
             if (_playerStatus[playerIndex][command] != isActive)
             {
-                if(DEBUG)Console.WriteLine("CLIENT: Moves: CMD({0}) PI({1}) AC({2})", command, playerIndex, isActive);
+                if(Settings.Get().GetClientVerbose())Console.WriteLine("CLIENT: Moves: CMD({0}) PI({1}) AC({2})", command, playerIndex, isActive);
                 SendMessage(MessageContents.CreateMovement(command, playerIndex, isActive));
             }
         }
@@ -173,10 +172,10 @@ namespace SPX.IO
 
         private void AwaitReply(byte messageType)
         {
-            if (DEBUG) Console.WriteLine("CLIENT: Waiting for " + CmtString.Get(messageType));          
+            if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT: Waiting for " + CmtString.Get(messageType));          
             while (true)
             {
-                if (DEBUG) Console.WriteLine("CLIENT: Waiting");
+                if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT: Waiting");
                 _client.MessageReceivedEvent.WaitOne();
                 _message = _client.ReadMessage();
                 if (_message != null)
@@ -187,18 +186,18 @@ namespace SPX.IO
                         _contents.Deserialize(_message);
                         if (_contents.MessageType == messageType)
                         {
-                            if (DEBUG) Console.WriteLine("CLIENT: Right message received");
+                            if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT: Right message received");
                             return;
                         }
                         else
                         {
-                            if(DEBUG)Console.WriteLine("CLIENT: Wrong message received: "+_contents.MessageType+" Expected: "+messageType);
+                            if(Settings.Get().GetClientVerbose())Console.WriteLine("CLIENT: Wrong message received: "+_contents.MessageType+" Expected: "+messageType);
                             HandleResponse(_contents);
                         }                            
                     }
                     else
                     {
-                        if (DEBUG) Console.WriteLine("CLIENT: Unexpected : " + _message.MessageType + ": " + _message.ReadString());
+                        if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT: Unexpected : " + _message.MessageType + ": " + _message.ReadString());
                     }
                     _client.Recycle(_message);
                 }                
@@ -210,7 +209,7 @@ namespace SPX.IO
             switch (contents.MessageType)
             {
                 case MessageTypes.CONNECT:
-                    if (DEBUG) Console.WriteLine("CLIENT: Handshake successful. Starting player id: " + contents.PlayerIndex);
+                    if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT: Handshake successful. Starting player id: " + contents.PlayerIndex);
                     RNG.Seed(contents.RngSeed);
                     _initialPlayerIndex = contents.PlayerCount;
                     _isConnected = true;
@@ -220,7 +219,7 @@ namespace SPX.IO
                     _isGameStarting = true;
                     break;
                 case MessageTypes.SYNC_STATE:
-                    if (DEBUG) Console.WriteLine("CLIENT: Input state received");
+                    if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT: Input state received");
                     contents.ReadPlayerState(ref _playerStatus);
                     break;
                 default:
@@ -242,6 +241,11 @@ namespace SPX.IO
         public void PrepareForNextTurn()
         {
             SendMessage(MessageContents.CreateReadyForNextTurn());
+        }
+
+        public void Close()
+        {
+            _client.Shutdown("CLIENT: Shutting down");
         }
     }
 }
