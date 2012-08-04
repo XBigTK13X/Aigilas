@@ -51,6 +51,9 @@ namespace SPX.Particles
         {
             if (particle.Entity != null)
             {
+
+                var size = RNG.Rand.Next(0,10);
+                particle.SetSize(size, size);
                 if (particle.Radius < 5)
                 {
                     particle.Radius = 5;

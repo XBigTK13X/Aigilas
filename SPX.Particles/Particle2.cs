@@ -13,8 +13,8 @@ namespace SPX.Particles
     {
         public const int DefaultLife = 100;
 
-        public int Height = 1;
-        public int Width = 1;
+        public float Height = 1;
+        public float Width = 1;
 
         
         private float _life = DefaultLife;
@@ -45,7 +45,7 @@ namespace SPX.Particles
             if (IsActive)
             {
                 _currentCell = new Rectangle(0, 0, 6, 6);
-                _target = new Rectangle((int)Position.X, (int)Position.Y, Width, Width);
+                _target = new Rectangle((int)Position.X, (int)Position.Y, (int)Width, (int)Width);
                 XnaManager.Renderer.Draw(_texture, _target, _currentCell, _color*_alpha, 0f, Vector2.Zero, SpriteEffects.None, _layerDepth);
             }
         }
@@ -102,7 +102,7 @@ namespace SPX.Particles
               255);
         }
 
-        public void SetSize(int height, int width)
+        public void SetSize(float height, float width)
         {
             Height = height;
             Width = width;
