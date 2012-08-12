@@ -1,7 +1,7 @@
 package com.spx.io;
 
 import com.xna.wrapper.Buttons;
-import com.xna.wrapper.Keys;
+import com.xna.wrapper.keySet;
 
 public class CommandDefinition
 {
