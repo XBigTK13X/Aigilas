@@ -18,6 +18,9 @@ def isCodeOnly(file):
 traversed = []
 def isCodeDir(dir):
 	excludes = ['Debug','Release','TempPE','bin','obj','Properties','x86','script','concept','.git','SPX.Paths','port-workspace']
+	excludes.append('SPX.Util')
+	excludes.append('SPX.States')
+	excludes.append('SPX.Core')
 	for ex in excludes:
 		if ex in dir:
 			return False
@@ -32,6 +35,8 @@ def cs2java(line):
 	replacements['SPX.'] = 'com.spx.'
 	replacements['static class'] = 'class'
 	replacements['ref '] = ''
+	replacements['ContainsKey '] = 'containsKey'
+	replacements['ToString '] = 'toString'
 	for key in replacements.keys():
 		if key in line and (not replacements[key] in line or replacements[key] == '' or replacements[key] == 'class'):
 			line = line.replace(key,replacements[key])
