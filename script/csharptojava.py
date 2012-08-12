@@ -22,6 +22,7 @@ def isCodeDir(dir):
 	excludes.append('SPX.States')
 	excludes.append('SPX.Core')
 	excludes.append('SPX.Text')
+	excludes.append('SPX.Particles')
 	for ex in excludes:
 		if ex in dir:
 			return False
@@ -41,11 +42,16 @@ def cs2java(line):
 	replacements['virtual '] = ''
 	replacements[' in '] = ':'
 	replacements['foreach'] = 'for'
-	replacements['Contains'] = 'contains'
-	replacements['Add'] = 'add'
-	replacements['Remove'] = 'remove'
+	replacements['.Contains'] = '.contains'
+	replacements['.Add'] = '.add'
+	replacements['.Remove'] = '.remove'
 	replacements['RNG.Rand.Next'] = 'RNG.Next'
 	replacements['.Length'] = '.length'
+	replacements['boolean?'] = 'Boolean'
+	replacements['int?'] = 'Integer'
+	replacements['addRange'] = 'addAll'
+	replacements['.Clear'] = '.clear'
+	replacements['IEnumerable'] = 'List'
 	for key in replacements.keys():
 		if key in line and (not replacements[key] in line or replacements[key] == '' or replacements[key] == 'class'):
 			line = line.replace(key,replacements[key])
@@ -160,7 +166,7 @@ def transform(path):
 									if 'super' in line:
 										line,superCall = line.split(':')
 									else:
-										if not 'default' in line and not 'case' in line and not '?' in line:
+										if not 'default' in line and not 'case' in line and not '?' in line and not 'for' in line:
 											line = line.replace(":",' extends ')
 								w.write(cs2java(line))
 							w.close()
