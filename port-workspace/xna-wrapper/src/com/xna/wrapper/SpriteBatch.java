@@ -29,9 +29,14 @@ public class SpriteBatch {
 		
 	}
 
-	public void DrawString(SpriteFont getFont, String _contents,
+	public void DrawString(SpriteFont getFont, String contents,
 			Vector2 _position, Color black, int i, float fontCenter, float f,
 			SpriteEffects none, float actiontextbg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void Draw(Texture2D texture, Vector2 vector, Color color) {
 		// TODO Auto-generated method stub
 		
 	}
