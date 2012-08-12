@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>aigilas</name>
+	<comment></comment>
+	<projects>
+		<project>xna-wrapper</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/com</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/git/aigilas/script/convert/com</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

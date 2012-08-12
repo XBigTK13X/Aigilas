@@ -1,0 +1,19 @@
+package com.aigilas.items;{
+    public class ItemSuffix
+    {
+        public final string NULL = "NULL";
+        public final string Blight = "Blight";
+        public final string Confusion = "Confusion";
+        public final string Tragedy = "Tragedy";
+        public final string Comedy = "Comedy";
+
+        public static readonly string[] Values = 
+        {
+            NULL,
+            Blight,
+            Confusion,
+            Tragedy,
+            Comedy
+        };
+    }
+}

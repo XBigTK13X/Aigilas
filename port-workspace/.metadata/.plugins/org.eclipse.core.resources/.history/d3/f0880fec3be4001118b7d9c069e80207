@@ -1,0 +1,13 @@
+package com.aigilas.creatures;
+{
+    public enum OAction
+    {
+        Movement,
+        Attacking,
+        SkillCycle,
+        Regeneration,
+        WontHitNonTargets,
+        ReceiveHealing,
+        SkillUsage
+    }
+}

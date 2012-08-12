@@ -1,0 +1,33 @@
+package com.aigilas.creatures;{
+    public class StatType
+    {
+        public final string HEALTH = "Health";
+        public final string MANA = "Mana";
+        public final string STRENGTH = "Strength";
+        public final string WISDOM = "Wisdom";
+        public final string DEFENSE = "Defense";
+        public final string LUCK = "Luck";
+        public final string AGE = "Age";
+        public final string HEIGHT = "Height";
+        public final string WEIGHT = "Weight";
+        public final string MOVE_COOL_DOWN = "MoveCoolDown";
+        public final string PIETY = "Piety";
+        public final string REGEN = "Regen";
+
+        public static readonly string[] Values = 
+        {
+            HEALTH, 
+            MANA, 
+            STRENGTH, 
+            WISDOM, 
+            DEFENSE, 
+            LUCK, 
+            AGE, 
+            HEIGHT, 
+            WEIGHT, 
+            MOVE_COOL_DOWN, 
+            PIETY,
+            REGEN
+        };
+    }
+}

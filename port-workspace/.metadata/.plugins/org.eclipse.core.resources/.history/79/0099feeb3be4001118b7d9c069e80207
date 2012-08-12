@@ -1,0 +1,74 @@
+package com.aigilas.states;import ﻿com.spx.states.*;import com.spx.entities.*;import com.aigilas.creatures.*;import com.aigilas.dungeons.*;import com.spx.text.*;import com.spx.util.*;import com.spx.core.*;import com.aigilas.management.*;import com.spx.io.*;import com.spx.devtools.*;
+{
+    public class MainMenuState : State
+    {
+        private ActionTextHandler _text = new ActionTextHandler();
+
+        private final string PlayText = "Play Game";
+        private final string OptionsText = "Options";
+        private final string QuitText = "Quit Game";
+        private final string SelectionText = "--<";
+
+        private int _selection;
+
+        public MainMenuState()
+        {
+            Input.SetContext(Contexts.Nonfree, Client.Get().GetFirstPlayerIndex());
+        }
+        public void Update()
+        {
+            _text.WriteAction(PlayText, 1, 300, 100);
+            _text.WriteAction(OptionsText, 1, 300, 200);
+            _text.WriteAction(QuitText, 1, 300, 300);
+
+            _selection += (Input.IsActive(Commands.MoveDown, Client.Get().GetFirstPlayerIndex()) ? 1 : 0)
+                + (Input.IsActive(Commands.MoveUp, Client.Get().GetFirstPlayerIndex()) ? -1 : 0);
+            _selection %= 3;
+            if (_selection < 0)
+            {
+                _selection = 0;
+            }
+
+            if (Client.Get().IsGameStarting())
+            {
+                for (int ii = 0; ii < Client.Get().GetPlayerCount(); ii++)
+                {
+                    Input.SetContext(Contexts.Free, ii);
+                }            
+
+                StateManager.LoadState(new GameplayState());
+            }
+            else
+            {
+                if (Input.IsActive(Commands.Confirm, Client.Get().GetFirstPlayerIndex()))
+                {
+                    switch (_selection)
+                    {
+                        case 0:
+                            Console.WriteLine("Starting the game");
+                            Client.Get().StartGame();
+                            return;
+                        case 1:
+                            StateManager.LoadState(new OptionsState());
+                            return;
+                        case 2:
+                            Environment.Exit(0);
+                            return;
+                        default: break;
+                    }
+                }
+            }
+
+            _text.WriteAction(SelectionText,1,225,100*(_selection+1));
+        }
+        public void LoadContent()
+        {
+
+        }
+        public void Draw()
+        {
+            _text.Draw();
+            _text.Clear();
+        }
+    }
+}

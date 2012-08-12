@@ -1,0 +1,30 @@
+package com.spx.io;import com.spx.wrapper.*;import java.util.*;    public class MessageTypes
+    {
+        public static final byte CONNECT = 1;
+        public static final byte MOVEMENT = 2;
+        public static final byte START_GAME = 3;
+        public static final byte CHECK_STATE = 4;
+        public static final byte PLAYER_COUNT = 5;
+        public static final byte SYNC_STATE = 6;
+        public static final byte READY_FOR_NEXT_TURN = 7;
+        public static final byte HEART_BEAT = 8;
+    }
+
+    public class CmtString
+    {
+        public static String Get(byte messageType)
+        {
+            switch (messageType)
+            {
+                case MessageTypes.CONNECT extends  return "CONNECT";
+                case MessageTypes.MOVEMENT extends  return "MOVEMENT";
+                case MessageTypes.START_GAME extends  return "START_GAME";
+                case MessageTypes.CHECK_STATE extends  return "CHECK_STATE";
+                case MessageTypes.PLAYER_COUNT extends  return "PLAYER_COUNT";
+                case MessageTypes.SYNC_STATE extends  return "SYNC_STATE";
+                case MessageTypes.READY_FOR_NEXT_TURN extends  return "READY_FOR_NEXT_TURN";
+                case MessageTypes.HEART_BEAT extends  return "HEART_BEAT";
+            }
+            return "INVALID MESSAGE TYPE";
+        }
+    }

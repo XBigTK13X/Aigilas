@@ -1,0 +1,20 @@
+package com.aigilas.strategies;import ﻿com.aigilas.creatures.*;import com.aigilas.skills.*;import com.spx.core.*;
+{
+    public class NullStrategy : IStrategy
+    {
+
+        public NullStrategy(ICreature parent, params int[] targetTypes)
+            : base(parent,Strategy.Null)
+        {
+            foreach (var targetType in targetTypes)
+            {
+                _targets.AddTargetTypes(targetType);
+            }
+        }
+
+        public override void Act()
+        {
+            
+        }
+    }
+}

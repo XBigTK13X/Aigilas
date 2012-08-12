@@ -1,0 +1,15 @@
+package com.aigilas.;
+{
+    public class ZDepth:SPX.Core.Depth
+    {
+        public final float Floor = 0f;
+        public final float Wall = .1f;
+        public final float Altar = .2f;
+        public final float Stairs = .4f;
+        public final float Item = .45f;
+        public final float Creature = .5f;
+        public final float Player = .7f;
+        public final float SkillEffect = .75f;
+        public final float ComboMarker = .999f;
+    }
+}

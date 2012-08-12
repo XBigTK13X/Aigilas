@@ -1,0 +1,16 @@
+package com.aigilas.strategies;import com.spx.wrapper.*;import java.util.*;import ﻿com.aigilas.creatures.*;import com.aigilas.skills.*;import com.spx.core.*;
+    public class NullStrategy  extends  IStrategy
+    {
+
+        public NullStrategy(ICreature parent, params int[] targetTypes)
+            { super(parent,Strategy.Null);            foreach (var targetType in targetTypes)
+            {
+                _targets.AddTargetTypes(targetType);
+            }
+        }
+
+        public override void Act()
+        {
+            
+        }
+    }

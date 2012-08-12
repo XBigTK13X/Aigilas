@@ -1,0 +1,104 @@
+package com.aigilas.reactions;
+{
+    public class ReactionId
+    {
+        public final int SWEAT = 0;
+        public final int MAGMA = 1;
+        public final int EXPLOSION = 2;
+        public final int SCORCH = 3;
+        public final int BLIND = 4;
+        public final int LACTIC_ACID = 5;
+        public final int MIND_BLOWN = 6;
+        public final int VENT = 7;
+        public final int DROWN = 8;
+        public final int REFLECT = 9;
+        public final int DRENCH = 10;
+        public final int PNEUMONIA = 11;
+        public final int LOBOTOMY = 12;
+        public final int RUST = 13;
+        public final int PURIFY = 14;
+        public final int ECLIPSE = 15;
+        public final int RESPECT = 16;
+        public final int CRAFTSMAN = 17;
+        public final int FLASH = 18;
+        public final int METABOLISM = 19;
+        public final int FAST_FORWARD = 20;
+        public final int BLANK = 21;
+        public final int YIN_YANG = 22;
+        public final int EXPOSE = 23;
+        public final int ENLIGHTEN = 24;
+        public final int ATROPHY = 25;
+        public final int NEUROSIS = 26;
+        public final int CONFUSE = 27;
+
+        public static readonly List<string> Names = new List<string>()
+        {
+            "SWEAT",
+            "MAGMA",
+            "EXPLOSION",
+            "SCORCH",
+            "BLIND",
+            "LACTIC ACID",
+            "MIND BLOWN",
+            "VENT",
+            "DROWN",
+            "REFLECT",
+            "DRENCH",
+            "PNEUMONIA",
+            "LOBOTOMY",
+            "RUST",
+            "PURIFY",
+            "ECLIPSE",
+            "RESPECT",
+            "CRAFTSMAN",
+            "FLASH",
+            "METABOLISM",
+            "FAST FORWARD",
+            "BLANK",
+            "YIN YANG",
+            "EXPOSE",
+            "ENLIGHTEN",
+            "ATROPHY",
+            "NEUROSIS",
+            "CONFUSE"
+        };
+    }
+    public class ReactionFactory
+    {
+        public static IReaction Create(int id)
+        {
+            switch(id)
+            {
+                case ReactionId.SWEAT: return new SweatReaction();
+                case ReactionId.MAGMA: return new MagmaReaction();
+                case ReactionId.EXPLOSION: return new ExplosionReaction();
+                case ReactionId.SCORCH: return new ScorchReaction();
+                case ReactionId.BLIND: return new BlindReaction();
+                case ReactionId.LACTIC_ACID: return new LacticAcidReaction();
+                case ReactionId.MIND_BLOWN: return new MindBlownReaction();
+                case ReactionId.VENT: return new VentReaction();
+                case ReactionId.DROWN: return new DrownReaction();
+                case ReactionId.REFLECT: return new ReflectReaction();
+                case ReactionId.DRENCH: return new DrenchReaction();
+                case ReactionId.PNEUMONIA: return new PneumoniaReaction();
+                case ReactionId.LOBOTOMY: return new LobotomyReaction();
+                case ReactionId.RUST: return new RustReaction();
+                case ReactionId.PURIFY: return new PurifyReaction();
+                case ReactionId.ECLIPSE: return new EclipseReaction();
+                case ReactionId.RESPECT: return new RespectReaction();
+                case ReactionId.CRAFTSMAN: return new CraftsmanReaction();
+                case ReactionId.FLASH: return new FlashReaction();
+                case ReactionId.METABOLISM: return new MetabolismReaction();
+                case ReactionId.FAST_FORWARD: return new FastForwardReaction();
+                case ReactionId.BLANK: return new BlankReaction();
+                case ReactionId.YIN_YANG: return new YinYangReaction();
+                case ReactionId.EXPOSE: return new ExposeReaction();
+                case ReactionId.ENLIGHTEN: return new EnlightenReaction();
+                case ReactionId.ATROPHY: return new AtrophyReaction();
+                case ReactionId.NEUROSIS: return new NeurosisReaction();
+                case ReactionId.CONFUSE: return new ConfuseReaction();
+                default:return null;
+            }
+        }
+    }
+}

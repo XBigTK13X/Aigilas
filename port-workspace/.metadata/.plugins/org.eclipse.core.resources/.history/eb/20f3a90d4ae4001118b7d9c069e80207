@@ -1,0 +1,43 @@
+package com.aigilas.skills;import com.spx.wrapper.*;import java.util.*;import ﻿com.aigilas.creatures.*;import com.aigilas.entities.*;import com.spx.core.*;
+    class SkillAnimation
+    {
+        protected SkillAnimation(){}
+        public virtual void Animate(SkillEffect skill,ICreature source,Point2 velocity){}
+    }
+    class NoAnimation  extends  SkillAnimation { }
+
+    class SelfAnimation  extends  SkillAnimation
+    {
+        public override void Animate(SkillEffect skill,ICreature source,Point2 velocity)
+        {
+            skill.UpdateLocation(source.GetLocation());
+        }
+    }
+
+    class RangedAnimation  extends  SkillAnimation
+    {
+        public override void Animate(SkillEffect skill, ICreature source, Point2 velocity)
+        {
+            if (!skill.Move(velocity.X, velocity.Y))
+            {
+                skill.Cleanup(skill);
+            }
+        }
+    }
+
+    class RotateAnimation  extends  SkillAnimation
+    {
+        private Point2 rotation;
+        private Point2 location = new Point2(0, 0);
+        public override void Animate(SkillEffect skill, ICreature source, Point2 velocity)
+        {
+            if (rotation==null)
+            {
+                rotation = new Point2(source.GetSkillVector().GridX, source.GetSkillVector().GridY);
+            }
+            location.SetX(rotation.GridX + source.GetLocation().GridX);
+            location.SetY(rotation.GridY + source.GetLocation().GridY);
+            skill.SetLocation(location);
+            rotation.Copy(rotation.RotateClockwise());
+        }
+    }

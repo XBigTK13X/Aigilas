@@ -1,0 +1,14 @@
+package com.aigilas.strategies;import com.spx.wrapper.*;import java.util.*;import ﻿com.aigilas.creatures.*;import com.aigilas.skills.*;
+    public class AttackSelfStrategy  extends  IStrategy
+    {
+        public AttackSelfStrategy(ICreature parent)
+            { super(parent,Strategy.AttackSelf);        }
+
+        public override void Act()
+        {
+            if (AbleToMove())
+            {
+                _parent.ApplyDamage(1);
+            }
+        }
+    }

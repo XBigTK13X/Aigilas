@@ -1,0 +1,35 @@
+package com.spx.util;import com.spx.wrapper.*;import java.util.*;
+
+    public class StringSquisher
+    {
+        private static StringBuilder builder = new StringBuilder(64,64);
+        private static HashMap<StringBuilder, string> lookup = new HashMap<StringBuilder, string>();
+
+        public static String Build(params String[] textToSquish)
+        {
+            Clear();
+            for (int ii = 0; ii < textToSquish.length; ii++)
+            {
+                builder.Append(textToSquish[ii]);
+            }
+            return Flush();
+        }
+
+        public static void Squish(params String[] textToSquish)
+        {
+            for (int ii = 0; ii < textToSquish.length; ii++)
+            {
+                builder.Append(textToSquish[ii]);
+            }
+        }
+
+        public static void Clear()
+        {
+            builder.Remove(0, builder.Length);
+        }
+
+        public static String Flush()
+        {
+            return builder.ToString();
+        }
+    }

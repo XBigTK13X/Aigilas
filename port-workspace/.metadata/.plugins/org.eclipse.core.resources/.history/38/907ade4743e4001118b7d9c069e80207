@@ -1,0 +1,22 @@
+package com.aigilas.entities;import com.spx.wrapper.*;import java.util.*;import ﻿com.aigilas.creatures.*;import com.aigilas.dungeons.*;import com.spx.core.*;import com.spx.entities.*;import com.aigilas.management.*;
+    public class Downstairs  extends  Entity
+    {
+        public Downstairs(Point2 location)
+        {
+            Initialize(location, SpriteType.DOWNSTAIRS, Aigilas.EntityType.DOWNSTAIRS,ZDepth.Stairs);
+        }
+
+        private ICreature player;
+        public override void Update()
+        {
+            player = EntityManager.GetTouchingCreature(this) as ICreature;
+            if (player != null)
+            {
+                if (player.IsInteracting())
+                {
+                    player.PerformInteraction();
+                    DungeonFactory.GetNextFloor();
+                }
+            }
+        }
+    }

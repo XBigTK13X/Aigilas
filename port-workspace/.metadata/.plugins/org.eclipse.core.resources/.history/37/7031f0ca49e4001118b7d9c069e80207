@@ -1,0 +1,30 @@
+package com.spx.sprites;import com.spx.wrapper.*;import java.util.*;
+    public class SpriteDefinition
+    {
+        public SpriteDefinition(int type, int index, int frames)
+        {
+            Type = type;
+            Info = new SpriteInfo(index, frames);
+        }
+        public int Type         public SpriteInfo Info     }
+    public interface ISpriteInitializer
+    {
+        ICollection<SpriteDefinition> GetSprites();
+    }
+    public class SpriteSheetManager
+    {
+        private static HashMap<Integer, SpriteInfo> __manager = new HashMap<Integer, SpriteInfo>();
+
+        public static SpriteInfo GetSpriteInfo(int spriteName)
+        {
+            return __manager[spriteName];
+        }
+
+        public static void Setup(ISpriteInitializer initializer)
+        {
+            foreach (var sprite in initializer.GetSprites())
+            {
+                __manager.Add(sprite.Type, sprite.Info);
+            }
+        }
+    }

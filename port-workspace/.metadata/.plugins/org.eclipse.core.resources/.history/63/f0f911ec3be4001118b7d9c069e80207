@@ -1,0 +1,14 @@
+package com.aigilas.;import com.spx.entities.*;
+{
+    public class EntityType:SPX.Entities.EntityType
+    {
+        public final int WALL = 2;
+        public final int UPSTAIRS = 3;
+        public final int DOWNSTAIRS = 4;
+        public final int ITEM = 5;
+        public final int SKILL_EFFECT = 6;
+        public final int SKILL_EFFECT_GENERATOR = 7;
+        public final int ALTAR = 8;
+        public final int COMBO_MARKER = 9;
+    }
+}

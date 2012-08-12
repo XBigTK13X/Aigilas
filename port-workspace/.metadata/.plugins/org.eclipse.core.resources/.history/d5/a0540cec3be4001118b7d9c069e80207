@@ -1,0 +1,14 @@
+package com.aigilas.entities;import ﻿com.aigilas.creatures.*;import com.spx.entities.*;import com.spx.core.*;
+{
+    public static class Extensions
+    {
+        public static ICreature IsCreature(this IEntity entity)
+        {
+            if (entity.GetEntityType() == Aigilas.EntityType.ACTOR)
+            {
+                return entity as ICreature;
+            }
+            return null;
+        }
+    }
+}

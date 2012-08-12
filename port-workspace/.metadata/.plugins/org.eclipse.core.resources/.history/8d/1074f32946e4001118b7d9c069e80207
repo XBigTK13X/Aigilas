@@ -1,0 +1,24 @@
+package com.spx.paths;import com.spx.wrapper.*;import com.spx.wrapper.Color;import java.util.*;import com.spx.core.*;
+    class Walk
+    {
+        private static List<Point2>[] __walks = new ArrayList<Point2>[1000];
+        private static int _index = 0;
+
+        public static List<Point2> Copy(List<Point2> walk)
+        {
+            if (__walks[0] == null)
+            {
+                for (int ii = 0; ii < __walks.length; ii++)
+                {
+                    __walks[ii] = new ArrayList<Point2>();
+                }
+            }
+            _index = (_index + 1) % __walks.length;
+            __walks[_index].Clear();
+            foreach (var point in walk)
+            {
+                __walks[_index].Add(point);
+            }
+            return __walks[_index];
+        }
+    }

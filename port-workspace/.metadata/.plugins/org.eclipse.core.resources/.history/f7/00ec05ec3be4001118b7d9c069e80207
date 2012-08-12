@@ -1,0 +1,49 @@
+package com.aigilas.items;{
+    public class ItemClass
+    {
+        public final int NULL = 0;
+        public final int Melee_Weapon = 1;
+        public final int Ranged_Weapon = 2;
+        public final int Ranged_Ammo = 3;
+        public final int Ring = 4;
+        public final int Leggings = 5; 
+        public final int Torso_Garb = 6;
+        public final int Feet = 7;
+        public final int Head_Gear = 8;
+        public final int Gloves = 9;
+        public final int Shield = 10;
+        public final int LAST = 11;
+
+        public static readonly int[] Values =
+        {
+            NULL,
+            Melee_Weapon,
+            Ranged_Weapon, 
+            Ranged_Ammo,
+            Ring,
+            Leggings, 
+            Torso_Garb,
+            Feet,
+            Head_Gear,
+            Gloves,
+            Shield,
+            LAST
+        };
+
+        public static readonly Dictionary<int, string> Names = new Dictionary<int, string>()
+        {
+            {NULL,"NULL"},
+            {Melee_Weapon,"Melee Weapon"},
+            {Ranged_Weapon,"Ranged Weapon"}, 
+            {Ranged_Ammo,"Ranged Ammo"},
+            {Ring,"Ring"},
+            {Leggings,"Leggings"}, 
+            {Torso_Garb,"Torso Garb"},
+            {Feet,"Feet"},
+            {Head_Gear,"Head Gear"},
+            {Gloves,"Gloves"},
+            {Shield,"Shield"},
+            {LAST,"LAST"}
+        };
+    }
+}

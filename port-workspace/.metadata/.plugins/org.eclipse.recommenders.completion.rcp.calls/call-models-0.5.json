@@ -1,0 +1,12 @@
+{
+  "C:\\_z\\dev\\horkspace\\aigilas\\src": {
+    "location": "C:\\_z\\dev\\horkspace\\aigilas\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\_z\\dev\\horkspace\\aigilas\\src\u0027. Skipped."
+  },
+  "C:\\_z\\java\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "C:\\_z\\java\\lib\\rt.jar",
+    "status": "RESOLVED"
+  }
+}

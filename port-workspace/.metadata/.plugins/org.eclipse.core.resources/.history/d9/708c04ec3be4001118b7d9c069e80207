@@ -1,0 +1,29 @@
+package com.aigilas.management;
+{
+    public class SpriteType
+    {
+        public final int EMPTY = 0;
+        public final int PLAYER_STAND = 1;
+        public final int FLOOR = 2;
+        public final int SPIKE = 3;
+        public final int WALL = 4;
+        public final int UPSTAIRS = 5;
+        public final int DOWNSTAIRS = 6;
+        public final int CREATURE = 7;
+        public final int ITEM = 8;
+        public final int SKILL_EFFECT = 9;
+        public final int MINION = 10;
+        public final int ALTAR = 11;
+        public final int ZORB = 12;
+        public final int COMBO_MARKER = 13;
+        public final int WRATH = 14;
+        public final int PRIDE = 15;
+        public final int ENVY = 16;
+        public final int GLUTTONY = 17;
+        public final int LUST = 18;
+        public final int GREED = 19;
+        public final int SLOTH = 20;
+        public final int HAND = 21;
+        public final int WHEEL = 22;
+    }
+}

@@ -1,0 +1,450 @@
+package com.aigilas.statuses;import com.aigilas.creatures.*;import com.aigilas.strategies.*;import com.aigilas.entities.*;import com.aigilas.skills.*;import com.spx.core.*;
+{
+    public class Status
+    {
+        public final int Poison = 0;
+        public final int Regen = 1;
+        public final int StrengthUp = 2;
+        public final int Confusion = 3;
+        public final int WeakKnees = 4;
+        public final int VenomFist = 5;
+        public final int Mutiny = 6;
+        public final int ManaUp = 7;
+        public final int SpeedUp = 8;
+        public final int Electrify = 9;
+        public final int Zap = 10;
+        public final int PoisonOneHit = 11;
+        public final int DefenseUp = 12;
+        public final int ColdShoulder = 13;
+        public final int Burn = 14;
+        public final int Flee = 15;
+        public final int Berserk = 16;
+        public final int RandomBuff = 17;
+        public final int Hord = 18;
+        public final int LockSkillCycle = 19;
+        public final int WeakenStrength = 20;
+        public final int SelfMutilation = 21;
+        public final int PreventMentalUsage = 22;
+        public final int PreventRegeneration = 23;
+        public final int PreventLightUsage = 24;
+        public final int PreventDarkUsage = 25;
+        public final int IntDown = 27;
+        public final int SoakingWet = 28;
+        public final int HealReflect = 29;
+        public final int Mute = 30;
+        public final int SlowDown = 31;
+        public final int WeakMuscles = 32;
+        public final int Blind = 33;
+        public final int Toxic = 34;
+        public final int Boil = 35;
+    }
+
+    public class ConfusionStatus : IStatus
+    {
+        private int previousStrategy;
+        public ConfusionStatus(ICreature target) : base(target) 
+        { 
+            _prevents.Add(OAction.WontHitNonTargets); 
+        }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = _target.GetStrategyId();
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Confused,_target));
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy,_target));
+        }
+    }
+    public class MutinyStatus : IStatus
+    {
+        private int previousStrategy;
+        private StatBuff buff = new StatBuff(StatType.MOVE_COOL_DOWN, 10);
+        public MutinyStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.WontHitNonTargets);
+        }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = _target.GetStrategyId();
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Mutiny, _target));
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+        }
+    }
+    public class FleeStatus : IStatus
+    {
+        private int previousStrategy;
+        public FleeStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.WontHitNonTargets);
+        }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = _target.GetStrategyId();
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Flee, _target));
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+        }
+    }
+    public class PoisonStatus:IStatus
+    {
+        public PoisonStatus(ICreature target): base(target){}
+        public override void Update()
+        {
+            base.Update();
+            _target.ApplyDamage(2.1f);
+        }
+    }
+
+    public class RegenStatus : IStatus
+    {
+        public RegenStatus(ICreature target) : base(target) { }
+        public override void Update()
+        {
+            base.Update();
+            _target.ApplyDamage(-1f);
+        }
+    }
+
+    public class StrengthUpStatus : IStatus
+    {
+        public StrengthUpStatus(ICreature target) : base(target)
+        {
+            _buff = new StatBuff(StatType.STRENGTH, 10f);
+            Setup();
+        }
+    }
+
+    public class VenomFistStatus : IStatus
+    {
+        public VenomFistStatus(ICreature target)
+            : base(target)
+        {
+            Add(Status.Poison,StatusComponent.Contagion);
+        }
+    }
+
+    public class WeakKneesStatus : IStatus
+    {
+        public WeakKneesStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.Movement);
+            _prevents.Add(OAction.Attacking);
+        }
+    }
+
+    public class ManaUpStatus : IStatus
+    {
+        public ManaUpStatus(ICreature target) : base(target) 
+        {
+            _buff = new StatBuff(StatType.MANA, 20f);
+            Setup();
+        }
+    }
+    public class SpeedUpStatus: IStatus
+    {
+        public SpeedUpStatus(ICreature target) : base(target)
+        {
+            _buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);
+            Setup();
+        }
+    }
+    public class ElectrifyStatus: IStatus
+    {
+        public ElectrifyStatus(ICreature target)
+            : base(target)
+        {
+            Add(Status.Zap,StatusComponent.Passive );
+        }
+    }
+    public class ZapStatus : IStatus
+    {
+        public ZapStatus(ICreature target)
+            : base(target)
+        {}
+        public override void Setup()
+        {
+            base.Setup();
+            _target.ApplyDamage(10);
+            _isActive = false;
+        }
+    }
+    public class PoisonOneHitStatus : IStatus
+    {
+        public PoisonOneHitStatus(ICreature target)
+            : base(target)
+        {
+            Add(Status.Poison,StatusComponent.Contagion);
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (_wasPassed)
+            {
+                _isActive = false;
+            }
+        }
+    }
+    public class BurnOneHitStatus : IStatus
+    {
+        public BurnOneHitStatus(ICreature target)
+            : base(target)
+        {
+            Add(Status.Burn, StatusComponent.Contagion);
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (_wasPassed)
+            {
+                _isActive = false;
+            }
+        }
+    }
+    public class DefenseUpStatus : IStatus
+    {
+        public DefenseUpStatus(ICreature target)
+        : base(target)
+        {
+            _buff = new StatBuff(StatType.DEFENSE, 10);
+            Setup();
+        }
+    }
+    public class BurnStatus : IStatus
+    {
+        public BurnStatus(ICreature target) : base(target) 
+        {
+            _prevents.Add(OAction.Movement);
+        }
+        public override void Update()
+        {
+            base.Update();
+            _target.ApplyDamage(1.0f);
+        }
+    }
+    public class BerserkStatus : IStatus
+    {
+        public BerserkStatus(ICreature target) : base(target) 
+        {
+            Add(Status.RandomBuff, StatusComponent.KillReward);
+        }
+    }
+    public class RandomBuffStatus : IStatus
+    {
+        public RandomBuffStatus(ICreature target)
+        : base(target)
+        {
+            _buff = new StatBuff(StatType.Values[RNG.Rand.Next(0, 3)], 10);
+            Setup();
+        }
+    }
+    public class HordStatus : IStatus
+    {
+        public HordStatus(ICreature target)
+            : base(target)
+        {
+            _buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
+            Setup();
+        }
+    }
+    public class LockSkillCycleStatus : IStatus
+    {
+        public LockSkillCycleStatus(ICreature target)
+            : base(target)
+        {
+            _prevents.Add(OAction.SkillCycle);
+        }
+    }
+    public class WeakenStrengthStatus : IStatus
+    {
+        public WeakenStrengthStatus(ICreature target)
+            : base(target)
+        {
+            _buff = new StatBuff(StatType.STRENGTH, -10);
+            Setup();
+        }
+    }
+    public class SelfMutilationStatus : IStatus
+    {
+        private int previousStrategy;
+        public SelfMutilationStatus(ICreature target)
+            : base(target)
+        {
+        }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = _target.GetStrategyId();
+            _target.SetStrategy(StrategyFactory.Create(Strategy.AttackSelf, _target));
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+        }
+    }
+    public class PreventMentalUsageStatus : IStatus
+    {
+        public PreventMentalUsageStatus(ICreature target)
+            : base(target)
+        {
+            _blockedElements.Add(Elements.MENTAL);
+        }
+    }
+    public class PreventRegenerationStatus : IStatus
+    {
+        public PreventRegenerationStatus(ICreature target)
+            : base(target)
+        {
+            _prevents.Add(OAction.Regeneration);
+        }
+    }
+    public class PreventLightUsageStatus : IStatus
+    {
+        public PreventLightUsageStatus(ICreature target)
+            : base(target)
+        {
+            _blockedElements.Add(Elements.LIGHT);
+        }
+    }
+    public class PreventDarkUsageStatus : IStatus
+    {
+        public PreventDarkUsageStatus(ICreature target)
+            : base(target)
+        {
+            _blockedElements.Add(Elements.DARK);
+        }
+    }
+    public class IntDownStatus : IStatus
+    {
+        public IntDownStatus(ICreature target)
+            : base(target)
+        {
+            _buff = new StatBuff(StatType.WISDOM, -10);
+            Setup();
+        }
+    }
+    public class SoakingWetStatus : IStatus
+    {
+        public SoakingWetStatus(ICreature target)
+            : base(target)
+        {
+            _blockedElements.Add(Elements.FIRE);
+        }
+    }
+    public class BlockHealingStatus : IStatus
+    {
+        public BlockHealingStatus(ICreature target)
+            : base(target)
+        {
+            _prevents.Add(OAction.ReceiveHealing);
+        }
+    }
+    public class MuteStatus : IStatus
+    {
+        public MuteStatus(ICreature target)
+            : base(target)
+        {
+            _prevents.Add(OAction.SkillUsage);
+        }
+    }
+    public class SlowDownStatus : IStatus
+    {
+        public SlowDownStatus(ICreature target)
+            : base(target)
+        {
+            _buff = new StatBuff(StatType.MOVE_COOL_DOWN, 10);
+            _buffMax = true;
+            Setup();
+        }
+    }
+    public class WeakMusclesStatus : IStatus
+    {
+        public WeakMusclesStatus(ICreature target)
+            : base(target)
+        {
+            _buff = new StatBuff(StatType.STRENGTH, -10);
+            Setup();
+        }
+    }
+    public class BlindStatus : IStatus
+    {
+        public BlindStatus(ICreature target)
+            : base(target)
+        {
+            _prevents.Add(OAction.WontHitNonTargets);
+        }
+    }
+    public class ToxicStatus : IStatus
+    {
+        public ToxicStatus(ICreature target)
+            : base(target)
+        {
+            _target = target;
+        }
+        public override void Act()
+        {
+            CreatureFactory.CreateMinion(SkillId.PLAGUE, _target, null, _target.GetLocation());
+        }
+    }
+    public class BoilStatus : IStatus
+    {
+        private int previousStrategy;
+        private float _previousHealth = 0;
+        private bool _countDownFailed = false;
+        private final int _countdownMax = 10;
+        private int _countdown = _countdownMax;
+        
+        public BoilStatus(ICreature target)
+            : base(target)
+        {
+            
+        }
+        public override void Setup()
+        {
+            base.Setup();
+            previousStrategy = _target.GetStrategyId();
+            _target.SetStrategy(StrategyFactory.Create(Strategy.Null, _target));
+            _target.GetTargets().AddTargetTypes(AigilasActorType.PLAYER);
+        }
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            if (!_countDownFailed)
+            {
+                _target.GetTargets().FindClosest().ApplyDamage(30);
+            }
+            _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+        }
+        public override void Update()
+        {
+            base.Update();
+            if (_target.IsCooledDown())
+            {
+                _countdown--;
+                _target.Write(SPX.Util.StringStorage.Get(_strength));
+                if (_countdown <= 0)
+                {
+                    _countdown = _countdownMax;
+                }
+            }
+            if (_target.Get(StatType.HEALTH) < _previousHealth)
+            {
+                _countDownFailed = true;
+                Cleanup();
+            }
+            _previousHealth = _target.Get(StatType.HEALTH);
+        }
+    }
+}

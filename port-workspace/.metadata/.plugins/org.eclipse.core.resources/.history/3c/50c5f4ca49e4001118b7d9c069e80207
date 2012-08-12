@@ -1,0 +1,237 @@
+package com.spx.io;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;import com.spx.devtools.*;
+    public class Client
+    {
+        private static Client __instance;
+        public static Client Get()
+        {
+            if (__instance == null)
+            {
+                __instance = new Client();
+                while (!__instance.IsConnected()) 
+                {
+                    __instance.Update();
+                }
+            }
+            return __instance;
+        }
+
+        private NetClient _client;
+        private NetPeerConfiguration _config;
+        private NetIncomingMessage _message;
+        private NetOutgoingMessage _outMessage;        
+        private Integer _initialPlayerIndex;
+        private boolean _isGameStarting;
+        private boolean _isConnected;
+
+        private HashMap<Integer, HashMap<Integer, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Integer, Boolean>>();
+
+        private Client()
+        {
+            _config = new NetPeerConfiguration(Server.ConnectionName);
+            for (int ii = 0; ii < MessageContents.PlayerMax; ii++)
+            {
+                _playerStatus.Add(ii, new HashMap<Integer, Boolean>());
+                for (int jj = 0; jj < MessageContents.CommandMax; jj++)
+                {
+                    _playerStatus[ii].Add(jj, false);
+                }
+            }
+            _client = new NetClient(_config);
+            _client.Start();
+            var init = _client.CreateMessage();
+            init.Write(MessageTypes.CONNECT);      
+            _client.Connect(Settings.Get().GetIp(), Settings.Get().GetPort(), init);
+        }
+
+        //Client<->Game communication
+        public boolean IsGameStarting()
+        {
+            return _isGameStarting;
+        }
+
+        public boolean IsConnected()
+        {
+            return _isConnected;
+        }
+
+
+        private int _heartBeat = 30;
+        public void HeartBeat()
+        {
+            if (!_dungeonHasLoaded)
+            {
+                _heartBeat--;
+                if (_heartBeat <= 0)
+                {
+                    Console.WriteLine("CLIENT extends  Heartbeating...");
+                    SendMessage(MessageContents.CreateHeartBeat());
+                    _heartBeat = 15;
+                }
+            }
+        }
+
+        private boolean _dungeonHasLoaded = false;
+        public void DungeonHasLoaded()
+        {
+            Console.WriteLine("CLIENT extends  Dungeon has finished loading...");
+            _dungeonHasLoaded = true;
+        }
+
+        public boolean NextTurn()
+        {
+            _contents.Clear();
+            Update();
+            if (_contents.MessageType == MessageTypes.SYNC_STATE)
+            {
+                if (Settings.Get().GetClientVerbose()) DevConsole.Get().Add("RNG Test Broke? extends  " + RNG.Rand.Next(0, 100000));
+                if (Settings.Get().GetClientVerbose()) DevConsole.Get().Add("CLIENT extends  Synced  extends  " + _contents.TurnCount + ". Seeding extends  " + _contents.RngSeed);
+                RNG.Seed(_contents.RngSeed);
+                if (Settings.Get().GetClientVerbose()) DevConsole.Get().Add("RNG Test extends  " + RNG.Rand.Next(0, 100000) + " extends  Turn - " + _contents.TurnCount);
+                _heartBeat = 15;
+            }
+            return _contents.MessageType == MessageTypes.SYNC_STATE;
+        }
+
+        private void InitPlayer(int playerIndex, int command)
+        {
+            if (!_playerStatus.ContainsKey(playerIndex))
+            {
+                _playerStatus.Add(playerIndex, new HashMap<Integer, Boolean>());
+            }
+            if (!_playerStatus[playerIndex].ContainsKey(command))
+            {
+                _playerStatus[playerIndex].Add(command, false);
+            }
+        }
+
+        public int GetFirstPlayerIndex()
+        {
+            return _initialPlayerIndex;
+        }
+        
+
+        //Client<->Server communication
+        public boolean IsActive(int command, int playerIndex)
+        {
+            if (_playerStatus.ContainsKey(playerIndex) && _playerStatus[playerIndex].ContainsKey(command))
+            {
+                return _playerStatus[playerIndex][command];
+            }
+            return false;
+        }
+
+        public void SetState(int command, int playerIndex, boolean isActive)
+        {
+            InitPlayer(playerIndex, command);
+            if (_playerStatus[playerIndex][command] != isActive)
+            {
+                if(Settings.Get().GetClientVerbose())Console.WriteLine("CLIENT extends  Moves extends  CMD({0}) PI({1}) AC({2})", command, playerIndex, isActive);
+                SendMessage(MessageContents.CreateMovement(command, playerIndex, isActive));
+            }
+        }
+
+        int _playerCount = 0;
+        public int GetPlayerCount()
+        {
+            if (_playerCount == 0)
+            {
+                SendMessage(MessageContents.CreatePlayerCount(0));
+                AwaitReply(MessageTypes.PLAYER_COUNT);
+                _playerCount = _contents.PlayerCount;
+            }
+            return _playerCount;
+        }
+
+        public void StartGame()
+        {
+            SendMessage(MessageContents.Create(MessageTypes.START_GAME));
+        }
+
+        private void SendMessage(MessageContents contents)
+        {
+            _outMessage = _client.CreateMessage(MessageContents.ByteCount);
+            contents.Serialize(_outMessage);
+            _client.SendMessage(_outMessage, NetDeliveryMethod.ReliableOrdered);
+        }
+
+        //If the server doesn't reply at some point with the messageType you expect
+        //Then the client will hang in an infinite loop.
+
+        private void AwaitReply(byte messageType)
+        {
+            if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT extends  Waiting for " + CmtString.Get(messageType));          
+            while (true)
+            {
+                if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT extends  Waiting");
+                _client.MessageReceivedEvent.WaitOne();
+                _message = _client.ReadMessage();
+                if (_message != null)
+                {
+                   
+                    if (_message.MessageType == NetIncomingMessageType.Data)
+                    {
+                        _contents.Deserialize(_message);
+                        if (_contents.MessageType == messageType)
+                        {
+                            if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT extends  Right message received");
+                            return;
+                        }
+                        else
+                        {
+                            if(Settings.Get().GetClientVerbose())Console.WriteLine("CLIENT extends  Wrong message received extends  "+_contents.MessageType+" Expected extends  "+messageType);
+                            HandleResponse(_contents);
+                        }                            
+                    }
+                    else
+                    {
+                        if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT extends  Unexpected  extends  " + _message.MessageType + " extends  " + _message.ReadString());
+                    }
+                    _client.Recycle(_message);
+                }                
+            }
+        }
+
+        private void HandleResponse(MessageContents contents)
+        {
+            switch (contents.MessageType)
+            {
+                case MessageTypes.CONNECT extends 
+                    if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT extends  Handshake successful. Starting player id extends  " + contents.PlayerIndex);
+                    RNG.Seed(contents.RngSeed);
+                    _initialPlayerIndex = contents.PlayerCount;
+                    _isConnected = true;
+                    break;
+                case MessageTypes.START_GAME extends 
+                    Console.WriteLine("CLIENT extends  Start game reply has been received");
+                    _isGameStarting = true;
+                    break;
+                case MessageTypes.SYNC_STATE extends 
+                    if (Settings.Get().GetClientVerbose()) Console.WriteLine("CLIENT extends  Input state received");
+                    contents.ReadPlayerState(ref _playerStatus);
+                    break;
+                default extends 
+                    break;
+            }
+        }
+
+        private MessageContents _contents = MessageContents.Empty();
+        public void Update()
+        {
+            while ((_message = _client.ReadMessage()) != null && _message.MessageType == NetIncomingMessageType.Data)
+            {
+                _contents.Deserialize(_message);
+                HandleResponse(_contents);
+                _client.Recycle(_message);
+            }
+        }
+
+        public void PrepareForNextTurn()
+        {
+            SendMessage(MessageContents.CreateReadyForNextTurn());
+        }
+
+        public void Close()
+        {
+            _client.Shutdown("CLIENT extends  Shutting down");
+        }
+    }

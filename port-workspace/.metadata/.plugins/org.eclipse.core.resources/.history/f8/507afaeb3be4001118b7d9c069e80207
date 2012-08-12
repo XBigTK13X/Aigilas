@@ -1,0 +1,18 @@
+package com.aigilas.strategies;import ﻿com.aigilas.creatures.*;import com.aigilas.skills.*;
+{
+    public class AttackSelfStrategy : IStrategy
+    {
+        public AttackSelfStrategy(ICreature parent)
+            : base(parent,Strategy.AttackSelf)
+        {
+        }
+
+        public override void Act()
+        {
+            if (AbleToMove())
+            {
+                _parent.ApplyDamage(1);
+            }
+        }
+    }
+}

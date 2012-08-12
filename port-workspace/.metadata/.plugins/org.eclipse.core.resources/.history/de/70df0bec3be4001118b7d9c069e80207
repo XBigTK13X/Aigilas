@@ -1,0 +1,11 @@
+package com.aigilas.entities;import ﻿com.spx.core.*;import com.aigilas.management.*;import com.spx.entities.*;
+{
+    public class Wall : Entity
+    {
+        public Wall(Point2 location)
+        {
+            Initialize(location, SpriteType.WALL, Aigilas.EntityType.WALL,ZDepth.Wall);
+            _isBlocking = true;
+        }
+    }
+}

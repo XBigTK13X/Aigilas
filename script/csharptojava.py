@@ -1,5 +1,6 @@
 import os
 import shutil
+import re
 
 start_path = "c:\\_z\\dev\\git\\aigilas"
 convert_path = ".\\convert\\"
@@ -16,7 +17,7 @@ def isCodeOnly(file):
 
 traversed = []
 def isCodeDir(dir):
-	excludes = ['Debug','Release','TempPE','bin','obj','Properties','x86','script','concept','.git']
+	excludes = ['Debug','Release','TempPE','bin','obj','Properties','x86','script','concept','.git','SPX.Paths','port-workspace']
 	for ex in excludes:
 		if ex in dir:
 			return False
@@ -26,10 +27,22 @@ def isCodeDir(dir):
 	return True
 
 def cs2java(line):
-	replacements = {'const':'final','readonly ':'','string':'String','Dictionary':'HashMap', 'bool':'boolean','Int32':'Integer','this(':'initThis(','base(':'super(', '<int':'<Integer','int>':'Integer>'}
+	replacements = {'const':'static final','readonly ':'','string':'String','Dictionary':'HashMap', 'bool':'boolean','Int32':'Integer','this(':'initThis(','base(':'super(', '<int':'<Integer','int>':'Integer>','IList':'List','<float':'<Float','float>':'Float>','<boolean':'<Boolean','boolean>':'Boolean>','new List':'new ArrayList','base.':'super.','.Count()':'.length'}
+	replacements['Aigilas.'] = 'com.aigilas.'
+	replacements['SPX.'] = 'com.spx.'
+	replacements['static class'] = 'class'
+	replacements['ref '] = ''
 	for key in replacements.keys():
-		if key in line and not replacements[key] in line:
+		if key in line and (not replacements[key] in line or replacements[key] == '' or replacements[key] == 'class'):
 			line = line.replace(key,replacements[key])
+	if 'public' in line and 'get' in line:
+		line = line.split('{')[0]+"\r"
+	if 'Math.' in line:
+		for kill in [m.start() for m in re.finditer('Math.', line)]:
+			killLoc = kill + 5
+			l = list(line)
+			l[killLoc] = line[killLoc].lower()
+			line = "".join(l)
 	return line
 
 # Phases
@@ -71,7 +84,8 @@ def transform(path):
 
 							w = open(convert_file,'w')
 							w.write("package "+package.replace('\\','.').replace("..convert.",'')+';\r')
-							w.write('import java.util.HashMap;\r')
+							w.write('import com.spx.wrapper.*;\r')
+							w.write('import java.util.*;\r')
 							braceCount = 0
 							firstBraceFound = False
 							for line in read:
@@ -98,6 +112,8 @@ def transform(path):
 											firstBraceFound = True
 										elif firstBraceFound and braceCount == 0:
 											continue
+										elif "#" in line:
+											continue
 										else:
 											w.write(line)
 							w.close()
@@ -121,13 +137,14 @@ def transform(path):
 							superCall = '';
 							for line in cop:
 								if superCall != '' and "{" in line:
-									line = "{\r" + superCall
+									line = "{\r" + superCall.rstrip() + ';\r'
 									superCall = ''
 								if ":" in line:
 									if 'super' in line:
 										line,superCall = line.split(':')
 									else:
-										line = line.replace(":",' extends ')
+										if not 'default' in line and not 'case' in line and not '?' in line:
+											line = line.replace(":",' extends ')
 								w.write(cs2java(line))
 							w.close()
 							cop.close()

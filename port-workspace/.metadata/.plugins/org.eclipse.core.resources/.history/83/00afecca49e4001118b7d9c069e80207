@@ -1,0 +1,58 @@
+package com.spx.text;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;
+    public class TextType
+    {
+        public static final int Action = 0;
+        public static final int Inventory = 1;
+    }
+
+    public class TextManager
+    {
+        static private SpriteFont actionFont;
+        static private List<Text> _contents = new ArrayList<Text>();
+
+        public static void Add(Text textToAdd)
+        {
+            if(!_contents.Contains(textToAdd))
+            {
+                _contents.Add(textToAdd);    
+            }
+        }
+
+        public static void Clear()
+        {
+            _contents.Clear();
+        }
+
+        static public SpriteFont GetFont()
+        {
+            return actionFont;
+        }
+
+        public static void Update()
+        {
+            for (int ii = 0; ii < _contents.Count; ii++)
+            {
+                if(_contents[ii].Update()<=0)
+                {
+                    _contents.Remove(_contents[ii]);
+                    ii--;
+                }
+            }
+        }
+
+        public static void Draw()
+        {
+            foreach (Text component in _contents)
+            {
+                if (XnaManager.Renderer != null)
+                {
+                    component.Draw();
+                }
+            }
+        }
+
+        public static void LoadContent()
+        {
+            actionFont = XnaManager.GetActionFont();
+        }
+    }

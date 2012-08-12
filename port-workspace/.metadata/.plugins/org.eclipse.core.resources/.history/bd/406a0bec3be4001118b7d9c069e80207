@@ -1,0 +1,24 @@
+package com.aigilas.entities;import ﻿com.aigilas.creatures.*;import com.aigilas.dungeons.*;import com.spx.entities.*;import com.aigilas.management.*;import com.spx.core.*;
+{
+    public class Upstairs : Entity
+    {
+        public Upstairs(Point2 location)
+        {
+            Initialize(location, SpriteType.UPSTAIRS, Aigilas.EntityType.UPSTAIRS,ZDepth.Stairs);
+        }
+
+        ICreature player;
+        public override void  Update()
+        {
+            player = EntityManager.GetTouchingCreature(this) as Player;
+            if(player!=null)
+            {
+                if (player.IsInteracting())
+                {
+                    player.PerformInteraction();
+                    DungeonFactory.GetPreviousFloor();
+                }    
+            }
+        }
+    }
+}
