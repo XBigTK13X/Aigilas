@@ -2,7 +2,7 @@ package com.spx.core;import com.spx.wrapper.*;import java.util.*;
     public class RNG
     {
         public static Random Rand;
-
+        public static int Next(int min,int max)        {        	return RNG.Rand.nextInt(max-min)+min;        }        
         public static double Angle()
         {
             return RNG.Rand.nextInt(360) * Math.PI / 180;

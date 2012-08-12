@@ -41,17 +41,25 @@ def cs2java(line):
 	replacements['virtual '] = ''
 	replacements[' in '] = ':'
 	replacements['foreach'] = 'for'
+	replacements['Contains'] = 'contains'
+	replacements['Add'] = 'add'
+	replacements['Remove'] = 'remove'
+	replacements['RNG.Rand.Next'] = 'RNG.Next'
+	replacements['.Length'] = '.length'
 	for key in replacements.keys():
 		if key in line and (not replacements[key] in line or replacements[key] == '' or replacements[key] == 'class'):
 			line = line.replace(key,replacements[key])
 	if 'public' in line and 'get' in line:
 		line = line.split('{')[0]+"\r"
-	if 'Math.' in line:
+	if 'Math.' in line and not '.PI' in line:
 		for kill in [m.start() for m in re.finditer('Math.', line)]:
 			killLoc = kill + 5
 			l = list(line)
 			l[killLoc] = line[killLoc].lower()
 			line = "".join(l)
+	if "override" in line:
+		line = line.replace('override','')
+		line = '@Override\r' + line		
 	return line
 
 # Phases

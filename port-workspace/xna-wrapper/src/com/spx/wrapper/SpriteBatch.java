@@ -15,4 +15,11 @@ public class SpriteBatch {
 		
 	}
 
+	public void Draw(Texture2D _texture, Rectangle _target,
+			Rectangle _currentCell, Object multiply, float f, float zero,
+			SpriteEffects none, float _layerDepth) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
