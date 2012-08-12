@@ -21,6 +21,7 @@ def isCodeDir(dir):
 	excludes.append('SPX.Util')
 	excludes.append('SPX.States')
 	excludes.append('SPX.Core')
+	excludes.append('SPX.Text')
 	for ex in excludes:
 		if ex in dir:
 			return False
@@ -37,6 +38,9 @@ def cs2java(line):
 	replacements['ref '] = ''
 	replacements['ContainsKey '] = 'containsKey'
 	replacements['ToString '] = 'toString'
+	replacements['virtual '] = ''
+	replacements[' in '] = ':'
+	replacements['foreach'] = 'for'
 	for key in replacements.keys():
 		if key in line and (not replacements[key] in line or replacements[key] == '' or replacements[key] == 'class'):
 			line = line.replace(key,replacements[key])
