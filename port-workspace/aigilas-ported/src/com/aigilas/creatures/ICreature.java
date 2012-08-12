@@ -68,9 +68,9 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
                 }
                 for(String skillId:SkillFactory.GetElementalSkills(GetActorType(),_composition))
                 {
-                    _skills.add(skillId);
+                    _skills.Add(skillId);
                 }
-                _skills.add(_class.GetLevelSkills(_currentLevel));                
+                _skills.Add(_class.GetLevelSkills(_currentLevel));                
             }
         }
 
@@ -96,8 +96,8 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
         private void Init(int type, Stats stats, CreatureClass creatureClass)        {            Init(type,stats,creatureClass,true);        }                private void Init(int type, Stats stats)        {        	Init(type,stats,null,true);        }        
         public void PickupItem(GenericItem item)
         {
-            _inventory.add(item);
-            EntityManager.removeObject(item);
+            _inventory.Add(item);
+            EntityManager.RemoveObject(item);
         }
 
         public void Equip(GenericItem item)
@@ -105,7 +105,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             if (_inventory.GetItemCount(item) > 0 && !_equipment.IsRegistered(item))
             {
                 _equipment.Register(item);
-                _inventory.remove(item);
+                _inventory.Remove(item);
             }
             else
             {
@@ -124,7 +124,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
                 if (_inventory.GetItemCount(item) > 0)
                 {
                     EntityManager.addObject(new GenericItem(item, GetLocation()));
-                    _inventory.remove(item);
+                    _inventory.Remove(item);
                 }
                 else
                 {
@@ -132,7 +132,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
                     {
                         _equipment.Unregister(item);
                         EntityManager.addObject(new GenericItem(item, GetLocation()));
-                        _inventory.remove(item);
+                        _inventory.Remove(item);
                     }
                 }
             }
@@ -140,10 +140,10 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
 
         public GenericItem DestroyRandomItemFromInventory()
         {
-            var item = _inventory.GetNonZeroEntry();
+            GenericItem item = _inventory.GetNonZeroEntry();
             if (item != null)
             {
-                _inventory.remove(item);
+                _inventory.Remove(item);
             }
             return item;
         }
@@ -160,7 +160,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             {
                 _isActive = false;
             }
-            if (_statuses.Allows(OAction.Movement))
+            if (_statuses.Allows(CreatureAction.Movement))
             {
                 if (_isPlaying)
                 {
@@ -188,7 +188,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
         }
         private void Regenerate()
         {
-            if (_statuses.Allows(OAction.Regeneration))
+            if (_statuses.Allows(CreatureAction.Regeneration))
             {
                 for (String stat:StatType.Values)
                 {
@@ -242,11 +242,11 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return _baseStats.Get(stat)+CalculateEquipmentBonus(stat)+CalculateInstrinsicBonus(stat);
         }
 
-        private float GetRaw(String stat,boolean isMax=false)
+        private float GetRaw(String stat,boolean isMax)
         {
             return isMax ? _maxStats.GetRaw(stat) : _baseStats.GetRaw(stat);
         }
-
+        private float GetRaw(String stat)        {            return GetRaw(stat,false);        }        
         private float CalculateInstrinsicBonus(String stat)
         {
             if (_class == null)
@@ -270,7 +270,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return (int)_maxStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
         }
 
-        public float Set(String stat,float value)
+        public float SetBase(String stat,float value)
         {
             return _baseStats.Set(stat,value);
         }
@@ -280,11 +280,11 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return _maxStats.Set(stat,value);
         }
 
-        public float Set(String stat,float value,boolean setMax=false)
+        public float Set(String stat,float value,boolean setMax)
         {
-            return setMax ? SetMax(stat, value) : Set(stat, value);
+            return setMax ? SetMax(stat, value) : SetBase(stat, value);
         }
-
+        public float Set(String stat,float value)        {            return Set(stat,value,false);        }        
         protected void InitStat(String stat, float value)
         {
             _maxStats.Set(stat, value);
@@ -301,9 +301,9 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return _actorType;
         }
 
-        protected float Adjust(String stat, float adjustment,boolean adjustMax = false)
+        protected float Adjust(String stat, float adjustment,boolean adjustMax)
         {
-            var result = GetRaw(stat) + adjustment;
+            float result = GetRaw(stat) + adjustment;
             if (!adjustMax)
             {
                 if (result > GetMax(stat))
@@ -313,39 +313,10 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             }
             return Set(stat, (result),adjustMax);
         }
-
-        public void ApplyDamage(float damage,ICreature attacker=null,boolean showDamage = true,String statType = null)
+        protected float Adjust(String stat, float adjustment)        {            return Adjust(stat,adjustment,false);        }        public void ApplyDamage(float damage,ICreature attacker,boolean showDamage,String statType)        {            if (attacker != null)            {                attacker.PassOn(this,StatusComponent.Contagion);                this.PassOn(attacker, StatusComponent.Passive);            }            if (statType == null)            {                damage -= _baseStats.Get(StatType.DEFENSE);            }            if (damage <= 0 && statType==null)            {                damage = 0;                            }            if (showDamage)            {                _damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));            }            if(damage>0 && statType==null && _statuses.Allows(CreatureAction.ReceiveHealing))            {                Adjust((statType == null)?StatType.HEALTH:statType, -damage);            }            if (Get(StatType.HEALTH) <= 0)            {                _isActive = false;                if (attacker != null)                {                    attacker.AddExperience(CalculateExperience());                    attacker.PassOn(attacker, StatusComponent.KillReward);                }            }        }                public void ApplyDamage(float damage,ICreature attacker,boolean showDamage)        {            ApplyDamage(damage,attacker,showDamage);        }                public void ApplyDamage(float damage,ICreature attacker)        {            ApplyDamage(damage,attacker,true,null);        }        
+        public void ApplyDamage(float damage)
         {
-            if (attacker != null)
-            {
-                attacker.PassOn(this,StatusComponent.Contagion);
-                this.PassOn(attacker, StatusComponent.Passive);
-            }
-            if (statType == null)
-            {
-                damage -= _baseStats.Get(StatType.DEFENSE);
-            }
-            if (damage <= 0 && statType==null)
-            {
-                damage = 0;                
-            }
-            if (showDamage)
-            {
-                _damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
-            }
-            if(damage>0 && statType==null && _statuses.Allows(OAction.ReceiveHealing))
-            {
-                Adjust(statType??StatType.HEALTH, -damage);
-            }
-            if (Get(StatType.HEALTH) <= 0)
-            {
-                _isActive = false;
-                if (attacker != null)
-                {
-                    attacker.addExperience(CalculateExperience());
-                    attacker.PassOn(attacker, StatusComponent.KillReward);
-                }
-            }
+            ApplyDamage(damage,null,true,null);
         }
 
         public boolean LowerStat(String stat, float amount)
@@ -362,18 +333,18 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return true;
         }
 
-        public void AddBuff(StatBuff buff,boolean applyToMax = false)
+        public void AddBuff(StatBuff buff,boolean applyToMax)
         {
             if (!applyToMax)
             {
-                _baseStats.addBuff(buff);
+                _baseStats.AddBuff(buff);
             }
             else
             {
-                _maxStats.addBuff(buff);
+                _maxStats.AddBuff(buff);
             }
         }
-
+        public void AddBuff(StatBuff buff)        {            AddBuff(buff,false);        }        
         protected float CalculateDamage()
         {
             return Get(StatType.STRENGTH);
@@ -384,7 +355,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
         public void MoveIfPossible(float xVel, float yVel)
         {
 
-            if (_statuses.Allows(OAction.Movement))
+            if (_statuses.Allows(CreatureAction.Movement))
             {
                 if ((xVel != 0 || yVel != 0) && IsCooledDown())
                 {
@@ -394,12 +365,12 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
                         Move(xVel, yVel);
                         Set(StatType.MOVE_COOL_DOWN, 0);
                     }
-                    if(_statuses.Allows(OAction.Attacking))
-                    {
-                        creatures = EntityManager.GetActorsAt(target).Select(a=>a as ICreature).ToList();
-                        if (creatures.length > 0)
+                    if(_statuses.Allows(CreatureAction.Attacking))
+                    {                    	creatures.clear();
+                        for(IActor actor: EntityManager.GetActorsAt(target)){                        	creatures.add((ICreature)actor);                        }
+                        if (creatures.size() > 0)
                         {
-                            for (var creature:creatures)
+                            for (ICreature creature:creatures)
                             {
                                 if (creature != this)
                                 {
@@ -407,7 +378,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
                                         ||
                                         (creature.GetActorType() == AigilasActorType.PLAYER && _actorType != AigilasActorType.PLAYER)
                                         || 
-                                        !_statuses.Allows(OAction.WontHitNonTargets))
+                                        !_statuses.Allows(CreatureAction.WontHitNonTargets))
                                     {
                                         creature.ApplyDamage(CalculateDamage(), this);
                                         if (!creature.IsActive())
@@ -424,8 +395,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             }
         }
 
-        public void MoveTo(Point2 targetPosition)
-;;        {
+        public void MoveTo(Point2 targetPosition)        {
             MoveIfPossible(targetPosition.PosX - GetLocation().PosX, targetPosition.PosY - GetLocation().PosY);
         }
 
@@ -449,7 +419,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             
             while (amount > 0)
             {
-                var diff = amount;
+                float diff = amount;
                 if (amount > _nextLevelExperience)
                 {
                     diff = _nextLevelExperience;
@@ -467,9 +437,9 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
                     _currentLevel++;
                     if (_class != null)
                     {
-                        _skills.add(_class.GetLevelSkills(_currentLevel));
+                        _skills.Add(_class.GetLevelSkills(_currentLevel));
                     }
-                    TextManager.add(new ActionText("LEVEL UP!", 100, (int)GetLocation().PosX, (int)GetLocation().PosY));
+                    TextManager.Add(new ActionText("LEVEL UP!", 100, (int)GetLocation().PosX, (int)GetLocation().PosY));
                 }
             }
         }
@@ -481,7 +451,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
 
         public void CycleActiveSkill(int velocity)
         {
-            if (_statuses.Allows(OAction.SkillCycle))
+            if (_statuses.Allows(CreatureAction.SkillCycle))
             {
                 _skills.Cycle(velocity);
             }
@@ -495,7 +465,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
         float lastSum = 0;
         public void UseActiveSkill()
         {
-            if (_statuses.Allows(OAction.SkillUsage))
+            if (_statuses.Allows(CreatureAction.SkillUsage))
             {
                 lastSum = _baseStats.GetSum();
                 _skills.UseActive();
@@ -506,8 +476,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             }
         }
 
-        public TargetSet GetTargets()
-;;        {
+        public TargetSet GetTargets()        {
             if (_strategy == null)
             {
                 return _master.GetTargets();
@@ -519,9 +488,9 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
 
         private String GetLowestStat()
         {
-            var result = StatType.AGE;
-            var min = float.MaxValue;
-            for (var stat:StatType.Values.Where(stat => Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY))
+            String result = StatType.AGE;
+            float min = Float.MAX_VALUE;
+            List<String> possibleStats = new ArrayList<String>();            for(String stat: StatType.Values){            	if(Get(stat)<min && stat != StatType.AGE && stat!= StatType.MOVE_COOL_DOWN && stat != StatType.PIETY){            		possibleStats.add(stat);            	}            }            for (String stat:possibleStats)
             {
                 result = stat;
                 min = Get(stat);
@@ -536,15 +505,13 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             Adjust(StatType.PIETY,sacrifice.Modifers.GetSum() * ((_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1));
             sacrifice.SetInactive();
         }
-
+        static final int pietyCost = 500;
         public void Pray(God god)
-        {
-            AssignGod(god);
-            static final int pietyCost = 500;
+        {        	AssignGod(god);         
             if (Get(StatType.PIETY) >= pietyCost)
             {
-                var lowest = GetLowestStat();
-                var adjustment = (Get(StatType.PIETY)/100);
+                String lowest = GetLowestStat();
+                float adjustment = (Get(StatType.PIETY)/100);
                 Set(lowest, GetMax(lowest) + adjustment);
                 Set(lowest, adjustment, true);
                 Adjust(StatType.PIETY, -pietyCost);
@@ -571,17 +538,16 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
         {
             for(int element:attack)
             {
-                _combo.add(element);
+                _combo.Add(element);
             }
         }
 
         public void AddStatus(IStatus status)
         {
-            _statuses.add(status);
+            _statuses.Add(status);
         }
 
-        public void PassOn(ICreature target,StatusComponent componentType)
-;;        {
+        public void PassOn(ICreature target,StatusComponent componentType)        {
             _statuses.PassOn(target, componentType);
         }
 
@@ -603,16 +569,16 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
 
         public void RemoveLeastUsedSkill()
         {
-            _skills.removeLeastUsed();
+            _skills.RemoveLeastUsed();
         }
 
         public void React(String skillId)
         {
             if (_actorType == AigilasActorType.PLAYER && skillId != SkillId.FORGET_SKILL && _god.NameText == GodId.Names[GodId.GLUTTONY])
             {
-                if (_skills.length < _currentLevel)
+                if (_skills.Count() < _currentLevel)
                 {
-                    _skills.add(skillId);
+                    _skills.Add(skillId);
                 }
             }
         }
@@ -633,13 +599,12 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return _skills.SetHotSkillsActive(hotkey);
         }
 
-        internal object GetHotSkillName(int hotSkillSlot)
+        public String GetHotSkillName(int hotSkillSlot)
         {
             return _skills.GetHotSkillName(hotSkillSlot);
         }
 
-        public List<Integer> GetTargetActorTypes()
-;;        {
+        public List<Integer> GetTargetActorTypes()        {
             return _strategy.GetTargetActorTypes();
         }
 

@@ -4,15 +4,17 @@ import re
 
 start_path = "c:\\_z\\dev\\git\\aigilas"
 convert_path = ".\\convert\\"
-targetName = "CreatureClasses"
-targetFile = "CreatureClasses.java"
-targetPath = os.path.join("c:\\_z\\dev\\git\\aigilas\\script\\convert\\com\\aigilas\\classes",'')
+targetName = "Minions"
+targetFile = "Minons.java"
+targetUrl = 'creatures'
+targetPath = os.path.join("c:\\_z\\dev\\git\\aigilas\\script\\convert\\com\\aigilas",targetUrl)
 targetPath = os.path.join(targetPath,targetFile)
 
 def divide_class(targetName):
 	phase = 0
 	braceCount = 0
-	os.remove('header.java')
+	if os.path.exists('header.java'):
+		os.remove('header.java')
 	while phase < 3:
 		read = open(targetPath,'r')
 		newClassName = ''
@@ -28,7 +30,7 @@ def divide_class(targetName):
 				if ' class ' in line:
 					if not targetName in line:
 						print "Generating " + newClassName+".java"
-						newClassName = line.split('class')[1].rstrip().split('extends')[0].replace(' ','')
+						newClassName = line.split('class')[1].rstrip().split('extends')[0].replace(' ','')						
 						newPath = targetPath.replace(targetName,newClassName)
 						if os.path.exists(newPath):
 							os.remove(newPath)
@@ -37,6 +39,8 @@ def divide_class(targetName):
 						header = open('header.java','r')
 						for head in header:
 							w.write(head)
+						if not 'public' in line:
+							line = 'public ' + line
 				if '{' in line:
 					braceCount += 1
 				if '}' in line:

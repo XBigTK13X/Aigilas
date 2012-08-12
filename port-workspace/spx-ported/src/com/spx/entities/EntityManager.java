@@ -111,7 +111,7 @@ import com.xna.wrapper.*;    public class EntityManager
             }
             return creatures;
         }
-
+        public static List<IActor> GetActorsAt(Point2 target)        {            return GetActorsAt(target,-1);        }        
         private static List<IActor> creatures2 = new ArrayList<IActor>();
         public static List<IActor> GetActorsSurrounding(Point2 target,int distance)
         {
