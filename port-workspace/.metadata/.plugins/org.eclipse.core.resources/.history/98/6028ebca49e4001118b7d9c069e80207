@@ -1,21 +1,0 @@
-package com.spx.util;import com.spx.wrapper.*;import java.util.*;
-    public class StringStorage
-    {
-        private static HashMap<Integer, String> __slots = new HashMap<Integer, String>();
-
-        public static String Get(float value)
-        {
-            if (__slots.Keys.length == 0)
-            {
-                for (float ii = 0; ii < 1000; ii++)
-                {
-                    __slots.Add((int)ii, ii.ToString());
-                }
-            }
-            if (__slots.ContainsKey((int)value))
-            {
-                return __slots[(int)value];
-            }
-            return value.ToString();
-        }
-    }

@@ -1,5 +1,0 @@
-package com.spx.wrapper;
-
-public class ContentManager {
-	static public Load<?>(){}
-}

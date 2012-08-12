@@ -1,216 +1,0 @@
-package com.spx.core;import com.spx.wrapper.*;import java.util.*;
-
-
-    public class Point2:Object
-    {
-        private static Point2 Zero = new Point2(0, 0);
-        private static float halfHeight = GameManager.SpriteHeight/2;
-        private static float halfWidth= GameManager.SpriteWidth/ 2;
-
-        public float X;        public float Y;        public float Weight;        public int GridX;        public int GridY;        public float PosX;        public float PosY;        public float PosCenterX;        public float PosCenterY;        
-        public static Point2[] _rotateTargets = 
-            {
-                new Point2(1, 0),
-                new Point2(1, 1),
-                new Point2(0, 1),
-                new Point2(0,-1),
-                new Point2(-1,-1),
-                new Point2(-1, 0),
-                new Point2(-1, 1),
-                new Point2(1, -1)
-            };
-
-        public static Point2[][] _locations = new Point2[GameManager.TileMapHeight][GameManager.TileMapWidth];
-
-        public Point2(float x, float y, int weight)
-        {
-            initThis(x,y,weight);
-        }       
-        public Point2(Point2 target){ initThis(target.X, target.Y, 0);} 
-        public Point2(Vector2 target){ initThis(target.X, target.Y, 0);} 
-        public Point2(int x, int y) {			initThis(x,y,0);		}                private void initThis(float x, float y, int weight){        	SetX(x);            SetY(y);            Weight = weight;        }        		public void Reset(float x, float y)
-        {
-            SetX(x);
-            SetY(y);
-        }
-
-        public void Copy(Point2 point)
-        {
-            if (point != null)
-            {
-                SetX(point.X);
-                SetY(point.Y);
-            }
-        }
-
-        public Point2 Add(Point2 target)
-        {
-            return new Point2(GridX + target.GridX,GridY + target.GridY);
-        }
-
-        public Point2 Minus(Point2 target)
-        {
-            return new Point2(GridX - target.GridX, GridY - target.GridY);
-        }
-        @Override
-        public int GetHashCode()
-        {
-            return GridX + 1000*GridY;
-        }
-
-        public override boolean Equals(object obj)
-        {
-            if (obj.GetType()==typeof(Point2))
-            {
-                var target = (Point2) obj;
-                return target.GridX == GridX && target.GridY == GridY;
-            }
-            return false;
-        }
-
-        public void SetX(float xValue)
-        {
-            X = xValue;
-            var isGrid = (Math.abs(X) < GameManager.TileMapWidth);
-            PosX = (isGrid) ? X * GameManager.SpriteWidth  extends  X;
-            PosCenterX = PosX + halfWidth;
-            GridX = (isGrid) ? (int)X  extends  (int)(X / GameManager.SpriteWidth);
-        }
-
-        public void SetY(float yValue)
-        {
-            Y = yValue;
-            var isGrid = (Math.abs(Y) < GameManager.TileMapWidth);
-            PosY = (isGrid) ? Y * GameManager.SpriteHeight extends  Y;
-            PosCenterY = PosY+halfHeight;
-            GridY = (isGrid) ? (int)Y  extends  (int)(Y / GameManager.SpriteHeight);
-        }
-
-        public void SetWeight(float weight)
-        {
-            Weight = weight;
-        }
-
-        public boolean IsZero()
-        {
-            return X == 0 && Y == 0;
-        }
-
-        public static float CalculateDistanceSquared(Point2 source, Point2 target)
-        {
-            return (float) (Math.pow(source.PosY - target.PosY, 2) + Math.pow(source.PosX - target.PosX, 2));
-        }
-
-        private static List<Point2> _neighbors = new ArrayList<Point2>();
-        public List<Point2> GetNeighbors()
-        {
-            if (_locations[0,0]==null)
-            {
-                for (int ii = 0; ii < GameManager.TileMapHeight; ii++)
-                {
-                    for (int jj = 0; jj < GameManager.TileMapWidth; jj++)
-                    {
-                        _locations[ii,jj] = new Point2(jj, ii);
-                    }
-                }
-            }
-            _neighbors.Clear();
-            for (var ii = -1; ii < 2; ii++)
-            {
-                for (var jj = -1; jj < 2; jj++)
-                {
-                    if (ii != 0 || jj != 0)
-                    {
-                        _neighbors.Add(_locations[GridY + ii,GridX + jj]);
-                    }
-                }
-            }
-            return _neighbors;
-        }
-
-        public boolean IsSameSpot(Point2 target)
-        {
-            return target.GridX == GridX && target.GridY == GridY;
-        }
-
-        public Point2 RotateClockwise()
-        {
-            if (GridX == 1)
-            {
-                if (GridY == -1)
-                {
-                    return _rotateTargets[0];
-                }
-                if (GridY == 0)
-                {
-                    return _rotateTargets[1];
-                }
-                if (GridY == 1)
-                {
-                    return _rotateTargets[2];
-                }
-            }
-            if (GridX == -1)
-            {
-                if (GridY == -1)
-                {
-                    return _rotateTargets[3];
-                }
-                if (GridY == 0)
-                {
-                    return _rotateTargets[4];
-                }
-                if (GridY == 1)
-                {
-                    return _rotateTargets[5];
-                }
-            }
-            if (GridX == 0)
-            {
-                if (GridY == 1)
-                {
-                    return _rotateTargets[6];
-                }
-                if (GridY == -1)
-                {
-                    return _rotateTargets[7];
-                }
-            }
-            return Zero;
-            /*
-             * This is getting close, but the flipped Y coord is ticking me off.
-            var theta = Math.pI / 4f;
-            var currentRotation = Math.atan2(-Y, X);
-            Console.WriteLine(currentRotation);
-            currentRotation -= theta;
-            var x = (float)Math.cos(currentRotation);
-            var y = (float)Math.sin(currentRotation);
-            if(x!=0)
-            {
-                x = (1 / (Math.abs(x))) * x;
-            }
-            if (y != 0)
-            {
-                y = (1 / (Math.abs(y))) * y;
-            }
-            var result = new Point2(x,y);
-            Console.WriteLine(result);
-            return result;
-             * */
-        }
-
-        public Point2 Rotate180()
-        {
-            return RotateClockwise().RotateClockwise().RotateClockwise().RotateClockwise();
-        }
-
-        public static float DistanceSquared(Point2 source, Point2 target)
-        {
-            return (float)(Math.pow(source.PosX - target.PosX, 2) + Math.pow(source.PosY - target.PosY, 2));
-        }
-
-        public override String ToString()
-        {
-            return "(gX,gY) - (posX,posY) extends  (" + GridX + "," + GridY + ") - (" + PosX + "," + PosY + ")";
-        }
-    }

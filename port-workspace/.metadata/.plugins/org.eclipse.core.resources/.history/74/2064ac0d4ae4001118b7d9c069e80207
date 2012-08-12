@@ -1,56 +1,0 @@
-package com.aigilas.strategies;import com.spx.wrapper.*;import java.util.*;import ﻿com.aigilas.creatures.*;import com.spx.core.*;
-    public class MinionRotateStrategy  extends  IStrategy
-    {
-        public MinionRotateStrategy(ICreature parent) { super(parent,Strategy.MinionRotate)//TODO pass master into strategy to copy targets here.;            parent.SetSkillVector(new Point2(1,0));
-        }
-
-        public override void Act()
-        {
-            if (_parent.IsCooledDown())
-            {
-                _parent.SetSkillVector(_parent.GetSkillVector().RotateClockwise());
-                _parent.UseActiveSkill();
-                _parent.ApplyDamage(5, null, false);
-                _parent.Set(StatType.MOVE_COOL_DOWN, 0);
-            }
-        }
-    }
-    public class MinionFireStrategy  extends  IStrategy
-    {
-        public MinionFireStrategy(ICreature parent)
-            { super(parent,Strategy.MinionFire);            parent.SetSkillVector(parent.GetSkillVector());
-        }
-        public override void Act()
-        {
-            if (_parent.IsCooledDown())
-            {
-                _parent.UseActiveSkill();
-                _parent.ApplyDamage(5, null, false);
-                _parent.Set(StatType.MOVE_COOL_DOWN, 0);
-            }
-        }
-    }
-
-    public class MinionOneUseStrategy  extends  IStrategy
-    {
-        public MinionOneUseStrategy(ICreature parent)
-            { super(parent,Strategy.MinionOneUse);            parent.SetSkillVector(parent.GetSkillVector());
-        }
-        public override void Act()
-        {
-            _parent.UseActiveSkill();     
-            _parent.SetInactive();
-        }
-    }
-
-    public class MinionCloudStrategy  extends  IStrategy
-    {
-        public MinionCloudStrategy(ICreature parent)
-            { super(parent,Strategy.MinionCloud);            parent.SetSkillVector(parent.GetSkillVector());
-        }
-        public override void Act()
-        {
-            _parent.UseActiveSkill();
-            _parent.SetInactive();
-        }
-    }

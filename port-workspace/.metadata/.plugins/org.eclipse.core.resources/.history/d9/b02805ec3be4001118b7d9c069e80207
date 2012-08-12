@@ -1,12 +1,0 @@
-package com.aigilas.items;import com.aigilas.creatures.*;import com.aigilas.entities.*;
-{
-    public class Slots
-    {
-       private List<int> _slots; 
-       public Slots(IEnumerable<int> itemSlots)
-       {
-           _slots = new List<int>(itemSlots);
-       }
-       
-    }
-}

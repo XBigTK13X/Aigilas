@@ -1,25 +1,0 @@
-package com.aigilas.states;import ﻿com.spx.states.*;import com.spx.entities.*;import com.aigilas.creatures.*;import com.aigilas.dungeons.*;import com.spx.core.*;import com.spx.io.*;
-{
-    public class GameplayState : State
-    {
-        public GameplayState()
-        {
-            Console.WriteLine("Generating the dungeon...");
-            EntityManager.Reset();
-            DungeonFactory.Start();
-            Client.Get().DungeonHasLoaded();
-        }
-        public void Update()
-        {
-            EntityManager.Update();
-        }
-        public void LoadContent()
-        {
-            EntityManager.LoadContent();
-        }
-        public void Draw()
-        {
-            EntityManager.Draw();
-        }
-    }
-}

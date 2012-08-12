@@ -19,7 +19,7 @@
 		<link>
 			<name>src/com</name>
 			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/git/aigilas/script/convert/com</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/script/convert/com</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

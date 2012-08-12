@@ -1,17 +1,0 @@
-package com.aigilas.items;{
-    public class ItemPrefix
-    {
-        public final string NULL = "NULL";
-        public final string Silver = "Silver";
-        public final string Solid = "Solid";
-        public final string Permuted = "Permuted";
-
-        public static readonly string[] Values =
-        {
-            NULL,
-            Silver,
-            Solid,
-            Permuted
-        };
-    }
-}

@@ -1,42 +1,0 @@
-package com.aigilas.hud;import com.spx.wrapper.*;import java.util.*;import ﻿com.aigilas.creatures.*;import com.aigilas.items.*;import com.spx.util.*;import com.spx.core.*;
-    public class EquipmentHud extends IHud
-    {
-        private Equipment _equipment;
-        private static final String __text = "Equipped";
-
-        public EquipmentHud(ICreature owner, Equipment equipment){ super(owner, XnaManager.WindowWidth / 2, XnaManager.WindowHeight / 2);            _equipment = equipment;
-        }
-
-        public void Draw()
-        {
-            if (_isVisible)
-            {
-                _textHandler.Draw();
-            }
-        }
-
-        private static final String sep = " extends ";
-        private static final String newline = "\n";
-        private String display = "EMPTY";
-        private String title = "Equipped\n";
-
-        public void Update(boolean refresh)
-        {
-            if (_isVisible)
-            {
-                _textHandler.Update();
-                _textHandler.Clear();
-                if (refresh)
-                {
-                    StringSquisher.Clear();
-                    StringSquisher.Squish(title);
-                    foreach (var item in _equipment.GetItems())
-                    {
-                        StringSquisher.Squish(ItemSlot.Names[item.Key].Substring(0, 1), sep, item.Value.Name, newline);
-                    }
-                    display = StringSquisher.Flush();
-                }
-                _textHandler.WriteDefault(display, 320, 30, GetHudOrigin());
-            }
-        }
-    }

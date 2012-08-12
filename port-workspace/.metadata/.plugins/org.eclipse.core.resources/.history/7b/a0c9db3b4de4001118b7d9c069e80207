@@ -1,9 +1,0 @@
-package com.spx.wrapper;
-
-public class Vector2 {
-
-	public Vector2(int windowWidth, int windowHeight) {
-		// TODO Auto-generated constructor stub
-	}
-
-}

@@ -1,24 +1,0 @@
-package com.spx.paths;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;
-    class StepLookup
-    {
-        private static HashMap<Point2,Point2>[] __lookups = new HashMap<Point2,Point2>[1000];
-        private static int _index = 0;
-
-        public static HashMap<Point2,Point2> Copy(HashMap<Point2,Point2> walk)
-        {
-            if (__lookups[0] == null)
-            {
-                for (int ii = 0; ii < __lookups.length; ii++)
-                {
-                    __lookups[ii] = new HashMap<Point2,Point2>(200);
-                }
-            }
-            _index = (_index + 1) % __lookups.length;
-            __lookups[_index].Clear();
-            foreach (var keyval in walk)
-            {
-                __lookups[_index].Add(keyval.Key,keyval.Value);
-            }
-            return __lookups[_index];
-        }
-    }
