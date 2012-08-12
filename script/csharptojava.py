@@ -5,7 +5,7 @@ import re
 start_path = "c:\\_z\\dev\\git\\aigilas"
 convert_path = ".\\convert\\"
 targetName = "Minions"
-targetFile = "Minons.java"
+targetFile = "Minions.java"
 targetUrl = 'creatures'
 targetPath = os.path.join("c:\\_z\\dev\\git\\aigilas\\script\\convert\\com\\aigilas",targetUrl)
 targetPath = os.path.join(targetPath,targetFile)
