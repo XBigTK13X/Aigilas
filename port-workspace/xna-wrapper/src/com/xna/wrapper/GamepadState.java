@@ -7,4 +7,9 @@ public class GamepadState {
 		//TODO 
 	}
 
+	public boolean IsButtonDown(Buttons buttons) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

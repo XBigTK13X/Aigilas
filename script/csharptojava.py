@@ -4,7 +4,49 @@ import re
 
 start_path = "c:\\_z\\dev\\git\\aigilas"
 convert_path = ".\\convert\\"
+targetName = "CreatureClasses"
+targetFile = "CreatureClasses.java"
+targetPath = os.path.join("c:\\_z\\dev\\git\\aigilas\\script\\convert\\com\\aigilas\\classes",'')
+targetPath = os.path.join(targetPath,targetFile)
 
+def divide_class(targetName):
+	phase = 0
+	braceCount = 0
+	os.remove('header.java')
+	while phase < 3:
+		read = open(targetPath,'r')
+		newClassName = ''
+		for line in read:
+			if phase == 0:
+				if 'package' in line or 'import' in line:
+					w = open('header.java','a')
+					w.write(line)
+					w.close()
+			if phase == 1:
+				if newClassName != '':
+					w = open(targetPath.replace(targetName,newClassName),'a')
+				if ' class ' in line:
+					if not targetName in line:
+						print "Generating " + newClassName+".java"
+						newClassName = line.split('class')[1].rstrip().split('extends')[0].replace(' ','')
+						newPath = targetPath.replace(targetName,newClassName)
+						if os.path.exists(newPath):
+							os.remove(newPath)
+						w = open(newPath,'a')
+						braceCount = 0					
+						header = open('header.java','r')
+						for head in header:
+							w.write(head)
+				if '{' in line:
+					braceCount += 1
+				if '}' in line:
+					braceCount -= 1
+				if newClassName != '':
+					w.write(line)
+					w.close()
+		read.close()
+		phase += 1
+	os.remove(targetPath)
 
 def isCodeOnly(file):
 	exclude = ['.txt','AssemblyInfo','.csproj','.csv']
@@ -72,6 +114,7 @@ def cs2java(line):
 		line = line.replace('override','')
 		line = '@Override\r' + line		
 	return line
+
 
 # Phases
 #   0 - Determine the namespace and prepare a location for the converted file
@@ -177,7 +220,9 @@ def transform(path):
 							cop.close()
 							os.remove(convert_file+'b')
 
-if os.path.exists(convert_path):		
-	shutil.rmtree(os.path.join(convert_path,''))
-transform(start_path)
+divide_class(targetName)
+
+#if os.path.exists(convert_path):		
+#	shutil.rmtree(os.path.join(convert_path,''))
+#transform(start_path)
 
