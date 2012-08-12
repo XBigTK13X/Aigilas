@@ -1,4 +1,4 @@
-package com.spx.particles;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;import com.spx.entities.*;
+package com.spx.particles;import java.util.*;import com.spx.core.*;import com.spx.entities.*;import com.xna.wrapper.*;
     public class Particle2 extends  PEComponent
     {
         public static final int DefaultLife = 100;

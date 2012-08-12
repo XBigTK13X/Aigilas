@@ -1,4 +1,4 @@
-package com.spx.text;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;
+package com.spx.text;import java.util.*;import com.spx.core.*;import com.xna.wrapper.*;
     public class Text
     {
         protected String _contents;

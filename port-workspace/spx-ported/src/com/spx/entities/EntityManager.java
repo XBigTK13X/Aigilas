@@ -1,5 +1,5 @@
-package com.spx.entities;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;
-    public class EntityManager
+package com.spx.entities;import java.util.*;import com.spx.core.*;
+import com.xna.wrapper.*;    public class EntityManager
     {
         private static List<IEntity> _contents = new ArrayList<IEntity>();
         private static HashMap<Point2,List<IEntity>> _gridContents = new HashMap<Point2, List<IEntity>>();

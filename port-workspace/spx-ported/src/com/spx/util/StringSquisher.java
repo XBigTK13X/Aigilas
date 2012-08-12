@@ -1,4 +1,4 @@
-package com.spx.util;import com.spx.wrapper.*;import java.util.*;
+package com.spx.util;import com.xna.wrapper.*;import java.util.*;
 
     public class StringSquisher
     {

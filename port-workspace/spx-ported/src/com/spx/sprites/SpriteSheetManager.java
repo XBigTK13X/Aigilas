@@ -1,4 +1,4 @@
-package com.spx.sprites;import com.spx.wrapper.*;import java.util.*;
+package com.spx.sprites;import com.xna.wrapper.*;import java.util.*;
     public class SpriteSheetManager
     {
         private static HashMap<Integer, SpriteInfo> __manager = new HashMap<Integer, SpriteInfo>();

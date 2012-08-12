@@ -1,4 +1,4 @@
-package com.spx.core;import com.spx.wrapper.*;import java.util.*;
+package com.spx.core;import com.xna.wrapper.*;import java.util.*;
     public class XnaManager
     {
         public static int WindowHeight = GameManager.SpriteHeight * GameManager.TileMapHeight; //720 //1050

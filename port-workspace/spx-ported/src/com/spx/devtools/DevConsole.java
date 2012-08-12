@@ -1,4 +1,4 @@
-package com.spx.devtools;import com.spx.wrapper.*;import java.util.*;import com.spx.text.*;import com.spx.core.*;
+package com.spx.devtools;import java.util.*;import com.spx.text.*;import com.spx.core.*;import com.xna.wrapper.*;
     public class DevConsole
     {
         private class ConsoleText  extends  com.spx.text.Text

@@ -1,4 +1,4 @@
-package com.spx.text;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;import com.spx.text.*;
+package com.spx.text;import java.util.*;import com.spx.core.*;import com.spx.text.*;import com.xna.wrapper.*;
     public class ActionTextHandler
     {
         private ActionText[] defaultPool = new ActionText[100];

@@ -1,4 +1,4 @@
-package com.spx.text;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;    public class TextManager
+package com.spx.text;import java.util.*;import com.spx.core.*;import com.xna.wrapper.*;    public class TextManager
     {
         static private SpriteFont actionFont;
         static private List<Text> _contents = new ArrayList<Text>();

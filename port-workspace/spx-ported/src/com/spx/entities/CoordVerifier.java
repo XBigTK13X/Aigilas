@@ -1,4 +1,4 @@
-package com.spx.entities;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;import com.spx.entities.*;
+package com.spx.entities;import java.util.*;import com.spx.core.*;import com.spx.entities.*;import com.xna.wrapper.*;
     public class CoordVerifier
     {
         public static boolean IsValid(Point2 position)

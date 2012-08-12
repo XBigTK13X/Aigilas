@@ -1,4 +1,4 @@
-package com.spx.sprites;import com.spx.wrapper.*;import java.util.*;    public class AnimatedTextureFactory
+package com.spx.sprites;import com.xna.wrapper.*;import java.util.*;    public class AnimatedTextureFactory
     {
         public static AnimatedTexture Create(int type, int x, int y)
         {

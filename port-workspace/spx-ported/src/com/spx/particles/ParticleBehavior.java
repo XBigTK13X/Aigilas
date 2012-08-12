@@ -1,4 +1,4 @@
-package com.spx.particles;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;import com.spx.entities.*;public abstract class ParticleBehavior
+package com.spx.particles;import java.util.*;import com.spx.core.*;import com.spx.entities.*;import com.xna.wrapper.*;public abstract class ParticleBehavior
 {
     public int GetParticleCount()
     {

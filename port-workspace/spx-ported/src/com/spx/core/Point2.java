@@ -1,4 +1,4 @@
-package com.spx.core;import com.spx.wrapper.*;import java.util.*;
+package com.spx.core;import com.xna.wrapper.*;import java.util.*;
 
 
     public class Point2 extends Object

@@ -26,6 +26,7 @@ def isCodeDir(dir):
 	excludes.append('SPX.Entities')
 	excludes.append('SPX.DevTools')
 	excludes.append('SPX.Sprites')
+	excludes.append('SPX.IO')
 	for ex in excludes:
 		if ex in dir:
 			return False
@@ -111,7 +112,7 @@ def transform(path):
 
 							w = open(convert_file,'w')
 							w.write("package "+package.replace('\\','.').replace("..convert.",'')+';\r')
-							w.write('import com.spx.wrapper.*;\r')
+							w.write('import com.xna.wrapper.*;\r')
 							w.write('import java.util.*;\r')
 							braceCount = 0
 							firstBraceFound = False
@@ -169,9 +170,8 @@ def transform(path):
 								if ":" in line:
 									if 'super' in line:
 										line,superCall = line.split(':')
-									else:
-										if not 'default' in line and not 'case' in line and not '?' in line and not 'for' in line:
-											line = line.replace(":",' extends ')
+									if 'class' in line:
+										line = line.replace(":",' extends ')
 								w.write(cs2java(line))
 							w.close()
 							cop.close()

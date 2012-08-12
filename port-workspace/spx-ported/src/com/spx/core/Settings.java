@@ -1,4 +1,4 @@
-package com.spx.core;import com.spx.wrapper.*;import java.io.BufferedReader;import java.io.DataInputStream;import java.io.FileInputStream;import java.io.InputStreamReader;import java.util.*;
+package com.spx.core;import com.xna.wrapper.*;import java.io.BufferedReader;import java.io.DataInputStream;import java.io.FileInputStream;import java.io.InputStreamReader;import java.util.*;
     public class Settings
     {
         private static final String __configPath = "settings.cfg";

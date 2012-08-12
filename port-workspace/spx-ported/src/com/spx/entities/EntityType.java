@@ -1,4 +1,4 @@
-package com.spx.entities;import com.spx.wrapper.*;import java.util.*;
+package com.spx.entities;import com.xna.wrapper.*;import java.util.*;
     public class EntityType
     {
         public static final int ACTOR = 0;

@@ -1,4 +1,4 @@
-package com.spx.sprites;import com.spx.wrapper.*;import java.util.*;import com.spx.core.*;
+package com.spx.sprites;import java.util.*;import com.spx.core.*;import com.xna.wrapper.*;
     public class AnimatedTexture
     {
         private int _currentFrame;

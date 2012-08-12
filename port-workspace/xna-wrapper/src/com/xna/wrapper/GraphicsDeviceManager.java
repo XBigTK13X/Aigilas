@@ -1,4 +1,4 @@
-package com.spx.wrapper;
+package com.xna.wrapper;
 
 public class GraphicsDeviceManager {
 

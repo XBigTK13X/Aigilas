@@ -1,4 +1,4 @@
-package com.spx.states;import com.spx.wrapper.*;import java.util.*;
+package com.spx.states;import com.xna.wrapper.*;import java.util.*;
     public interface State
     {
         void Draw();
