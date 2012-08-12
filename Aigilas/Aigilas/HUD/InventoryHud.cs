@@ -17,7 +17,8 @@ namespace Aigilas.HUD
         private int _currentClass = ItemClass.Values[1];
         private readonly Inventory _inventory;
         private readonly Equipment _equipment;
-        private int _endingItem = 4, _startingItem = 0;
+        private int _endingItem = 4;
+        private int _startingItem = 0;
         private Dictionary<GenericItem, int> _currentClassItems;
         private GenericItem _currentSelectedItem = null;
 
