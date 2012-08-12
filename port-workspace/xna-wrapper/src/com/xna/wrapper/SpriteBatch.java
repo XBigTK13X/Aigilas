@@ -1,6 +1,10 @@
 package com.xna.wrapper;
 
 public class SpriteBatch {
+	public SpriteBatch(com.xna.wrapper.GraphicsDevice graphicsDevice) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void DrawString(SpriteFont getFont, String _contents, Vector2 add,
 			Color _color, int i, Vector2 zero, float f, SpriteEffects none,
 			float defaulthudtext) {
@@ -37,6 +41,18 @@ public class SpriteBatch {
 	}
 
 	public void Draw(Texture2D texture, Vector2 vector, Color color) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void Begin(SpriteSortMode fronttoback, BlendState alphablend,
+			Object object, Object object2, Object object3, Object object4,
+			Matrix getScalingMatrix) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void End() {
 		// TODO Auto-generated method stub
 		
 	}

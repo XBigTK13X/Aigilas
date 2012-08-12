@@ -23,4 +23,9 @@ public class Resolution {
 		return null;
 	}
 
+	public static void BeginDraw() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

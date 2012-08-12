@@ -1,5 +1,5 @@
 package com.aigilas.management;import com.xna.wrapper.*;import java.util.*;import com.spx.sprites.*;
-    class SpriteInitializer implements ISpriteInitializer
+    public class SpriteInitializer implements ISpriteInitializer
     {
         private SpriteDefinition Make(int type, int index, int frames)
         {

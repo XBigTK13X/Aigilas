@@ -8,4 +8,8 @@ public class Environment {
 	public static void Exit(int status) {
 		System.exit(status);
 	}
+
+	public static void Exit() {
+		Exit(0);
+	}
 }

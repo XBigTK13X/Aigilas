@@ -2,7 +2,7 @@ package com.xna.wrapper;
 
 public class GamePad {
 
-	public static PlayerIndex GetState(PlayerIndex playerIndex) {
+	public static GamepadState GetState(PlayerIndex playerIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
