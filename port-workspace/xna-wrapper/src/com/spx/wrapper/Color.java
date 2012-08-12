@@ -5,6 +5,7 @@ public class Color {
 	public float R;
 	public float G;
 	public float B;
+	public byte A;
 	public Color(float f, float g, float h, float alpha) {
 		// TODO Auto-generated constructor stub
 	}

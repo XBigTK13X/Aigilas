@@ -23,6 +23,9 @@ def isCodeDir(dir):
 	excludes.append('SPX.Core')
 	excludes.append('SPX.Text')
 	excludes.append('SPX.Particles')
+	excludes.append('SPX.Entities')
+	excludes.append('SPX.DevTools')
+	excludes.append('SPX.Sprites')
 	for ex in excludes:
 		if ex in dir:
 			return False
@@ -52,11 +55,12 @@ def cs2java(line):
 	replacements['addRange'] = 'addAll'
 	replacements['.Clear'] = '.clear'
 	replacements['IEnumerable'] = 'List'
+	replacements['ICollection'] = 'List'
 	for key in replacements.keys():
 		if key in line and (not replacements[key] in line or replacements[key] == '' or replacements[key] == 'class'):
 			line = line.replace(key,replacements[key])
 	if 'public' in line and 'get' in line:
-		line = line.split('{')[0]+"\r"
+		line = line.split('{')[0]+";\r"
 	if 'Math.' in line and not '.PI' in line:
 		for kill in [m.start() for m in re.finditer('Math.', line)]:
 			killLoc = kill + 5
