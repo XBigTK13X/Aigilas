@@ -1,6 +1,4 @@
-import os
-import shutil
-import re
+import os,shutil,re,sys
 
 start_path = "c:\\_z\\dev\\aigilas"
 convert_path = ".\\convert\\"
@@ -57,7 +55,7 @@ def isCodeOnly(file):
 	for ex in exclude:
 		if ex in file:
 			return False
-	if ".cs" in file:
+	if ".cs" in file or ".java" in file:
 		return True
 	return False
 
@@ -225,9 +223,19 @@ def transform(path):
 							cop.close()
 							os.remove(convert_file+'b')
 
-#divide_class(targetName)
+if 'gen' in sys.argv[1]:
+	print '== Generating all starting java code'
+	if os.path.exists(convert_path):		
+		shutil.rmtree(os.path.join(convert_path,''))
+	transform(start_path)
+elif 'div' in sys.argv[1]:					
+	print '== Splitting chunky file into multiple class files.'
+	targetName = sys.argv[2]
+	targetFile = sys.argv[3]
+	targetUrl = sys.argv[4]
+	divide_class(targetName)
+else:
+	print 'Unrecognized option: ' + sys.argv[0]
 
-if os.path.exists(convert_path):		
-	shutil.rmtree(os.path.join(convert_path,''))
-transform(start_path)
+
 
