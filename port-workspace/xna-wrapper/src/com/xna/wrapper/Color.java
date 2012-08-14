@@ -24,6 +24,9 @@ public class Color {
 	public static final Color Blue = null;
 	public static final Color Green = null;
 	public static final Color Yellow = null;
+	public static final Color Gray = null;
+	public static final Color Orange = null;
+	public static final Color Purple = null;
 	public Object multiply(float _alpha) {
 		// TODO Auto-generated method stub
 		return null;

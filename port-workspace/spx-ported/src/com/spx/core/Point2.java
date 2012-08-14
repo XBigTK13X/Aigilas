@@ -28,7 +28,7 @@ package com.spx.core;import com.xna.wrapper.*;import java.util.*;
         }       
         public Point2(Point2 target){ initThis(target.X, target.Y, 0);} 
         public Point2(Vector2 target){ initThis(target.X, target.Y, 0);} 
-        public Point2(int x, int y) {			initThis(x,y,0);		}                private void initThis(float x, float y, int weight){        	SetX(x);            SetY(y);            Weight = weight;        }        		public void Reset(float x, float y)
+        public Point2(int x, int y) {			initThis(x,y,0);		}        public Point2(float x, float y) {			initThis(x,y,0);		}        		private void initThis(float x, float y, int weight){        	SetX(x);            SetY(y);            Weight = weight;        }        		public void Reset(float x, float y)
         {
             SetX(x);
             SetY(y);
