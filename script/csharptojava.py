@@ -2,12 +2,12 @@ import os
 import shutil
 import re
 
-start_path = "c:\\_z\\dev\\git\\aigilas"
+start_path = "c:\\_z\\dev\\aigilas"
 convert_path = ".\\convert\\"
 targetName = "Minions"
 targetFile = "Minions.java"
 targetUrl = 'creatures'
-targetPath = os.path.join("c:\\_z\\dev\\git\\aigilas\\script\\convert\\com\\aigilas",targetUrl)
+targetPath = os.path.join("c:\\_z\\dev\\aigilas\\script\\convert\\com\\aigilas",targetUrl)
 targetPath = os.path.join(targetPath,targetFile)
 
 def divide_class(targetName):
@@ -73,6 +73,7 @@ def isCodeDir(dir):
 	excludes.append('SPX.DevTools')
 	excludes.append('SPX.Sprites')
 	excludes.append('SPX.IO')
+	excludes.append('SPX.Paths')
 	for ex in excludes:
 		if ex in dir:
 			return False
