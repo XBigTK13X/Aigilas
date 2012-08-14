@@ -56,4 +56,11 @@ public class SpriteBatch {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void Draw(Texture2D _menuBase, Vector2 getHudOrigin,
+			Rectangle rectangle, Color black, float f, Vector2 zero2,
+			Vector2 getCenter, SpriteEffects none, float hudbg) {
+		// TODO Auto-generated method stub
+		
+	}
 }

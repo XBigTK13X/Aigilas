@@ -14,6 +14,10 @@ public class Vector2 {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Vector2() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Vector2 add(Vector2 _origin) {
 		// TODO Auto-generated method stub
 		return null;
