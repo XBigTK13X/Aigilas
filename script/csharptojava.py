@@ -63,7 +63,7 @@ def isCodeOnly(file):
 
 traversed = []
 def isCodeDir(dir):
-	excludes = ['Debug','Release','TempPE','bin','obj','Properties','x86','script','concept','.git','SPX.Paths','port-workspace']
+	excludes = ['Debug','Release','TempPE','bin','obj','Properties','x86','script','concept','.git','port-workspace']
 	excludes.append('SPX.Util')
 	excludes.append('SPX.States')
 	excludes.append('SPX.Core')
@@ -224,9 +224,9 @@ def transform(path):
 							cop.close()
 							os.remove(convert_file+'b')
 
-divide_class(targetName)
+#divide_class(targetName)
 
-#if os.path.exists(convert_path):		
-#	shutil.rmtree(os.path.join(convert_path,''))
-#transform(start_path)
+if os.path.exists(convert_path):		
+	shutil.rmtree(os.path.join(convert_path,''))
+transform(start_path)
 
