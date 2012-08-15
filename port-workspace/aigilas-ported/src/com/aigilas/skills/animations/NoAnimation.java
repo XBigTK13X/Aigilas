@@ -1,0 +1,1 @@
+package com.aigilas.skills.animations;import com.xna.wrapper.*;import java.util.*;import com.aigilas.creatures.*;import com.aigilas.entities.*;import com.spx.core.*;public     class NoAnimation  extends  SkillAnimation { }

@@ -1,0 +1,1 @@
+package com.aigilas.skills.animations;import com.xna.wrapper.*;import java.util.*;import com.aigilas.creatures.*;import com.aigilas.entities.*;import com.spx.core.*;public     class SkillAnimation    {        protected SkillAnimation(){}        public void Animate(SkillEffect skill,ICreature source,Point2 velocity){}    }
