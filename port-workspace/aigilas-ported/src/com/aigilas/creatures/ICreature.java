@@ -576,7 +576,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
         {
             if (_actorType == AigilasActorType.PLAYER && skillId != SkillId.FORGET_SKILL && _god.NameText == GodId.Names[GodId.GLUTTONY])
             {
-                if (_skills.Count() < _currentLevel)
+                if (_skills.size()() < _currentLevel)
                 {
                     _skills.Add(skillId);
                 }

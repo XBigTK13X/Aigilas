@@ -1,54 +1,52 @@
 import os,shutil,re,sys
 
-start_path = "c:\\_z\\dev\\aigilas"
+start_path = "c:\\_z\\dev\\git\\aigilas"
 convert_path = ".\\convert\\"
-targetName = "Minions"
-targetFile = "Minions.java"
-targetUrl = 'creatures'
-targetPath = os.path.join("c:\\_z\\dev\\aigilas\\script\\convert\\com\\aigilas",targetUrl)
-targetPath = os.path.join(targetPath,targetFile)
+targetName = "" #Minions
+targetFile = ""#"Minions.java"
+targetUrl = ""#'creatures'
 
-def divide_class(targetName):
+def divide_class(targetName,targetFile,targetUrl):
+	targetPath = os.path.join("c:\\_z\\dev\\git\\aigilas\\script\\convert\\com\\aigilas",targetUrl)
+	targetPath = os.path.join(targetPath,targetFile)
 	phase = 0
 	braceCount = 0
 	if os.path.exists('header.java'):
 		os.remove('header.java')
+	shutil.copyfile(targetPath,targetPath+'b')
 	while phase < 3:
-		read = open(targetPath,'r')
 		newClassName = ''
-		for line in read:
+		for line in open(targetPath+'b','r').read().splitlines():
 			if phase == 0:
 				if 'package' in line or 'import' in line:
 					w = open('header.java','a')
-					w.write(line)
+					w.write(line+"\r")
 					w.close()
 			if phase == 1:
 				if newClassName != '':
 					w = open(targetPath.replace(targetName,newClassName),'a')
 				if ' class ' in line:
-					if not targetName in line:
-						print "Generating " + newClassName+".java"
-						newClassName = line.split('class')[1].rstrip().split('extends')[0].replace(' ','')						
-						newPath = targetPath.replace(targetName,newClassName)
-						if os.path.exists(newPath):
-							os.remove(newPath)
-						w = open(newPath,'a')
-						braceCount = 0					
-						header = open('header.java','r')
-						for head in header:
-							w.write(head)
-						if not 'public' in line:
-							line = 'public ' + line
+					print "Generating " + newClassName+".java"
+					newClassName = line.split('class')[1].rstrip().split('extends')[0].replace(' ','')						
+					newPath = targetPath.replace(targetName,newClassName)
+					if os.path.exists(newPath):
+						os.remove(newPath)
+					w = open(newPath,'a')
+					braceCount = 0					
+					header = open('header.java','r')
+					for head in header:
+						w.write(head)
+					if not 'public' in line:
+						line = 'public ' + line					
 				if '{' in line:
 					braceCount += 1
 				if '}' in line:
 					braceCount -= 1
 				if newClassName != '':
-					w.write(line)
+					w.write(line+"\r")
 					w.close()
-		read.close()
 		phase += 1
-	os.remove(targetPath)
+	os.remove(targetPath+'b')
 
 def isCodeOnly(file):
 	exclude = ['.txt','AssemblyInfo','.csproj','.csv']
@@ -138,10 +136,8 @@ def transform(path):
 					package = ""
 					convert_file = ""
 					while phase < 4:
-						read = open(os.path.join(root,file),"r")
-
 						if phase == 0:
-							for line in read:
+							for line in open(os.path.join(root,file),"r").read().splitlines():
 								if "namespace" in line:
 									namespace = line.split(' ')[1].lower().replace("ogur",'aigilas')
 
@@ -162,7 +158,7 @@ def transform(path):
 							w.write('import java.util.*;\r')
 							braceCount = 0
 							firstBraceFound = False
-							for line in read:
+							for line in open(os.path.join(root,file),"r").read().splitlines():
 								if '{' in line:
 									braceCount += 1
 								if '}' in line:
@@ -189,27 +185,23 @@ def transform(path):
 										elif "#" in line:
 											continue
 										else:
-											w.write(line)
+											w.write(line + "\r")
 							w.close()
 
 						if phase == 2:		
-							shutil.copyfile(convert_file,convert_file+'b')
-							cop = open(convert_file+'b','r')					
+							shutil.copyfile(convert_file,convert_file+'b')				
 							w = open(convert_file,'w')
-							for line in cop:
-								w.write(cs2java(line))
+							for line in open(convert_file+'b','r').read().splitlines():
+								w.write(cs2java(line)+"\r")
 							w.close()
-							cop.close()
 							os.remove(convert_file+'b')
-						read.close()
 						phase = phase + 1
 						
 						if phase == 3:
-							shutil.copyfile(convert_file,convert_file+'b')
-							cop = open(convert_file+'b','r')					
+							shutil.copyfile(convert_file,convert_file+'b')	
 							w = open(convert_file,'w')
 							superCall = '';
-							for line in cop:
+							for line in open(convert_file+'b','r').read().splitlines():
 								if superCall != '' and "{" in line:
 									line = "{\r" + superCall.rstrip() + ';\r'
 									superCall = ''
@@ -218,10 +210,31 @@ def transform(path):
 										line,superCall = line.split(':')
 									if 'class' in line:
 										line = line.replace(":",' extends ')
-								w.write(cs2java(line))
+								w.write(cs2java(line) + "\r")
 							w.close()
-							cop.close()
 							os.remove(convert_file+'b')
+
+def scrub(path):
+	for root,dirs,files in os.walk(path):
+		if isCodeDir(root):
+			print root
+			for dir in dirs:
+				scrub(os.path.join(root,dir))
+			for file in files:
+				if isCodeOnly(file):
+					file = os.path.join(root,file)
+					shutil.copyfile(file,file+'b')	
+					w = open(file,'w')
+					count = 0
+					for line in open(file+'b','r').read().splitlines():
+						if ';' in line and len(line) < 3:
+							print 'Scrubbed'
+						if 'target);;' in line:
+							w.write(line.replace(';;','') + '\r')
+						else:						
+							w.write(line + '\r')
+					w.close()
+					os.remove(file+'b')
 
 if 'gen' in sys.argv[1]:
 	print '== Generating all starting java code'
@@ -233,7 +246,9 @@ elif 'div' in sys.argv[1]:
 	targetName = sys.argv[2]
 	targetFile = sys.argv[3]
 	targetUrl = sys.argv[4]
-	divide_class(targetName)
+	divide_class(targetName,targetFile,targetUrl)
+elif 'scrub' in sys.argv[1]:
+	scrub(convert_path)
 else:
 	print 'Unrecognized option: ' + sys.argv[0]
 
