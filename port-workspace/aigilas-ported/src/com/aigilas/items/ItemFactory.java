@@ -5,7 +5,7 @@ package com.aigilas.items;import com.xna.wrapper.*;import java.util.*;import 
         private static final int itemGrowth = 3;
         private static int itemType;
 
-        public static GenericItem CreateRandomPlain(Point2 location,boolean onFloor) throws Exception
+        public static GenericItem CreateRandomPlain(Point2 location,boolean onFloor) 
         {
             if(location == null)
             {
@@ -19,10 +19,10 @@ package com.aigilas.items;import com.xna.wrapper.*;import java.util.*;import 
                                                                 ItemSuffix.NULL, ItemPrefix.NULL, itemType,
                                                                 location,onFloor));
         }        
-        public static GenericItem CreateRandomPlain(Point2 location) throws Exception
+        public static GenericItem CreateRandomPlain(Point2 location) 
         {
             return CreateRandomPlain(location, true);
-        }        public static GenericItem CreateRandomPlain() throws Exception        {            return CreateRandomPlain(null,false);        }
+        }        public static GenericItem CreateRandomPlain()         {            return CreateRandomPlain(null,false);        }
         public static GenericItem CreateRandomMagic()
         {
             return null;

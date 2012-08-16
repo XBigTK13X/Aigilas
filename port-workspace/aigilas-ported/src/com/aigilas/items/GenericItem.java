@@ -55,10 +55,10 @@ package com.aigilas.items;import com.xna.wrapper.*;import java.util.*;import 
             Initialize(item._suffix, item._prefix, item._type,item._targetSlots, item.Modifers,location);
         }
 
-        public GenericItem(Stats modifiers, String suffix, String prefix, int type, Point2 location,boolean onGround) throws Exception
+        public GenericItem(Stats modifiers, String suffix, String prefix, int type, Point2 location,boolean onGround) 
         {
         	Construct(modifiers,suffix,prefix,type,location,onGround);
-        }                public GenericItem(Stats modifiers, String suffix, String prefix, int type, Point2 location) throws Exception        {            Construct(modifiers,suffix,prefix,type,location,true);        }                private void Construct(Stats modifiers, String suffix, String prefix, int type, Point2 location,boolean onGround) throws Exception{        	if (type == ItemName.NULL)            {                throw new Exception("Invalid type NULL passed into the GenericItem factory!");            }            Initialize(_suffix,_prefix,type,GetSlotFromType(type),modifiers,location);        }
+        }                public GenericItem(Stats modifiers, String suffix, String prefix, int type, Point2 location)         {            Construct(modifiers,suffix,prefix,type,location,true);        }                private void Construct(Stats modifiers, String suffix, String prefix, int type, Point2 location,boolean onGround) {        	if (type == ItemName.NULL)            {                throw new Exception("Invalid type NULL passed into the GenericItem factory!");            }            Initialize(_suffix,_prefix,type,GetSlotFromType(type),modifiers,location);        }
 
         protected void Setup(Point2 location, int type)
         {

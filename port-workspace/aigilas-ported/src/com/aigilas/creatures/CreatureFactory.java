@@ -3,7 +3,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
     {
         private static int __playerCount = 0;
 
-        public static ICreature Create(int actorType, Point2 position) throws Exception
+        public static ICreature Create(int actorType, Point2 position)
         {
             AbstractCreature result;
             switch (actorType)
@@ -20,7 +20,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return result;
         }
 
-        private static AbstractCreature GenerateCreature(int actorType) throws Exception
+        private static AbstractCreature GenerateCreature(int actorType) 
         {
             switch(actorType)
             {
@@ -36,16 +36,16 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
                 case AigilasActorType.GREED: return new Greed();
                 case AigilasActorType.SERPENT: return new Serpent();
                 case AigilasActorType.BREAKING_WHEEL: return new BreakingWheel();
-                default:throw new Exception("No Factory generation logic for: "+actorType);
+                default:try {					throw new Exception("No Factory generation logic for: "+actorType);				} catch (Exception e) {					// TODO Auto-generated catch block					e.printStackTrace();				}
             }
         }
 
-        public static ICreature CreateRandom(Point2 randomPoint) throws Exception
+        public static ICreature CreateRandom(Point2 randomPoint) 
         {            
             return Create(Generate.Randoms.get(RNG.Next(0, Generate.Randoms.size())), randomPoint);
         }
 
-        public static ICreature CreateMinion(String skillId, ICreature source,SkillEffect effectGraphic,Point2 location) throws Exception
+        public static ICreature CreateMinion(String skillId, ICreature source,SkillEffect effectGraphic,Point2 location) 
         {
             Minion result = null;
             switch (skillId)
@@ -66,7 +66,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             }
             EntityManager.addObject(result);
             return result;
-        }        public static ICreature CreateMinion(String skillId, ICreature source, SkillEffect effectGraphic) throws Exception        {            return CreateMinion(skillId,source,effectGraphic,null);        }        public static ICreature CreateMinion(String skillId, ICreature source) throws Exception        {            return CreateMinion(skillId,source,null,null);        }
+        }        public static ICreature CreateMinion(String skillId, ICreature source, SkillEffect effectGraphic)         {            return CreateMinion(skillId,source,effectGraphic,null);        }        public static ICreature CreateMinion(String skillId, ICreature source)         {            return CreateMinion(skillId,source,null,null);        }
 
         private static List<Integer> __remainingBosses;        static
         {        	__remainingBosses = Arrays.asList(
@@ -84,7 +84,7 @@ package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;imp
             return __remainingBosses.size();
         }
 
-        public static IEntity CreateNextBoss(Point2 randomPoint) throws Exception
+        public static IEntity CreateNextBoss(Point2 randomPoint) 
         {
             int nextBoss = __remainingBosses.get(RNG.Next(0,__remainingBosses.size()));
             __remainingBosses.remove(nextBoss);

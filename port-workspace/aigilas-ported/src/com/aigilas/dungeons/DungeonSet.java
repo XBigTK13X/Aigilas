@@ -13,19 +13,19 @@ public class DungeonSet
      * This whole "area" thing is very messy and doesn't work:an intuitive way.
      * In order to pre-load, we need to make sure we can easily get back to start.
      * */
-    public DungeonSet() throws Exception
+    public DungeonSet() 
     {
         _floors.put(_currentFloor, new Dungeon());
     }
 
-    public void GotoNext() throws Exception
+    public void GotoNext() 
     {
         _floors.get(_currentFloor).CacheContents();
         _currentFloor++;
         LoadOrCreateDungeon(false);
     }
 
-    public boolean GotoPrevious() throws Exception
+    public boolean GotoPrevious() 
     {
         if (_currentFloor > 0)
         {
@@ -37,7 +37,7 @@ public class DungeonSet
         return false;
     }
 
-    private void LoadOrCreateDungeon(boolean goingUp) throws Exception
+    private void LoadOrCreateDungeon(boolean goingUp) 
     {
         if (!_floors.containsKey(_currentFloor))
         {

@@ -24,7 +24,7 @@ package com.aigilas.dungeons;import com.xna.wrapper.*;import java.util.*;imp
 
         private static boolean _firstDungeonMade;
 
-        public Dungeon() throws Exception
+        public Dungeon() 
         {
             if (!_firstDungeonMade)
             {
@@ -96,7 +96,7 @@ package com.aigilas.dungeons;import com.xna.wrapper.*;import java.util.*;imp
             _rooms.add(new Room(_blocksHigh, _blocksWide, 0, 0));
         }
 
-        private void TransferDungeonState() throws Exception
+        private void TransferDungeonState() 
         {
             for (IEntity[] row:dungeon)
             {            	for(IEntity tile: row){
@@ -147,7 +147,7 @@ package com.aigilas.dungeons;import com.xna.wrapper.*;import java.util.*;imp
             return null;
         }
 
-        private void PlaceItems(int amountToPlace) throws Exception
+        private void PlaceItems(int amountToPlace) 
         {
             while (amountToPlace > 0)
             {
@@ -168,7 +168,7 @@ package com.aigilas.dungeons;import com.xna.wrapper.*;import java.util.*;imp
             }
         }
 
-        private void PlaceCreatures(int amountOfCreatures) throws Exception
+        private void PlaceCreatures(int amountOfCreatures) 
         {
             //Point2 random = new Point2(FindRandomFreeTile());
             //dungeon[random.GridX][random.GridY] = CreatureFactory.Create(AigilasActorType.ENVY, random);

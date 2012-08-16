@@ -9,12 +9,12 @@ package com.aigilas.dungeons;import com.xna.wrapper.*;import java.util.*;imp
         private static HashMap<Integer, DungeonSet> _world = new HashMap<Integer, DungeonSet>();
         private static List<Entity> _cache = new ArrayList<Entity>(); 
 
-        public static void GetNextFloor() throws Exception
+        public static void GetNextFloor() 
         {
             _world.get(Location.Depths).GotoNext();
         }
 
-        public static boolean GetPreviousFloor() throws Exception
+        public static boolean GetPreviousFloor() 
         {
             return _world.get(Location.Depths).GotoPrevious();
         }
@@ -31,7 +31,7 @@ package com.aigilas.dungeons;import com.xna.wrapper.*;import java.util.*;imp
             return result;
         }
 
-        public static void Start() throws Exception
+        public static void Start() 
         {           
             _world = new HashMap<Integer, DungeonSet>();
             _cache = new ArrayList<Entity>();
