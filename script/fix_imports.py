@@ -2,7 +2,7 @@ import os
 
 impls = ['.impl','.behaviors','.animations']
 targetPath = 'c:/_z/dev/git/aigilas/code/'
-reactionsPath = targetPath + '/aigilas-ported/src/com/aigilas/reactions/impl'
+reactionsPath = targetPath + '/aigilas-ported/src/com/aigilas/skills/impl'
 
 def isCodeFile(file):
 	return '.java' in file
