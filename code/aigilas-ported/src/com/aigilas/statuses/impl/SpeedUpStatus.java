@@ -1,1 +1,0 @@
-package com.aigilas.statuses.impl;import com.aigilas.creatures.ICreature;import com.aigilas.creatures.StatBuff;import com.aigilas.creatures.StatType;import com.aigilas.statuses.IStatus;public class SpeedUpStatus extends IStatus {	public SpeedUpStatus(ICreature target)	{		super(target);		_buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);		Setup();	}}

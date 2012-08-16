@@ -1,1 +1,0 @@
-package com.aigilas.statuses.impl;import com.aigilas.creatures.ICreature;import com.aigilas.entities.Elements;import com.aigilas.statuses.IStatus;public class PreventMentalUsageStatus extends IStatus {	public PreventMentalUsageStatus(ICreature target)	{		super(target);		_blockedElements.add(Elements.MENTAL);	}}

@@ -1,1 +1,0 @@
-package com.aigilas.statuses.impl;import com.aigilas.creatures.ICreature;import com.aigilas.creatures.StatBuff;import com.aigilas.creatures.StatType;import com.aigilas.statuses.IStatus;public class WeakMusclesStatus extends IStatus {	public WeakMusclesStatus(ICreature target)	{		super(target);		_buff = new StatBuff(StatType.STRENGTH, -10);		Setup();	}}

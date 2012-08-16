@@ -1,0 +1,1 @@
+package lidgren.wrapper;public enum NetDeliveryMethod {	ReliableOrdered}

@@ -1,1 +1,0 @@
-package com.aigilas.reactions.impl;import com.aigilas.creatures.ICreature;import com.aigilas.reactions.IReaction;public class MagmaReaction implements IReaction {	@Override	public void Affect(ICreature target)	{		target.ApplyDamage(30f);	}}

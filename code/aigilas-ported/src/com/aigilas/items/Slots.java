@@ -1,1 +1,0 @@
-package com.aigilas.items;import java.util.List;public class Slots {	public Slots(List<Integer> itemSlots) {	}}

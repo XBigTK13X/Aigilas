@@ -1,1 +1,0 @@
-package com.aigilas.statuses.impl;import com.aigilas.creatures.CreatureAction;import com.aigilas.creatures.ICreature;import com.aigilas.statuses.IStatus;public class PreventRegenerationStatus extends IStatus {	public PreventRegenerationStatus(ICreature target)	{		super(target);		_prevents.add(CreatureAction.Regeneration);	}}

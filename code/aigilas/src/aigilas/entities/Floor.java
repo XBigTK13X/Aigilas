@@ -1,0 +1,1 @@
+package aigilas.entities;import aigilas.management.SpriteType;import spx.core.Point2;import spx.entities.Entity;import spx.entities.EntityType;public class Floor extends Entity {	public Floor(Point2 location) {		Initialize(location, SpriteType.FLOOR, EntityType.FLOOR,				aigilas.Depth.Floor);	}}

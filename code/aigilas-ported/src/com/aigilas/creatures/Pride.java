@@ -1,1 +1,0 @@
-package com.aigilas.creatures;import com.aigilas.entities.Elements;import com.aigilas.management.SpriteType;import com.aigilas.skills.SkillId;public class Pride extends AbstractCreature {	public Pride() {		super(AigilasActorType.PRIDE, SpriteType.PRIDE);		Compose(Elements.DARK);		Strengths(StatType.STRENGTH, StatType.STRENGTH);		Add(SkillId.BREAKING_WHEEL);	}}

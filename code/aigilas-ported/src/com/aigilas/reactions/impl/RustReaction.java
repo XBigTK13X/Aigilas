@@ -1,1 +1,0 @@
-package com.aigilas.reactions.impl;import com.aigilas.creatures.ICreature;import com.aigilas.reactions.IReaction;public class RustReaction implements IReaction {	@Override	public void Affect(ICreature target)	{		target.DestroyRandomItemFromInventory();	}}

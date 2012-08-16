@@ -1,1 +1,0 @@
-package com.aigilas.creatures;public class StatBuff {	public String Stat;	public float Amount;	public StatBuff(String stat, float amount) {		Stat = stat;		Amount = amount;	}}

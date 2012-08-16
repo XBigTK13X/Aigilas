@@ -1,0 +1,1 @@
+package aigilas.entities;import aigilas.management.SpriteType;import spx.core.Point2;import spx.entities.Entity;public class Wall extends Entity {	public Wall(Point2 location) {		Initialize(location, SpriteType.WALL, aigilas.EntityType.WALL,				aigilas.Depth.Wall);		_isBlocking = true;	}}

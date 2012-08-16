@@ -1,1 +1,0 @@
-package com.aigilas.reactions;import com.aigilas.creatures.ICreature;public interface IReaction {	void Affect(ICreature target);}

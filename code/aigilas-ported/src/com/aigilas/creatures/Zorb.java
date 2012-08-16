@@ -1,1 +1,0 @@
-package com.aigilas.creatures;import com.aigilas.entities.Elements;import com.aigilas.skills.SkillId;public class Zorb extends AbstractCreature {	public Zorb() {		super(AigilasActorType.ZORB);		Compose(Elements.PHYSICAL, Elements.FIRE);		Strengths(StatType.MANA, StatType.HEALTH);		Weaknesses(StatType.WISDOM, StatType.DEFENSE);		Add(SkillId.FIREBALL);	}}

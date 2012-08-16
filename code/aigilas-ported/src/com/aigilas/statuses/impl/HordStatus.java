@@ -1,1 +1,0 @@
-package com.aigilas.statuses.impl;import com.aigilas.creatures.ICreature;import com.aigilas.creatures.StatBuff;import com.aigilas.creatures.StatType;import com.aigilas.statuses.IStatus;public class HordStatus extends IStatus {	public HordStatus(ICreature target)	{		super(target);		_buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());		Setup();	}}

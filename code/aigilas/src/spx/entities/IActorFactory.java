@@ -1,0 +1,1 @@
+package spx.entities;import spx.core.Point2;public interface IActorFactory {	IActor Create(int actorType, Point2 position);	IActor GenerateActor(int actorType);	IActor CreateRandom(Point2 randomPoint);	void ResetPlayerCount();	void IncreasePlayerCount();	int GetPlayerCount();}

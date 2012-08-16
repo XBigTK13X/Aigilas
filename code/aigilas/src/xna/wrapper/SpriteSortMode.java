@@ -1,0 +1,1 @@
+package xna.wrapper;public enum SpriteSortMode {	FrontToBack}

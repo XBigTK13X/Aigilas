@@ -1,1 +1,0 @@
-package com.aigilas.creatures;import com.aigilas.entities.Elements;import com.aigilas.management.SpriteType;import com.aigilas.skills.SkillId;public class Sloth extends AbstractCreature {	public Sloth() {		super(AigilasActorType.SLOTH, SpriteType.SLOTH);		Compose(Elements.EARTH);		Strengths(StatType.STRENGTH, StatType.STRENGTH);		Add(SkillId.SERPENT_SUPPER);	}}

@@ -1,1 +1,0 @@
-package com.aigilas.statuses.impl;import com.aigilas.creatures.ICreature;import com.aigilas.entities.Elements;import com.aigilas.statuses.IStatus;public class SoakingWetStatus extends IStatus {	public SoakingWetStatus(ICreature target)	{		super(target);		_blockedElements.add(Elements.FIRE);	}}

@@ -1,0 +1,1 @@
+package aigilas.creatures;import aigilas.entities.Elements;import aigilas.management.SpriteType;import aigilas.skills.SkillId;public class Lust extends AbstractCreature {	public Lust() {		super(AigilasActorType.LUST, SpriteType.LUST);		Compose(Elements.FIRE);		Strengths(StatType.STRENGTH, StatType.STRENGTH);		Add(SkillId.BRIMSTONE);	}}

@@ -1,1 +1,0 @@
-package com.aigilas.statuses.impl;import com.aigilas.creatures.ICreature;import com.aigilas.statuses.IStatus;public class RegenStatus extends IStatus {	public RegenStatus(ICreature target) {		super(target);	}	@Override	public void Update() {		super.Update();		_target.ApplyDamage(-1f);	}}

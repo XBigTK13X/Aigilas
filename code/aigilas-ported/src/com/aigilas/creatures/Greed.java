@@ -1,1 +1,0 @@
-package com.aigilas.creatures;import com.aigilas.entities.Elements;import com.aigilas.management.SpriteType;import com.aigilas.skills.SkillId;public class Greed extends AbstractCreature {	public Greed() {		super(AigilasActorType.GREED, SpriteType.GREED);		Compose(Elements.AIR);		Strengths(StatType.STRENGTH, StatType.STRENGTH);		Add(SkillId.BOIL);	}}

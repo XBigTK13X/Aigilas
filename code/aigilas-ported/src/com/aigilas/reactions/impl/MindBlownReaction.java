@@ -1,1 +1,0 @@
-package com.aigilas.reactions.impl;import com.aigilas.creatures.ICreature;import com.aigilas.creatures.StatType;import com.aigilas.reactions.IReaction;public class MindBlownReaction implements IReaction {	@Override	public void Affect(ICreature target)	{		target.ApplyDamage(10, null, true, StatType.MANA);	}}
