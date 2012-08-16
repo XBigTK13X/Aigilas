@@ -18,7 +18,7 @@ def fix_impl_imports(path):
 					if impl in line:
 						missing = line.split(' ')[1].replace(impl,'')
 						line = line + '\r' + missing
-				w.write(line='\r')
+				w.write(line+'\r')
 			w.close()
 			r.close()
 			os.remove(source)
