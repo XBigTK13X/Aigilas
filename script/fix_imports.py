@@ -9,7 +9,7 @@ def isCodeFile(file):
 def fix_impl_imports(path):
 	for root,dirs,files in os.walk(path):
 		for dir in dirs:
-			print dir
+			print root+dir
 			fix_impl_imports(os.path.join(root,dir))
 		for file in files:
 			if isCodeFile(file):
