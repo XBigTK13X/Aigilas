@@ -12,7 +12,7 @@ suo
 Aigilas_TemporaryKey.pfx
 *csproj.user
 convert/
-class*
+*.class
 .metadata/
 header.java
 .settings/
