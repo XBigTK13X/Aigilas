@@ -18,7 +18,7 @@ def fix_impl_imports(path):
 				w = open(result,'w')
 				for line in r.read().splitlines():
 					if 'package c' in line:
-						line = line = "\rimport com.aigilas.statuses.StatusFactory;"
+						line = line + "\rimport com.aigilas.statuses.StatusFactory;"
 					w.write(line+'\r')
 				w.close()
 				r.close()
