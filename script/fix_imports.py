@@ -19,7 +19,7 @@ def fix_impl_imports(path):
 				w = open(result,'w')
 				for line in r.read().splitlines():
 					for impl in impls:
-						if impl in line:
+						if impl in line and not 'package' in line:
 							missing = line.split(' ')[1].replace(impl,'')
 							line = line + '\r' + missing
 					w.write(line+'\r')
