@@ -2,6 +2,7 @@ import os
 
 impls = ['.impl','.behaviors','.animations']
 targetPath = 'c:/_z/dev/git/aigilas/code/'
+reactionsPath = targetPath + '/aigilas-ported/com/aigilas/reactions/impl'
 
 def isCodeFile(file):
 	return '.java' in file
@@ -16,39 +17,12 @@ def fix_impl_imports(path):
 				r = open(source,'r')
 				w = open(result,'w')
 				for line in r.read().splitlines():
-					for impl in impls:
-						if impl in line:
-							missing = 'import ' + line.split(' ')[1].replace(impl,'.*')
-							if not ';' in missing:
-								missing += ';'
-							line = line + '\r' + missing
+					if 'package c' in line:
+						line = line = "\rimport com.aigilas.statuses.StatusFactory;"
 					w.write(line+'\r')
 				w.close()
 				r.close()
 				os.remove(source)
 				os.rename(result,source)
 
-def import_all_packages(path):
-	for root,dirs,files in os.walk(path):
-			for file in files:
-				if isCodeFile(file):
-				print file
-				source = os.path.join(root,file)
-				result = os.path.join(root,file+"b")
-				r = open(source,'r')
-				w = open(result,'w')
-				for line in r.read().splitlines():
-					for impl in impls:
-						if impl in line:
-							missing = 'import ' + line.split(' ')[1].replace(impl,'.*')
-							if not ';' in missing:
-								missing += ';'
-							line = line + '\r' + missing
-					w.write(line+'\r')
-				w.close()
-				r.close()
-				os.remove(source)
-				os.rename(result,source)
-
-				
-import_all_packages(targetPath)
+fix_impl_imports(reactionsPath)
