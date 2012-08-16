@@ -1,23 +1,1 @@
-package com.aigilas.states;import com.xna.wrapper.*;import java.util.*;import com.spx.entities.*;import com.aigilas.creatures.*;import com.aigilas.dungeons.*;import com.spx.core.*;import com.spx.io.*;import com.spx.states.State;
-    public class GameplayState  implements  State
-    {
-        public GameplayState()
-        {
-            Console.WriteLine("Generating the dungeon...");
-            EntityManager.Reset();
-            DungeonFactory.Start();
-            Client.Get().DungeonHasLoaded();
-        }
-        public void Update()
-        {
-            EntityManager.Update();
-        }
-        public void LoadContent()
-        {
-            EntityManager.LoadContent();
-        }
-        public void Draw()
-        {
-            EntityManager.Draw();
-        }
-    }
+package com.aigilas.states;import com.aigilas.dungeons.DungeonFactory;import com.spx.entities.EntityManager;import com.spx.io.Client;import com.spx.states.State;import com.xna.wrapper.Console;    public class GameplayState  implements  State    {        public GameplayState()        {            Console.WriteLine("Generating the dungeon...");            EntityManager.Reset();            DungeonFactory.Start();            Client.Get().DungeonHasLoaded();        }        @Override		public void Update()        {            EntityManager.Update();        }        @Override		public void LoadContent()        {            EntityManager.LoadContent();        }        @Override		public void Draw()        {            EntityManager.Draw();        }    }

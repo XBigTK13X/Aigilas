@@ -1,6 +1,1 @@
-package com.xna.wrapper;
-
-public enum SpriteSortMode {
-	FrontToBack
-
-}
+package com.xna.wrapper;public enum SpriteSortMode {	FrontToBack}

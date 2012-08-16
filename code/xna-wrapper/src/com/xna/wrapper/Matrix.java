@@ -1,5 +1,1 @@
-package com.xna.wrapper;
-
-public class Matrix {
-
-}
+package com.xna.wrapper;public class Matrix {}

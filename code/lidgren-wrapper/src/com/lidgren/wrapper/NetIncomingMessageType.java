@@ -1,5 +1,1 @@
-package com.lidgren.wrapper;
-
-public enum NetIncomingMessageType {
-	ConnectionApproval, Data
-}
+package com.lidgren.wrapper;public enum NetIncomingMessageType {	ConnectionApproval, Data}

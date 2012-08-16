@@ -1,5 +1,1 @@
-package com.xna.wrapper;
-
-public class GameTime {
-
-}
+package com.xna.wrapper;public class GameTime {}

@@ -1,5 +1,1 @@
-package com.spx.particles;import com.xna.wrapper.*;import java.util.*;
-    public abstract class PEComponent
-    {
-        public boolean IsActive;
-    }
+package com.spx.particles;    public abstract class PEComponent    {        public boolean IsActive;    }

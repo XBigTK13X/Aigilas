@@ -1,5 +1,1 @@
-package com.xna.wrapper;
-
-public enum SpriteEffects {
-	None
-}
+package com.xna.wrapper;public enum SpriteEffects {	None}

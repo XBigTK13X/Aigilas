@@ -1,7 +1,1 @@
-package com.xna.wrapper;
-
-public class MediaPlayer {
-
-	public static boolean IsRepeating;
-
-}
+package com.xna.wrapper;public class MediaPlayer {	public static boolean IsRepeating;}

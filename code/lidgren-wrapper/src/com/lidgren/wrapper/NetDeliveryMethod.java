@@ -1,6 +1,1 @@
-package com.lidgren.wrapper;
-
-public enum NetDeliveryMethod {
-	ReliableOrdered
-
-}
+package com.lidgren.wrapper;public enum NetDeliveryMethod {	ReliableOrdered}

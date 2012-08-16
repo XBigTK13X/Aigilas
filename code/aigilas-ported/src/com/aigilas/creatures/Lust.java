@@ -1,9 +1,1 @@
-package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;import com.aigilas.skills.*;import com.aigilas.strategies.*;import com.aigilas.classes.*;import com.aigilas.management.*;import com.aigilas.entities.*;import com.aigilas.gods.*;import com.aigilas.creatures.*;import com.spx.core.*;import com.spx.devtools.*;
-public     class Lust extends  AbstractCreature
-    {
-        public Lust()
-            { super(AigilasActorType.LUST, SpriteType.LUST);            Compose(Elements.FIRE);
-            Strengths(StatType.STRENGTH, StatType.STRENGTH);
-            Add(SkillId.BRIMSTONE);
-        }
-    }
+package com.aigilas.creatures;import com.aigilas.entities.Elements;import com.aigilas.management.SpriteType;import com.aigilas.skills.SkillId;public     class Lust extends  AbstractCreature    {        public Lust()            { super(AigilasActorType.LUST, SpriteType.LUST);            Compose(Elements.FIRE);            Strengths(StatType.STRENGTH, StatType.STRENGTH);            Add(SkillId.BRIMSTONE);        }    }

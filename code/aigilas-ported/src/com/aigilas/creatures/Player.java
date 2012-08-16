@@ -1,13 +1,1 @@
-package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;import com.aigilas.skills.*;import com.aigilas.strategies.*;import com.aigilas.classes.*;import com.aigilas.management.*;import com.aigilas.entities.*;import com.aigilas.gods.*;import com.aigilas.creatures.*;import com.spx.core.*;import com.spx.devtools.*;
-    public class Player  extends  AbstractCreature
-    {
-        private static List<Color> __colors = Arrays.asList(Color.Red,Color.Green,Color.Blue,Color.White);
-        public Player(int playerIndex){ super(AigilasActorType.PLAYER, SpriteType.PLAYER_STAND, new WrathAcolyte());            _playerIndex = playerIndex;
-            _graphic.SetColor(__colors.get(_playerIndex));
-            _strategy = StrategyFactory.Create(Strategy.ControlledByPlayer, this);
-            _baseStats = new Stats(100f, 100f, 1f, 10f, 11f, 10f, 35f, 50f, 6.0f, 6, 1);
-            _maxStats = new Stats(_baseStats);
-            AssignGod(God.Get(GodId.GLUTTONY));
-            Compose(Elements.PHYSICAL);
-        }
-    }
+package com.aigilas.creatures;import java.util.Arrays;import java.util.List;import com.aigilas.classes.WrathAcolyte;import com.aigilas.entities.Elements;import com.aigilas.gods.God;import com.aigilas.gods.GodId;import com.aigilas.management.SpriteType;import com.aigilas.strategies.Strategy;import com.aigilas.strategies.StrategyFactory;import com.xna.wrapper.Color;    public class Player  extends  AbstractCreature    {        private static List<Color> __colors = Arrays.asList(Color.Red,Color.Green,Color.Blue,Color.White);        public Player(int playerIndex){ super(AigilasActorType.PLAYER, SpriteType.PLAYER_STAND, new WrathAcolyte());            _playerIndex = playerIndex;            _graphic.SetColor(__colors.get(_playerIndex));            _strategy = StrategyFactory.Create(Strategy.ControlledByPlayer, this);            _baseStats = new Stats(100f, 100f, 1f, 10f, 11f, 10f, 35f, 50f, 6.0f, 6, 1);            _maxStats = new Stats(_baseStats);            AssignGod(God.Get(GodId.GLUTTONY));            Compose(Elements.PHYSICAL);        }    }

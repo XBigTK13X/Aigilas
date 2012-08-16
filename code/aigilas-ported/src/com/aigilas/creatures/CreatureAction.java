@@ -1,11 +1,1 @@
-package com.aigilas.creatures;import com.xna.wrapper.*;import java.util.*;
-    public enum CreatureAction
-    {
-        Movement,
-        Attacking,
-        SkillCycle,
-        Regeneration,
-        WontHitNonTargets,
-        ReceiveHealing,
-        SkillUsage
-    }
+package com.aigilas.creatures;    public enum CreatureAction    {        Movement,        Attacking,        SkillCycle,        Regeneration,        WontHitNonTargets,        ReceiveHealing,        SkillUsage    }

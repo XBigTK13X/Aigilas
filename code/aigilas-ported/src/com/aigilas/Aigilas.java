@@ -1,86 +1,1 @@
-package com.aigilas;import com.xna.wrapper.*;import java.util.*;import com.aigilas.states.*;import com.spx.states.*;import com.spx.core.*;import com.spx.text.*;import com.aigilas.management.*;import com.spx.sprites.*;import com.spx.particles.*;import com.spx.io.*;import com.spx.devtools.*;
-    public class Aigilas extends  com.xna.wrapper.Game
-    {
-        private GraphicsDeviceManager graphics;
-
-        public Aigilas()
-        {
-            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);
-            Client.Get();
-            graphics = new GraphicsDeviceManager(this);
-            XnaManager.SetupCamera(graphics,false);
-            Content.RootDirectory = "Content";
-        }
-
-@Overridepublic  void Initialize()
-        {
-            XnaManager.SetContentManager(this.Content);
-            Input.Setup(new InputInitializer());
-            SpriteSheetManager.Setup(new SpriteInitializer());
-            StateManager.LoadState(new MainMenuState());
-            ParticleEngine.Reset();
-            super.Initialize();
-        }
-
-@Override        protected  void LoadContent()
-        {
-            XnaManager.Renderer = new SpriteBatch(GraphicsDevice);
-            StateManager.LoadContent();
-            TextManager.LoadContent();
-            //$$$MediaPlayer.Play(Content.Load<Song>("MainTheme"));
-            MediaPlayer.IsRepeating = true;
-        }
-
-@Override        protected  void UnloadContent()
-        {
-            
-        }
-
-@Override        protected  void Update(GameTime gameTime)
-        {
-            Input.Update();
-            if (Input.DetectState(Commands.ToggleDevConsole, Client.Get().GetFirstPlayerIndex()))
-            {
-                DevConsole.Get().Toggle();
-            }
-            if (Client.Get().NextTurn())
-            {
-                for (int ii = 0; ii < 4; ii++)
-                {
-                    PlayerIndex player = PlayerIndex.values()[ii];
-                    if (GamePad.GetState(player).IsPressed(Buttons.Back) && GamePad.GetState(player).IsPressed(Buttons.Start))
-                    {
-                        SetIsRunning(false);
-                    }
-                }
-                ParticleEngine.Update();
-                StateManager.Update();
-                TextManager.Update();
-                super.Update(gameTime);
-                Client.Get().PrepareForNextTurn();
-            }
-            else
-            {
-                Client.Get().HeartBeat();
-            }
-        }
-
-@Override        protected  void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.clear(Color.White);
-            Resolution.BeginDraw();
-            XnaManager.Renderer.Begin(SpriteSortMode.FrontToBack,
-                         BlendState.AlphaBlend,
-                         null,
-                         null,
-                         null,
-                         null,
-                         XnaManager.GetScalingMatrix());
-            StateManager.Draw();
-            ParticleEngine.Draw();
-            TextManager.Draw();
-            DevConsole.Get().Draw();
-            super.Draw(gameTime);
-            XnaManager.Renderer.End();
-        }
-    }
+package com.aigilas;import com.aigilas.management.Commands;import com.aigilas.management.InputInitializer;import com.aigilas.management.SpriteInitializer;import com.aigilas.states.MainMenuState;import com.spx.core.XnaManager;import com.spx.devtools.DevConsole;import com.spx.io.Client;import com.spx.io.Input;import com.spx.particles.ParticleEngine;import com.spx.sprites.SpriteSheetManager;import com.spx.states.StateManager;import com.spx.text.TextManager;import com.xna.wrapper.BlendState;import com.xna.wrapper.Buttons;import com.xna.wrapper.Color;import com.xna.wrapper.GamePad;import com.xna.wrapper.GameTime;import com.xna.wrapper.GraphicsDeviceManager;import com.xna.wrapper.MediaPlayer;import com.xna.wrapper.PlayerIndex;import com.xna.wrapper.Resolution;import com.xna.wrapper.SpriteBatch;import com.xna.wrapper.SpriteSortMode;import com.xna.wrapper.TimeSpan;    public class Aigilas extends  com.xna.wrapper.Game    {        private GraphicsDeviceManager graphics;        public Aigilas()        {            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);            Client.Get();            graphics = new GraphicsDeviceManager(this);            XnaManager.SetupCamera(graphics,false);            Content.RootDirectory = "Content";        }@Overridepublic  void Initialize()        {            XnaManager.SetContentManager(this.Content);            Input.Setup(new InputInitializer());            SpriteSheetManager.Setup(new SpriteInitializer());            StateManager.LoadState(new MainMenuState());            ParticleEngine.Reset();            super.Initialize();        }@Override        protected  void LoadContent()        {            XnaManager.Renderer = new SpriteBatch(GraphicsDevice);            StateManager.LoadContent();            TextManager.LoadContent();            //$$$MediaPlayer.Play(Content.Load<Song>("MainTheme"));            MediaPlayer.IsRepeating = true;        }@Override        protected  void UnloadContent()        {                    }@Override        protected  void Update(GameTime gameTime)        {            Input.Update();            if (Input.DetectState(Commands.ToggleDevConsole, Client.Get().GetFirstPlayerIndex()))            {                DevConsole.Get().Toggle();            }            if (Client.Get().NextTurn())            {                for (int ii = 0; ii < 4; ii++)                {                    PlayerIndex player = PlayerIndex.values()[ii];                    if (GamePad.GetState(player).IsPressed(Buttons.Back) && GamePad.GetState(player).IsPressed(Buttons.Start))                    {                        SetIsRunning(false);                    }                }                ParticleEngine.Update();                StateManager.Update();                TextManager.Update();                super.Update(gameTime);                Client.Get().PrepareForNextTurn();            }            else            {                Client.Get().HeartBeat();            }        }@Override        protected  void Draw(GameTime gameTime)        {            GraphicsDevice.clear(Color.White);            Resolution.BeginDraw();            XnaManager.Renderer.Begin(SpriteSortMode.FrontToBack,                         BlendState.AlphaBlend,                         null,                         null,                         null,                         null,                         XnaManager.GetScalingMatrix());            StateManager.Draw();            ParticleEngine.Draw();            TextManager.Draw();            DevConsole.Get().Draw();            super.Draw(gameTime);            XnaManager.Renderer.End();        }    }

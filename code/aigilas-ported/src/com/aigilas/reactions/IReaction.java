@@ -1,1 +1,1 @@
-package com.aigilas.reactions;import com.xna.wrapper.*;import java.util.*;import com.aigilas.creatures.*;    public interface IReaction    {        void Affect(ICreature target);    }
+package com.aigilas.reactions;import com.aigilas.creatures.ICreature;    public interface IReaction    {        void Affect(ICreature target);    }
