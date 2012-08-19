@@ -23,7 +23,8 @@ public class AssetManager {
 
 	private AssetManager() {
 		try {
-			gameplaySheet = new SpriteSheet(Graphic("Gameplay.png"), 32, 32, 1);
+			gameplaySheet = new SpriteSheet(Graphic("GameplaySheet.png"), 32,
+					32, 1);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
