@@ -4,9 +4,12 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
+import spx.core.GameManager;
+
 public class AssetManager {
 	private static final String assetPath = "assets";
 	private static AssetManager instance;
+	private static final String __spriteSheetName = "GameplaySheet.png";
 
 	public static AssetManager Get() {
 		if (instance == null) {
@@ -30,12 +33,17 @@ public class AssetManager {
 		}
 	}
 
-	public Image GetSprite(String fileName) {
+	public Image GetImage(String fileName) {
 		try {
 			return new Image(Graphic(fileName));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public SpriteSheet GetSpriteSheet() {
+		return new SpriteSheet(GetImage(__spriteSheetName),
+				GameManager.SpriteWidth, GameManager.SpriteHeight, 1);
 	}
 }
