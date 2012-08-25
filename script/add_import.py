@@ -1,4 +1,4 @@
-import os
+import os,shutil
 
 def fix(path):
     for root,dirs,files in os.walk(path):
