@@ -11,7 +11,7 @@ def fix(path):
                 for line in open(convert_file+'b','r').read().splitlines():
                     if 'package ' in line:
 			line = line + '\r import com.badlogic.gdx.graphics.Color;\r'
-                    w.write(line)
+                    w.write(line+'\r')
                 w.close()
                 os.remove(convert_file+'b')
 
