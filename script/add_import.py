@@ -5,6 +5,7 @@ def fix(path):
         for file in files:
             if ".java" in file:
                 convert_file = os.path.join(root,file)
+                print convert_file
                 shutil.copyfile(convert_file,convert_file+'b')
                 w = open(convert_file,'w')
                 for line in open(convert_file+'b','r').read().splitlines():
