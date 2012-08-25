@@ -16,3 +16,4 @@ convert/
 .metadata/
 header.java
 .settings/
+*.log
