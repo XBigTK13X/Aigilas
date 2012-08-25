@@ -15,4 +15,4 @@ def fix(path):
                 w.close()
                 os.remove(convert_file+'b')
 
-fix('/home/dev/aigilas/code')
+fix('/home/kretst/dev/aigilas/code')
