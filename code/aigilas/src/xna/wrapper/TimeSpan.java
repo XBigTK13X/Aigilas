@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class TimeSpan {	public static TimeSpan FromSeconds(float framesPerSecond) {		// TODO Auto-generated method stub		return null;	}}
+package xna.wrapper; public class TimeSpan {	public static TimeSpan FromSeconds(float framesPerSecond) {		// TODO Auto-generated method stub		return null;	}}

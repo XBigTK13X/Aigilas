@@ -1,1 +1,1 @@
-package spx.entities; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class ActorType {	public static final int NONPLAYER = 0;	public static final int PLAYER = 1;}
+package spx.entities; public class ActorType {	public static final int NONPLAYER = 0;	public static final int PLAYER = 1;}

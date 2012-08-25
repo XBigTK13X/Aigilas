@@ -1,1 +1,1 @@
-package lidgren.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class NetConnection {	public void Approve() {		// TODO Auto-generated method stub	}}
+package lidgren.wrapper; public class NetConnection {	public void Approve() {		// TODO Auto-generated method stub	}}

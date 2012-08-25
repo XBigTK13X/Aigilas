@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class GamepadState {	public boolean IsPressed(Buttons button){		return false;		//TODO 	}	public boolean IsButtonDown(Buttons buttons) {		// TODO Auto-generated method stub		return false;	}}
+package xna.wrapper; public class GamepadState {	public boolean IsPressed(Buttons button){		return false;		//TODO 	}	public boolean IsButtonDown(Buttons buttons) {		// TODO Auto-generated method stub		return false;	}}

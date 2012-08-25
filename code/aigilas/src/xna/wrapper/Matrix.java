@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class Matrix {}
+package xna.wrapper; public class Matrix {}

@@ -1,1 +1,1 @@
-package aigilas.dungeons; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class Location {	public static final int Start = 0;	public static final int Depths = 1;}
+package aigilas.dungeons; public class Location {	public static final int Start = 0;	public static final int Depths = 1;}

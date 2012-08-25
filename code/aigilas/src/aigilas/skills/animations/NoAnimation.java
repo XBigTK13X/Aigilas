@@ -1,1 +1,1 @@
-package aigilas.skills.animations; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class NoAnimation extends SkillAnimation {}
+package aigilas.skills.animations; public class NoAnimation extends SkillAnimation {}

@@ -1,1 +1,1 @@
-package lidgren.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public enum NetDeliveryMethod {	ReliableOrdered}
+package lidgren.wrapper; public enum NetDeliveryMethod {	ReliableOrdered}

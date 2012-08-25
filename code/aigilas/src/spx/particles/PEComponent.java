@@ -1,1 +1,1 @@
-package spx.particles; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public abstract class PEComponent {	public boolean IsActive;}
+package spx.particles; public abstract class PEComponent {	public boolean IsActive;}

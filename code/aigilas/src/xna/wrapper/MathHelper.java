@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class MathHelper {	public static int Clamp(float f, int i, int j) {		// TODO Auto-generated method stub		return 0;	}}
+package xna.wrapper; public class MathHelper {	public static int Clamp(float f, int i, int j) {		// TODO Auto-generated method stub		return 0;	}}

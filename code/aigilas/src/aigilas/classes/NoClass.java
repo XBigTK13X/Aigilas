@@ -1,1 +1,1 @@
-package aigilas.classes; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;import aigilas.creatures.Stats;public class NoClass extends CreatureClass {	public NoClass() {		super(new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));	}}
+package aigilas.classes; import aigilas.creatures.Stats;public class NoClass extends CreatureClass {	public NoClass() {		super(new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));	}}

@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public enum Buttons {	LeftThumbstickUp, LeftThumbstickDown, LeftThumbstickLeft, LeftThumbstickRight, RightTrigger, DPadUp, X, Start, Back, RightShoulder, LeftShoulder, A, LeftTrigger, Y, B, DPadDown}
+package xna.wrapper; public enum Buttons {	LeftThumbstickUp, LeftThumbstickDown, LeftThumbstickLeft, LeftThumbstickRight, RightTrigger, DPadUp, X, Start, Back, RightShoulder, LeftShoulder, A, LeftTrigger, Y, B, DPadDown}
