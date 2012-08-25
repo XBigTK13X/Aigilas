@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Color;import com.badlogic.gdx.graphics.Color;public class GraphicsDevice {	public void clear(Color backgroundColor) {		// TODO Auto-generated method stub	}}
+package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;import com.badlogic.gdx.graphics.Color;public class GraphicsDevice {	public void clear(Color backgroundColor) {		// TODO Auto-generated method stub	}}

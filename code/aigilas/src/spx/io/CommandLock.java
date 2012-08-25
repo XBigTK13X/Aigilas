@@ -1,1 +1,1 @@
-package spx.io; import com.badlogic.gdx.graphics.Color;public class CommandLock {	public CommandLock(int command, int playerIndex) {		Command = command;		PlayerIndex = playerIndex;	}	public int Command;	public int PlayerIndex;}
+package spx.io; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class CommandLock {	public CommandLock(int command, int playerIndex) {		Command = command;		PlayerIndex = playerIndex;	}	public int Command;	public int PlayerIndex;}

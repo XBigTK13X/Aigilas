@@ -1,1 +1,1 @@
-package aigilas.creatures; import com.badlogic.gdx.graphics.Color;import java.util.Arrays;import java.util.List;public class Generate {	public static List<Integer> Randoms = Arrays.asList(AigilasActorType.PEON,			AigilasActorType.ZORB);}
+package aigilas.creatures; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;import java.util.Arrays;import java.util.List;public class Generate {	public static List<Integer> Randoms = Arrays.asList(AigilasActorType.PEON,			AigilasActorType.ZORB);}

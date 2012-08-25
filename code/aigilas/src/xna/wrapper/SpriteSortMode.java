@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Color;public enum SpriteSortMode {	FrontToBack}
+package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public enum SpriteSortMode {	FrontToBack}

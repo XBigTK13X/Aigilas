@@ -1,1 +1,1 @@
-package spx.sprites; import com.badlogic.gdx.graphics.Color;public class SpriteDefinition {	public SpriteDefinition(int type, int index, int frames) {		Type = type;		Info = new SpriteInfo(index, frames);	}	public int Type;	public SpriteInfo Info;}
+package spx.sprites; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class SpriteDefinition {	public SpriteDefinition(int type, int index, int frames) {		Type = type;		Info = new SpriteInfo(index, frames);	}	public int Type;	public SpriteInfo Info;}

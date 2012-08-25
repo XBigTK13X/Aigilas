@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Color;public class Keyboard {	public static KeyboardState GetState() {		// TODO Auto-generated method stub		return null;	}}
+package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class Keyboard {	public static KeyboardState GetState() {		// TODO Auto-generated method stub		return null;	}}

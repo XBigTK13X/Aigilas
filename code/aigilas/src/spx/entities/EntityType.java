@@ -1,1 +1,1 @@
-package spx.entities; import com.badlogic.gdx.graphics.Color;public class EntityType {	public static final int ACTOR = 0;	public static final int FLOOR = 1;}
+package spx.entities; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class EntityType {	public static final int ACTOR = 0;	public static final int FLOOR = 1;}

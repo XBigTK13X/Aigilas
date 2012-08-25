@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Color;public class KeyboardState {	public boolean IsKeyDown(Keys keys) {		// TODO Auto-generated method stub		return false;	}}
+package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class KeyboardState {	public boolean IsKeyDown(Keys keys) {		// TODO Auto-generated method stub		return false;	}}

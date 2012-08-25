@@ -1,1 +1,1 @@
-package spx.io; import com.badlogic.gdx.graphics.Color;import java.util.List;public interface IInputInitializer {	List<CommandDefinition> GetCommands();}
+package spx.io; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;import java.util.List;public interface IInputInitializer {	List<CommandDefinition> GetCommands();}

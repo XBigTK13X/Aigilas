@@ -1,1 +1,1 @@
-package spx.particles; import com.badlogic.gdx.graphics.Color;public abstract class ParticleBehavior {	public int GetParticleCount() {		return 10;	}	public abstract void Update(Particle2 particle);}
+package spx.particles; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public abstract class ParticleBehavior {	public int GetParticleCount() {		return 10;	}	public abstract void Update(Particle2 particle);}

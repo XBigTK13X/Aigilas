@@ -1,1 +1,1 @@
-package aigilas.reactions; import com.badlogic.gdx.graphics.Color;import aigilas.creatures.ICreature;public interface IReaction {	void Affect(ICreature target);}
+package aigilas.reactions; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;import aigilas.creatures.ICreature;public interface IReaction {	void Affect(ICreature target);}

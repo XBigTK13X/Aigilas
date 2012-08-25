@@ -1,1 +1,1 @@
-package aigilas.creatures; import com.badlogic.gdx.graphics.Color;public class StatBuff {	public String Stat;	public float Amount;	public StatBuff(String stat, float amount) {		Stat = stat;		Amount = amount;	}}
+package aigilas.creatures; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class StatBuff {	public String Stat;	public float Amount;	public StatBuff(String stat, float amount) {		Stat = stat;		Amount = amount;	}}

@@ -1,1 +1,1 @@
-package xna.wrapper; import com.badlogic.gdx.graphics.Color;public enum PlayerIndex {	One,	Two,	Three,	Four;	public boolean IsButtonDown(Buttons buttons) {		// TODO Auto-generated method stub		return false;	}}
+package xna.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public enum PlayerIndex {	One,	Two,	Three,	Four;	public boolean IsButtonDown(Buttons buttons) {		// TODO Auto-generated method stub		return false;	}}

@@ -1,1 +1,1 @@
-package lidgren.wrapper; import com.badlogic.gdx.graphics.Color;public enum NetIncomingMessageType {	ConnectionApproval, Data}
+package lidgren.wrapper; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public enum NetIncomingMessageType {	ConnectionApproval, Data}

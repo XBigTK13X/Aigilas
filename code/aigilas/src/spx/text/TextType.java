@@ -1,1 +1,1 @@
-package spx.text; import com.badlogic.gdx.graphics.Color;public class TextType {	public static final int Action = 0;	public static final int Inventory = 1;}
+package spx.text; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public class TextType {	public static final int Action = 0;	public static final int Inventory = 1;}

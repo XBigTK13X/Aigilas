@@ -1,1 +1,1 @@
-package spx.entities; import com.badlogic.gdx.graphics.Color;public interface IActor extends IEntity {	int GetActorType();	void PerformInteraction();}
+package spx.entities; import com.badlogic.gdx.graphics.Texture;  import com.badlogic.gdx.graphics.Color;public interface IActor extends IEntity {	int GetActorType();	void PerformInteraction();}
