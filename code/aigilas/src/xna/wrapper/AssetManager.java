@@ -1,9 +1,5 @@
 package xna.wrapper;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
-
 import spx.core.GameManager;
 
 public class AssetManager {
