@@ -1,1 +1,1 @@
-package spx.sprites;import java.util.List;public interface ISpriteInitializer {	List<SpriteDefinition> GetSprites();}
+package spx.sprites; import com.badlogic.gdx.graphics.Color;import java.util.List;public interface ISpriteInitializer {	List<SpriteDefinition> GetSprites();}

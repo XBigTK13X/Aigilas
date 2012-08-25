@@ -1,1 +1,1 @@
-package aigilas.creatures;public enum CreatureAction {	Movement, Attacking, SkillCycle, Regeneration, WontHitNonTargets, ReceiveHealing, SkillUsage}
+package aigilas.creatures; import com.badlogic.gdx.graphics.Color;public enum CreatureAction {	Movement, Attacking, SkillCycle, Regeneration, WontHitNonTargets, ReceiveHealing, SkillUsage}

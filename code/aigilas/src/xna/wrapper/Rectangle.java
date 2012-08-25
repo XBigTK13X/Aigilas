@@ -1,1 +1,1 @@
-package xna.wrapper;public class Rectangle {	public int Right;	public int Bottom;	public Rectangle(int i, int j, int k, int l) {		// TODO Auto-generated constructor stub	}}
+package xna.wrapper; import com.badlogic.gdx.graphics.Color;public class Rectangle {	public int Right;	public int Bottom;	public Rectangle(int i, int j, int k, int l) {		// TODO Auto-generated constructor stub	}}

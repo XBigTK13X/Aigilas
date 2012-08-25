@@ -1,1 +1,1 @@
-package aigilas.items;import java.util.List;public class Slots {	public Slots(List<Integer> itemSlots) {	}}
+package aigilas.items; import com.badlogic.gdx.graphics.Color;import java.util.List;public class Slots {	public Slots(List<Integer> itemSlots) {	}}

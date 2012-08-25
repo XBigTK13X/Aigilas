@@ -1,1 +1,1 @@
-package xna.wrapper;public enum SpriteEffects {	None}
+package xna.wrapper; import com.badlogic.gdx.graphics.Color;public enum SpriteEffects {	None}

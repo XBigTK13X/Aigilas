@@ -1,1 +1,1 @@
-package aigilas.statuses;public enum StatusComponent {	Passive, Contagion, KillReward}
+package aigilas.statuses; import com.badlogic.gdx.graphics.Color;public enum StatusComponent {	Passive, Contagion, KillReward}
