@@ -1,5 +1,7 @@
 import os,shutil
 
+newImport = 'import com.badlogic.gdx.graphics.Texture;'
+
 def fix(path):
     for root,dirs,files in os.walk(path):
         for file in files:
@@ -10,7 +12,7 @@ def fix(path):
                 w = open(convert_file,'w')
                 for line in open(convert_file+'b','r').read().splitlines():
                     if 'package ' in line:
-			line = line + '\r import com.badlogic.gdx.graphics.Color;\r'
+			line = line + '\r '+newImport + ' \r'
                     w.write(line+'\r')
                 w.close()
                 os.remove(convert_file+'b')
