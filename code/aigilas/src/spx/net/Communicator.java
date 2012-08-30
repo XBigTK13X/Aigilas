@@ -13,10 +13,10 @@ public class Communicator {
 		_connection = connection;
 	}
 
-	public MessageContents receive() {
+	public Message receive() {
 		try {
 			_ois = new ObjectInputStream(_connection.getInputStream());
-			return (MessageContents) _ois.readObject();
+			return (Message) _ois.readObject();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -24,7 +24,7 @@ public class Communicator {
 		return null;
 	}
 
-	public void send(MessageContents message) {
+	public void send(Message message) {
 		try {
 			_oos = new ObjectOutputStream(_connection.getOutputStream());
 			_oos.writeObject(message);
