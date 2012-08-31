@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import spx.core.Settings;
+import xna.wrapper.Console;
+
 public class ClientManager {
 	List<MessageHandler> clients = new ArrayList<>();
 	private HashMap<Integer, Integer> addressToIndex = new HashMap<>();
@@ -19,7 +22,11 @@ public class ClientManager {
 			public void run() {
 				while (!Thread.interrupted()) {
 					try {
+						Console.WriteLine("SERVER: Spinning up a server instance");
 						Socket client = server.accept();
+						if (Settings.Get().GetServerVerbose()) {
+							System.out.println("SERVER: New connection made");
+						}
 						clients.add(new MessageHandler(server.accept()));
 						addressToIndex.put(client.getLocalPort(), clients.size() - 1);
 					}
@@ -29,6 +36,7 @@ public class ClientManager {
 				}
 			}
 		}, String.format("ClientListener"));
+		clientListener.start();
 	}
 
 	public Message readMessage() {
@@ -44,11 +52,6 @@ public class ClientManager {
 
 	public int size() {
 		return clients.size();
-	}
-
-	public int getIndex(Message _message) {
-		// TODO Find a way to correlate a message to its sender.
-		return 0;
 	}
 
 	public void announce(Message contents) {

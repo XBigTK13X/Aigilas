@@ -2,6 +2,7 @@
 
 package spx.net;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -20,20 +21,24 @@ public class MessageHandler {
 	private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<>();
 	private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<>();
 
-	public MessageHandler(Socket connection) {
+	public MessageHandler(final Socket connection) {
 		try {
-			this.oos = new ObjectOutputStream(connection.getOutputStream());
-			this.ois = new ObjectInputStream(connection.getInputStream());
-
-			// Create sender and receiver threads responsible for performing the
-			// I/O.
 			this.sender = new Thread(new Runnable() {
 				public void run() {
+					if (oos == null) {
+						try {
+							oos = new ObjectOutputStream(connection.getOutputStream());
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 					while (!Thread.interrupted()) {
 						Message msg = null;
 						try {
-							msg = outboundMessages.take(); // Will block until
-															// message available
+							System.out.println("Waiting for a message to send.");
+							msg = outboundMessages.take();
+							System.out.println("Sending message: " + msg.MessageType);
 							oos.reset();
 							oos.writeObject(msg);
 							oos.flush();
@@ -47,9 +52,19 @@ public class MessageHandler {
 
 			this.receiver = new Thread(new Runnable() {
 				public void run() {
+					if (ois == null) {
+						try {
+							ois = new ObjectInputStream(connection.getInputStream());
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 					Message msg = null;
 					try {
+						System.out.println("Waiting for a message to come in.");
 						msg = (Message) ois.readObject();
+						System.out.println("Getting message: " + msg.MessageType);
 						inboundMessages.add(msg);
 					}
 					catch (Exception e) {
@@ -58,7 +73,7 @@ public class MessageHandler {
 
 				}
 			}, String.format("ReceiverThread-%s", connection.getRemoteSocketAddress()));
-
+			System.out.println("Starting the send/receive threads.");
 			sender.start();
 			receiver.start();
 		}
