@@ -2,7 +2,6 @@
 
 package spx.net;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -14,59 +13,58 @@ import java.util.concurrent.LinkedBlockingQueue;
  * for receiving messages. It is initialized with an open socket.
  */
 public class MessageHandler {
-	private final ObjectOutputStream oos;
-	private final ObjectInputStream ois;
-	private final Thread sender;
-	private final Thread receiver;
+	private ObjectOutputStream oos;
+	private ObjectInputStream ois;
+	private Thread sender;
+	private Thread receiver;
 	private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<>();
 	private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<>();
 
-	public MessageHandler(Socket connection) throws IOException {
-		this.oos = new ObjectOutputStream(connection.getOutputStream());
-		this.ois = new ObjectInputStream(connection.getInputStream());
+	public MessageHandler(Socket connection) {
+		try {
+			this.oos = new ObjectOutputStream(connection.getOutputStream());
+			this.ois = new ObjectInputStream(connection.getInputStream());
 
-		// Create sender and receiver threads responsible for performing the
-		// I/O.
-		this.sender = new Thread(new Runnable() {
-			public void run() {
-				while (!Thread.interrupted()) {
+			// Create sender and receiver threads responsible for performing the
+			// I/O.
+			this.sender = new Thread(new Runnable() {
+				public void run() {
+					while (!Thread.interrupted()) {
+						Message msg = null;
+						try {
+							msg = outboundMessages.take(); // Will block until
+															// message available
+							oos.reset();
+							oos.writeObject(msg);
+							oos.flush();
+						}
+						catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}, String.format("SenderThread-%s", connection.getRemoteSocketAddress()));
+
+			this.receiver = new Thread(new Runnable() {
+				public void run() {
 					Message msg = null;
 					try {
-						msg = outboundMessages.take(); // Will block until
-														// message available
-						oos.reset();
-						oos.writeObject(msg);
-						oos.flush();
+						msg = (Message) ois.readObject();
+						inboundMessages.add(msg);
 					}
-					catch (InterruptedException e) {
+					catch (Exception e) {
 						e.printStackTrace();
 					}
-					catch (IOException ex) {
-						ex.printStackTrace();
-					}
-				}
-			}
-		}, String.format("SenderThread-%s", connection.getRemoteSocketAddress()));
 
-		this.receiver = new Thread(new Runnable() {
-			public void run() {
-				Message msg = null;
-				try {
-					msg = (Message) ois.readObject();
-					inboundMessages.add(msg);
 				}
-				catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				catch (IOException e) {
-					e.printStackTrace();
-				}
+			}, String.format("ReceiverThread-%s", connection.getRemoteSocketAddress()));
 
-			}
-		}, String.format("ReceiverThread-%s", connection.getRemoteSocketAddress()));
-
-		sender.start();
-		receiver.start();
+			sender.start();
+			receiver.start();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
