@@ -37,7 +37,6 @@ public class ClientManager {
 						clients.add(new MessageHandler(client));
 						clients.get(clients.size() - 1).owner = "SERVER";
 						addressToIndex.put(client.getPort(), clients.size() - 1);
-						System.out.println("Connection count: " + clients.size());
 					}
 					catch (IOException e) {
 						e.printStackTrace();

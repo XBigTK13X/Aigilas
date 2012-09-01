@@ -54,26 +54,30 @@ public class MessageHandler {
 
 			this.receiver = new Thread(new Runnable() {
 				public void run() {
-					if (ois == null) {
-						try {
-							ois = new ObjectInputStream(connection.getInputStream());
+					while (!Thread.interrupted()) {
+						blurt("Waiting for messages to arrive");
+						if (ois == null) {
+							try {
+								ois = new ObjectInputStream(connection.getInputStream());
+							}
+							catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
-						catch (IOException e) {
+						Message msg = null;
+						try {
+							msg = (Message) ois.readObject();
+							blurt("Getting message: " + msg.MessageType);
+							inboundMessages.add(msg);
+						}
+						catch (Exception e) {
 							e.printStackTrace();
 						}
-					}
-					Message msg = null;
-					try {
-						msg = (Message) ois.readObject();
-						blurt("Getting message: " + msg.MessageType);
-						inboundMessages.add(msg);
-					}
-					catch (Exception e) {
-						e.printStackTrace();
 					}
 
 				}
 			}, String.format("ReceiverThread-%s", connection.getLocalPort()));
+
 			blurt("Starting the send/receive threads.");
 			sender.start();
 			receiver.start();
