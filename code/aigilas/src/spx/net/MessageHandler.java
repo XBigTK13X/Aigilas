@@ -20,9 +20,12 @@ public class MessageHandler {
 	private Thread receiver;
 	private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<>();
 	private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<>();
+	private Socket connection;
+	public String owner = "";
 
 	public MessageHandler(final Socket connection) {
 		try {
+			this.connection = connection;
 			this.sender = new Thread(new Runnable() {
 				public void run() {
 					if (oos == null) {
@@ -36,9 +39,8 @@ public class MessageHandler {
 					while (!Thread.interrupted()) {
 						Message msg = null;
 						try {
-							System.out.println("Waiting for a message to send.");
 							msg = outboundMessages.take();
-							System.out.println("Sending message: " + msg.MessageType);
+							blurt("Sending message: " + msg.MessageType);
 							oos.reset();
 							oos.writeObject(msg);
 							oos.flush();
@@ -48,7 +50,7 @@ public class MessageHandler {
 						}
 					}
 				}
-			}, String.format("SenderThread-%s", connection.getRemoteSocketAddress()));
+			}, String.format("SenderThread-%s", connection.getLocalPort()));
 
 			this.receiver = new Thread(new Runnable() {
 				public void run() {
@@ -62,9 +64,8 @@ public class MessageHandler {
 					}
 					Message msg = null;
 					try {
-						System.out.println("Waiting for a message to come in.");
 						msg = (Message) ois.readObject();
-						System.out.println("Getting message: " + msg.MessageType);
+						blurt("Getting message: " + msg.MessageType);
 						inboundMessages.add(msg);
 					}
 					catch (Exception e) {
@@ -72,8 +73,8 @@ public class MessageHandler {
 					}
 
 				}
-			}, String.format("ReceiverThread-%s", connection.getRemoteSocketAddress()));
-			System.out.println("Starting the send/receive threads.");
+			}, String.format("ReceiverThread-%s", connection.getLocalPort()));
+			blurt("Starting the send/receive threads.");
 			sender.start();
 			receiver.start();
 		}
@@ -82,9 +83,6 @@ public class MessageHandler {
 		}
 	}
 
-	/**
-	 * Submits a message to the outbound queue, ready for sending.
-	 */
 	public void sendOutboundMessage(Message msg) {
 		outboundMessages.add(msg);
 	}
@@ -101,7 +99,15 @@ public class MessageHandler {
 		return null;
 	}
 
+	private void blurt(String message) {
+		System.out.println(owner + ": " + message);
+	}
+
 	public void destroy() {
 		// TODO: Interrupt and join with threads. Close streams and socket.
+	}
+
+	public Integer getLocalPort() {
+		return connection.getLocalPort();
 	}
 }

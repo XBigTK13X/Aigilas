@@ -16,26 +16,36 @@ public class ClientManager {
 	ServerSocket server;
 	Thread clientListener;
 
-	public ClientManager(final ServerSocket server) {
-		this.server = server;
+	public ClientManager() {
+		try {
+			this.server = new ServerSocket(Settings.Get().GetPort());
+		}
+		catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		clientListener = new Thread(new Runnable() {
 			public void run() {
 				while (!Thread.interrupted()) {
 					try {
-						Console.WriteLine("SERVER: Spinning up a server instance");
+						if (Settings.Get().GetServerVerbose()) {
+							Console.WriteLine("SERVER: Waiting for a client connection");
+						}
 						Socket client = server.accept();
 						if (Settings.Get().GetServerVerbose()) {
 							System.out.println("SERVER: New connection made");
 						}
-						clients.add(new MessageHandler(server.accept()));
-						addressToIndex.put(client.getLocalPort(), clients.size() - 1);
+						clients.add(new MessageHandler(client));
+						clients.get(clients.size() - 1).owner = "SERVER";
+						addressToIndex.put(client.getPort(), clients.size() - 1);
+						System.out.println("Connection count: " + clients.size());
 					}
 					catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
+				System.out.println("ClientManager was interupted.");
 			}
-		}, String.format("ClientListener"));
+		}, String.format("ClientManager on - %d", server.getLocalPort()));
 		clientListener.start();
 	}
 
@@ -61,7 +71,6 @@ public class ClientManager {
 	}
 
 	public void send(Message contents) {
-		// TODO Correlate a message to its sender.
-
+		clients.get(addressToIndex.get(contents.LocalPort)).sendOutboundMessage(contents);
 	}
 }
