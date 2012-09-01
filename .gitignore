@@ -17,3 +17,4 @@ convert/
 header.java
 .settings/
 *.log
+pkg/
