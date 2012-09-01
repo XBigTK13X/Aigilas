@@ -11,41 +11,43 @@ import spx.core.Settings;
 import xna.wrapper.Console;
 
 public class ClientManager {
-	List<MessageHandler> clients = new ArrayList<>();
-	private HashMap<Integer, Integer> addressToIndex = new HashMap<>();
+	List<MessageHandler> clients = new ArrayList<MessageHandler>();
+	private HashMap<Integer, Integer> addressToIndex = new HashMap<Integer, Integer>();
 	ServerSocket server;
 	Thread clientListener;
+	private boolean __otherServerExists = false;
 
 	public ClientManager() {
 		try {
 			this.server = new ServerSocket(Settings.Get().GetPort());
+			clientListener = new Thread(new Runnable() {
+				public void run() {
+					while (!Thread.interrupted()) {
+						try {
+							if (Settings.Get().GetClientManagerVerbose()) {
+								Console.WriteLine("MANAGER: Waiting for a client connection");
+							}
+							Socket client = server.accept();
+							if (Settings.Get().GetClientManagerVerbose()) {
+								System.out.println("MANAGER: New connection made");
+							}
+							clients.add(new MessageHandler(client));
+							clients.get(clients.size() - 1).owner = "SERVER";
+							addressToIndex.put(client.getPort(), clients.size() - 1);
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					System.out.println("ClientManager was interupted.");
+				}
+			}, "ClientManager");
+			clientListener.start();
 		}
 		catch (IOException e1) {
-			e1.printStackTrace();
+			__otherServerExists = true;
+			Console.WriteLine("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
 		}
-		clientListener = new Thread(new Runnable() {
-			public void run() {
-				while (!Thread.interrupted()) {
-					try {
-						if (Settings.Get().GetServerVerbose()) {
-							Console.WriteLine("SERVER: Waiting for a client connection");
-						}
-						Socket client = server.accept();
-						if (Settings.Get().GetServerVerbose()) {
-							System.out.println("SERVER: New connection made");
-						}
-						clients.add(new MessageHandler(client));
-						clients.get(clients.size() - 1).owner = "SERVER";
-						addressToIndex.put(client.getPort(), clients.size() - 1);
-					}
-					catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				System.out.println("ClientManager was interupted.");
-			}
-		}, String.format("ClientManager on - %d", server.getLocalPort()));
-		clientListener.start();
 	}
 
 	public Message readMessage() {
@@ -71,5 +73,9 @@ public class ClientManager {
 
 	public void send(Message contents) {
 		clients.get(addressToIndex.get(contents.LocalPort)).sendOutboundMessage(contents);
+	}
+
+	public boolean isOnlyInstance() {
+		return !__otherServerExists;
 	}
 }
