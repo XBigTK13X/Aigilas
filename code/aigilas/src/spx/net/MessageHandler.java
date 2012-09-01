@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import spx.core.Settings;
+
 /**
  * Handler definition. The handler contains two threads: One for sending and one
  * for receiving messages. It is initialized with an open socket.
@@ -104,7 +106,9 @@ public class MessageHandler {
 	}
 
 	private void blurt(String message) {
-		System.out.println(owner + ": " + message);
+		if (Settings.Get().GetMessageHandlerVerbose()) {
+			System.out.println(owner + ": " + message);
+		}
 	}
 
 	public void destroy() {
