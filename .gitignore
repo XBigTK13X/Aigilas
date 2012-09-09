@@ -23,3 +23,5 @@ pkg/
 /code/aigilas-pc/manifest.mf
 /code/aigilas/build.xml
 /code/aigilas-pc/nb-build.xml
+/code/aigilas/build/
+/code/aigilas-pc/build/
