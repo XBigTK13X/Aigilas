@@ -1,1 +1,0 @@
-package xna.wrapper; public class GameTime {}

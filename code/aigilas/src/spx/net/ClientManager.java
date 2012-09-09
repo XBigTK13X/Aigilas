@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import spx.core.Settings;
-import xna.wrapper.Console;
 
 public class ClientManager {
 	List<MessageHandler> clients = new ArrayList<MessageHandler>();
@@ -25,7 +24,7 @@ public class ClientManager {
 					while (!Thread.interrupted()) {
 						try {
 							if (Settings.Get().GetClientManagerVerbose()) {
-								Console.WriteLine("MANAGER: Waiting for a client connection");
+								System.out.println("MANAGER: Waiting for a client connection");
 							}
 							Socket client = server.accept();
 							if (Settings.Get().GetClientManagerVerbose()) {
@@ -46,7 +45,7 @@ public class ClientManager {
 		}
 		catch (IOException e1) {
 			__otherServerExists = true;
-			Console.WriteLine("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
+			System.out.println("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
 		}
 	}
 
