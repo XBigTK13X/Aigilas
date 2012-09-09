@@ -106,7 +106,7 @@ public class MessageHandler {
 	}
 
 	private void blurt(String message) {
-		if (Settings.Get().GetMessageHandlerVerbose()) {
+		if (Settings.Get().messageHandlerVerbose) {
 			System.out.println(owner + ": " + message);
 		}
 	}
