@@ -1,1 +1,1 @@
-package aigilas.skills.animations; public class NoAnimation extends SkillAnimation {}
+package aigilas.skills.animations;public class NoAnimation extends SkillAnimation {}

@@ -1,1 +1,1 @@
-package spx.particles; public abstract class PEComponent {	public boolean IsActive;}
+package spx.particles;public abstract class PEComponent {	public boolean IsActive;}
