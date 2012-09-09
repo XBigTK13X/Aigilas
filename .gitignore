@@ -18,3 +18,8 @@ header.java
 .settings/
 *.log
 pkg/
+/code/aigilas/nbproject/
+/code/aigilas-pc/nbproject/
+/code/aigilas-pc/manifest.mf
+/code/aigilas/build.xml
+/code/aigilas-pc/nb-build.xml
