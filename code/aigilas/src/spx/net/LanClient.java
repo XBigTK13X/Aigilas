@@ -8,12 +8,12 @@ import spx.core.Settings;
 import spx.devtools.DevConsole;
 
 public class LanClient implements IClient {
-	// Client<->Server
+	 = Client<->Server
 	private Message _message;
 	private MessageHandler _comm;
 	private int _heartBeat = 30;
 
-	// Client<->Game
+	 = Client<->Game
 	private Integer _initialPlayerIndex;
 	private boolean _isGameStarting;
 	private boolean _dungeonHasLoaded = false;
@@ -43,7 +43,7 @@ public class LanClient implements IClient {
 		}
 	}
 
-	// Client<->Game communication
+	 = Client<->Game communication
 	public boolean IsGameStarting() {
 		return _isGameStarting;
 	}
@@ -84,7 +84,7 @@ public class LanClient implements IClient {
 		return false;
 	}
 
-	private void InitPlayer(int playerIndex, int command) {
+	private void InitPlayer(int playerIndex, Commands command) {
 		if (!_playerStatus.containsKey(playerIndex)) {
 			_playerStatus.put(playerIndex, new HashMap<Integer, Boolean>());
 		}
@@ -101,15 +101,15 @@ public class LanClient implements IClient {
 		SendMessage(Message.CreateReadyForNextTurn());
 	}
 
-	// Client<->Server communication
-	public boolean IsActive(int command, int playerIndex) {
+	 = Client<->Server communication
+	public boolean IsActive(Commands command, int playerIndex) {
 		if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
 			return _playerStatus.get(playerIndex).get(command);
 		}
 		return false;
 	}
 
-	public void SetState(int command, int playerIndex, boolean isActive) {
+	public void SetState(Commands command, int playerIndex, boolean isActive) {
 		InitPlayer(playerIndex, command);
 		if (_playerStatus.get(playerIndex).get(command) != isActive) {
 			if (Settings.Get().clientVerbose) {
@@ -143,8 +143,8 @@ public class LanClient implements IClient {
 		_comm.sendOutboundMessage(contents);
 	}
 
-	// If the server doesn't reply at some point with the messageType you expect
-	// Then the client will hang extends an infinite loop.
+	 = If the server doesn't reply at some point with the messageType you expect
+	 = Then the client will hang extends an infinite loop.
 	private void AwaitReply(MessageTypes messageType) {
 		if (Settings.Get().clientVerbose) {
 			System.out.println("CLIENT: Waiting for " + messageType);

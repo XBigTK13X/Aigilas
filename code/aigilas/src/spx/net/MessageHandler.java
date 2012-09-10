@@ -1,4 +1,4 @@
-// Modified from: http://stackoverflow.com/questions/2828447/using-threads-to-handle-sockets
+ = Modified from: http: =stackoverflow.com/questions/2828447/using-threads-to-handle-sockets
 
 package spx.net;
 
@@ -112,7 +112,7 @@ public class MessageHandler {
 	}
 
 	public void destroy() {
-		// TODO: Interrupt and join with threads. Close streams and socket.
+		 = TODO: Interrupt and join with threads. Close streams and socket.
 	}
 
 	public Integer getLocalPort() {

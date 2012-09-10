@@ -1,1 +1,1 @@
-package aigilas.creatures;public class StatBuff {	public String Stat;	public float Amount;	public StatBuff(String stat, float amount) {		Stat = stat;		Amount = amount;	}}
+package aigilas.creatures;public class StatBuff {	public StatType stat;	public float Amount;	public StatBuff(StatType stat, float amount) {		Stat = stat;		Amount = amount;	}}

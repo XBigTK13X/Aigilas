@@ -1,11 +1,13 @@
 package spx.net;
 
+import aigilas.management.Commands;
+
 public interface IClient {
-	boolean IsActive(int command, int playerIndex);
+	boolean IsActive(Commands command, int playerIndex);
 
 	boolean NextTurn();
 
-	void SetState(int command, int playerIndex, boolean isActive);
+	void SetState(Commands command, int playerIndex, boolean isActive);
 
 	int GetPlayerCount();
 

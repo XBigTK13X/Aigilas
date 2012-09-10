@@ -1,1 +1,1 @@
-package aigilas.dungeons;public class Location {	public static final int Start = 0;	public static final int DrawDepths = 1;}
+package aigilas.dungeons;public class Location {	Start = 0;	DrawDepths = 1;}

@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 
 public class LocalClient implements IClient {
 
-	// Client<->Game
+	 = Client<->Game
 	private boolean _isGameStarting;
 	private float _turnTimer = 0;
 	private boolean _isConnected;
@@ -46,7 +46,7 @@ public class LocalClient implements IClient {
 		return false;
 	}
 
-	private void InitPlayer(int playerIndex, int command) {
+	private void InitPlayer(int playerIndex, Commands command) {
 		if (!_playerStatus.containsKey(playerIndex)) {
 			_playerStatus.put(playerIndex, new HashMap<Integer, Boolean>());
 		}
@@ -59,14 +59,14 @@ public class LocalClient implements IClient {
 		return 0;
 	}
 
-	public boolean IsActive(int command, int playerIndex) {
+	public boolean IsActive(Commands command, int playerIndex) {
 		if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
 			return _playerStatus.get(playerIndex).get(command);
 		}
 		return false;
 	}
 
-	public void SetState(int command, int playerIndex, boolean isActive) {
+	public void SetState(Commands command, int playerIndex, boolean isActive) {
 		InitPlayer(playerIndex, command);
 		if (_playerStatus.get(playerIndex).get(command) != isActive) {
 			if (Settings.Get().clientVerbose) {

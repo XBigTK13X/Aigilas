@@ -1,1 +1,1 @@
-package spx.io;public class CommandLock {	public CommandLock(int command, int playerIndex) {		Command = command;		PlayerIndex = playerIndex;	}	public int Command;	public int PlayerIndex;}
+package spx.io;import aigilas.management.Commands;public class CommandLock {	public CommandLock(Commands command, int playerIndex) {		Command = command;		PlayerIndex = playerIndex;	}	public Commands Command;	public int PlayerIndex;}
