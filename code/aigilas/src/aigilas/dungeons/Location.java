@@ -1,1 +1,1 @@
-package aigilas.dungeons;public class Location {	Start = 0;	DrawDepths = 1;}
+package aigilas.dungeons;public enum Location {	Start,	Depths;}
