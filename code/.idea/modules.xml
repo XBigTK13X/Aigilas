@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/aigilas/aigilas.iml" filepath="$PROJECT_DIR$/aigilas/aigilas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aigilas-pc/aigilas-pc.iml" filepath="$PROJECT_DIR$/aigilas-pc/aigilas-pc.iml" />
+    </modules>
+  </component>
+</project>
+

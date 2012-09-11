@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="gdx.jar" scope="COMPILE">
+		<srcroot url="jar://$MODULE_DIR$/lib/gdx-sources.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/aigilas/lib/gdx-sources.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/aigilas/lib/gdx.jar!/"/>
+	</lib>
+</component>
