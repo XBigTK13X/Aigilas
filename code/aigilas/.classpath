@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="/aigilas/src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="/aigilas/lib/gdx.jar" sourcepath="/aigilas/lib/gdx-sources.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
