@@ -4,16 +4,15 @@ import java.util.HashMap;
 
 import spx.core.RNG;
 import spx.core.Settings;
+import aigilas.management.Commands;
 
 import com.badlogic.gdx.Gdx;
 
 public class LocalClient implements IClient {
-
-	 = Client<->Game
 	private boolean _isGameStarting;
 	private float _turnTimer = 0;
 	private boolean _isConnected;
-	private final HashMap<Integer, HashMap<Integer, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Integer, Boolean>>();
+	private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
 
 	private final int maxPlayers = 1;
 
@@ -22,9 +21,9 @@ public class LocalClient implements IClient {
 			System.out.println("CLIENT: Starting up");
 		}
 		for (int ii = 0; ii < maxPlayers; ii++) {
-			_playerStatus.put(ii, new HashMap<Integer, Boolean>());
-			for (int jj = 0; jj < Message.CommandMax; jj++) {
-				_playerStatus.get(ii).put(jj, false);
+			_playerStatus.put(ii, new HashMap<Commands, Boolean>());
+			for (Commands command : Commands.values()) {
+				_playerStatus.get(ii).put(command, false);
 			}
 		}
 	}
@@ -48,7 +47,7 @@ public class LocalClient implements IClient {
 
 	private void InitPlayer(int playerIndex, Commands command) {
 		if (!_playerStatus.containsKey(playerIndex)) {
-			_playerStatus.put(playerIndex, new HashMap<Integer, Boolean>());
+			_playerStatus.put(playerIndex, new HashMap<Commands, Boolean>());
 		}
 		if (!_playerStatus.get(playerIndex).containsKey(command)) {
 			_playerStatus.get(playerIndex).put(command, false);

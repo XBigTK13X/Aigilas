@@ -6,28 +6,29 @@ import java.util.HashMap;
 import spx.core.RNG;
 import spx.core.Settings;
 import spx.devtools.DevConsole;
+import aigilas.management.Commands;
 
 public class LanClient implements IClient {
-	 = Client<->Server
+	// Client <-> Server
 	private Message _message;
 	private MessageHandler _comm;
 	private int _heartBeat = 30;
 
-	 = Client<->Game
+	// Client <-> Game
 	private Integer _initialPlayerIndex;
 	private boolean _isGameStarting;
 	private boolean _dungeonHasLoaded = false;
 	private boolean _isConnected;
-	private final HashMap<Integer, HashMap<Integer, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Integer, Boolean>>();
+	private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
 
 	public LanClient() {
 		if (Settings.Get().clientVerbose) {
 			System.out.println("CLIENT: Attempting to make a new connection");
 		}
 		for (int ii = 0; ii < Message.PlayerMax; ii++) {
-			_playerStatus.put(ii, new HashMap<Integer, Boolean>());
-			for (int jj = 0; jj < Message.CommandMax; jj++) {
-				_playerStatus.get(ii).put(jj, false);
+			_playerStatus.put(ii, new HashMap<Commands, Boolean>());
+			for (Commands command : Commands.values()) {
+				_playerStatus.get(ii).put(command, false);
 			}
 		}
 		try {
@@ -43,7 +44,7 @@ public class LanClient implements IClient {
 		}
 	}
 
-	 = Client<->Game communication
+	// Client <-> Game communication
 	public boolean IsGameStarting() {
 		return _isGameStarting;
 	}
@@ -86,7 +87,7 @@ public class LanClient implements IClient {
 
 	private void InitPlayer(int playerIndex, Commands command) {
 		if (!_playerStatus.containsKey(playerIndex)) {
-			_playerStatus.put(playerIndex, new HashMap<Integer, Boolean>());
+			_playerStatus.put(playerIndex, new HashMap<Commands, Boolean>());
 		}
 		if (!_playerStatus.get(playerIndex).containsKey(command)) {
 			_playerStatus.get(playerIndex).put(command, false);
@@ -101,7 +102,7 @@ public class LanClient implements IClient {
 		SendMessage(Message.CreateReadyForNextTurn());
 	}
 
-	 = Client<->Server communication
+	// Client <-> Server communication
 	public boolean IsActive(Commands command, int playerIndex) {
 		if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
 			return _playerStatus.get(playerIndex).get(command);
@@ -143,8 +144,8 @@ public class LanClient implements IClient {
 		_comm.sendOutboundMessage(contents);
 	}
 
-	 = If the server doesn't reply at some point with the messageType you expect
-	 = Then the client will hang extends an infinite loop.
+	// If the server doesn't reply at some point with the messageType you expect
+	// Then the client will hang in an infinite loop.
 	private void AwaitReply(MessageTypes messageType) {
 		if (Settings.Get().clientVerbose) {
 			System.out.println("CLIENT: Waiting for " + messageType);
