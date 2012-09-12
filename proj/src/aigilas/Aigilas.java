@@ -50,7 +50,7 @@ public class Aigilas implements ApplicationListener {
 
 		// Update
 		Input.Update();
-		if (Input.DetectState(Commands.ToggleDevConsole, Client.Get().GetFirstPlayerIndex())) {
+		if (Input.IsActive(Commands.ToggleDevConsole,Client.Get().GetFirstPlayerIndex())){
 			DevConsole.Get().Toggle();
 		}
 		if (Client.Get().NextTurn()) {
