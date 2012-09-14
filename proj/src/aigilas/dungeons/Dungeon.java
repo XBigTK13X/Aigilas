@@ -34,39 +34,36 @@ public class Dungeon {
 	private List<Room> _rooms = new ArrayList<Room>();
 	private List<IEntity> _contents = new ArrayList<IEntity>();
 	private IEntity[][] dungeon = new IEntity[_blocksWide][_blocksHigh];
-	private Point2 downSpawnLocation = new Point2(0, 0);
-	private Point2 upSpawnLocation = new Point2(0, 0);
+	private Point2 _upSpawnLocation = new Point2(0, 0);
+	private Point2 _downSpawnLocation = new Point2(0, 0);
 
-	private static boolean _firstDungeonMade;
+    private static final int startY = 10;
 
 	public Dungeon() {
-		if (!_firstDungeonMade) {
-			Init();
-			ConvertRoomsToWalls();
-			PlaceAltars();
-			PlaceStairs();
-			PlaceFloor();
-			TransferDungeonState();
-			_firstDungeonMade = true;
-		}
-		else {
-			enemyCapModifier++;
-			enemyBaseModifier = Settings.Get().enemyBase + enemyCapModifier / 5;
-			EntityManager.Clear();
-			Init();
-			PlaceRooms();
-			ConvertRoomsToWalls();
-			PlaceStairs();
-			PlaceCreatures(RNG.Next(Settings.Get().enemyBase + enemyBaseModifier, Settings.Get().enemyCap + enemyCapModifier));
-			PlaceItems(RNG.Next(Settings.Get().itemBase, Settings.Get().itemCap));
-			PlaceFloor();
-			TransferDungeonState();
-		}
+        Init();
+        ConvertRoomsToWalls();
+        PlaceAltars();
+        PlaceStairs();
+        PlaceFloor();
+        TransferDungeonState();
 	}
 
-	static final int startY = 10;
+    public Dungeon(Point2 upstairsSpawn) {
+        enemyCapModifier++;
+        enemyBaseModifier = Settings.Get().enemyBase + enemyCapModifier / 5;
+        EntityManager.Clear();
+        Init();
+        PlaceRooms();
+        ConvertRoomsToWalls();
+        _upSpawnLocation.Copy(upstairsSpawn);
+        PlaceStairs();
+        PlaceCreatures(RNG.Next(Settings.Get().enemyBase + enemyBaseModifier, Settings.Get().enemyCap + enemyCapModifier));
+        PlaceItems(RNG.Next(Settings.Get().itemBase, Settings.Get().itemCap));
+        PlaceFloor();
+        TransferDungeonState();
+    }
 
-	private void PlaceAltars() {
+    private void PlaceAltars() {
 		int startX = 8;
 		for (GodId god : GodId.values()) {
 			dungeon[startX][startY] = new Altar(new Point2(startX, startY), god);
@@ -80,7 +77,7 @@ public class Dungeon {
 		EntityManager.Clear();
 		PlaceFloor();
 		playerCache = DungeonFactory.FlushCache();
-		Point2 spawn = goingUp ? upSpawnLocation : downSpawnLocation;
+		Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
 		List<Point2> neighbors = spawn.GetNeighbors();
 		for (IEntity player : playerCache) {
 			Player pl = ((Player) player);
@@ -117,7 +114,7 @@ public class Dungeon {
 		}
 
 		List<IEntity> cache = DungeonFactory.FlushCache();
-		List<Point2> neighbors = downSpawnLocation.GetNeighbors();
+		List<Point2> neighbors = _upSpawnLocation.GetNeighbors();
 
 		if (cache.size() == 0) {
 			for (int ii = 0; ii < playerCount; ii++) {
@@ -224,13 +221,15 @@ public class Dungeon {
 	}
 
 	private void PlaceDownstairs() {
-		upSpawnLocation.Copy(FindRandomFreeTile());
-		dungeon[upSpawnLocation.GridX][upSpawnLocation.GridY] = new Downstairs(upSpawnLocation);
+		_downSpawnLocation.Copy(FindRandomFreeTile());
+		dungeon[_downSpawnLocation.GridX][_downSpawnLocation.GridY] = new Downstairs(_downSpawnLocation);
 	}
 
 	private void PlaceUpstairs() {
-		downSpawnLocation.Copy(FindRandomFreeTile());
-		dungeon[downSpawnLocation.GridX][downSpawnLocation.GridY] = new Upstairs(downSpawnLocation);
+		if(_upSpawnLocation.IsZero()){
+            _upSpawnLocation.Copy(FindRandomFreeTile());
+        }
+		dungeon[_upSpawnLocation.GridX][_upSpawnLocation.GridY] = new Upstairs(_upSpawnLocation);
 	}
 
 	private void ConvertRoomsToWalls() {
@@ -292,4 +291,8 @@ public class Dungeon {
 	private boolean IsFloor(int x, int y) {
 		return dungeon[x][y].GetEntityType() == EntityType.FLOOR;
 	}
+
+    public Point2 getDownstairsLocation() {
+        return _downSpawnLocation;
+    }
 }
