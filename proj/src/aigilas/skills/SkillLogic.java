@@ -56,7 +56,6 @@ public class SkillLogic {
                 __actorToSkillMapping.get(actorType).add(SkillLogic.GetElementalSkill(elem));
             }
         }
-        System.out.println(actorType + ": "+__actorToSkillMapping.get(actorType).size());
         return __actorToSkillMapping.get(actorType);
     }
 

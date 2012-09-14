@@ -327,7 +327,7 @@ public abstract class ICreature extends Entity implements IActor {
 	}
 
 	public void ApplyDamage(float damage, ICreature attacker, boolean showDamage) {
-		ApplyDamage(damage, attacker, showDamage);
+		ApplyDamage(damage, attacker, showDamage, null);
 	}
 
 	public void ApplyDamage(float damage, ICreature attacker) {
