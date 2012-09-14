@@ -52,29 +52,31 @@ public enum SkillId {
 	VAPOR_CLOUD("Vapor Cloud"),
 
 	// = Wrath
-	DISMEMBERMENT("Dismemberment"),
+	DISMEMBERMENT("Dismemberment",true),
 	// = Envy
-	HYPOTHERMIA("Hypothermia"),
+	HYPOTHERMIA("Hypothermia",true),
 	ICE_SHARD("Ice Shard"),
 	// = Gluttony
 	PLAGUE("Plague"),
-	POISON_CLOUD("Poison Cloud"),
+	POISON_CLOUD("Poison Cloud",true),
 	// = Sloth
-	SERPENT_SUPPER("Serpent Supper"),
+	SERPENT_SUPPER("Serpent Supper",true),
 	// = Pride
-	BREAKING_WHEEL("Breaking Wheel"),
+	BREAKING_WHEEL("Breaking Wheel",true),
 	// = Greed
-	BOIL("Boil"),
+	BOIL("Boil",true),
 	// = Lust
-	BRIMSTONE("Brimstone");
+	BRIMSTONE("Brimstone",true);
 
-	private String text;
+	public final String Name;
+    public final boolean Restrict;
+
+    private SkillId(String text, boolean restrict){
+        Restrict = restrict;
+        Name = text;
+    }
 
 	private SkillId(String text) {
-		this.text = text;
-	}
-
-	public String getName() {
-		return text;
+		this(text,false);
 	}
 }

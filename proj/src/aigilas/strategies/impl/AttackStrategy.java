@@ -1,9 +1,9 @@
 package aigilas.strategies.impl;
 
+import aigilas.skills.SkillLogic;
 import spx.bridge.ActorType;
 import aigilas.creatures.ICreature;
 import aigilas.skills.AnimationType;
-import aigilas.skills.SkillFactory;
 import aigilas.strategies.IStrategy;
 import aigilas.strategies.Strategy;
 
@@ -27,7 +27,7 @@ public class AttackStrategy extends IStrategy {
 			_skillCooldown--;
 			if (_skillCooldown <= 0) {
 				_parent.CycleActiveSkill(1);
-				if (SkillFactory.IsSkill(_parent.GetActiveSkill(), AnimationType.RANGED)) {
+				if (SkillLogic.IsSkill(_parent.GetActiveSkill(), AnimationType.RANGED)) {
 					if (opponent != null) {
 						_parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
 					}

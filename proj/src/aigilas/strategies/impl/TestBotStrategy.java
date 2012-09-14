@@ -1,5 +1,6 @@
 package aigilas.strategies.impl;
 
+import aigilas.skills.SkillLogic;
 import spx.bridge.ActorType;
 import spx.bridge.EntityType;
 import spx.core.RNG;
@@ -9,7 +10,6 @@ import spx.entities.IEntity;
 import spx.paths.PathFinder;
 import aigilas.creatures.ICreature;
 import aigilas.skills.AnimationType;
-import aigilas.skills.SkillFactory;
 import aigilas.strategies.IStrategy;
 import aigilas.strategies.Strategy;
 
@@ -31,7 +31,7 @@ public class TestBotStrategy extends IStrategy {
 			_parent.UseActiveSkill();
 		}
 		if (AbleToMove()) {
-			if (SkillFactory.IsSkill(_parent.GetActiveSkill(), AnimationType.RANGED)) {
+			if (SkillLogic.IsSkill(_parent.GetActiveSkill(), AnimationType.RANGED)) {
 				if (opponent != null) {
 					_parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
 				}

@@ -3,6 +3,7 @@ package aigilas.creatures;
 import java.util.ArrayList;
 import java.util.List;
 
+import aigilas.skills.SkillLogic;
 import spx.bridge.ActorType;
 import spx.bridge.DrawDepth;
 import spx.bridge.EntityType;
@@ -27,7 +28,6 @@ import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
 import aigilas.management.Commands;
 import aigilas.reactions.ComboMeter;
-import aigilas.skills.SkillFactory;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;
 import aigilas.statuses.IStatus;
@@ -87,7 +87,7 @@ public abstract class ICreature extends Entity implements IActor {
 			if (_skills == null) {
 				_skills = new SkillPool(this);
 			}
-			for (SkillId skillId : SkillFactory.GetElementalSkills(GetActorType(), _composition)) {
+			for (SkillId skillId : SkillLogic.GetElementalSkills(GetActorType(), _composition)) {
 				_skills.Add(skillId);
 			}
 			_skills.Add(_class.GetLevelSkills(_currentLevel));

@@ -1,13 +1,5 @@
 package aigilas.skills;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import spx.bridge.ActorType;
-import spx.core.RNG;
-import aigilas.entities.Elements;
 import aigilas.management.SpriteType;
 import aigilas.skills.animations.NoAnimation;
 import aigilas.skills.animations.RangedAnimation;
@@ -180,45 +172,7 @@ public class SkillFactory {
 		}
 	}
 
-	private static HashMap<Elements, List<SkillId>> __elementMap = new HashMap<>();
-	private static HashMap<SkillId, AnimationType> __skillAnimationMap = new HashMap<>();
-
-	private static void GenerateStaticSkillMaps() {
-		if (__elementMap.size() == 0) {
-			ISkill skill;
-			for (SkillId skillId : SkillId.values()) {
-				if (skillId != SkillId.NO_SKILL) {
-					skill = Create(skillId);
-					for (Elements elem : skill.GetElements()) {
-						if (!__elementMap.containsKey(elem)) {
-							__elementMap.put(elem, new ArrayList<SkillId>());
-						}
-						__elementMap.get(elem).add(skillId);
-					}
-					__skillAnimationMap.put(skillId, skill.GetAnimationType());
-				}
-			}
-			__skillAnimationMap.put(SkillId.NO_SKILL, null);
-		}
-	}
-
-	private static int skillPick = 0;
-	private static List<SkillId> InvalidRandomSkills = Arrays.asList(SkillId.BRIMSTONE, SkillId.BOIL, SkillId.SERPENT_SUPPER, SkillId.BREAKING_WHEEL, SkillId.DISMEMBERMENT, SkillId.HYPOTHERMIA, SkillId.PLAGUE);
-
-	public static SkillId GetElementalSkill(Elements elementId) {
-		GenerateStaticSkillMaps();
-		while (InvalidRandomSkills.contains(SkillId.values()[skillPick])) {
-			skillPick = RNG.Next(0, __elementMap.get(elementId).size());
-		}
-		return __elementMap.get(elementId).get(skillPick);
-	}
-
-	public static boolean IsSkill(SkillId skillId, AnimationType animationType) {
-		GenerateStaticSkillMaps();
-		return __skillAnimationMap.get(skillId) == animationType;
-	}
-
-	public static SkillBehavior Create(AnimationType animation, SpriteType skillGraphic, ISkill parentSkill) {
+    public static SkillBehavior Create(AnimationType animation, SpriteType skillGraphic, ISkill parentSkill) {
 		switch (animation) {
 			case CLOUD:
 				return new CloudBehavior(skillGraphic, parentSkill);
@@ -253,19 +207,7 @@ public class SkillFactory {
 			default:
 				return new NoAnimation();
 		}
-	}
-
-	public static HashMap<ActorType, List<SkillId>> __actorToSkillMapping = new HashMap<>();
-
-	public static List<SkillId> GetElementalSkills(ActorType actorType, List<Elements> _elementalComposition) {
-		if (!__actorToSkillMapping.containsKey(actorType)) {
-			__actorToSkillMapping.put(actorType, new ArrayList<SkillId>());
-			for (Elements elem : _elementalComposition) {
-				__actorToSkillMapping.get(actorType).add(SkillFactory.GetElementalSkill(elem));
-			}
-		}
-		return __actorToSkillMapping.get(actorType);
-	}
+    }
 
 	public static float GetCost(SkillId skillId) {
 		return Create(skillId).GetCost();
