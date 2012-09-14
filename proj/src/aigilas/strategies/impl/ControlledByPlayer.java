@@ -86,8 +86,8 @@ public class ControlledByPlayer extends IStrategy {
 					}
 					if (!_parent.GetSkillVector().IsZero()) {
 						_parent.UseActiveSkill();
-						_isCasting = false;
 					}
+                    _isCasting = false;
 				}
 			}
 
