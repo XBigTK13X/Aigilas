@@ -12,7 +12,7 @@ These hellbound souls are the main characters in Aigilas. Each player selects a 
 * Reactive skill system (similar to combos)
 * Procedurally generated dungeons and enemies means the game is never the same twice.
 * Support for couch co-op and LAN multiplayer with up to four players
-* Built on top of the SimplePathXna library, XNA, and Lidgren
+* Built on top of libgdx
 
 ## How to Play the Game##
 Please refer to <https://github.com/XBigTK13X/Aigilas/wiki/Instruction-Manual>
@@ -20,15 +20,13 @@ Please refer to <https://github.com/XBigTK13X/Aigilas/wiki/Instruction-Manual>
 ## How to Build the Game##
 Prerequisites:
 
-* Visual Studio 2010 (at least Visual C# 2010 Express)
-* XNA 4.0 (which is included in Windows Phone Developer Tools)
+* Oracle JDK 7
+* Intellij IDEA Community Edition
 
-Open Aigilas.sln in Visual Studio and launch the project. The game should launch shortly after that.
+Open the proj directory as a project in Intellij IDEA. Run the class "DesktopMain" as a Java application. The game should launch shortly after that.
 
 ## Supported Platforms ##
-Currently, only Windows 7 is tested and supported. A PoC has been done that shows Aigilas can run on MonoGame, which would open up support for Linux and Mac OS X.
-
-The game originally targeted Xbox 360, but then I graduated college and lost my Creators Club account. Should this game ever raise enough interest (and money) to sustain a new account, then I will resume testing on the 360.
+Windows 7, Mac OS X Lion and Ubuntu 12.04 are all supported to varying degrees. Currently, LAN play is fully functional on only Windows and Mac OS X.
 
 ## How can I contribute? ##
 Look through current issues, make suggestions via the issues page, if all else fails then fire a question my way at: xbigtk13x@gmail.com
