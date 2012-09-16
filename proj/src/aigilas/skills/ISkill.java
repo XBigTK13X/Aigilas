@@ -28,7 +28,7 @@ public abstract class ISkill {
     protected ISkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent, SpriteType effectGraphic) {
         _implementationId = implementationId;
         _components = new SkillComponents(strength, isPersistent);
-        _behavior = SkillFactory.Create(animation, effectGraphic, this);
+        _behavior = SkillFactory.create(animation, effectGraphic, this);
     }
 
     protected ISkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
@@ -43,85 +43,85 @@ public abstract class ISkill {
         this(implementationId, animation, SkillEffect.DefaultStrength, false, SpriteType.SKILL_EFFECT);
     }
 
-    protected void Add(Elements... elements) {
-        _components.AddElements(elements);
+    protected void add(Elements... elements) {
+        _components.addElements(elements);
     }
 
-    protected void AddCost(StatType stat, float cost) {
-        _behavior.AddCost(stat, cost);
+    protected void addCost(StatType stat, float cost) {
+        _behavior.addCost(stat, cost);
     }
 
-    public void SetBuff(StatType stat, float amount) {
-        _components.SetBuff(stat, amount);
+    public void setBuff(StatType stat, float amount) {
+        _components.setBuff(stat, amount);
     }
 
-    public void Activate(ICreature source) {
+    public void activate(ICreature source) {
         _source = source;
-        _behavior.Activate(source);
+        _behavior.activate(source);
     }
 
-    public void Affect(IEntity target) {
-        ICreature creature = Extensions.IsCreature(target);
+    public void affect(IEntity target) {
+        ICreature creature = Extensions.isCreature(target);
         if (creature != null) {
-            Affect(creature);
+            affect(creature);
         }
     }
 
-    public void ApplyToPlayers(Status statusId) {
-        for (IActor player : EntityManager.GetPlayers()) {
-            StatusFactory.Apply((ICreature) player, statusId);
+    public void applyToPlayers(Status statusId) {
+        for (IActor player : EntityManager.getPlayers()) {
+            StatusFactory.apply((ICreature) player, statusId);
         }
     }
 
-    public List<Elements> GetElements() {
-        return _components.GetElements();
+    public List<Elements> getElements() {
+        return _components.getElements();
     }
 
-    public void Affect(ICreature target) {
+    public void affect(ICreature target) {
 
     }
 
-    public SpriteType GetSpriteType() {
-        return _behavior.GetSpriteType();
+    public SpriteType getSpriteType() {
+        return _behavior.getSpriteType();
     }
 
-    public AnimationType GetAnimationType() {
-        return _behavior.GetAnimationType();
+    public AnimationType getAnimationType() {
+        return _behavior.getAnimationType();
     }
 
-    public float GetStrength() {
-        return _components.GetStrength();
+    public float getStrength() {
+        return _components.getStrength();
     }
 
-    public boolean IsPersistent() {
-        return _components.IsPersistent();
+    public boolean isPersistent() {
+        return _components.isPersistent();
     }
 
-    public Color GetElementColor() {
-        return _components.GetElements().get(0).Tint;
+    public Color getElementColor() {
+        return _components.getElements().get(0).Tint;
     }
 
-    public void Cleanup(Entity target, SkillEffect source) {
-        _behavior.Cleanup(target, source);
+    public void cleanup(Entity target, SkillEffect source) {
+        _behavior.cleanup(target, source);
     }
 
-    public boolean AffectTarget(ICreature target, SkillEffect graphic) {
-        return _behavior.AffectTarget(target, graphic);
+    public boolean affectTarget(ICreature target, SkillEffect graphic) {
+        return _behavior.affectTarget(target, graphic);
     }
 
-    public boolean IsActive() {
-        return _behavior.IsActive();
+    public boolean isActive() {
+        return _behavior.isActive();
     }
 
-    public List<EntityType> GetTargetTypes() {
-        return _components.GetTargetTypes();
+    public List<EntityType> getTargetTypes() {
+        return _components.getTargetTypes();
     }
 
-    public SkillId GetSkillId() {
+    public SkillId getSkillId() {
         return _implementationId;
     }
 
-    public float GetCost() {
-        return _behavior.GetCost();
+    public float getCost() {
+        return _behavior.getCost();
     }
 }

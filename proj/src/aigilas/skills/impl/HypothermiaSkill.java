@@ -15,17 +15,17 @@ public class HypothermiaSkill extends ISkill {
     {
         super(SkillId.DISMEMBERMENT, AnimationType.SELF);
 
-        Add(Elements.WATER);
-        AddCost(StatType.MANA, 3);
+        add(Elements.WATER);
+        addCost(StatType.MANA, 3);
 
     }
 
     @Override
-    public void Activate(ICreature target)
+    public void activate(ICreature target)
 
     {
         for (int ii = 0; ii < 4; ii++) {
-            CreatureFactory.CreateMinion(SkillId.ICE_SHARD, target, _behavior.GetGraphic(), EntityManager.GetEmptyLocation());
+            CreatureFactory.createMinion(SkillId.ICE_SHARD, target, _behavior.getGraphic(), EntityManager.getEmptyLocation());
 
         }
 

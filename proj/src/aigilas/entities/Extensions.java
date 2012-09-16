@@ -5,8 +5,8 @@ import spx.bridge.EntityType;
 import spx.entities.IEntity;
 
 public class Extensions {
-    public static ICreature IsCreature(IEntity entity) {
-        if (entity.GetEntityType() == EntityType.ACTOR) {
+    public static ICreature isCreature(IEntity entity) {
+        if (entity.getEntityType() == EntityType.ACTOR) {
             return (ICreature) entity;
         }
         return null;

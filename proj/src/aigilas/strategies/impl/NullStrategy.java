@@ -12,12 +12,12 @@ public class NullStrategy extends IStrategy {
         super(parent, null);
 
         for (ActorType targetType : targetTypes) {
-            _targets.AddTargetTypes(targetType);
+            _targets.addTargetTypes(targetType);
         }
     }
 
     @Override
-    public void Act() {
+    public void act() {
 
     }
 }

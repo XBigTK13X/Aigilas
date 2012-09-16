@@ -12,9 +12,9 @@ public class CloudBehavior extends SkillBehavior {
     }
 
     @Override
-    public void Activate(ICreature target) {
+    public void activate(ICreature target) {
         if (SubtractCost(target)) {
-            Point2 referencePoint = target.GetLocation();
+            Point2 referencePoint = target.getLocation();
             for (int ii = -1; ii < 2; ii++) {
                 for (int jj = -1; jj < 2; jj++) {
                     if (ii != 0 || jj != 0) {

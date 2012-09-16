@@ -18,23 +18,23 @@ public class AnimatedTexture {
 
     protected Point2 _position = Point2.Zero;
 
-    public void LoadContent(SpriteType assetName) {
-        _spriteInfo = SpriteSheetManager.GetSpriteInfo(assetName);
+    public void loadContent(SpriteType assetName) {
+        _spriteInfo = SpriteSheetManager.getSpriteInfo(assetName);
         _currentFrame = 0;
         _animationTimer = GameManager.AnimationFps;
     }
 
-    public void Draw() {
+    public void draw() {
         if (_texture == null) {
-            _texture = SpxManager.GetSpriteAsset(_spriteInfo.SpriteIndex);
+            _texture = SpxManager.getSpriteAsset(_spriteInfo.SpriteIndex);
         }
         if (_color.a > 0) {
-            UpdateAnimation();
-            SpxManager.Renderer.Draw(_texture, _position, _depth, _color);
+            updateAnimation();
+            SpxManager.Renderer.draw(_texture, _position, _depth, _color);
         }
     }
 
-    private void UpdateAnimation() {
+    private void updateAnimation() {
         if (_spriteInfo.MaxFrame != 1) {
             _animationTimer--;
             if (_animationTimer <= 0) {
@@ -44,35 +44,35 @@ public class AnimatedTexture {
         }
     }
 
-    public void SetSpriteInfo(SpriteInfo sprite) {
+    public void setSpriteInfo(SpriteInfo sprite) {
         if (_spriteInfo != sprite) {
             _spriteInfo = sprite;
             _currentFrame = 0;
         }
     }
 
-    public void SetPosition(float x, float y) {
+    public void setPosition(float x, float y) {
         _position.X = (int) x;
         _position.Y = (int) y;
     }
 
-    public void SetPosition(Point2 position) {
+    public void setPosition(Point2 position) {
         _position = new Point2(position.PosX, position.PosY);
     }
 
-    public void SetColor(Color color) {
+    public void setColor(Color color) {
         _color = color;
     }
 
-    public Color GetColor() {
+    public Color getColor() {
         return _color;
     }
 
-    public void SetAlpha(int alpha) {
+    public void setAlpha(int alpha) {
         _color = new Color(_color.r, _color.g, _color.b, alpha);
     }
 
-    public void SetDrawDepth(DrawDepth depth) {
+    public void setDrawDepth(DrawDepth depth) {
         _depth = depth;
     }
 }

@@ -6,7 +6,7 @@ import aigilas.skills.behaviors.*;
 import aigilas.skills.impl.*;
 
 public class SkillFactory {
-    public static ISkill Create(SkillId idSkill) {
+    public static ISkill create(SkillId idSkill) {
         switch (idSkill) {
             case ABSORB:
                 return new AbsorbSkill();
@@ -115,7 +115,7 @@ public class SkillFactory {
         }
     }
 
-    public static SkillBehavior Create(AnimationType animation, SpriteType skillGraphic, ISkill parentSkill) {
+    public static SkillBehavior create(AnimationType animation, SpriteType skillGraphic, ISkill parentSkill) {
         switch (animation) {
             case CLOUD:
                 return new CloudBehavior(skillGraphic, parentSkill);
@@ -138,7 +138,7 @@ public class SkillFactory {
         }
     }
 
-    public static SkillAnimation Create(AnimationType animation) {
+    public static SkillAnimation create(AnimationType animation) {
         switch (animation) {
             case RANGED:
                 return new RangedAnimation();
@@ -151,7 +151,7 @@ public class SkillFactory {
         }
     }
 
-    public static float GetCost(SkillId skillId) {
-        return Create(skillId).GetCost();
+    public static float getCost(SkillId skillId) {
+        return create(skillId).getCost();
     }
 }

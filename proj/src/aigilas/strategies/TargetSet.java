@@ -25,33 +25,33 @@ public class TargetSet
         _parent = parent;
     }
 
-    public ICreature AddTarget(ICreature target)
+    public ICreature addTarget(ICreature target)
 
     {
         _targets.add(target);
         return target;
     }
 
-    public void AddTargetTypes(ActorType... actorTypes) {
+    public void addTargetTypes(ActorType... actorTypes) {
         for (ActorType type : actorTypes) {
             _targetActorTypes.add(type);
         }
     }
 
-    public void AddEntityTypes(int... entityTypes) {
+    public void addEntityTypes(int... entityTypes) {
         for (int type : entityTypes) {
             _targetEntityTypes.add(type);
         }
     }
 
-    public void AddTargets(ICreature source)
+    public void addTargets(ICreature source)
 
     {
-        _targets.addAll(source.GetTargets()._targets);
-        _targetActorTypes.addAll(source.GetTargets()._targetActorTypes);
+        _targets.addAll(source.getTargets()._targets);
+        _targetActorTypes.addAll(source.getTargets()._targetActorTypes);
     }
 
-    public List<ICreature> AddTargets(List<ICreature> targets)
+    public List<ICreature> addTargets(List<ICreature> targets)
 
     {
         if (targets != null) {
@@ -64,12 +64,12 @@ public class TargetSet
     private float dist;
     ICreature closest;
 
-    public ICreature FindClosest() {
+    public ICreature findClosest() {
         closest = null;
         float closestDistance = Float.MAX_VALUE;
         if (_targets != null) {
             for (ICreature target : _targets) {
-                dist = Point2.DistanceSquared(target.GetLocation(), _parent.GetLocation());
+                dist = Point2.distanceSquared(target.getLocation(), _parent.getLocation());
                 if (dist < closestDistance) {
                     closest = target;
                     closestDistance = dist;
@@ -77,13 +77,13 @@ public class TargetSet
             }
             for (ActorType actorType : _targetActorTypes) {
                 _calculatedTargets = new ArrayList<ICreature>();
-                for (IEntity entity : EntityManager.GetActors(actorType)) {
+                for (IEntity entity : EntityManager.getActors(actorType)) {
                     _calculatedTargets.add((ICreature) entity);
                 }
 
                 for (ICreature creature : _calculatedTargets) {
                     if (creature != _parent) {
-                        dist = Point2.DistanceSquared(creature.GetLocation(), _parent.GetLocation());
+                        dist = Point2.distanceSquared(creature.getLocation(), _parent.getLocation());
                         if (dist < closestDistance) {
                             closest = creature;
                             closestDistance = dist;
@@ -95,18 +95,18 @@ public class TargetSet
         return closest;
     }
 
-    public IEntity GetCollidedTarget(Entity source)
+    public IEntity getCollidedTarget(Entity source)
 
     {
         for (ICreature target : _targets) {
-            if (target.contains(source.GetLocation())) {
+            if (target.contains(source.getLocation())) {
                 return target;
             }
         }
 
         for (ActorType actorType : _targetActorTypes) {
-            for (IActor target : EntityManager.GetActorsAt(source.GetLocation())) {
-                if (target.GetActorType() == actorType || (actorType == ActorType.NONPLAYER && target.GetActorType() != ActorType.PLAYER) || (actorType == ActorType.PLAYER && target.GetActorType() == ActorType.PLAYER)) {
+            for (IActor target : EntityManager.getActorsAt(source.getLocation())) {
+                if (target.getActorType() == actorType || (actorType == ActorType.NONPLAYER && target.getActorType() != ActorType.PLAYER) || (actorType == ActorType.PLAYER && target.getActorType() == ActorType.PLAYER)) {
                     return target;
                 }
             }
@@ -114,7 +114,7 @@ public class TargetSet
         return null;
     }
 
-    public List<ActorType> GetTargetActorTypes() {
+    public List<ActorType> getTargetActorTypes() {
         return _targetActorTypes;
     }
 }

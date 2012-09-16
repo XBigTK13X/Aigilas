@@ -13,15 +13,15 @@ public class StraightLineStrategy extends IStrategy {
         super(parent, Strategy.StraightLine);
 
         for (ActorType targetType : targetTypes) {
-            _targets.AddTargetTypes(targetType);
+            _targets.addTargetTypes(targetType);
         }
     }
 
     @Override
-    public void Act() {
-        _parent.MoveIfPossible(0, 1);
-        if (_parent.GetLocation().GridY >= Settings.Get().tileMapHeight - 1) {
-            _parent.SetInactive();
+    public void act() {
+        _parent.moveIfPossible(0, 1);
+        if (_parent.getLocation().GridY >= Settings.get().tileMapHeight - 1) {
+            _parent.setInactive();
         }
     }
 }

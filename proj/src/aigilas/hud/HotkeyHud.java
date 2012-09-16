@@ -15,16 +15,16 @@ public class HotkeyHud extends IHud {
         _isVisible = true;
     }
 
-    public void Draw() {
+    public void draw() {
     }
 
     private static List<Commands> _hotSkills = Arrays.asList(Commands.HotSkill1, Commands.HotSkill2, Commands.HotSkill3);
 
-    public void Update(GenericItem item, boolean refresh) {
-        if (Input.IsActive(Commands.LockSkill, _parent.GetPlayerIndex(), false)) {
+    public void update(GenericItem item, boolean refresh) {
+        if (Input.isActive(Commands.LockSkill, _parent.getPlayerIndex(), false)) {
             for (Commands hotSkill : _hotSkills) {
-                if (Input.IsActive(hotSkill, _parent.GetPlayerIndex(), false)) {
-                    _parent.MarkHotSkill(hotSkill);
+                if (Input.isActive(hotSkill, _parent.getPlayerIndex(), false)) {
+                    _parent.markHotSkill(hotSkill);
                 }
             }
         }

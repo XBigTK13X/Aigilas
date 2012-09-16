@@ -11,19 +11,19 @@ import spx.entities.EntityManager;
 
 public class Downstairs extends Entity {
     public Downstairs(Point2 location) {
-        Initialize(location, SpriteType.DOWNSTAIRS, EntityType.DOWNSTAIRS, DrawDepth.Stairs);
+        initialize(location, SpriteType.DOWNSTAIRS, EntityType.DOWNSTAIRS, DrawDepth.Stairs);
     }
 
     private ICreature player;
 
     @Override
-    public void Update() {
-        player = (ICreature) EntityManager.GetTouchingCreature(this);
+    public void update() {
+        player = (ICreature) EntityManager.getTouchingCreature(this);
         if (player != null) {
-            if (player.IsInteracting()) {
-                player.PerformInteraction();
+            if (player.isInteracting()) {
+                player.performInteraction();
                 try {
-                    DungeonFactory.GetNextFloor();
+                    DungeonFactory.getNextFloor();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -4,36 +4,36 @@ import spx.core.GameManager;
 import spx.core.Point2;
 
 public class HitTest {
-    public static boolean IsTouching(IEntity source, IEntity target)
+    public static boolean isTouching(IEntity source, IEntity target)
 
     {
-        if (IsClose(source, target)) {
+        if (isClose(source, target)) {
             return true;
         }
         return false;
     }
 
-    private static boolean IsClose(IEntity source, IEntity target) {
-        return IsClose(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY, target.GetLocation().PosY);
+    private static boolean isClose(IEntity source, IEntity target) {
+        return isClose(source.getLocation().PosX, target.getLocation().PosX, source.getLocation().PosY, target.getLocation().PosY);
     }
 
-    private static boolean IsClose(float x1, float x2, float y1, float y2) {
-        return GetDistanceSquare(x1, x2, y1, y2) < GameManager.SpriteRadius;
+    private static boolean isClose(float x1, float x2, float y1, float y2) {
+        return getDistanceSquare(x1, x2, y1, y2) < GameManager.SpriteRadius;
     }
 
-    public static float GetDistanceSquare(IEntity source, IEntity target)
+    public static float getDistanceSquare(IEntity source, IEntity target)
 
     {
-        return GetDistanceSquare(source.GetLocation().PosX, target.GetLocation().PosX, source.GetLocation().PosY, target.GetLocation().PosY);
+        return getDistanceSquare(source.getLocation().PosX, target.getLocation().PosX, source.getLocation().PosY, target.getLocation().PosY);
     }
 
-    public static float GetDistanceSquare(Point2 source, Point2 target)
+    public static float getDistanceSquare(Point2 source, Point2 target)
 
     {
-        return GetDistanceSquare(source.PosX, target.PosX, source.PosY, target.PosY);
+        return getDistanceSquare(source.PosX, target.PosX, source.PosY, target.PosY);
     }
 
-    private static float GetDistanceSquare(float x1, float x2, float y1, float y2) {
+    private static float getDistanceSquare(float x1, float x2, float y1, float y2) {
         return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
     }
 }

@@ -12,7 +12,7 @@ public class RotateBehavior extends SkillBehavior {
     }
 
     @Override
-    public void Activate(ICreature target) {
-        _sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target);
+    public void activate(ICreature target) {
+        _sideEffects.Generate(target.getLocation(), new Point2(0, 0), target);
     }
 }

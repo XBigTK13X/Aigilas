@@ -16,26 +16,26 @@ import java.util.List;
 public class CreatureFactory {
     private static int __playerCount = 0;
 
-    public static ICreature Create(ActorType actorType, Point2 position) {
+    public static ICreature create(ActorType actorType, Point2 position) {
         AbstractCreature result;
         switch (actorType) {
             case PLAYER:
                 result = new Player(__playerCount++);
                 break;
             default:
-                result = GenerateCreature(actorType);
+                result = generateCreature(actorType);
                 break;
         }
-        result.Setup(position);
+        result.setup(position);
         EntityManager.addObject(result);
         // $$$ Testing inv HUD
         for (int ii = 0; ii < 100; ii++) {
-            result.PickupItem(ItemFactory.CreateRandomPlain());
+            result.pickupItem(ItemFactory.createRandomPlain());
         }
         return result;
     }
 
-    private static AbstractCreature GenerateCreature(ActorType actorType) {
+    private static AbstractCreature generateCreature(ActorType actorType) {
         switch (actorType) {
             case PEON:
                 return new Peon();
@@ -72,11 +72,11 @@ public class CreatureFactory {
         }
     }
 
-    public static ICreature CreateRandom(Point2 randomPoint) {
-        return Create(Generate.Randoms.get(RNG.Next(0, Generate.Randoms.size())), randomPoint);
+    public static ICreature createRandom(Point2 randomPoint) {
+        return create(Generate.Randoms.get(RNG.next(0, Generate.Randoms.size())), randomPoint);
     }
 
-    public static ICreature CreateMinion(SkillId skillId, ICreature source, SkillEffect effectGraphic, Point2 location) {
+    public static ICreature createMinion(SkillId skillId, ICreature source, SkillEffect effectGraphic, Point2 location) {
         Minion result = null;
         switch (skillId) {
             case ACID_NOZZLE:
@@ -105,20 +105,20 @@ public class CreatureFactory {
                     e.printStackTrace();
                 }
         }
-        result.Init(source, effectGraphic);
+        result.init(source, effectGraphic);
         if (location != null) {
-            result.SetLocation(location);
+            result.setLocation(location);
         }
         EntityManager.addObject(result);
         return result;
     }
 
-    public static ICreature CreateMinion(SkillId skillId, ICreature source, SkillEffect effectGraphic) {
-        return CreateMinion(skillId, source, effectGraphic, null);
+    public static ICreature createMinion(SkillId skillId, ICreature source, SkillEffect effectGraphic) {
+        return createMinion(skillId, source, effectGraphic, null);
     }
 
-    public static ICreature CreateMinion(SkillId skillId, ICreature source) {
-        return CreateMinion(skillId, source, null, null);
+    public static ICreature createMinion(SkillId skillId, ICreature source) {
+        return createMinion(skillId, source, null, null);
     }
 
     private static List<ActorType> __remainingBosses;
@@ -129,13 +129,13 @@ public class CreatureFactory {
 
     ;
 
-    public static int BossesRemaining() {
+    public static int bossesRemaining() {
         return __remainingBosses.size();
     }
 
-    public static IEntity CreateNextBoss(Point2 randomPoint) {
-        ActorType nextBoss = __remainingBosses.get(RNG.Next(0, __remainingBosses.size()));
+    public static IEntity createNextBoss(Point2 randomPoint) {
+        ActorType nextBoss = __remainingBosses.get(RNG.next(0, __remainingBosses.size()));
         __remainingBosses.remove(nextBoss);
-        return Create(nextBoss, randomPoint);
+        return create(nextBoss, randomPoint);
     }
 }

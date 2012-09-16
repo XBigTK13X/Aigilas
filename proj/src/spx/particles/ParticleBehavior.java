@@ -1,9 +1,9 @@
 package spx.particles;
 
 public abstract class ParticleBehavior {
-    public int GetParticleCount() {
+    public int getParticleCount() {
         return 10;
     }
 
-    public abstract void Update(Particle2 particle);
+    public abstract void update(Particle2 particle);
 }

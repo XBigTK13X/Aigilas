@@ -17,31 +17,31 @@ public class AttackStrategy extends IStrategy {
         super(parent, Strategy.Attack);
 
         for (ActorType targetType : targetTypes) {
-            _targets.AddTargetTypes(targetType);
+            _targets.addTargetTypes(targetType);
         }
     }
 
     @Override
-    public void Act() {
+    public void act() {
         if (AbleToMove()) {
             _skillCooldown--;
             if (_skillCooldown <= 0) {
-                _parent.CycleActiveSkill(1);
-                if (SkillLogic.IsSkill(_parent.GetActiveSkill(), AnimationType.RANGED)) {
+                _parent.cycleActiveSkill(1);
+                if (SkillLogic.isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
                     if (opponent != null) {
-                        _parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
+                        _parent.setSkillVector(CalculateTargetVector(_parent.getLocation(), opponent.getLocation()));
                     }
-                    if (_parent.GetSkillVector().GridX != 0 || _parent.GetSkillVector().GridY != 0) {
-                        _parent.UseActiveSkill();
+                    if (_parent.getSkillVector().GridX != 0 || _parent.getSkillVector().GridY != 0) {
+                        _parent.useActiveSkill();
                     }
                 } else {
-                    _parent.UseActiveSkill();
+                    _parent.useActiveSkill();
                 }
                 _skillCooldown = _skillCooldownMax;
             }
-            if (targetPath.HasMoves()) {
-                nextMove.Copy(targetPath.GetNextMove());
-                _parent.MoveTo(nextMove);
+            if (targetPath.hasMoves()) {
+                nextMove.copy(targetPath.getNextMove());
+                _parent.moveTo(nextMove);
             }
         }
     }

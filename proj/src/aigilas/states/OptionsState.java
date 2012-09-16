@@ -19,26 +19,26 @@ public class OptionsState implements State {
     private int _selection;
 
     public OptionsState() {
-        Input.SetContext(Contexts.Nonfree, Client.Get().GetFirstPlayerIndex());
+        Input.setContext(Contexts.Nonfree, Client.get().getFirstPlayerIndex());
     }
 
     @Override
-    public void Update() {
-        _text.WriteAction(PlayText, 1, 300, 100);
-        _text.WriteAction(OptionsText, 1, 300, 200);
-        _text.WriteAction(QuitText, 1, 300, 300);
+    public void update() {
+        _text.writeAction(PlayText, 1, 300, 100);
+        _text.writeAction(OptionsText, 1, 300, 200);
+        _text.writeAction(QuitText, 1, 300, 300);
 
-        _selection += (Input.IsActive(Commands.MoveDown, 0) ? 1 : 0) + (Input.IsActive(Commands.MoveUp, 0) ? -1 : 0);
+        _selection += (Input.isActive(Commands.MoveDown, 0) ? 1 : 0) + (Input.isActive(Commands.MoveUp, 0) ? -1 : 0);
         _selection %= 3;
 
-        if (Input.IsActive(Commands.Confirm, Client.Get().GetFirstPlayerIndex())) {
+        if (Input.isActive(Commands.Confirm, Client.get().getFirstPlayerIndex())) {
             switch (_selection) {
                 case 0:
-                    Input.SetContext(Contexts.Free, Client.Get().GetFirstPlayerIndex());
-                    StateManager.LoadState(new GameplayState());
+                    Input.setContext(Contexts.Free, Client.get().getFirstPlayerIndex());
+                    StateManager.loadState(new GameplayState());
                     return;
                 case 1:
-                    StateManager.LoadState(new OptionsState());
+                    StateManager.loadState(new OptionsState());
                     return;
                 case 2:
                     System.exit(0);
@@ -48,17 +48,17 @@ public class OptionsState implements State {
             }
         }
 
-        _text.WriteAction(SelectionText, 1, 225, 100 * (_selection + 1));
+        _text.writeAction(SelectionText, 1, 225, 100 * (_selection + 1));
     }
 
     @Override
-    public void LoadContent() {
+    public void loadContent() {
 
     }
 
     @Override
-    public void Draw() {
-        _text.Draw();
-        _text.Clear();
+    public void draw() {
+        _text.draw();
+        _text.clear();
     }
 }

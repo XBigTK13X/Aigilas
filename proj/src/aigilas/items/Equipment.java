@@ -13,30 +13,30 @@ public class Equipment {
         _parent = owner;
     }
 
-    public void Unequip(GenericItem item) {
-        if (IsRegistered(item)) {
-            Unregister(item);
+    public void unequip(GenericItem item) {
+        if (isRegistered(item)) {
+            unregister(item);
         }
     }
 
-    public void Register(GenericItem item) {
-        ItemSlot itemSlot = item.GetItemClass().Slot;
+    public void register(GenericItem item) {
+        ItemSlot itemSlot = item.getItemClass().Slot;
         if (_slots.containsKey(itemSlot)) {
-            Unequip(_slots.get(itemSlot));
+            unequip(_slots.get(itemSlot));
         }
         _slots.put(itemSlot, item);
     }
 
-    public void Unregister(GenericItem item) {
-        ItemSlot itemSlot = item.GetItemClass().Slot;
+    public void unregister(GenericItem item) {
+        ItemSlot itemSlot = item.getItemClass().Slot;
         if (_slots.containsKey(itemSlot)) {
-            _parent.PickupItem(_slots.get(itemSlot));
+            _parent.pickupItem(_slots.get(itemSlot));
             _slots.remove(itemSlot);
         }
     }
 
-    public boolean IsRegistered(GenericItem item) {
-        ItemSlot itemClass = item.GetItemClass().Slot;
+    public boolean isRegistered(GenericItem item) {
+        ItemSlot itemClass = item.getItemClass().Slot;
         if (_slots.containsKey(itemClass)) {
             return (item == _slots.get(itemClass));
         }
@@ -45,15 +45,15 @@ public class Equipment {
 
     private float bonusSum;
 
-    public float CalculateBonus(StatType stat) {
+    public float calculateBonus(StatType stat) {
         bonusSum = 0;
         for (ItemSlot slot : _slots.keySet()) {
-            bonusSum += _slots.get(slot).GetStatBonus(stat);
+            bonusSum += _slots.get(slot).getStatBonus(stat);
         }
         return bonusSum;
     }
 
-    public HashMap<ItemSlot, GenericItem> GetItems() {
+    public HashMap<ItemSlot, GenericItem> getItems() {
         return _slots;
     }
 }

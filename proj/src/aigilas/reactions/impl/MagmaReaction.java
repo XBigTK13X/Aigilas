@@ -5,9 +5,9 @@ import aigilas.reactions.IReaction;
 
 public class MagmaReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(30f);
+        target.applyDamage(30f);
     }
 }

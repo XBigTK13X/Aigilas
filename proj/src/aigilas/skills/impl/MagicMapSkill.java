@@ -13,13 +13,13 @@ public class MagicMapSkill extends ISkill {
     {
         super(SkillId.MAGIC_MAP, AnimationType.RANGED);
 
-        Add(Elements.LIGHT);
-        AddCost(StatType.MANA, 10);
+        add(Elements.LIGHT);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
 

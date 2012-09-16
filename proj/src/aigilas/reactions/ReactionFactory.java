@@ -3,7 +3,7 @@ package aigilas.reactions;
 import aigilas.reactions.impl.*;
 
 public class ReactionFactory {
-    public static IReaction Create(ReactionId id) {
+    public static IReaction create(ReactionId id) {
         switch (id) {
             case SWEAT:
                 return new SweatReaction();

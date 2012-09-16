@@ -7,9 +7,9 @@ import aigilas.statuses.StatusFactory;
 
 public class PneumoniaReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.Poison);
+        StatusFactory.apply(target, Status.Poison);
     }
 }

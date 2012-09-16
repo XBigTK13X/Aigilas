@@ -15,18 +15,18 @@ public class WallPunchSkill extends ISkill {
     {
         super(SkillId.WALL_PUNCH, AnimationType.RANGED);
 
-        Add(Elements.EARTH);
-        AddCost(StatType.MANA, 10);
+        add(Elements.EARTH);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(IEntity target)
+    public void affect(IEntity target)
 
     {
-        if (target.GetEntityType() == EntityType.WALL) {
-            if (target.GetLocation().GridX > 0 && target.GetLocation().GridX < Settings.Get().tileMapWidth - 1 && target.GetLocation().GridY > 0 && target.GetLocation().GridY < Settings.Get().tileMapHeight - 1) {
-                target.SetInactive();
+        if (target.getEntityType() == EntityType.WALL) {
+            if (target.getLocation().GridX > 0 && target.getLocation().GridX < Settings.get().tileMapWidth - 1 && target.getLocation().GridY > 0 && target.getLocation().GridY < Settings.get().tileMapHeight - 1) {
+                target.setInactive();
 
             }
 

@@ -16,15 +16,15 @@ public class DeltasHud extends IHud {
         _equipment = equipment;
     }
 
-    public void Draw() {
+    public void draw() {
         if (_isVisible) {
-            _textHandler.Draw();
+            _textHandler.draw();
         }
     }
 
-    private GenericItem GetEquipmentIn(ItemSlot slot) {
-        if (_equipment.GetItems().containsKey(slot)) {
-            return _equipment.GetItems().get(slot);
+    private GenericItem getEquipmentIn(ItemSlot slot) {
+        if (_equipment.getItems().containsKey(slot)) {
+            return _equipment.getItems().get(slot);
         }
         return null;
     }
@@ -34,21 +34,21 @@ public class DeltasHud extends IHud {
     private static final String title = "Deltas";
     private String display = "EMPTY";
 
-    public void Update(GenericItem item, boolean refresh) {
+    public void update(GenericItem item, boolean refresh) {
         if (_isVisible) {
-            _textHandler.Update();
-            _textHandler.Clear();
+            _textHandler.update();
+            _textHandler.clear();
             if (item != null && refresh) {
-                if (GetEquipmentIn(item.GetItemClass().Slot) != null) {
-                    StringSquisher.Clear();
-                    for (Float stat : GetEquipmentIn(item.GetItemClass().Slot).Modifers.GetDeltas(item.Modifers)) {
-                        StringSquisher.Squish(((stat > 0) ? positive : ""), StringStorage.Get(stat), delim);
+                if (getEquipmentIn(item.getItemClass().Slot) != null) {
+                    StringSquisher.clear();
+                    for (Float stat : getEquipmentIn(item.getItemClass().Slot).Modifers.getDeltas(item.Modifers)) {
+                        StringSquisher.squish(((stat > 0) ? positive : ""), StringStorage.get(stat), delim);
                     }
-                    display = StringSquisher.Flush();
+                    display = StringSquisher.flush();
                 }
             }
-            _textHandler.WriteDefault(title, 30, 260, GetHudOrigin());
-            _textHandler.WriteDefault(display, 30, 290, GetHudOrigin());
+            _textHandler.writeDefault(title, 30, 260, getHudOrigin());
+            _textHandler.writeDefault(display, 30, 290, getHudOrigin());
         }
     }
 }

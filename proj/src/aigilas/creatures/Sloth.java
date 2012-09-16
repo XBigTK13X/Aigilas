@@ -10,6 +10,6 @@ public class Sloth extends AbstractCreature {
         super(ActorType.SLOTH, SpriteType.SLOTH);
         Compose(Elements.EARTH);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
-        Add(SkillId.SERPENT_SUPPER);
+        add(SkillId.SERPENT_SUPPER);
     }
 }

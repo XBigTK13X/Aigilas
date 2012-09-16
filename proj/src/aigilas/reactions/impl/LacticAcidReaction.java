@@ -7,9 +7,9 @@ import aigilas.statuses.StatusFactory;
 
 public class LacticAcidReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.WeakMuscles);
+        StatusFactory.apply(target, Status.WeakMuscles);
     }
 }

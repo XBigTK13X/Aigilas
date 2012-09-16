@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dungeon {
-    private static int _blocksHigh = Settings.Get().tileMapHeight;
-    private static int _blocksWide = Settings.Get().tileMapWidth;
+    private static int _blocksHigh = Settings.get().tileMapHeight;
+    private static int _blocksWide = Settings.get().tileMapWidth;
 
     private static int enemyCapModifier = 0;
     private static int enemyBaseModifier = 0;
-    private int playerCount = Client.Get().GetPlayerCount();
+    private int playerCount = Client.get().getPlayerCount();
 
     private List<Room> _rooms = new ArrayList<Room>();
     private List<IEntity> _contents = new ArrayList<IEntity>();
@@ -36,30 +36,30 @@ public class Dungeon {
     private static final int startY = 10;
 
     public Dungeon() {
-        Init();
-        ConvertRoomsToWalls();
-        PlaceAltars();
-        PlaceStairs();
-        PlaceFloor();
-        TransferDungeonState();
+        init();
+        convertRoomsToWalls();
+        placeAltars();
+        placeStairs();
+        placeFloor();
+        transferDungeonState();
     }
 
     public Dungeon(Point2 upstairsSpawn) {
         enemyCapModifier++;
-        enemyBaseModifier = Settings.Get().enemyBase + enemyCapModifier / 5;
-        EntityManager.Clear();
-        Init();
-        PlaceRooms();
-        ConvertRoomsToWalls();
-        _upSpawnLocation.Copy(upstairsSpawn);
-        PlaceStairs();
-        PlaceCreatures(RNG.Next(Settings.Get().enemyBase + enemyBaseModifier, Settings.Get().enemyCap + enemyCapModifier));
-        PlaceItems(RNG.Next(Settings.Get().itemBase, Settings.Get().itemCap));
-        PlaceFloor();
-        TransferDungeonState();
+        enemyBaseModifier = Settings.get().enemyBase + enemyCapModifier / 5;
+        EntityManager.clear();
+        init();
+        placeRooms();
+        convertRoomsToWalls();
+        _upSpawnLocation.copy(upstairsSpawn);
+        placeStairs();
+        placeCreatures(RNG.next(Settings.get().enemyBase + enemyBaseModifier, Settings.get().enemyCap + enemyCapModifier));
+        placeItems(RNG.next(Settings.get().itemBase, Settings.get().itemCap));
+        placeFloor();
+        transferDungeonState();
     }
 
-    private void PlaceAltars() {
+    private void placeAltars() {
         int startX = 8;
         for (GodId god : GodId.values()) {
             dungeon[startX][startY] = new Altar(new Point2(startX, startY), god);
@@ -69,15 +69,15 @@ public class Dungeon {
 
     private List<IEntity> playerCache;
 
-    public void LoadTiles(boolean goingUp) {
-        EntityManager.Clear();
-        PlaceFloor();
-        playerCache = DungeonFactory.FlushCache();
+    public void loadTiles(boolean goingUp) {
+        EntityManager.clear();
+        placeFloor();
+        playerCache = DungeonFactory.flushCache();
         Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
-        List<Point2> neighbors = spawn.GetNeighbors();
+        List<Point2> neighbors = spawn.getNeighbors();
         for (IEntity player : playerCache) {
             Player pl = ((Player) player);
-            pl.SetLocation(GetRandomNeighbor(neighbors));
+            pl.setLocation(getRandomNeighbor(neighbors));
             _contents.add(pl);
         }
         for (IEntity item : _contents) {
@@ -85,23 +85,23 @@ public class Dungeon {
         }
     }
 
-    public void CacheContents() {
-        for (IActor player : EntityManager.GetActors(ActorType.PLAYER)) {
-            DungeonFactory.AddToCache((Entity) player);
-            EntityManager.RemoveObject(player);
+    public void cacheContents() {
+        for (IActor player : EntityManager.getActors(ActorType.PLAYER)) {
+            DungeonFactory.addToCache((Entity) player);
+            EntityManager.removeObject(player);
         }
-        _contents = new ArrayList<IEntity>(EntityManager.GetEntitiesToCache());
+        _contents = new ArrayList<IEntity>(EntityManager.getEntitiesToCache());
     }
 
-    private void Init() {
+    private void init() {
         _rooms.add(new Room(_blocksHigh, _blocksWide, 0, 0));
     }
 
-    private void TransferDungeonState() {
+    private void transferDungeonState() {
         for (IEntity[] row : dungeon) {
             for (IEntity tile : row) {
                 if (tile != null) {
-                    if (tile.GetEntityType() != EntityType.FLOOR) {
+                    if (tile.getEntityType() != EntityType.FLOOR) {
                         _contents.add(tile);
                     }
                     EntityManager.addObject(tile);
@@ -109,16 +109,16 @@ public class Dungeon {
             }
         }
 
-        List<IEntity> cache = DungeonFactory.FlushCache();
-        List<Point2> neighbors = _upSpawnLocation.GetNeighbors();
+        List<IEntity> cache = DungeonFactory.flushCache();
+        List<Point2> neighbors = _upSpawnLocation.getNeighbors();
 
         if (cache.size() == 0) {
             for (int ii = 0; ii < playerCount; ii++) {
-                _contents.add(CreatureFactory.Create(ActorType.PLAYER, GetRandomNeighbor(neighbors)));
+                _contents.add(CreatureFactory.create(ActorType.PLAYER, getRandomNeighbor(neighbors)));
             }
         } else {
             for (IEntity player : cache) {
-                ((Entity) player).SetLocation(GetRandomNeighbor(neighbors));
+                ((Entity) player).setLocation(getRandomNeighbor(neighbors));
             }
             EntityManager.addObjects(cache);
             _contents.addAll(cache);
@@ -127,27 +127,27 @@ public class Dungeon {
 
     Point2 neighborTemp = new Point2(0, 0);
 
-    private Point2 GetRandomNeighbor(List<Point2> neighbors) {
+    private Point2 getRandomNeighbor(List<Point2> neighbors) {
         while (neighbors.size() > 0) {
-            int neighborIndex = RNG.Next(0, neighbors.size());
+            int neighborIndex = RNG.next(0, neighbors.size());
             neighborTemp = neighbors.get(neighborIndex);
             neighbors.remove(neighborIndex);
-            if (!dungeon[neighborTemp.GridX][neighborTemp.GridY].IsBlocking()) {
+            if (!dungeon[neighborTemp.GridX][neighborTemp.GridY].isBlocking()) {
                 return neighborTemp;
             }
         }
         return null;
     }
 
-    private void PlaceItems(int amountToPlace) {
+    private void placeItems(int amountToPlace) {
         while (amountToPlace > 0) {
             amountToPlace--;
-            Point2 randomPoint = FindRandomFreeTile();
-            dungeon[randomPoint.GridX][randomPoint.GridY] = ItemFactory.CreateRandomPlain(randomPoint);
+            Point2 randomPoint = findRandomFreeTile();
+            dungeon[randomPoint.GridX][randomPoint.GridY] = ItemFactory.createRandomPlain(randomPoint);
         }
     }
 
-    private void PlaceFloor() {
+    private void placeFloor() {
         for (int ii = 1; ii < _blocksWide - 1; ii++) {
             for (int jj = 1; jj < _blocksHigh - 1; jj++) {
                 EntityManager.addObject(new Floor(new Point2(ii, jj)));
@@ -155,42 +155,42 @@ public class Dungeon {
         }
     }
 
-    private void PlaceCreatures(int amountOfCreatures) {
-        // = Point2 random = new Point2(FindRandomFreeTile());
+    private void placeCreatures(int amountOfCreatures) {
+        // = Point2 random = new Point2(findRandomFreeTile());
         // = dungeon[random.GridX][random.GridY] =
-        // = CreatureFactory.Create(ActorType.ENVY, random);
+        // = CreatureFactory.create(ActorType.ENVY, random);
         // = return;
-        if (DungeonFactory.GetFloorCount() % Settings.Get().bossLevelMod == 1 && CreatureFactory.BossesRemaining() > 0) {
-            Point2 randomPoint = new Point2(FindRandomFreeTile());
-            dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.CreateNextBoss(randomPoint);
+        if (DungeonFactory.getFloorCount() % Settings.get().bossLevelMod == 1 && CreatureFactory.bossesRemaining() > 0) {
+            Point2 randomPoint = new Point2(findRandomFreeTile());
+            dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
         } else {
             while (amountOfCreatures > 0) {
                 amountOfCreatures--;
-                Point2 randomPoint = new Point2(FindRandomFreeTile());
-                dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.CreateRandom(randomPoint);
+                Point2 randomPoint = new Point2(findRandomFreeTile());
+                dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createRandom(randomPoint);
             }
         }
     }
 
-    private void PlaceRooms() {
+    private void placeRooms() {
         ArrayList<Room> newRooms = new ArrayList<Room>();
-        int roomsToPlace = 3 + RNG.Next(0, Settings.Get().maxRoomCount);
+        int roomsToPlace = 3 + RNG.next(0, Settings.get().maxRoomCount);
         int attemptCount = 0;
         while (attemptCount < 1000 && roomsToPlace > 0) {
             attemptCount++;
-            int startX = RNG.Next(0, _blocksWide - 5);
-            int startY = RNG.Next(0, _blocksHigh - 5);
-            int startWidth = 5 + RNG.Next(0, 2);
-            int startHeight = 5 + RNG.Next(0, 2);
+            int startX = RNG.next(0, _blocksWide - 5);
+            int startY = RNG.next(0, _blocksHigh - 5);
+            int startWidth = 5 + RNG.next(0, 2);
+            int startHeight = 5 + RNG.next(0, 2);
             roomsToPlace--;
             Room nextRoom = new Room(startHeight, startWidth, startX, startY);
             boolean collides = false;
             for (Room room : newRooms) {
-                if (room.Collides(nextRoom)) {
+                if (room.collides(nextRoom)) {
                     collides = true;
                 }
             }
-            if (!collides && !nextRoom.IsBad()) {
+            if (!collides && !nextRoom.isBad()) {
                 newRooms.add(nextRoom);
             }
         }
@@ -199,34 +199,34 @@ public class Dungeon {
         }
     }
 
-    private Point2 FindRandomFreeTile() {
+    private Point2 findRandomFreeTile() {
         while (true) {
-            int x = RNG.Next(0, _blocksWide);
-            int y = RNG.Next(0, _blocksHigh);
-            if (dungeon[x][y].GetEntityType() == EntityType.FLOOR) {
+            int x = RNG.next(0, _blocksWide);
+            int y = RNG.next(0, _blocksHigh);
+            if (dungeon[x][y].getEntityType() == EntityType.FLOOR) {
                 return new Point2(x, y);
             }
         }
     }
 
-    private void PlaceStairs() {
-        PlaceUpstairs();
-        PlaceDownstairs();
+    private void placeStairs() {
+        placeUpstairs();
+        placeDownstairs();
     }
 
-    private void PlaceDownstairs() {
-        _downSpawnLocation.Copy(FindRandomFreeTile());
+    private void placeDownstairs() {
+        _downSpawnLocation.copy(findRandomFreeTile());
         dungeon[_downSpawnLocation.GridX][_downSpawnLocation.GridY] = new Downstairs(_downSpawnLocation);
     }
 
-    private void PlaceUpstairs() {
-        if (_upSpawnLocation.IsZero()) {
-            _upSpawnLocation.Copy(FindRandomFreeTile());
+    private void placeUpstairs() {
+        if (_upSpawnLocation.isZero()) {
+            _upSpawnLocation.copy(findRandomFreeTile());
         }
         dungeon[_upSpawnLocation.GridX][_upSpawnLocation.GridY] = new Upstairs(_upSpawnLocation);
     }
 
-    private void ConvertRoomsToWalls() {
+    private void convertRoomsToWalls() {
         int roomCount = 0;
         ArrayList<PointPoint> dungeonEntrances = new ArrayList<PointPoint>();
         for (Room room : _rooms) {
@@ -236,26 +236,26 @@ public class Dungeon {
                     if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1) {
                         if (!room.Corners.contains(new Point2(ii, jj))) {
                             if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < _blocksWide)) {
-                                if (IsFloor(ii - 1, jj) && IsFloor(ii + 1, jj)) {
+                                if (isFloor(ii - 1, jj) && isFloor(ii + 1, jj)) {
                                     entrances.add(new PointPoint(ii, jj, true));
                                 }
                             }
                             if ((jj == room.Y && jj > 0) || (jj == room.BottomSide && jj < _blocksHigh)) {
-                                if (IsFloor(ii, jj - 1) && IsFloor(ii, jj + 1)) {
+                                if (isFloor(ii, jj - 1) && isFloor(ii, jj + 1)) {
                                     entrances.add(new PointPoint(ii, jj));
                                 }
                             }
                         }
-                        dungeon[ii][jj] = EntityFactory.Create(EntityType.WALL, new Point2(ii, jj));
+                        dungeon[ii][jj] = EntityFactory.create(EntityType.WALL, new Point2(ii, jj));
                     } else {
-                        dungeon[ii][jj] = EntityFactory.Create(EntityType.FLOOR, new Point2(ii, jj));
+                        dungeon[ii][jj] = EntityFactory.create(EntityType.FLOOR, new Point2(ii, jj));
                     }
                 }
             }
             if (roomCount > 0 && entrances.size() > 0) {
-                int index = RNG.Next(0, entrances.size() - 1);
+                int index = RNG.next(0, entrances.size() - 1);
                 PointPoint entrance = entrances.get(index);
-                if (dungeon[entrance.X][entrance.Y].GetEntityType() != EntityType.FLOOR) {
+                if (dungeon[entrance.X][entrance.Y].getEntityType() != EntityType.FLOOR) {
                     dungeonEntrances.add(entrance);
                 }
             }
@@ -265,23 +265,23 @@ public class Dungeon {
             if (entrance.isHorizontal()) {
                 for (int ii = 1; ii < _blocksWide - 1; ii++) {
                     Point2 currentTarget = new Point2(ii, entrance.Y);
-                    if (dungeon[currentTarget.GridX][currentTarget.GridY].GetEntityType() == EntityType.WALL) {
-                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.Create(EntityType.FLOOR, currentTarget);
+                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.WALL) {
+                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.FLOOR, currentTarget);
                     }
                 }
             } else {
                 for (int ii = 1; ii < _blocksHigh - 1; ii++) {
                     Point2 currentTarget = new Point2(entrance.X, ii);
-                    if (dungeon[currentTarget.GridX][currentTarget.GridY].GetEntityType() == EntityType.WALL) {
-                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.Create(EntityType.FLOOR, currentTarget);
+                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.WALL) {
+                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.FLOOR, currentTarget);
                     }
                 }
             }
         }
     }
 
-    private boolean IsFloor(int x, int y) {
-        return dungeon[x][y].GetEntityType() == EntityType.FLOOR;
+    private boolean isFloor(int x, int y) {
+        return dungeon[x][y].getEntityType() == EntityType.FLOOR;
     }
 
     public Point2 getDownstairsLocation() {

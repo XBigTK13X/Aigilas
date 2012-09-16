@@ -13,13 +13,13 @@ public class MimicSkill extends ISkill {
     {
         super(SkillId.MIMIC, AnimationType.RANGED);
 
-        Add(Elements.DARK);
-        AddCost(StatType.MANA, 10);
+        add(Elements.DARK);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
 

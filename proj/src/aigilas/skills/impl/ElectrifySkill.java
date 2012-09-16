@@ -15,15 +15,15 @@ public class ElectrifySkill extends ISkill {
     {
         super(SkillId.ELECTRIFY, AnimationType.SELF);
 
-        Add(Elements.AIR);
-        AddCost(StatType.MANA, 10);
+        add(Elements.AIR);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        StatusFactory.Apply(source, Status.Electrify);
+    public void activate(ICreature source) {
+        super.activate(source);
+        StatusFactory.apply(source, Status.Electrify);
 
     }
 

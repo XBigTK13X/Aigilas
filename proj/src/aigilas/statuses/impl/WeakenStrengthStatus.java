@@ -12,6 +12,6 @@ public class WeakenStrengthStatus extends IStatus {
         super(target);
 
         _buff = new StatBuff(StatType.STRENGTH, -10);
-        Setup();
+        setup();
     }
 }

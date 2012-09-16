@@ -13,16 +13,16 @@ public class FlameHammerSkill extends ISkill {
     {
         super(SkillId.FLAME_HAMMER, AnimationType.ROTATE);
 
-        Add(Elements.FIRE);
-        AddCost(StatType.MANA, 10);
+        add(Elements.FIRE);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(3f, _source);
+        target.applyDamage(3f, _source);
 
     }
 

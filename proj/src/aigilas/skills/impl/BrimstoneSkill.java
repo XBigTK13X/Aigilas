@@ -16,18 +16,18 @@ public class BrimstoneSkill extends ISkill {
     {
         super(SkillId.ACID_NOZZLE, AnimationType.STATIONARY);
 
-        AddCost(StatType.MANA, 10);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
+    public void activate(ICreature source) {
         for (int ii = -1; ii < 2; ii++) {
             for (int jj = -1; jj < 2; jj++) {
                 if (ii != 0 || jj != 0) {
-                    _direction.Reset(ii, jj);
-                    source.SetSkillVector(_direction);
-                    SkillFactory.Create(SkillId.FIREBALL).Activate(source);
+                    _direction.reset(ii, jj);
+                    source.setSkillVector(_direction);
+                    SkillFactory.create(SkillId.FIREBALL).activate(source);
 
                 }
 

@@ -8,6 +8,6 @@ public class SkillAnimation {
     protected SkillAnimation() {
     }
 
-    public void Animate(SkillEffect skill, ICreature source, Point2 velocity) {
+    public void animate(SkillEffect skill, ICreature source, Point2 velocity) {
     }
 }

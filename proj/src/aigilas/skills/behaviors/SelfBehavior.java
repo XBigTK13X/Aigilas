@@ -14,17 +14,17 @@ public class SelfBehavior extends SkillBehavior {
     }
 
     @Override
-    public void Activate(ICreature target) {
+    public void activate(ICreature target) {
         if (SubtractCost(target)) {
-            _sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target);
+            _sideEffects.Generate(target.getLocation(), new Point2(0, 0), target);
         }
     }
 
     @Override
-    public boolean AffectTarget(ICreature source, SkillEffect graphic) {
+    public boolean affectTarget(ICreature source, SkillEffect graphic) {
         if (!_used) {
-            source.React(_parent.GetSkillId());
-            _parent.Affect(source);
+            source.react(_parent.getSkillId());
+            _parent.affect(source);
             _used = true;
         }
         return true;

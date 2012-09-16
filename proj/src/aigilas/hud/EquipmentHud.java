@@ -17,9 +17,9 @@ public class EquipmentHud extends IHud {
         _equipment = equipment;
     }
 
-    public void Draw() {
+    public void draw() {
         if (_isVisible) {
-            _textHandler.Draw();
+            _textHandler.draw();
         }
     }
 
@@ -28,29 +28,29 @@ public class EquipmentHud extends IHud {
     private String title = "Equipped\n";
     private String[] list = new String[10];
 
-    public void Update(boolean refresh) {
+    public void update(boolean refresh) {
         if (_isVisible) {
-            _textHandler.Update();
-            _textHandler.Clear();
+            _textHandler.update();
+            _textHandler.clear();
             if (refresh) {
-                StringSquisher.Clear();
-                StringSquisher.Squish(title);
-                display = StringSquisher.Flush();
-                HashMap<ItemSlot, GenericItem> items = _equipment.GetItems();
+                StringSquisher.clear();
+                StringSquisher.squish(title);
+                display = StringSquisher.flush();
+                HashMap<ItemSlot, GenericItem> items = _equipment.getItems();
                 int count = 0;
                 for (ItemSlot item : items.keySet()) {
                     count++;
                     if (count < 10) {
-                        StringSquisher.Clear();
-                        StringSquisher.Squish(item.toString().substring(0, 1), sep, items.get(item).Name);
-                        list[count] = StringSquisher.Flush();
+                        StringSquisher.clear();
+                        StringSquisher.squish(item.toString().substring(0, 1), sep, items.get(item).Name);
+                        list[count] = StringSquisher.flush();
                     }
                 }
             }
-            _textHandler.WriteDefault(display, 200, 60, GetHudOrigin());
+            _textHandler.writeDefault(display, 200, 60, getHudOrigin());
             for (int ii = 0; ii < 10; ii++) {
                 if (list[ii] != null) {
-                    _textHandler.WriteDefault(list[ii], 200, 60 + 40 * ii, GetHudOrigin());
+                    _textHandler.writeDefault(list[ii], 200, 60 + 40 * ii, getHudOrigin());
                 }
             }
         }

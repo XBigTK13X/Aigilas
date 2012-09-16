@@ -9,8 +9,8 @@ import spx.bridge.ActorType;
 public class PoisonCloud extends Minion {
     public PoisonCloud() {
         super(ActorType.MINION);
-        _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
-        Add(SkillId.POISON_CLOUD);
+        _strategy = StrategyFactory.create(Strategy.MinionOneUse, this);
+        add(SkillId.POISON_CLOUD);
         _composition.add(Elements.MENTAL);
     }
 }

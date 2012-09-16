@@ -12,42 +12,42 @@ class Emitter extends PEComponent {
     public Emitter() {
     }
 
-    public void Update() {
+    public void update() {
         if (IsActive) {
             IsActive = false;
             for (int ii = 0; ii < _index; ii++) {
                 if (_particles[ii].IsActive) {
                     IsActive = true;
-                    _particles[ii].Update();
+                    _particles[ii].update();
                 }
             }
         }
     }
 
-    public void Draw() {
+    public void draw() {
         if (IsActive) {
             for (int ii = 0; ii < _index; ii++) {
-                _particles[ii].Draw();
+                _particles[ii].draw();
             }
         }
     }
 
-    public void Reset(ParticleBehavior behavior, Point2 position, Color baseColor) {
+    public void reset(ParticleBehavior behavior, Point2 position, Color baseColor) {
         IsActive = true;
         _behavior = behavior;
         _index = 0;
-        while (_index < behavior.GetParticleCount()) {
-            _particles[_index] = ParticleEngine.CreateParticle(behavior, position, baseColor);
+        while (_index < behavior.getParticleCount()) {
+            _particles[_index] = ParticleEngine.createParticle(behavior, position, baseColor);
             _index++;
         }
     }
 
-    public void Reset(ParticleBehavior behavior, IEntity entity, Color baseColor) {
+    public void reset(ParticleBehavior behavior, IEntity entity, Color baseColor) {
         IsActive = true;
         _behavior = behavior;
         _index = 0;
-        while (_index < behavior.GetParticleCount()) {
-            _particles[_index] = ParticleEngine.CreateParticle(behavior, entity, baseColor);
+        while (_index < behavior.getParticleCount()) {
+            _particles[_index] = ParticleEngine.createParticle(behavior, entity, baseColor);
             _index++;
         }
     }

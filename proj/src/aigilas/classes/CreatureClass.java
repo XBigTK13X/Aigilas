@@ -20,11 +20,11 @@ public abstract class CreatureClass {
         _stats = new Stats(stats);
     }
 
-    public float GetBonus(int level, StatType stat) {
-        return _stats.GetBonus(level, stat);
+    public float getBonus(int level, StatType stat) {
+        return _stats.getBonus(level, stat);
     }
 
-    public List<SkillId> GetLevelSkills(int level) {
+    public List<SkillId> getLevelSkills(int level) {
         List<SkillId> results = new ArrayList<SkillId>();
         for (Integer key : _skillUnlocks.keySet()) {
             if (key <= level) {
@@ -34,7 +34,7 @@ public abstract class CreatureClass {
         return results;
     }
 
-    protected void Add(int level, SkillId skillId) {
+    protected void add(int level, SkillId skillId) {
         _skillUnlocks.put(level, skillId);
     }
 }

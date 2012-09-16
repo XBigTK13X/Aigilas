@@ -16,27 +16,27 @@ public class ThrowItemSkill extends ISkill {
     {
         super(SkillId.THROW_ITEM, AnimationType.RANGED);
 
-        Add(Elements.AIR);
-        AddCost(StatType.MANA, 0);
+        add(Elements.AIR);
+        addCost(StatType.MANA, 0);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        GenericItem item = source.DestroyRandomItemFromInventory();
+    public void activate(ICreature source) {
+        GenericItem item = source.destroyRandomItemFromInventory();
         if (item != null) {
-            _itemStrength = item.Modifers.GetSum() * 3;
-            super.Activate(source);
+            _itemStrength = item.Modifers.getSum() * 3;
+            super.activate(source);
 
         }
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(_itemStrength, _source);
+        target.applyDamage(_itemStrength, _source);
 
     }
 

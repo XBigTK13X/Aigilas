@@ -12,6 +12,6 @@ public class ManaUpStatus extends IStatus {
         super(target);
 
         _buff = new StatBuff(StatType.MANA, 20f);
-        Setup();
+        setup();
     }
 }

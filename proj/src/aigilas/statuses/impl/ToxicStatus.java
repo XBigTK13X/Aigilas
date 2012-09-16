@@ -15,9 +15,9 @@ public class ToxicStatus extends IStatus {
     }
 
     @Override
-    public void Act() {
+    public void act() {
         try {
-            CreatureFactory.CreateMinion(SkillId.PLAGUE, _target, null, _target.GetLocation());
+            CreatureFactory.createMinion(SkillId.PLAGUE, _target, null, _target.getLocation());
         } catch (Exception e) {
 
             e.printStackTrace();

@@ -10,12 +10,12 @@ public class MinionOneUseStrategy extends IStrategy {
     {
         super(parent, Strategy.MinionOneUse);
 
-        parent.SetSkillVector(parent.GetSkillVector());
+        parent.setSkillVector(parent.getSkillVector());
     }
 
     @Override
-    public void Act() {
-        _parent.UseActiveSkill();
-        _parent.SetInactive();
+    public void act() {
+        _parent.useActiveSkill();
+        _parent.setInactive();
     }
 }

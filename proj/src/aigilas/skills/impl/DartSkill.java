@@ -15,17 +15,17 @@ public class DartSkill extends ISkill {
     {
         super(SkillId.DART, AnimationType.RANGED);
 
-        AddCost(StatType.MANA, 10);
-        Add(Elements.DARK);
+        addCost(StatType.MANA, 10);
+        add(Elements.DARK);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.Poison);
-        target.ApplyDamage(5, _source);
+        StatusFactory.apply(target, Status.Poison);
+        target.applyDamage(5, _source);
 
     }
 

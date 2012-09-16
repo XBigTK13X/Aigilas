@@ -13,19 +13,19 @@ public class FleeStrategy extends IStrategy {
         super(parent, Strategy.Flee);
 
         for (ActorType targetType : targetTypes) {
-            _targets.AddTargetTypes(targetType);
+            _targets.addTargetTypes(targetType);
         }
     }
 
     private Point2 _transfer = new Point2(0, 0);
 
     @Override
-    public void Act() {
+    public void act() {
         if (AbleToMove()) {
-            _transfer = targetPath.GetNextMove();
+            _transfer = targetPath.getNextMove();
             if (_transfer != null) {
-                nextMove.Copy(_parent.GetLocation().Add(_transfer.Minus(_parent.GetLocation()).Rotate180()));
-                _parent.MoveTo(nextMove);
+                nextMove.copy(_parent.getLocation().add(_transfer.minus(_parent.getLocation()).rotate180()));
+                _parent.moveTo(nextMove);
             }
         }
     }

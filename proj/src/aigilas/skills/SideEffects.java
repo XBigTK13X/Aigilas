@@ -20,7 +20,7 @@ public class SideEffects {
 
     public SideEffects(SpriteType effectGraphic, AnimationType animation, ISkill parent) {
         _parent = parent;
-        _effectStrength = parent.GetStrength();
+        _effectStrength = parent.getStrength();
         _effectSprite = effectGraphic;
         _animation = animation;
     }
@@ -31,17 +31,17 @@ public class SideEffects {
         EntityManager.addObject(effect);
     }
 
-    public SkillEffect GetFirstGraphic() {
+    public SkillEffect getFirstGraphic() {
         if (_effectGraphics.size() > 0)
             return _effectGraphics.get(0);
         return null;
     }
 
-    public SpriteType GetSpriteType() {
+    public SpriteType getSpriteType() {
         return _effectSprite;
     }
 
-    public AnimationType GetAnimationType() {
+    public AnimationType getAnimationType() {
         return _animation;
     }
 }

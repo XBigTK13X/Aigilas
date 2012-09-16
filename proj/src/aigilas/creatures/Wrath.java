@@ -10,6 +10,6 @@ public class Wrath extends AbstractCreature {
         super(ActorType.WRATH, SpriteType.WRATH);
         Compose(Elements.PHYSICAL);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
-        Add(SkillId.DISMEMBERMENT);
+        add(SkillId.DISMEMBERMENT);
     }
 }

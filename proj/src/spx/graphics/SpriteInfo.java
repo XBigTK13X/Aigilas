@@ -6,8 +6,8 @@ public class SpriteInfo {
     public int X, Y, SpriteIndex, MaxFrame;
 
     public SpriteInfo(int spriteIndex, int maxFrame) {
-        X = Settings.Get().spriteWidth;
-        Y = Settings.Get().spriteHeight;
+        X = Settings.get().spriteWidth;
+        Y = Settings.get().spriteHeight;
         SpriteIndex = spriteIndex;
         MaxFrame = maxFrame;
     }

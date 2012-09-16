@@ -18,16 +18,16 @@ public class ClientManager {
 
     public ClientManager() {
         try {
-            this.server = new ServerSocket(Settings.Get().port);
+            this.server = new ServerSocket(Settings.get().port);
             clientListener = new Thread(new Runnable() {
                 public void run() {
                     while (!Thread.interrupted()) {
                         try {
-                            if (Settings.Get().clientManagerVerbose) {
+                            if (Settings.get().clientManagerVerbose) {
                                 System.out.println("MANAGER: Waiting for a client connection");
                             }
                             Socket client = server.accept();
-                            if (Settings.Get().clientManagerVerbose) {
+                            if (Settings.get().clientManagerVerbose) {
                                 System.out.println("MANAGER: New connection made");
                             }
                             clients.add(new MessageHandler(client));

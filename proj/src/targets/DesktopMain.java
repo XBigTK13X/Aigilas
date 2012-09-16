@@ -10,7 +10,7 @@ import spx.net.Server;
 public class DesktopMain {
     public static void main(String[] args) {
 
-        if (Settings.Get().networkingEnabled) {
+        if (Settings.get().networkingEnabled) {
             Thread server = new Server();
             server.start();
             try {

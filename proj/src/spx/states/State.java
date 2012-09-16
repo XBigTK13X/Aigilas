@@ -1,9 +1,9 @@
 package spx.states;
 
 public interface State {
-    void Draw();
+    void draw();
 
-    void Update();
+    void update();
 
-    void LoadContent();
+    void loadContent();
 }

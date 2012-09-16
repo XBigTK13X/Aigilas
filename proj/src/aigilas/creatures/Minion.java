@@ -14,28 +14,28 @@ public class Minion extends ICreature {
     }
 
     public Minion(ActorType actorType) {
-        this(actorType, Settings.Get().defaultSpeed);
+        this(actorType, Settings.get().defaultSpeed);
     }
 
     public Minion() {
-        this(ActorType.MINION, Settings.Get().defaultSpeed);
+        this(ActorType.MINION, Settings.get().defaultSpeed);
     }
 
-    public void Init(ICreature source, SkillEffect effectGraphic) {
+    public void init(ICreature source, SkillEffect effectGraphic) {
         _master = source;
-        Setup(source.GetLocation(), _actorType, _baseStats, null, false);
+        setup(source.getLocation(), _actorType, _baseStats, null, false);
         if (null != effectGraphic) {
-            SetSkillVector(effectGraphic.GetDirection().Rotate180());
+            setSkillVector(effectGraphic.getDirection().rotate180());
         } else {
-            SetSkillVector(new Point2(0, 1));
+            setSkillVector(new Point2(0, 1));
         }
-        _strategy.AddTargets(_master);
+        _strategy.addTargets(_master);
     }
 
-    protected void Add(SkillId skill) {
+    protected void add(SkillId skill) {
         if (_skills == null) {
             _skills = new SkillPool(this);
         }
-        _skills.Add(skill);
+        _skills.add(skill);
     }
 }

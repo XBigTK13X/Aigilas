@@ -15,14 +15,14 @@ public class BoilSkill extends ISkill {
     {
         super(SkillId.BOIL, AnimationType.SELF);
 
-        Add(Elements.AIR);
-        AddCost(StatType.MANA, 10);
+        add(Elements.AIR);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        StatusFactory.Apply(source, Status.Boil);
+    public void activate(ICreature source) {
+        StatusFactory.apply(source, Status.Boil);
 
     }
 

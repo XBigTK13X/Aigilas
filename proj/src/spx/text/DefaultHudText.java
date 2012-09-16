@@ -14,18 +14,18 @@ class DefaultHudText extends Text {
         _color = new Color(255f, 255f, 255f, alpha);
     }
 
-    public void Reset(String contents, int x, int y, Point2 origin) {
+    public void reset(String contents, int x, int y, Point2 origin) {
         _origin = origin;
-        Reset(contents, x, y);
+        reset(contents, x, y);
     }
 
     @Override
-    public int Update() {
+    public int update() {
         return 1;
     }
 
     @Override
-    public void Draw() {
-        SpxManager.Renderer.DrawString(_contents, new Point2(_position.X + Settings.Get().spriteWidth, SpxManager.WindowHeight - _position.Y + Settings.Get().spriteHeight / 2), _color, 1f, DrawDepth.DefaultHudText);
+    public void draw() {
+        SpxManager.Renderer.drawString(_contents, new Point2(_position.X + Settings.get().spriteWidth, SpxManager.WindowHeight - _position.Y + Settings.get().spriteHeight / 2), _color, 1f, DrawDepth.DefaultHudText);
     }
 }

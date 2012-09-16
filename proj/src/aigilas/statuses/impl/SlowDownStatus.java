@@ -13,6 +13,6 @@ public class SlowDownStatus extends IStatus {
 
         _buff = new StatBuff(StatType.MOVE_COOL_DOWN, 10);
         _buffMax = true;
-        Setup();
+        setup();
     }
 }

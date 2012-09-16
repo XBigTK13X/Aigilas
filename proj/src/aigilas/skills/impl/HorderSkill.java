@@ -15,15 +15,15 @@ public class HorderSkill extends ISkill {
     {
         super(SkillId.HORDER, AnimationType.SELF);
 
-        Add(Elements.MENTAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        StatusFactory.Apply(source, Status.Hord);
+    public void activate(ICreature source) {
+        super.activate(source);
+        StatusFactory.apply(source, Status.Hord);
 
     }
 

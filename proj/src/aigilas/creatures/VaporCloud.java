@@ -13,26 +13,26 @@ public class VaporCloud extends Minion {
 
     public VaporCloud() {
         super(ActorType.MINION);
-        _strategy = StrategyFactory.Create(Strategy.MinionCloud, this);
-        Add(SkillId.VAPOR_CLOUD);
+        _strategy = StrategyFactory.create(Strategy.MinionCloud, this);
+        add(SkillId.VAPOR_CLOUD);
         _composition.add(Elements.WATER);
     }
 
     @Override
-    public void Update() {
-        super.Update();
+    public void update() {
+        super.update();
         if (_host == null) {
-            for (IActor creature : EntityManager.GetActorsAt(_location)) {
+            for (IActor creature : EntityManager.getActorsAt(_location)) {
                 if (creature != this) {
                     _host = (ICreature) creature;
                 }
             }
             if (_host == null) {
-                SetInactive();
+                setInactive();
             }
         }
         if (_host != null) {
-            SetLocation(_host.GetLocation());
+            setLocation(_host.getLocation());
         }
     }
 }

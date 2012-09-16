@@ -13,16 +13,16 @@ public class FireballSkill extends ISkill {
     {
         super(SkillId.FIREBALL, AnimationType.RANGED);
 
-        Add(Elements.FIRE);
-        AddCost(StatType.MANA, 10);
+        add(Elements.FIRE);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(20, _source);
+        target.applyDamage(20, _source);
 
     }
 

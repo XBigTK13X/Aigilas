@@ -15,28 +15,28 @@ public class Path {
     public Path() {
     }
 
-    public Path Reset(Point2 start, Point2 finish) {
+    public Path reset(Point2 start, Point2 finish) {
         _steps.clear();
         _stepLookup.clear();
         _totalWeight = 0;
         moveIndex = -1;
-        Finish.Copy(finish);
-        Add(start);
+        Finish.copy(finish);
+        add(start);
         return this;
     }
 
-    public Path Copy(Path source) {
+    public Path copy(Path source) {
         if (source != null) {
-            _stepLookup = StepLookup.Copy(source._stepLookup);
-            _steps = Walk.Copy(source._steps);
+            _stepLookup = StepLookup.copy(source._stepLookup);
+            _steps = Walk.copy(source._steps);
             _totalWeight = source._totalWeight;
-            Finish.Copy(source.Finish);
+            Finish.copy(source.Finish);
         }
         moveIndex = -1;
         return this;
     }
 
-    public boolean Add(Point2 step) {
+    public boolean add(Point2 step) {
         if (!_stepLookup.containsKey(step)) {
             _stepLookup.put(step, step);
             _steps.add(step);
@@ -46,17 +46,17 @@ public class Path {
         return false;
     }
 
-    public float GetCost() {
+    public float getCost() {
         return _totalWeight;
     }
 
     private int moveIndex = -1;
 
-    public boolean HasMoves() {
+    public boolean hasMoves() {
         return moveIndex < _steps.size();
     }
 
-    public Point2 GetNextMove() {
+    public Point2 getNextMove() {
         moveIndex++;
         if (moveIndex >= _steps.size()) {
             return null;
@@ -67,19 +67,19 @@ public class Path {
         return _steps.size() == 1 ? _steps.get(0) : _steps.get(moveIndex);
     }
 
-    public boolean IsDone() {
+    public boolean isDone() {
         return _stepLookup.containsKey(Finish);
     }
 
-    public Point2 GetLastStep() {
+    public Point2 getLastStep() {
         return _steps.get(_steps.size() - 1);
     }
 
-    public List<Point2> GetNeighbors() {
-        return GetLastStep().GetNeighbors();
+    public List<Point2> getNeighbors() {
+        return getLastStep().getNeighbors();
     }
 
-    public int Length() {
+    public int length() {
         return _steps.size();
     }
 }

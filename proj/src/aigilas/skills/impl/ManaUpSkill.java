@@ -15,15 +15,15 @@ public class ManaUpSkill extends ISkill {
     {
         super(SkillId.MANA_UP, AnimationType.SELF);
 
-        Add(Elements.WATER);
-        AddCost(StatType.MANA, 10);
+        add(Elements.WATER);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        StatusFactory.Apply(source, Status.ManaUp);
+    public void activate(ICreature source) {
+        super.activate(source);
+        StatusFactory.apply(source, Status.ManaUp);
 
     }
 

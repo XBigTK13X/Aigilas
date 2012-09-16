@@ -6,9 +6,9 @@ import aigilas.reactions.IReaction;
 
 public class MindBlownReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(10, null, true, StatType.MANA);
+        target.applyDamage(10, null, true, StatType.MANA);
     }
 }

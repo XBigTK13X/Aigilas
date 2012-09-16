@@ -16,7 +16,7 @@ public class LocalClient implements IClient {
     private final int maxPlayers = 1;
 
     public LocalClient() {
-        if (Settings.Get().clientVerbose) {
+        if (Settings.get().clientVerbose) {
             System.out.println("CLIENT: Starting up");
         }
         for (int ii = 0; ii < maxPlayers; ii++) {
@@ -27,24 +27,24 @@ public class LocalClient implements IClient {
         }
     }
 
-    public boolean IsGameStarting() {
+    public boolean isGameStarting() {
         return _isGameStarting;
     }
 
-    public boolean IsConnected() {
+    public boolean isConnected() {
         return _isConnected;
     }
 
-    public boolean NextTurn() {
-        Update();
-        if (_turnTimer >= Settings.Get().turnTime) {
+    public boolean nextTurn() {
+        update();
+        if (_turnTimer >= Settings.get().turnTime) {
             _turnTimer = 0;
             return true;
         }
         return false;
     }
 
-    private void InitPlayer(int playerIndex, Commands command) {
+    private void initPlayer(int playerIndex, Commands command) {
         if (!_playerStatus.containsKey(playerIndex)) {
             _playerStatus.put(playerIndex, new HashMap<Commands, Boolean>());
         }
@@ -53,21 +53,21 @@ public class LocalClient implements IClient {
         }
     }
 
-    public int GetFirstPlayerIndex() {
+    public int getFirstPlayerIndex() {
         return 0;
     }
 
-    public boolean IsActive(Commands command, int playerIndex) {
+    public boolean isActive(Commands command, int playerIndex) {
         if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
             return _playerStatus.get(playerIndex).get(command);
         }
         return false;
     }
 
-    public void SetState(Commands command, int playerIndex, boolean isActive) {
-        InitPlayer(playerIndex, command);
+    public void setState(Commands command, int playerIndex, boolean isActive) {
+        initPlayer(playerIndex, command);
         if (_playerStatus.get(playerIndex).get(command) != isActive) {
-            if (Settings.Get().clientVerbose) {
+            if (Settings.get().clientVerbose) {
                 System.out.println(String.format("CLIENT: Moves extends  CMD(%s) PI(%s) AC(%s)", command, playerIndex, isActive));
             }
             _playerStatus.get(playerIndex).put(command, isActive);
@@ -76,33 +76,33 @@ public class LocalClient implements IClient {
 
     int _playerCount = 0;
 
-    public int GetPlayerCount() {
+    public int getPlayerCount() {
         if (_playerCount == 0) {
             _playerCount = _playerStatus.keySet().size();
         }
         return _playerCount;
     }
 
-    public void StartGame() {
-        RNG.Seed((int) System.currentTimeMillis());
+    public void startGame() {
+        RNG.seed((int) System.currentTimeMillis());
         _isConnected = true;
         _isGameStarting = true;
     }
 
-    public void Update() {
+    public void update() {
         _turnTimer += Gdx.graphics.getDeltaTime();
     }
 
-    public void Close() {
+    public void close() {
     }
 
-    public void DungeonHasLoaded() {
+    public void dungeonHasLoaded() {
 
     }
 
-    public void HeartBeat() {
+    public void heartBeat() {
     }
 
-    public void PrepareForNextTurn() {
+    public void prepareForNextTurn() {
     }
 }

@@ -25,33 +25,33 @@ public class SkillComponents {
         _elements = new ArrayList<>();
     }
 
-    public void AddElements(Elements... elements) {
+    public void addElements(Elements... elements) {
         for (Elements element : elements) {
             _elements.add(element);
         }
     }
 
-    public void Buff(ICreature target) {
-        target.AddBuff(_buff);
+    public void buff(ICreature target) {
+        target.addBuff(_buff);
     }
 
-    public void SetBuff(StatType stat, float amount) {
+    public void setBuff(StatType stat, float amount) {
         _buff = new StatBuff(stat, amount);
     }
 
-    public float GetStrength() {
+    public float getStrength() {
         return _effectStrength;
     }
 
-    public boolean IsPersistent() {
+    public boolean isPersistent() {
         return _isPersistent;
     }
 
-    public List<Elements> GetElements() {
+    public List<Elements> getElements() {
         return _elements;
     }
 
-    public List<EntityType> GetTargetTypes()
+    public List<EntityType> getTargetTypes()
 
     {
         return _targetTypes;

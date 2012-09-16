@@ -14,14 +14,14 @@ public class CavalrySkill extends ISkill {
     {
         super(SkillId.CAVALRY, AnimationType.SELF);
 
-        Add(Elements.DARK, Elements.EARTH);
-        AddCost(StatType.MANA, 10);
+        add(Elements.DARK, Elements.EARTH);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        ApplyToPlayers(Status.DefenseUp);
+    public void activate(ICreature source) {
+        super.activate(source);
+        applyToPlayers(Status.DefenseUp);
     }
 }

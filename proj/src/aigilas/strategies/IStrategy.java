@@ -29,30 +29,30 @@ public abstract class IStrategy {
         _strategyId = strategyId;
     }
 
-    public abstract void Act();
+    public abstract void act();
 
-    public TargetSet GetTargets() {
+    public TargetSet getTargets() {
         return _targets;
     }
 
-    public void AddTargets(ICreature source)
+    public void addTargets(ICreature source)
 
     {
-        _targets.AddTargets(source);
+        _targets.addTargets(source);
     }
 
     protected boolean AbleToMove() {
         throttle--;
         if (throttle <= 0) {
-            opponent = _targets.FindClosest();
+            opponent = _targets.findClosest();
             // Every player is dead
             if (null != opponent) {
-                targetPath.Copy(PathFinder.FindNextMove(_parent.GetLocation(), opponent.GetLocation()));
+                targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), opponent.getLocation()));
             }
-            throttle = RNG.Next(throttleMin, throttleMax);
+            throttle = RNG.next(throttleMin, throttleMax);
         }
         if (null != targetPath) {
-            if (targetPath.HasMoves() && _parent.IsCooledDown()) {
+            if (targetPath.hasMoves() && _parent.isCooledDown()) {
                 return true;
             }
         }
@@ -62,34 +62,34 @@ public abstract class IStrategy {
     protected Point2 diff = new Point2(0, 0);
 
     protected Point2 CalculateTargetVector(Point2 source, Point2 dest) {
-        diff.SetX(source.GridX - dest.GridX);
-        diff.SetY(source.GridY - dest.GridY);
+        diff.setX(source.GridX - dest.GridX);
+        diff.setY(source.GridY - dest.GridY);
         if (diff.GridY == 0) {
             if (diff.GridX > 0) {
-                diff.SetX(-1f);
+                diff.setX(-1f);
             } else {
-                diff.SetX(1f);
+                diff.setX(1f);
             }
         } else if (diff.GridX == 0) {
             if (diff.GridY > 0) {
-                diff.SetY(-1f);
+                diff.setY(-1f);
             } else {
-                diff.SetY(1f);
+                diff.setY(1f);
             }
         } else {
-            diff.SetX(0);
-            diff.SetY(0);
+            diff.setX(0);
+            diff.setY(0);
         }
         return diff;
     }
 
-    public Strategy GetId() {
+    public Strategy getId() {
         return _strategyId;
     }
 
-    public List<ActorType> GetTargetActorTypes()
+    public List<ActorType> getTargetActorTypes()
 
     {
-        return _targets.GetTargetActorTypes();
+        return _targets.getTargetActorTypes();
     }
 }

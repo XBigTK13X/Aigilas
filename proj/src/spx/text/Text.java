@@ -11,28 +11,28 @@ public class Text {
     public Text() {
     }
 
-    public void Reset(String contents, int x, int y) {
+    public void reset(String contents, int x, int y) {
         _contents = contents;
-        _position.Reset(x, y);
+        _position.reset(x, y);
     }
 
     public Text(String contents, int x, int y, TextType type) {
-        Reset(contents, x, y);
+        reset(contents, x, y);
         _textType = type;
     }
 
-    public int Update() {
+    public int update() {
         return 0;
     }
 
-    public TextType GetTextType() {
+    public TextType getTextType() {
         return _textType;
     }
 
     protected void DrawText(Renderer target) {
     }
 
-    public void Draw() {
+    public void draw() {
 
     }
 }

@@ -10,7 +10,7 @@ class StepLookup {
     private static int _index = 0;
     private static final int __lookupCount = 1000;
 
-    public static HashMap<Point2, Point2> Copy(HashMap<Point2, Point2> walk) {
+    public static HashMap<Point2, Point2> copy(HashMap<Point2, Point2> walk) {
         if (__lookups.size() == 0) {
             for (int ii = 0; ii < __lookupCount; ii++) {
                 __lookups.add(new HashMap<Point2, Point2>(200));

@@ -12,26 +12,26 @@ public class GameOverState implements State {
     private final Texture _menuBase;
 
     public GameOverState() {
-        _menuBase = SpxManager.GetGameOverAsset();
+        _menuBase = SpxManager.getGameOverAsset();
     }
 
     @Override
-    public void Draw() {
+    public void draw() {
         float x = (SpxManager.WindowWidth - _menuBase.getWidth()) / 2;
         float y = (SpxManager.WindowHeight - _menuBase.getHeight()) / 2;
 
-        SpxManager.Renderer.Draw(_menuBase, new Point2(x, y));
+        SpxManager.Renderer.draw(_menuBase, new Point2(x, y));
     }
 
     @Override
-    public void Update() {
-        if (Input.IsActive(Commands.Confirm, 0, true)) {
-            StateManager.LoadState(new GameplayState());
+    public void update() {
+        if (Input.isActive(Commands.Confirm, 0, true)) {
+            StateManager.loadState(new GameplayState());
         }
     }
 
     @Override
-    public void LoadContent() {
+    public void loadContent() {
 
     }
 }

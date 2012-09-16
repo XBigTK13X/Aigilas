@@ -15,19 +15,19 @@ public class NoSkill extends ISkill {
     }
 
     @Override
-    public void Activate(ICreature source) {
+    public void activate(ICreature source) {
 
     }
 
     @Override
-    public void Affect(IEntity target)
+    public void affect(IEntity target)
 
     {
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
 

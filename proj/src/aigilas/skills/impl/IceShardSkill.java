@@ -13,16 +13,16 @@ public class IceShardSkill extends ISkill {
     {
         super(SkillId.ICE_SHARD, AnimationType.CLOUD);
 
-        Add(Elements.WATER);
-        AddCost(StatType.MANA, 0);
+        add(Elements.WATER);
+        addCost(StatType.MANA, 0);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(10, _source, true);
+        target.applyDamage(10, _source, true);
 
     }
 

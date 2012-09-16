@@ -6,7 +6,7 @@ import spx.particles.ParticleBehavior;
 public class RadiateBehavior extends ParticleBehavior {
     protected static ParticleBehavior __instance;
 
-    public static ParticleBehavior GetInstance() {
+    public static ParticleBehavior getInstance() {
         if (__instance == null) {
             __instance = new RadiateBehavior();
         }
@@ -14,8 +14,8 @@ public class RadiateBehavior extends ParticleBehavior {
     }
 
     @Override
-    public void Update(Particle2 particle) {
-        particle.Position.SetX(particle.Position.X + (float) Math.cos(particle.Angle) * particle.MoveSpeed);
-        particle.Position.SetY(particle.Position.Y + (float) Math.sin(particle.Angle) * particle.MoveSpeed);
+    public void update(Particle2 particle) {
+        particle.Position.setX(particle.Position.X + (float) Math.cos(particle.Angle) * particle.MoveSpeed);
+        particle.Position.setY(particle.Position.Y + (float) Math.sin(particle.Angle) * particle.MoveSpeed);
     }
 }

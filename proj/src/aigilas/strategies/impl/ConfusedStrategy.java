@@ -14,7 +14,7 @@ public class ConfusedStrategy extends IStrategy {
     }
 
     @Override
-    public void Act() {
-        _parent.MoveIfPossible(RNG.Rand.nextInt(3) - 1, RNG.Rand.nextInt(3) - 1);
+    public void act() {
+        _parent.moveIfPossible(RNG.Rand.nextInt(3) - 1, RNG.Rand.nextInt(3) - 1);
     }
 }

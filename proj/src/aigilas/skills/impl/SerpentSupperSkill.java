@@ -17,23 +17,23 @@ public class SerpentSupperSkill extends ISkill {
     {
         super(SkillId.SERPENT_SUPPER, AnimationType.SELF);
 
-        Add(Elements.MENTAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        for (int ii = 1; ii < Settings.Get().tileMapWidth - 1; ii++) {
-            if (ii != Settings.Get().tileMapHeight / 2) {
-                CreatureFactory.Create(ActorType.SERPENT, new Point2(ii, Settings.Get().tileMapHeight / 2));
+    public void activate(ICreature source) {
+        for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
+            if (ii != Settings.get().tileMapHeight / 2) {
+                CreatureFactory.create(ActorType.SERPENT, new Point2(ii, Settings.get().tileMapHeight / 2));
 
             }
 
         }
-        for (int ii = 1; ii < Settings.Get().tileMapHeight - 1; ii++) {
-            if (ii != Settings.Get().tileMapWidth / 2) {
-                CreatureFactory.Create(ActorType.SERPENT, new Point2(Settings.Get().tileMapWidth / 2, ii));
+        for (int ii = 1; ii < Settings.get().tileMapHeight - 1; ii++) {
+            if (ii != Settings.get().tileMapWidth / 2) {
+                CreatureFactory.create(ActorType.SERPENT, new Point2(Settings.get().tileMapWidth / 2, ii));
 
             }
 

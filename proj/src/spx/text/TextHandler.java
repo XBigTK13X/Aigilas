@@ -18,36 +18,36 @@ public class TextHandler {
         }
     }
 
-    public void WriteDefault(String contents, int x, int y, Point2 origin) {
-        defaultPool[defaultIndex].Reset(contents, x, y, origin);
-        Add(defaultPool[defaultIndex]);
+    public void writeDefault(String contents, int x, int y, Point2 origin) {
+        defaultPool[defaultIndex].reset(contents, x, y, origin);
+        add(defaultPool[defaultIndex]);
         defaultIndex = (defaultIndex + 1) % defaultPool.length;
     }
 
-    public void Add(Text textToAdd) {
+    public void add(Text textToAdd) {
         if (!_contents.contains(textToAdd)) {
             _contents.add(textToAdd);
         }
     }
 
-    public void Clear() {
+    public void clear() {
         _contents.clear();
     }
 
-    public void Update() {
+    public void update() {
         for (int ii = 0; ii < _contents.size(); ii++) {
-            if (_contents.get(ii).Update() <= 0) {
+            if (_contents.get(ii).update() <= 0) {
                 _contents.remove(_contents.get(ii));
                 ii--;
             }
         }
     }
 
-    public void Draw() {
+    public void draw() {
 
         if (SpxManager.Renderer != null) {
             for (Text component : _contents) {
-                component.Draw();
+                component.draw();
             }
         }
     }

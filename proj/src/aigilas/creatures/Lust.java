@@ -10,6 +10,6 @@ public class Lust extends AbstractCreature {
         super(ActorType.LUST, SpriteType.LUST);
         Compose(Elements.FIRE);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
-        Add(SkillId.BRIMSTONE);
+        add(SkillId.BRIMSTONE);
     }
 }

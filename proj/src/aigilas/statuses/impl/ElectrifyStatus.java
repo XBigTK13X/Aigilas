@@ -11,6 +11,6 @@ public class ElectrifyStatus extends IStatus {
     {
         super(target);
 
-        Add(Status.Zap, StatusComponent.Passive);
+        add(Status.Zap, StatusComponent.Passive);
     }
 }

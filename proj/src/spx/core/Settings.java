@@ -11,7 +11,7 @@ public class Settings {
 
     private static Settings __instance;
 
-    public static Settings Get() {
+    public static Settings get() {
         if (__instance == null) {
             __instance = new Settings();
         }
@@ -62,17 +62,17 @@ public class Settings {
                     if (key.equals("socket_port"))
                         port = Integer.parseInt(value);
                     if (key.equals("server_log_verbose"))
-                        serverVerbose = IsTrue(value);
+                        serverVerbose = isTrue(value);
                     if (key.equals("client_log_verbose"))
-                        clientVerbose = IsTrue(value);
+                        clientVerbose = isTrue(value);
                     if (key.equals("message_contents_log_verbose"))
-                        messageContentsVerbose = IsTrue(value);
+                        messageContentsVerbose = isTrue(value);
                     if (key.equals("message_handler_log_verbose"))
-                        messageHandlerVerbose = IsTrue(value);
+                        messageHandlerVerbose = isTrue(value);
                     if (key.equals("client_manager_log_verbose"))
-                        clientManagerVerbose = IsTrue(value);
+                        clientManagerVerbose = isTrue(value);
                     if (key.equals("networking_enabled"))
-                        networkingEnabled = IsTrue(value);
+                        networkingEnabled = isTrue(value);
 
                     // Gameplay
                     if (key.equals("enemyCap"))
@@ -106,7 +106,7 @@ public class Settings {
 
                     // Dev
                     if (key.equals("consoleLogging"))
-                        consoleLogging = IsTrue(value);
+                        consoleLogging = isTrue(value);
                 } else {
                     System.out.println("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
                 }
@@ -117,7 +117,7 @@ public class Settings {
         }
     }
 
-    private boolean IsTrue(String value) {
+    private boolean isTrue(String value) {
         return value.equalsIgnoreCase("true");
     }
 }

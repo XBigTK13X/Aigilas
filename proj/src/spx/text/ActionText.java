@@ -18,21 +18,21 @@ public class ActionText extends Text {
 
     }
 
-    public void Reset(String contents, int lifespan, int x, int y) {
+    public void reset(String contents, int lifespan, int x, int y) {
         _scalePercent = 1;
         _lifeSpan = lifespan;
-        Reset(contents, x, y);
+        reset(contents, x, y);
     }
 
     @Override
-    public int Update() {
+    public int update() {
         _scalePercent *= .98f;
         return _lifeSpan--;
     }
 
     @Override
-    public void Draw() {
-        SpxManager.Renderer.DrawString(_contents, _position, Color.BLACK, 1.15f * _scalePercent, DrawDepth.ActionTextBG);
-        SpxManager.Renderer.DrawString(_contents, _position, Color.WHITE, 1.0f * _scalePercent, DrawDepth.ActionText);
+    public void draw() {
+        SpxManager.Renderer.drawString(_contents, _position, Color.BLACK, 1.15f * _scalePercent, DrawDepth.ActionTextBG);
+        SpxManager.Renderer.drawString(_contents, _position, Color.WHITE, 1.0f * _scalePercent, DrawDepth.ActionText);
     }
 }

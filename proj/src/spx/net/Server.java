@@ -9,7 +9,7 @@ public class Server extends Thread {
     private boolean isRunning = true;
     private HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
     private int _rngSeed = (int) System.currentTimeMillis();
-    private Message _message = Message.Empty();
+    private Message _message = Message.empty();
     private Integer _turnCount = 0;
     private boolean[] _readyCheckIn = {true, true, true, true};
 
@@ -41,44 +41,44 @@ public class Server extends Thread {
     private void pollForNewMessages() {
         _message = clients.readMessage();
         if (_message != null) {
-            if (Settings.Get().serverVerbose)
+            if (Settings.get().serverVerbose)
                 System.out.println("SERVER: Message received: " + _message.MessageType);
             switch (_message.MessageType) {
                 case CONNECT:
                     System.out.println("SERVER: New client connection");
-                    SendMessage(Message.CreateInit(clients.size() - 1, _rngSeed), _message.LocalPort);
-                    if (Settings.Get().serverVerbose)
+                    sendMessage(Message.createInit(clients.size() - 1, _rngSeed), _message.LocalPort);
+                    if (Settings.get().serverVerbose)
                         System.out.println("SERVER: Accepted new connection");
                     _turnCount = 0;
                     break;
                 case CHECK_STATE:
-                    InitPlayer(_message.PlayerIndex, _message.Command);
+                    initPlayer(_message.PlayerIndex, _message.Command);
                     _message.IsActive = _playerStatus.get(_message.PlayerIndex).get(_message.Command);
-                    if (Settings.Get().serverVerbose)
+                    if (Settings.get().serverVerbose)
                         System.out.println(String.format("SERVER: Check extends  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _playerStatus.get((int) _message.PlayerIndex).get(_message.Command)));
-                    SendMessage(_message, _message.LocalPort);
+                    sendMessage(_message, _message.LocalPort);
                     break;
 
                 case MOVEMENT:
-                    InitPlayer(_message.PlayerIndex, _message.Command);
-                    if (Settings.Get().serverVerbose)
+                    initPlayer(_message.PlayerIndex, _message.Command);
+                    if (Settings.get().serverVerbose)
                         System.out.println(String.format("SERVER: Moves:  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _message.IsActive));
                     _playerStatus.get(_message.PlayerIndex).put(_message.Command, _message.IsActive);
                     break;
 
                 case START_GAME:
                     System.out.println("SERVER: Announcing game commencement.");
-                    Announce(_message);
+                    announce(_message);
                     break;
 
                 case PLAYER_COUNT:
-                    if (Settings.Get().serverVerbose)
+                    if (Settings.get().serverVerbose)
                         System.out.println("SERVER: PLAYER COUNT");
-                    SendMessage(Message.CreatePlayerCount(clients.size()), _message.LocalPort);
+                    sendMessage(Message.createPlayerCount(clients.size()), _message.LocalPort);
                     break;
 
                 case READY_FOR_NEXT_TURN:
-                    if (Settings.Get().serverVerbose)
+                    if (Settings.get().serverVerbose)
                         System.out.println("SERVER: Received ready signal from client");
                     _readyCheckIn[_message.PlayerIndex] = true;
                     break;
@@ -87,14 +87,14 @@ public class Server extends Thread {
                     _readyCheckIn[_message.PlayerIndex] = true;
                     break;
                 default:
-                    if (Settings.Get().serverVerbose)
+                    if (Settings.get().serverVerbose)
                         System.out.println("SERVER: Unknown message");
                     break;
             }
         }
     }
 
-    private void InitPlayer(int playerIndex, Commands command) {
+    private void initPlayer(int playerIndex, Commands command) {
         if (!_playerStatus.containsKey(playerIndex)) {
             _playerStatus.put(playerIndex, new HashMap<Commands, Boolean>());
         }
@@ -103,7 +103,7 @@ public class Server extends Thread {
         }
     }
 
-    public boolean IsOnlyInstance() {
+    public boolean isOnlyInstance() {
         return clients.isOnlyInstance();
     }
 
@@ -113,25 +113,25 @@ public class Server extends Thread {
             readyCount += _readyCheckIn[ii] ? 1 : 0;
         }
         if (readyCount >= clients.size()) {
-            if (Settings.Get().serverVerbose)
+            if (Settings.get().serverVerbose)
                 System.out.println("SERVER: Announcing player input status.");
-            Announce(Message.CreatePlayerState(_playerStatus, _turnCount++, _rngSeed));
+            announce(Message.createPlayerState(_playerStatus, _turnCount++, _rngSeed));
             for (int ii = 0; ii < _readyCheckIn.length; ii++) {
                 _readyCheckIn[ii] = false;
             }
         }
     }
 
-    private void Announce(Message contents) {
+    private void announce(Message contents) {
         clients.announce(contents);
     }
 
-    private void SendMessage(Message contents, int localPort) {
+    private void sendMessage(Message contents, int localPort) {
         contents.LocalPort = localPort;
         clients.send(contents);
     }
 
-    public void Close() {
+    public void close() {
         isRunning = false;
         System.out.println("SERVER: Shutting down");
     }

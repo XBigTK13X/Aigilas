@@ -7,9 +7,9 @@ import aigilas.statuses.StatusFactory;
 
 public class ConfuseReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.Confusion);
+        StatusFactory.apply(target, Status.Confusion);
     }
 }

@@ -18,10 +18,10 @@ public class SkillPool {
         _owner = owner;
     }
 
-    public void Add(SkillId skill) {
+    public void add(SkillId skill) {
         if (skill.equals(null) && _skills.size() == 0) {
             _skills.add(SkillId.NO_SKILL);
-            FindCurrent();
+            findCurrent();
             return;
         }
         if (!_skills.contains(skill)) {
@@ -33,11 +33,11 @@ public class SkillPool {
         }
     }
 
-    private SkillId FindCurrent() {
+    private SkillId findCurrent() {
         return _skills.get(_currentSkillSlot);
     }
 
-    public void Add(List<SkillId> getLevelSkills) {
+    public void add(List<SkillId> getLevelSkills) {
         if (getLevelSkills.size() == 0) {
             _skills.add(SkillId.NO_SKILL);
             return;
@@ -49,34 +49,34 @@ public class SkillPool {
         }
     }
 
-    public void Cycle(int velocity) {
+    public void cycle(int velocity) {
         _currentSkillSlot = (_currentSkillSlot + velocity) % _skills.size();
         if (_currentSkillSlot < 0) {
             _currentSkillSlot = _skills.size() - 1;
         }
-        FindCurrent();
+        findCurrent();
     }
 
-    public String GetActiveName() {
-        return _skills.size() > 0 ? FindCurrent().Name : SkillId.NO_SKILL.Name;
+    public String getActiveName() {
+        return _skills.size() > 0 ? findCurrent().Name : SkillId.NO_SKILL.Name;
     }
 
-    private void RemoveNone() {
+    private void removeNone() {
         _skills.remove(SkillId.NO_SKILL);
     }
 
-    public void UseActive() {
-        if (FindCurrent() == SkillId.NO_SKILL) {
-            RemoveNone();
+    public void useActive() {
+        if (findCurrent() == SkillId.NO_SKILL) {
+            removeNone();
             _currentSkillSlot = 0;
         }
         if (_skills.size() > 0) {
-            UseSkill(FindCurrent());
+            useSkill(findCurrent());
         }
     }
 
-    private void UseSkill(SkillId skillId) {
-        SkillFactory.Create(FindCurrent()).Activate(_owner);
+    private void useSkill(SkillId skillId) {
+        SkillFactory.create(findCurrent()).activate(_owner);
         if (!_usageCounter.containsKey(skillId)) {
             _usageCounter.put(skillId, 0);
         }
@@ -85,7 +85,7 @@ public class SkillPool {
 
     SkillId _leastUsed;
 
-    public void RemoveLeastUsed() {
+    public void removeLeastUsed() {
         for (SkillId skillId : _skills) {
             if (!_usageCounter.containsKey(skillId)) {
                 _usageCounter.put(skillId, 0);
@@ -102,23 +102,23 @@ public class SkillPool {
         }
     }
 
-    public int Count() {
+    public int count() {
         return _skills.size();
     }
 
-    public void MakeActiveSkillHot(Commands hotSkillSlot) {
+    public void makeActiveSkillHot(Commands hotSkillSlot) {
         if (!_hotSkills.containsKey(hotSkillSlot)) {
-            _hotSkills.put(hotSkillSlot, FindCurrent());
+            _hotSkills.put(hotSkillSlot, findCurrent());
         }
-        _hotSkills.put(hotSkillSlot, FindCurrent());
+        _hotSkills.put(hotSkillSlot, findCurrent());
     }
 
-    public boolean SetHotSkillsActive(Commands hotkey) {
+    public boolean setHotSkillsActive(Commands hotkey) {
         if (_hotSkills.containsKey(hotkey)) {
             for (int ii = 0; ii < _skills.size(); ii++) {
                 if (_skills.get(ii) == _hotSkills.get(hotkey)) {
                     _currentSkillSlot = ii;
-                    FindCurrent();
+                    findCurrent();
                     return true;
                 }
             }
@@ -126,18 +126,18 @@ public class SkillPool {
         return false;
     }
 
-    public String GetHotSkillName(Commands hotSkillSlot) {
+    public String getHotSkillName(Commands hotSkillSlot) {
         if (_hotSkills.containsKey(hotSkillSlot)) {
             return _hotSkills.get(hotSkillSlot).Name;
         }
         return SkillId.NO_SKILL.Name;
     }
 
-    public float GetCurrentCost() {
-        return SkillFactory.GetCost(FindCurrent());
+    public float getCurrentCost() {
+        return SkillFactory.getCost(findCurrent());
     }
 
-    public SkillId GetActive() {
-        return FindCurrent();
+    public SkillId getActive() {
+        return findCurrent();
     }
 }

@@ -22,76 +22,76 @@ public class ControlledByPlayer extends IStrategy {
     public ControlledByPlayer(ICreature parent) {
         super(parent, Strategy.ControlledByPlayer);
 
-        _targets.AddTargetTypes(ActorType.NONPLAYER);
+        _targets.addTargetTypes(ActorType.NONPLAYER);
     }
 
     @Override
-    public void Act() {
-        if (Input.IsActive(Commands.Start, _parent.GetPlayerIndex())) {
-            _parent.SetPlaying(true);
+    public void act() {
+        if (Input.isActive(Commands.Start, _parent.getPlayerIndex())) {
+            _parent.setPlaying(true);
         }
-        if (Input.IsActive(Commands.Back, _parent.GetPlayerIndex())) {
-            _parent.SetPlaying(false);
+        if (Input.isActive(Commands.Back, _parent.getPlayerIndex())) {
+            _parent.setPlaying(false);
         }
-        if (_parent.IsPlaying()) {
-            if (!Input.IsContext(Contexts.Inventory, _parent.GetPlayerIndex())) {
-                float leftVelocity = (Input.IsActive(Commands.MoveLeft, _parent.GetPlayerIndex()) ? -Stats.DefaultMoveDistance : 0);
-                float rightVelocity = ((Input.IsActive(Commands.MoveRight, _parent.GetPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
-                _keyVelocity.SetX(rightVelocity + leftVelocity);
+        if (_parent.isPlaying()) {
+            if (!Input.isContext(Contexts.Inventory, _parent.getPlayerIndex())) {
+                float leftVelocity = (Input.isActive(Commands.MoveLeft, _parent.getPlayerIndex()) ? -Stats.DefaultMoveDistance : 0);
+                float rightVelocity = ((Input.isActive(Commands.MoveRight, _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
+                _keyVelocity.setX(rightVelocity + leftVelocity);
 
-                float downVelocity = ((Input.IsActive(Commands.MoveDown, _parent.GetPlayerIndex())) ? -Stats.DefaultMoveDistance : 0);
-                float upVelocity = ((Input.IsActive(Commands.MoveUp, _parent.GetPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
-                _keyVelocity.SetY(upVelocity + downVelocity);
+                float downVelocity = ((Input.isActive(Commands.MoveDown, _parent.getPlayerIndex())) ? -Stats.DefaultMoveDistance : 0);
+                float upVelocity = ((Input.isActive(Commands.MoveUp, _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
+                _keyVelocity.setY(upVelocity + downVelocity);
 
-                if (Input.IsContext(Contexts.Free, _parent.GetPlayerIndex())) {
-                    boolean isPress = Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex());
+                if (Input.isContext(Contexts.Free, _parent.getPlayerIndex())) {
+                    boolean isPress = Input.isActive(Commands.Confirm, _parent.getPlayerIndex());
                     if (!isPress) {
-                        _parent.SetInteraction(false);
+                        _parent.setInteraction(false);
                     }
-                    if (isPress && !_parent.IsInteracting()) {
-                        _parent.SetInteraction(true);
+                    if (isPress && !_parent.isInteracting()) {
+                        _parent.setInteraction(true);
                     }
-                    int skillCycleVelocity = ((Input.IsActive(Commands.CycleLeft, _parent.GetPlayerIndex())) ? -1 : 0) + ((Input.IsActive(Commands.CycleRight, _parent.GetPlayerIndex())) ? 1 : 0);
-                    _parent.CycleActiveSkill(skillCycleVelocity);
+                    int skillCycleVelocity = ((Input.isActive(Commands.CycleLeft, _parent.getPlayerIndex())) ? -1 : 0) + ((Input.isActive(Commands.CycleRight, _parent.getPlayerIndex())) ? 1 : 0);
+                    _parent.cycleActiveSkill(skillCycleVelocity);
 
                     if (!_isCasting) {
-                        if (!Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex(), false)) {
-                            _parent.MoveIfPossible(_keyVelocity.X, _keyVelocity.Y);
+                        if (!Input.isActive(Commands.Confirm, _parent.getPlayerIndex(), false)) {
+                            _parent.moveIfPossible(_keyVelocity.X, _keyVelocity.Y);
                         }
-                        if (!_keyVelocity.IsZero()) {
-                            _parent.SetSkillVector(_keyVelocity);
+                        if (!_keyVelocity.isZero()) {
+                            _parent.setSkillVector(_keyVelocity);
                         }
                     }
                 }
-                if (Input.IsActive(Commands.Skill, _parent.GetPlayerIndex())) {
+                if (Input.isActive(Commands.Skill, _parent.getPlayerIndex())) {
                     _isCasting = true;
                 }
 
                 for (Commands hotkey : __hotkeys) {
-                    if (Input.IsActive(hotkey, _parent.GetPlayerIndex())) {
-                        if (!Input.IsActive(Commands.LockSkill, _parent.GetPlayerIndex(), false)) {
-                            if (_parent.SetHotSkillActive(hotkey)) {
+                    if (Input.isActive(hotkey, _parent.getPlayerIndex())) {
+                        if (!Input.isActive(Commands.LockSkill, _parent.getPlayerIndex(), false)) {
+                            if (_parent.setHotSkillActive(hotkey)) {
                                 _isCasting = true;
                             }
                         } else {
-                            _parent.MarkHotSkill(hotkey);
+                            _parent.markHotSkill(hotkey);
                         }
                     }
                 }
 
                 if (_isCasting) {
-                    if (_parent.GetSkillVector() == null) {
-                        _parent.SetSkillVector(new Point2(1, 0));
+                    if (_parent.getSkillVector() == null) {
+                        _parent.setSkillVector(new Point2(1, 0));
                     }
-                    if (!_parent.GetSkillVector().IsZero()) {
-                        _parent.UseActiveSkill();
+                    if (!_parent.getSkillVector().isZero()) {
+                        _parent.useActiveSkill();
                     }
                     _isCasting = false;
                 }
             }
 
-            if (Input.IsActive(Commands.Inventory, _parent.GetPlayerIndex())) {
-                Input.SetContext(_parent.ToggleInventoryVisibility() ? Contexts.Inventory : Contexts.Free, _parent.GetPlayerIndex());
+            if (Input.isActive(Commands.Inventory, _parent.getPlayerIndex())) {
+                Input.setContext(_parent.toggleInventoryVisibility() ? Contexts.Inventory : Contexts.Free, _parent.getPlayerIndex());
             }
         }
     }

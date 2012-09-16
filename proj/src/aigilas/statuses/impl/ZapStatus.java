@@ -11,9 +11,9 @@ public class ZapStatus extends IStatus {
     }
 
     @Override
-    public void Setup() {
-        super.Setup();
-        _target.ApplyDamage(10);
+    public void setup() {
+        super.setup();
+        _target.applyDamage(10);
         _isActive = false;
     }
 }

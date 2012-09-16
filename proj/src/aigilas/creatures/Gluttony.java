@@ -10,6 +10,6 @@ public class Gluttony extends AbstractCreature {
         super(ActorType.GLUTTONY, SpriteType.GLUTTONY);
         Compose(Elements.MENTAL);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
-        Add(SkillId.PLAGUE);
+        add(SkillId.PLAGUE);
     }
 }

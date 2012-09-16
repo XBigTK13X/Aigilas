@@ -7,25 +7,25 @@ public class AssetManager {
     private static final String assetPath = "assets";
     private static AssetManager instance;
 
-    public static AssetManager Get() {
+    public static AssetManager get() {
         if (instance == null) {
             instance = new AssetManager();
         }
         return instance;
     }
 
-    private static String Graphic(String fileName) {
+    private static String graphic(String fileName) {
         return assetPath + "/graphics/" + fileName;
     }
 
     private AssetManager() {
     }
 
-    public Texture GetImage(String fileName) {
-        return new Texture(Graphic(fileName));
+    public Texture getImage(String fileName) {
+        return new Texture(graphic(fileName));
     }
 
-    public BitmapFont GetFont(String string) {
+    public BitmapFont getFont(String string) {
         return new BitmapFont();
     }
 }

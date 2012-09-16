@@ -13,16 +13,16 @@ public class FloorSpikesSkill extends ISkill {
     {
         super(SkillId.FLOOR_SPIKES, AnimationType.STATIONARY, Float.MAX_VALUE, true);
 
-        AddCost(StatType.MANA, 20);
-        Add(Elements.EARTH);
+        addCost(StatType.MANA, 20);
+        add(Elements.EARTH);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(80, _source);
+        target.applyDamage(80, _source);
 
     }
 

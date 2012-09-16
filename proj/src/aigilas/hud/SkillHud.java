@@ -15,39 +15,39 @@ public class SkillHud extends IHud {
     private Point2 _manaPosition = new Point2();
 
     public SkillHud(ICreature owner) {
-        super(owner, Settings.Get().spriteWidth, SpxManager.WindowHeight / 4);
-        _manaPosition = new Point2(GetHudOrigin().X, GetHudOrigin().Y - SpxManager.WindowHeight / 4);
+        super(owner, Settings.get().spriteWidth, SpxManager.WindowHeight / 4);
+        _manaPosition = new Point2(getHudOrigin().X, getHudOrigin().Y - SpxManager.WindowHeight / 4);
     }
 
-    private int CalculateHeight(StatType statType) {
-        return (int) ((_parent.Get(statType) / _parent.GetMax(statType)) * _dimensions.Y);
+    private int calculateHeight(StatType statType) {
+        return (int) ((_parent.get(statType) / _parent.getMax(statType)) * _dimensions.Y);
     }
 
-    private int CostOfCurrentSkill() {
-        return (int) (_parent.GetCurrentSkillCost() / _parent.GetMax(StatType.MANA) * _dimensions.Y);
+    private int costOfCurrentSkill() {
+        return (int) (_parent.getCurrentSkillCost() / _parent.getMax(StatType.MANA) * _dimensions.Y);
     }
 
-    private String GetSkillStrings() {
-        return "A:" + _parent.GetActiveSkillName() + __separator + "X:" + _parent.GetHotSkillName(Commands.HotSkill1) + __separator + "Y:" + _parent.GetHotSkillName(Commands.HotSkill2) + __separator + "B:" + _parent.GetHotSkillName(Commands.HotSkill3) + __separator;
+    private String getSkillStrings() {
+        return "A:" + _parent.getActiveSkillName() + __separator + "X:" + _parent.getHotSkillName(Commands.HotSkill1) + __separator + "Y:" + _parent.getHotSkillName(Commands.HotSkill2) + __separator + "B:" + _parent.getHotSkillName(Commands.HotSkill3) + __separator;
     }
 
-    public void Update() {
+    public void update() {
         if (_isVisible) {
-            _textHandler.Update();
-            _textHandler.Clear();
-            _textHandler.WriteDefault(GetSkillStrings(), (int) GetHudOrigin().X + Settings.Get().spriteWidth, Settings.Get().spriteHeight, GetHudOrigin());
+            _textHandler.update();
+            _textHandler.clear();
+            _textHandler.writeDefault(getSkillStrings(), (int) getHudOrigin().X + Settings.get().spriteWidth, Settings.get().spriteHeight, getHudOrigin());
         }
     }
 
-    public void Draw() {
+    public void draw() {
         if (!_isVisible) {
             return;
         }
 
-        SpxManager.Renderer.Draw(_menuBase, GetHudOrigin(), DrawDepth.HudBG, Color.GREEN, Settings.Get().spriteWidth, CalculateHeight(StatType.HEALTH));
-        SpxManager.Renderer.Draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.BLUE, Settings.Get().spriteWidth, CalculateHeight(StatType.MANA));
-        SpxManager.Renderer.Draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.YELLOW, Settings.Get().spriteWidth / 2, CostOfCurrentSkill());
+        SpxManager.Renderer.draw(_menuBase, getHudOrigin(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.HEALTH));
+        SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.MANA));
+        SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
 
-        _textHandler.Draw();
+        _textHandler.draw();
     }
 }

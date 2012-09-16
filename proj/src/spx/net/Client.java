@@ -5,14 +5,14 @@ import spx.core.Settings;
 public class Client {
     private static IClient __instance;
 
-    public static IClient Get() {
+    public static IClient get() {
         if (__instance == null) {
-            if (Settings.Get().networkingEnabled) {
+            if (Settings.get().networkingEnabled) {
                 __instance = new LanClient();
-                if (Settings.Get().clientVerbose) {
+                if (Settings.get().clientVerbose) {
                     System.out.println("CLIENT: Waiting for networked server connection");
                 }
-                while (!__instance.IsConnected()) {
+                while (!__instance.isConnected()) {
                     // Wait
                 }
             } else {

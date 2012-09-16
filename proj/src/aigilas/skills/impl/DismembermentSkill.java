@@ -18,20 +18,20 @@ public class DismembermentSkill extends ISkill {
     {
         super(SkillId.DISMEMBERMENT, AnimationType.SELF);
 
-        Add(Elements.PHYSICAL);
-        AddCost(StatType.MANA, 3);
+        add(Elements.PHYSICAL);
+        addCost(StatType.MANA, 3);
 
     }
 
     @Override
-    public void Activate(ICreature target)
+    public void activate(ICreature target)
 
     {
-        super.Activate(target);
-        int openCell = RNG.Next(1, Settings.Get().tileMapWidth - 1);
-        for (int ii = 1; ii < Settings.Get().tileMapWidth - 1; ii++) {
+        super.activate(target);
+        int openCell = RNG.next(1, Settings.get().tileMapWidth - 1);
+        for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             if (ii != openCell) {
-                CreatureFactory.Create(ActorType.HAND, new Point2(ii, 1));
+                CreatureFactory.create(ActorType.HAND, new Point2(ii, 1));
 
             }
 

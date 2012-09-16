@@ -14,15 +14,15 @@ public class ColdShoulderSkill extends ISkill {
     {
         super(SkillId.COLD_SHOULDER, AnimationType.SELF);
 
-        Add(Elements.FIRE);
-        AddCost(StatType.MANA, 10);
+        add(Elements.FIRE);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        ApplyToPlayers(Status.ColdShoulder);
+    public void activate(ICreature source) {
+        super.activate(source);
+        applyToPlayers(Status.ColdShoulder);
 
     }
 

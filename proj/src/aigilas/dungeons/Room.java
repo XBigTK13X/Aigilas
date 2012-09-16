@@ -25,34 +25,34 @@ public class Room {
         Center = new Point2(RightSide / 2, BottomSide / 2);
     }
 
-    public boolean IsBad() {
-        if (BottomSide > Settings.Get().tileMapHeight) {
+    public boolean isBad() {
+        if (BottomSide > Settings.get().tileMapHeight) {
             return true;
         }
-        if (RightSide > Settings.Get().tileMapWidth) {
+        if (RightSide > Settings.get().tileMapWidth) {
             return true;
         }
         return false;
     }
 
-    public boolean Collides(Room target) {
+    public boolean collides(Room target) {
         for (Point2 corner : target.Corners) {
-            if (IsPointInsideBoundingBox(corner)) {
+            if (isPointInsideBoundingBox(corner)) {
                 return true;
             }
         }
         for (Point2 corner : Corners) {
-            if (target.IsPointInsideBoundingBox(corner)) {
+            if (target.isPointInsideBoundingBox(corner)) {
                 return true;
             }
         }
-        if (target.IsPointInsideBoundingBox(Center)) {
+        if (target.isPointInsideBoundingBox(Center)) {
             return true;
         }
-        return IsPointInsideBoundingBox(target.Center);
+        return isPointInsideBoundingBox(target.Center);
     }
 
-    public boolean IsPointInsideBoundingBox(Point2 target) {
+    public boolean isPointInsideBoundingBox(Point2 target) {
         if (target.X > X && target.Y > Y && target.X < RightSide && target.Y < BottomSide) {
             return true;
         }

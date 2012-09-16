@@ -16,14 +16,14 @@ public class BreakingWheelSkill extends ISkill {
     {
         super(SkillId.BREAKING_WHEEL, AnimationType.SELF);
 
-        Add(Elements.DARK);
-        AddCost(StatType.MANA, 10);
+        add(Elements.DARK);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        CreatureFactory.Create(ActorType.BREAKING_WHEEL, EntityManager.GetEmptyLocation());
+    public void activate(ICreature source) {
+        CreatureFactory.create(ActorType.BREAKING_WHEEL, EntityManager.getEmptyLocation());
 
     }
 

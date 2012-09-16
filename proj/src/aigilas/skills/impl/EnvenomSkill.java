@@ -14,15 +14,15 @@ public class EnvenomSkill extends ISkill {
     {
         super(SkillId.ENVENOM, AnimationType.SELF);
 
-        Add(Elements.EARTH);
-        AddCost(StatType.MANA, 10);
+        add(Elements.EARTH);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        ApplyToPlayers(Status.PoisonOneHit);
+    public void activate(ICreature source) {
+        super.activate(source);
+        applyToPlayers(Status.PoisonOneHit);
 
     }
 

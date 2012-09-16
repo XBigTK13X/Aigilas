@@ -13,16 +13,16 @@ public class GushSkill extends ISkill {
     {
         super(SkillId.GUSH, AnimationType.RANGED);
 
-        Add(Elements.WATER);
-        AddCost(StatType.MANA, 10);
+        add(Elements.WATER);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(10, _source, true);
+        target.applyDamage(10, _source, true);
 
     }
 

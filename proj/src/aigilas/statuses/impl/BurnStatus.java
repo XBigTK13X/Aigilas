@@ -14,8 +14,8 @@ public class BurnStatus extends IStatus {
     }
 
     @Override
-    public void Update() {
-        super.Update();
-        _target.ApplyDamage(1.0f);
+    public void update() {
+        super.update();
+        _target.applyDamage(1.0f);
     }
 }

@@ -9,13 +9,13 @@ public class RotateAnimation extends SkillAnimation {
     private Point2 location = new Point2(0, 0);
 
     @Override
-    public void Animate(SkillEffect skill, ICreature source, Point2 velocity) {
+    public void animate(SkillEffect skill, ICreature source, Point2 velocity) {
         if (rotation == null) {
-            rotation = new Point2(source.GetSkillVector().GridX, source.GetSkillVector().GridY);
+            rotation = new Point2(source.getSkillVector().GridX, source.getSkillVector().GridY);
         }
-        location.SetX(rotation.GridX + source.GetLocation().GridX);
-        location.SetY(rotation.GridY + source.GetLocation().GridY);
-        skill.SetLocation(location);
-        rotation.Copy(rotation.RotateClockwise());
+        location.setX(rotation.GridX + source.getLocation().GridX);
+        location.setY(rotation.GridY + source.getLocation().GridY);
+        skill.setLocation(location);
+        rotation.copy(rotation.rotateClockwise());
     }
 }

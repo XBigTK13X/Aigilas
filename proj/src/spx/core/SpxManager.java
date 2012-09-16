@@ -9,8 +9,8 @@ import spx.net.Client;
 
 public class SpxManager {
     // This is the resolution used by the game internally
-    public static int WindowHeight = Settings.Get().spriteHeight * Settings.Get().tileMapHeight;
-    public static int WindowWidth = Settings.Get().spriteWidth * Settings.Get().tileMapWidth;
+    public static int WindowHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
+    public static int WindowWidth = Settings.get().spriteWidth * Settings.get().tileMapWidth;
 
     // This is the resolution used to draw on the screen
     // 720
@@ -26,48 +26,48 @@ public class SpxManager {
     private static final String __gameOverSprite = "GameOver.png";
     private static final String __particleSprite = "Particle.png";
 
-    public static void SetContentManager(ContentManager assetHandler) {
+    public static void setContentManager(ContentManager assetHandler) {
         __assetHandler = assetHandler;
     }
 
-    private static Texture GetAsset(String resourceName) {
-        return __assetHandler.LoadTexture(resourceName);
+    private static Texture getAsset(String resourceName) {
+        return __assetHandler.loadTexture(resourceName);
     }
 
-    public static Sprite GetParticleAsset() {
-        return new Sprite(GetAsset(__particleSprite));
+    public static Sprite getParticleAsset() {
+        return new Sprite(getAsset(__particleSprite));
     }
 
-    public static Sprite GetMenuBaseAsset() {
-        return new Sprite(GetAsset(__menuBaseSprite));
+    public static Sprite getMenuBaseAsset() {
+        return new Sprite(getAsset(__menuBaseSprite));
     }
 
-    public static Sprite GetSpriteAsset(int index) {
-        return __assetHandler.LoadSprite(index);
+    public static Sprite getSpriteAsset(int index) {
+        return __assetHandler.loadSprite(index);
     }
 
-    public static Texture GetGameOverAsset() {
-        return GetAsset(__gameOverSprite);
+    public static Texture getGameOverAsset() {
+        return getAsset(__gameOverSprite);
     }
 
-    public static void SetupCamera(boolean isFullScreen) {
+    public static void setupCamera(boolean isFullScreen) {
 
         Renderer = new Renderer();
     }
 
-    public static Point2 GetCenter() {
+    public static Point2 getCenter() {
         return new Point2(WindowWidth / 2, WindowHeight / 2);
     }
 
-    public static Point2 GetDimensions() {
+    public static Point2 getDimensions() {
         return new Point2(WindowWidth, WindowHeight);
     }
 
-    public static void Setup() {
-        Client.Get();
+    public static void setup() {
+        Client.get();
         GdxNativesLoader.load();
-        SetupCamera(false);
-        SetContentManager(new ContentManager());
+        setupCamera(false);
+        setContentManager(new ContentManager());
         Renderer = new Renderer();
     }
 }

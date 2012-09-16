@@ -6,9 +6,9 @@ import aigilas.reactions.IReaction;
 
 public class FastForwardReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(-1, null, false, StatType.AGE);
+        target.applyDamage(-1, null, false, StatType.AGE);
     }
 }

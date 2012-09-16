@@ -15,15 +15,15 @@ public class ForgetSkill extends ISkill
     {
         super(SkillId.FORGET_SKILL, AnimationType.SELF);
 
-        Add(Elements.MENTAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        _source.RemoveLeastUsedSkill();
+    public void activate(ICreature source) {
+        super.activate(source);
+        _source.removeLeastUsedSkill();
 
     }
 

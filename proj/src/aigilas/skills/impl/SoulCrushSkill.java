@@ -14,16 +14,16 @@ public class SoulCrushSkill extends ISkill {
     {
         super(SkillId.SOUL_CRUSH, AnimationType.RANGED);
 
-        Add(Elements.MENTAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(5, _source, true, StatType.values()[RNG.Next(0, 3)]);
+        target.applyDamage(5, _source, true, StatType.values()[RNG.next(0, 3)]);
 
     }
 

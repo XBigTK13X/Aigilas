@@ -26,14 +26,14 @@ public class IStatus {
     protected IStatus(ICreature target) {
         _strength = _maxStrength;
         _target = target;
-        Setup();
+        setup();
     }
 
-    public boolean IsActive() {
+    public boolean isActive() {
         return _isActive;
     }
 
-    public boolean Prevents(CreatureAction action) {
+    public boolean prevents(CreatureAction action) {
         for (CreatureAction prevent : _prevents) {
             if (prevent == action) {
                 return true;
@@ -42,7 +42,7 @@ public class IStatus {
         return false;
     }
 
-    public boolean IsElementBlocked(Elements element) {
+    public boolean isElementBlocked(Elements element) {
         for (Elements blocked : _blockedElements) {
             if (blocked == element) {
                 return true;
@@ -51,48 +51,48 @@ public class IStatus {
         return false;
     }
 
-    public void PassOn(ICreature target, StatusComponent componentType) {
+    public void passOn(ICreature target, StatusComponent componentType) {
         if (_passables.containsKey(componentType)) {
             for (Status contagion : _passables.get(componentType)) {
-                StatusFactory.Apply(target, contagion);
+                StatusFactory.apply(target, contagion);
             }
             _wasPassed = _passables.containsKey(componentType);
         }
 
     }
 
-    protected void Add(Status statusId, StatusComponent componentType) {
+    protected void add(Status statusId, StatusComponent componentType) {
         if (!_passables.containsKey(componentType)) {
             _passables.put(componentType, new ArrayList<Status>());
         }
         _passables.get(componentType).add(statusId);
     }
 
-    public void Update() {
+    public void update() {
         if (_isActive) {
             _strength--;
             if (_strength <= 0) {
-                Cleanup();
+                cleanup();
                 _isActive = false;
             }
         }
     }
 
-    public void Act() {
+    public void act() {
 
     }
 
-    private void CycleBuff() {
+    private void cycleBuff() {
         if (_buff != null) {
-            _target.AddBuff(_buff, _buffMax);
+            _target.addBuff(_buff, _buffMax);
         }
     }
 
-    public void Setup() {
-        CycleBuff();
+    public void setup() {
+        cycleBuff();
     }
 
-    public void Cleanup() {
-        CycleBuff();
+    public void cleanup() {
+        cycleBuff();
     }
 }

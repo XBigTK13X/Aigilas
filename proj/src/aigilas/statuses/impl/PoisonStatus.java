@@ -9,8 +9,8 @@ public class PoisonStatus extends IStatus {
     }
 
     @Override
-    public void Update() {
-        super.Update();
-        _target.ApplyDamage(2.1f);
+    public void update() {
+        super.update();
+        _target.applyDamage(2.1f);
     }
 }

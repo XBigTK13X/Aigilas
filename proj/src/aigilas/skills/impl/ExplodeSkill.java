@@ -13,16 +13,16 @@ public class ExplodeSkill extends ISkill {
     {
         super(SkillId.EXPLODE, AnimationType.CLOUD);
 
-        Add(Elements.FIRE);
-        AddCost(StatType.MANA, 0);
+        add(Elements.FIRE);
+        addCost(StatType.MANA, 0);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(10, _source, true);
+        target.applyDamage(10, _source, true);
 
     }
 

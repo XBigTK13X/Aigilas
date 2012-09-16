@@ -12,6 +12,6 @@ public class DefenseUpStatus extends IStatus {
         super(target);
 
         _buff = new StatBuff(StatType.DEFENSE, 10);
-        Setup();
+        setup();
     }
 }

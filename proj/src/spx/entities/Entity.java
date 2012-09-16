@@ -20,59 +20,59 @@ public class Entity implements IEntity {
     protected EntityType _entityType;
 
     @Override
-    public void LoadContent() {
-        _graphic.LoadContent(_assetName);
+    public void loadContent() {
+        _graphic.loadContent(_assetName);
     }
 
     @Override
-    public void Draw() {
+    public void draw() {
         if (_isOnBoard && _isActive) {
-            _graphic.Draw();
+            _graphic.draw();
         }
     }
 
-    public void Hide() {
+    public void hide() {
         _isOnBoard = false;
     }
 
-    public void Show() {
+    public void show() {
         _isOnBoard = true;
     }
 
-    protected void Initialize(Point2 location, SpriteType spriteType, EntityType entityType, DrawDepth depth) {
+    protected void initialize(Point2 location, SpriteType spriteType, EntityType entityType, DrawDepth depth) {
         _assetName = spriteType;
         _entityType = entityType;
-        _location.Copy(location);
-        _graphic.SetPosition(_location);
-        _graphic.SetDrawDepth(depth);
+        _location.copy(location);
+        _graphic.setPosition(_location);
+        _graphic.setDrawDepth(depth);
     }
 
     @Override
-    public void Update() {
+    public void update() {
     }
 
-    public void SetLocation(Point2 location) {
-        _graphic.SetPosition(location);
-        _location.Copy(location);
+    public void setLocation(Point2 location) {
+        _graphic.setPosition(location);
+        _location.copy(location);
     }
 
     private Point2 oldLocation = new Point2(0, 0);
 
-    public void UpdateLocation(Point2 location) {
-        oldLocation.Copy(_location);
-        _graphic.SetPosition(location);
-        _location.Copy(location);
-        EntityManager.UpdateGridLocation(this, oldLocation);
+    public void updateLocation(Point2 location) {
+        oldLocation.copy(_location);
+        _graphic.setPosition(location);
+        _location.copy(location);
+        EntityManager.updateGridLocation(this, oldLocation);
     }
 
     private Point2 target = new Point2(0, 0);
 
-    public boolean Move(float amountX, float amountY) {
-        amountX = NormalizeDistance(amountX);
-        amountY = NormalizeDistance(amountY);
-        target.Reset(_location.PosX + amountX, _location.PosY + amountY);
-        if (CoordVerifier.IsValid(target)) {
-            UpdateLocation(target);
+    public boolean move(float amountX, float amountY) {
+        amountX = normalizeDistance(amountX);
+        amountY = normalizeDistance(amountY);
+        target.reset(_location.PosX + amountX, _location.PosY + amountY);
+        if (CoordVerifier.isValid(target)) {
+            updateLocation(target);
             return true;
         }
         return false;
@@ -81,26 +81,26 @@ public class Entity implements IEntity {
     private static int isNeg = 1;
     private static int factorsOfSpriteHeight = 0;
 
-    private static float NormalizeDistance(float amount) {
+    private static float normalizeDistance(float amount) {
         isNeg = (amount < 0) ? -1 : 1;
         amount = Math.abs(amount);
-        factorsOfSpriteHeight = (int) Math.floor(amount / Settings.Get().spriteHeight);
+        factorsOfSpriteHeight = (int) Math.floor(amount / Settings.get().spriteHeight);
         factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount != 0) ? 1 : factorsOfSpriteHeight;
-        return (Settings.Get().spriteHeight * factorsOfSpriteHeight * isNeg);
+        return (Settings.get().spriteHeight * factorsOfSpriteHeight * isNeg);
     }
 
     @Override
-    public boolean IsActive() {
+    public boolean isActive() {
         return _isActive;
     }
 
     @Override
-    public void SetInactive() {
+    public void setInactive() {
         _isActive = false;
     }
 
     @Override
-    public boolean IsBlocking() {
+    public boolean isBlocking() {
         if (_isBlocking == null) {
             return false;
         }
@@ -108,39 +108,39 @@ public class Entity implements IEntity {
     }
 
     @Override
-    public Point2 GetLocation() {
+    public Point2 getLocation() {
         return _location;
     }
 
-    public boolean IsGraphicLoaded() {
+    public boolean isGraphicLoaded() {
         return (_graphic != null);
     }
 
-    protected void SetSpriteInfo(SpriteInfo sprite) {
-        _graphic.SetSpriteInfo(sprite);
+    protected void setSpriteInfo(SpriteInfo sprite) {
+        _graphic.setSpriteInfo(sprite);
     }
 
     @Override
     public boolean contains(Point2 target)
 
     {
-        return target.GridX == GetLocation().GridX && target.GridY == GetLocation().GridY;
+        return target.GridX == getLocation().GridX && target.GridY == getLocation().GridY;
     }
 
-    public void SetInteraction(boolean isInteracting) {
+    public void setInteraction(boolean isInteracting) {
         _isInteracting = isInteracting;
     }
 
-    public boolean IsInteracting() {
+    public boolean isInteracting() {
         return _isInteracting;
     }
 
-    public void SetInteracting(boolean isInteracting) {
+    public void setInteracting(boolean isInteracting) {
         _isInteracting = isInteracting;
     }
 
     @Override
-    public EntityType GetEntityType() {
+    public EntityType getEntityType() {
         return _entityType;
     }
 }

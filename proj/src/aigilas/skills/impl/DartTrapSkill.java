@@ -15,16 +15,16 @@ public class DartTrapSkill extends ISkill {
     {
         super(SkillId.DART_TRAP, AnimationType.RANGED);
 
-        AddCost(StatType.MANA, 10);
-        Add(Elements.DARK);
+        addCost(StatType.MANA, 10);
+        add(Elements.DARK);
 
     }
 
     @Override
-    public void Cleanup(Entity target, SkillEffect source)
+    public void cleanup(Entity target, SkillEffect source)
 
     {
-        CreatureFactory.CreateMinion(_implementationId, _source, source, target.GetLocation());
+        CreatureFactory.createMinion(_implementationId, _source, source, target.getLocation());
 
     }
 

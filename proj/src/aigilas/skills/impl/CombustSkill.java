@@ -21,20 +21,20 @@ public class CombustSkill extends ISkill {
     {
         super(SkillId.COMBUST, AnimationType.RANGED);
 
-        Add(Elements.AIR, Elements.PHYSICAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.AIR, Elements.PHYSICAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(10, _source);
-        if (!target.IsActive()) {
-            List<IActor> targets = EntityManager.GetActorsSurrounding(target.GetLocation(), CombustDistance);
+        target.applyDamage(10, _source);
+        if (!target.isActive()) {
+            List<IActor> targets = EntityManager.getActorsSurrounding(target.getLocation(), CombustDistance);
             for (int ii = 0; ii < targets.size(); ii++) {
-                StatusFactory.Apply((ICreature) targets.get(ii), Status.Burn);
+                StatusFactory.apply((ICreature) targets.get(ii), Status.Burn);
 
             }
 

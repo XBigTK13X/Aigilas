@@ -26,7 +26,7 @@ public enum GodId {
         Detests = detests;
     }
 
-    public God GetInstance() {
+    public God getInstance() {
         if (!__instances.containsKey(this)) {
             __instances.put(this, new God(this));
         }

@@ -10,6 +10,6 @@ public class Pride extends AbstractCreature {
         super(ActorType.PRIDE, SpriteType.PRIDE);
         Compose(Elements.DARK);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
-        Add(SkillId.BREAKING_WHEEL);
+        add(SkillId.BREAKING_WHEEL);
     }
 }

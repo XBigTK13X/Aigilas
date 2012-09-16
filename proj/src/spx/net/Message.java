@@ -31,32 +31,32 @@ public class Message implements Serializable {
     private Message() {
     }
 
-    public static Message Empty() {
+    public static Message empty() {
         return new Message();
     }
 
-    public static Message Create(MessageTypes messageType) {
+    public static Message create(MessageTypes messageType) {
         Message result = new Message();
         result.MessageType = messageType;
         return result;
     }
 
-    public static Message CreateReadyForNextTurn() {
-        return Create(MessageTypes.READY_FOR_NEXT_TURN);
+    public static Message createReadyForNextTurn() {
+        return create(MessageTypes.READY_FOR_NEXT_TURN);
     }
 
-    public static Message CreateHeartBeat() {
-        return Create(MessageTypes.HEART_BEAT);
+    public static Message createHeartBeat() {
+        return create(MessageTypes.HEART_BEAT);
     }
 
-    public static Message CreatePlayerCount(int playerCount) {
+    public static Message createPlayerCount(int playerCount) {
         Message result = new Message();
         result.MessageType = MessageTypes.PLAYER_COUNT;
         result.PlayerCount = (byte) playerCount;
         return result;
     }
 
-    public static Message CreateInit(int playerCount, int rngSeed) {
+    public static Message createInit(int playerCount, int rngSeed) {
         Message result = new Message();
         result.MessageType = MessageTypes.CONNECT;
         result.PlayerCount = (byte) playerCount;
@@ -64,7 +64,7 @@ public class Message implements Serializable {
         return result;
     }
 
-    public static Message CreateCheckState(Commands command, int playerIndex) {
+    public static Message createCheckState(Commands command, int playerIndex) {
         Message result = new Message();
         result.MessageType = MessageTypes.CHECK_STATE;
         result.Command = command;
@@ -72,7 +72,7 @@ public class Message implements Serializable {
         return result;
     }
 
-    public static Message CreateMovement(Commands command, int playerIndex, boolean isActive) {
+    public static Message createMovement(Commands command, int playerIndex, boolean isActive) {
         Message result = new Message();
         result.MessageType = MessageTypes.MOVEMENT;
         result.PlayerIndex = playerIndex;
@@ -81,16 +81,16 @@ public class Message implements Serializable {
         return result;
     }
 
-    public static Message CreatePlayerState(HashMap<Integer, HashMap<Commands, Boolean>> playerStatus, Integer turnCount, Integer rngSeed) {
+    public static Message createPlayerState(HashMap<Integer, HashMap<Commands, Boolean>> playerStatus, Integer turnCount, Integer rngSeed) {
         Message result = new Message();
         result.MessageType = MessageTypes.SYNC_STATE;
-        result.WritePlayerState(playerStatus);
+        result.writePlayerState(playerStatus);
         result.TurnCount = turnCount;
         result.RngSeed = rngSeed;
         return result;
     }
 
-    public void WritePlayerState(HashMap<Integer, HashMap<Commands, Boolean>> state) {
+    public void writePlayerState(HashMap<Integer, HashMap<Commands, Boolean>> state) {
         for (int jj = 0; jj < PlayerMax; jj++) {
             for (int ii = 0; ii < CommandMax; ii++) {
                 switch (jj) {
@@ -111,7 +111,7 @@ public class Message implements Serializable {
         }
     }
 
-    public void ReadPlayerState(HashMap<Integer, HashMap<Commands, Boolean>> result) {
+    public void readPlayerState(HashMap<Integer, HashMap<Commands, Boolean>> result) {
         for (int jj = 0; jj < PlayerMax; jj++) {
             for (int ii = 0; ii < CommandMax; ii++) {
                 switch (jj) {
@@ -132,7 +132,7 @@ public class Message implements Serializable {
         }
     }
 
-    public void Clear() {
+    public void clear() {
         MessageType = null;
     }
 }

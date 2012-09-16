@@ -10,6 +10,6 @@ public class Zorb extends AbstractCreature {
         Compose(Elements.PHYSICAL, Elements.FIRE);
         Strengths(StatType.MANA, StatType.HEALTH);
         Weaknesses(StatType.WISDOM, StatType.DEFENSE);
-        Add(SkillId.FIREBALL);
+        add(SkillId.FIREBALL);
     }
 }

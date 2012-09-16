@@ -15,15 +15,15 @@ public class PlagueSkill extends ISkill {
     {
         super(SkillId.STRENGTH_UP, AnimationType.SELF);
 
-        Add(Elements.MENTAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        StatusFactory.Apply(source, Status.Toxic);
+    public void activate(ICreature source) {
+        super.activate(source);
+        StatusFactory.apply(source, Status.Toxic);
 
     }
 

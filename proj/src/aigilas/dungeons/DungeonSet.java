@@ -17,29 +17,29 @@ public class DungeonSet {
         _floors.put(_currentFloor, new Dungeon());
     }
 
-    public void GotoNext() {
-        _floors.get(_currentFloor).CacheContents();
+    public void gotoNext() {
+        _floors.get(_currentFloor).cacheContents();
         _currentFloor++;
-        LoadOrCreateDungeon(false);
+        loadOrCreateDungeon(false);
     }
 
-    public boolean GotoPrevious() {
+    public boolean gotoPrevious() {
         if (_currentFloor > 0) {
-            _floors.get(_currentFloor).CacheContents();
+            _floors.get(_currentFloor).cacheContents();
             _currentFloor--;
-            LoadOrCreateDungeon(true);
+            loadOrCreateDungeon(true);
             return true;
         }
         return false;
     }
 
-    private void LoadOrCreateDungeon(boolean goingUp) {
+    private void loadOrCreateDungeon(boolean goingUp) {
         if (!_floors.containsKey(_currentFloor)) {
             System.out.println("Creating a new dungeon for floor: " + _currentFloor);
             _floors.put(_currentFloor, new Dungeon(_floors.get(_currentFloor - 1).getDownstairsLocation()));
-            DungeonFactory.IncreaseFloorCount();
+            DungeonFactory.increaseFloorCount();
         }
-        ParticleEngine.Reset();
-        _floors.get(_currentFloor).LoadTiles(goingUp);
+        ParticleEngine.reset();
+        _floors.get(_currentFloor).loadTiles(goingUp);
     }
 }

@@ -22,7 +22,7 @@ public class LanClient implements IClient {
     private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
 
     public LanClient() {
-        if (Settings.Get().clientVerbose) {
+        if (Settings.get().clientVerbose) {
             System.out.println("CLIENT: Attempting to make a new connection");
         }
         for (int ii = 0; ii < Message.PlayerMax; ii++) {
@@ -32,51 +32,51 @@ public class LanClient implements IClient {
             }
         }
         try {
-            Socket server = new Socket(Settings.Get().serverIp, Settings.Get().port);
+            Socket server = new Socket(Settings.get().serverIp, Settings.get().port);
             _comm = new MessageHandler(server);
             _comm.owner = "CLIENT";
-            SendMessage(Message.CreateInit(0, 0));
-            AwaitReply(MessageTypes.CONNECT);
-            HandleResponse(_message);
+            sendMessage(Message.createInit(0, 0));
+            awaitReply(MessageTypes.CONNECT);
+            handleResponse(_message);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     // Client <-> Game communication
-    public boolean IsGameStarting() {
+    public boolean isGameStarting() {
         return _isGameStarting;
     }
 
-    public boolean IsConnected() {
+    public boolean isConnected() {
         return _isConnected;
     }
 
-    public void HeartBeat() {
+    public void heartBeat() {
         if (!_dungeonHasLoaded) {
             _heartBeat--;
             if (_heartBeat <= 0) {
-                if (Settings.Get().clientVerbose)
+                if (Settings.get().clientVerbose)
                     System.out.println("CLIENT: Heartbeating...");
-                SendMessage(Message.CreateHeartBeat());
+                sendMessage(Message.createHeartBeat());
                 _heartBeat = 15;
             }
         }
     }
 
-    public void DungeonHasLoaded() {
+    public void dungeonHasLoaded() {
         System.out.println("CLIENT: Dungeon has finished loading...");
         _dungeonHasLoaded = true;
     }
 
-    public boolean NextTurn() {
-        Update();
+    public boolean nextTurn() {
+        update();
         if (_message != null) {
             if (_message.MessageType == MessageTypes.SYNC_STATE) {
-                if (Settings.Get().clientVerbose) {
-                    DevConsole.Get().Add("CLIENT: Synced:  " + _message.TurnCount + ". Seeding:  " + _message.RngSeed);
+                if (Settings.get().clientVerbose) {
+                    DevConsole.get().add("CLIENT: Synced:  " + _message.TurnCount + ". Seeding:  " + _message.RngSeed);
                 }
-                RNG.Seed(_message.RngSeed);
+                RNG.seed(_message.RngSeed);
                 _heartBeat = 15;
             }
             return _message.MessageType == MessageTypes.SYNC_STATE;
@@ -84,7 +84,7 @@ public class LanClient implements IClient {
         return false;
     }
 
-    private void InitPlayer(int playerIndex, Commands command) {
+    private void initPlayer(int playerIndex, Commands command) {
         if (!_playerStatus.containsKey(playerIndex)) {
             _playerStatus.put(playerIndex, new HashMap<Commands, Boolean>());
         }
@@ -93,49 +93,49 @@ public class LanClient implements IClient {
         }
     }
 
-    public int GetFirstPlayerIndex() {
+    public int getFirstPlayerIndex() {
         return _initialPlayerIndex;
     }
 
-    public void PrepareForNextTurn() {
-        SendMessage(Message.CreateReadyForNextTurn());
+    public void prepareForNextTurn() {
+        sendMessage(Message.createReadyForNextTurn());
     }
 
     // Client <-> Server communication
-    public boolean IsActive(Commands command, int playerIndex) {
+    public boolean isActive(Commands command, int playerIndex) {
         if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
             return _playerStatus.get(playerIndex).get(command);
         }
         return false;
     }
 
-    public void SetState(Commands command, int playerIndex, boolean isActive) {
-        InitPlayer(playerIndex, command);
+    public void setState(Commands command, int playerIndex, boolean isActive) {
+        initPlayer(playerIndex, command);
         if (_playerStatus.get(playerIndex).get(command) != isActive) {
-            if (Settings.Get().clientVerbose) {
+            if (Settings.get().clientVerbose) {
                 System.out.println(String.format("CLIENT: Moves extends  CMD(%s) PI(%s) AC(%s)", command, playerIndex, isActive));
             }
-            SendMessage(Message.CreateMovement(command, playerIndex, isActive));
+            sendMessage(Message.createMovement(command, playerIndex, isActive));
         }
     }
 
     int _playerCount = 0;
 
-    public int GetPlayerCount() {
+    public int getPlayerCount() {
         if (_playerCount == 0) {
-            SendMessage(Message.CreatePlayerCount(0));
-            AwaitReply(MessageTypes.PLAYER_COUNT);
+            sendMessage(Message.createPlayerCount(0));
+            awaitReply(MessageTypes.PLAYER_COUNT);
             _playerCount = _message.PlayerCount;
         }
         return _playerCount;
     }
 
-    public void StartGame() {
-        SendMessage(Message.Create(MessageTypes.START_GAME));
+    public void startGame() {
+        sendMessage(Message.create(MessageTypes.START_GAME));
     }
 
-    private void SendMessage(Message contents) {
-        if (Settings.Get().clientVerbose) {
+    private void sendMessage(Message contents) {
+        if (Settings.get().clientVerbose) {
             System.out.println("CLIENT: Sending message -> " + contents.MessageType);
         }
         contents.PlayerIndex = _initialPlayerIndex;
@@ -145,42 +145,42 @@ public class LanClient implements IClient {
 
     // If the server doesn't reply at some point with the messageType you expect
     // Then the client will hang in an infinite loop.
-    private void AwaitReply(MessageTypes messageType) {
-        if (Settings.Get().clientVerbose) {
+    private void awaitReply(MessageTypes messageType) {
+        if (Settings.get().clientVerbose) {
             System.out.println("CLIENT: Waiting for " + messageType);
         }
         while (true) {
             _message = _comm.readInboundMessage();
             if (_message != null) {
                 if (_message.MessageType == messageType) {
-                    if (Settings.Get().clientVerbose) {
+                    if (Settings.get().clientVerbose) {
                         System.out.println("CLIENT: Right message received");
                     }
                     return;
                 } else {
-                    if (Settings.Get().clientVerbose) {
+                    if (Settings.get().clientVerbose) {
                         System.out.println("CLIENT: Wrong message received:  " + _message.MessageType + "; Expected:  " + messageType);
                     }
-                    HandleResponse(_message);
+                    handleResponse(_message);
                 }
             }
         }
     }
 
-    public void Update() {
+    public void update() {
         _message = _comm.readInboundMessage();
         if (_message != null) {
-            HandleResponse(_message);
+            handleResponse(_message);
         }
     }
 
-    private void HandleResponse(Message contents) {
+    private void handleResponse(Message contents) {
         switch (contents.MessageType) {
             case CONNECT:
-                if (Settings.Get().clientVerbose) {
+                if (Settings.get().clientVerbose) {
                     System.out.println("CLIENT: Handshake successful. Starting player id extends  " + contents.PlayerIndex);
                 }
-                RNG.Seed(contents.RngSeed);
+                RNG.seed(contents.RngSeed);
                 _initialPlayerIndex = (int) contents.PlayerCount;
                 _isConnected = true;
                 break;
@@ -189,20 +189,20 @@ public class LanClient implements IClient {
                 _isGameStarting = true;
                 break;
             case SYNC_STATE:
-                if (Settings.Get().clientVerbose) {
+                if (Settings.get().clientVerbose) {
                     System.out.println("CLIENT: Input state received");
                 }
-                contents.ReadPlayerState(_playerStatus);
+                contents.readPlayerState(_playerStatus);
                 break;
             default:
-                if (Settings.Get().clientVerbose) {
+                if (Settings.get().clientVerbose) {
                     System.out.println("CLIENT: Unknown message type received -> " + _message.MessageType);
                 }
                 break;
         }
     }
 
-    public void Close() {
+    public void close() {
         System.out.println("CLIENT: Shutting down");
     }
 }

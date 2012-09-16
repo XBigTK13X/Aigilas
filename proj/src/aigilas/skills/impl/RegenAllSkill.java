@@ -14,15 +14,15 @@ public class RegenAllSkill extends ISkill {
     {
         super(SkillId.REGEN_ALL, AnimationType.SELF);
 
-        Add(Elements.LIGHT);
-        AddCost(StatType.MANA, 10);
+        add(Elements.LIGHT);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        ApplyToPlayers(Status.Regen);
+    public void activate(ICreature source) {
+        super.activate(source);
+        applyToPlayers(Status.Regen);
 
     }
 

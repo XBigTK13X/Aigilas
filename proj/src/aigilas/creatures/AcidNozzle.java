@@ -9,8 +9,8 @@ import spx.bridge.ActorType;
 public class AcidNozzle extends Minion {
     public AcidNozzle() {
         super(ActorType.MINION, 50f);
-        Add(SkillId.ACID_DRIP);
+        add(SkillId.ACID_DRIP);
         _composition.add(Elements.EARTH);
-        _strategy = StrategyFactory.Create(Strategy.MinionRotate, this);
+        _strategy = StrategyFactory.create(Strategy.MinionRotate, this);
     }
 }

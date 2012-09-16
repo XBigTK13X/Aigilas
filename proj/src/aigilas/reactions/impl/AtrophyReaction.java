@@ -7,9 +7,9 @@ import aigilas.statuses.StatusFactory;
 
 public class AtrophyReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.WeakenStrength);
+        StatusFactory.apply(target, Status.WeakenStrength);
     }
 }

@@ -6,11 +6,11 @@ import aigilas.reactions.IReaction;
 
 public class CraftsmanReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
         try {
-            ItemFactory.CreateRandomPlain(target.GetLocation());
+            ItemFactory.createRandomPlain(target.getLocation());
         } catch (Exception e) {
 
             e.printStackTrace();

@@ -13,11 +13,11 @@ public class Inventory {
         _parent = parent;
     }
 
-    public ICreature GetParent() {
+    public ICreature getParent() {
         return _parent;
     }
 
-    public GenericItem GetNonZeroEntry() {
+    public GenericItem getNonZeroEntry() {
         for (GenericItem key : _contents.keySet()) {
             if (_contents.get(key) > 0) {
                 return key;
@@ -26,8 +26,8 @@ public class Inventory {
         return null;
     }
 
-    public void Add(GenericItem item) {
-        if (Contains(item)) {
+    public void add(GenericItem item) {
+        if (contains(item)) {
             _contents.put(item, _contents.get(item) + 1);
         } else {
             _contents.put(item, 1);
@@ -36,18 +36,18 @@ public class Inventory {
 
     private HashMap<GenericItem, Integer> _itemResult = new HashMap<GenericItem, Integer>();
 
-    public HashMap<GenericItem, Integer> GetItems(ItemClass iClass) {
+    public HashMap<GenericItem, Integer> getItems(ItemClass iClass) {
         _itemResult.clear();
         for (GenericItem key : _contents.keySet()) {
-            if (key.GetItemClass() == iClass) {
+            if (key.getItemClass() == iClass) {
                 _itemResult.put(key, _contents.get(key));
             }
         }
         return _itemResult;
     }
 
-    public void Remove(GenericItem item) {
-        if (Contains(item)) {
+    public void remove(GenericItem item) {
+        if (contains(item)) {
             _contents.put(item, _contents.get(item) - 1);
             if (_contents.get(item) <= -1) {
                 _contents.remove(item);
@@ -55,29 +55,29 @@ public class Inventory {
         }
     }
 
-    public boolean Contains(GenericItem item) {
+    public boolean contains(GenericItem item) {
         return _contents.containsKey(item);
     }
 
-    public int GetItemCount(GenericItem item) {
+    public int getItemCount(GenericItem item) {
         if (_contents.keySet().contains(item)) {
             return _contents.get(item);
         }
         return 0;
     }
 
-    public void DropAll() {
+    public void dropAll() {
         for (GenericItem item : _contents.keySet()) {
             while (_contents.get(item) > 0) {
-                EntityManager.addObject(new GenericItem(item, _parent.GetLocation()));
-                Remove(item);
+                EntityManager.addObject(new GenericItem(item, _parent.getLocation()));
+                remove(item);
             }
         }
     }
 
     float _nonZeroResult;
 
-    public float NonZeroCount() {
+    public float nonZeroCount() {
         _nonZeroResult = 0;
         for (GenericItem item : _contents.keySet()) {
             if (_contents.get(item) > 0) {

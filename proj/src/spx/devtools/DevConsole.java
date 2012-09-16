@@ -17,18 +17,18 @@ public class DevConsole {
         }
 
         @Override
-        public void Draw() {
-            SpxManager.Renderer.DrawString(_contents, _position, Color.WHITE, 1.0f, DrawDepth.DevConsoleText);
+        public void draw() {
+            SpxManager.Renderer.drawString(_contents, _position, Color.WHITE, 1.0f, DrawDepth.DevConsoleText);
         }
 
-        public String GetContent() {
+        public String getContent() {
             return _contents;
         }
     }
 
     private static DevConsole __instance;
 
-    public static DevConsole Get() {
+    public static DevConsole get() {
         if (__instance == null) {
             __instance = new DevConsole();
         }
@@ -44,37 +44,37 @@ public class DevConsole {
     private DevConsole() {
         _bgColor = Color.BLACK;
         _bgColor.a = (byte) 180;
-        _consoleBase = SpxManager.GetMenuBaseAsset();
-        Add("The development console has been started.");
+        _consoleBase = SpxManager.getMenuBaseAsset();
+        add("The development console has been started.");
     }
 
     private int getY(int index) {
         return SpxManager.WindowHeight - (index * margin / 2);
     }
 
-    public void Add(String message) {
+    public void add(String message) {
         if (_index < _contents.length) {
             _contents[_index++] = new ConsoleText(margin, getY(_index), message);
         } else {
             for (int ii = 0; ii < _contents.length - 1; ii++) {
-                _contents[ii] = new ConsoleText(margin, getY(ii), _contents[ii + 1].GetContent());
+                _contents[ii] = new ConsoleText(margin, getY(ii), _contents[ii + 1].getContent());
             }
             _contents[_contents.length - 1] = new ConsoleText(margin, getY(_contents.length - 1), message);
         }
     }
 
-    public void Draw() {
+    public void draw() {
         if (_isVisible) {
-            SpxManager.Renderer.Draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, SpxManager.WindowWidth, SpxManager.WindowHeight);
+            SpxManager.Renderer.draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, SpxManager.WindowWidth, SpxManager.WindowHeight);
             for (int ii = 0; ii < _contents.length; ii++) {
                 if (_contents[ii] != null) {
-                    _contents[ii].Draw();
+                    _contents[ii].draw();
                 }
             }
         }
     }
 
-    public void Toggle() {
+    public void toggle() {
         _isVisible = !_isVisible;
     }
 }

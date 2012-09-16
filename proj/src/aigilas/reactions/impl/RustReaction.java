@@ -5,9 +5,9 @@ import aigilas.reactions.IReaction;
 
 public class RustReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.DestroyRandomItemFromInventory();
+        target.destroyRandomItemFromInventory();
     }
 }

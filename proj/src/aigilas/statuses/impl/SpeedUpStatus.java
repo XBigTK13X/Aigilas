@@ -11,6 +11,6 @@ public class SpeedUpStatus extends IStatus {
     {
         super(target);
         _buff = new StatBuff(StatType.MOVE_COOL_DOWN, 5f);
-        Setup();
+        setup();
     }
 }

@@ -10,12 +10,12 @@ public class MinionCloudStrategy extends IStrategy {
     {
         super(parent, Strategy.MinionCloud);
 
-        parent.SetSkillVector(parent.GetSkillVector());
+        parent.setSkillVector(parent.getSkillVector());
     }
 
     @Override
-    public void Act() {
-        _parent.UseActiveSkill();
-        _parent.SetInactive();
+    public void act() {
+        _parent.useActiveSkill();
+        _parent.setInactive();
     }
 }

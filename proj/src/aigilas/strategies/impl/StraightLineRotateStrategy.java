@@ -17,19 +17,19 @@ public class StraightLineRotateStrategy extends IStrategy {
         super(parent, Strategy.StraightLineRotate);
 
         for (ActorType targetType : targetTypes) {
-            _targets.AddTargetTypes(targetType);
+            _targets.addTargetTypes(targetType);
         }
     }
 
     private Point2 target = new Point2(0, 0);
 
     @Override
-    public void Act() {
-        _parent.MoveIfPossible(_direction.PosX, _direction.PosY);
-        target.Reset(_direction.PosX + _parent.GetLocation().PosX, _direction.PosY + _parent.GetLocation().PosY);
-        if (CoordVerifier.IsBlocked(target) && _parent.IsCooledDown()) {
-            _direction.SetX(RNG.Rand.nextInt(3) - 1);
-            _direction.SetY(RNG.Rand.nextInt(3) - 1);
+    public void act() {
+        _parent.moveIfPossible(_direction.PosX, _direction.PosY);
+        target.reset(_direction.PosX + _parent.getLocation().PosX, _direction.PosY + _parent.getLocation().PosY);
+        if (CoordVerifier.isBlocked(target) && _parent.isCooledDown()) {
+            _direction.setX(RNG.Rand.nextInt(3) - 1);
+            _direction.setY(RNG.Rand.nextInt(3) - 1);
         }
     }
 }

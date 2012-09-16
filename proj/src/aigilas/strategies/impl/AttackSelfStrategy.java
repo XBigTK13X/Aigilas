@@ -13,9 +13,9 @@ public class AttackSelfStrategy extends IStrategy {
     }
 
     @Override
-    public void Act() {
+    public void act() {
         if (AbleToMove()) {
-            _parent.ApplyDamage(1);
+            _parent.applyDamage(1);
         }
     }
 }

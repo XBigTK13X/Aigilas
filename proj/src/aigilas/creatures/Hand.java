@@ -12,6 +12,6 @@ public class Hand extends AbstractCreature {
         Compose(Elements.PHYSICAL);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
         _isBlocking = false;
-        _strategy = StrategyFactory.Create(Strategy.StraightLine, this);
+        _strategy = StrategyFactory.create(Strategy.StraightLine, this);
     }
 }

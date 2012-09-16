@@ -14,16 +14,16 @@ public class VaporCloudSkill extends ISkill {
     {
         super(SkillId.VAPOR_CLOUD, AnimationType.CLOUD);
 
-        Add(Elements.PHYSICAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.PHYSICAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.AddBuff(new StatBuff(StatType.MOVE_COOL_DOWN, -10));
+        target.addBuff(new StatBuff(StatType.MOVE_COOL_DOWN, -10));
 
     }
 

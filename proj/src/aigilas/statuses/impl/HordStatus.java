@@ -11,7 +11,7 @@ public class HordStatus extends IStatus {
     {
         super(target);
 
-        _buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
-        Setup();
+        _buff = new StatBuff(StatType.STRENGTH, target.getInventoryCount());
+        setup();
     }
 }

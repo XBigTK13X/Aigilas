@@ -14,15 +14,15 @@ public class SpawnItemSkill extends ISkill {
     {
         super(SkillId.SPAWN_ITEM, AnimationType.SELF);
 
-        Add(Elements.EARTH);
-        AddCost(StatType.MANA, 10);
+        add(Elements.EARTH);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        ItemFactory.CreateRandomPlain(source.GetLocation());
+    public void activate(ICreature source) {
+        super.activate(source);
+        ItemFactory.createRandomPlain(source.getLocation());
 
     }
 

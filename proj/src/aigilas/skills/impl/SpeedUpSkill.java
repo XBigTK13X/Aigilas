@@ -14,15 +14,15 @@ public class SpeedUpSkill extends ISkill {
     {
         super(SkillId.SPEED_UP, AnimationType.SELF);
 
-        Add(Elements.WATER);
-        AddCost(StatType.MANA, 10);
+        add(Elements.WATER);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        ApplyToPlayers(Status.SpeedUp);
+    public void activate(ICreature source) {
+        super.activate(source);
+        applyToPlayers(Status.SpeedUp);
 
     }
 

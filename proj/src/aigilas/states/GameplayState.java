@@ -8,23 +8,23 @@ import spx.states.State;
 public class GameplayState implements State {
     public GameplayState() {
         System.out.println("Generating the dungeon...");
-        EntityManager.Reset();
-        DungeonFactory.Start();
-        Client.Get().DungeonHasLoaded();
+        EntityManager.reset();
+        DungeonFactory.start();
+        Client.get().dungeonHasLoaded();
     }
 
     @Override
-    public void Update() {
-        EntityManager.Update();
+    public void update() {
+        EntityManager.update();
     }
 
     @Override
-    public void LoadContent() {
-        EntityManager.LoadContent();
+    public void loadContent() {
+        EntityManager.loadContent();
     }
 
     @Override
-    public void Draw() {
-        EntityManager.Draw();
+    public void draw() {
+        EntityManager.draw();
     }
 }

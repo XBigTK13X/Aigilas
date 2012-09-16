@@ -67,18 +67,18 @@ public abstract class ICreature extends Entity implements IActor {
 
     protected ActorType _actorType;
 
-    protected void Setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
+    protected void setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
         _entityType = EntityType.ACTOR;
-        Initialize(location, type.Sprite, EntityType.ACTOR, DrawDepth.Creature);
-        Init(type, stats, creatureClass, setClass);
+        initialize(location, type.Sprite, EntityType.ACTOR, DrawDepth.Creature);
+        init(type, stats, creatureClass, setClass);
     }
 
-    protected void Setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass) {
-        Setup(location, type, stats, creatureClass, true);
+    protected void setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass) {
+        setup(location, type, stats, creatureClass, true);
     }
 
-    protected void Setup(Point2 location, ActorType type, Stats stats) {
-        Setup(location, type, stats, null, true);
+    protected void setup(Point2 location, ActorType type, Stats stats) {
+        setup(location, type, stats, null, true);
     }
 
     protected void SetClass(CreatureClass cClass) {
@@ -86,15 +86,15 @@ public abstract class ICreature extends Entity implements IActor {
             _class = (cClass == null) ? CreatureClass.NULL : cClass;
             _skills = new SkillPool(this);
             if (_actorType != ActorType.PLAYER) {
-                for (SkillId skillId : SkillLogic.GetElementalSkills(GetActorType(), _composition)) {
-                    _skills.Add(skillId);
+                for (SkillId skillId : SkillLogic.getElementalSkills(getActorType(), _composition)) {
+                    _skills.add(skillId);
                 }
             }
-            _skills.Add(_class.GetLevelSkills(_currentLevel));
+            _skills.add(_class.getLevelSkills(_currentLevel));
         }
     }
 
-    private void Init(ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
+    private void init(ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
         if (setClass) {
             SetClass(creatureClass);
         }
@@ -112,82 +112,82 @@ public abstract class ICreature extends Entity implements IActor {
         _maxStats = new Stats(_baseStats);
     }
 
-    public void PickupItem(GenericItem item) {
-        _inventory.Add(item);
-        EntityManager.RemoveObject(item);
+    public void pickupItem(GenericItem item) {
+        _inventory.add(item);
+        EntityManager.removeObject(item);
     }
 
-    public void Equip(GenericItem item) {
-        if (_inventory.GetItemCount(item) > 0 && !_equipment.IsRegistered(item)) {
-            _equipment.Register(item);
-            _inventory.Remove(item);
+    public void equip(GenericItem item) {
+        if (_inventory.getItemCount(item) > 0 && !_equipment.isRegistered(item)) {
+            _equipment.register(item);
+            _inventory.remove(item);
         } else {
-            if (_equipment.IsRegistered(item)) {
-                _equipment.Unregister(item);
+            if (_equipment.isRegistered(item)) {
+                _equipment.unregister(item);
             }
         }
     }
 
-    public void Drop(GenericItem item) {
+    public void drop(GenericItem item) {
         if (item != null) {
 
-            if (_inventory.GetItemCount(item) > 0) {
-                EntityManager.addObject(new GenericItem(item, GetLocation()));
-                _inventory.Remove(item);
+            if (_inventory.getItemCount(item) > 0) {
+                EntityManager.addObject(new GenericItem(item, getLocation()));
+                _inventory.remove(item);
             } else {
-                if (_inventory.GetItemCount(item) == 0) {
-                    _equipment.Unregister(item);
-                    EntityManager.addObject(new GenericItem(item, GetLocation()));
-                    _inventory.Remove(item);
+                if (_inventory.getItemCount(item) == 0) {
+                    _equipment.unregister(item);
+                    EntityManager.addObject(new GenericItem(item, getLocation()));
+                    _inventory.remove(item);
                 }
             }
         }
     }
 
-    public GenericItem DestroyRandomItemFromInventory() {
-        GenericItem item = _inventory.GetNonZeroEntry();
+    public GenericItem destroyRandomItemFromInventory() {
+        GenericItem item = _inventory.getNonZeroEntry();
         if (item != null) {
-            _inventory.Remove(item);
+            _inventory.remove(item);
         }
         return item;
     }
 
-    public boolean IsCooledDown() {
-        return Get(StatType.MOVE_COOL_DOWN) >= GetMax(StatType.MOVE_COOL_DOWN);
+    public boolean isCooledDown() {
+        return get(StatType.MOVE_COOL_DOWN) >= getMax(StatType.MOVE_COOL_DOWN);
     }
 
     @Override
-    public void Update() {
-        _statuses.Update();
-        if (Get(StatType.HEALTH) <= 0) {
+    public void update() {
+        _statuses.update();
+        if (get(StatType.HEALTH) <= 0) {
             _isActive = false;
         }
-        if (_statuses.Allows(CreatureAction.Movement)) {
+        if (_statuses.allows(CreatureAction.Movement)) {
             if (_isPlaying) {
-                if (!IsCooledDown()) {
+                if (!isCooledDown()) {
                     Adjust(StatType.MOVE_COOL_DOWN, 1);
                 } else {
-                    _statuses.Act();
+                    _statuses.act();
                 }
-                Regenerate();
+                regenerate();
             }
             if (_strategy != null) {
-                _strategy.Act();
-                _combo.Update();
+                _strategy.act();
+                _combo.update();
             }
         }
         if (_hudManager != null) {
-            _hudManager.Update();
+            _hudManager.update();
         }
-        _damageText.Update();
+        _damageText.update();
     }
 
-    private void Regenerate() {
-        if (_statuses.Allows(CreatureAction.Regeneration)) {
+    private void regenerate() {
+        if (_statuses.allows(CreatureAction.Regeneration)) {
             for (StatType stat : StatType.values()) {
                 if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN) {
-                    if (_baseStats.GetRaw(stat) < _maxStats.GetRaw(stat)) {
-                        Adjust(stat, _baseStats.Get(StatType.REGEN) / 50);
+                    if (_baseStats.getRaw(stat) < _maxStats.getRaw(stat)) {
+                        Adjust(stat, _baseStats.get(StatType.REGEN) / 50);
                     }
                 }
             }
@@ -195,149 +195,149 @@ public abstract class ICreature extends Entity implements IActor {
     }
 
     @Override
-    public void Draw() {
-        super.Draw();
+    public void draw() {
+        super.draw();
         if (_hudManager != null) {
-            _hudManager.Draw();
+            _hudManager.draw();
         }
-        _combo.Draw();
-        _damageText.Draw();
+        _combo.draw();
+        _damageText.draw();
     }
 
-    public void Write(String text) {
-        _damageText.WriteAction(text, 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
+    public void write(String text) {
+        _damageText.writeAction(text, 30, IntStorage.get(getLocation().PosCenterX), IntStorage.get(getLocation().PosCenterY));
     }
 
-    public boolean ToggleInventoryVisibility() {
+    public boolean toggleInventoryVisibility() {
         if (_hudManager != null) {
-            return _hudManager.ToggleInventory();
+            return _hudManager.toggleInventory();
         }
         return false;
     }
 
-    public void SetPlaying(boolean isPlaying) {
+    public void setPlaying(boolean isPlaying) {
         _isPlaying = isPlaying;
     }
 
-    public boolean IsPlaying() {
+    public boolean isPlaying() {
         return _isPlaying;
     }
 
-    public float Get(StatType stat) {
-        return _baseStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
+    public float get(StatType stat) {
+        return _baseStats.get(stat) + calculateEquipmentBonus(stat) + calculateInstrinsicBonus(stat);
     }
 
-    private float GetRaw(StatType stat, boolean isMax) {
-        return isMax ? _maxStats.GetRaw(stat) : _baseStats.GetRaw(stat);
+    private float getRaw(StatType stat, boolean isMax) {
+        return isMax ? _maxStats.getRaw(stat) : _baseStats.getRaw(stat);
     }
 
-    private float GetRaw(StatType stat) {
-        return GetRaw(stat, false);
+    private float getRaw(StatType stat) {
+        return getRaw(stat, false);
     }
 
-    private float CalculateInstrinsicBonus(StatType stat) {
+    private float calculateInstrinsicBonus(StatType stat) {
         if (_class == null) {
             return 0;
         }
-        return _class.GetBonus(_currentLevel, stat);
+        return _class.getBonus(_currentLevel, stat);
     }
 
-    private float CalculateEquipmentBonus(StatType stat) {
+    private float calculateEquipmentBonus(StatType stat) {
         if (_equipment != null) {
-            return _equipment.CalculateBonus(stat);
+            return _equipment.calculateBonus(stat);
         }
         return 0;
     }
 
-    public float GetMax(StatType stat) {
-        return (int) _maxStats.Get(stat) + CalculateEquipmentBonus(stat) + CalculateInstrinsicBonus(stat);
+    public float getMax(StatType stat) {
+        return (int) _maxStats.get(stat) + calculateEquipmentBonus(stat) + calculateInstrinsicBonus(stat);
     }
 
-    public float SetBase(StatType stat, float value) {
-        return _baseStats.Set(stat, value);
+    public float setBase(StatType stat, float value) {
+        return _baseStats.set(stat, value);
     }
 
-    public float SetMax(StatType stat, float value) {
-        return _maxStats.Set(stat, value);
+    public float setMax(StatType stat, float value) {
+        return _maxStats.set(stat, value);
     }
 
-    public float Set(StatType stat, float value, boolean setMax) {
-        return setMax ? SetMax(stat, value) : SetBase(stat, value);
+    public float set(StatType stat, float value, boolean setMax) {
+        return setMax ? setMax(stat, value) : setBase(stat, value);
     }
 
-    public float Set(StatType stat, float value) {
-        return Set(stat, value, false);
+    public float set(StatType stat, float value) {
+        return set(stat, value, false);
     }
 
     protected void InitStat(StatType stat, float value) {
-        _maxStats.Set(stat, value);
-        _baseStats.Set(stat, value);
+        _maxStats.set(stat, value);
+        _baseStats.set(stat, value);
     }
 
-    public int GetPlayerIndex() {
+    public int getPlayerIndex() {
         return _playerIndex;
     }
 
     @Override
-    public ActorType GetActorType() {
+    public ActorType getActorType() {
         return _actorType;
     }
 
     protected float Adjust(StatType stat, float adjustment, boolean adjustMax) {
-        float result = GetRaw(stat) + adjustment;
+        float result = getRaw(stat) + adjustment;
         if (!adjustMax) {
-            if (result > GetMax(stat)) {
-                result = GetMax(stat);
+            if (result > getMax(stat)) {
+                result = getMax(stat);
             }
         }
-        return Set(stat, (result), adjustMax);
+        return set(stat, (result), adjustMax);
     }
 
     protected float Adjust(StatType stat, float adjustment) {
         return Adjust(stat, adjustment, false);
     }
 
-    public void ApplyDamage(float damage, ICreature attacker, boolean showDamage, StatType statType) {
+    public void applyDamage(float damage, ICreature attacker, boolean showDamage, StatType statType) {
         if (attacker != null) {
-            attacker.PassOn(this, StatusComponent.Contagion);
-            this.PassOn(attacker, StatusComponent.Passive);
+            attacker.passOn(this, StatusComponent.Contagion);
+            this.passOn(attacker, StatusComponent.Passive);
         }
         if (statType == null) {
-            damage -= _baseStats.Get(StatType.DEFENSE);
+            damage -= _baseStats.get(StatType.DEFENSE);
         }
         if (damage <= 0 && statType == null) {
             damage = 0;
         }
         if (showDamage) {
-            _damageText.WriteAction(StringStorage.Get(damage), 30, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosCenterY));
+            _damageText.writeAction(StringStorage.get(damage), 30, IntStorage.get(getLocation().PosCenterX), IntStorage.get(getLocation().PosCenterY));
         }
-        if (damage > 0 && statType == null && _statuses.Allows(CreatureAction.ReceiveHealing)) {
+        if (damage > 0 && statType == null && _statuses.allows(CreatureAction.ReceiveHealing)) {
             Adjust((statType == null) ? StatType.HEALTH : statType, -damage);
         }
-        if (Get(StatType.HEALTH) <= 0) {
+        if (get(StatType.HEALTH) <= 0) {
             _isActive = false;
             if (attacker != null) {
-                attacker.AddExperience(CalculateExperience());
-                attacker.PassOn(attacker, StatusComponent.KillReward);
+                attacker.addExperience(calculateExperience());
+                attacker.passOn(attacker, StatusComponent.KillReward);
             }
         }
     }
 
-    public void ApplyDamage(float damage, ICreature attacker, boolean showDamage) {
-        ApplyDamage(damage, attacker, showDamage, null);
+    public void applyDamage(float damage, ICreature attacker, boolean showDamage) {
+        applyDamage(damage, attacker, showDamage, null);
     }
 
-    public void ApplyDamage(float damage, ICreature attacker) {
-        ApplyDamage(damage, attacker, true, null);
+    public void applyDamage(float damage, ICreature attacker) {
+        applyDamage(damage, attacker, true, null);
     }
 
-    public void ApplyDamage(float damage) {
-        ApplyDamage(damage, null, true, null);
+    public void applyDamage(float damage) {
+        applyDamage(damage, null, true, null);
     }
 
-    public boolean LowerStat(StatType stat, float amount) {
+    public boolean lowerStat(StatType stat, float amount) {
         if (amount != 0) {
-            if (Get(stat) >= amount) {
+            if (get(stat) >= amount) {
                 Adjust(stat, -amount);
                 return true;
             }
@@ -346,74 +346,74 @@ public abstract class ICreature extends Entity implements IActor {
         return true;
     }
 
-    public void AddBuff(StatBuff buff, boolean applyToMax) {
+    public void addBuff(StatBuff buff, boolean applyToMax) {
         if (!applyToMax) {
-            _baseStats.AddBuff(buff);
+            _baseStats.addBuff(buff);
         } else {
-            _maxStats.AddBuff(buff);
+            _maxStats.addBuff(buff);
         }
     }
 
-    public void AddBuff(StatBuff buff) {
-        AddBuff(buff, false);
+    public void addBuff(StatBuff buff) {
+        addBuff(buff, false);
     }
 
     protected float CalculateDamage() {
-        return Get(StatType.STRENGTH);
+        return get(StatType.STRENGTH);
     }
 
     private final Point2 target = new Point2(0, 0);
     private final List<ICreature> creatures = new ArrayList<ICreature>();
 
-    public void MoveIfPossible(float xVel, float yVel) {
+    public void moveIfPossible(float xVel, float yVel) {
 
-        if (_statuses.Allows(CreatureAction.Movement)) {
-            if ((xVel != 0 || yVel != 0) && IsCooledDown()) {
-                target.Reset(xVel + GetLocation().PosX, yVel + GetLocation().PosY);
-                if (!IsBlocking() || !CoordVerifier.IsBlocked(target)) {
-                    Move(xVel, yVel);
-                    Set(StatType.MOVE_COOL_DOWN, 0);
+        if (_statuses.allows(CreatureAction.Movement)) {
+            if ((xVel != 0 || yVel != 0) && isCooledDown()) {
+                target.reset(xVel + getLocation().PosX, yVel + getLocation().PosY);
+                if (!isBlocking() || !CoordVerifier.isBlocked(target)) {
+                    move(xVel, yVel);
+                    set(StatType.MOVE_COOL_DOWN, 0);
                 }
-                if (_statuses.Allows(CreatureAction.Attacking)) {
+                if (_statuses.allows(CreatureAction.Attacking)) {
                     creatures.clear();
-                    for (IActor actor : EntityManager.GetActorsAt(target)) {
+                    for (IActor actor : EntityManager.getActorsAt(target)) {
                         creatures.add((ICreature) actor);
                     }
                     if (creatures.size() > 0) {
                         for (ICreature creature : creatures) {
                             if (creature != this) {
-                                if ((creature.GetActorType() != ActorType.PLAYER && _actorType == ActorType.PLAYER) || (creature.GetActorType() == ActorType.PLAYER && _actorType != ActorType.PLAYER) || !_statuses.Allows(CreatureAction.WontHitNonTargets)) {
-                                    creature.ApplyDamage(CalculateDamage(), this);
-                                    if (!creature.IsActive()) {
-                                        AddExperience(creature.CalculateExperience());
+                                if ((creature.getActorType() != ActorType.PLAYER && _actorType == ActorType.PLAYER) || (creature.getActorType() == ActorType.PLAYER && _actorType != ActorType.PLAYER) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
+                                    creature.applyDamage(CalculateDamage(), this);
+                                    if (!creature.isActive()) {
+                                        addExperience(creature.calculateExperience());
                                     }
                                 }
                             }
                         }
-                        Set(StatType.MOVE_COOL_DOWN, 0);
+                        set(StatType.MOVE_COOL_DOWN, 0);
                     }
                 }
             }
         }
     }
 
-    public void MoveTo(Point2 targetPosition) {
-        MoveIfPossible(targetPosition.PosX - GetLocation().PosX, targetPosition.PosY - GetLocation().PosY);
+    public void moveTo(Point2 targetPosition) {
+        moveIfPossible(targetPosition.PosX - getLocation().PosX, targetPosition.PosY - getLocation().PosY);
     }
 
-    public Point2 GetSkillVector() {
+    public Point2 getSkillVector() {
         if (null == _skillVector) {
             return null;
         }
         return _skillVector;
     }
 
-    public void SetSkillVector(Point2 skillVector) {
-        _skillVector.SetX(skillVector.X);
-        _skillVector.SetY(skillVector.Y);
+    public void setSkillVector(Point2 skillVector) {
+        _skillVector.setX(skillVector.X);
+        _skillVector.setY(skillVector.Y);
     }
 
-    public void AddExperience(float amount) {
+    public void addExperience(float amount) {
 
         while (amount > 0) {
             float diff = amount;
@@ -429,160 +429,160 @@ public abstract class ICreature extends Entity implements IActor {
                 _experience = 0;
                 _currentLevel++;
                 if (_class != null) {
-                    _skills.Add(_class.GetLevelSkills(_currentLevel));
+                    _skills.add(_class.getLevelSkills(_currentLevel));
                 }
-                TextManager.Add(new ActionText("LEVEL UP!", 100, (int) GetLocation().PosX, (int) GetLocation().PosY));
+                TextManager.add(new ActionText("LEVEL UP!", 100, (int) getLocation().PosX, (int) getLocation().PosY));
             }
         }
     }
 
-    public float CalculateExperience() {
-        return _currentLevel + _baseStats.GetSum();
+    public float calculateExperience() {
+        return _currentLevel + _baseStats.getSum();
     }
 
-    public void CycleActiveSkill(int velocity) {
-        if (_statuses.Allows(CreatureAction.SkillCycle)) {
-            _skills.Cycle(velocity);
+    public void cycleActiveSkill(int velocity) {
+        if (_statuses.allows(CreatureAction.SkillCycle)) {
+            _skills.cycle(velocity);
         }
     }
 
-    public String GetActiveSkillName() {
-        return _skills.GetActiveName();
+    public String getActiveSkillName() {
+        return _skills.getActiveName();
     }
 
     float lastSum = 0;
 
-    public void UseActiveSkill() {
-        if (_statuses.Allows(CreatureAction.SkillUsage)) {
-            lastSum = _baseStats.GetSum();
-            _skills.UseActive();
-            if (lastSum != _baseStats.GetSum()) {
-                _damageText.WriteAction(GetActiveSkillName(), 40, IntStorage.Get(GetLocation().PosCenterX), IntStorage.Get(GetLocation().PosY));
+    public void useActiveSkill() {
+        if (_statuses.allows(CreatureAction.SkillUsage)) {
+            lastSum = _baseStats.getSum();
+            _skills.useActive();
+            if (lastSum != _baseStats.getSum()) {
+                _damageText.writeAction(getActiveSkillName(), 40, IntStorage.get(getLocation().PosCenterX), IntStorage.get(getLocation().PosY));
             }
         }
     }
 
-    public TargetSet GetTargets() {
+    public TargetSet getTargets() {
         if (_strategy == null) {
-            return _master.GetTargets();
+            return _master.getTargets();
         }
-        return _strategy.GetTargets();
+        return _strategy.getTargets();
     }
 
-    private StatType GetLowestStat() {
+    private StatType getLowestStat() {
         StatType result = StatType.AGE;
         float min = Float.MAX_VALUE;
         List<StatType> possibleStats = new ArrayList<>();
         for (StatType stat : StatType.values()) {
-            if (Get(stat) < min && stat != StatType.AGE && stat != StatType.MOVE_COOL_DOWN && stat != StatType.PIETY) {
+            if (get(stat) < min && stat != StatType.AGE && stat != StatType.MOVE_COOL_DOWN && stat != StatType.PIETY) {
                 possibleStats.add(stat);
             }
         }
         for (StatType stat : possibleStats) {
             result = stat;
-            min = Get(stat);
+            min = get(stat);
         }
         return result;
     }
 
-    public void Sacrifice(God god, GenericItem sacrifice) {
+    public void sacrifice(God god, GenericItem sacrifice) {
         AssignGod(god);
-        Adjust(StatType.PIETY, sacrifice.Modifers.GetSum() * ((_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1), true);
-        Adjust(StatType.PIETY, sacrifice.Modifers.GetSum() * ((_god.IsGoodSacrifice(sacrifice.GetItemClass())) ? 3 : 1) * ((_god.IsBadSacrifice(sacrifice.GetItemClass())) ? -2 : 1));
-        sacrifice.SetInactive();
+        Adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1), true);
+        Adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1));
+        sacrifice.setInactive();
     }
 
     static final int pietyCost = 500;
 
-    public void Pray(God god) {
+    public void pray(God god) {
         AssignGod(god);
-        if (Get(StatType.PIETY) >= pietyCost) {
-            StatType lowest = GetLowestStat();
-            float adjustment = (Get(StatType.PIETY) / 100);
-            Set(lowest, GetMax(lowest) + adjustment);
-            Set(lowest, adjustment, true);
+        if (get(StatType.PIETY) >= pietyCost) {
+            StatType lowest = getLowestStat();
+            float adjustment = (get(StatType.PIETY) / 100);
+            set(lowest, getMax(lowest) + adjustment);
+            set(lowest, adjustment, true);
             Adjust(StatType.PIETY, -pietyCost);
-            if (Get(StatType.PIETY) < 0) {
-                Set(StatType.PIETY, 0);
+            if (get(StatType.PIETY) < 0) {
+                set(StatType.PIETY, 0);
             }
         }
-        PerformInteraction();
+        performInteraction();
     }
 
     protected void AssignGod(God god) {
         if (_god != god && _god != null) {
-            ApplyDamage(Get(StatType.PIETY));
-            Set(StatType.PIETY, 0);
-            SetClass(god.GetClass());
+            applyDamage(get(StatType.PIETY));
+            set(StatType.PIETY, 0);
+            SetClass(god.getCreatureClass());
         }
         _god = god;
     }
 
-    public void Combo(List<Elements> attack) {
+    public void combo(List<Elements> attack) {
         for (Elements element : attack) {
-            _combo.Add(element);
+            _combo.add(element);
         }
     }
 
-    public void AddStatus(IStatus status) {
-        _statuses.Add(status);
+    public void addStatus(IStatus status) {
+        _statuses.add(status);
     }
 
-    public void PassOn(ICreature target, StatusComponent componentType) {
-        _statuses.PassOn(target, componentType);
+    public void passOn(ICreature target, StatusComponent componentType) {
+        _statuses.passOn(target, componentType);
     }
 
-    public void SetStrategy(IStrategy strategy) {
+    public void setStrategy(IStrategy strategy) {
         _strategy = strategy;
     }
 
-    public Strategy GetStrategyId() {
-        return _strategy.GetId();
+    public Strategy getStrategyId() {
+        return _strategy.getId();
     }
 
-    public float GetInventoryCount() {
-        return _inventory.NonZeroCount();
+    public float getInventoryCount() {
+        return _inventory.nonZeroCount();
     }
 
-    public void RemoveLeastUsedSkill() {
-        _skills.RemoveLeastUsed();
+    public void removeLeastUsedSkill() {
+        _skills.removeLeastUsed();
     }
 
-    public void React(SkillId skillId) {
+    public void react(SkillId skillId) {
         if (_actorType == ActorType.PLAYER && skillId != SkillId.FORGET_SKILL && _god.Id == GodId.GLUTTONY) {
-            if (_skills.Count() < _currentLevel) {
-                _skills.Add(skillId);
+            if (_skills.count() < _currentLevel) {
+                _skills.add(skillId);
             }
         }
     }
 
     @Override
-    public void PerformInteraction() {
-        SetInteracting(false);
-        Input.Lock(Commands.Confirm, GetPlayerIndex());
+    public void performInteraction() {
+        setInteracting(false);
+        Input.lock(Commands.Confirm, getPlayerIndex());
     }
 
-    public void MarkHotSkill(Commands hotSkillSlot) {
-        _skills.MakeActiveSkillHot(hotSkillSlot);
+    public void markHotSkill(Commands hotSkillSlot) {
+        _skills.makeActiveSkillHot(hotSkillSlot);
     }
 
-    public boolean SetHotSkillActive(Commands hotkey) {
-        return _skills.SetHotSkillsActive(hotkey);
+    public boolean setHotSkillActive(Commands hotkey) {
+        return _skills.setHotSkillsActive(hotkey);
     }
 
-    public String GetHotSkillName(Commands hotSkillSlot) {
-        return _skills.GetHotSkillName(hotSkillSlot);
+    public String getHotSkillName(Commands hotSkillSlot) {
+        return _skills.getHotSkillName(hotSkillSlot);
     }
 
-    public List<ActorType> GetTargetActorTypes() {
-        return _strategy.GetTargetActorTypes();
+    public List<ActorType> getTargetActorTypes() {
+        return _strategy.getTargetActorTypes();
     }
 
-    public float GetCurrentSkillCost() {
-        return _skills.GetCurrentCost();
+    public float getCurrentSkillCost() {
+        return _skills.getCurrentCost();
     }
 
-    public SkillId GetActiveSkill() {
-        return _skills.GetActive();
+    public SkillId getActiveSkill() {
+        return _skills.getActive();
     }
 }

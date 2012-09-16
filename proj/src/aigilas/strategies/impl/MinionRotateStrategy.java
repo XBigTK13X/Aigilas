@@ -12,16 +12,16 @@ public class MinionRotateStrategy extends IStrategy {
     {
         super(parent, Strategy.MinionRotate);
         // TODO pass master into strategy to copy targets here.
-        parent.SetSkillVector(new Point2(1, 0));
+        parent.setSkillVector(new Point2(1, 0));
     }
 
     @Override
-    public void Act() {
-        if (_parent.IsCooledDown()) {
-            _parent.SetSkillVector(_parent.GetSkillVector().RotateClockwise());
-            _parent.UseActiveSkill();
-            _parent.ApplyDamage(5, null, false);
-            _parent.Set(StatType.MOVE_COOL_DOWN, 0);
+    public void act() {
+        if (_parent.isCooledDown()) {
+            _parent.setSkillVector(_parent.getSkillVector().rotateClockwise());
+            _parent.useActiveSkill();
+            _parent.applyDamage(5, null, false);
+            _parent.set(StatType.MOVE_COOL_DOWN, 0);
         }
     }
 }

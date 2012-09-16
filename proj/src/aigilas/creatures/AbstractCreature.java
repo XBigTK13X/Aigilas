@@ -28,18 +28,18 @@ public class AbstractCreature extends ICreature {
         this(actorType, SpriteType.CREATURE, null);
     }
 
-    public void Setup(Point2 position) {
-        Setup(position, _actorType, _baseStats, _class);
+    public void setup(Point2 position) {
+        setup(position, _actorType, _baseStats, _class);
         if (_strategy == null) {
-            _strategy = StrategyFactory.Create(Strategy.Attack, this, ActorType.PLAYER);
+            _strategy = StrategyFactory.create(Strategy.Attack, this, ActorType.PLAYER);
         }
     }
 
-    protected void Add(SkillId skillId) {
+    protected void add(SkillId skillId) {
         if (_skills == null) {
             _skills = new SkillPool(this);
         }
-        _skills.Add(skillId);
+        _skills.add(skillId);
     }
 
     float multiplier = 0f;
@@ -47,14 +47,14 @@ public class AbstractCreature extends ICreature {
     protected void Strengths(StatType... stats) {
         for (StatType stat : stats) {
             multiplier = (stat == StatType.MOVE_COOL_DOWN) ? .5f : 2;
-            InitStat(stat, Get(stat) * multiplier);
+            InitStat(stat, get(stat) * multiplier);
         }
     }
 
     protected void Weaknesses(StatType... stats) {
         for (StatType stat : stats) {
             multiplier = (stat == StatType.MOVE_COOL_DOWN) ? 2 : .5f;
-            InitStat(stat, Get(stat) * multiplier);
+            InitStat(stat, get(stat) * multiplier);
         }
     }
 

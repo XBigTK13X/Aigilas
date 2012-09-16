@@ -7,9 +7,9 @@ import aigilas.statuses.StatusFactory;
 
 public class PurifyReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.PreventDarkUsage);
+        StatusFactory.apply(target, Status.PreventDarkUsage);
     }
 }

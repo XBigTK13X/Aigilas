@@ -10,6 +10,6 @@ public class BerserkStatus extends IStatus {
 
     {
         super(target);
-        Add(Status.RandomBuff, StatusComponent.KillReward);
+        add(Status.RandomBuff, StatusComponent.KillReward);
     }
 }

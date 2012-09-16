@@ -17,42 +17,42 @@ public class TestBotStrategy extends IStrategy {
     public TestBotStrategy(ICreature parent) {
         super(parent, Strategy.TestBot);
 
-        _targets.AddTargetTypes(ActorType.NONPLAYER);
+        _targets.addTargetTypes(ActorType.NONPLAYER);
     }
 
     private IEntity _stairsTarget;
 
     @Override
-    public void Act() {
-        if (RNG.Next(0, 1000) == 2) {
-            _parent.CycleActiveSkill(1);
+    public void act() {
+        if (RNG.next(0, 1000) == 2) {
+            _parent.cycleActiveSkill(1);
         }
-        if (RNG.Next(0, 100) <= 1) {
-            _parent.UseActiveSkill();
+        if (RNG.next(0, 100) <= 1) {
+            _parent.useActiveSkill();
         }
         if (AbleToMove()) {
-            if (SkillLogic.IsSkill(_parent.GetActiveSkill(), AnimationType.RANGED)) {
+            if (SkillLogic.isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
                 if (opponent != null) {
-                    _parent.SetSkillVector(CalculateTargetVector(_parent.GetLocation(), opponent.GetLocation()));
+                    _parent.setSkillVector(CalculateTargetVector(_parent.getLocation(), opponent.getLocation()));
                 }
-                if (_parent.GetSkillVector().GridX != 0 || _parent.GetSkillVector().GridY != 0) {
-                    _parent.UseActiveSkill();
+                if (_parent.getSkillVector().GridX != 0 || _parent.getSkillVector().GridY != 0) {
+                    _parent.useActiveSkill();
                 }
             }
-            if (targetPath.HasMoves()) {
-                nextMove.Copy(targetPath.GetNextMove());
-                _parent.MoveTo(nextMove);
-                if (_stairsTarget != null && HitTest.IsTouching(_parent, _stairsTarget)) {
-                    _parent.SetInteracting(true);
+            if (targetPath.hasMoves()) {
+                nextMove.copy(targetPath.getNextMove());
+                _parent.moveTo(nextMove);
+                if (_stairsTarget != null && HitTest.isTouching(_parent, _stairsTarget)) {
+                    _parent.setInteracting(true);
                 } else {
-                    _parent.SetInteracting(false);
+                    _parent.setInteracting(false);
                 }
             }
         } else {
-            if ((targetPath == null || !targetPath.HasMoves()) && EntityManager.GetObjects(EntityType.ACTOR).size() == 1) {
-                _stairsTarget = EntityManager.GetObject(EntityType.DOWNSTAIRS);
+            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.getObjects(EntityType.ACTOR).size() == 1) {
+                _stairsTarget = EntityManager.getObject(EntityType.DOWNSTAIRS);
                 if (_stairsTarget != null) {
-                    targetPath.Copy(PathFinder.FindNextMove(_parent.GetLocation(), _stairsTarget.GetLocation()));
+                    targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), _stairsTarget.getLocation()));
                 }
             }
         }

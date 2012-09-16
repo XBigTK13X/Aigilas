@@ -9,8 +9,8 @@ import spx.bridge.ActorType;
 public class Explosion extends Minion {
     public Explosion() {
         super(ActorType.MINION);
-        _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
-        Add(SkillId.EXPLODE);
+        _strategy = StrategyFactory.create(Strategy.MinionOneUse, this);
+        add(SkillId.EXPLODE);
         _composition.add(Elements.FIRE);
     }
 }

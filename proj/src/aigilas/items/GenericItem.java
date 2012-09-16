@@ -21,12 +21,12 @@ public class GenericItem extends Entity {
 
     private static final String __spacingCharacter = " ";
 
-    public ItemClass GetItemClass() {
+    public ItemClass getItemClass() {
         return _type.Category;
     }
 
-    private void Initialize(String suffix, String prefix, ItemName type, Slots targetSlots, Stats modifiers, Point2 location) {
-        Setup(location, type);
+    private void initialize(String suffix, String prefix, ItemName type, Slots targetSlots, Stats modifiers, Point2 location) {
+        setup(location, type);
         _suffix = suffix;
         _prefix = prefix;
         _type = type;
@@ -36,7 +36,7 @@ public class GenericItem extends Entity {
     }
 
     public GenericItem(GenericItem item, Point2 location) {
-        Initialize(item._suffix, item._prefix, item._type, item._targetSlots, item.Modifers, location);
+        initialize(item._suffix, item._prefix, item._type, item._targetSlots, item.Modifers, location);
     }
 
     public GenericItem(Stats modifiers, String suffix, String prefix, ItemName type, Point2 location, boolean onGround) {
@@ -48,29 +48,29 @@ public class GenericItem extends Entity {
                 e.printStackTrace();
             }
         }
-        Initialize(_suffix, _prefix, type, type.Slots, modifiers, location);
+        initialize(_suffix, _prefix, type, type.Slots, modifiers, location);
     }
 
     public GenericItem(Stats modifiers, String suffix, String prefix, ItemName type, Point2 location) {
         this(modifiers, suffix, prefix, type, location, true);
     }
 
-    protected void Setup(Point2 location, ItemName type) {
-        Initialize(location, type.Sprite, EntityType.ITEM, DrawDepth.Item);
+    protected void setup(Point2 location, ItemName type) {
+        initialize(location, type.Sprite, EntityType.ITEM, DrawDepth.Item);
     }
 
     private Player _currentTarget;
 
     @Override
-    public void Update() {
-        super.Update();
+    public void update() {
+        super.update();
         if (_isOnBoard) {
-            IActor collider = EntityManager.GetTouchingCreature(this);
-            if (collider != null && collider.GetActorType() == ActorType.PLAYER) {
+            IActor collider = EntityManager.getTouchingCreature(this);
+            if (collider != null && collider.getActorType() == ActorType.PLAYER) {
                 _currentTarget = (Player) collider;
                 if (_currentTarget != null) {
-                    if (_currentTarget.IsInteracting()) {
-                        _currentTarget.PickupItem(this);
+                    if (_currentTarget.isInteracting()) {
+                        _currentTarget.pickupItem(this);
                     }
                 }
             }
@@ -85,7 +85,7 @@ public class GenericItem extends Entity {
                 return false;
             }
             for (StatType stat : StatType.values()) {
-                if (Modifers.Get(stat) != gI.Modifers.Get(stat)) {
+                if (Modifers.get(stat) != gI.Modifers.get(stat)) {
                     return false;
                 }
             }
@@ -99,7 +99,7 @@ public class GenericItem extends Entity {
         return Name.hashCode() + Modifers.hashCode();
     }
 
-    public float GetStatBonus(StatType stat) {
-        return Modifers.Get(stat);
+    public float getStatBonus(StatType stat) {
+        return Modifers.get(stat);
     }
 }

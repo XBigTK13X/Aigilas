@@ -15,17 +15,17 @@ public class StealItemSkill extends ISkill {
     {
         super(SkillId.STEAL_ITEM, AnimationType.ROTATE);
 
-        Add(Elements.WATER, Elements.AIR);
-        AddCost(StatType.MANA, 10);
+        add(Elements.WATER, Elements.AIR);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
         if (RNG.Rand.nextInt(100) > 0) {
-            _source.PickupItem(ItemFactory.CreateRandomPlain());
+            _source.pickupItem(ItemFactory.createRandomPlain());
 
         }
 

@@ -15,16 +15,16 @@ public class WeakKneesSkill extends ISkill {
     {
         super(SkillId.WEAK_KNEEES, AnimationType.RANGED);
 
-        Add(Elements.PHYSICAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.PHYSICAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.WeakKnees);
+        StatusFactory.apply(target, Status.WeakKnees);
 
     }
 

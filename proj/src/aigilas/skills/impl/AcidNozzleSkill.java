@@ -13,13 +13,13 @@ public class AcidNozzleSkill extends ISkill {
     {
         super(SkillId.ACID_NOZZLE, AnimationType.STATIONARY);
 
-        AddCost(StatType.MANA, 10);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        CreatureFactory.CreateMinion(_implementationId, source);
+    public void activate(ICreature source) {
+        CreatureFactory.createMinion(_implementationId, source);
 
     }
 

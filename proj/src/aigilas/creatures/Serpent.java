@@ -11,6 +11,6 @@ public class Serpent extends AbstractCreature {
         super(ActorType.SERPENT, SpriteType.SLOTH);
         Compose(Elements.EARTH);
         Strengths(StatType.HEALTH, StatType.HEALTH, StatType.HEALTH);
-        _strategy = StrategyFactory.Create(Strategy.ConfusedAndDying, this);
+        _strategy = StrategyFactory.create(Strategy.ConfusedAndDying, this);
     }
 }

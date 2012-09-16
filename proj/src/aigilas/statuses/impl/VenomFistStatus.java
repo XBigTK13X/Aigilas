@@ -11,6 +11,6 @@ public class VenomFistStatus extends IStatus {
     {
         super(target);
 
-        Add(Status.Poison, StatusComponent.Contagion);
+        add(Status.Poison, StatusComponent.Contagion);
     }
 }

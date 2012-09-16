@@ -15,16 +15,16 @@ public class MutinySkill extends ISkill {
     {
         super(SkillId.MUTINY, AnimationType.RANGED);
 
-        Add(Elements.MENTAL, Elements.PHYSICAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL, Elements.PHYSICAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.Mutiny);
+        StatusFactory.apply(target, Status.Mutiny);
 
     }
 

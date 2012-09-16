@@ -9,9 +9,9 @@ public class RegenStatus extends IStatus {
     }
 
     @Override
-    public void Update() {
+    public void update() {
 
-        super.Update();
-        _target.ApplyDamage(-1f);
+        super.update();
+        _target.applyDamage(-1f);
     }
 }

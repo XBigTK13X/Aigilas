@@ -7,9 +7,9 @@ import aigilas.statuses.StatusFactory;
 
 public class DrenchReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.SoakingWet);
+        StatusFactory.apply(target, Status.SoakingWet);
     }
 }

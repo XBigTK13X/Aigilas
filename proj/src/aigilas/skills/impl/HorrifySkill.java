@@ -15,16 +15,16 @@ public class HorrifySkill extends ISkill {
     {
         super(SkillId.HORRIFY, AnimationType.RANGED);
 
-        Add(Elements.DARK, Elements.FIRE);
-        AddCost(StatType.MANA, 10);
+        add(Elements.DARK, Elements.FIRE);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.Flee);
+        StatusFactory.apply(target, Status.Flee);
 
     }
 

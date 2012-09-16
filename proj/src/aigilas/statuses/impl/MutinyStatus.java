@@ -16,15 +16,15 @@ public class MutinyStatus extends IStatus {
     }
 
     @Override
-    public void Setup() {
-        super.Setup();
-        previousStrategy = _target.GetStrategyId();
-        _target.SetStrategy(StrategyFactory.Create(Strategy.Mutiny, _target));
+    public void setup() {
+        super.setup();
+        previousStrategy = _target.getStrategyId();
+        _target.setStrategy(StrategyFactory.create(Strategy.Mutiny, _target));
     }
 
     @Override
-    public void Cleanup() {
-        super.Cleanup();
-        _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+    public void cleanup() {
+        super.cleanup();
+        _target.setStrategy(StrategyFactory.create(previousStrategy, _target));
     }
 }

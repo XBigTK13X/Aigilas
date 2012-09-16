@@ -13,19 +13,19 @@ public class AbsorbSkill extends ISkill {
     {
         super(SkillId.ABSORB, AnimationType.RANGED);
 
-        Add(Elements.LIGHT);
-        AddCost(StatType.MANA, 10);
+        add(Elements.LIGHT);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(10, _source);
-        _source.ApplyDamage(-10);
-        target.ApplyDamage(10, _source, true, StatType.MANA);
-        _source.ApplyDamage(-10, _source, true, StatType.MANA);
+        target.applyDamage(10, _source);
+        _source.applyDamage(-10);
+        target.applyDamage(10, _source, true, StatType.MANA);
+        _source.applyDamage(-10, _source, true, StatType.MANA);
 
     }
 

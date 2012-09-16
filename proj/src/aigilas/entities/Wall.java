@@ -8,7 +8,7 @@ import spx.entities.Entity;
 
 public class Wall extends Entity {
     public Wall(Point2 location) {
-        Initialize(location, SpriteType.WALL, EntityType.WALL, DrawDepth.Wall);
+        initialize(location, SpriteType.WALL, EntityType.WALL, DrawDepth.Wall);
         _isBlocking = true;
     }
 }

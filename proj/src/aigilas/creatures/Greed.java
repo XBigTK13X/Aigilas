@@ -10,6 +10,6 @@ public class Greed extends AbstractCreature {
         super(ActorType.GREED, SpriteType.GREED);
         Compose(Elements.AIR);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
-        Add(SkillId.BOIL);
+        add(SkillId.BOIL);
     }
 }

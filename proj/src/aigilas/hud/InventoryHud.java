@@ -33,20 +33,20 @@ public class InventoryHud extends IHud {
         _equipment = equipment;
         _deltas = new DeltasHud(owner, equipment);
         _equipHud = new EquipmentHud(owner, equipment);
-        _currentClassItems = _inventory.GetItems(ItemClass.values()[_currentClass]);
+        _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
     }
 
-    public void Draw() {
+    public void draw() {
         if (_isVisible) {
-            SpxManager.Renderer.Draw(_menuBase, GetHudOrigin(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.GetCenter().X, (int) SpxManager.GetCenter().Y);
-            _textHandler.Draw();
-            _deltas.Draw();
-            _equipHud.Draw();
+            SpxManager.Renderer.draw(_menuBase, getHudOrigin(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.getCenter().X, (int) SpxManager.getCenter().Y);
+            _textHandler.draw();
+            _deltas.draw();
+            _equipHud.draw();
         }
     }
 
-    private void HandleInput() {
-        if (Input.IsActive(Commands.CycleLeft, _parent.GetPlayerIndex())) {
+    private void handleInput() {
+        if (Input.isActive(Commands.CycleLeft, _parent.getPlayerIndex())) {
             _currentClass--;
             if (_currentClass <= 0) {
                 _currentClass = ItemClass.values().length - 2;
@@ -56,7 +56,7 @@ public class InventoryHud extends IHud {
             forceRefresh = true;
         }
 
-        if (Input.IsActive(Commands.CycleRight, _parent.GetPlayerIndex())) {
+        if (Input.isActive(Commands.CycleRight, _parent.getPlayerIndex())) {
             _currentClass++;
             if (_currentClass >= ItemClass.values().length) {
                 _currentClass = 1;
@@ -66,7 +66,7 @@ public class InventoryHud extends IHud {
             forceRefresh = true;
         }
 
-        if (Input.IsActive(Commands.MoveDown, _parent.GetPlayerIndex())) {
+        if (Input.isActive(Commands.MoveDown, _parent.getPlayerIndex())) {
             if (_startingItem < _currentClassItems.size() - 1) {
                 _startingItem++;
                 _endingItem++;
@@ -74,31 +74,31 @@ public class InventoryHud extends IHud {
             }
         }
 
-        if (Input.IsActive(Commands.MoveUp, _parent.GetPlayerIndex())) {
+        if (Input.isActive(Commands.MoveUp, _parent.getPlayerIndex())) {
             if (_startingItem > 0) {
                 _startingItem--;
                 _endingItem--;
                 forceRefresh = true;
             }
         }
-        if (Input.IsActive(Commands.Confirm, _parent.GetPlayerIndex())) {
-            _parent.Equip(_currentSelectedItem);
+        if (Input.isActive(Commands.Confirm, _parent.getPlayerIndex())) {
+            _parent.equip(_currentSelectedItem);
             forceRefresh = true;
         }
-        if (Input.IsActive(Commands.Cancel, _parent.GetPlayerIndex())) {
-            _parent.Drop(_currentSelectedItem);
+        if (Input.isActive(Commands.Cancel, _parent.getPlayerIndex())) {
+            _parent.drop(_currentSelectedItem);
             forceRefresh = true;
         }
     }
 
-    public void Update() {
+    public void update() {
         if (_isVisible) {
-            HandleInput();
-            _textHandler.Update();
-            _deltas.Update(_currentSelectedItem, forceRefresh);
-            _equipHud.Update(forceRefresh);
-            _textHandler.Clear();
-            UpdateInventoryDisplay();
+            handleInput();
+            _textHandler.update();
+            _deltas.update(_currentSelectedItem, forceRefresh);
+            _equipHud.update(forceRefresh);
+            _textHandler.clear();
+            updateInventoryDisplay();
             if (forceRefresh) {
                 forceRefresh = false;
             }
@@ -106,16 +106,16 @@ public class InventoryHud extends IHud {
     }
 
     @Override
-    public void Toggle() {
-        super.Toggle();
-        _deltas.Toggle();
-        _equipHud.Toggle();
+    public void toggle() {
+        super.toggle();
+        _deltas.toggle();
+        _equipHud.toggle();
         forceRefresh = true;
     }
 
     private static HashMap<Integer, String> __classStrings = new HashMap<>();
 
-    private String GetClassDisplay() {
+    private String getClassDisplay() {
         if (!__classStrings.containsKey(_currentClass)) {
             __classStrings.put(_currentClass, ItemClass.values()[_currentClass].hudName());
         }
@@ -131,43 +131,43 @@ public class InventoryHud extends IHud {
     private boolean forceRefresh = false;
     private String[] list = new String[10];
 
-    private void UpdateInventoryDisplay() {
-        _textHandler.WriteDefault(GetClassDisplay(), 20, 30, GetHudOrigin());
-        _currentClassItems = _inventory.GetItems(ItemClass.values()[_currentClass]);
+    private void updateInventoryDisplay() {
+        _textHandler.writeDefault(getClassDisplay(), 20, 30, getHudOrigin());
+        _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
         if (_currentClassItems.size() > 0) {
             int ii = 0;
             if (forceRefresh) {
-                StringSquisher.Clear();
-                displayString = StringSquisher.Flush();
+                StringSquisher.clear();
+                displayString = StringSquisher.flush();
                 int count = 0;
                 for (GenericItem item : _currentClassItems.keySet()) {
                     if (ii == _startingItem) {
                         _currentSelectedItem = item;
                     }
-                    if (!_equipment.IsRegistered(item) && _inventory.GetItemCount(item) <= 0) {
+                    if (!_equipment.isRegistered(item) && _inventory.getItemCount(item) <= 0) {
                         continue;
                     }
 
                     if (ii >= _startingItem && ii < _endingItem && ii < _currentClassItems.keySet().size()) {
                         count++;
-                        StringSquisher.Clear();
-                        StringSquisher.Squish(StringStorage.Get(ii), __delim, (_equipment.IsRegistered(item)) ? __equipDelim : "", item.Name);
+                        StringSquisher.clear();
+                        StringSquisher.squish(StringStorage.get(ii), __delim, (_equipment.isRegistered(item)) ? __equipDelim : "", item.Name);
                         if (_currentClassItems.get(item) > -1) {
-                            StringSquisher.Squish(__seper, StringStorage.Get(_currentClassItems.get(item)));
+                            StringSquisher.squish(__seper, StringStorage.get(_currentClassItems.get(item)));
                         }
-                        StringSquisher.Squish(__newline);
+                        StringSquisher.squish(__newline);
                         if (count < 10) {
-                            list[count] = StringSquisher.Flush();
+                            list[count] = StringSquisher.flush();
                         }
                     }
                     ii++;
                 }
 
             }
-            _textHandler.WriteDefault(displayString, 50, 60, GetHudOrigin());
+            _textHandler.writeDefault(displayString, 50, 60, getHudOrigin());
             for (int jj = 0; jj < 10; jj++) {
                 if (list[jj] != null) {
-                    _textHandler.WriteDefault(list[jj], 20, 60 + 40 * jj, GetHudOrigin());
+                    _textHandler.writeDefault(list[jj], 20, 60 + 40 * jj, getHudOrigin());
                 }
             }
         }

@@ -17,10 +17,10 @@ public class ComboMarker extends Entity {
     private int _index;
 
     public ComboMarker(ICreature source, Elements elementId, int index) {
-        Initialize(source.GetLocation(), SpriteType.COMBO_MARKER, EntityType.COMBO_MARKER, DrawDepth.ComboMarker);
-        _graphic.SetColor(elementId.Tint);
-        _graphic.SetAlpha(0);
-        ParticleEngine.Emit(spx.particles.behaviors.RotateBehavior.GetInstance(), this, _graphic.GetColor());
+        initialize(source.getLocation(), SpriteType.COMBO_MARKER, EntityType.COMBO_MARKER, DrawDepth.ComboMarker);
+        _graphic.setColor(elementId.Tint);
+        _graphic.setAlpha(0);
+        ParticleEngine.emit(spx.particles.behaviors.RotateBehavior.getInstance(), this, _graphic.getColor());
         _parent = source;
         _index = index;
     }
@@ -28,14 +28,14 @@ public class ComboMarker extends Entity {
     private static List<Point2> __dMults = Arrays.asList(new Point2(-1, 0), new Point2(0, -1), new Point2(1, 0));
 
     @Override
-    public void Update() {
-        float dX = (Settings.Get().spriteWidth / 16) * __dMults.get(_index).X;
-        float dY = (Settings.Get().spriteHeight / 16) * __dMults.get(_index).Y;
-        SetLocation(new Point2(_parent.GetLocation().PosX + dX, _parent.GetLocation().PosY + dY));
+    public void update() {
+        float dX = (Settings.get().spriteWidth / 16) * __dMults.get(_index).X;
+        float dY = (Settings.get().spriteHeight / 16) * __dMults.get(_index).Y;
+        setLocation(new Point2(_parent.getLocation().PosX + dX, _parent.getLocation().PosY + dY));
     }
 
     @Override
-    public void Draw() {
-        _graphic.Draw();
+    public void draw() {
+        _graphic.draw();
     }
 }

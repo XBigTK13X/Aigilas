@@ -16,7 +16,7 @@ public class Particle2 extends PEComponent {
     public float Width = 1;
 
     private float _life = DefaultLife;
-    private final Sprite _texture = SpxManager.GetParticleAsset();
+    private final Sprite _texture = SpxManager.getParticleAsset();
     private Color _color = Color.WHITE;
 
     public float MoveSpeed = 5f;
@@ -33,62 +33,62 @@ public class Particle2 extends PEComponent {
     public Particle2(Point2 position) {
     }
 
-    public void Draw() {
+    public void draw() {
         if (IsActive) {
-            SpxManager.Renderer.Draw(_texture, Position, DrawDepth.Particle, _color, Width, Height);
+            SpxManager.Renderer.draw(_texture, Position, DrawDepth.Particle, _color, Width, Height);
         }
     }
 
-    public void Reset(ParticleBehavior behavior, Point2 position, Color baseColor) {
-        Init(behavior, position, null, baseColor);
+    public void reset(ParticleBehavior behavior, Point2 position, Color baseColor) {
+        init(behavior, position, null, baseColor);
     }
 
-    public void Reset(ParticleBehavior behavior, IEntity entity, Color baseColor) {
-        Init(behavior, null, entity, baseColor);
+    public void reset(ParticleBehavior behavior, IEntity entity, Color baseColor) {
+        init(behavior, null, entity, baseColor);
     }
 
-    private void Init(ParticleBehavior behavior, Point2 position, IEntity entity, Color baseColor) {
+    private void init(ParticleBehavior behavior, Point2 position, IEntity entity, Color baseColor) {
         _behavior = behavior;
         if (position != null) {
-            Origin.Reset(position.X, position.Y);
-            Position.Reset(position.X, position.Y);
+            Origin.reset(position.X, position.Y);
+            Position.reset(position.X, position.Y);
         }
         if (entity != null) {
             Entity = entity;
-            Origin.Reset(Entity.GetLocation().PosX, Entity.GetLocation().PosY);
-            Position.Reset(Entity.GetLocation().PosX, Entity.GetLocation().PosY);
+            Origin.reset(Entity.getLocation().PosX, Entity.getLocation().PosY);
+            Position.reset(Entity.getLocation().PosX, Entity.getLocation().PosY);
         }
         if (baseColor != null) {
-            _color = Darken(baseColor, (RNG.Next(10, 50)) / 100f);
+            _color = darken(baseColor, (RNG.next(10, 50)) / 100f);
         } else {
-            _color = new Color(RNG.Next(60, 190) / 255f, RNG.Next(60, 190) / 255f, RNG.Next(60, 190) / 255f, 1f);
+            _color = new Color(RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, 1f);
         }
-        Angle = RNG.Angle();
+        Angle = RNG.angle();
         IsActive = true;
         Radius = 0;
-        SetMoveSpeed();
+        setMoveSpeed();
     }
 
-    private void SetMoveSpeed() {
+    private void setMoveSpeed() {
         MoveSpeed = 15f - (10f * ((Height + Width) / 30f));
     }
 
-    private static Color Darken(Color inColor, float inAmount) {
-        return new Color(MathHelper.Clamp((inColor.r) * 255 - 255 * inAmount, 0, 255), MathHelper.Clamp((inColor.g) * 255 - 255 * inAmount, 0, 255), MathHelper.Clamp((inColor.b) * 255 - 255 * inAmount, 0, 255), 255);
+    private static Color darken(Color inColor, float inAmount) {
+        return new Color(MathHelper.clamp((inColor.r) * 255 - 255 * inAmount, 0, 255), MathHelper.clamp((inColor.g) * 255 - 255 * inAmount, 0, 255), MathHelper.clamp((inColor.b) * 255 - 255 * inAmount, 0, 255), 255);
     }
 
-    public void SetSize(float height, float width) {
+    public void setSize(float height, float width) {
         Height = height;
         Width = width;
-        SetMoveSpeed();
+        setMoveSpeed();
     }
 
-    public void Update() {
+    public void update() {
         _life *= .85f;
         _color.a *= .999f;
-        if ((_life <= .001 && Entity == null) || (Entity != null && !Entity.IsActive())) {
+        if ((_life <= .001 && Entity == null) || (Entity != null && !Entity.isActive())) {
             IsActive = false;
         }
-        _behavior.Update(this);
+        _behavior.update(this);
     }
 }

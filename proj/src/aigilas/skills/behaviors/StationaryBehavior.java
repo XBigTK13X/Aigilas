@@ -13,16 +13,16 @@ public class StationaryBehavior extends SkillBehavior {
     }
 
     @Override
-    public void Activate(ICreature target)
+    public void activate(ICreature target)
 
     {
 
         if (SubtractCost(target)) {
             if (_parent.StartOffCenter) {
-                Point2 location = new Point2(target.GetLocation().GridX + target.GetSkillVector().GridX, target.GetLocation().GridY + target.GetSkillVector().GridY);
+                Point2 location = new Point2(target.getLocation().GridX + target.getSkillVector().GridX, target.getLocation().GridY + target.getSkillVector().GridY);
                 _sideEffects.Generate(location, new Point2(0, 0), target);
             } else {
-                _sideEffects.Generate(target.GetLocation(), new Point2(0, 0), target);
+                _sideEffects.Generate(target.getLocation(), new Point2(0, 0), target);
             }
         }
     }

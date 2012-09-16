@@ -10,6 +10,6 @@ public class Envy extends AbstractCreature {
         super(ActorType.ENVY, SpriteType.ENVY);
         Compose(Elements.WATER);
         Strengths(StatType.STRENGTH, StatType.STRENGTH);
-        Add(SkillId.HYPOTHERMIA);
+        add(SkillId.HYPOTHERMIA);
     }
 }

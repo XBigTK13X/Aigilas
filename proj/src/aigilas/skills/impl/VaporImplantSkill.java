@@ -14,16 +14,16 @@ public class VaporImplantSkill extends ISkill {
     {
         super(SkillId.VAPOR_IMPLANT, AnimationType.RANGED);
 
-        AddCost(StatType.MANA, 10);
-        Add(Elements.PHYSICAL, Elements.AIR);
+        addCost(StatType.MANA, 10);
+        add(Elements.PHYSICAL, Elements.AIR);
 
     }
 
     @Override
-    public void Affect(IEntity target)
+    public void affect(IEntity target)
 
     {
-        CreatureFactory.CreateMinion(SkillId.VAPOR_CLOUD, _source, null, target.GetLocation());
+        CreatureFactory.createMinion(SkillId.VAPOR_CLOUD, _source, null, target.getLocation());
 
     }
 

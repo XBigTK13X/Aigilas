@@ -6,9 +6,9 @@ import spx.core.Point2;
 
 public class RangedAnimation extends SkillAnimation {
     @Override
-    public void Animate(SkillEffect skill, ICreature source, Point2 velocity) {
-        if (!skill.Move(velocity.X, velocity.Y)) {
-            skill.Cleanup(skill);
+    public void animate(SkillEffect skill, ICreature source, Point2 velocity) {
+        if (!skill.move(velocity.X, velocity.Y)) {
+            skill.cleanup(skill);
         }
     }
 }

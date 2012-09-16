@@ -11,15 +11,15 @@ public class MinionFireStrategy extends IStrategy {
     {
         super(parent, Strategy.MinionFire);
 
-        parent.SetSkillVector(parent.GetSkillVector());
+        parent.setSkillVector(parent.getSkillVector());
     }
 
     @Override
-    public void Act() {
-        if (_parent.IsCooledDown()) {
-            _parent.UseActiveSkill();
-            _parent.ApplyDamage(5, null, false);
-            _parent.Set(StatType.MOVE_COOL_DOWN, 0);
+    public void act() {
+        if (_parent.isCooledDown()) {
+            _parent.useActiveSkill();
+            _parent.applyDamage(5, null, false);
+            _parent.set(StatType.MOVE_COOL_DOWN, 0);
         }
     }
 }

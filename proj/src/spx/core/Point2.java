@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Point2 {
     public static Point2 Zero = new Point2(0, 0);
-    private static float halfHeight = Settings.Get().spriteHeight / 2;
-    private static float halfWidth = Settings.Get().spriteWidth / 2;
+    private static float halfHeight = Settings.get().spriteHeight / 2;
+    private static float halfWidth = Settings.get().spriteWidth / 2;
 
     public float X;
     public float Y;
@@ -20,7 +20,7 @@ public class Point2 {
 
     public static Point2[] _rotateTargets = {new Point2(1, 0), new Point2(1, 1), new Point2(0, 1), new Point2(0, -1), new Point2(-1, -1), new Point2(-1, 0), new Point2(-1, 1), new Point2(1, -1)};
 
-    public static Point2[][] _locations = new Point2[Settings.Get().tileMapHeight][Settings.Get().tileMapWidth];
+    public static Point2[][] _locations = new Point2[Settings.get().tileMapHeight][Settings.get().tileMapWidth];
 
     public Point2() {
     }
@@ -42,32 +42,32 @@ public class Point2 {
     }
 
     private void initThis(float x, float y, int weight) {
-        SetX(x);
-        SetY(y);
+        setX(x);
+        setY(y);
         Weight = weight;
     }
 
-    public void Reset(float x, float y) {
-        SetX(x);
-        SetY(y);
+    public void reset(float x, float y) {
+        setX(x);
+        setY(y);
     }
 
-    public void Copy(Point2 point) {
+    public void copy(Point2 point) {
         if (point != null) {
-            SetX(point.X);
-            SetY(point.Y);
+            setX(point.X);
+            setY(point.Y);
         }
     }
 
-    public Point2 Add(Point2 target) {
+    public Point2 add(Point2 target) {
         return new Point2(GridX + target.GridX, GridY + target.GridY);
     }
 
-    public Point2 Add(int dX, int dY) {
+    public Point2 add(int dX, int dY) {
         return new Point2(X + dX, Y + dY);
     }
 
-    public Point2 Minus(Point2 target) {
+    public Point2 minus(Point2 target) {
         return new Point2(GridX - target.GridX, GridY - target.GridY);
     }
 
@@ -85,40 +85,40 @@ public class Point2 {
         return false;
     }
 
-    public void SetX(float xValue) {
+    public void setX(float xValue) {
         X = xValue;
-        boolean isGrid = (Math.abs(X) < Settings.Get().tileMapWidth);
-        PosX = (isGrid) ? X * Settings.Get().spriteWidth : X;
+        boolean isGrid = (Math.abs(X) < Settings.get().tileMapWidth);
+        PosX = (isGrid) ? X * Settings.get().spriteWidth : X;
         PosCenterX = PosX + halfWidth;
-        GridX = (isGrid) ? (int) X : (int) (X / Settings.Get().spriteWidth);
+        GridX = (isGrid) ? (int) X : (int) (X / Settings.get().spriteWidth);
     }
 
-    public void SetY(float yValue) {
+    public void setY(float yValue) {
         Y = yValue;
-        boolean isGrid = (Math.abs(Y) < Settings.Get().tileMapWidth);
-        PosY = (isGrid) ? Y * Settings.Get().spriteHeight : Y;
+        boolean isGrid = (Math.abs(Y) < Settings.get().tileMapWidth);
+        PosY = (isGrid) ? Y * Settings.get().spriteHeight : Y;
         PosCenterY = PosY + halfHeight;
-        GridY = (isGrid) ? (int) Y : (int) (Y / Settings.Get().spriteHeight);
+        GridY = (isGrid) ? (int) Y : (int) (Y / Settings.get().spriteHeight);
     }
 
-    public void SetWeight(float weight) {
+    public void setWeight(float weight) {
         Weight = weight;
     }
 
-    public boolean IsZero() {
+    public boolean isZero() {
         return X == 0 && Y == 0;
     }
 
-    public static float CalculateDistanceSquared(Point2 source, Point2 target) {
+    public static float calculateDistanceSquared(Point2 source, Point2 target) {
         return (float) (Math.pow(source.PosY - target.PosY, 2) + Math.pow(source.PosX - target.PosX, 2));
     }
 
     private static List<Point2> _neighbors = new ArrayList<Point2>();
 
-    public List<Point2> GetNeighbors() {
+    public List<Point2> getNeighbors() {
         if (_locations[0][0] == null) {
-            for (int ii = 0; ii < Settings.Get().tileMapHeight; ii++) {
-                for (int jj = 0; jj < Settings.Get().tileMapWidth; jj++) {
+            for (int ii = 0; ii < Settings.get().tileMapHeight; ii++) {
+                for (int jj = 0; jj < Settings.get().tileMapWidth; jj++) {
                     _locations[ii][jj] = new Point2(jj, ii);
                 }
             }
@@ -134,11 +134,11 @@ public class Point2 {
         return _neighbors;
     }
 
-    public boolean IsSameSpot(Point2 target) {
+    public boolean isSameSpot(Point2 target) {
         return target.GridX == GridX && target.GridY == GridY;
     }
 
-    public Point2 RotateClockwise() {
+    public Point2 rotateClockwise() {
         if (GridX == 1) {
             if (GridY == -1) {
                 return _rotateTargets[0];
@@ -181,11 +181,11 @@ public class Point2 {
            */
     }
 
-    public Point2 Rotate180() {
-        return RotateClockwise().RotateClockwise().RotateClockwise().RotateClockwise();
+    public Point2 rotate180() {
+        return rotateClockwise().rotateClockwise().rotateClockwise().rotateClockwise();
     }
 
-    public static float DistanceSquared(Point2 source, Point2 target) {
+    public static float distanceSquared(Point2 source, Point2 target) {
         return (float) (Math.pow(source.PosX - target.PosX, 2) + Math.pow(source.PosY - target.PosY, 2));
     }
 

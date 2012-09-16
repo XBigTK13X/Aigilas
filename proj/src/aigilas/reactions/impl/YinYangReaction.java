@@ -7,9 +7,9 @@ import aigilas.statuses.StatusFactory;
 
 public class YinYangReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.SelfMutilation);
+        StatusFactory.apply(target, Status.SelfMutilation);
     }
 }

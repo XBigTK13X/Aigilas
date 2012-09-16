@@ -15,15 +15,15 @@ public class VenomFistSkill extends ISkill {
     {
         super(SkillId.VENOM_FIST, AnimationType.SELF);
 
-        Add(Elements.DARK);
-        AddCost(StatType.MANA, 10);
+        add(Elements.DARK);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        StatusFactory.Apply(source, Status.VenomFist);
+    public void activate(ICreature source) {
+        super.activate(source);
+        StatusFactory.apply(source, Status.VenomFist);
 
     }
 

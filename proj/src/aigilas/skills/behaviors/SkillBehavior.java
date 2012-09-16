@@ -25,33 +25,33 @@ public class SkillBehavior {
         _cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
-    public SpriteType GetSpriteType() {
-        return _sideEffects.GetSpriteType();
+    public SpriteType getSpriteType() {
+        return _sideEffects.getSpriteType();
     }
 
-    public void Activate(ICreature target) {
+    public void activate(ICreature target) {
     }
 
-    public void Cleanup(Entity target, SkillEffect source) {
+    public void cleanup(Entity target, SkillEffect source) {
     }
 
-    public boolean IsActive() {
+    public boolean isActive() {
         return !_used;
     }
 
-    public SkillEffect GetGraphic() {
-        return _sideEffects.GetFirstGraphic();
+    public SkillEffect getGraphic() {
+        return _sideEffects.getFirstGraphic();
     }
 
-    public void AddCost(StatType stat, float cost) {
-        _cost.AddBuff(new StatBuff(stat, cost));
+    public void addCost(StatType stat, float cost) {
+        _cost.addBuff(new StatBuff(stat, cost));
     }
 
     protected boolean SubtractCost(ICreature owner) {
         boolean costPaid = false;
         for (StatType stat : StatType.values()) {
             if (stat != StatType.REGEN) {
-                if (owner.LowerStat(stat, _cost.Get(stat))) {
+                if (owner.lowerStat(stat, _cost.get(stat))) {
                     costPaid = true;
                 }
             }
@@ -62,29 +62,29 @@ public class SkillBehavior {
     private IEntity hitTarget;
     private ICreature hitCreature;
 
-    public boolean AffectTarget(ICreature source, SkillEffect graphic)
+    public boolean affectTarget(ICreature source, SkillEffect graphic)
 
     {
-        hitTarget = source.GetTargets().GetCollidedTarget(graphic);
+        hitTarget = source.getTargets().getCollidedTarget(graphic);
         if (null != hitTarget && hitTarget != source) {
-            _parent.Affect(hitTarget);
-            hitCreature = Extensions.IsCreature(hitTarget);
+            _parent.affect(hitTarget);
+            hitCreature = Extensions.isCreature(hitTarget);
             if (hitCreature != null) {
-                hitCreature.Combo(_parent.GetElements());
-                hitCreature.React(_parent.GetSkillId());
+                hitCreature.combo(_parent.getElements());
+                hitCreature.react(_parent.getSkillId());
             }
-            if (!_parent.IsPersistent()) {
+            if (!_parent.isPersistent()) {
                 return false;
             }
         }
         return true;
     }
 
-    public AnimationType GetAnimationType() {
-        return _sideEffects.GetAnimationType();
+    public AnimationType getAnimationType() {
+        return _sideEffects.getAnimationType();
     }
 
-    public float GetCost() {
-        return _cost.Get(StatType.MANA);
+    public float getCost() {
+        return _cost.get(StatType.MANA);
     }
 }

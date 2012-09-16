@@ -20,7 +20,7 @@ public class IHud {
     protected IHud(ICreature owner, int width, int height) {
         _parent = owner;
         if (_menuBase == null) {
-            _menuBase = SpxManager.GetMenuBaseAsset();
+            _menuBase = SpxManager.getMenuBaseAsset();
         }
         _dimensions = new Point2(width, height);
         playerHudPositions.add(new Point2(0, SpxManager.WindowHeight - _dimensions.Y));
@@ -29,19 +29,19 @@ public class IHud {
         playerHudPositions.add(new Point2(SpxManager.WindowWidth - _dimensions.X, 0));
     }
 
-    public void Toggle() {
+    public void toggle() {
         _isVisible = !_isVisible;
     }
 
-    public boolean IsVisible() {
+    public boolean isVisible() {
         return _isVisible;
     }
 
-    public void LoadContent() {
-        _menuBase = SpxManager.GetMenuBaseAsset();
+    public void loadContent() {
+        _menuBase = SpxManager.getMenuBaseAsset();
     }
 
-    protected Point2 GetHudOrigin() {
-        return playerHudPositions.get(_parent.GetPlayerIndex());
+    protected Point2 getHudOrigin() {
+        return playerHudPositions.get(_parent.getPlayerIndex());
     }
 }

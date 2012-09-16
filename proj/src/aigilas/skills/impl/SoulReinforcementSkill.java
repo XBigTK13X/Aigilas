@@ -15,15 +15,15 @@ public class SoulReinforcementSkill extends ISkill {
     {
         super(SkillId.SOUL_REINFORCEMENT, AnimationType.SELF);
 
-        Add(Elements.LIGHT);
-        AddCost(StatType.MANA, 10);
+        add(Elements.LIGHT);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        StatusFactory.Apply(source, Status.Berserk);
+    public void activate(ICreature source) {
+        super.activate(source);
+        StatusFactory.apply(source, Status.Berserk);
 
     }
 

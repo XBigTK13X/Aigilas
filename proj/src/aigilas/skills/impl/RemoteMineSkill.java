@@ -18,28 +18,28 @@ public class RemoteMineSkill extends ISkill {
     {
         super(SkillId.REMOTE_MINE, AnimationType.STATIONARY);
 
-        AddCost(StatType.MANA, 10);
-        Add(Elements.FIRE);
+        addCost(StatType.MANA, 10);
+        add(Elements.FIRE);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
+    public void activate(ICreature source) {
         if (!_cache.containsKey(source)) {
             _cache.put(source, this);
-            super.Activate(source);
+            super.activate(source);
 
         } else {
-            if (_cache.get(source).IsActive()) {
-                _cache.get(source).Explode(source);
-                _cache.get(source).Cleanup(source, null);
+            if (_cache.get(source).isActive()) {
+                _cache.get(source).explode(source);
+                _cache.get(source).cleanup(source, null);
                 _cache.remove(source);
-                Cleanup(source, null);
+                cleanup(source, null);
 
             } else {
                 _cache.remove(source);
                 _cache.put(source, this);
-                super.Activate(source);
+                super.activate(source);
 
             }
 
@@ -47,9 +47,9 @@ public class RemoteMineSkill extends ISkill {
 
     }
 
-    private void Explode(ICreature source) {
-        if (_behavior.GetGraphic() != null) {
-            CreatureFactory.CreateMinion(SkillId.EXPLODE, _source, _behavior.GetGraphic(), _behavior.GetGraphic().GetLocation());
+    private void explode(ICreature source) {
+        if (_behavior.getGraphic() != null) {
+            CreatureFactory.createMinion(SkillId.EXPLODE, _source, _behavior.getGraphic(), _behavior.getGraphic().getLocation());
 
         }
 

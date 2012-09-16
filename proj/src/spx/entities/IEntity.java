@@ -6,19 +6,19 @@ import spx.core.Point2;
 public interface IEntity {
     boolean contains(Point2 target);
 
-    void Draw();
+    void draw();
 
-    void Update();
+    void update();
 
-    void LoadContent();
+    void loadContent();
 
-    Point2 GetLocation();
+    Point2 getLocation();
 
-    EntityType GetEntityType();
+    EntityType getEntityType();
 
-    boolean IsActive();
+    boolean isActive();
 
-    boolean IsBlocking();
+    boolean isBlocking();
 
-    void SetInactive();
+    void setInactive();
 }

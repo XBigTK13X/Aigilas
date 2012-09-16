@@ -11,8 +11,8 @@ public class ConfusedAndDyingStrategy extends ConfusedStrategy {
     }
 
     @Override
-    public void Act() {
-        super.Act();
-        _parent.ApplyDamage(1.1f, null, false);
+    public void act() {
+        super.act();
+        _parent.applyDamage(1.1f, null, false);
     }
 }

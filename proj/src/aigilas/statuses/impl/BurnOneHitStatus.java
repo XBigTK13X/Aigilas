@@ -11,12 +11,12 @@ public class BurnOneHitStatus extends IStatus {
     {
         super(target);
 
-        Add(Status.Burn, StatusComponent.Contagion);
+        add(Status.Burn, StatusComponent.Contagion);
     }
 
     @Override
-    public void Update() {
-        super.Update();
+    public void update() {
+        super.update();
         if (_wasPassed) {
             _isActive = false;
         }

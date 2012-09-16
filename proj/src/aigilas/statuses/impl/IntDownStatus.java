@@ -12,6 +12,6 @@ public class IntDownStatus extends IStatus {
         super(target);
 
         _buff = new StatBuff(StatType.WISDOM, -10);
-        Setup();
+        setup();
     }
 }

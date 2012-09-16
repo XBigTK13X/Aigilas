@@ -14,16 +14,16 @@ public class AcidDripSkill extends ISkill {
         super(SkillId.ACID_DRIP, AnimationType.STATIONARY);
 
         StartOffCenter = true;
-        AddCost(StatType.MANA, 10);
-        Add(Elements.WATER);
+        addCost(StatType.MANA, 10);
+        add(Elements.WATER);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.ApplyDamage(20, _source);
+        target.applyDamage(20, _source);
 
     }
 

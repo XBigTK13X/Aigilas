@@ -13,13 +13,13 @@ public class ValedictorianSkill extends ISkill {
     {
         super(SkillId.VALEDICTORIAN, AnimationType.RANGED);
 
-        Add(Elements.MENTAL, Elements.LIGHT);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL, Elements.LIGHT);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
 

@@ -19,36 +19,36 @@ public class MainMenuState implements State {
     private int _selection = 2;
 
     public MainMenuState() {
-        Input.SetContext(Contexts.Nonfree, Client.Get().GetFirstPlayerIndex());
+        Input.setContext(Contexts.Nonfree, Client.get().getFirstPlayerIndex());
     }
 
     @Override
-    public void Update() {
-        _text.WriteAction(PlayText, 1, 300, 300);
-        _text.WriteAction(OptionsText, 1, 300, 200);
-        _text.WriteAction(QuitText, 1, 300, 100);
+    public void update() {
+        _text.writeAction(PlayText, 1, 300, 300);
+        _text.writeAction(OptionsText, 1, 300, 200);
+        _text.writeAction(QuitText, 1, 300, 100);
 
-        _selection += (Input.IsActive(Commands.MoveUp, Client.Get().GetFirstPlayerIndex()) ? 1 : 0) + (Input.IsActive(Commands.MoveDown, Client.Get().GetFirstPlayerIndex()) ? -1 : 0);
+        _selection += (Input.isActive(Commands.MoveUp, Client.get().getFirstPlayerIndex()) ? 1 : 0) + (Input.isActive(Commands.MoveDown, Client.get().getFirstPlayerIndex()) ? -1 : 0);
         _selection %= 3;
         if (_selection < 0) {
             _selection = 0;
         }
 
-        if (Client.Get().IsGameStarting()) {
-            for (int ii = 0; ii < Client.Get().GetPlayerCount(); ii++) {
-                Input.SetContext(Contexts.Free, ii);
+        if (Client.get().isGameStarting()) {
+            for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
+                Input.setContext(Contexts.Free, ii);
             }
 
-            StateManager.LoadState(new GameplayState());
+            StateManager.loadState(new GameplayState());
         } else {
-            if (Input.IsActive(Commands.Confirm, Client.Get().GetFirstPlayerIndex())) {
+            if (Input.isActive(Commands.Confirm, Client.get().getFirstPlayerIndex())) {
                 switch (_selection) {
                     case 2:
                         System.out.println("Starting the game");
-                        Client.Get().StartGame();
+                        Client.get().startGame();
                         return;
                     case 1:
-                        StateManager.LoadState(new OptionsState());
+                        StateManager.loadState(new OptionsState());
                         return;
                     case 0:
                         System.exit(0);
@@ -59,17 +59,17 @@ public class MainMenuState implements State {
             }
         }
 
-        _text.WriteAction(SelectionText, 1, 225, 100 * (_selection + 1));
+        _text.writeAction(SelectionText, 1, 225, 100 * (_selection + 1));
     }
 
     @Override
-    public void LoadContent() {
+    public void loadContent() {
 
     }
 
     @Override
-    public void Draw() {
-        _text.Draw();
-        _text.Clear();
+    public void draw() {
+        _text.draw();
+        _text.clear();
     }
 }

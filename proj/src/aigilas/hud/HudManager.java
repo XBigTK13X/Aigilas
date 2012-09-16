@@ -11,22 +11,22 @@ public class HudManager {
     public HudManager(ICreature parent, Inventory inventory, Equipment equipment) {
         _inventory = new InventoryHud(parent, inventory, equipment);
         _skill = new SkillHud(parent);
-        _skill.Toggle();
+        _skill.toggle();
     }
 
-    public boolean ToggleInventory() {
-        _inventory.Toggle();
-        _skill.Toggle();
-        return _inventory.IsVisible();
+    public boolean toggleInventory() {
+        _inventory.toggle();
+        _skill.toggle();
+        return _inventory.isVisible();
     }
 
-    public void Update() {
-        _inventory.Update();
-        _skill.Update();
+    public void update() {
+        _inventory.update();
+        _skill.update();
     }
 
-    public void Draw() {
-        _inventory.Draw();
-        _skill.Draw();
+    public void draw() {
+        _inventory.draw();
+        _skill.draw();
     }
 }

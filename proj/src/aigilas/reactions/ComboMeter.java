@@ -56,27 +56,27 @@ public class ComboMeter {
         _parent = parent;
     }
 
-    private void ResetComboDisplay() {
+    private void resetComboDisplay() {
         _reactionTimer = _maxTimer;
         for (int ii = 0; ii < _markers.size(); ii++) {
-            _markers.get(ii).SetInactive();
+            _markers.get(ii).setInactive();
         }
         _markers.clear();
         int jj = 0;
         for (Elements element : _elements) {
             _markers.add(new ComboMarker(_parent, element, jj));
             jj++;
-            _markers.get(_markers.size() - 1).LoadContent();
+            _markers.get(_markers.size() - 1).loadContent();
         }
     }
 
-    public void Draw() {
+    public void draw() {
         for (ComboMarker marker : _markers) {
-            marker.Draw();
+            marker.draw();
         }
     }
 
-    public void Add(Elements element) {
+    public void add(Elements element) {
         if (!_elements.contains(element)) {
             if (_elements.size() == 2) {
                 if (_elements.get(0).Value > element.Value) {
@@ -96,42 +96,42 @@ public class ComboMeter {
             if (_elements.size() == 0) {
                 _elements.add(element);
             }
-            ResetComboDisplay();
+            resetComboDisplay();
         }
     }
 
     private IReaction reaction;
 
-    public void Update() {
+    public void update() {
         for (ComboMarker marker : _markers) {
-            marker.Update();
+            marker.update();
         }
         int key = 0;
         if (_elements.size() == 3) {
             key = _elements.get(0).Value * 100 + _elements.get(1).Value * 10 + _elements.get(2).Value;
-            React(key);
+            react(key);
         }
         if (_elements.size() == 2) {
             key = _elements.get(0).Value * 10 + _elements.get(1).Value;
-            React(key);
+            react(key);
         }
         if (_elements.size() == 1) {
-            React(_elements.get(0).Value);
+            react(_elements.get(0).Value);
         }
     }
 
-    private void React(int reactionId) {
+    private void react(int reactionId) {
         _reactionTimer--;
         if (_reactionTimer <= 0) {
             if (__reactions.keySet().contains(reactionId)) {
-                reaction = ReactionFactory.Create(__reactions.get(reactionId));
+                reaction = ReactionFactory.create(__reactions.get(reactionId));
                 if (reaction != null) {
-                    reaction.Affect(_parent);
-                    TextManager.Add(new ActionText(__reactions.get(reactionId).toString(), 10, (int) _parent.GetLocation().PosX, (int) _parent.GetLocation().PosY));
+                    reaction.affect(_parent);
+                    TextManager.add(new ActionText(__reactions.get(reactionId).toString(), 10, (int) _parent.getLocation().PosX, (int) _parent.getLocation().PosY));
                 }
             }
             _elements.clear();
-            ResetComboDisplay();
+            resetComboDisplay();
             _reactionTimer = _maxTimer;
         }
     }

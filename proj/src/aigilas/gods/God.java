@@ -13,11 +13,11 @@ public class God {
         NameText = Id.toString();
     }
 
-    public Color GetColor() {
+    public Color getColor() {
         return Id.Tint;
     }
 
-    public CreatureClass GetClass() {
+    public CreatureClass getCreatureClass() {
         switch (Id) {
             case ENVY:
                 return new EnvyAcolyte();
@@ -37,11 +37,11 @@ public class God {
         return new NoClass();
     }
 
-    public boolean IsGoodSacrifice(ItemClass sacrifice) {
+    public boolean isGoodSacrifice(ItemClass sacrifice) {
         return sacrifice == Id.Desires;
     }
 
-    public boolean IsBadSacrifice(ItemClass sacrifice) {
+    public boolean isBadSacrifice(ItemClass sacrifice) {
         return sacrifice == Id.Detests;
     }
 }

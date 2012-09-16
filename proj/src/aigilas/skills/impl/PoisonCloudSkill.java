@@ -15,16 +15,16 @@ public class PoisonCloudSkill extends ISkill {
     {
         super(SkillId.POISON_CLOUD, AnimationType.CLOUD);
 
-        Add(Elements.MENTAL);
-        AddCost(StatType.MANA, 0);
+        add(Elements.MENTAL);
+        addCost(StatType.MANA, 0);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.Poison);
+        StatusFactory.apply(target, Status.Poison);
 
     }
 

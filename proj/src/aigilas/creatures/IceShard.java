@@ -9,8 +9,8 @@ import spx.bridge.ActorType;
 public class IceShard extends Minion {
     public IceShard() {
         super(ActorType.MINION);
-        _strategy = StrategyFactory.Create(Strategy.MinionOneUse, this);
-        Add(SkillId.ICE_SHARD);
+        _strategy = StrategyFactory.create(Strategy.MinionOneUse, this);
+        add(SkillId.ICE_SHARD);
         _composition.add(Elements.WATER);
     }
 }

@@ -11,7 +11,7 @@ public class RandomBuffStatus extends IStatus {
 
     {
         super(target);
-        _buff = new StatBuff(StatType.values()[RNG.Next(0, 3)], 10);
-        Setup();
+        _buff = new StatBuff(StatType.values()[RNG.next(0, 3)], 10);
+        setup();
     }
 }

@@ -15,16 +15,16 @@ public class ConfusionSkill extends ISkill {
     {
         super(SkillId.CONFUSION, AnimationType.RANGED);
 
-        Add(Elements.MENTAL);
-        AddCost(StatType.MANA, 10);
+        add(Elements.MENTAL);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        StatusFactory.Apply(target, Status.Confusion);
+        StatusFactory.apply(target, Status.Confusion);
 
     }
 

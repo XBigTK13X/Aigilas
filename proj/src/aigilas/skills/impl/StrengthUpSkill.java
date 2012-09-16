@@ -15,15 +15,15 @@ public class StrengthUpSkill extends ISkill {
     {
         super(SkillId.STRENGTH_UP, AnimationType.SELF);
 
-        Add(Elements.FIRE);
-        AddCost(StatType.MANA, 10);
+        add(Elements.FIRE);
+        addCost(StatType.MANA, 10);
 
     }
 
     @Override
-    public void Activate(ICreature source) {
-        super.Activate(source);
-        StatusFactory.Apply(source, Status.StrengthUp);
+    public void activate(ICreature source) {
+        super.activate(source);
+        StatusFactory.apply(source, Status.StrengthUp);
 
     }
 

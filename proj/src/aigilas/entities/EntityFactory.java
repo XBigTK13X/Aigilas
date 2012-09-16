@@ -5,7 +5,7 @@ import spx.core.Point2;
 import spx.entities.Entity;
 
 public class EntityFactory {
-    public static Entity Create(EntityType type, Point2 location) {
+    public static Entity create(EntityType type, Point2 location) {
         switch (type) {
             case FLOOR:
                 return new Floor(location);

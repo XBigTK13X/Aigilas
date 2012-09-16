@@ -20,18 +20,18 @@ import spx.text.TextManager;
 public class Aigilas implements ApplicationListener {
     private boolean IsRunning = true;
 
-    private void SetIsRunning(boolean isRunning) {
+    private void setIsRunning(boolean isRunning) {
         IsRunning = isRunning;
     }
 
     @Override
     public void create() {
-        SpxManager.Setup();
-        Input.Setup(new InputInitializer());
-        SpriteSheetManager.Setup(new SpriteInitializer());
-        StateManager.LoadState(new MainMenuState());
-        ParticleEngine.Reset();
-        StateManager.LoadContent();
+        SpxManager.setup();
+        Input.setup(new InputInitializer());
+        SpriteSheetManager.setup(new SpriteInitializer());
+        StateManager.loadState(new MainMenuState());
+        ParticleEngine.reset();
+        StateManager.loadContent();
         // //$$$MediaPlayer.Play(Content.Load<Song>("MainTheme"));
         // //$$$MediaPlayer.IsRepeating = true;
     }
@@ -43,42 +43,42 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void render() {
-        if (Settings.Get().consoleLogging) {
-            DevConsole.Get().Add("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
+        if (Settings.get().consoleLogging) {
+            DevConsole.get().add("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
         }
 
         // Update
-        Input.Update();
-        if (Input.IsActive(Commands.ToggleDevConsole, Client.Get().GetFirstPlayerIndex())) {
-            DevConsole.Get().Toggle();
+        Input.update();
+        if (Input.isActive(Commands.ToggleDevConsole, Client.get().getFirstPlayerIndex())) {
+            DevConsole.get().toggle();
         }
-        if (Client.Get().NextTurn()) {
+        if (Client.get().nextTurn()) {
             for (int ii = 0; ii < 4; ii++) {
                 PlayerIndex player = PlayerIndex.values()[ii];
                 /*
                      * //$$$ if (GamePad.GetState(player).IsPressed(Buttons.Back) &&
                      * GamePad.GetState(player).IsPressed(Buttons.Start)) {
-                     * SetIsRunning(false); }
+                     * setIsRunning(false); }
                      */
             }
-            ParticleEngine.Update();
-            StateManager.Update();
-            TextManager.Update();
-            Client.Get().PrepareForNextTurn();
+            ParticleEngine.update();
+            StateManager.update();
+            TextManager.update();
+            Client.get().prepareForNextTurn();
         } else {
-            Client.Get().HeartBeat();
+            Client.get().heartBeat();
         }
         if (!IsRunning) {
             System.exit(0);
         }
 
         // Render
-        SpxManager.Renderer.Begin();
-        StateManager.Draw();
-        ParticleEngine.Draw();
-        TextManager.Draw();
-        DevConsole.Get().Draw();
-        SpxManager.Renderer.End();
+        SpxManager.Renderer.begin();
+        StateManager.draw();
+        ParticleEngine.draw();
+        TextManager.draw();
+        DevConsole.get().draw();
+        SpxManager.Renderer.end();
     }
 
     @Override

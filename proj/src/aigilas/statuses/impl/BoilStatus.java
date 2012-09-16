@@ -22,36 +22,36 @@ public class BoilStatus extends IStatus {
     }
 
     @Override
-    public void Setup() {
-        super.Setup();
-        previousStrategy = _target.GetStrategyId();
-        _target.SetStrategy(StrategyFactory.Create(null, _target));
-        _target.GetTargets().AddTargetTypes(ActorType.PLAYER);
+    public void setup() {
+        super.setup();
+        previousStrategy = _target.getStrategyId();
+        _target.setStrategy(StrategyFactory.create(null, _target));
+        _target.getTargets().addTargetTypes(ActorType.PLAYER);
     }
 
     @Override
-    public void Cleanup() {
-        super.Cleanup();
+    public void cleanup() {
+        super.cleanup();
         if (!_countDownFailed) {
-            _target.GetTargets().FindClosest().ApplyDamage(30);
+            _target.getTargets().findClosest().applyDamage(30);
         }
-        _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+        _target.setStrategy(StrategyFactory.create(previousStrategy, _target));
     }
 
     @Override
-    public void Update() {
-        super.Update();
-        if (_target.IsCooledDown()) {
+    public void update() {
+        super.update();
+        if (_target.isCooledDown()) {
             _countdown--;
-            _target.Write(spx.util.StringStorage.Get(_strength));
+            _target.write(spx.util.StringStorage.get(_strength));
             if (_countdown <= 0) {
                 _countdown = _countdownMax;
             }
         }
-        if (_target.Get(StatType.HEALTH) < _previousHealth) {
+        if (_target.get(StatType.HEALTH) < _previousHealth) {
             _countDownFailed = true;
-            Cleanup();
+            cleanup();
         }
-        _previousHealth = _target.Get(StatType.HEALTH);
+        _previousHealth = _target.get(StatType.HEALTH);
     }
 }

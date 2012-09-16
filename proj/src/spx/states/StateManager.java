@@ -3,20 +3,20 @@ package spx.states;
 public class StateManager {
     private static State _state;
 
-    public static void LoadState(State state) {
+    public static void loadState(State state) {
         _state = state;
-        _state.LoadContent();
+        _state.loadContent();
     }
 
-    public static void Draw() {
-        _state.Draw();
+    public static void draw() {
+        _state.draw();
     }
 
-    public static void LoadContent() {
-        _state.LoadContent();
+    public static void loadContent() {
+        _state.loadContent();
     }
 
-    public static void Update() {
-        _state.Update();
+    public static void update() {
+        _state.update();
     }
 }

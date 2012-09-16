@@ -6,9 +6,9 @@ import spx.entities.EntityManager;
 
 public class FlashReaction implements IReaction {
     @Override
-    public void Affect(ICreature target)
+    public void affect(ICreature target)
 
     {
-        target.SetLocation(EntityManager.GetEmptyLocation());
+        target.setLocation(EntityManager.getEmptyLocation());
     }
 }

@@ -10,44 +10,44 @@ import java.util.List;
 public class StatusPool {
     private List<IStatus> _statuses = new ArrayList<IStatus>();
 
-    public boolean Allows(CreatureAction action) {
+    public boolean allows(CreatureAction action) {
         for (int ii = 0; ii < _statuses.size(); ii++) {
-            if (_statuses.get(ii).Prevents(action)) {
+            if (_statuses.get(ii).prevents(action)) {
                 return false;
             }
         }
         return true;
     }
 
-    public void Add(IStatus status) {
+    public void add(IStatus status) {
         _statuses.add(status);
     }
 
-    public void Update() {
+    public void update() {
         for (int ii = 0; ii < _statuses.size(); ii++) {
-            _statuses.get(ii).Update();
-            if (!_statuses.get(ii).IsActive()) {
+            _statuses.get(ii).update();
+            if (!_statuses.get(ii).isActive()) {
                 _statuses.remove(_statuses.get(ii));
                 ii--;
             }
         }
     }
 
-    public void Act() {
+    public void act() {
         for (int ii = 0; ii < _statuses.size(); ii++) {
-            _statuses.get(ii).Act();
+            _statuses.get(ii).act();
         }
     }
 
-    public void PassOn(ICreature target, StatusComponent componentType) {
+    public void passOn(ICreature target, StatusComponent componentType) {
         for (int ii = 0; ii < _statuses.size(); ii++) {
-            _statuses.get(ii).PassOn(target, componentType);
+            _statuses.get(ii).passOn(target, componentType);
         }
     }
 
-    public boolean IsElementBlocked(Elements element) {
+    public boolean isElementBlocked(Elements element) {
         for (IStatus status : _statuses) {
-            if (status.IsElementBlocked(element)) {
+            if (status.isElementBlocked(element)) {
                 return true;
             }
         }

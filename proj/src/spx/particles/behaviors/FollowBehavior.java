@@ -7,7 +7,7 @@ import spx.particles.ParticleBehavior;
 public class FollowBehavior extends ParticleBehavior {
     protected static ParticleBehavior __instance;
 
-    public static ParticleBehavior GetInstance() {
+    public static ParticleBehavior getInstance() {
         if (__instance == null) {
             __instance = new FollowBehavior();
         }
@@ -15,11 +15,11 @@ public class FollowBehavior extends ParticleBehavior {
     }
 
     @Override
-    public void Update(Particle2 particle) {
+    public void update(Particle2 particle) {
         if (particle.Entity != null) {
 
-            float size = RNG.Next(0, 10);
-            particle.SetSize(size, size);
+            float size = RNG.next(0, 10);
+            particle.setSize(size, size);
             if (particle.Radius < 5) {
                 particle.Radius = 5;
                 particle.Toggle = true;
@@ -35,8 +35,8 @@ public class FollowBehavior extends ParticleBehavior {
                 particle.Angle -= Math.PI / 150;
             }
 
-            particle.Position.SetX(particle.Entity.GetLocation().PosCenterX - particle.Width / 2 + (float) Math.cos(particle.Angle) * particle.Radius);
-            particle.Position.SetY(particle.Entity.GetLocation().PosCenterY - particle.Height / 2 + (float) Math.sin(particle.Angle) * particle.Radius);
+            particle.Position.setX(particle.Entity.getLocation().PosCenterX - particle.Width / 2 + (float) Math.cos(particle.Angle) * particle.Radius);
+            particle.Position.setY(particle.Entity.getLocation().PosCenterY - particle.Height / 2 + (float) Math.sin(particle.Angle) * particle.Radius);
         }
     }
 }

@@ -10,7 +10,7 @@ class Walk {
     private static int _index = 0;
     private static final int __walkCount = 1000;
 
-    public static List<Point2> Copy(List<Point2> walk) {
+    public static List<Point2> copy(List<Point2> walk) {
         if (__walks.size() == 0) {
             for (int ii = 0; ii < __walkCount; ii++) {
                 __walks.add(new ArrayList<Point2>());
