@@ -45,8 +45,8 @@ def fixCase(line):
 	
 	for method in methods:
 		if (method+'(' in line or method + ' (' in line) and (' ' + method in line or '.'+method in line):
-			for c in classes:
-			if method != c:
+			fail = method in classes			
+			if not fail:	
 				line = line.replace(method,camel(method))		
 	return line	
 
