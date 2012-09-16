@@ -16,7 +16,7 @@ def isMethod(line,source):
 	if not ism:
 		return False
 
-	excludes = ['=']
+	excludes = ['=',' class ']
 	for ex in excludes:
 		if ex in line:
 			return False
