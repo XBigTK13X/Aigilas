@@ -32,6 +32,11 @@ def isMethod(line,source):
 	if name == source.replace('.java',''):
 		return False
 	
+	ex2 = ['DrawDepth']
+	for e in ex2:
+		if name == e:
+			return False
+
 	if not name in methods:
 		methods.append(name)
 	return True
