@@ -84,12 +84,13 @@ public abstract class ICreature extends Entity implements IActor {
 	protected void SetClass(CreatureClass cClass) {
 		if (_class != cClass || cClass == null || cClass == CreatureClass.NULL) {
 			_class = (cClass == null) ? CreatureClass.NULL : cClass;
-			if (_skills == null) {
-				_skills = new SkillPool(this);
-			}
-			for (SkillId skillId : SkillLogic.GetElementalSkills(GetActorType(), _composition)) {
-				_skills.Add(skillId);
-			}
+			_skills = new SkillPool(this);
+            if(_actorType != ActorType.PLAYER)
+            {
+                for (SkillId skillId : SkillLogic.GetElementalSkills(GetActorType(), _composition)) {
+                    _skills.Add(skillId);
+                }
+            }
 			_skills.Add(_class.GetLevelSkills(_currentLevel));
 		}
 	}
