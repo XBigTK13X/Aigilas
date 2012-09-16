@@ -8,6 +8,8 @@ def isCodeOnly(file):
 	return False
 
 def isMethod(line,source):
+	classes.append(source.replace('.java',''))
+
 	ism = False
 	sigs = ['public','private','static']
 	for sig in sigs:
@@ -31,11 +33,6 @@ def isMethod(line,source):
 
 	if name == source.replace('.java',''):
 		return False
-	
-	ex2 = ['DrawDepth']
-	for e in ex2:
-		if name == e:
-			return False
 
 	if not name in methods:
 		methods.append(name)
@@ -44,12 +41,17 @@ def isMethod(line,source):
 camel = lambda s: s[:1].lower() + s[1:] if s else ''
 
 def fixCase(line):
+	ex2 = ['DrawDepth','ConsoleText']
+	
 	for method in methods:
 		if (method+'(' in line or method + ' (' in line) and (' ' + method in line or '.'+method in line):
-			line = line.replace(method,camel(method))		
+			for c in classes:
+			if method != c:
+				line = line.replace(method,camel(method))		
 	return line	
 
 methods = []
+classes = []
 def transform(path):
 	for root,dirs,files in os.walk(path):
 		for fil in files:
