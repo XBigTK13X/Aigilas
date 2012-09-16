@@ -50,14 +50,14 @@ def transform(path):
 	
 	for root,dirs,files in os.walk(path):
 		for file in files:
-			'''convert_file = os.path.join(root,file)
+			convert_file = os.path.join(root,file)
 			target_file = convert_file+'b'
 			shutil.copyfile(convert_file,target_file)				
 			w = open(convert_file,'w')
 			for line in open(target_file,'r').read().splitlines():
 				w.write(cs2java(line)+"\r")
 			w.close()
-			os.remove(target_file)	//'''
+			os.remove(target_file)
 						
 
 if 'method' in sys.argv[1]:
