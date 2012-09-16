@@ -36,6 +36,16 @@ def isMethod(line,source):
 		methods.append(name)
 	return True
 
+camel = lambda s: s[:1].lower() + s[1:] if s else ''
+
+def fixCase(line):
+	for method in methods:
+		if method in line:
+		
+			print line
+			line = line.replace(method,camel(method))
+			print line
+
 methods = []
 def transform(path):
 	for root,dirs,files in os.walk(path):
@@ -45,19 +55,19 @@ def transform(path):
 					isMethod(line,fil)
 	methods.sort(lambda x,y:cmp(len(x),len(y)))
 	methods.reverse()
-	for method in methods:
-		print method
 	
 	for root,dirs,files in os.walk(path):
 		for file in files:
-			convert_file = os.path.join(root,file)
-			target_file = convert_file+'b'
-			shutil.copyfile(convert_file,target_file)				
-			w = open(convert_file,'w')
-			for line in open(target_file,'r').read().splitlines():
-				w.write(cs2java(line)+"\r")
-			w.close()
-			os.remove(target_file)
+			if isCodeOnly(file):	
+				convert_file = os.path.join(root,file)
+				target_file = convert_file+'b'
+				shutil.copyfile(convert_file,target_file)				
+				w = open(convert_file,'w')
+				for line in open(target_file,'r').read().splitlines():
+					res = fixCase(line)
+					w.write(res+'\r')
+				w.close()
+				os.remove(target_file)
 						
 
 if 'method' in sys.argv[1]:
