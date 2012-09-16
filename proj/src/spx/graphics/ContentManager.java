@@ -22,10 +22,10 @@ public class ContentManager {
 		if (_spriteSheet == null) {
 			_spriteSheet = AssetManager.Get().GetImage("GameplaySheet.png");
 		}
-		int x = 0;
-		int y = verticalIndex * Settings.Get().spriteHeight + verticalIndex;
-		int width = Settings.Get().spriteWidth;
-		int height = Settings.Get().spriteHeight;
+		int x = 1;
+		int y = verticalIndex * Settings.Get().spriteHeight + verticalIndex + 1;
+		int width = Settings.Get().spriteWidth-1;
+		int height = Settings.Get().spriteHeight-1;
 		return new Sprite(_spriteSheet, x, y, width, height);
 	}
 
