@@ -44,7 +44,7 @@ def fixCase(line):
 	ex2 = ['DrawDepth','ConsoleText']
 	
 	for method in methods:
-		if (method+'(' in line or method + ' (' in line) and (' ' + method in line or '.'+method in line):
+		if (method+'(' in line or method + ' (' in line) and (' ' + method in line or '.'+method in line or '('+method in line or '( '+method in line):
 			fail = method in classes			
 			if not fail:	
 				line = line.replace(method,camel(method))		
