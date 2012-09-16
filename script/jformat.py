@@ -41,10 +41,7 @@ camel = lambda s: s[:1].lower() + s[1:] if s else ''
 def fixCase(line):
 	for method in methods:
 		if method in line:
-		
-			print line
-			line = line.replace(method,camel(method))
-			print line
+			line = line.replace(method,camel(method))			
 
 methods = []
 def transform(path):
