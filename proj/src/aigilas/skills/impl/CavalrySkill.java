@@ -9,19 +9,19 @@ import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 
 public class CavalrySkill extends ISkill {
-	public CavalrySkill()
+    public CavalrySkill()
 
-	{
-		super(SkillId.CAVALRY, AnimationType.SELF);
+    {
+        super(SkillId.CAVALRY, AnimationType.SELF);
 
-		Add(Elements.DARK, Elements.EARTH);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.DARK, Elements.EARTH);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		ApplyToPlayers(Status.DefenseUp);
-	}
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        ApplyToPlayers(Status.DefenseUp);
+    }
 }

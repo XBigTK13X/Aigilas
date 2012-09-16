@@ -10,23 +10,23 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class DartSkill extends ISkill {
-	public DartSkill()
+    public DartSkill()
 
-	{
-		super(SkillId.DART, AnimationType.RANGED);
+    {
+        super(SkillId.DART, AnimationType.RANGED);
 
-		AddCost(StatType.MANA, 10);
-		Add(Elements.DARK);
+        AddCost(StatType.MANA, 10);
+        Add(Elements.DARK);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.Poison);
-		target.ApplyDamage(5, _source);
+    {
+        StatusFactory.Apply(target, Status.Poison);
+        target.ApplyDamage(5, _source);
 
-	}
+    }
 
 }

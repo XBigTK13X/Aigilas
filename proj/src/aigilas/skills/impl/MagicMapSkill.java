@@ -8,21 +8,21 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class MagicMapSkill extends ISkill {
-	public MagicMapSkill()
+    public MagicMapSkill()
 
-	{
-		super(SkillId.MAGIC_MAP, AnimationType.RANGED);
+    {
+        super(SkillId.MAGIC_MAP, AnimationType.RANGED);
 
-		Add(Elements.LIGHT);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.LIGHT);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
+    {
 
-	}
+    }
 
 }

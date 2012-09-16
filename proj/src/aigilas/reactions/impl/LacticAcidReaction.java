@@ -6,10 +6,10 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class LacticAcidReaction implements IReaction {
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.WeakMuscles);
-	}
+    {
+        StatusFactory.Apply(target, Status.WeakMuscles);
+    }
 }

@@ -10,22 +10,22 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class MutinySkill extends ISkill {
-	public MutinySkill()
+    public MutinySkill()
 
-	{
-		super(SkillId.MUTINY, AnimationType.RANGED);
+    {
+        super(SkillId.MUTINY, AnimationType.RANGED);
 
-		Add(Elements.MENTAL, Elements.PHYSICAL);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.MENTAL, Elements.PHYSICAL);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.Mutiny);
+    {
+        StatusFactory.Apply(target, Status.Mutiny);
 
-	}
+    }
 
 }

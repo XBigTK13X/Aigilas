@@ -10,21 +10,21 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class SoulReinforcementSkill extends ISkill {
-	public SoulReinforcementSkill()
+    public SoulReinforcementSkill()
 
-	{
-		super(SkillId.SOUL_REINFORCEMENT, AnimationType.SELF);
+    {
+        super(SkillId.SOUL_REINFORCEMENT, AnimationType.SELF);
 
-		Add(Elements.LIGHT);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.LIGHT);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		StatusFactory.Apply(source, Status.Berserk);
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        StatusFactory.Apply(source, Status.Berserk);
 
-	}
+    }
 
 }

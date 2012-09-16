@@ -5,11 +5,11 @@ import aigilas.creatures.ICreature;
 import aigilas.statuses.IStatus;
 
 public class BlindStatus extends IStatus {
-	public BlindStatus(ICreature target)
+    public BlindStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_prevents.add(CreatureAction.WontHitNonTargets);
-	}
+        _prevents.add(CreatureAction.WontHitNonTargets);
+    }
 }

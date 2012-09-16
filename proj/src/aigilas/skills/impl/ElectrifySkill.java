@@ -10,21 +10,21 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class ElectrifySkill extends ISkill {
-	public ElectrifySkill()
+    public ElectrifySkill()
 
-	{
-		super(SkillId.ELECTRIFY, AnimationType.SELF);
+    {
+        super(SkillId.ELECTRIFY, AnimationType.SELF);
 
-		Add(Elements.AIR);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.AIR);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		StatusFactory.Apply(source, Status.Electrify);
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        StatusFactory.Apply(source, Status.Electrify);
 
-	}
+    }
 
 }

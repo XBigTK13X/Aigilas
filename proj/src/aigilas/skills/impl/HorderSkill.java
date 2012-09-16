@@ -10,21 +10,21 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class HorderSkill extends ISkill {
-	public HorderSkill()
+    public HorderSkill()
 
-	{
-		super(SkillId.HORDER, AnimationType.SELF);
+    {
+        super(SkillId.HORDER, AnimationType.SELF);
 
-		Add(Elements.MENTAL);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.MENTAL);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		StatusFactory.Apply(source, Status.Hord);
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        StatusFactory.Apply(source, Status.Hord);
 
-	}
+    }
 
 }

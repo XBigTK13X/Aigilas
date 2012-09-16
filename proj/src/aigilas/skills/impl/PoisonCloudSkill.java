@@ -10,22 +10,22 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class PoisonCloudSkill extends ISkill {
-	public PoisonCloudSkill()
+    public PoisonCloudSkill()
 
-	{
-		super(SkillId.POISON_CLOUD, AnimationType.CLOUD);
+    {
+        super(SkillId.POISON_CLOUD, AnimationType.CLOUD);
 
-		Add(Elements.MENTAL);
-		AddCost(StatType.MANA, 0);
+        Add(Elements.MENTAL);
+        AddCost(StatType.MANA, 0);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.Poison);
+    {
+        StatusFactory.Apply(target, Status.Poison);
 
-	}
+    }
 
 }

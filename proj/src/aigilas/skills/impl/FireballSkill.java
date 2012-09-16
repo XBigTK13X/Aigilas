@@ -8,22 +8,22 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class FireballSkill extends ISkill {
-	public FireballSkill()
+    public FireballSkill()
 
-	{
-		super(SkillId.FIREBALL, AnimationType.RANGED);
+    {
+        super(SkillId.FIREBALL, AnimationType.RANGED);
 
-		Add(Elements.FIRE);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.FIRE);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		target.ApplyDamage(20, _source);
+    {
+        target.ApplyDamage(20, _source);
 
-	}
+    }
 
 }

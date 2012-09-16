@@ -6,10 +6,10 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class SweatReaction implements IReaction {
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.SlowDown);
-	}
+    {
+        StatusFactory.Apply(target, Status.SlowDown);
+    }
 }

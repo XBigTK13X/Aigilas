@@ -6,10 +6,10 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class DrownReaction implements IReaction {
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.Mute);
-	}
+    {
+        StatusFactory.Apply(target, Status.Mute);
+    }
 }

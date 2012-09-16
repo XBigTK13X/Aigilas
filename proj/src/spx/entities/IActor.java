@@ -3,7 +3,7 @@ package spx.entities;
 import spx.bridge.ActorType;
 
 public interface IActor extends IEntity {
-	ActorType GetActorType();
+    ActorType GetActorType();
 
-	void PerformInteraction();
+    void PerformInteraction();
 }

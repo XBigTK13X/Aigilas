@@ -6,10 +6,10 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusComponent;
 
 public class BerserkStatus extends IStatus {
-	public BerserkStatus(ICreature target)
+    public BerserkStatus(ICreature target)
 
-	{
-		super(target);
-		Add(Status.RandomBuff, StatusComponent.KillReward);
-	}
+    {
+        super(target);
+        Add(Status.RandomBuff, StatusComponent.KillReward);
+    }
 }

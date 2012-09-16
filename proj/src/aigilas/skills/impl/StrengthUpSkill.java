@@ -10,21 +10,21 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class StrengthUpSkill extends ISkill {
-	public StrengthUpSkill()
+    public StrengthUpSkill()
 
-	{
-		super(SkillId.STRENGTH_UP, AnimationType.SELF);
+    {
+        super(SkillId.STRENGTH_UP, AnimationType.SELF);
 
-		Add(Elements.FIRE);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.FIRE);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		StatusFactory.Apply(source, Status.StrengthUp);
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        StatusFactory.Apply(source, Status.StrengthUp);
 
-	}
+    }
 
 }

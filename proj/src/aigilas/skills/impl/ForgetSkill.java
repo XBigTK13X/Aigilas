@@ -10,21 +10,21 @@ import aigilas.skills.SkillId;
 public class ForgetSkill extends ISkill
 
 {
-	public ForgetSkill()
+    public ForgetSkill()
 
-	{
-		super(SkillId.FORGET_SKILL, AnimationType.SELF);
+    {
+        super(SkillId.FORGET_SKILL, AnimationType.SELF);
 
-		Add(Elements.MENTAL);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.MENTAL);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		_source.RemoveLeastUsedSkill();
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        _source.RemoveLeastUsedSkill();
 
-	}
+    }
 
 }

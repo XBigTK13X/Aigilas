@@ -8,19 +8,19 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class AcidNozzleSkill extends ISkill {
-	public AcidNozzleSkill()
+    public AcidNozzleSkill()
 
-	{
-		super(SkillId.ACID_NOZZLE, AnimationType.STATIONARY);
+    {
+        super(SkillId.ACID_NOZZLE, AnimationType.STATIONARY);
 
-		AddCost(StatType.MANA, 10);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		CreatureFactory.CreateMinion(_implementationId, source);
+    @Override
+    public void Activate(ICreature source) {
+        CreatureFactory.CreateMinion(_implementationId, source);
 
-	}
+    }
 
 }

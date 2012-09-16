@@ -1,7 +1,5 @@
 package aigilas.skills.impl;
 
-import java.util.HashMap;
-
 import aigilas.creatures.CreatureFactory;
 import aigilas.creatures.ICreature;
 import aigilas.creatures.StatType;
@@ -10,51 +8,51 @@ import aigilas.skills.AnimationType;
 import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
+import java.util.HashMap;
+
 public class RemoteMineSkill extends ISkill {
-	private static HashMap<ICreature, RemoteMineSkill> _cache = new HashMap<ICreature, RemoteMineSkill>();
+    private static HashMap<ICreature, RemoteMineSkill> _cache = new HashMap<ICreature, RemoteMineSkill>();
 
-	public RemoteMineSkill()
+    public RemoteMineSkill()
 
-	{
-		super(SkillId.REMOTE_MINE, AnimationType.STATIONARY);
+    {
+        super(SkillId.REMOTE_MINE, AnimationType.STATIONARY);
 
-		AddCost(StatType.MANA, 10);
-		Add(Elements.FIRE);
+        AddCost(StatType.MANA, 10);
+        Add(Elements.FIRE);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		if (!_cache.containsKey(source)) {
-			_cache.put(source, this);
-			super.Activate(source);
+    @Override
+    public void Activate(ICreature source) {
+        if (!_cache.containsKey(source)) {
+            _cache.put(source, this);
+            super.Activate(source);
 
-		}
-		else {
-			if (_cache.get(source).IsActive()) {
-				_cache.get(source).Explode(source);
-				_cache.get(source).Cleanup(source, null);
-				_cache.remove(source);
-				Cleanup(source, null);
+        } else {
+            if (_cache.get(source).IsActive()) {
+                _cache.get(source).Explode(source);
+                _cache.get(source).Cleanup(source, null);
+                _cache.remove(source);
+                Cleanup(source, null);
 
-			}
-			else {
-				_cache.remove(source);
-				_cache.put(source, this);
-				super.Activate(source);
+            } else {
+                _cache.remove(source);
+                _cache.put(source, this);
+                super.Activate(source);
 
-			}
+            }
 
-		}
+        }
 
-	}
+    }
 
-	private void Explode(ICreature source) {
-		if (_behavior.GetGraphic() != null) {
-			CreatureFactory.CreateMinion(SkillId.EXPLODE, _source, _behavior.GetGraphic(), _behavior.GetGraphic().GetLocation());
+    private void Explode(ICreature source) {
+        if (_behavior.GetGraphic() != null) {
+            CreatureFactory.CreateMinion(SkillId.EXPLODE, _source, _behavior.GetGraphic(), _behavior.GetGraphic().GetLocation());
 
-		}
+        }
 
-	}
+    }
 
 }

@@ -10,22 +10,22 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class WeakKneesSkill extends ISkill {
-	public WeakKneesSkill()
+    public WeakKneesSkill()
 
-	{
-		super(SkillId.WEAK_KNEEES, AnimationType.RANGED);
+    {
+        super(SkillId.WEAK_KNEEES, AnimationType.RANGED);
 
-		Add(Elements.PHYSICAL);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.PHYSICAL);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.WeakKnees);
+    {
+        StatusFactory.Apply(target, Status.WeakKnees);
 
-	}
+    }
 
 }

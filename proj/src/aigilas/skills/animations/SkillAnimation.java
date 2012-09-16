@@ -1,13 +1,13 @@
 package aigilas.skills.animations;
 
-import spx.core.Point2;
 import aigilas.creatures.ICreature;
 import aigilas.entities.SkillEffect;
+import spx.core.Point2;
 
 public class SkillAnimation {
-	protected SkillAnimation() {
-	}
+    protected SkillAnimation() {
+    }
 
-	public void Animate(SkillEffect skill, ICreature source, Point2 velocity) {
-	}
+    public void Animate(SkillEffect skill, ICreature source, Point2 velocity) {
+    }
 }

@@ -9,21 +9,21 @@ import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 
 public class SpeedUpSkill extends ISkill {
-	public SpeedUpSkill()
+    public SpeedUpSkill()
 
-	{
-		super(SkillId.SPEED_UP, AnimationType.SELF);
+    {
+        super(SkillId.SPEED_UP, AnimationType.SELF);
 
-		Add(Elements.WATER);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.WATER);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		ApplyToPlayers(Status.SpeedUp);
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        ApplyToPlayers(Status.SpeedUp);
 
-	}
+    }
 
 }

@@ -5,11 +5,11 @@ import aigilas.entities.Elements;
 import aigilas.statuses.IStatus;
 
 public class SoakingWetStatus extends IStatus {
-	public SoakingWetStatus(ICreature target)
+    public SoakingWetStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_blockedElements.add(Elements.FIRE);
-	}
+        _blockedElements.add(Elements.FIRE);
+    }
 }

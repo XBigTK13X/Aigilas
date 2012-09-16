@@ -5,17 +5,17 @@ import aigilas.strategies.IStrategy;
 import aigilas.strategies.Strategy;
 
 public class MinionCloudStrategy extends IStrategy {
-	public MinionCloudStrategy(ICreature parent)
+    public MinionCloudStrategy(ICreature parent)
 
-	{
-		super(parent, Strategy.MinionCloud);
+    {
+        super(parent, Strategy.MinionCloud);
 
-		parent.SetSkillVector(parent.GetSkillVector());
-	}
+        parent.SetSkillVector(parent.GetSkillVector());
+    }
 
-	@Override
-	public void Act() {
-		_parent.UseActiveSkill();
-		_parent.SetInactive();
-	}
+    @Override
+    public void Act() {
+        _parent.UseActiveSkill();
+        _parent.SetInactive();
+    }
 }

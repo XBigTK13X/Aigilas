@@ -3,27 +3,27 @@ package spx.net;
 import aigilas.management.Commands;
 
 public interface IClient {
-	boolean IsActive(Commands command, int playerIndex);
+    boolean IsActive(Commands command, int playerIndex);
 
-	boolean NextTurn();
+    boolean NextTurn();
 
-	void SetState(Commands command, int playerIndex, boolean isActive);
+    void SetState(Commands command, int playerIndex, boolean isActive);
 
-	int GetPlayerCount();
+    int GetPlayerCount();
 
-	void Update();
+    void Update();
 
-	int GetFirstPlayerIndex();
+    int GetFirstPlayerIndex();
 
-	void DungeonHasLoaded();
+    void DungeonHasLoaded();
 
-	void HeartBeat();
+    void HeartBeat();
 
-	boolean IsConnected();
+    boolean IsConnected();
 
-	boolean IsGameStarting();
+    boolean IsGameStarting();
 
-	void PrepareForNextTurn();
+    void PrepareForNextTurn();
 
-	void StartGame();
+    void StartGame();
 }

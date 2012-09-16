@@ -6,12 +6,12 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.IStatus;
 
 public class IntDownStatus extends IStatus {
-	public IntDownStatus(ICreature target)
+    public IntDownStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_buff = new StatBuff(StatType.WISDOM, -10);
-		Setup();
-	}
+        _buff = new StatBuff(StatType.WISDOM, -10);
+        Setup();
+    }
 }

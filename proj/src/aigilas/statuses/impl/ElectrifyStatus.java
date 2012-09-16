@@ -6,11 +6,11 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusComponent;
 
 public class ElectrifyStatus extends IStatus {
-	public ElectrifyStatus(ICreature target)
+    public ElectrifyStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		Add(Status.Zap, StatusComponent.Passive);
-	}
+        Add(Status.Zap, StatusComponent.Passive);
+    }
 }

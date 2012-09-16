@@ -6,10 +6,10 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class BlankReaction implements IReaction {
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.PreventMentalUsage);
-	}
+    {
+        StatusFactory.Apply(target, Status.PreventMentalUsage);
+    }
 }

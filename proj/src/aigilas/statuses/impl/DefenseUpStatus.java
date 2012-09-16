@@ -6,12 +6,12 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.IStatus;
 
 public class DefenseUpStatus extends IStatus {
-	public DefenseUpStatus(ICreature target)
+    public DefenseUpStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_buff = new StatBuff(StatType.DEFENSE, 10);
-		Setup();
-	}
+        _buff = new StatBuff(StatType.DEFENSE, 10);
+        Setup();
+    }
 }

@@ -6,25 +6,25 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 
 public class SelfMutilationStatus extends IStatus {
-	private Strategy previousStrategy;
+    private Strategy previousStrategy;
 
-	public SelfMutilationStatus(ICreature target)
+    public SelfMutilationStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-	}
+    }
 
-	@Override
-	public void Setup() {
-		super.Setup();
-		previousStrategy = _target.GetStrategyId();
-		_target.SetStrategy(StrategyFactory.Create(Strategy.AttackSelf, _target));
-	}
+    @Override
+    public void Setup() {
+        super.Setup();
+        previousStrategy = _target.GetStrategyId();
+        _target.SetStrategy(StrategyFactory.Create(Strategy.AttackSelf, _target));
+    }
 
-	@Override
-	public void Cleanup() {
-		super.Cleanup();
-		_target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
-	}
+    @Override
+    public void Cleanup() {
+        super.Cleanup();
+        _target.SetStrategy(StrategyFactory.Create(previousStrategy, _target));
+    }
 }

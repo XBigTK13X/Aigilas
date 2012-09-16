@@ -6,12 +6,12 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.IStatus;
 
 public class ManaUpStatus extends IStatus {
-	public ManaUpStatus(ICreature target)
+    public ManaUpStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_buff = new StatBuff(StatType.MANA, 20f);
-		Setup();
-	}
+        _buff = new StatBuff(StatType.MANA, 20f);
+        Setup();
+    }
 }

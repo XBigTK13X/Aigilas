@@ -8,21 +8,21 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class MimicSkill extends ISkill {
-	public MimicSkill()
+    public MimicSkill()
 
-	{
-		super(SkillId.MIMIC, AnimationType.RANGED);
+    {
+        super(SkillId.MIMIC, AnimationType.RANGED);
 
-		Add(Elements.DARK);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.DARK);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
+    {
 
-	}
+    }
 
 }

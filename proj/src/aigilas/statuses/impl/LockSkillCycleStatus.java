@@ -5,11 +5,11 @@ import aigilas.creatures.ICreature;
 import aigilas.statuses.IStatus;
 
 public class LockSkillCycleStatus extends IStatus {
-	public LockSkillCycleStatus(ICreature target)
+    public LockSkillCycleStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_prevents.add(CreatureAction.SkillCycle);
-	}
+        _prevents.add(CreatureAction.SkillCycle);
+    }
 }

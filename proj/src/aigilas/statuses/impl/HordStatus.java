@@ -6,12 +6,12 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.IStatus;
 
 public class HordStatus extends IStatus {
-	public HordStatus(ICreature target)
+    public HordStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
-		Setup();
-	}
+        _buff = new StatBuff(StatType.STRENGTH, target.GetInventoryCount());
+        Setup();
+    }
 }

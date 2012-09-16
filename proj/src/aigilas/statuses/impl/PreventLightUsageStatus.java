@@ -5,11 +5,11 @@ import aigilas.entities.Elements;
 import aigilas.statuses.IStatus;
 
 public class PreventLightUsageStatus extends IStatus {
-	public PreventLightUsageStatus(ICreature target)
+    public PreventLightUsageStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_blockedElements.add(Elements.LIGHT);
-	}
+        _blockedElements.add(Elements.LIGHT);
+    }
 }

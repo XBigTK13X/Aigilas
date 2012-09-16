@@ -8,21 +8,21 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class ValedictorianSkill extends ISkill {
-	public ValedictorianSkill()
+    public ValedictorianSkill()
 
-	{
-		super(SkillId.VALEDICTORIAN, AnimationType.RANGED);
+    {
+        super(SkillId.VALEDICTORIAN, AnimationType.RANGED);
 
-		Add(Elements.MENTAL, Elements.LIGHT);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.MENTAL, Elements.LIGHT);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
+    {
 
-	}
+    }
 
 }

@@ -5,11 +5,11 @@ import aigilas.entities.Elements;
 import aigilas.statuses.IStatus;
 
 public class PreventDarkUsageStatus extends IStatus {
-	public PreventDarkUsageStatus(ICreature target)
+    public PreventDarkUsageStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_blockedElements.add(Elements.DARK);
-	}
+        _blockedElements.add(Elements.DARK);
+    }
 }

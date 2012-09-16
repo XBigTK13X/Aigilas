@@ -5,10 +5,10 @@ import aigilas.creatures.StatType;
 import aigilas.reactions.IReaction;
 
 public class FastForwardReaction implements IReaction {
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		target.ApplyDamage(-1, null, false, StatType.AGE);
-	}
+    {
+        target.ApplyDamage(-1, null, false, StatType.AGE);
+    }
 }

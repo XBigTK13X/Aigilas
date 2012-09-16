@@ -5,16 +5,15 @@ import aigilas.items.ItemFactory;
 import aigilas.reactions.IReaction;
 
 public class CraftsmanReaction implements IReaction {
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		try {
-			ItemFactory.CreateRandomPlain(target.GetLocation());
-		}
-		catch (Exception e) {
+    {
+        try {
+            ItemFactory.CreateRandomPlain(target.GetLocation());
+        } catch (Exception e) {
 
-			e.printStackTrace();
-		}
-	}
+            e.printStackTrace();
+        }
+    }
 }

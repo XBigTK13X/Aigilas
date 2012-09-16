@@ -5,11 +5,11 @@ import aigilas.creatures.ICreature;
 import aigilas.statuses.IStatus;
 
 public class PreventRegenerationStatus extends IStatus {
-	public PreventRegenerationStatus(ICreature target)
+    public PreventRegenerationStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_prevents.add(CreatureAction.Regeneration);
-	}
+        _prevents.add(CreatureAction.Regeneration);
+    }
 }

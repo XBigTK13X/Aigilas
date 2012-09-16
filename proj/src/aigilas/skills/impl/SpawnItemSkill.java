@@ -9,21 +9,21 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class SpawnItemSkill extends ISkill {
-	public SpawnItemSkill()
+    public SpawnItemSkill()
 
-	{
-		super(SkillId.SPAWN_ITEM, AnimationType.SELF);
+    {
+        super(SkillId.SPAWN_ITEM, AnimationType.SELF);
 
-		Add(Elements.EARTH);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.EARTH);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		ItemFactory.CreateRandomPlain(source.GetLocation());
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        ItemFactory.CreateRandomPlain(source.GetLocation());
 
-	}
+    }
 
 }

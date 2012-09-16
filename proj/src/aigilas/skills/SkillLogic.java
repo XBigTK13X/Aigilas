@@ -4,7 +4,6 @@ import aigilas.entities.Elements;
 import spx.bridge.ActorType;
 import spx.core.RNG;
 import spx.devtools.DevConsole;
-import sun.util.calendar.CalendarSystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,14 +16,15 @@ public class SkillLogic {
     private static List<SkillId> __invalidRandomSkills = new ArrayList<>();
     private static int skillPick = 0;
 
-    private SkillLogic(){}
+    private SkillLogic() {
+    }
 
-    static{
+    static {
         if (__elementMap.size() == 0) {
             ISkill skill;
             for (SkillId skillId : SkillId.values()) {
                 if (skillId != SkillId.NO_SKILL) {
-                    if(!skillId.Restrict){
+                    if (!skillId.Restrict) {
                         __invalidRandomSkills.add(skillId);
                     }
                     skill = SkillFactory.Create(skillId);

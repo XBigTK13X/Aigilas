@@ -6,10 +6,10 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class MetabolismReaction implements IReaction {
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		StatusFactory.Apply(target, Status.PreventRegeneration);
-	}
+    {
+        StatusFactory.Apply(target, Status.PreventRegeneration);
+    }
 }

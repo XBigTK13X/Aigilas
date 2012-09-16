@@ -5,12 +5,12 @@ import aigilas.creatures.ICreature;
 import aigilas.statuses.IStatus;
 
 public class WeakKneesStatus extends IStatus {
-	public WeakKneesStatus(ICreature target)
+    public WeakKneesStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_prevents.add(CreatureAction.Movement);
-		_prevents.add(CreatureAction.Attacking);
-	}
+        _prevents.add(CreatureAction.Movement);
+        _prevents.add(CreatureAction.Attacking);
+    }
 }

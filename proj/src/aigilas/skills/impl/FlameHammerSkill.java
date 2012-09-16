@@ -8,22 +8,22 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class FlameHammerSkill extends ISkill {
-	public FlameHammerSkill()
+    public FlameHammerSkill()
 
-	{
-		super(SkillId.FLAME_HAMMER, AnimationType.ROTATE);
+    {
+        super(SkillId.FLAME_HAMMER, AnimationType.ROTATE);
 
-		Add(Elements.FIRE);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.FIRE);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		target.ApplyDamage(3f, _source);
+    {
+        target.ApplyDamage(3f, _source);
 
-	}
+    }
 
 }

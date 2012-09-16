@@ -1,7 +1,7 @@
 package aigilas.statuses;
 
 public enum StatusComponent {
-	Passive,
-	Contagion,
-	KillReward
+    Passive,
+    Contagion,
+    KillReward
 }

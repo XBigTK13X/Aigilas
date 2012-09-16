@@ -9,21 +9,21 @@ import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 
 public class EnvenomSkill extends ISkill {
-	public EnvenomSkill()
+    public EnvenomSkill()
 
-	{
-		super(SkillId.ENVENOM, AnimationType.SELF);
+    {
+        super(SkillId.ENVENOM, AnimationType.SELF);
 
-		Add(Elements.EARTH);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.EARTH);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		ApplyToPlayers(Status.PoisonOneHit);
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        ApplyToPlayers(Status.PoisonOneHit);
 
-	}
+    }
 
 }

@@ -6,12 +6,12 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.IStatus;
 
 public class StrengthUpStatus extends IStatus {
-	public StrengthUpStatus(ICreature target)
+    public StrengthUpStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_buff = new StatBuff(StatType.STRENGTH, 10f);
-		Setup();
-	}
+        _buff = new StatBuff(StatType.STRENGTH, 10f);
+        Setup();
+    }
 }

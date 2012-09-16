@@ -8,22 +8,22 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class ExplodeSkill extends ISkill {
-	public ExplodeSkill()
+    public ExplodeSkill()
 
-	{
-		super(SkillId.EXPLODE, AnimationType.CLOUD);
+    {
+        super(SkillId.EXPLODE, AnimationType.CLOUD);
 
-		Add(Elements.FIRE);
-		AddCost(StatType.MANA, 0);
+        Add(Elements.FIRE);
+        AddCost(StatType.MANA, 0);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		target.ApplyDamage(10, _source, true);
+    {
+        target.ApplyDamage(10, _source, true);
 
-	}
+    }
 
 }

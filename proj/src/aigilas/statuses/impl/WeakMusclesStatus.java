@@ -6,12 +6,12 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.IStatus;
 
 public class WeakMusclesStatus extends IStatus {
-	public WeakMusclesStatus(ICreature target)
+    public WeakMusclesStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_buff = new StatBuff(StatType.STRENGTH, -10);
-		Setup();
-	}
+        _buff = new StatBuff(StatType.STRENGTH, -10);
+        Setup();
+    }
 }

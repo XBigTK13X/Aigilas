@@ -5,11 +5,11 @@ import aigilas.creatures.ICreature;
 import aigilas.statuses.IStatus;
 
 public class BlockHealingStatus extends IStatus {
-	public BlockHealingStatus(ICreature target)
+    public BlockHealingStatus(ICreature target)
 
-	{
-		super(target);
+    {
+        super(target);
 
-		_prevents.add(CreatureAction.ReceiveHealing);
-	}
+        _prevents.add(CreatureAction.ReceiveHealing);
+    }
 }

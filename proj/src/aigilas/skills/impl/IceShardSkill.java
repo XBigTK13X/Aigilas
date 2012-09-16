@@ -8,22 +8,22 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class IceShardSkill extends ISkill {
-	public IceShardSkill()
+    public IceShardSkill()
 
-	{
-		super(SkillId.ICE_SHARD, AnimationType.CLOUD);
+    {
+        super(SkillId.ICE_SHARD, AnimationType.CLOUD);
 
-		Add(Elements.WATER);
-		AddCost(StatType.MANA, 0);
+        Add(Elements.WATER);
+        AddCost(StatType.MANA, 0);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		target.ApplyDamage(10, _source, true);
+    {
+        target.ApplyDamage(10, _source, true);
 
-	}
+    }
 
 }

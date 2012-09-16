@@ -8,25 +8,25 @@ import aigilas.skills.ISkill;
 import aigilas.skills.SkillId;
 
 public class AbsorbSkill extends ISkill {
-	public AbsorbSkill()
+    public AbsorbSkill()
 
-	{
-		super(SkillId.ABSORB, AnimationType.RANGED);
+    {
+        super(SkillId.ABSORB, AnimationType.RANGED);
 
-		Add(Elements.LIGHT);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.LIGHT);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Affect(ICreature target)
+    @Override
+    public void Affect(ICreature target)
 
-	{
-		target.ApplyDamage(10, _source);
-		_source.ApplyDamage(-10);
-		target.ApplyDamage(10, _source, true, StatType.MANA);
-		_source.ApplyDamage(-10, _source, true, StatType.MANA);
+    {
+        target.ApplyDamage(10, _source);
+        _source.ApplyDamage(-10);
+        target.ApplyDamage(10, _source, true, StatType.MANA);
+        _source.ApplyDamage(-10, _source, true, StatType.MANA);
 
-	}
+    }
 
 }

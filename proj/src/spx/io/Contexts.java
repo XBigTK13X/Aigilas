@@ -1,8 +1,8 @@
 package spx.io;
 
 public enum Contexts {
-	All,
-	Nonfree,
-	Free,
-	Inventory;
+    All,
+    Nonfree,
+    Free,
+    Inventory;
 }

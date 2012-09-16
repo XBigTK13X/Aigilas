@@ -1,54 +1,54 @@
 package spx.text;
 
+import spx.core.SpxManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import spx.core.SpxManager;
-
 public class ActionTextHandler {
-	private ActionText[] defaultPool = new ActionText[100];
-	private int defaultIndex = 0;
+    private ActionText[] defaultPool = new ActionText[100];
+    private int defaultIndex = 0;
 
-	private List<Text> _contents = new ArrayList<Text>();
+    private List<Text> _contents = new ArrayList<Text>();
 
-	public ActionTextHandler() {
-		for (int ii = 0; ii < defaultPool.length; ii++) {
-			defaultPool[ii] = new ActionText();
-		}
-	}
+    public ActionTextHandler() {
+        for (int ii = 0; ii < defaultPool.length; ii++) {
+            defaultPool[ii] = new ActionText();
+        }
+    }
 
-	public void WriteAction(String contents, int lifespan, int x, int y) {
-		defaultPool[defaultIndex].Reset(contents, lifespan, x, y);
-		Add(defaultPool[defaultIndex]);
-		defaultIndex = (defaultIndex + 1) % defaultPool.length;
-	}
+    public void WriteAction(String contents, int lifespan, int x, int y) {
+        defaultPool[defaultIndex].Reset(contents, lifespan, x, y);
+        Add(defaultPool[defaultIndex]);
+        defaultIndex = (defaultIndex + 1) % defaultPool.length;
+    }
 
-	public void Add(Text textToAdd) {
-		if (!_contents.contains(textToAdd)) {
-			_contents.add(textToAdd);
-			TextManager.Add(textToAdd);
-		}
-	}
+    public void Add(Text textToAdd) {
+        if (!_contents.contains(textToAdd)) {
+            _contents.add(textToAdd);
+            TextManager.Add(textToAdd);
+        }
+    }
 
-	public void Clear() {
-		_contents.clear();
-	}
+    public void Clear() {
+        _contents.clear();
+    }
 
-	public void Update() {
-		for (int ii = 0; ii < _contents.size(); ii++) {
-			if (_contents.get(ii).Update() <= 0) {
-				_contents.remove(_contents.get(ii));
-				ii--;
-			}
-		}
-	}
+    public void Update() {
+        for (int ii = 0; ii < _contents.size(); ii++) {
+            if (_contents.get(ii).Update() <= 0) {
+                _contents.remove(_contents.get(ii));
+                ii--;
+            }
+        }
+    }
 
-	public void Draw() {
+    public void Draw() {
 
-		if (SpxManager.Renderer != null) {
-			for (Text component : _contents) {
-				component.Draw();
-			}
-		}
-	}
+        if (SpxManager.Renderer != null) {
+            for (Text component : _contents) {
+                component.Draw();
+            }
+        }
+    }
 }

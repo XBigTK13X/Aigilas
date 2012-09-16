@@ -10,21 +10,21 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class PlagueSkill extends ISkill {
-	public PlagueSkill()
+    public PlagueSkill()
 
-	{
-		super(SkillId.STRENGTH_UP, AnimationType.SELF);
+    {
+        super(SkillId.STRENGTH_UP, AnimationType.SELF);
 
-		Add(Elements.MENTAL);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.MENTAL);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		super.Activate(source);
-		StatusFactory.Apply(source, Status.Toxic);
+    @Override
+    public void Activate(ICreature source) {
+        super.Activate(source);
+        StatusFactory.Apply(source, Status.Toxic);
 
-	}
+    }
 
 }

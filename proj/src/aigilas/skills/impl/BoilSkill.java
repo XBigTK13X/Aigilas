@@ -10,20 +10,20 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class BoilSkill extends ISkill {
-	public BoilSkill()
+    public BoilSkill()
 
-	{
-		super(SkillId.BOIL, AnimationType.SELF);
+    {
+        super(SkillId.BOIL, AnimationType.SELF);
 
-		Add(Elements.AIR);
-		AddCost(StatType.MANA, 10);
+        Add(Elements.AIR);
+        AddCost(StatType.MANA, 10);
 
-	}
+    }
 
-	@Override
-	public void Activate(ICreature source) {
-		StatusFactory.Apply(source, Status.Boil);
+    @Override
+    public void Activate(ICreature source) {
+        StatusFactory.Apply(source, Status.Boil);
 
-	}
+    }
 
 }

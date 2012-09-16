@@ -4,15 +4,15 @@ import spx.bridge.ActorType;
 import spx.core.Point2;
 
 public interface IActorFactory {
-	IActor Create(ActorType actorType, Point2 position);
+    IActor Create(ActorType actorType, Point2 position);
 
-	IActor GenerateActor(ActorType actorType);
+    IActor GenerateActor(ActorType actorType);
 
-	IActor CreateRandom(Point2 randomPoint);
+    IActor CreateRandom(Point2 randomPoint);
 
-	void ResetPlayerCount();
+    void ResetPlayerCount();
 
-	void IncreasePlayerCount();
+    void IncreasePlayerCount();
 
-	int GetPlayerCount();
+    int GetPlayerCount();
 }
