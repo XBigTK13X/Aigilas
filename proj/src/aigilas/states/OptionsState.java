@@ -57,6 +57,11 @@ public class OptionsState implements State {
     }
 
     @Override
+    public void unload() {
+
+    }
+
+    @Override
     public void draw() {
         _text.draw();
         _text.clear();

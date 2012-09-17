@@ -20,10 +20,8 @@ public class FlameHammerSkill extends ISkill {
 
     @Override
     public void affect(ICreature target)
-
     {
         target.applyDamage(3f, _source);
-
     }
 
 }

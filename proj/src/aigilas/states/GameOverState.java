@@ -9,18 +9,17 @@ import spx.states.State;
 import spx.states.StateManager;
 
 public class GameOverState implements State {
-    private final Texture _menuBase;
+    private final Texture _gameOver;
 
     public GameOverState() {
-        _menuBase = SpxManager.getGameOverAsset();
+        _gameOver = SpxManager.getGameOverAsset();
     }
 
     @Override
     public void draw() {
-        float x = (SpxManager.WindowWidth - _menuBase.getWidth()) / 2;
-        float y = (SpxManager.WindowHeight - _menuBase.getHeight()) / 2;
-
-        SpxManager.Renderer.draw(_menuBase, new Point2(x, y));
+        float x = (SpxManager.WindowWidth - _gameOver.getWidth()) / 2;
+        float y = (SpxManager.WindowHeight - _gameOver.getHeight()) / 2;
+        SpxManager.Renderer.draw(_gameOver, new Point2(x, y));
     }
 
     @Override
@@ -32,6 +31,11 @@ public class GameOverState implements State {
 
     @Override
     public void loadContent() {
+
+    }
+
+    @Override
+    public void unload() {
 
     }
 }

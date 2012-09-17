@@ -6,4 +6,6 @@ public interface State {
     void update();
 
     void loadContent();
+
+    void unload();
 }

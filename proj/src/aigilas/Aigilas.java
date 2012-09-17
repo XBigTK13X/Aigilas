@@ -3,12 +3,16 @@ package aigilas;
 import aigilas.management.Commands;
 import aigilas.management.InputInitializer;
 import aigilas.management.SpriteInitializer;
+import aigilas.states.GameOverState;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import spx.core.Settings;
 import spx.core.SpxManager;
 import spx.devtools.DevConsole;
+import spx.entities.EntityManager;
+import spx.entities.IActor;
 import spx.graphics.SpriteSheetManager;
 import spx.io.Input;
 import spx.io.PlayerIndex;
@@ -16,6 +20,9 @@ import spx.net.Client;
 import spx.particles.ParticleEngine;
 import spx.states.StateManager;
 import spx.text.TextManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Aigilas implements ApplicationListener {
     private boolean IsRunning = true;
