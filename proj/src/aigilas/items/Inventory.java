@@ -1,19 +1,19 @@
 package aigilas.items;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import spx.entities.EntityManager;
 
 import java.util.HashMap;
 
 public class Inventory {
-    HashMap<GenericItem, Integer> _contents = new HashMap<GenericItem, Integer>();
-    private ICreature _parent;
+    final HashMap<GenericItem, Integer> _contents = new HashMap<>();
+    private final BaseCreature _parent;
 
-    public Inventory(ICreature parent) {
+    public Inventory(BaseCreature parent) {
         _parent = parent;
     }
 
-    public ICreature getParent() {
+    public BaseCreature getParent() {
         return _parent;
     }
 
@@ -34,7 +34,7 @@ public class Inventory {
         }
     }
 
-    private HashMap<GenericItem, Integer> _itemResult = new HashMap<GenericItem, Integer>();
+    private final HashMap<GenericItem, Integer> _itemResult = new HashMap<>();
 
     public HashMap<GenericItem, Integer> getItems(ItemClass iClass) {
         _itemResult.clear();

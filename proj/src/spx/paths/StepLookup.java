@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class StepLookup {
-    private static ArrayList<HashMap<Point2, Point2>> __lookups = new ArrayList<HashMap<Point2, Point2>>();
+    private static final ArrayList<HashMap<Point2, Point2>> __lookups = new ArrayList<>();
     private static int _index = 0;
     private static final int __lookupCount = 1000;
 

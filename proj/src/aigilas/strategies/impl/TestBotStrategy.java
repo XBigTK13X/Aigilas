@@ -1,9 +1,9 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
-import aigilas.strategies.IStrategy;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import spx.bridge.ActorType;
 import spx.bridge.EntityType;
@@ -13,8 +13,8 @@ import spx.entities.HitTest;
 import spx.entities.IEntity;
 import spx.paths.PathFinder;
 
-public class TestBotStrategy extends IStrategy {
-    public TestBotStrategy(ICreature parent) {
+public class TestBotStrategy extends BaseStrategy {
+    public TestBotStrategy(BaseCreature parent) {
         super(parent, Strategy.TestBot);
 
         _targets.addTargetTypes(ActorType.NONPLAYER);

@@ -1,15 +1,15 @@
 package aigilas.items;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 
 import java.util.HashMap;
 
 public class Equipment {
-    private HashMap<ItemSlot, GenericItem> _slots = new HashMap<>();
-    private ICreature _parent;
+    private final HashMap<ItemSlot, GenericItem> _slots = new HashMap<>();
+    private final BaseCreature _parent;
 
-    public Equipment(ICreature owner) {
+    public Equipment(BaseCreature owner) {
         _parent = owner;
     }
 
@@ -37,10 +37,7 @@ public class Equipment {
 
     public boolean isRegistered(GenericItem item) {
         ItemSlot itemClass = item.getItemClass().Slot;
-        if (_slots.containsKey(itemClass)) {
-            return (item == _slots.get(itemClass));
-        }
-        return false;
+        return _slots.containsKey(itemClass) && (item == _slots.get(itemClass));
     }
 
     private float bonusSum;

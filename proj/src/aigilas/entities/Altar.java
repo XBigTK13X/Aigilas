@@ -17,7 +17,7 @@ import spx.text.TextManager;
 import java.util.List;
 
 public class Altar extends Entity {
-    private God _god;
+    private final God _god;
     private Player _currentTarget;
     private List<IEntity> _offerings;
 

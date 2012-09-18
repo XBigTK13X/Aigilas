@@ -1,9 +1,9 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 
 public class ConfusedAndDyingStrategy extends ConfusedStrategy {
-    public ConfusedAndDyingStrategy(ICreature parent)
+    public ConfusedAndDyingStrategy(BaseCreature parent)
 
     {
         super(parent);

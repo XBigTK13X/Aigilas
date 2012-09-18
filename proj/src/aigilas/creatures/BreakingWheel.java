@@ -5,7 +5,7 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import spx.bridge.ActorType;
 
-public class BreakingWheel extends AbstractCreature {
+public class BreakingWheel extends BaseEnemy {
     public BreakingWheel() {
         super(ActorType.BREAKING_WHEEL);
         _strategy = StrategyFactory.create(Strategy.StraightLineRotate, this);

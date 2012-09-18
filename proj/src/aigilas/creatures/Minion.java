@@ -7,7 +7,7 @@ import spx.bridge.ActorType;
 import spx.core.Point2;
 import spx.core.Settings;
 
-public class Minion extends ICreature {
+public class Minion extends BaseCreature {
     public Minion(ActorType actorType, float coolDown) {
         _actorType = actorType;
         _baseStats = new Stats(80f, 999f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, coolDown);
@@ -21,7 +21,7 @@ public class Minion extends ICreature {
         this(ActorType.MINION, Settings.get().defaultSpeed);
     }
 
-    public void init(ICreature source, SkillEffect effectGraphic) {
+    public void init(BaseCreature source, SkillEffect effectGraphic) {
         _master = source;
         setup(source.getLocation(), _actorType, _baseStats, null, false);
         if (null != effectGraphic) {

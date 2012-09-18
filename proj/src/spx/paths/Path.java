@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Path {
-    public Point2 Finish = new Point2(0, 0);
-    private List<Point2> _steps = new ArrayList<Point2>();
-    private HashMap<Point2, Point2> _stepLookup = new HashMap<Point2, Point2>();
+    public final Point2 Finish = new Point2(0, 0);
+    private List<Point2> _steps = new ArrayList<>();
+    private HashMap<Point2, Point2> _stepLookup = new HashMap<>();
     private float _totalWeight = 0;
 
     public Path() {

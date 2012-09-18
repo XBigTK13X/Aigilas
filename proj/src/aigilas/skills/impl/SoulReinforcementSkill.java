@@ -1,15 +1,15 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
-public class SoulReinforcementSkill extends ISkill {
+public class SoulReinforcementSkill extends BaseSkill {
     public SoulReinforcementSkill()
 
     {
@@ -21,7 +21,7 @@ public class SoulReinforcementSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         super.activate(source);
         StatusFactory.apply(source, Status.Berserk);
 

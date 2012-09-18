@@ -1,17 +1,17 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
-import aigilas.strategies.IStrategy;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import spx.bridge.ActorType;
 
-public class AttackStrategy extends IStrategy {
+public class AttackStrategy extends BaseStrategy {
     private int _skillCooldown = 0;
-    private int _skillCooldownMax = 10;
+    private final int _skillCooldownMax = 10;
 
-    public AttackStrategy(ICreature parent, ActorType... targetTypes)
+    public AttackStrategy(BaseCreature parent, ActorType... targetTypes)
 
     {
         super(parent, Strategy.Attack);

@@ -5,7 +5,7 @@ import aigilas.management.SpriteType;
 import java.util.HashMap;
 
 public class SpriteSheetManager {
-    private static HashMap<SpriteType, SpriteInfo> __manager = new HashMap<>();
+    private static final HashMap<SpriteType, SpriteInfo> __manager = new HashMap<>();
 
     public static SpriteInfo getSpriteInfo(SpriteType spriteName) {
         return __manager.get(spriteName);

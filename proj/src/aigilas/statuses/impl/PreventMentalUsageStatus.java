@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class PreventMentalUsageStatus extends IStatus {
-    public PreventMentalUsageStatus(ICreature target)
+public class PreventMentalUsageStatus extends BaseStatus {
+    public PreventMentalUsageStatus(BaseCreature target)
 
     {
         super(target);

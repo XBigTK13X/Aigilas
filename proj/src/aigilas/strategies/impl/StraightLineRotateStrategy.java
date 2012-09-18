@@ -1,17 +1,17 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.strategies.IStrategy;
+import aigilas.creatures.BaseCreature;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import spx.bridge.ActorType;
 import spx.core.Point2;
 import spx.core.RNG;
 import spx.entities.CoordVerifier;
 
-public class StraightLineRotateStrategy extends IStrategy {
-    private Point2 _direction = new Point2(0, 1);
+public class StraightLineRotateStrategy extends BaseStrategy {
+    private final Point2 _direction = new Point2(0, 1);
 
-    public StraightLineRotateStrategy(ICreature parent, ActorType... targetTypes)
+    public StraightLineRotateStrategy(BaseCreature parent, ActorType... targetTypes)
 
     {
         super(parent, Strategy.StraightLineRotate);
@@ -21,7 +21,7 @@ public class StraightLineRotateStrategy extends IStrategy {
         }
     }
 
-    private Point2 target = new Point2(0, 0);
+    private final Point2 target = new Point2(0, 0);
 
     @Override
     public void act() {

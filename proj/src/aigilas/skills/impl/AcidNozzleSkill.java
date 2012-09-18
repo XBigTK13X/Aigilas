@@ -1,13 +1,13 @@
 package aigilas.skills.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureFactory;
-import aigilas.creatures.ICreature;
 import aigilas.creatures.StatType;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
-public class AcidNozzleSkill extends ISkill {
+public class AcidNozzleSkill extends BaseSkill {
     public AcidNozzleSkill()
 
     {
@@ -18,7 +18,7 @@ public class AcidNozzleSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         CreatureFactory.createMinion(_implementationId, source);
 
     }

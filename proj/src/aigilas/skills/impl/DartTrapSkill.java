@@ -5,11 +5,11 @@ import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.entities.SkillEffect;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import spx.entities.Entity;
 
-public class DartTrapSkill extends ISkill {
+public class DartTrapSkill extends BaseSkill {
     public DartTrapSkill()
 
     {

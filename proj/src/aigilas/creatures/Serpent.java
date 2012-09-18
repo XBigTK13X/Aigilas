@@ -6,7 +6,7 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import spx.bridge.ActorType;
 
-public class Serpent extends AbstractCreature {
+public class Serpent extends BaseEnemy {
     public Serpent() {
         super(ActorType.SERPENT, SpriteType.SLOTH);
         Compose(Elements.EARTH);

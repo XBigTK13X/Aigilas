@@ -1,12 +1,12 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.strategies.IStrategy;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 
-public class MinionFireStrategy extends IStrategy {
-    public MinionFireStrategy(ICreature parent)
+public class MinionFireStrategy extends BaseStrategy {
+    public MinionFireStrategy(BaseCreature parent)
 
     {
         super(parent, Strategy.MinionFire);

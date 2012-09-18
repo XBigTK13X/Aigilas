@@ -5,7 +5,7 @@ import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;
 import spx.bridge.ActorType;
 
-public class Lust extends AbstractCreature {
+public class Lust extends BaseEnemy {
     public Lust() {
         super(ActorType.LUST, SpriteType.LUST);
         Compose(Elements.FIRE);

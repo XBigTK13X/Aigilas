@@ -1,12 +1,12 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusComponent;
 
-public class PoisonOneHitStatus extends IStatus {
-    public PoisonOneHitStatus(ICreature target)
+public class PoisonOneHitStatus extends BaseStatus {
+    public PoisonOneHitStatus(BaseCreature target)
 
     {
         super(target);

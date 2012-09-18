@@ -1,11 +1,11 @@
 package aigilas.strategies;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.strategies.impl.*;
 import spx.bridge.ActorType;
 
 public class StrategyFactory {
-    public static IStrategy create(Strategy strategy, ICreature target, ActorType... actorTypes) {
+    public static BaseStrategy create(Strategy strategy, BaseCreature target, ActorType... actorTypes) {
         if (strategy == null) {
             return new NullStrategy(target);
         }

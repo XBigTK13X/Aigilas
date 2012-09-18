@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.management.SpriteType;
 import spx.bridge.DrawDepth;
 import spx.bridge.EntityType;
@@ -13,10 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ComboMarker extends Entity {
-    private ICreature _parent;
-    private int _index;
+    private final BaseCreature _parent;
+    private final int _index;
 
-    public ComboMarker(ICreature source, Elements elementId, int index) {
+    public ComboMarker(BaseCreature source, Elements elementId, int index) {
         initialize(source.getLocation(), SpriteType.COMBO_MARKER, EntityType.COMBO_MARKER, DrawDepth.ComboMarker);
         _graphic.setColor(elementId.Tint);
         _graphic.setAlpha(0);
@@ -25,7 +25,7 @@ public class ComboMarker extends Entity {
         _index = index;
     }
 
-    private static List<Point2> __dMults = Arrays.asList(new Point2(-1, 0), new Point2(0, -1), new Point2(1, 0));
+    private static final List<Point2> __dMults = Arrays.asList(new Point2(-1, 0), new Point2(0, -1), new Point2(1, 0));
 
     @Override
     public void update() {

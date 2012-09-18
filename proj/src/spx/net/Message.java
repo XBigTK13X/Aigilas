@@ -23,10 +23,10 @@ public class Message implements Serializable {
     public boolean IsActive;
     public Integer RngSeed;
     public byte PlayerCount;
-    public byte[] PlayerOneState = new byte[16];
-    public byte[] PlayerTwoState = new byte[16];
-    public byte[] PlayerThreeState = new byte[16];
-    public byte[] PlayerFourState = new byte[16];
+    public final byte[] PlayerOneState = new byte[16];
+    public final byte[] PlayerTwoState = new byte[16];
+    public final byte[] PlayerThreeState = new byte[16];
+    public final byte[] PlayerFourState = new byte[16];
 
     private Message() {
     }
@@ -116,16 +116,16 @@ public class Message implements Serializable {
             for (int ii = 0; ii < CommandMax; ii++) {
                 switch (jj) {
                     case 0:
-                        result.get(jj).put(Commands.values()[ii], (PlayerOneState[ii] == TrueByte) ? true : false);
+                        result.get(jj).put(Commands.values()[ii], (PlayerOneState[ii] == TrueByte));
                         break;
                     case 1:
-                        result.get(jj).put(Commands.values()[ii], (PlayerTwoState[ii] == TrueByte) ? true : false);
+                        result.get(jj).put(Commands.values()[ii], (PlayerTwoState[ii] == TrueByte));
                         break;
                     case 2:
-                        result.get(jj).put(Commands.values()[ii], (PlayerThreeState[ii] == TrueByte) ? true : false);
+                        result.get(jj).put(Commands.values()[ii], (PlayerThreeState[ii] == TrueByte));
                         break;
                     case 3:
-                        result.get(jj).put(Commands.values()[ii], (PlayerFourState[ii] == TrueByte) ? true : false);
+                        result.get(jj).put(Commands.values()[ii], (PlayerFourState[ii] == TrueByte));
                         break;
                 }
             }

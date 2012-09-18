@@ -13,10 +13,10 @@ import aigilas.reactions.ComboMeter;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillLogic;
 import aigilas.skills.SkillPool;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 import aigilas.statuses.StatusComponent;
 import aigilas.statuses.StatusPool;
-import aigilas.strategies.IStrategy;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.TargetSet;
 import spx.bridge.ActorType;
@@ -31,32 +31,32 @@ import spx.io.Input;
 import spx.text.ActionText;
 import spx.text.ActionTextHandler;
 import spx.text.TextManager;
-import spx.util.IntStorage;
+import spx.util.IntegerStorage;
 import spx.util.StringStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ICreature extends Entity implements IActor {
-    protected IStrategy _strategy;
+public abstract class BaseCreature extends Entity implements IActor {
+    protected BaseStrategy _strategy;
 
     protected CreatureClass _class;
     protected Stats _baseStats;
     protected Stats _maxStats;
     protected God _god;
-    protected ICreature _master;
-    protected List<Elements> _composition = new ArrayList<>();
+    protected BaseCreature _master;
+    protected final List<Elements> _composition = new ArrayList<>();
 
     protected SkillPool _skills;
-    protected Point2 _skillVector = new Point2(0, 0);
+    protected final Point2 _skillVector = new Point2(0, 0);
     protected ComboMeter _combo;
-    protected StatusPool _statuses = new StatusPool();
+    protected final StatusPool _statuses = new StatusPool();
 
     protected Inventory _inventory;
     protected Equipment _equipment;
 
     protected HudManager _hudManager;
-    protected ActionTextHandler _damageText = new ActionTextHandler();
+    protected final ActionTextHandler _damageText = new ActionTextHandler();
 
     protected int _playerIndex = -1;
     protected boolean _isPlaying = true;
@@ -205,14 +205,11 @@ public abstract class ICreature extends Entity implements IActor {
     }
 
     public void write(String text) {
-        _damageText.writeAction(text, 30, IntStorage.get(getLocation().PosCenterX), IntStorage.get(getLocation().PosCenterY));
+        _damageText.writeAction(text, 30, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosCenterY));
     }
 
     public boolean toggleInventoryVisibility() {
-        if (_hudManager != null) {
-            return _hudManager.toggleInventory();
-        }
-        return false;
+        return _hudManager != null && _hudManager.toggleInventory();
     }
 
     public void setPlaying(boolean isPlaying) {
@@ -297,7 +294,7 @@ public abstract class ICreature extends Entity implements IActor {
         return Adjust(stat, adjustment, false);
     }
 
-    public void applyDamage(float damage, ICreature attacker, boolean showDamage, StatType statType) {
+    public void applyDamage(float damage, BaseCreature attacker, boolean showDamage, StatType statType) {
         if (attacker != null) {
             attacker.passOn(this, StatusComponent.Contagion);
             this.passOn(attacker, StatusComponent.Passive);
@@ -309,9 +306,9 @@ public abstract class ICreature extends Entity implements IActor {
             damage = 0;
         }
         if (showDamage) {
-            _damageText.writeAction(StringStorage.get(damage), 30, IntStorage.get(getLocation().PosCenterX), IntStorage.get(getLocation().PosCenterY));
+            _damageText.writeAction(StringStorage.get(damage), 30, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosCenterY));
         }
-        if (damage > 0 && statType == null && _statuses.allows(CreatureAction.ReceiveHealing)) {
+        if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
             Adjust((statType == null) ? StatType.HEALTH : statType, -damage);
         }
         if (get(StatType.HEALTH) <= 0) {
@@ -323,11 +320,11 @@ public abstract class ICreature extends Entity implements IActor {
         }
     }
 
-    public void applyDamage(float damage, ICreature attacker, boolean showDamage) {
+    public void applyDamage(float damage, BaseCreature attacker, boolean showDamage) {
         applyDamage(damage, attacker, showDamage, null);
     }
 
-    public void applyDamage(float damage, ICreature attacker) {
+    public void applyDamage(float damage, BaseCreature attacker) {
         applyDamage(damage, attacker, true, null);
     }
 
@@ -363,7 +360,7 @@ public abstract class ICreature extends Entity implements IActor {
     }
 
     private final Point2 target = new Point2(0, 0);
-    private final List<ICreature> creatures = new ArrayList<ICreature>();
+    private final List<BaseCreature> creatures = new ArrayList<>();
 
     public void moveIfPossible(float xVel, float yVel) {
 
@@ -377,10 +374,10 @@ public abstract class ICreature extends Entity implements IActor {
                 if (_statuses.allows(CreatureAction.Attacking)) {
                     creatures.clear();
                     for (IActor actor : EntityManager.getActorsAt(target)) {
-                        creatures.add((ICreature) actor);
+                        creatures.add((BaseCreature) actor);
                     }
                     if (creatures.size() > 0) {
-                        for (ICreature creature : creatures) {
+                        for (BaseCreature creature : creatures) {
                             if (creature != this) {
                                 if ((creature.getActorType() != ActorType.PLAYER && _actorType == ActorType.PLAYER) || (creature.getActorType() == ActorType.PLAYER && _actorType != ActorType.PLAYER) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
                                     creature.applyDamage(CalculateDamage(), this);
@@ -457,7 +454,7 @@ public abstract class ICreature extends Entity implements IActor {
             lastSum = _baseStats.getSum();
             _skills.useActive();
             if (lastSum != _baseStats.getSum()) {
-                _damageText.writeAction(getActiveSkillName(), 40, IntStorage.get(getLocation().PosCenterX), IntStorage.get(getLocation().PosY));
+                _damageText.writeAction(getActiveSkillName(), 40, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosY));
             }
         }
     }
@@ -479,8 +476,11 @@ public abstract class ICreature extends Entity implements IActor {
             }
         }
         for (StatType stat : possibleStats) {
-            result = stat;
-            min = get(stat);
+            if(min > get(stat))
+            {
+                result = stat;
+                min = get(stat);
+            }
         }
         return result;
     }
@@ -524,15 +524,15 @@ public abstract class ICreature extends Entity implements IActor {
         }
     }
 
-    public void addStatus(IStatus status) {
+    public void addStatus(BaseStatus status) {
         _statuses.add(status);
     }
 
-    public void passOn(ICreature target, StatusComponent componentType) {
+    public void passOn(BaseCreature target, StatusComponent componentType) {
         _statuses.passOn(target, componentType);
     }
 
-    public void setStrategy(IStrategy strategy) {
+    public void setStrategy(BaseStrategy strategy) {
         _strategy = strategy;
     }
 

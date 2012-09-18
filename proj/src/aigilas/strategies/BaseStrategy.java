@@ -1,6 +1,6 @@
 package aigilas.strategies;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import spx.bridge.ActorType;
 import spx.core.Point2;
 import spx.core.RNG;
@@ -9,21 +9,21 @@ import spx.paths.PathFinder;
 
 import java.util.List;
 
-public abstract class IStrategy {
-    protected TargetSet _targets;
-    protected ICreature _parent;
+public abstract class BaseStrategy {
+    protected final TargetSet _targets;
+    protected final BaseCreature _parent;
 
     protected static final int throttleMin = 10;
     protected static final int throttleMax = 20;
     protected int throttle = 0;
 
-    protected ICreature opponent;
-    protected Path targetPath = new Path();
-    protected Point2 nextMove = new Point2(0, 0);
+    protected BaseCreature opponent;
+    protected final Path targetPath = new Path();
+    protected final Point2 nextMove = new Point2(0, 0);
 
-    protected Strategy _strategyId;
+    protected final Strategy _strategyId;
 
-    protected IStrategy(ICreature parent, Strategy strategyId) {
+    protected BaseStrategy(BaseCreature parent, Strategy strategyId) {
         _targets = new TargetSet(parent);
         _parent = parent;
         _strategyId = strategyId;
@@ -35,7 +35,7 @@ public abstract class IStrategy {
         return _targets;
     }
 
-    public void addTargets(ICreature source)
+    public void addTargets(BaseCreature source)
 
     {
         _targets.addTargets(source);
@@ -59,7 +59,7 @@ public abstract class IStrategy {
         return false;
     }
 
-    protected Point2 diff = new Point2(0, 0);
+    protected final Point2 diff = new Point2(0, 0);
 
     protected Point2 CalculateTargetVector(Point2 source, Point2 dest) {
         diff.setX(source.GridX - dest.GridX);

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Point2 {
-    public static Point2 Zero = new Point2(0, 0);
-    private static float halfHeight = Settings.get().spriteHeight / 2;
-    private static float halfWidth = Settings.get().spriteWidth / 2;
+    public static final Point2 Zero = new Point2(0, 0);
+    private static final float halfHeight = Settings.get().spriteHeight / 2;
+    private static final float halfWidth = Settings.get().spriteWidth / 2;
 
     public float X;
     public float Y;
@@ -18,9 +18,9 @@ public class Point2 {
     public float PosCenterX;
     public float PosCenterY;
 
-    public static Point2[] _rotateTargets = {new Point2(1, 0), new Point2(1, 1), new Point2(0, 1), new Point2(0, -1), new Point2(-1, -1), new Point2(-1, 0), new Point2(-1, 1), new Point2(1, -1)};
+    public static final Point2[] _rotateTargets = {new Point2(1, 0), new Point2(1, 1), new Point2(0, 1), new Point2(0, -1), new Point2(-1, -1), new Point2(-1, 0), new Point2(-1, 1), new Point2(1, -1)};
 
-    public static Point2[][] _locations = new Point2[Settings.get().tileMapHeight][Settings.get().tileMapWidth];
+    public static final Point2[][] _locations = new Point2[Settings.get().tileMapHeight][Settings.get().tileMapWidth];
 
     public Point2() {
     }
@@ -113,7 +113,7 @@ public class Point2 {
         return (float) (Math.pow(source.PosY - target.PosY, 2) + Math.pow(source.PosX - target.PosX, 2));
     }
 
-    private static List<Point2> _neighbors = new ArrayList<Point2>();
+    private static final List<Point2> _neighbors = new ArrayList<>();
 
     public List<Point2> getNeighbors() {
         if (_locations[0][0] == null) {

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class PathFinder {
-    private static PriorityQueue<Path> queue = new PriorityQueue<Path>(100, new Comparator<Path>() {
+    private static final PriorityQueue<Path> queue = new PriorityQueue<>(100, new Comparator<Path>() {
 
         @Override
         public int compare(Path o1, Path o2) {
@@ -20,7 +20,7 @@ public class PathFinder {
     });
     private static Point2 node = new Point2(0, 0);
     private static Path path;
-    private static List<Point2> neighbors = new ArrayList<Point2>();
+    private static List<Point2> neighbors = new ArrayList<>();
 
     public static Path findNextMove(Point2 start, Point2 destination, boolean nextMoveOnly) {
         queue.clear();

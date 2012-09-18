@@ -5,8 +5,8 @@ import spx.core.Point2;
 import spx.entities.IEntity;
 
 public class ParticleEngine {
-    private static Particle2[] __particles = new Particle2[1000];
-    private static Emitter[] __emitters = new Emitter[100];
+    private static final Particle2[] __particles = new Particle2[1000];
+    private static final Emitter[] __emitters = new Emitter[100];
 
     public static void reset() {
         for (int ii = 0; ii < __particles.length; ii++) {
@@ -39,14 +39,14 @@ public class ParticleEngine {
     }
 
     public static void update() {
-        for (int ii = 0; ii < __emitters.length; ii++) {
-            __emitters[ii].update();
+        for (Emitter __emitter : __emitters) {
+            __emitter.update();
         }
     }
 
     public static void draw() {
-        for (int ii = 0; ii < __emitters.length; ii++) {
-            __emitters[ii].draw();
+        for (Emitter __emitter : __emitters) {
+            __emitter.draw();
         }
     }
 

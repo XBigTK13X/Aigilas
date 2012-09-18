@@ -21,7 +21,7 @@ public enum Keys {
     E(Input.Keys.E),
     Space(Input.Keys.SPACE);
 
-    private int _keyCode;
+    private final int _keyCode;
 
     private Keys(int keyCode) {
         _keyCode = keyCode;

@@ -1,12 +1,12 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
 import aigilas.creatures.StatType;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class SpeedUpStatus extends IStatus {
-    public SpeedUpStatus(ICreature target)
+public class SpeedUpStatus extends BaseStatus {
+    public SpeedUpStatus(BaseCreature target)
 
     {
         super(target);

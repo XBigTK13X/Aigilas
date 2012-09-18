@@ -7,10 +7,7 @@ public class HitTest {
     public static boolean isTouching(IEntity source, IEntity target)
 
     {
-        if (isClose(source, target)) {
-            return true;
-        }
-        return false;
+        return isClose(source, target);
     }
 
     private static boolean isClose(IEntity source, IEntity target) {

@@ -1,15 +1,15 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
-public class PoisonCloudSkill extends ISkill {
+public class PoisonCloudSkill extends BaseSkill {
     public PoisonCloudSkill()
 
     {
@@ -21,7 +21,7 @@ public class PoisonCloudSkill extends ISkill {
     }
 
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
         StatusFactory.apply(target, Status.Poison);

@@ -1,6 +1,6 @@
 package aigilas.hud;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
@@ -9,10 +9,10 @@ import spx.util.StringSquisher;
 
 import java.util.HashMap;
 
-public class EquipmentHud extends IHud {
-    private Equipment _equipment;
+public class EquipmentHud extends BaseHud {
+    private final Equipment _equipment;
 
-    public EquipmentHud(ICreature owner, Equipment equipment) {
+    public EquipmentHud(BaseCreature owner, Equipment equipment) {
         super(owner, SpxManager.WindowWidth / 2, SpxManager.WindowHeight / 2);
         _equipment = equipment;
     }
@@ -25,8 +25,8 @@ public class EquipmentHud extends IHud {
 
     private static final String sep = ":";
     private String display = "EMPTY";
-    private String title = "Equipped\n";
-    private String[] list = new String[10];
+    private final String title = "Equipped\n";
+    private final String[] list = new String[10];
 
     public void update(boolean refresh) {
         if (_isVisible) {

@@ -15,5 +15,5 @@ public enum Strategy {
     MinionOneUse,
     StraightLineRotate,
     StraightLine,
-    TestBot;
+    TestBot
 }

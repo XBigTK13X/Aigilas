@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class MuteStatus extends IStatus {
-    public MuteStatus(ICreature target)
+public class MuteStatus extends BaseStatus {
+    public MuteStatus(BaseCreature target)
 
     {
         super(target);

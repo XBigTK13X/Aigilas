@@ -9,7 +9,7 @@ import spx.entities.EntityManager;
 import spx.entities.IActor;
 
 public class VaporCloud extends Minion {
-    private ICreature _host = null;
+    private BaseCreature _host = null;
 
     public VaporCloud() {
         super(ActorType.MINION);
@@ -24,7 +24,7 @@ public class VaporCloud extends Minion {
         if (_host == null) {
             for (IActor creature : EntityManager.getActorsAt(_location)) {
                 if (creature != this) {
-                    _host = (ICreature) creature;
+                    _host = (BaseCreature) creature;
                 }
             }
             if (_host == null) {

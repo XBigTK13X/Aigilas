@@ -1,15 +1,15 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillFactory;
 import aigilas.skills.SkillId;
 import spx.core.Point2;
 
-public class BrimstoneSkill extends ISkill {
-    private Point2 _direction = new Point2(0, 0);
+public class BrimstoneSkill extends BaseSkill {
+    private final Point2 _direction = new Point2(0, 0);
 
     public BrimstoneSkill()
 
@@ -21,7 +21,7 @@ public class BrimstoneSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         for (int ii = -1; ii < 2; ii++) {
             for (int jj = -1; jj < 2; jj++) {
                 if (ii != 0 || jj != 0) {

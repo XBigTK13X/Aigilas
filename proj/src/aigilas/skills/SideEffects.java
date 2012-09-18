@@ -1,6 +1,6 @@
 package aigilas.skills;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
 import aigilas.management.SpriteType;
 import spx.core.Point2;
@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SideEffects {
-    protected ISkill _parent;
+    protected final BaseSkill _parent;
 
-    protected AnimationType _animation;
-    protected List<SkillEffect> _effectGraphics = new ArrayList<SkillEffect>();
+    protected final AnimationType _animation;
+    protected final List<SkillEffect> _effectGraphics = new ArrayList<>();
     protected SpriteType _effectSprite = SpriteType.SKILL_EFFECT;
-    protected float _effectStrength;
+    protected final float _effectStrength;
     protected boolean _isPersistent = false;
 
-    public SideEffects(SpriteType effectGraphic, AnimationType animation, ISkill parent) {
+    public SideEffects(SpriteType effectGraphic, AnimationType animation, BaseSkill parent) {
         _parent = parent;
         _effectStrength = parent.getStrength();
         _effectSprite = effectGraphic;
         _animation = animation;
     }
 
-    public void Generate(Point2 gridLocation, Point2 velocity, ICreature source) {
+    public void Generate(Point2 gridLocation, Point2 velocity, BaseCreature source) {
         SkillEffect effect = new SkillEffect(gridLocation, velocity, source, _parent);
         _effectGraphics.add(effect);
         EntityManager.addObject(effect);

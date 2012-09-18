@@ -1,17 +1,17 @@
 package aigilas.skills.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureFactory;
-import aigilas.creatures.ICreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import spx.bridge.ActorType;
 import spx.core.Point2;
 import spx.core.Settings;
 
-public class SerpentSupperSkill extends ISkill {
+public class SerpentSupperSkill extends BaseSkill {
     public SerpentSupperSkill()
 
     {
@@ -23,7 +23,7 @@ public class SerpentSupperSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             if (ii != Settings.get().tileMapHeight / 2) {
                 CreatureFactory.create(ActorType.SERPENT, new Point2(ii, Settings.get().tileMapHeight / 2));

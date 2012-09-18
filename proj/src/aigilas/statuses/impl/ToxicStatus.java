@@ -1,12 +1,12 @@
 package aigilas.statuses.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureFactory;
-import aigilas.creatures.ICreature;
 import aigilas.skills.SkillId;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class ToxicStatus extends IStatus {
-    public ToxicStatus(ICreature target)
+public class ToxicStatus extends BaseStatus {
+    public ToxicStatus(BaseCreature target)
 
     {
         super(target);

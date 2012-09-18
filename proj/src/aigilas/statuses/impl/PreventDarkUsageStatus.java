@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class PreventDarkUsageStatus extends IStatus {
-    public PreventDarkUsageStatus(ICreature target)
+public class PreventDarkUsageStatus extends BaseStatus {
+    public PreventDarkUsageStatus(BaseCreature target)
 
     {
         super(target);

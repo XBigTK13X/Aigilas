@@ -1,10 +1,10 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
@@ -13,7 +13,7 @@ import spx.entities.IActor;
 
 import java.util.List;
 
-public class CombustSkill extends ISkill {
+public class CombustSkill extends BaseSkill {
     private static final int CombustDistance = 1;
 
     public CombustSkill()
@@ -27,14 +27,14 @@ public class CombustSkill extends ISkill {
     }
 
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
         target.applyDamage(10, _source);
         if (!target.isActive()) {
             List<IActor> targets = EntityManager.getActorsSurrounding(target.getLocation(), CombustDistance);
-            for (int ii = 0; ii < targets.size(); ii++) {
-                StatusFactory.apply((ICreature) targets.get(ii), Status.Burn);
+            for (IActor target1 : targets) {
+                StatusFactory.apply((BaseCreature) target1, Status.Burn);
 
             }
 

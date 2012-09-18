@@ -12,19 +12,19 @@ import spx.core.Point2;
 
 import java.util.Arrays;
 
-public class AbstractCreature extends ICreature {
-    public AbstractCreature(ActorType actorType, SpriteType spriteType, CreatureClass cClass) {
+public class BaseEnemy extends BaseCreature {
+    public BaseEnemy(ActorType actorType, SpriteType spriteType, CreatureClass cClass) {
         SetClass(cClass);
         _actorType = actorType;
         _baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
         _maxStats = new Stats(_baseStats);
     }
 
-    public AbstractCreature(ActorType actorType, SpriteType spriteType) {
+    public BaseEnemy(ActorType actorType, SpriteType spriteType) {
         this(actorType, spriteType, null);
     }
 
-    public AbstractCreature(ActorType actorType) {
+    public BaseEnemy(ActorType actorType) {
         this(actorType, SpriteType.CREATURE, null);
     }
 

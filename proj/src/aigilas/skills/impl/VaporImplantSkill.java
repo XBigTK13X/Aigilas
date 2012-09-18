@@ -4,11 +4,11 @@ import aigilas.creatures.CreatureFactory;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import spx.entities.IEntity;
 
-public class VaporImplantSkill extends ISkill {
+public class VaporImplantSkill extends BaseSkill {
     public VaporImplantSkill()
 
     {

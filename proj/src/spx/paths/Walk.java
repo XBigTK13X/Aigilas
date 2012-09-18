@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Walk {
-    private static ArrayList<List<Point2>> __walks = new ArrayList<List<Point2>>();
+    private static final ArrayList<List<Point2>> __walks = new ArrayList<>();
     private static int _index = 0;
     private static final int __walkCount = 1000;
 

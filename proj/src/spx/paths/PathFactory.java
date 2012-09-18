@@ -3,7 +3,7 @@ package spx.paths;
 import spx.core.Point2;
 
 class PathFactory {
-    private static Path[] __paths = new Path[50];
+    private static final Path[] __paths = new Path[50];
     private static int __pathIndex = 0;
 
     public static Path create(Point2 source, Point2 dest) {

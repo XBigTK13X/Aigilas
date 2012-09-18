@@ -1,15 +1,15 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.items.ItemFactory;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import spx.core.RNG;
 
-public class StealItemSkill extends ISkill {
+public class StealItemSkill extends BaseSkill {
     public StealItemSkill()
 
     {
@@ -21,7 +21,7 @@ public class StealItemSkill extends ISkill {
     }
 
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
         if (RNG.Rand.nextInt(100) > 0) {

@@ -1,15 +1,15 @@
 package aigilas.statuses.impl;
 
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 
-public class FleeStatus extends IStatus {
+public class FleeStatus extends BaseStatus {
     private Strategy previousStrategy;
 
-    public FleeStatus(ICreature target)
+    public FleeStatus(BaseCreature target)
 
     {
         super(target);

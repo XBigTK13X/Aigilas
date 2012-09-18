@@ -6,7 +6,7 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import spx.bridge.ActorType;
 
-public class Hand extends AbstractCreature {
+public class Hand extends BaseEnemy {
     public Hand() {
         super(ActorType.HAND, SpriteType.HAND);
         Compose(Elements.PHYSICAL);

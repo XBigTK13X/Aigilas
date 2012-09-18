@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActionTextHandler {
-    private ActionText[] defaultPool = new ActionText[100];
+    private final ActionText[] defaultPool = new ActionText[100];
     private int defaultIndex = 0;
 
-    private List<Text> _contents = new ArrayList<Text>();
+    private final List<Text> _contents = new ArrayList<>();
 
     public ActionTextHandler() {
         for (int ii = 0; ii < defaultPool.length; ii++) {

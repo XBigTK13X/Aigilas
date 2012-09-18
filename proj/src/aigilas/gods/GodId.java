@@ -18,7 +18,7 @@ public enum GodId {
     public final ItemClass Desires;
     public final ItemClass Detests;
 
-    private static HashMap<GodId, God> __instances = new HashMap<>();
+    private static final HashMap<GodId, God> __instances = new HashMap<>();
 
     private GodId(Color tint, ItemClass desires, ItemClass detests) {
         Tint = tint;

@@ -1,6 +1,6 @@
 package aigilas.skills;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
@@ -9,14 +9,15 @@ import spx.bridge.EntityType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SkillComponents {
-    protected List<Elements> _elements;
+    protected final List<Elements> _elements;
     protected StatBuff _buff;
     protected float _effectStrength = 0;
     protected boolean _isPersistent = false;
-    protected List<EntityType> _targetTypes = Arrays.asList(EntityType.WALL);
+    protected final List<EntityType> _targetTypes = Arrays.asList(EntityType.WALL);
     protected List<ActorType> _targetActorTypes = new ArrayList<>();
 
     public SkillComponents(float strength, boolean isPersistent) {
@@ -26,12 +27,10 @@ public class SkillComponents {
     }
 
     public void addElements(Elements... elements) {
-        for (Elements element : elements) {
-            _elements.add(element);
-        }
+        Collections.addAll(_elements, elements);
     }
 
-    public void buff(ICreature target) {
+    public void buff(BaseCreature target) {
         target.addBuff(_buff);
     }
 

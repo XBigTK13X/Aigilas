@@ -20,8 +20,8 @@ public class MessageHandler {
     private ObjectInputStream ois;
     private Thread sender;
     private Thread receiver;
-    private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<Message>();
-    private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<Message>();
+    private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<>();
+    private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<>();
     private Socket connection;
     public String owner = "";
 
@@ -38,7 +38,7 @@ public class MessageHandler {
                         }
                     }
                     while (!Thread.interrupted()) {
-                        Message msg = null;
+                        Message msg;
                         try {
                             msg = outboundMessages.take();
                             blurt("Sending message: " + msg.MessageType);

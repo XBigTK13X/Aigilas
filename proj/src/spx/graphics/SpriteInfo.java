@@ -3,7 +3,10 @@ package spx.graphics;
 import spx.core.Settings;
 
 public class SpriteInfo {
-    public int X, Y, SpriteIndex, MaxFrame;
+    public final int X;
+    public final int Y;
+    public final int SpriteIndex;
+    public final int MaxFrame;
 
     public SpriteInfo(int spriteIndex, int maxFrame) {
         X = Settings.get().spriteWidth;

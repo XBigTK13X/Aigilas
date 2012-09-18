@@ -1,6 +1,6 @@
 package aigilas.hud;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
@@ -8,10 +8,10 @@ import spx.core.SpxManager;
 import spx.util.StringSquisher;
 import spx.util.StringStorage;
 
-public class DeltasHud extends IHud {
-    private Equipment _equipment;
+public class DeltasHud extends BaseHud {
+    private final Equipment _equipment;
 
-    public DeltasHud(ICreature owner, Equipment equipment) {
+    public DeltasHud(BaseCreature owner, Equipment equipment) {
         super(owner, SpxManager.WindowWidth / 2, SpxManager.WindowHeight / 2);
         _equipment = equipment;
     }

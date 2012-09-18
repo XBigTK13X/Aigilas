@@ -12,5 +12,5 @@ public enum StatType {
     WEIGHT,
     MOVE_COOL_DOWN,
     PIETY,
-    REGEN;
+    REGEN
 }

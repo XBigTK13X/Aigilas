@@ -9,16 +9,16 @@ import spx.net.Client;
 
 public class SpxManager {
     // This is the resolution used by the game internally
-    public static int WindowHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
-    public static int WindowWidth = Settings.get().spriteWidth * Settings.get().tileMapWidth;
+    public static final int WindowHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
+    public static final int WindowWidth = Settings.get().spriteWidth * Settings.get().tileMapWidth;
 
     // This is the resolution used to draw on the screen
     // 720
     // 1050
-    public static int RenderHeight = WindowHeight;
+    public static final int RenderHeight = WindowHeight;
     // 1280
     // 1680
-    public static int RenderWidth = WindowWidth;
+    public static final int RenderWidth = WindowWidth;
     private static ContentManager __assetHandler;
     public static Renderer Renderer;
 

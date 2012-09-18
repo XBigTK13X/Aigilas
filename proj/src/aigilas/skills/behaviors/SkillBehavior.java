@@ -1,6 +1,6 @@
 package aigilas.skills.behaviors;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
 import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
@@ -8,18 +8,18 @@ import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
 import aigilas.management.SpriteType;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SideEffects;
 import spx.entities.Entity;
 import spx.entities.IEntity;
 
 public class SkillBehavior {
-    protected SideEffects _sideEffects;
-    protected ISkill _parent;
+    protected final SideEffects _sideEffects;
+    protected final BaseSkill _parent;
     protected boolean _used = false;
-    protected Stats _cost;
+    protected final Stats _cost;
 
-    public SkillBehavior(SpriteType effectGraphic, AnimationType animation, ISkill parentSkill) {
+    public SkillBehavior(SpriteType effectGraphic, AnimationType animation, BaseSkill parentSkill) {
         _parent = parentSkill;
         _sideEffects = new SideEffects(effectGraphic, animation, _parent);
         _cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -29,7 +29,7 @@ public class SkillBehavior {
         return _sideEffects.getSpriteType();
     }
 
-    public void activate(ICreature target) {
+    public void activate(BaseCreature target) {
     }
 
     public void cleanup(Entity target, SkillEffect source) {
@@ -47,7 +47,7 @@ public class SkillBehavior {
         _cost.addBuff(new StatBuff(stat, cost));
     }
 
-    protected boolean SubtractCost(ICreature owner) {
+    protected boolean SubtractCost(BaseCreature owner) {
         boolean costPaid = false;
         for (StatType stat : StatType.values()) {
             if (stat != StatType.REGEN) {
@@ -60,9 +60,9 @@ public class SkillBehavior {
     }
 
     private IEntity hitTarget;
-    private ICreature hitCreature;
+    private BaseCreature hitCreature;
 
-    public boolean affectTarget(ICreature source, SkillEffect graphic)
+    public boolean affectTarget(BaseCreature source, SkillEffect graphic)
 
     {
         hitTarget = source.getTargets().getCollidedTarget(graphic);

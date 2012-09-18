@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ClientManager {
-    List<MessageHandler> clients = new ArrayList<MessageHandler>();
-    private HashMap<Integer, Integer> addressToIndex = new HashMap<Integer, Integer>();
+    final List<MessageHandler> clients = new ArrayList<>();
+    private final HashMap<Integer, Integer> addressToIndex = new HashMap<>();
     ServerSocket server;
     Thread clientListener;
     private boolean __otherServerExists = false;
@@ -49,8 +49,8 @@ public class ClientManager {
 
     public Message readMessage() {
         Message result;
-        for (int ii = 0; ii < clients.size(); ii++) {
-            result = clients.get(ii).readInboundMessage();
+        for (MessageHandler client : clients) {
+            result = client.readInboundMessage();
             if (result != null) {
                 return result;
             }
@@ -63,8 +63,8 @@ public class ClientManager {
     }
 
     public void announce(Message contents) {
-        for (int ii = 0; ii < clients.size(); ii++) {
-            clients.get(ii).sendOutboundMessage(contents);
+        for (MessageHandler client : clients) {
+            client.sendOutboundMessage(contents);
         }
     }
 

@@ -1,12 +1,12 @@
 package aigilas.reactions.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.items.ItemFactory;
 import aigilas.reactions.IReaction;
 
 public class CraftsmanReaction implements IReaction {
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
         try {

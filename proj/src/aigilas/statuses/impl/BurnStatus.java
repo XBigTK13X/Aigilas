@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 
-public class BurnStatus extends IStatus {
-    public BurnStatus(ICreature target)
+public class BurnStatus extends BaseStatus {
+    public BurnStatus(BaseCreature target)
 
     {
         super(target);

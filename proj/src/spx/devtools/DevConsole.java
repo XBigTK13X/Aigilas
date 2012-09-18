@@ -66,9 +66,9 @@ public class DevConsole {
     public void draw() {
         if (_isVisible) {
             SpxManager.Renderer.draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, SpxManager.WindowWidth, SpxManager.WindowHeight);
-            for (int ii = 0; ii < _contents.length; ii++) {
-                if (_contents[ii] != null) {
-                    _contents[ii].draw();
+            for (ConsoleText _content : _contents) {
+                if (_content != null) {
+                    _content.draw();
                 }
             }
         }

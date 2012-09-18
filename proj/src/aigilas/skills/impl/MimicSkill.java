@@ -1,13 +1,13 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
-public class MimicSkill extends ISkill {
+public class MimicSkill extends BaseSkill {
     public MimicSkill()
 
     {
@@ -19,7 +19,7 @@ public class MimicSkill extends ISkill {
     }
 
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
 

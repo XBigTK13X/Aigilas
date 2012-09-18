@@ -1,14 +1,14 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.items.GenericItem;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
-public class ThrowItemSkill extends ISkill {
+public class ThrowItemSkill extends BaseSkill {
     private float _itemStrength = 0;
 
     public ThrowItemSkill()
@@ -22,7 +22,7 @@ public class ThrowItemSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         GenericItem item = source.destroyRandomItemFromInventory();
         if (item != null) {
             _itemStrength = item.Modifers.getSum() * 3;
@@ -33,7 +33,7 @@ public class ThrowItemSkill extends ISkill {
     }
 
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
         target.applyDamage(_itemStrength, _source);

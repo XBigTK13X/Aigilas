@@ -9,14 +9,14 @@ import spx.graphics.AnimatedTexture;
 import spx.graphics.SpriteInfo;
 
 public class Entity implements IEntity {
-    protected AnimatedTexture _graphic = new AnimatedTexture();
+    protected final AnimatedTexture _graphic = new AnimatedTexture();
 
     protected boolean _isActive = true;
     protected Boolean _isBlocking;
     protected SpriteType _assetName;
     protected boolean _isOnBoard = true;
     private boolean _isInteracting = false;
-    protected Point2 _location = new Point2(0, 0);
+    protected final Point2 _location = new Point2(0, 0);
     protected EntityType _entityType;
 
     @Override
@@ -56,7 +56,7 @@ public class Entity implements IEntity {
         _location.copy(location);
     }
 
-    private Point2 oldLocation = new Point2(0, 0);
+    private final Point2 oldLocation = new Point2(0, 0);
 
     public void updateLocation(Point2 location) {
         oldLocation.copy(_location);
@@ -65,7 +65,7 @@ public class Entity implements IEntity {
         EntityManager.updateGridLocation(this, oldLocation);
     }
 
-    private Point2 target = new Point2(0, 0);
+    private final Point2 target = new Point2(0, 0);
 
     public boolean move(float amountX, float amountY) {
         amountX = normalizeDistance(amountX);

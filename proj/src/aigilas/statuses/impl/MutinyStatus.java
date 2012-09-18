@@ -1,15 +1,15 @@
 package aigilas.statuses.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 
-public class MutinyStatus extends IStatus {
+public class MutinyStatus extends BaseStatus {
     private Strategy previousStrategy;
 
-    public MutinyStatus(ICreature target) {
+    public MutinyStatus(BaseCreature target) {
         super(target);
 
         _prevents.add(CreatureAction.WontHitNonTargets);

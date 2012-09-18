@@ -2,8 +2,8 @@ package spx.util;
 
 import java.util.HashMap;
 
-public class IntStorage {
-    private static HashMap<Float, Integer> __slots = new HashMap<Float, Integer>();
+public class IntegerStorage {
+    private static final HashMap<Float, Integer> __slots = new HashMap<>();
 
     public static int get(float value) {
         if (!__slots.containsKey(value)) {

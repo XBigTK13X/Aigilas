@@ -8,6 +8,6 @@ public class CommandLock {
         PlayerIndex = playerIndex;
     }
 
-    public Commands Command;
-    public int PlayerIndex;
+    public final Commands Command;
+    public final int PlayerIndex;
 }

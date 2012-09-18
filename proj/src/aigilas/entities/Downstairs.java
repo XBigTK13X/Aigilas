@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.dungeons.DungeonFactory;
 import aigilas.management.SpriteType;
 import spx.bridge.DrawDepth;
@@ -14,11 +14,11 @@ public class Downstairs extends Entity {
         initialize(location, SpriteType.DOWNSTAIRS, EntityType.DOWNSTAIRS, DrawDepth.Stairs);
     }
 
-    private ICreature player;
+    private BaseCreature player;
 
     @Override
     public void update() {
-        player = (ICreature) EntityManager.getTouchingCreature(this);
+        player = (BaseCreature) EntityManager.getTouchingCreature(this);
         if (player != null) {
             if (player.isInteracting()) {
                 player.performInteraction();

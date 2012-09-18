@@ -18,7 +18,7 @@ public class Settings {
         return __instance;
     }
 
-    private final HashMap<String, String> _values = new HashMap<String, String>();
+    private final HashMap<String, String> _values = new HashMap<>();
     public int port;
     public String serverIp;
     public boolean clientVerbose;

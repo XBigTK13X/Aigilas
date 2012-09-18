@@ -1,13 +1,13 @@
 package aigilas.reactions.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.reactions.IReaction;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class BlindReaction implements IReaction {
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
         StatusFactory.apply(target, Status.Blind);

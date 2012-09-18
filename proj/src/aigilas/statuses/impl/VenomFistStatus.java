@@ -1,12 +1,12 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusComponent;
 
-public class VenomFistStatus extends IStatus {
-    public VenomFistStatus(ICreature target)
+public class VenomFistStatus extends BaseStatus {
+    public VenomFistStatus(BaseCreature target)
 
     {
         super(target);

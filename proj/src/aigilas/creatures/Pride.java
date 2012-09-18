@@ -5,7 +5,7 @@ import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;
 import spx.bridge.ActorType;
 
-public class Pride extends AbstractCreature {
+public class Pride extends BaseEnemy {
     public Pride() {
         super(ActorType.PRIDE, SpriteType.PRIDE);
         Compose(Elements.DARK);

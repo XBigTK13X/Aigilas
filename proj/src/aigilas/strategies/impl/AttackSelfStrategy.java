@@ -1,11 +1,11 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.strategies.IStrategy;
+import aigilas.creatures.BaseCreature;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 
-public class AttackSelfStrategy extends IStrategy {
-    public AttackSelfStrategy(ICreature parent)
+public class AttackSelfStrategy extends BaseStrategy {
+    public AttackSelfStrategy(BaseCreature parent)
 
     {
         super(parent, Strategy.AttackSelf);

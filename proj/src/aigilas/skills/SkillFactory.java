@@ -6,7 +6,7 @@ import aigilas.skills.behaviors.*;
 import aigilas.skills.impl.*;
 
 public class SkillFactory {
-    public static ISkill create(SkillId idSkill) {
+    public static BaseSkill create(SkillId idSkill) {
         switch (idSkill) {
             case ABSORB:
                 return new AbsorbSkill();
@@ -115,7 +115,7 @@ public class SkillFactory {
         }
     }
 
-    public static SkillBehavior create(AnimationType animation, SpriteType skillGraphic, ISkill parentSkill) {
+    public static SkillBehavior create(AnimationType animation, SpriteType skillGraphic, BaseSkill parentSkill) {
         switch (animation) {
             case CLOUD:
                 return new CloudBehavior(skillGraphic, parentSkill);

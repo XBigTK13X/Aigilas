@@ -22,8 +22,8 @@ public class Particle2 extends PEComponent {
     public float MoveSpeed = 5f;
 
     public IEntity Entity;
-    public Point2 Position = new Point2(0, 0);
-    public Point2 Origin = new Point2(0, 0);
+    public final Point2 Position = new Point2(0, 0);
+    public final Point2 Origin = new Point2(0, 0);
     public double Angle;
     public float Radius;
     public boolean Toggle;

@@ -1,12 +1,12 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import spx.entities.IEntity;
 
-public class NoSkill extends ISkill {
+public class NoSkill extends BaseSkill {
     public NoSkill()
 
     {
@@ -15,7 +15,7 @@ public class NoSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
 
     }
 
@@ -27,7 +27,7 @@ public class NoSkill extends ISkill {
     }
 
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
 

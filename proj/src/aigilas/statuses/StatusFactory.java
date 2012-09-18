@@ -1,10 +1,10 @@
 package aigilas.statuses;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.statuses.impl.*;
 
 public class StatusFactory {
-    public static void apply(ICreature target, Status statusId) {
+    public static void apply(BaseCreature target, Status statusId) {
         switch (statusId) {
             case Confusion:
                 target.addStatus(new ConfusionStatus(target));
@@ -113,7 +113,7 @@ public class StatusFactory {
                 break;
             default:
                 try {
-                    throw new Exception(String.format("An undefined statusId {0} was passed StatusFactory.Apply.", statusId));
+                    throw new Exception(String.format("An undefined statusId %s was passed StatusFactory.Apply.", statusId));
                 } catch (Exception e) {
 
                     e.printStackTrace();

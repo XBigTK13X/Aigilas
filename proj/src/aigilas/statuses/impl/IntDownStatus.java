@@ -1,12 +1,12 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
 import aigilas.creatures.StatType;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class IntDownStatus extends IStatus {
-    public IntDownStatus(ICreature target)
+public class IntDownStatus extends BaseStatus {
+    public IntDownStatus(BaseCreature target)
 
     {
         super(target);

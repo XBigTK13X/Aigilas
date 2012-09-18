@@ -13,7 +13,7 @@ public class SpriteInitializer implements ISpriteInitializer {
 
     @Override
     public List<SpriteDefinition> getSprites() {
-        ArrayList<SpriteDefinition> result = new ArrayList<SpriteDefinition>();
+        ArrayList<SpriteDefinition> result = new ArrayList<>();
         result.add(make(SpriteType.EMPTY, 0, 1));
         result.add(make(SpriteType.PLAYER_STAND, 1, 2));
         result.add(make(SpriteType.FLOOR, 2, 1));

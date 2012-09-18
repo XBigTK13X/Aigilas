@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Stats {
-    public static float DefaultMoveDistance = Settings.get().spriteHeight;
+    public static final float DefaultMoveDistance = Settings.get().spriteHeight;
 
     private HashMap<StatType, Float> _stats = new HashMap<>();
-    private final List<StatBuff> _buffs = new ArrayList<StatBuff>();
+    private final List<StatBuff> _buffs = new ArrayList<>();
 
     public Stats(Stats target) {
-        _stats = new HashMap<StatType, Float>(target._stats);
+        _stats = new HashMap<>(target._stats);
     }
 
     public Stats(float health, float mana, float strength, float wisdom, float defense, float luck, float age, float weightInLbs, float heightInFeet, float moveCoolDown, float regenRate) {
@@ -42,9 +42,9 @@ public class Stats {
         if (_buffs != null) {
             if (!_buffs.contains(null)) {
                 statSum = 0;
-                for (int ii = 0; ii < _buffs.size(); ii++) {
-                    if (_buffs.get(ii).Stat == stat) {
-                        statSum += _buffs.get(ii).Amount;
+                for (StatBuff _buff : _buffs) {
+                    if (_buff.Stat == stat) {
+                        statSum += _buff.Amount;
                     }
                 }
                 return getRaw(stat) + statSum;
@@ -69,7 +69,7 @@ public class Stats {
         _buffs.add(buff);
     }
 
-    private final List<Float> deltas = new ArrayList<Float>();
+    private final List<Float> deltas = new ArrayList<>();
 
     public List<Float> getDeltas(Stats stats) {
         deltas.clear();

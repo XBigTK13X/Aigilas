@@ -68,10 +68,8 @@ public class GenericItem extends Entity {
             IActor collider = EntityManager.getTouchingCreature(this);
             if (collider != null && collider.getActorType() == ActorType.PLAYER) {
                 _currentTarget = (Player) collider;
-                if (_currentTarget != null) {
-                    if (_currentTarget.isInteracting()) {
-                        _currentTarget.pickupItem(this);
-                    }
+                if (_currentTarget.isInteracting()) {
+                    _currentTarget.pickupItem(this);
                 }
             }
         }
@@ -81,7 +79,7 @@ public class GenericItem extends Entity {
     public boolean equals(Object obj) {
         if (obj.getClass() == GenericItem.class) {
             GenericItem gI = (GenericItem) obj;
-            if (Name != gI.Name) {
+            if (! Name.equals(gI.Name)) {
                 return false;
             }
             for (StatType stat : StatType.values()) {

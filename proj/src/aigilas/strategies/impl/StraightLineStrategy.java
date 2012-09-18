@@ -1,13 +1,13 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.strategies.IStrategy;
+import aigilas.creatures.BaseCreature;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import spx.bridge.ActorType;
 import spx.core.Settings;
 
-public class StraightLineStrategy extends IStrategy {
-    public StraightLineStrategy(ICreature parent, ActorType... targetTypes)
+public class StraightLineStrategy extends BaseStrategy {
+    public StraightLineStrategy(BaseCreature parent, ActorType... targetTypes)
 
     {
         super(parent, Strategy.StraightLine);

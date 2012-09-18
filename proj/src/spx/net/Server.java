@@ -7,13 +7,13 @@ import java.util.HashMap;
 
 public class Server extends Thread {
     private boolean isRunning = true;
-    private HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
-    private int _rngSeed = (int) System.currentTimeMillis();
+    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
+    private final int _rngSeed = (int) System.currentTimeMillis();
     private Message _message = Message.empty();
     private Integer _turnCount = 0;
-    private boolean[] _readyCheckIn = {true, true, true, true};
+    private final boolean[] _readyCheckIn = {true, true, true, true};
 
-    private ClientManager clients;
+    private final ClientManager clients;
 
     public Server() {
         setName("Server");
@@ -55,7 +55,7 @@ public class Server extends Thread {
                     initPlayer(_message.PlayerIndex, _message.Command);
                     _message.IsActive = _playerStatus.get(_message.PlayerIndex).get(_message.Command);
                     if (Settings.get().serverVerbose)
-                        System.out.println(String.format("SERVER: Check extends  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _playerStatus.get((int) _message.PlayerIndex).get(_message.Command)));
+                        System.out.println(String.format("SERVER: Check extends  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _playerStatus.get(_message.PlayerIndex).get(_message.Command)));
                     sendMessage(_message, _message.LocalPort);
                     break;
 
@@ -109,8 +109,8 @@ public class Server extends Thread {
 
     private void broadCastGameState() {
         int readyCount = 0;
-        for (int ii = 0; ii < _readyCheckIn.length; ii++) {
-            readyCount += _readyCheckIn[ii] ? 1 : 0;
+        for (boolean a_readyCheckIn : _readyCheckIn) {
+            readyCount += a_readyCheckIn ? 1 : 0;
         }
         if (readyCount >= clients.size()) {
             if (Settings.get().serverVerbose)

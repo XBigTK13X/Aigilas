@@ -1,7 +1,7 @@
 package aigilas.reactions;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 
 public interface IReaction {
-    void affect(ICreature target);
+    void affect(BaseCreature target);
 }

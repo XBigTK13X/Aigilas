@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class WeakKneesStatus extends IStatus {
-    public WeakKneesStatus(ICreature target)
+public class WeakKneesStatus extends BaseStatus {
+    public WeakKneesStatus(BaseCreature target)
 
     {
         super(target);

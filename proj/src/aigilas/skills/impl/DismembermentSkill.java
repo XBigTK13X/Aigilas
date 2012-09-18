@@ -1,18 +1,18 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.CreatureFactory;
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import spx.bridge.ActorType;
 import spx.core.Point2;
 import spx.core.RNG;
 import spx.core.Settings;
 
-public class DismembermentSkill extends ISkill {
+public class DismembermentSkill extends BaseSkill {
     public DismembermentSkill()
 
     {
@@ -24,7 +24,7 @@ public class DismembermentSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature target)
+    public void activate(BaseCreature target)
 
     {
         super.activate(target);

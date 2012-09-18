@@ -1,6 +1,6 @@
 package aigilas.hud;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import spx.core.Point2;
 import spx.core.SpxManager;
@@ -9,15 +9,15 @@ import spx.text.TextHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IHud {
+public class BaseHud {
     protected boolean _isVisible = false;
-    protected ICreature _parent;
+    protected final BaseCreature _parent;
     protected static Sprite _menuBase;
-    protected TextHandler _textHandler = new TextHandler();
-    protected List<Point2> playerHudPositions = new ArrayList<Point2>();
-    protected Point2 _dimensions;
+    protected final TextHandler _textHandler = new TextHandler();
+    protected final List<Point2> playerHudPositions = new ArrayList<>();
+    protected final Point2 _dimensions;
 
-    protected IHud(ICreature owner, int width, int height) {
+    protected BaseHud(BaseCreature owner, int width, int height) {
         _parent = owner;
         if (_menuBase == null) {
             _menuBase = SpxManager.getMenuBaseAsset();

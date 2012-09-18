@@ -5,7 +5,7 @@ import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;
 import spx.bridge.ActorType;
 
-public class Sloth extends AbstractCreature {
+public class Sloth extends BaseEnemy {
     public Sloth() {
         super(ActorType.SLOTH, SpriteType.SLOTH);
         Compose(Elements.EARTH);

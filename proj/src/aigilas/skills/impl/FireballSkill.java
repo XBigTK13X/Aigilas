@@ -1,13 +1,13 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
-public class FireballSkill extends ISkill {
+public class FireballSkill extends BaseSkill {
     public FireballSkill()
 
     {
@@ -19,7 +19,7 @@ public class FireballSkill extends ISkill {
     }
 
     @Override
-    public void affect(ICreature target)
+    public void affect(BaseCreature target)
 
     {
         target.applyDamage(20, _source);

@@ -10,7 +10,7 @@ public enum MessageTypes {
     READY_FOR_NEXT_TURN((byte) 7),
     HEART_BEAT((byte) 8);
 
-    private byte _value;
+    private final byte _value;
 
     private MessageTypes(byte value) {
         _value = value;

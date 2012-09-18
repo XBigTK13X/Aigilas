@@ -1,7 +1,7 @@
 package aigilas.statuses;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
 import aigilas.creatures.StatBuff;
 import aigilas.entities.Elements;
 
@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class IStatus {
-    protected List<CreatureAction> _prevents = new ArrayList<>();
+public class BaseStatus {
+    protected final List<CreatureAction> _prevents = new ArrayList<>();
 
     protected boolean _wasPassed = false;
     protected int _strength = 0;
-    protected int _maxStrength = 100;
+    protected final int _maxStrength = 100;
     protected boolean _isActive = true;
-    protected ICreature _target;
+    protected BaseCreature _target;
     protected StatBuff _buff = null;
     protected boolean _buffMax = false;
-    protected List<Elements> _blockedElements = new ArrayList<>();
+    protected final List<Elements> _blockedElements = new ArrayList<>();
 
-    protected HashMap<StatusComponent, List<Status>> _passables = new HashMap<>();
+    protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<>();
 
-    protected IStatus(ICreature target) {
+    protected BaseStatus(BaseCreature target) {
         _strength = _maxStrength;
         _target = target;
         setup();
@@ -51,7 +51,7 @@ public class IStatus {
         return false;
     }
 
-    public void passOn(ICreature target, StatusComponent componentType) {
+    public void passOn(BaseCreature target, StatusComponent componentType) {
         if (_passables.containsKey(componentType)) {
             for (Status contagion : _passables.get(componentType)) {
                 StatusFactory.apply(target, contagion);

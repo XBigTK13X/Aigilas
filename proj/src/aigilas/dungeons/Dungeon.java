@@ -20,18 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dungeon {
-    private static int _blocksHigh = Settings.get().tileMapHeight;
-    private static int _blocksWide = Settings.get().tileMapWidth;
+    private static final int _blocksHigh = Settings.get().tileMapHeight;
+    private static final int _blocksWide = Settings.get().tileMapWidth;
 
     private static int enemyCapModifier = 0;
     private static int enemyBaseModifier = 0;
-    private int playerCount = Client.get().getPlayerCount();
+    private final int playerCount = Client.get().getPlayerCount();
 
-    private List<Room> _rooms = new ArrayList<Room>();
-    private List<IEntity> _contents = new ArrayList<IEntity>();
-    private IEntity[][] dungeon = new IEntity[_blocksWide][_blocksHigh];
-    private Point2 _upSpawnLocation = new Point2(0, 0);
-    private Point2 _downSpawnLocation = new Point2(0, 0);
+    private final List<Room> _rooms = new ArrayList<>();
+    private List<IEntity> _contents = new ArrayList<>();
+    private final IEntity[][] dungeon = new IEntity[_blocksWide][_blocksHigh];
+    private final Point2 _upSpawnLocation = new Point2(0, 0);
+    private final Point2 _downSpawnLocation = new Point2(0, 0);
 
     public static void reset(){
         enemyBaseModifier = 0;
@@ -95,7 +95,7 @@ public class Dungeon {
             DungeonFactory.addToCache((Entity) player);
             EntityManager.removeObject(player);
         }
-        _contents = new ArrayList<IEntity>(EntityManager.getEntitiesToCache());
+        _contents = new ArrayList<>(EntityManager.getEntitiesToCache());
     }
 
     private void init() {
@@ -179,7 +179,7 @@ public class Dungeon {
     }
 
     private void placeRooms() {
-        ArrayList<Room> newRooms = new ArrayList<Room>();
+        ArrayList<Room> newRooms = new ArrayList<>();
         int roomsToPlace = 3 + RNG.next(0, Settings.get().maxRoomCount);
         int attemptCount = 0;
         while (attemptCount < 1000 && roomsToPlace > 0) {
@@ -234,9 +234,9 @@ public class Dungeon {
 
     private void convertRoomsToWalls() {
         int roomCount = 0;
-        ArrayList<PointPoint> dungeonEntrances = new ArrayList<PointPoint>();
+        ArrayList<PointPoint> dungeonEntrances = new ArrayList<>();
         for (Room room : _rooms) {
-            ArrayList<PointPoint> entrances = new ArrayList<PointPoint>();
+            ArrayList<PointPoint> entrances = new ArrayList<>();
             for (int ii = room.X; ii < room.RightSide; ii++) {
                 for (int jj = room.Y; jj < room.BottomSide; jj++) {
                     if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1) {

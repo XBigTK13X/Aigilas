@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 
-public class LockSkillCycleStatus extends IStatus {
-    public LockSkillCycleStatus(ICreature target)
+public class LockSkillCycleStatus extends BaseStatus {
+    public LockSkillCycleStatus(BaseCreature target)
 
     {
         super(target);

@@ -1,6 +1,6 @@
 package aigilas.strategies;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import spx.bridge.ActorType;
 import spx.core.Point2;
 import spx.entities.Entity;
@@ -9,23 +9,24 @@ import spx.entities.IActor;
 import spx.entities.IEntity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TargetSet
 
 {
-    private List<ICreature> _targets = new ArrayList<>();
-    private List<ActorType> _targetActorTypes = new ArrayList<>();
-    private List<Integer> _targetEntityTypes = new ArrayList<>();
-    private ICreature _parent;
+    private final List<BaseCreature> _targets = new ArrayList<>();
+    private final List<ActorType> _targetActorTypes = new ArrayList<>();
+    private final List<Integer> _targetEntityTypes = new ArrayList<>();
+    private final BaseCreature _parent;
 
-    public TargetSet(ICreature parent)
+    public TargetSet(BaseCreature parent)
 
     {
         _parent = parent;
     }
 
-    public ICreature addTarget(ICreature target)
+    public BaseCreature addTarget(BaseCreature target)
 
     {
         _targets.add(target);
@@ -33,9 +34,7 @@ public class TargetSet
     }
 
     public void addTargetTypes(ActorType... actorTypes) {
-        for (ActorType type : actorTypes) {
-            _targetActorTypes.add(type);
-        }
+        Collections.addAll(_targetActorTypes, actorTypes);
     }
 
     public void addEntityTypes(int... entityTypes) {
@@ -44,14 +43,14 @@ public class TargetSet
         }
     }
 
-    public void addTargets(ICreature source)
+    public void addTargets(BaseCreature source)
 
     {
         _targets.addAll(source.getTargets()._targets);
         _targetActorTypes.addAll(source.getTargets()._targetActorTypes);
     }
 
-    public List<ICreature> addTargets(List<ICreature> targets)
+    public List<BaseCreature> addTargets(List<BaseCreature> targets)
 
     {
         if (targets != null) {
@@ -60,15 +59,15 @@ public class TargetSet
         return targets;
     }
 
-    private List<ICreature> _calculatedTargets;
+    private List<BaseCreature> _calculatedTargets;
     private float dist;
-    ICreature closest;
+    BaseCreature closest;
 
-    public ICreature findClosest() {
+    public BaseCreature findClosest() {
         closest = null;
         float closestDistance = Float.MAX_VALUE;
         if (_targets != null) {
-            for (ICreature target : _targets) {
+            for (BaseCreature target : _targets) {
                 dist = Point2.distanceSquared(target.getLocation(), _parent.getLocation());
                 if (dist < closestDistance) {
                     closest = target;
@@ -76,12 +75,12 @@ public class TargetSet
                 }
             }
             for (ActorType actorType : _targetActorTypes) {
-                _calculatedTargets = new ArrayList<ICreature>();
+                _calculatedTargets = new ArrayList<>();
                 for (IEntity entity : EntityManager.getActors(actorType)) {
-                    _calculatedTargets.add((ICreature) entity);
+                    _calculatedTargets.add((BaseCreature) entity);
                 }
 
-                for (ICreature creature : _calculatedTargets) {
+                for (BaseCreature creature : _calculatedTargets) {
                     if (creature != _parent) {
                         dist = Point2.distanceSquared(creature.getLocation(), _parent.getLocation());
                         if (dist < closestDistance) {
@@ -98,7 +97,7 @@ public class TargetSet
     public IEntity getCollidedTarget(Entity source)
 
     {
-        for (ICreature target : _targets) {
+        for (BaseCreature target : _targets) {
             if (target.contains(source.getLocation())) {
                 return target;
             }

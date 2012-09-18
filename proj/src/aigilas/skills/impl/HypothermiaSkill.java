@@ -1,15 +1,15 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.CreatureFactory;
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import spx.entities.EntityManager;
 
-public class HypothermiaSkill extends ISkill {
+public class HypothermiaSkill extends BaseSkill {
     public HypothermiaSkill()
 
     {
@@ -21,7 +21,7 @@ public class HypothermiaSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature target)
+    public void activate(BaseCreature target)
 
     {
         for (int ii = 0; ii < 4; ii++) {

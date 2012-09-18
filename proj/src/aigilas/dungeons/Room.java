@@ -7,9 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-    public int Height, Width, X, Y, BottomSide, RightSide;
-    public Point2 Center;
-    public List<Point2> Corners = new ArrayList<Point2>();
+    public final int Height;
+    public final int Width;
+    public final int X;
+    public final int Y;
+    public final int BottomSide;
+    public final int RightSide;
+    public final Point2 Center;
+    public final List<Point2> Corners = new ArrayList<>();
 
     public Room(int height, int width, int x, int y) {
         Height = height;
@@ -26,13 +31,7 @@ public class Room {
     }
 
     public boolean isBad() {
-        if (BottomSide > Settings.get().tileMapHeight) {
-            return true;
-        }
-        if (RightSide > Settings.get().tileMapWidth) {
-            return true;
-        }
-        return false;
+        return BottomSide > Settings.get().tileMapHeight || RightSide > Settings.get().tileMapWidth;
     }
 
     public boolean collides(Room target) {
@@ -46,16 +45,10 @@ public class Room {
                 return true;
             }
         }
-        if (target.isPointInsideBoundingBox(Center)) {
-            return true;
-        }
-        return isPointInsideBoundingBox(target.Center);
+        return target.isPointInsideBoundingBox(Center) || isPointInsideBoundingBox(target.Center);
     }
 
     public boolean isPointInsideBoundingBox(Point2 target) {
-        if (target.X > X && target.Y > Y && target.X < RightSide && target.Y < BottomSide) {
-            return true;
-        }
-        return false;
+        return target.X > X && target.Y > Y && target.X < RightSide && target.Y < BottomSide;
     }
 }

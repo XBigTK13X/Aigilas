@@ -1,11 +1,11 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.strategies.IStrategy;
+import aigilas.creatures.BaseCreature;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 
-public class MinionCloudStrategy extends IStrategy {
-    public MinionCloudStrategy(ICreature parent)
+public class MinionCloudStrategy extends BaseStrategy {
+    public MinionCloudStrategy(BaseCreature parent)
 
     {
         super(parent, Strategy.MinionCloud);

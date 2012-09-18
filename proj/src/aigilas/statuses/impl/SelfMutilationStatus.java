@@ -1,14 +1,14 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 
-public class SelfMutilationStatus extends IStatus {
+public class SelfMutilationStatus extends BaseStatus {
     private Strategy previousStrategy;
 
-    public SelfMutilationStatus(ICreature target)
+    public SelfMutilationStatus(BaseCreature target)
 
     {
         super(target);

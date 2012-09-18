@@ -1,7 +1,7 @@
 package aigilas.entities;
 
-import aigilas.creatures.ICreature;
-import aigilas.skills.ISkill;
+import aigilas.creatures.BaseCreature;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillFactory;
 import aigilas.skills.animations.SkillAnimation;
 import spx.bridge.ActorType;
@@ -23,16 +23,16 @@ public class SkillEffect extends Entity {
     public static final float DefaultStrength = 1;
     private static final float CoolDown = Settings.get().defaultSpeed / 8;
 
-    private Point2 _velocity = new Point2(0, 0);
-    private ICreature _source;
-    private ISkill _skill;
+    private final Point2 _velocity = new Point2(0, 0);
+    private final BaseCreature _source;
+    private final BaseSkill _skill;
     private float _currentStrength = 0;
     private float _startingStrength = 0;
-    private SkillAnimation _animation;
+    private final SkillAnimation _animation;
     private float _coolDown = CoolDown;
-    private Point2 _direction = new Point2(0, 0);
+    private final Point2 _direction = new Point2(0, 0);
 
-    public SkillEffect(Point2 gridLocation, Point2 velocity, ICreature source, ISkill skill) {
+    public SkillEffect(Point2 gridLocation, Point2 velocity, BaseCreature source, BaseSkill skill) {
         _skill = skill;
         initialize(gridLocation, _skill.getSpriteType(), EntityType.SKILL_EFFECT, DrawDepth.BaseSkillEffect);
         _velocity.copy(velocity);

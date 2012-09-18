@@ -1,10 +1,10 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 
-public class RegenStatus extends IStatus {
-    public RegenStatus(ICreature target) {
+public class RegenStatus extends BaseStatus {
+    public RegenStatus(BaseCreature target) {
         super(target);
     }
 

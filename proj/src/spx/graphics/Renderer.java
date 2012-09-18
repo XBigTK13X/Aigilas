@@ -15,9 +15,9 @@ import spx.core.SpxManager;
 
 public class Renderer {
 
-    private SpriteBatch batch;
-    private OrthographicCamera camera;
-    private BitmapFont font;
+    private final SpriteBatch batch;
+    private final OrthographicCamera camera;
+    private final BitmapFont font;
 
     private static final Color __defaultFilter = Color.WHITE;
     private static final float __defaultAlpha = 1f;

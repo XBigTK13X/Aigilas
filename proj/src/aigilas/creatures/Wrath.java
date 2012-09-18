@@ -5,7 +5,7 @@ import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;
 import spx.bridge.ActorType;
 
-public class Wrath extends AbstractCreature {
+public class Wrath extends BaseEnemy {
     public Wrath() {
         super(ActorType.WRATH, SpriteType.WRATH);
         Compose(Elements.PHYSICAL);

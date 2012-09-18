@@ -13,13 +13,13 @@ public class Input {
     private static HashMap<Integer, Contexts> __contexts;
 
     // Lists what commands are locked for a given player
-    private static List<CommandLock> __locks = new ArrayList<CommandLock>();
+    private static final List<CommandLock> __locks = new ArrayList<>();
 
     // The commands that cannot be used by simply holding down the command's
     // input depending on the given context
-    private static HashMap<Commands, Contexts> __lockOnPress = new HashMap<>();
-    private static HashMap<Commands, Keys> _keyboardMapping = new HashMap<>();
-    private static HashMap<Commands, Buttons> _gamePadMapping = new HashMap<>();
+    private static final HashMap<Commands, Contexts> __lockOnPress = new HashMap<>();
+    private static final HashMap<Commands, Keys> _keyboardMapping = new HashMap<>();
+    private static final HashMap<Commands, Buttons> _gamePadMapping = new HashMap<>();
     private static boolean __isInputActive = false;
 
     public static void setup(IInputInitializer initializer) {

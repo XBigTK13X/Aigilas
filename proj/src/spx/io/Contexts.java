@@ -4,5 +4,5 @@ public enum Contexts {
     All,
     Nonfree,
     Free,
-    Inventory;
+    Inventory
 }

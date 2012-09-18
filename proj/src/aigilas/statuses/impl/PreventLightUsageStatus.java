@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class PreventLightUsageStatus extends IStatus {
-    public PreventLightUsageStatus(ICreature target)
+public class PreventLightUsageStatus extends BaseStatus {
+    public PreventLightUsageStatus(BaseCreature target)
 
     {
         super(target);

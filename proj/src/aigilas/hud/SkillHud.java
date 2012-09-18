@@ -1,6 +1,6 @@
 package aigilas.hud;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Color;
@@ -9,12 +9,12 @@ import spx.core.Point2;
 import spx.core.Settings;
 import spx.core.SpxManager;
 
-public class SkillHud extends IHud {
-    private static String __separator = "|";
+public class SkillHud extends BaseHud {
+    private static final String __separator = "|";
 
     private Point2 _manaPosition = new Point2();
 
-    public SkillHud(ICreature owner) {
+    public SkillHud(BaseCreature owner) {
         super(owner, Settings.get().spriteWidth, SpxManager.WindowHeight / 4);
         _manaPosition = new Point2(getHudOrigin().X, getHudOrigin().Y - SpxManager.WindowHeight / 4);
     }

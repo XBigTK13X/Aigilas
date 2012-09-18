@@ -1,12 +1,12 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.strategies.IStrategy;
+import aigilas.creatures.BaseCreature;
+import aigilas.strategies.BaseStrategy;
 import spx.bridge.ActorType;
 
-public class NullStrategy extends IStrategy {
+public class NullStrategy extends BaseStrategy {
 
-    public NullStrategy(ICreature parent, ActorType... targetTypes)
+    public NullStrategy(BaseCreature parent, ActorType... targetTypes)
 
     {
         super(parent, null);

@@ -1,12 +1,12 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
-import aigilas.strategies.IStrategy;
+import aigilas.creatures.BaseCreature;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import spx.core.RNG;
 
-public class ConfusedStrategy extends IStrategy {
-    public ConfusedStrategy(ICreature parent)
+public class ConfusedStrategy extends BaseStrategy {
+    public ConfusedStrategy(BaseCreature parent)
 
     {
         super(parent, Strategy.Confused);

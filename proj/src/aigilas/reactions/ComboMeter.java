@@ -1,6 +1,6 @@
 package aigilas.reactions;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.entities.ComboMarker;
 import aigilas.entities.Elements;
 import spx.text.ActionText;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ComboMeter {
-    private static HashMap<Integer, ReactionId> __reactions = new HashMap<>();
+    private static final HashMap<Integer, ReactionId> __reactions = new HashMap<>();
 
     static {
         __reactions.put(12, ReactionId.SWEAT);
@@ -44,22 +44,20 @@ public class ComboMeter {
         __reactions.put(78, ReactionId.CONFUSE);
     }
 
-    ;
-
-    private ICreature _parent;
-    private List<Elements> _elements = new ArrayList<>();
-    private List<ComboMarker> _markers = new ArrayList<>();
+    private final BaseCreature _parent;
+    private final List<Elements> _elements = new ArrayList<>();
+    private final List<ComboMarker> _markers = new ArrayList<>();
     private static final int _maxTimer = 120;
     private int _reactionTimer = _maxTimer;
 
-    public ComboMeter(ICreature parent) {
+    public ComboMeter(BaseCreature parent) {
         _parent = parent;
     }
 
     private void resetComboDisplay() {
         _reactionTimer = _maxTimer;
-        for (int ii = 0; ii < _markers.size(); ii++) {
-            _markers.get(ii).setInactive();
+        for (ComboMarker _marker : _markers) {
+            _marker.setInactive();
         }
         _markers.clear();
         int jj = 0;
@@ -106,7 +104,7 @@ public class ComboMeter {
         for (ComboMarker marker : _markers) {
             marker.update();
         }
-        int key = 0;
+        int key;
         if (_elements.size() == 3) {
             key = _elements.get(0).Value * 100 + _elements.get(1).Value * 10 + _elements.get(2).Value;
             react(key);

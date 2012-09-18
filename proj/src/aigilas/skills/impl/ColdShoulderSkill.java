@@ -1,14 +1,14 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 
-public class ColdShoulderSkill extends ISkill {
+public class ColdShoulderSkill extends BaseSkill {
     public ColdShoulderSkill()
 
     {
@@ -20,7 +20,7 @@ public class ColdShoulderSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         super.activate(source);
         applyToPlayers(Status.ColdShoulder);
 

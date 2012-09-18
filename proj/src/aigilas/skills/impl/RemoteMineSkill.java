@@ -1,17 +1,17 @@
 package aigilas.skills.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureFactory;
-import aigilas.creatures.ICreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
 import java.util.HashMap;
 
-public class RemoteMineSkill extends ISkill {
-    private static HashMap<ICreature, RemoteMineSkill> _cache = new HashMap<ICreature, RemoteMineSkill>();
+public class RemoteMineSkill extends BaseSkill {
+    private static final HashMap<BaseCreature, RemoteMineSkill> _cache = new HashMap<>();
 
     public RemoteMineSkill()
 
@@ -24,7 +24,7 @@ public class RemoteMineSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         if (!_cache.containsKey(source)) {
             _cache.put(source, this);
             super.activate(source);
@@ -47,7 +47,7 @@ public class RemoteMineSkill extends ISkill {
 
     }
 
-    private void explode(ICreature source) {
+    private void explode(BaseCreature source) {
         if (_behavior.getGraphic() != null) {
             CreatureFactory.createMinion(SkillId.EXPLODE, _source, _behavior.getGraphic(), _behavior.getGraphic().getLocation());
 

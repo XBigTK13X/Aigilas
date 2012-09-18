@@ -1,9 +1,9 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.Stats;
 import aigilas.management.Commands;
-import aigilas.strategies.IStrategy;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import spx.bridge.ActorType;
 import spx.core.Point2;
@@ -13,13 +13,13 @@ import spx.io.Input;
 import java.util.Arrays;
 import java.util.List;
 
-public class ControlledByPlayer extends IStrategy {
+public class ControlledByPlayer extends BaseStrategy {
     private boolean _isCasting = false;
-    private Point2 _keyVelocity = new Point2(0, 0);
+    private final Point2 _keyVelocity = new Point2(0, 0);
 
-    private static List<Commands> __hotkeys = Arrays.asList(Commands.HotSkill1, Commands.HotSkill2, Commands.HotSkill3);
+    private static final List<Commands> __hotkeys = Arrays.asList(Commands.HotSkill1, Commands.HotSkill2, Commands.HotSkill3);
 
-    public ControlledByPlayer(ICreature parent) {
+    public ControlledByPlayer(BaseCreature parent) {
         super(parent, Strategy.ControlledByPlayer);
 
         _targets.addTargetTypes(ActorType.NONPLAYER);

@@ -1,15 +1,15 @@
 package aigilas.statuses.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 
-public class ConfusionStatus extends IStatus {
+public class ConfusionStatus extends BaseStatus {
     private Strategy previousStrategy;
 
-    public ConfusionStatus(ICreature target)
+    public ConfusionStatus(BaseCreature target)
 
     {
         super(target);

@@ -1,6 +1,6 @@
 package aigilas.skills;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.entities.Extensions;
@@ -18,28 +18,28 @@ import spx.entities.IEntity;
 
 import java.util.List;
 
-public abstract class ISkill {
-    protected ICreature _source;
-    protected SkillId _implementationId;
-    protected SkillBehavior _behavior;
-    protected SkillComponents _components;
+public abstract class BaseSkill {
+    protected BaseCreature _source;
+    protected final SkillId _implementationId;
+    protected final SkillBehavior _behavior;
+    protected final SkillComponents _components;
     public boolean StartOffCenter = false;
 
-    protected ISkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent, SpriteType effectGraphic) {
+    protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent, SpriteType effectGraphic) {
         _implementationId = implementationId;
         _components = new SkillComponents(strength, isPersistent);
         _behavior = SkillFactory.create(animation, effectGraphic, this);
     }
 
-    protected ISkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
+    protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
         this(implementationId, animation, strength, isPersistent, SpriteType.SKILL_EFFECT);
     }
 
-    protected ISkill(SkillId implementationId, AnimationType animation, float strength) {
+    protected BaseSkill(SkillId implementationId, AnimationType animation, float strength) {
         this(implementationId, animation, strength, false, SpriteType.SKILL_EFFECT);
     }
 
-    protected ISkill(SkillId implementationId, AnimationType animation) {
+    protected BaseSkill(SkillId implementationId, AnimationType animation) {
         this(implementationId, animation, SkillEffect.DefaultStrength, false, SpriteType.SKILL_EFFECT);
     }
 
@@ -55,13 +55,13 @@ public abstract class ISkill {
         _components.setBuff(stat, amount);
     }
 
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         _source = source;
         _behavior.activate(source);
     }
 
     public void affect(IEntity target) {
-        ICreature creature = Extensions.isCreature(target);
+        BaseCreature creature = Extensions.isCreature(target);
         if (creature != null) {
             affect(creature);
         }
@@ -69,7 +69,7 @@ public abstract class ISkill {
 
     public void applyToPlayers(Status statusId) {
         for (IActor player : EntityManager.getPlayers()) {
-            StatusFactory.apply((ICreature) player, statusId);
+            StatusFactory.apply((BaseCreature) player, statusId);
         }
     }
 
@@ -77,7 +77,7 @@ public abstract class ISkill {
         return _components.getElements();
     }
 
-    public void affect(ICreature target) {
+    public void affect(BaseCreature target) {
 
     }
 
@@ -105,7 +105,7 @@ public abstract class ISkill {
         _behavior.cleanup(target, source);
     }
 
-    public boolean affectTarget(ICreature target, SkillEffect graphic) {
+    public boolean affectTarget(BaseCreature target, SkillEffect graphic) {
         return _behavior.affectTarget(target, graphic);
     }
 

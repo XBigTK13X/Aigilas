@@ -16,8 +16,8 @@ import java.util.List;
 public class CreatureFactory {
     private static int __playerCount = 0;
 
-    public static ICreature create(ActorType actorType, Point2 position) {
-        AbstractCreature result;
+    public static BaseCreature create(ActorType actorType, Point2 position) {
+        BaseEnemy result;
         switch (actorType) {
             case PLAYER:
                 result = new Player(__playerCount++);
@@ -35,7 +35,7 @@ public class CreatureFactory {
         return result;
     }
 
-    private static AbstractCreature generateCreature(ActorType actorType) {
+    private static BaseEnemy generateCreature(ActorType actorType) {
         switch (actorType) {
             case PEON:
                 return new Peon();
@@ -72,11 +72,11 @@ public class CreatureFactory {
         }
     }
 
-    public static ICreature createRandom(Point2 randomPoint) {
+    public static BaseCreature createRandom(Point2 randomPoint) {
         return create(Generate.Randoms.get(RNG.next(0, Generate.Randoms.size())), randomPoint);
     }
 
-    public static ICreature createMinion(SkillId skillId, ICreature source, SkillEffect effectGraphic, Point2 location) {
+    public static BaseCreature createMinion(SkillId skillId, BaseCreature source, SkillEffect effectGraphic, Point2 location) {
         Minion result = null;
         switch (skillId) {
             case ACID_NOZZLE:
@@ -113,22 +113,22 @@ public class CreatureFactory {
         return result;
     }
 
-    public static ICreature createMinion(SkillId skillId, ICreature source, SkillEffect effectGraphic) {
+    public static BaseCreature createMinion(SkillId skillId, BaseCreature source, SkillEffect effectGraphic) {
         return createMinion(skillId, source, effectGraphic, null);
     }
 
-    public static ICreature createMinion(SkillId skillId, ICreature source) {
+    public static BaseCreature createMinion(SkillId skillId, BaseCreature source) {
         return createMinion(skillId, source, null, null);
     }
 
     private static List<ActorType> __remainingBosses;
 
     static {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
+        __remainingBosses = new LinkedList<>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
     }
 
     public static void reset(){
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
+        __remainingBosses = new LinkedList<>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
         __playerCount = 0;
     }
 

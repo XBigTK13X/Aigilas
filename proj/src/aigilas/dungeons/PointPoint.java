@@ -1,9 +1,9 @@
 package aigilas.dungeons;
 
 class PointPoint {
-    public int X;
-    public int Y;
-    private boolean _isHorizontal;
+    public final int X;
+    public final int Y;
+    private final boolean _isHorizontal;
 
     public PointPoint(int x, int y, boolean destroyHorizontal) {
         X = x;

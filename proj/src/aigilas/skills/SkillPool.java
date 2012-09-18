@@ -1,6 +1,6 @@
 package aigilas.skills;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.management.Commands;
 
 import java.util.ArrayList;
@@ -8,18 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SkillPool {
-    private List<SkillId> _skills = new ArrayList<SkillId>();
+    private final List<SkillId> _skills = new ArrayList<>();
     private int _currentSkillSlot = 0;
-    private ICreature _owner;
-    private HashMap<SkillId, Integer> _usageCounter = new HashMap<>();
-    private HashMap<Commands, SkillId> _hotSkills = new HashMap<>();
+    private final BaseCreature _owner;
+    private final HashMap<SkillId, Integer> _usageCounter = new HashMap<>();
+    private final HashMap<Commands, SkillId> _hotSkills = new HashMap<>();
 
-    public SkillPool(ICreature owner) {
+    public SkillPool(BaseCreature owner) {
         _owner = owner;
     }
 
     public void add(SkillId skill) {
-        if (skill.equals(null) && _skills.size() == 0) {
+        if (skill == null && _skills.size() == 0) {
             _skills.add(SkillId.NO_SKILL);
             findCurrent();
             return;

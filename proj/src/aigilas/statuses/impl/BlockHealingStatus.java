@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.creatures.BaseCreature;
+import aigilas.statuses.BaseStatus;
 
-public class BlockHealingStatus extends IStatus {
-    public BlockHealingStatus(ICreature target)
+public class BlockHealingStatus extends BaseStatus {
+    public BlockHealingStatus(BaseCreature target)
 
     {
         super(target);

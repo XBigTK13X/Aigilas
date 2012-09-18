@@ -1,14 +1,14 @@
 package aigilas.hud;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.Inventory;
 
 public class HudManager {
-    private InventoryHud _inventory;
-    private SkillHud _skill;
+    private final InventoryHud _inventory;
+    private final SkillHud _skill;
 
-    public HudManager(ICreature parent, Inventory inventory, Equipment equipment) {
+    public HudManager(BaseCreature parent, Inventory inventory, Equipment equipment) {
         _inventory = new InventoryHud(parent, inventory, equipment);
         _skill = new SkillHud(parent);
         _skill.toggle();

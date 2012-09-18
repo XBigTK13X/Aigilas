@@ -5,8 +5,8 @@ import aigilas.items.ItemClass;
 import com.badlogic.gdx.graphics.Color;
 
 public class God {
-    public String NameText;
-    public GodId Id;
+    public final String NameText;
+    public final GodId Id;
 
     protected God(GodId id) {
         Id = id;

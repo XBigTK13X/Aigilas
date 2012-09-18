@@ -12,8 +12,8 @@ import spx.bridge.ActorType;
 import java.util.Arrays;
 import java.util.List;
 
-public class Player extends AbstractCreature {
-    private static List<Color> __colors = Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.WHITE);
+public class Player extends BaseEnemy {
+    private static final List<Color> __colors = Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.WHITE);
 
     public Player(int playerIndex) {
         super(ActorType.PLAYER, SpriteType.PLAYER_STAND, new WrathAcolyte());

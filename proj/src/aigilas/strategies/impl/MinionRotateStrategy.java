@@ -1,13 +1,13 @@
 package aigilas.strategies.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.strategies.IStrategy;
+import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import spx.core.Point2;
 
-public class MinionRotateStrategy extends IStrategy {
-    public MinionRotateStrategy(ICreature parent)
+public class MinionRotateStrategy extends BaseStrategy {
+    public MinionRotateStrategy(BaseCreature parent)
 
     {
         super(parent, Strategy.MinionRotate);

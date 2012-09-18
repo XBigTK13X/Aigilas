@@ -1,15 +1,15 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
-import aigilas.skills.ISkill;
+import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
-public class BoilSkill extends ISkill {
+public class BoilSkill extends BaseSkill {
     public BoilSkill()
 
     {
@@ -21,7 +21,7 @@ public class BoilSkill extends ISkill {
     }
 
     @Override
-    public void activate(ICreature source) {
+    public void activate(BaseCreature source) {
         StatusFactory.apply(source, Status.Boil);
 
     }

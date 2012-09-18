@@ -1,20 +1,20 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import spx.bridge.ActorType;
 
-public class BoilStatus extends IStatus {
+public class BoilStatus extends BaseStatus {
     private Strategy previousStrategy;
     private float _previousHealth = 0;
     private boolean _countDownFailed = false;
     private static final int _countdownMax = 10;
     private int _countdown = _countdownMax;
 
-    public BoilStatus(ICreature target)
+    public BoilStatus(BaseCreature target)
 
     {
         super(target);

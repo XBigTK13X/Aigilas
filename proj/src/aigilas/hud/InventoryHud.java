@@ -1,6 +1,6 @@
 package aigilas.hud;
 
-import aigilas.creatures.ICreature;
+import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
@@ -15,7 +15,7 @@ import spx.util.StringStorage;
 
 import java.util.HashMap;
 
-public class InventoryHud extends IHud {
+public class InventoryHud extends BaseHud {
     private int _currentClass = 0;
     private final Inventory _inventory;
     private final Equipment _equipment;
@@ -27,7 +27,7 @@ public class InventoryHud extends IHud {
     private final EquipmentHud _equipHud;
     private final DeltasHud _deltas;
 
-    public InventoryHud(ICreature owner, Inventory inventory, Equipment equipment) {
+    public InventoryHud(BaseCreature owner, Inventory inventory, Equipment equipment) {
         super(owner, SpxManager.WindowWidth / 2, SpxManager.WindowHeight / 2);
         _inventory = inventory;
         _equipment = equipment;
@@ -113,7 +113,7 @@ public class InventoryHud extends IHud {
         forceRefresh = true;
     }
 
-    private static HashMap<Integer, String> __classStrings = new HashMap<>();
+    private static final HashMap<Integer, String> __classStrings = new HashMap<>();
 
     private String getClassDisplay() {
         if (!__classStrings.containsKey(_currentClass)) {
@@ -129,7 +129,7 @@ public class InventoryHud extends IHud {
 
     private String displayString = "";
     private boolean forceRefresh = false;
-    private String[] list = new String[10];
+    private final String[] list = new String[10];
 
     private void updateInventoryDisplay() {
         _textHandler.writeDefault(getClassDisplay(), 20, 30, getHudOrigin());

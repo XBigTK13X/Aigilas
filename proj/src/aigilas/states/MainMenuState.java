@@ -9,7 +9,7 @@ import spx.states.StateManager;
 import spx.text.ActionTextHandler;
 
 public class MainMenuState implements State {
-    private ActionTextHandler _text = new ActionTextHandler();
+    private final ActionTextHandler _text = new ActionTextHandler();
 
     private static final String PlayText = "Play Game";
     private static final String OptionsText = "Options";

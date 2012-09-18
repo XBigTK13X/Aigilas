@@ -4,7 +4,7 @@ import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
 import spx.bridge.ActorType;
 
-public class Zorb extends AbstractCreature {
+public class Zorb extends BaseEnemy {
     public Zorb() {
         super(ActorType.ZORB);
         Compose(Elements.PHYSICAL, Elements.FIRE);

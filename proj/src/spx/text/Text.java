@@ -5,7 +5,7 @@ import spx.graphics.Renderer;
 
 public class Text {
     protected String _contents;
-    protected Point2 _position = new Point2(0, 0);
+    protected final Point2 _position = new Point2(0, 0);
     protected TextType _textType = TextType.Inventory;
 
     public Text() {

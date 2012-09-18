@@ -1,11 +1,11 @@
 package aigilas.statuses.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureAction;
-import aigilas.creatures.ICreature;
-import aigilas.statuses.IStatus;
+import aigilas.statuses.BaseStatus;
 
-public class PreventRegenerationStatus extends IStatus {
-    public PreventRegenerationStatus(ICreature target)
+public class PreventRegenerationStatus extends BaseStatus {
+    public PreventRegenerationStatus(BaseCreature target)
 
     {
         super(target);
