@@ -1,338 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29ad9365-0af4-4aff-94f7-f40b83953e26" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/ant.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/scopes/scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/Proj.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas.ipr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/Aigilas.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/CreatureClass.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/EnvyAcolyte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/GluttonyAcolyte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/GreedAcolyte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/LustAcolyte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/NoClass.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/PrideAcolyte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/SlothAcolyte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/classes/WrathAcolyte.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/AbstractCreature.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/AcidNozzle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/BreakingWheel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/CreatureAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/CreatureFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/DartTrap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Envy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Explosion.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Generate.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Gluttony.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Greed.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Hand.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/ICreature.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/IceShard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Lust.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Minion.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Peon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Player.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/PoisonCloud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Pride.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Serpent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Sloth.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/StatBuff.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/StatType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Stats.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/VaporCloud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Wrath.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/creatures/Zorb.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/desktop/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/dungeons/Dungeon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/dungeons/DungeonFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/dungeons/DungeonSet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/dungeons/Location.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/dungeons/PointPoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/dungeons/Room.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/Altar.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/ComboMarker.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/Downstairs.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/Elements.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/EntityFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/Extensions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/Floor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/SkillEffect.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/Upstairs.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/entities/Wall.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/gods/God.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/gods/GodId.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/hud/DeltasHud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/hud/EquipmentHud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/hud/HotkeyHud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/hud/HudManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/hud/IHud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/hud/InventoryHud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/hud/SkillHud.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/Equipment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/GenericItem.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/Inventory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/ItemClass.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/ItemFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/ItemName.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/ItemPrefix.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/ItemSlot.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/ItemSuffix.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/items/Slots.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/management/Commands.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/management/InputInitializer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/management/SpriteInitializer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/management/SpriteType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/ComboMeter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/IReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/ReactionFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/ReactionId.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/AtrophyReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/BlankReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/BlindReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/ConfuseReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/CraftsmanReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/DrenchReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/DrownReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/EclipseReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/EnlightenReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/ExplosionReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/ExposeReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/FastForwardReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/FlashReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/LacticAcidReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/LobotomyReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/MagmaReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/MetabolismReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/MindBlownReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/NeurosisReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/PneumoniaReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/PurifyReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/ReflectReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/RespectReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/RustReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/ScorchReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/SweatReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/VentReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/reactions/impl/YinYangReaction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/AnimationType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/ISkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/SideEffects.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/SkillComponents.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/SkillFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/SkillId.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/SkillPool.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/animations/NoAnimation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/animations/RangedAnimation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/animations/RotateAnimation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/animations/SelfAnimation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/animations/SkillAnimation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/behaviors/CloudBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/behaviors/RangedBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/behaviors/RotateBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/behaviors/SelfBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/behaviors/SkillBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/behaviors/StationaryBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/AbsorbSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/AcidDripSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/AcidNozzleSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/BoilSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/BreakingWheelSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/BrimstoneSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/CavalrySkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ColdShoulderSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/CombustSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ConfusionSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/DartSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/DartTrapSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/DismembermentSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ElectrifySkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/EnvenomSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ExplodeSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/FireballSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/FlameHammerSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/FloorSpikesSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ForgetSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/GushSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/HorderSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/HorrifySkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/HypothermiaSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/IceShardSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/MagicMapSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ManaUpSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/MimicSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/MutinySkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/NoSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/PlagueSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/PoisonCloudSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/RegenAllSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/RemoteMineSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/SerpentSupperSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/SoulCrushSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/SoulReinforcementSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/SpawnItemSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/SpeedUpSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/StealItemSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/StrengthUpSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ThrowItemSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/ValedictorianSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/VaporCloudSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/VaporImplantSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/VenomFistSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/WallPunchSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/skills/impl/WeakKneesSkill.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/states/GameOverState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/states/GameplayState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/states/MainMenuState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/states/OptionsState.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/IStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/Status.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/StatusComponent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/StatusFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/StatusPool.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/BerserkStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/BlindStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/BlockHealingStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/BoilStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/BurnOneHitStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/BurnStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/ConfusionStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/DefenseUpStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/ElectrifyStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/FleeStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/HordStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/IntDownStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/LockSkillCycleStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/ManaUpStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/MuteStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/MutinyStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/PoisonOneHitStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/PoisonStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/PreventDarkUsageStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/PreventLightUsageStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/PreventMentalUsageStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/PreventRegenerationStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/RandomBuffStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/RegenStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/SelfMutilationStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/SlowDownStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/SoakingWetStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/SpeedUpStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/StrengthUpStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/ToxicStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/VenomFistStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/WeakKneesStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/WeakMusclesStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/WeakenStrengthStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/statuses/impl/ZapStatus.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/IStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/Strategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/StrategyFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/TargetSet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/AttackSelfStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/AttackStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/ConfusedAndDyingStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/ConfusedStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/ControlledByPlayer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/FleeStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/MinionCloudStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/MinionFireStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/MinionOneUseStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/MinionRotateStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/NullStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/StraightLineRotateStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/StraightLineStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/aigilas/strategies/impl/TestBotStrategy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/assets/graphics/GameOver.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/assets/graphics/GameplaySheet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/assets/graphics/MenuBase.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/assets/graphics/Particle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/assets/music/MainTheme.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/assets/settings.cfg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/assets/source/GameplaySheet.xcf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/lib/gdx-backend-lwjgl-natives.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/lib/gdx-backend-lwjgl.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/lib/gdx-natives.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/lib/gdx-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/lib/gdx.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/bridge/ActorType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/bridge/DrawDepth.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/bridge/EntityType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/core/GameManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/core/Point2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/core/RNG.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/core/Settings.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/core/SpxManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/devtools/DevConsole.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/entities/CoordVerifier.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/entities/Entity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/entities/EntityManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/entities/HitTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/entities/IActor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/entities/IActorFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/entities/IEntity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/AnimatedTexture.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/AssetManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/ContentManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/ISpriteInitializer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/Renderer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/SpriteDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/SpriteInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/graphics/SpriteSheetManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/Buttons.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/CommandDefinition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/CommandLock.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/Contexts.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/IInputInitializer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/Input.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/Keys.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/io/PlayerIndex.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/Client.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/ClientManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/IClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/LanClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/LocalClient.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/Message.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/MessageHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/MessageTypes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/net/Server.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/Emitter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/PEComponent.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/Particle2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/ParticleBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/ParticleEngine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/behaviors/FollowBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/behaviors/RadiateBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/particles/behaviors/RotateBehavior.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/paths/Path.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/paths/PathFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/paths/PathFinder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/paths/StepLookup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/paths/Walk.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/states/State.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/states/StateManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/text/ActionText.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/text/ActionTextHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/text/DefaultHudText.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/text/Text.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/text/TextHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/text/TextManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/text/TextType.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/util/IntStorage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/util/MathHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/util/StringSquisher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../code/spx/util/StringStorage.java" afterPath="" />
-    </list>
+    <list default="true" id="29ad9365-0af4-4aff-94f7-f40b83953e26" name="Default" comment="" />
     <ignored path="code.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -430,6 +99,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -450,7 +122,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -466,8 +137,8 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
@@ -509,24 +180,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -552,6 +205,24 @@
       <envs />
       <properties />
       <listeners />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -654,7 +325,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12119535" sideWeight="0.67094016" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12112832" sideWeight="0.67094016" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
