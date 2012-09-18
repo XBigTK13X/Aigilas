@@ -60,14 +60,14 @@ public class Aigilas implements ApplicationListener {
             DevConsole.get().toggle();
         }
         if (Client.get().nextTurn()) {
-            for (int ii = 0; ii < 4; ii++) {
+            /*for (int ii = 0; ii < 4; ii++) {
                 PlayerIndex player = PlayerIndex.values()[ii];
-                /*
-                     * //$$$ if (GamePad.GetState(player).IsPressed(Buttons.Back) &&
-                     * GamePad.GetState(player).IsPressed(Buttons.Start)) {
-                     * setIsRunning(false); }
-                     */
-            }
+
+                     //$$$ if (GamePad.GetState(player).IsPressed(Buttons.Back) &&
+                      GamePad.GetState(player).IsPressed(Buttons.Start)) {
+                      setIsRunning(false); }
+
+            }*/
             ParticleEngine.update();
             StateManager.update();
             TextManager.update();

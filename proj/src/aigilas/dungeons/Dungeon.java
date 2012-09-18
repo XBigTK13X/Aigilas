@@ -33,6 +33,11 @@ public class Dungeon {
     private Point2 _upSpawnLocation = new Point2(0, 0);
     private Point2 _downSpawnLocation = new Point2(0, 0);
 
+    public static void reset(){
+        enemyBaseModifier = 0;
+        enemyCapModifier = 0;
+    }
+
     private static final int startY = 10;
 
     public Dungeon() {
@@ -156,6 +161,7 @@ public class Dungeon {
     }
 
     private void placeCreatures(int amountOfCreatures) {
+        // $$$ Easiest way to test specific bosses
         // = Point2 random = new Point2(findRandomFreeTile());
         // = dungeon[random.GridX][random.GridY] =
         // = CreatureFactory.create(ActorType.ENVY, random);

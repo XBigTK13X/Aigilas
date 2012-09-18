@@ -127,7 +127,10 @@ public class CreatureFactory {
         __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
     }
 
-    ;
+    public static void reset(){
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
+        __playerCount = 0;
+    }
 
     public static int bossesRemaining() {
         return __remainingBosses.size();

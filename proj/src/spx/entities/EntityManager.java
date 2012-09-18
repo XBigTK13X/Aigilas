@@ -64,19 +64,6 @@ public class EntityManager {
         return goResults;
     }
 
-    // CT Accessors
-    public static IActor getActor(ActorType type) {
-        if (_contents == null) {
-            return null;
-        }
-        for (int ii = 0; ii < _contents.size(); ii++) {
-            if (_contents.get(ii).getEntityType() == EntityType.ACTOR && ((IActor) _contents.get(ii)).getActorType() == type) {
-                return ((IActor) _contents.get(ii));
-            }
-        }
-        return null;
-    }
-
     private static List<IActor> creatures = new ArrayList<IActor>();
 
     public static List<IActor> getActors(ActorType type) {

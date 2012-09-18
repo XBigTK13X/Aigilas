@@ -17,9 +17,7 @@ public class GameOverState implements State {
 
     @Override
     public void draw() {
-        float x = (SpxManager.WindowWidth - _gameOver.getWidth()) / 2;
-        float y = (SpxManager.WindowHeight - _gameOver.getHeight()) / 2;
-        SpxManager.Renderer.draw(_gameOver, new Point2(x, y));
+        SpxManager.Renderer.draw(_gameOver, Point2.Zero);
     }
 
     @Override

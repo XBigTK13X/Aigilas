@@ -1,5 +1,7 @@
 package aigilas.states;
 
+import aigilas.creatures.CreatureFactory;
+import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFactory;
 import spx.entities.EntityManager;
 import spx.entities.IActor;
@@ -16,7 +18,9 @@ public class GameplayState implements State {
     public GameplayState() {
         System.out.println("Generating the dungeon...");
         EntityManager.reset();
+        CreatureFactory.reset();
         DungeonFactory.start();
+        Dungeon.reset();
         Client.get().dungeonHasLoaded();
     }
 
