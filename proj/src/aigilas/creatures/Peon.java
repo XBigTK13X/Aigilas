@@ -1,7 +1,7 @@
 package aigilas.creatures;
 
 import aigilas.entities.Elements;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class Peon extends BaseEnemy {
     public Peon() {

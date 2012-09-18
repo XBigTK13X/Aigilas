@@ -1,6 +1,6 @@
 package aigilas.creatures;
 
-import spx.core.Settings;
+import sps.core.Settings;
 
 import java.util.ArrayList;
 import java.util.HashMap;

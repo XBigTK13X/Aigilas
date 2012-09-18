@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
 import aigilas.creatures.StatType;
 import aigilas.statuses.BaseStatus;
-import spx.core.RNG;
+import sps.core.RNG;
 
 public class RandomBuffStatus extends BaseStatus {
     public RandomBuffStatus(BaseCreature target)

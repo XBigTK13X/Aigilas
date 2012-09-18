@@ -10,11 +10,11 @@ import aigilas.skills.behaviors.SkillBehavior;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 import com.badlogic.gdx.graphics.Color;
-import spx.bridge.EntityType;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
-import spx.entities.IEntity;
+import sps.bridge.EntityType;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
+import sps.entities.IEntity;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public abstract class BaseSkill {
     }
 
     public void applyToPlayers(Status statusId) {
-        for (IActor player : EntityManager.getPlayers()) {
+        for (IActor player : EntityManager.get().getPlayers()) {
             StatusFactory.apply((BaseCreature) player, statusId);
         }
     }

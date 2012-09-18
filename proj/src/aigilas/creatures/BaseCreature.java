@@ -19,20 +19,20 @@ import aigilas.statuses.StatusPool;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.TargetSet;
-import spx.bridge.ActorType;
-import spx.bridge.DrawDepth;
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.entities.CoordVerifier;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
-import spx.io.Input;
-import spx.text.ActionText;
-import spx.text.ActionTextHandler;
-import spx.text.TextManager;
-import spx.util.IntegerStorage;
-import spx.util.StringStorage;
+import sps.bridge.ActorType;
+import sps.bridge.DrawDepth;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.entities.CoordVerifier;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
+import sps.io.Input;
+import sps.text.ActionText;
+import sps.text.ActionTextHandler;
+import sps.text.TextManager;
+import sps.util.IntegerStorage;
+import sps.util.StringStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +114,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     public void pickupItem(GenericItem item) {
         _inventory.add(item);
-        EntityManager.removeObject(item);
+        EntityManager.get().removeObject(item);
     }
 
     public void equip(GenericItem item) {
@@ -132,12 +132,12 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (item != null) {
 
             if (_inventory.getItemCount(item) > 0) {
-                EntityManager.addObject(new GenericItem(item, getLocation()));
+                EntityManager.get().addObject(new GenericItem(item, getLocation()));
                 _inventory.remove(item);
             } else {
                 if (_inventory.getItemCount(item) == 0) {
                     _equipment.unregister(item);
-                    EntityManager.addObject(new GenericItem(item, getLocation()));
+                    EntityManager.get().addObject(new GenericItem(item, getLocation()));
                     _inventory.remove(item);
                 }
             }
@@ -373,7 +373,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 }
                 if (_statuses.allows(CreatureAction.Attacking)) {
                     creatures.clear();
-                    for (IActor actor : EntityManager.getActorsAt(target)) {
+                    for (IActor actor : EntityManager.get().getActorsAt(target)) {
                         creatures.add((BaseCreature) actor);
                     }
                     if (creatures.size() > 0) {

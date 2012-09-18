@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import spx.core.Point2;
+import sps.core.Point2;
 
 public class MinionRotateStrategy extends BaseStrategy {
     public MinionRotateStrategy(BaseCreature parent)

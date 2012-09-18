@@ -10,8 +10,8 @@ import aigilas.management.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SideEffects;
-import spx.entities.Entity;
-import spx.entities.IEntity;
+import sps.entities.Entity;
+import sps.entities.IEntity;
 
 public class SkillBehavior {
     protected final SideEffects _sideEffects;

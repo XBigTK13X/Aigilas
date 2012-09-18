@@ -2,12 +2,12 @@ package aigilas.entities;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.management.SpriteType;
-import spx.bridge.DrawDepth;
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.core.Settings;
-import spx.entities.Entity;
-import spx.particles.ParticleEngine;
+import sps.bridge.DrawDepth;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.core.Settings;
+import sps.entities.Entity;
+import sps.particles.ParticleEngine;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ComboMarker extends Entity {
         initialize(source.getLocation(), SpriteType.COMBO_MARKER, EntityType.COMBO_MARKER, DrawDepth.ComboMarker);
         _graphic.setColor(elementId.Tint);
         _graphic.setAlpha(0);
-        ParticleEngine.emit(spx.particles.behaviors.RotateBehavior.getInstance(), this, _graphic.getColor());
+        ParticleEngine.emit(sps.particles.behaviors.RotateBehavior.getInstance(), this, _graphic.getColor());
         _parent = source;
         _index = index;
     }

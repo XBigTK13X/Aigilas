@@ -3,9 +3,9 @@ package targets;
 import aigilas.Aigilas;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import spx.core.Settings;
-import spx.core.SpxManager;
-import spx.net.Server;
+import sps.core.Settings;
+import sps.core.SpxManager;
+import sps.net.Server;
 
 public class DesktopMain {
     public static void main(String[] args) {

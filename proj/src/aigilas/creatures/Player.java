@@ -7,7 +7,7 @@ import aigilas.management.SpriteType;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import com.badlogic.gdx.graphics.Color;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 import java.util.Arrays;
 import java.util.List;

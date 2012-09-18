@@ -2,11 +2,11 @@ package aigilas.states;
 
 import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Texture;
-import spx.core.Point2;
-import spx.core.SpxManager;
-import spx.io.Input;
-import spx.states.State;
-import spx.states.StateManager;
+import sps.core.Point2;
+import sps.core.SpxManager;
+import sps.io.Input;
+import sps.states.State;
+import sps.states.StateManager;
 
 public class GameOverState implements State {
     private final Texture _gameOver;

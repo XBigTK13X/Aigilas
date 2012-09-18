@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.management.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
-import spx.core.Point2;
+import sps.core.Point2;
 
 public class StationaryBehavior extends SkillBehavior {
     public StationaryBehavior(SpriteType effectGraphic, BaseSkill parentSkill) {

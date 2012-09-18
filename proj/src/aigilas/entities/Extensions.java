@@ -1,8 +1,8 @@
 package aigilas.entities;
 
 import aigilas.creatures.BaseCreature;
-import spx.bridge.EntityType;
-import spx.entities.IEntity;
+import sps.bridge.EntityType;
+import sps.entities.IEntity;
 
 public class Extensions {
     public static BaseCreature isCreature(IEntity entity) {

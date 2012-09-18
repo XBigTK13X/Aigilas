@@ -2,7 +2,7 @@ package aigilas.creatures;
 
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class Zorb extends BaseEnemy {
     public Zorb() {

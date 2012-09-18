@@ -1,11 +1,11 @@
 package aigilas.strategies;
 
 import aigilas.creatures.BaseCreature;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.core.RNG;
-import spx.paths.Path;
-import spx.paths.PathFinder;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.core.RNG;
+import sps.paths.Path;
+import sps.paths.PathFinder;
 
 import java.util.List;
 

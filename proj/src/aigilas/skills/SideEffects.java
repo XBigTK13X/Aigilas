@@ -3,8 +3,8 @@ package aigilas.skills;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
 import aigilas.management.SpriteType;
-import spx.core.Point2;
-import spx.entities.EntityManager;
+import sps.core.Point2;
+import sps.entities.EntityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class SideEffects {
     public void Generate(Point2 gridLocation, Point2 velocity, BaseCreature source) {
         SkillEffect effect = new SkillEffect(gridLocation, velocity, source, _parent);
         _effectGraphics.add(effect);
-        EntityManager.addObject(effect);
+        EntityManager.get().addObject(effect);
     }
 
     public SkillEffect getFirstGraphic() {

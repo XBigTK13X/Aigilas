@@ -3,13 +3,13 @@ package aigilas.items;
 import aigilas.creatures.Player;
 import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
-import spx.bridge.ActorType;
-import spx.bridge.DrawDepth;
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
+import sps.bridge.ActorType;
+import sps.bridge.DrawDepth;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
 
 public class GenericItem extends Entity {
     public Stats Modifers;
@@ -65,7 +65,7 @@ public class GenericItem extends Entity {
     public void update() {
         super.update();
         if (_isOnBoard) {
-            IActor collider = EntityManager.getTouchingCreature(this);
+            IActor collider = EntityManager.get().getTouchingCreature(this);
             if (collider != null && collider.getActorType() == ActorType.PLAYER) {
                 _currentTarget = (Player) collider;
                 if (_currentTarget.isInteracting()) {

@@ -6,7 +6,7 @@ import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillFactory;
 import aigilas.skills.SkillId;
-import spx.core.Point2;
+import sps.core.Point2;
 
 public class BrimstoneSkill extends BaseSkill {
     private final Point2 _direction = new Point2(0, 0);

@@ -1,12 +1,12 @@
 package aigilas.strategies;
 
 import aigilas.creatures.BaseCreature;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
-import spx.entities.IEntity;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
+import sps.entities.IEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -76,7 +76,7 @@ public class TargetSet
             }
             for (ActorType actorType : _targetActorTypes) {
                 _calculatedTargets = new ArrayList<>();
-                for (IEntity entity : EntityManager.getActors(actorType)) {
+                for (IEntity entity : EntityManager.get().getActors(actorType)) {
                     _calculatedTargets.add((BaseCreature) entity);
                 }
 
@@ -104,7 +104,7 @@ public class TargetSet
         }
 
         for (ActorType actorType : _targetActorTypes) {
-            for (IActor target : EntityManager.getActorsAt(source.getLocation())) {
+            for (IActor target : EntityManager.get().getActorsAt(source.getLocation())) {
                 if (target.getActorType() == actorType || (actorType == ActorType.NONPLAYER && target.getActorType() != ActorType.PLAYER) || (actorType == ActorType.PLAYER && target.getActorType() == ActorType.PLAYER)) {
                     return target;
                 }

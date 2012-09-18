@@ -7,8 +7,8 @@ import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.bridge.ActorType;
-import spx.entities.EntityManager;
+import sps.bridge.ActorType;
+import sps.entities.EntityManager;
 
 public class BreakingWheelSkill extends BaseSkill {
     public BreakingWheelSkill()
@@ -23,7 +23,7 @@ public class BreakingWheelSkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        CreatureFactory.create(ActorType.BREAKING_WHEEL, EntityManager.getEmptyLocation());
+        CreatureFactory.create(ActorType.BREAKING_WHEEL, EntityManager.get().getEmptyLocation());
 
     }
 

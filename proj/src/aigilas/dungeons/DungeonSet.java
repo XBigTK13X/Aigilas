@@ -1,6 +1,6 @@
 package aigilas.dungeons;
 
-import spx.particles.ParticleEngine;
+import sps.particles.ParticleEngine;
 
 import java.util.HashMap;
 

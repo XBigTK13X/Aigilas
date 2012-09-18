@@ -1,6 +1,6 @@
 package aigilas.creatures;
 
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 import java.util.Arrays;
 import java.util.List;

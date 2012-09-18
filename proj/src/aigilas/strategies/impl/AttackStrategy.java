@@ -5,7 +5,7 @@ import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class AttackStrategy extends BaseStrategy {
     private int _skillCooldown = 0;

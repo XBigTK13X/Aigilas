@@ -3,7 +3,7 @@ package aigilas.strategies.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import spx.core.RNG;
+import sps.core.RNG;
 
 public class ConfusedStrategy extends BaseStrategy {
     public ConfusedStrategy(BaseCreature parent)

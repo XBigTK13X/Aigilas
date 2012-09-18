@@ -3,9 +3,9 @@ package aigilas.creatures;
 import aigilas.entities.SkillEffect;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.core.Settings;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.core.Settings;
 
 public class Minion extends BaseCreature {
     public Minion(ActorType actorType, float coolDown) {

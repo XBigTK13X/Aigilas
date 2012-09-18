@@ -4,10 +4,10 @@ import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Color;
-import spx.bridge.DrawDepth;
-import spx.core.Point2;
-import spx.core.Settings;
-import spx.core.SpxManager;
+import sps.bridge.DrawDepth;
+import sps.core.Point2;
+import sps.core.Settings;
+import sps.core.SpxManager;
 
 public class SkillHud extends BaseHud {
     private static final String __separator = "|";

@@ -6,7 +6,7 @@ import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.core.RNG;
+import sps.core.RNG;
 
 public class SoulCrushSkill extends BaseSkill {
     public SoulCrushSkill()

@@ -7,9 +7,9 @@ import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.core.Settings;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.core.Settings;
 
 public class SerpentSupperSkill extends BaseSkill {
     public SerpentSupperSkill()

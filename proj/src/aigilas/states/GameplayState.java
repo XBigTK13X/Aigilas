@@ -3,31 +3,27 @@ package aigilas.states;
 import aigilas.creatures.CreatureFactory;
 import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFactory;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
-import spx.net.Client;
-import spx.particles.ParticleEngine;
-import spx.states.State;
-import spx.states.StateManager;
-import spx.text.TextManager;
+import aigilas.management.AigilasManager;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
+import sps.net.Client;
+import sps.particles.ParticleEngine;
+import sps.states.State;
+import sps.states.StateManager;
+import sps.text.TextManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameplayState implements State {
     public GameplayState() {
-        System.out.println("Generating the dungeon...");
-        EntityManager.reset();
-        CreatureFactory.reset();
-        DungeonFactory.start();
-        Dungeon.reset();
-        Client.get().dungeonHasLoaded();
+        AigilasManager.get().reset();
     }
 
     List<IActor> players = new ArrayList<>();
     @Override
     public void update() {
-        players = EntityManager.getPlayers();
+        players = EntityManager.get().getPlayers();
         boolean allDead = true;
         for(IActor player:players){
             if(player.isActive()){
@@ -37,23 +33,23 @@ public class GameplayState implements State {
         if(allDead){
             StateManager.loadState(new GameOverState());
         }
-        EntityManager.update();
+        EntityManager.get().update();
     }
 
     @Override
     public void loadContent() {
-        EntityManager.loadContent();
+        EntityManager.get().loadContent();
     }
 
     @Override
     public void unload() {
-        EntityManager.clear();
+        EntityManager.get().clear();
         ParticleEngine.reset();
         TextManager.clear();
     }
 
     @Override
     public void draw() {
-        EntityManager.draw();
+        EntityManager.get().draw();
     }
 }

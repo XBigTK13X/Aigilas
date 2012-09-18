@@ -3,10 +3,10 @@ package aigilas.strategies.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.core.RNG;
-import spx.entities.CoordVerifier;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.core.RNG;
+import sps.entities.CoordVerifier;
 
 public class StraightLineRotateStrategy extends BaseStrategy {
     private final Point2 _direction = new Point2(0, 1);

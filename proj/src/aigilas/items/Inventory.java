@@ -1,7 +1,7 @@
 package aigilas.items;
 
 import aigilas.creatures.BaseCreature;
-import spx.entities.EntityManager;
+import sps.entities.EntityManager;
 
 import java.util.HashMap;
 
@@ -69,7 +69,7 @@ public class Inventory {
     public void dropAll() {
         for (GenericItem item : _contents.keySet()) {
             while (_contents.get(item) > 0) {
-                EntityManager.addObject(new GenericItem(item, _parent.getLocation()));
+                EntityManager.get().addObject(new GenericItem(item, _parent.getLocation()));
                 remove(item);
             }
         }

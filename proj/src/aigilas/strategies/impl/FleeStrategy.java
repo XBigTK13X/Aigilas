@@ -3,8 +3,8 @@ package aigilas.strategies.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import spx.bridge.ActorType;
-import spx.core.Point2;
+import sps.bridge.ActorType;
+import sps.core.Point2;
 
 public class FleeStrategy extends BaseStrategy {
     public FleeStrategy(BaseCreature parent, ActorType... targetTypes)

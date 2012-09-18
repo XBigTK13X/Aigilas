@@ -6,7 +6,7 @@ import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.entities.IEntity;
+import sps.entities.IEntity;
 
 public class VaporImplantSkill extends BaseSkill {
     public VaporImplantSkill()

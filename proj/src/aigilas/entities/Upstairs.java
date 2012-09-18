@@ -3,11 +3,11 @@ package aigilas.entities;
 import aigilas.creatures.BaseCreature;
 import aigilas.dungeons.DungeonFactory;
 import aigilas.management.SpriteType;
-import spx.bridge.DrawDepth;
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
+import sps.bridge.DrawDepth;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
 
 public class Upstairs extends Entity {
     public Upstairs(Point2 location) {
@@ -18,7 +18,7 @@ public class Upstairs extends Entity {
 
     @Override
     public void update() {
-        player = (BaseCreature) EntityManager.getTouchingCreature(this);
+        player = (BaseCreature) EntityManager.get().getTouchingCreature(this);
         if (player != null) {
             if (player.isInteracting()) {
                 player.performInteraction();

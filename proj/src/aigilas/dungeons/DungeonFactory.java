@@ -1,8 +1,8 @@
 package aigilas.dungeons;
 
 import aigilas.creatures.CreatureFactory;
-import spx.entities.Entity;
-import spx.entities.IEntity;
+import sps.entities.Entity;
+import sps.entities.IEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

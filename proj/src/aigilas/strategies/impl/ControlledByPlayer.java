@@ -5,10 +5,10 @@ import aigilas.creatures.Stats;
 import aigilas.management.Commands;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.io.Contexts;
-import spx.io.Input;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.io.Contexts;
+import sps.io.Input;
 
 import java.util.Arrays;
 import java.util.List;

@@ -7,10 +7,10 @@ import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.core.RNG;
-import spx.core.Settings;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.core.RNG;
+import sps.core.Settings;
 
 public class DismembermentSkill extends BaseSkill {
     public DismembermentSkill()

@@ -4,9 +4,9 @@ import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
-import spx.bridge.ActorType;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
+import sps.bridge.ActorType;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
 
 public class VaporCloud extends Minion {
     private BaseCreature _host = null;
@@ -22,7 +22,7 @@ public class VaporCloud extends Minion {
     public void update() {
         super.update();
         if (_host == null) {
-            for (IActor creature : EntityManager.getActorsAt(_location)) {
+            for (IActor creature : EntityManager.get().getActorsAt(_location)) {
                 if (creature != this) {
                     _host = (BaseCreature) creature;
                 }

@@ -1,8 +1,8 @@
 package aigilas.entities;
 
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.entities.Entity;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.entities.Entity;
 
 public class EntityFactory {
     public static Entity create(EntityType type, Point2 location) {

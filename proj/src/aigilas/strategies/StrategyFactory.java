@@ -2,7 +2,7 @@ package aigilas.strategies;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.strategies.impl.*;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class StrategyFactory {
     public static BaseStrategy create(Strategy strategy, BaseCreature target, ActorType... actorTypes) {

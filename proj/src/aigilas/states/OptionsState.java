@@ -1,12 +1,12 @@
 package aigilas.states;
 
 import aigilas.management.Commands;
-import spx.io.Contexts;
-import spx.io.Input;
-import spx.net.Client;
-import spx.states.State;
-import spx.states.StateManager;
-import spx.text.ActionTextHandler;
+import sps.io.Contexts;
+import sps.io.Input;
+import sps.net.Client;
+import sps.states.State;
+import sps.states.StateManager;
+import sps.text.ActionTextHandler;
 
 public class OptionsState implements State {
     private final ActionTextHandler _text = new ActionTextHandler();

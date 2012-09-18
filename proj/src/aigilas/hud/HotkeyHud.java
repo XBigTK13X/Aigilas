@@ -3,8 +3,8 @@ package aigilas.hud;
 import aigilas.creatures.BaseCreature;
 import aigilas.items.GenericItem;
 import aigilas.management.Commands;
-import spx.core.SpxManager;
-import spx.io.Input;
+import sps.core.SpxManager;
+import sps.io.Input;
 
 import java.util.Arrays;
 import java.util.List;

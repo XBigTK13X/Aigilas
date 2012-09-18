@@ -5,7 +5,7 @@ import aigilas.entities.SkillEffect;
 import aigilas.management.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
-import spx.core.Point2;
+import sps.core.Point2;
 
 public class SelfBehavior extends SkillBehavior {
 

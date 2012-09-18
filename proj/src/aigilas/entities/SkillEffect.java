@@ -4,17 +4,17 @@ import aigilas.creatures.BaseCreature;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillFactory;
 import aigilas.skills.animations.SkillAnimation;
-import spx.bridge.ActorType;
-import spx.bridge.DrawDepth;
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.core.Settings;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
-import spx.entities.IEntity;
-import spx.particles.ParticleEngine;
-import spx.particles.behaviors.FollowBehavior;
+import sps.bridge.ActorType;
+import sps.bridge.DrawDepth;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.core.Settings;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
+import sps.entities.IEntity;
+import sps.particles.ParticleEngine;
+import sps.particles.behaviors.FollowBehavior;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class SkillEffect extends Entity {
     @Override
     public void update() {
         for (EntityType targetType : _skill.getTargetTypes()) {
-            List<IEntity> targets = EntityManager.getEntities(targetType, this.getLocation());
+            List<IEntity> targets = EntityManager.get().getEntities(targetType, this.getLocation());
             if (targets != null && targets.size() > 0) {
                 hitTarget = targets.get(0);
                 if (null != hitTarget && hitTarget != this && hitTarget != _source) {
@@ -69,7 +69,7 @@ public class SkillEffect extends Entity {
             }
         }
         for (ActorType targetType : _source.getTargetActorTypes()) {
-            List<IActor> targets = EntityManager.getActorsAt(this.getLocation(), targetType);
+            List<IActor> targets = EntityManager.get().getActorsAt(this.getLocation(), targetType);
             if (targets != null && targets.size() > 0) {
                 hitTarget = targets.get(0);
                 if (null != hitTarget && hitTarget != this && hitTarget != _source) {

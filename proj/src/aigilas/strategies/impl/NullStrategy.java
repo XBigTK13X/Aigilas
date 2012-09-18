@@ -2,7 +2,7 @@ package aigilas.strategies.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.strategies.BaseStrategy;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class NullStrategy extends BaseStrategy {
 

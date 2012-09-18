@@ -5,7 +5,7 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.BaseStatus;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class BoilStatus extends BaseStatus {
     private Strategy previousStrategy;
@@ -43,7 +43,7 @@ public class BoilStatus extends BaseStatus {
         super.update();
         if (_target.isCooledDown()) {
             _countdown--;
-            _target.write(spx.util.StringStorage.get(_strength));
+            _target.write(sps.util.StringStorage.get(_strength));
             if (_countdown <= 0) {
                 _countdown = _countdownMax;
             }

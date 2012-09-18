@@ -3,8 +3,8 @@ package aigilas.reactions;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.ComboMarker;
 import aigilas.entities.Elements;
-import spx.text.ActionText;
-import spx.text.TextManager;
+import sps.text.ActionText;
+import sps.text.TextManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;

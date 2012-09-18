@@ -3,7 +3,7 @@ package aigilas.creatures;
 import aigilas.entities.Elements;
 import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class Envy extends BaseEnemy {
     public Envy() {

@@ -1,9 +1,9 @@
 package aigilas.skills;
 
 import aigilas.entities.Elements;
-import spx.bridge.ActorType;
-import spx.core.RNG;
-import spx.devtools.DevConsole;
+import sps.bridge.ActorType;
+import sps.core.RNG;
+import sps.devtools.DevConsole;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -2,7 +2,7 @@ package aigilas.skills.animations;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
-import spx.core.Point2;
+import sps.core.Point2;
 
 public class SelfAnimation extends SkillAnimation {
     @Override

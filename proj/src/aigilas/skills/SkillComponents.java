@@ -4,8 +4,8 @@ import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
-import spx.bridge.ActorType;
-import spx.bridge.EntityType;
+import sps.bridge.ActorType;
+import sps.bridge.EntityType;
 
 import java.util.ArrayList;
 import java.util.Arrays;

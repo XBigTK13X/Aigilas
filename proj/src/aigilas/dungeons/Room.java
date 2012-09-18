@@ -1,7 +1,7 @@
 package aigilas.dungeons;
 
-import spx.core.Point2;
-import spx.core.Settings;
+import sps.core.Point2;
+import sps.core.Settings;
 
 import java.util.ArrayList;
 import java.util.List;

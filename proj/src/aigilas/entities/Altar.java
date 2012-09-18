@@ -5,14 +5,14 @@ import aigilas.gods.God;
 import aigilas.gods.GodId;
 import aigilas.items.GenericItem;
 import aigilas.management.SpriteType;
-import spx.bridge.DrawDepth;
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
-import spx.entities.IEntity;
-import spx.text.ActionText;
-import spx.text.TextManager;
+import sps.bridge.DrawDepth;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
+import sps.entities.IEntity;
+import sps.text.ActionText;
+import sps.text.TextManager;
 
 import java.util.List;
 
@@ -29,12 +29,12 @@ public class Altar extends Entity {
 
     @Override
     public void update() {
-        _currentTarget = (Player) EntityManager.getTouchingCreature(this);
+        _currentTarget = (Player) EntityManager.get().getTouchingCreature(this);
         if (_currentTarget != null) {
             if (_currentTarget.isInteracting()) {
                 _currentTarget.pray(_god);
             }
-            _offerings = EntityManager.getEntities(EntityType.ITEM, _location);
+            _offerings = EntityManager.get().getEntities(EntityType.ITEM, _location);
             for (IEntity offering : _offerings) {
                 _currentTarget.sacrifice(_god, (GenericItem) offering);
             }

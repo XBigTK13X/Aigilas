@@ -3,11 +3,11 @@ package aigilas.creatures;
 import aigilas.entities.SkillEffect;
 import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
-import spx.bridge.ActorType;
-import spx.core.Point2;
-import spx.core.RNG;
-import spx.entities.EntityManager;
-import spx.entities.IEntity;
+import sps.bridge.ActorType;
+import sps.core.Point2;
+import sps.core.RNG;
+import sps.entities.EntityManager;
+import sps.entities.IEntity;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -27,7 +27,7 @@ public class CreatureFactory {
                 break;
         }
         result.setup(position);
-        EntityManager.addObject(result);
+        EntityManager.get().addObject(result);
         // $$$ Testing inv HUD
         for (int ii = 0; ii < 100; ii++) {
             result.pickupItem(ItemFactory.createRandomPlain());
@@ -109,7 +109,7 @@ public class CreatureFactory {
         if (location != null) {
             result.setLocation(location);
         }
-        EntityManager.addObject(result);
+        EntityManager.get().addObject(result);
         return result;
     }
 

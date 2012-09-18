@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.entities.IEntity;
+import sps.entities.IEntity;
 
 public class NoSkill extends BaseSkill {
     public NoSkill()

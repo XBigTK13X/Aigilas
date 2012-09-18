@@ -7,8 +7,8 @@ import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
-import spx.bridge.ActorType;
-import spx.core.Point2;
+import sps.bridge.ActorType;
+import sps.core.Point2;
 
 import java.util.Arrays;
 

@@ -7,7 +7,7 @@ import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.entities.EntityManager;
+import sps.entities.EntityManager;
 
 public class HypothermiaSkill extends BaseSkill {
     public HypothermiaSkill()
@@ -25,7 +25,7 @@ public class HypothermiaSkill extends BaseSkill {
 
     {
         for (int ii = 0; ii < 4; ii++) {
-            CreatureFactory.createMinion(SkillId.ICE_SHARD, target, _behavior.getGraphic(), EntityManager.getEmptyLocation());
+            CreatureFactory.createMinion(SkillId.ICE_SHARD, target, _behavior.getGraphic(), EntityManager.get().getEmptyLocation());
 
         }
 

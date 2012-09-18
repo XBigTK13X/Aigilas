@@ -4,9 +4,9 @@ import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
-import spx.core.SpxManager;
-import spx.util.StringSquisher;
-import spx.util.StringStorage;
+import sps.core.SpxManager;
+import sps.util.StringSquisher;
+import sps.util.StringStorage;
 
 public class DeltasHud extends BaseHud {
     private final Equipment _equipment;

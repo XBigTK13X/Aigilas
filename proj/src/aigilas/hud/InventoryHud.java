@@ -7,11 +7,11 @@ import aigilas.items.Inventory;
 import aigilas.items.ItemClass;
 import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Color;
-import spx.bridge.DrawDepth;
-import spx.core.SpxManager;
-import spx.io.Input;
-import spx.util.StringSquisher;
-import spx.util.StringStorage;
+import sps.bridge.DrawDepth;
+import sps.core.SpxManager;
+import sps.io.Input;
+import sps.util.StringSquisher;
+import sps.util.StringStorage;
 
 import java.util.HashMap;
 

@@ -4,7 +4,7 @@ import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
-import spx.bridge.ActorType;
+import sps.bridge.ActorType;
 
 public class PoisonCloud extends Minion {
     public PoisonCloud() {

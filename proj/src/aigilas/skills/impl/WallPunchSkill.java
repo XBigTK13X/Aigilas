@@ -5,9 +5,9 @@ import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import spx.bridge.EntityType;
-import spx.core.Settings;
-import spx.entities.IEntity;
+import sps.bridge.EntityType;
+import sps.core.Settings;
+import sps.entities.IEntity;
 
 public class WallPunchSkill extends BaseSkill {
     public WallPunchSkill()

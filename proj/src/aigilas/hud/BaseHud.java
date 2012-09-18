@@ -2,9 +2,9 @@ package aigilas.hud;
 
 import aigilas.creatures.BaseCreature;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import spx.core.Point2;
-import spx.core.SpxManager;
-import spx.text.TextHandler;
+import sps.core.Point2;
+import sps.core.SpxManager;
+import sps.text.TextHandler;
 
 import java.util.ArrayList;
 import java.util.List;

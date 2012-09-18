@@ -5,13 +5,13 @@ import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import spx.bridge.ActorType;
-import spx.bridge.EntityType;
-import spx.core.RNG;
-import spx.entities.EntityManager;
-import spx.entities.HitTest;
-import spx.entities.IEntity;
-import spx.paths.PathFinder;
+import sps.bridge.ActorType;
+import sps.bridge.EntityType;
+import sps.core.RNG;
+import sps.entities.EntityManager;
+import sps.entities.HitTest;
+import sps.entities.IEntity;
+import sps.paths.PathFinder;
 
 public class TestBotStrategy extends BaseStrategy {
     public TestBotStrategy(BaseCreature parent) {
@@ -49,8 +49,8 @@ public class TestBotStrategy extends BaseStrategy {
                 }
             }
         } else {
-            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.getObjects(EntityType.ACTOR).size() == 1) {
-                _stairsTarget = EntityManager.getObject(EntityType.DOWNSTAIRS);
+            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityType.ACTOR).size() == 1) {
+                _stairsTarget = EntityManager.get().getObject(EntityType.DOWNSTAIRS);
                 if (_stairsTarget != null) {
                     targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), _stairsTarget.getLocation()));
                 }

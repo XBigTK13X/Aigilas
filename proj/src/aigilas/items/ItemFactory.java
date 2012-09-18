@@ -1,9 +1,9 @@
 package aigilas.items;
 
 import aigilas.creatures.Stats;
-import spx.core.Point2;
-import spx.core.RNG;
-import spx.entities.EntityManager;
+import sps.core.Point2;
+import sps.core.RNG;
+import sps.entities.EntityManager;
 
 public class ItemFactory {
     private static final int itemGrowth = 3;
@@ -15,7 +15,7 @@ public class ItemFactory {
         }
 
         itemType = selectRandomType();
-        return (GenericItem) EntityManager.addObject(new GenericItem(new Stats(RNG.Rand.nextInt(itemGrowth), RNG.Rand.nextInt(itemGrowth), RNG.Rand.nextInt(itemGrowth), 0, 0, 0, 0, 0, 0, 0), null, null, itemType, location, onFloor));
+        return (GenericItem) EntityManager.get().addObject(new GenericItem(new Stats(RNG.Rand.nextInt(itemGrowth), RNG.Rand.nextInt(itemGrowth), RNG.Rand.nextInt(itemGrowth), 0, 0, 0, 0, 0, 0, 0), null, null, itemType, location, onFloor));
     }
 
     public static GenericItem createRandomPlain(Point2 location) {

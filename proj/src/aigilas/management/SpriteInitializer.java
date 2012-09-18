@@ -1,7 +1,7 @@
 package aigilas.management;
 
-import spx.graphics.ISpriteInitializer;
-import spx.graphics.SpriteDefinition;
+import sps.graphics.ISpriteInitializer;
+import sps.graphics.SpriteDefinition;
 
 import java.util.ArrayList;
 import java.util.List;

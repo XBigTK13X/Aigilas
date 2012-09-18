@@ -8,8 +8,8 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class CombustSkill extends BaseSkill {
     {
         target.applyDamage(10, _source);
         if (!target.isActive()) {
-            List<IActor> targets = EntityManager.getActorsSurrounding(target.getLocation(), CombustDistance);
+            List<IActor> targets = EntityManager.get().getActorsSurrounding(target.getLocation(), CombustDistance);
             for (IActor target1 : targets) {
                 StatusFactory.apply((BaseCreature) target1, Status.Burn);
 

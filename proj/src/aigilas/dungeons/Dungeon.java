@@ -5,16 +5,16 @@ import aigilas.creatures.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
-import spx.bridge.ActorType;
-import spx.bridge.EntityType;
-import spx.core.Point2;
-import spx.core.RNG;
-import spx.core.Settings;
-import spx.entities.Entity;
-import spx.entities.EntityManager;
-import spx.entities.IActor;
-import spx.entities.IEntity;
-import spx.net.Client;
+import sps.bridge.ActorType;
+import sps.bridge.EntityType;
+import sps.core.Point2;
+import sps.core.RNG;
+import sps.core.Settings;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
+import sps.entities.IActor;
+import sps.entities.IEntity;
+import sps.net.Client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class Dungeon {
     public Dungeon(Point2 upstairsSpawn) {
         enemyCapModifier++;
         enemyBaseModifier = Settings.get().enemyBase + enemyCapModifier / 5;
-        EntityManager.clear();
+        EntityManager.get().clear();
         init();
         placeRooms();
         convertRoomsToWalls();
@@ -75,7 +75,7 @@ public class Dungeon {
     private List<IEntity> playerCache;
 
     public void loadTiles(boolean goingUp) {
-        EntityManager.clear();
+        EntityManager.get().clear();
         placeFloor();
         playerCache = DungeonFactory.flushCache();
         Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
@@ -86,16 +86,16 @@ public class Dungeon {
             _contents.add(pl);
         }
         for (IEntity item : _contents) {
-            EntityManager.addObject(item);
+            EntityManager.get().addObject(item);
         }
     }
 
     public void cacheContents() {
-        for (IActor player : EntityManager.getActors(ActorType.PLAYER)) {
+        for (IActor player : EntityManager.get().getActors(ActorType.PLAYER)) {
             DungeonFactory.addToCache((Entity) player);
-            EntityManager.removeObject(player);
+            EntityManager.get().removeObject(player);
         }
-        _contents = new ArrayList<>(EntityManager.getEntitiesToCache());
+        _contents = new ArrayList<>(EntityManager.get().getEntitiesToCache());
     }
 
     private void init() {
@@ -109,7 +109,7 @@ public class Dungeon {
                     if (tile.getEntityType() != EntityType.FLOOR) {
                         _contents.add(tile);
                     }
-                    EntityManager.addObject(tile);
+                    EntityManager.get().addObject(tile);
                 }
             }
         }
@@ -125,7 +125,7 @@ public class Dungeon {
             for (IEntity player : cache) {
                 ((Entity) player).setLocation(getRandomNeighbor(neighbors));
             }
-            EntityManager.addObjects(cache);
+            EntityManager.get().addObjects(cache);
             _contents.addAll(cache);
         }
     }
@@ -155,7 +155,7 @@ public class Dungeon {
     private void placeFloor() {
         for (int ii = 1; ii < _blocksWide - 1; ii++) {
             for (int jj = 1; jj < _blocksHigh - 1; jj++) {
-                EntityManager.addObject(new Floor(new Point2(ii, jj)));
+                EntityManager.get().addObject(new Floor(new Point2(ii, jj)));
             }
         }
     }
