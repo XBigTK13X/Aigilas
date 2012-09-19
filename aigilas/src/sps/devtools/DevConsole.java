@@ -35,7 +35,8 @@ public class DevConsole {
         return __instance;
     }
 
-    private final ConsoleText[] _contents = new ConsoleText[10];
+    private final int messageLimit = 20;
+    private final ConsoleText[] _contents = new ConsoleText[messageLimit];
     private int _index = 0;
     private boolean _isVisible = false;
     private final Color _bgColor;

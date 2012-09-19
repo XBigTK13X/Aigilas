@@ -1,5 +1,7 @@
 package sps.core;
 
+import sps.devtools.DevConsole;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,50 +141,17 @@ public class Point2 {
     }
 
     public Point2 rotateClockwise() {
-        if (GridX == 1) {
-            if (GridY == -1) {
-                return _rotateTargets[0];
-            }
-            if (GridY == 0) {
-                return _rotateTargets[1];
-            }
-            if (GridY == 1) {
-                return _rotateTargets[2];
-            }
-        }
-        if (GridX == -1) {
-            if (GridY == -1) {
-                return _rotateTargets[3];
-            }
-            if (GridY == 0) {
-                return _rotateTargets[4];
-            }
-            if (GridY == 1) {
-                return _rotateTargets[5];
-            }
-        }
-        if (GridX == 0) {
-            if (GridY == 1) {
-                return _rotateTargets[6];
-            }
-            if (GridY == -1) {
-                return _rotateTargets[7];
-            }
-        }
-        return Zero;
-        /*
-           * This is getting close, but the flipped Y coord is ticking me off. var
-           * theta = Math.pI / 4f; var currentRotation = Math.atan2(-Y, X);
-           * System.out.println(currentRotation); currentRotation -= theta; var x
-           * = (float)Math.cos(currentRotation); var y =
-           * (float)Math.sin(currentRotation); if(x!=0) { x = (1 / (Math.abs(x)))
-           * * x; } if (y != 0) { y = (1 / (Math.abs(y))) * y; } var result = new
-           * Point2(x,y); System.out.println(result); return result;
-           */
+        double theta = Math.PI / 2.0;
+        double currentRotation = Math.atan2(Y, X);
+        currentRotation -= theta;
+        float x = (float) Math.cos(currentRotation);
+        float y = (float) Math.sin(currentRotation);
+        Point2 result = new Point2(x, y);
+        return result;
     }
 
     public Point2 rotate180() {
-        return rotateClockwise().rotateClockwise().rotateClockwise().rotateClockwise();
+        return rotateClockwise().rotateClockwise();
     }
 
     public static float distanceSquared(Point2 source, Point2 target) {

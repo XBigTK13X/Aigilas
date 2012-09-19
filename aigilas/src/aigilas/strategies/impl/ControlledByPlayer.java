@@ -84,7 +84,6 @@ public class ControlledByPlayer extends BaseStrategy {
                         _parent.setSkillVector(new Point2(1, 0));
                     }
                     if (!_parent.getSkillVector().isZero()) {
-                        _parent.applyDamage(50f);
                         _parent.useActiveSkill();
                     }
                     _isCasting = false;
