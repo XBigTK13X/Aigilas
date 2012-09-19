@@ -79,14 +79,6 @@ public class Stats {
         return deltas;
     }
 
-    public Stats getLevelBonuses(int level) {
-        Stats result = new Stats(this);
-        for (StatType stat : result._stats.keySet()) {
-            result._stats.put(stat, _stats.get(stat) + result._stats.get(stat) * level);
-        }
-        return result;
-    }
-
     public float getBonus(int level, StatType stat) {
         return _stats.get(stat) * level;
     }
@@ -101,13 +93,13 @@ public class Stats {
         return result;
     }
 
-    Float hash = 0f;
+    String hash;
 
     @Override
     public int hashCode() {
-        hash = 0f;
+        hash = "";
         for (StatType key : _stats.keySet()) {
-            hash += _stats.get(key);
+            hash += _stats.get(key).toString();
         }
         return hash.hashCode();
     }
