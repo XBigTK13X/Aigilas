@@ -234,21 +234,21 @@ public class Dungeon {
 
     private void convertRoomsToWalls() {
         int roomCount = 0;
-        ArrayList<PointPoint> dungeonEntrances = new ArrayList<>();
+        ArrayList<TransientPoint> dungeonEntrances = new ArrayList<>();
         for (Room room : _rooms) {
-            ArrayList<PointPoint> entrances = new ArrayList<>();
+            ArrayList<TransientPoint> entrances = new ArrayList<>();
             for (int ii = room.X; ii < room.RightSide; ii++) {
                 for (int jj = room.Y; jj < room.BottomSide; jj++) {
                     if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1) {
                         if (!room.Corners.contains(new Point2(ii, jj))) {
                             if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < _blocksWide)) {
                                 if (isFloor(ii - 1, jj) && isFloor(ii + 1, jj)) {
-                                    entrances.add(new PointPoint(ii, jj, true));
+                                    entrances.add(new TransientPoint(ii, jj, true));
                                 }
                             }
                             if ((jj == room.Y && jj > 0) || (jj == room.BottomSide && jj < _blocksHigh)) {
                                 if (isFloor(ii, jj - 1) && isFloor(ii, jj + 1)) {
-                                    entrances.add(new PointPoint(ii, jj));
+                                    entrances.add(new TransientPoint(ii, jj));
                                 }
                             }
                         }
@@ -260,14 +260,14 @@ public class Dungeon {
             }
             if (roomCount > 0 && entrances.size() > 0) {
                 int index = RNG.next(0, entrances.size() - 1);
-                PointPoint entrance = entrances.get(index);
+                TransientPoint entrance = entrances.get(index);
                 if (dungeon[entrance.X][entrance.Y].getEntityType() != EntityType.FLOOR) {
                     dungeonEntrances.add(entrance);
                 }
             }
             roomCount++;
         }
-        for (PointPoint entrance : dungeonEntrances) {
+        for (TransientPoint entrance : dungeonEntrances) {
             if (entrance.isHorizontal()) {
                 for (int ii = 1; ii < _blocksWide - 1; ii++) {
                     Point2 currentTarget = new Point2(ii, entrance.Y);

@@ -39,12 +39,12 @@ import java.util.List;
 
 public abstract class BaseCreature extends Entity implements IActor {
     protected BaseStrategy _strategy;
-
+    protected BaseCreature _master;
     protected CreatureClass _class;
     protected Stats _baseStats;
     protected Stats _maxStats;
     protected God _god;
-    protected BaseCreature _master;
+
     protected final List<Elements> _composition = new ArrayList<>();
 
     protected SkillPool _skills;
@@ -165,7 +165,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (_statuses.allows(CreatureAction.Movement)) {
             if (_isPlaying) {
                 if (!isCooledDown()) {
-                    Adjust(StatType.MOVE_COOL_DOWN, 1);
+                    adjust(StatType.MOVE_COOL_DOWN, 1);
                 } else {
                     _statuses.act();
                 }
@@ -187,7 +187,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             for (StatType stat : StatType.values()) {
                 if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN) {
                     if (_baseStats.getRaw(stat) < _maxStats.getRaw(stat)) {
-                        Adjust(stat, _baseStats.get(StatType.REGEN) / 50);
+                        adjust(stat, _baseStats.get(StatType.REGEN) / 50);
                     }
                 }
             }
@@ -280,7 +280,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         return _actorType;
     }
 
-    protected float Adjust(StatType stat, float adjustment, boolean adjustMax) {
+    protected float adjust(StatType stat, float adjustment, boolean adjustMax) {
         float result = getRaw(stat) + adjustment;
         if (!adjustMax) {
             if (result > getMax(stat)) {
@@ -290,8 +290,8 @@ public abstract class BaseCreature extends Entity implements IActor {
         return set(stat, (result), adjustMax);
     }
 
-    protected float Adjust(StatType stat, float adjustment) {
-        return Adjust(stat, adjustment, false);
+    protected float adjust(StatType stat, float adjustment) {
+        return adjust(stat, adjustment, false);
     }
 
     public void applyDamage(float damage, BaseCreature attacker, boolean showDamage, StatType statType) {
@@ -309,7 +309,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             _damageText.writeAction(StringStorage.get(damage), 30, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosCenterY));
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
-            Adjust((statType == null) ? StatType.HEALTH : statType, -damage);
+            adjust((statType == null) ? StatType.HEALTH : statType, -damage);
         }
         if (get(StatType.HEALTH) <= 0) {
             _isActive = false;
@@ -335,7 +335,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     public boolean lowerStat(StatType stat, float amount) {
         if (amount != 0) {
             if (get(stat) >= amount) {
-                Adjust(stat, -amount);
+                adjust(stat, -amount);
                 return true;
             }
             return false;
@@ -486,22 +486,22 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void sacrifice(God god, GenericItem sacrifice) {
-        AssignGod(god);
-        Adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1), true);
-        Adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1));
+        assignGod(god);
+        adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1), true);
+        adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1));
         sacrifice.setInactive();
     }
 
     static final int pietyCost = 500;
 
     public void pray(God god) {
-        AssignGod(god);
+        assignGod(god);
         if (get(StatType.PIETY) >= pietyCost) {
             StatType lowest = getLowestStat();
             float adjustment = (get(StatType.PIETY) / 100);
             set(lowest, getMax(lowest) + adjustment);
             set(lowest, adjustment, true);
-            Adjust(StatType.PIETY, -pietyCost);
+            adjust(StatType.PIETY, -pietyCost);
             if (get(StatType.PIETY) < 0) {
                 set(StatType.PIETY, 0);
             }
@@ -509,7 +509,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         performInteraction();
     }
 
-    protected void AssignGod(God god) {
+    protected void assignGod(God god) {
         if (_god != god && _god != null) {
             applyDamage(get(StatType.PIETY));
             set(StatType.PIETY, 0);
