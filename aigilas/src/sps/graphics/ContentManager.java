@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.core.Settings;
 
 public class ContentManager {
-    static public void load() {
-    }
 
     public String RootDirectory;
     private Texture _spriteSheet;

@@ -63,7 +63,7 @@ public class MessageHandler {
                                 e.printStackTrace();
                             }
                         }
-                        Message msg = null;
+                        Message msg;
                         try {
                             msg = (Message) ois.readObject();
                             blurt("Getting message: " + msg.MessageType);

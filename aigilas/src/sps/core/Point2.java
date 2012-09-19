@@ -146,8 +146,7 @@ public class Point2 {
         currentRotation -= theta;
         float x = (float) Math.cos(currentRotation);
         float y = (float) Math.sin(currentRotation);
-        Point2 result = new Point2(x, y);
-        return result;
+        return new Point2(x, y);
     }
 
     public Point2 rotate180() {

@@ -23,7 +23,7 @@ public class EntityManager {
         __instance = new EntityManager();
     }
 
-    private EntityManager(){};
+    private EntityManager(){}
 
     private List<IEntity> _contents = new ArrayList<>();
     private HashMap<Point2, List<IEntity>> _gridContents = new HashMap<>();
