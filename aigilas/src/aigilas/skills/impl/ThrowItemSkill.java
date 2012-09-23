@@ -25,7 +25,7 @@ public class ThrowItemSkill extends BaseSkill {
     public void activate(BaseCreature source) {
         GenericItem item = source.destroyRandomItemFromInventory();
         if (item != null) {
-            _itemStrength = item.Modifers.getSum() * 3;
+            _itemStrength = item.Modifiers.getSum() * 3;
             super.activate(source);
 
         }

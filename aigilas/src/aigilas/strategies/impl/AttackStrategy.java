@@ -41,6 +41,7 @@ public class AttackStrategy extends BaseStrategy {
             }
             if (targetPath.hasMoves()) {
                 nextMove.copy(targetPath.getNextMove());
+                System.out.println(nextMove);
                 _parent.moveTo(nextMove);
             }
         }

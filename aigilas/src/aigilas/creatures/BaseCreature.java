@@ -28,6 +28,7 @@ import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
 import sps.io.Input;
+import sps.paths.Path;
 import sps.text.ActionText;
 import sps.text.ActionTextHandler;
 import sps.text.TextManager;
@@ -196,10 +197,15 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     @Override
     public void draw() {
+        Path path = _strategy.getPath();
+        if(path != null){
+            path.draw();
+        }
         super.draw();
         if (_hudManager != null) {
             _hudManager.draw();
         }
+
         _combo.draw();
         _damageText.draw();
     }
@@ -487,8 +493,8 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     public void sacrifice(God god, GenericItem sacrifice) {
         assignGod(god);
-        adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1), true);
-        adjust(StatType.PIETY, sacrifice.Modifers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1));
+        adjust(StatType.PIETY, sacrifice.Modifiers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1), true);
+        adjust(StatType.PIETY, sacrifice.Modifiers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1));
         sacrifice.setInactive();
     }
 

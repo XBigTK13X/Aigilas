@@ -4,6 +4,7 @@ import aigilas.creatures.BaseCreature;
 import sps.bridge.ActorType;
 import sps.core.Point2;
 import sps.core.RNG;
+import sps.entities.HitTest;
 import sps.paths.Path;
 import sps.paths.PathFinder;
 
@@ -12,10 +13,6 @@ import java.util.List;
 public abstract class BaseStrategy {
     protected final TargetSet _targets;
     protected final BaseCreature _parent;
-
-    protected static final int throttleMin = 10;
-    protected static final int throttleMax = 20;
-    protected int throttle = 0;
 
     protected BaseCreature opponent;
     protected final Path targetPath = new Path();
@@ -42,19 +39,14 @@ public abstract class BaseStrategy {
     }
 
     protected boolean AbleToMove() {
-        throttle--;
-        if (throttle <= 0) {
-            opponent = _targets.findClosest();
-            // Every player is dead
-            if (null != opponent) {
-                targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), opponent.getLocation()));
-            }
-            throttle = RNG.next(throttleMin, throttleMax);
+        opponent = _targets.findClosest();
+        // Every player is dead
+        if (targetPath.getLastStep() == null || (null != opponent && !HitTest.isClose(targetPath.getLastStep(), opponent.getLocation()))) {
+            System.out.println("Finding a new path");
+            targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), opponent.getLocation()));
         }
-        if (null != targetPath) {
-            if (targetPath.hasMoves() && _parent.isCooledDown()) {
-                return true;
-            }
+        if (targetPath.hasMoves() && _parent.isCooledDown()) {
+            return true;
         }
         return false;
     }
@@ -67,16 +59,20 @@ public abstract class BaseStrategy {
         if (diff.GridY == 0) {
             if (diff.GridX > 0) {
                 diff.setX(-1f);
-            } else {
+            }
+            else {
                 diff.setX(1f);
             }
-        } else if (diff.GridX == 0) {
+        }
+        else if (diff.GridX == 0) {
             if (diff.GridY > 0) {
                 diff.setY(-1f);
-            } else {
+            }
+            else {
                 diff.setY(1f);
             }
-        } else {
+        }
+        else {
             diff.setX(0);
             diff.setY(0);
         }
@@ -91,5 +87,9 @@ public abstract class BaseStrategy {
 
     {
         return _targets.getTargetActorTypes();
+    }
+
+    public Path getPath() {
+        return targetPath;
     }
 }

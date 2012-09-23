@@ -12,7 +12,7 @@ import sps.entities.EntityManager;
 import sps.entities.IActor;
 
 public class GenericItem extends Entity {
-    public Stats Modifers;
+    public Stats Modifiers;
     public String Name;
     private String _suffix;
     private String _prefix;
@@ -32,11 +32,11 @@ public class GenericItem extends Entity {
         _type = type;
         _targetSlots = type.Slots;
         Name = (_prefix == null ? "" : _prefix + __spacingCharacter) + _type.toString() + (_suffix == null ? "" : __spacingCharacter + _suffix);
-        Modifers = new Stats(modifiers);
+        Modifiers = new Stats(modifiers);
     }
 
     public GenericItem(GenericItem item, Point2 location) {
-        initialize(item._suffix, item._prefix, item._type, item._targetSlots, item.Modifers, location);
+        initialize(item._suffix, item._prefix, item._type, item._targetSlots, item.Modifiers, location);
     }
 
     public GenericItem(Stats modifiers, String suffix, String prefix, ItemName type, Point2 location, boolean onGround) {
@@ -83,7 +83,7 @@ public class GenericItem extends Entity {
                 return false;
             }
             for (StatType stat : StatType.values()) {
-                if (Modifers.get(stat) != gI.Modifers.get(stat)) {
+                if (Modifiers.get(stat) != gI.Modifiers.get(stat)) {
                     return false;
                 }
             }
@@ -94,10 +94,10 @@ public class GenericItem extends Entity {
 
     @Override
     public int hashCode() {
-        return Name.hashCode() + Modifers.hashCode();
+        return Name.hashCode() + Modifiers.hashCode();
     }
 
     public float getStatBonus(StatType stat) {
-        return Modifers.get(stat);
+        return Modifiers.get(stat);
     }
 }

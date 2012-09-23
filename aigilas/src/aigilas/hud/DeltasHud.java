@@ -41,7 +41,7 @@ public class DeltasHud extends BaseHud {
             if (item != null && refresh) {
                 if (getEquipmentIn(item.getItemClass().Slot) != null) {
                     StringSquisher.clear();
-                    for (Float stat : getEquipmentIn(item.getItemClass().Slot).Modifers.getDeltas(item.Modifers)) {
+                    for (Float stat : getEquipmentIn(item.getItemClass().Slot).Modifiers.getDeltas(item.Modifiers)) {
                         StringSquisher.squish(((stat > 0) ? positive : ""), StringStorage.get(stat), delim);
                     }
                     display = StringSquisher.flush();

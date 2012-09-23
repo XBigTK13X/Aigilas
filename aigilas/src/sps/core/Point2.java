@@ -119,16 +119,16 @@ public class Point2 {
         if (_locations[0][0] == null) {
             for (int ii = 0; ii < Settings.get().tileMapHeight; ii++) {
                 for (int jj = 0; jj < Settings.get().tileMapWidth; jj++) {
-                    _locations[ii][jj] = new Point2(jj, ii);
+                    if(ii != 0 || jj != 0){
+                        _locations[ii][jj] = new Point2(jj, ii);
+                    }
                 }
             }
         }
         _neighbors.clear();
         for (int ii = -1; ii < 2; ii++) {
             for (int jj = -1; jj < 2; jj++) {
-                if (ii != 0 || jj != 0) {
-                    _neighbors.add(_locations[GridY + ii][GridX + jj]);
-                }
+                _neighbors.add(_locations[GridY + ii][GridX + jj]);
             }
         }
         return _neighbors;

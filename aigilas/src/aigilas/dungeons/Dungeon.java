@@ -33,7 +33,7 @@ public class Dungeon {
     private final Point2 _upSpawnLocation = new Point2(0, 0);
     private final Point2 _downSpawnLocation = new Point2(0, 0);
 
-    public static void reset(){
+    public static void reset() {
         enemyBaseModifier = 0;
         enemyCapModifier = 0;
     }
@@ -58,7 +58,11 @@ public class Dungeon {
         convertRoomsToWalls();
         _upSpawnLocation.copy(upstairsSpawn);
         placeStairs();
-        placeCreatures(RNG.next(Settings.get().enemyBase + enemyBaseModifier, Settings.get().enemyCap + enemyCapModifier));
+        int enemiesToPlace = RNG.next(Settings.get().enemyBase + enemyBaseModifier, Settings.get().enemyCap + enemyCapModifier);
+        if (enemiesToPlace <= 0) {
+            enemiesToPlace = 1;
+        }
+        placeCreatures(enemiesToPlace);
         placeItems(RNG.next(Settings.get().itemBase, Settings.get().itemCap));
         placeFloor();
         transferDungeonState();
@@ -121,7 +125,8 @@ public class Dungeon {
             for (int ii = 0; ii < playerCount; ii++) {
                 _contents.add(CreatureFactory.create(ActorType.PLAYER, getRandomNeighbor(neighbors)));
             }
-        } else {
+        }
+        else {
             for (IEntity player : cache) {
                 ((Entity) player).setLocation(getRandomNeighbor(neighbors));
             }
@@ -169,7 +174,8 @@ public class Dungeon {
         if (DungeonFactory.getFloorCount() % Settings.get().bossLevelMod == 1 && CreatureFactory.bossesRemaining() > 0) {
             Point2 randomPoint = new Point2(findRandomFreeTile());
             dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
-        } else {
+        }
+        else {
             while (amountOfCreatures > 0) {
                 amountOfCreatures--;
                 Point2 randomPoint = new Point2(findRandomFreeTile());
@@ -253,7 +259,8 @@ public class Dungeon {
                             }
                         }
                         dungeon[ii][jj] = EntityFactory.create(EntityType.WALL, new Point2(ii, jj));
-                    } else {
+                    }
+                    else {
                         dungeon[ii][jj] = EntityFactory.create(EntityType.FLOOR, new Point2(ii, jj));
                     }
                 }
@@ -275,7 +282,8 @@ public class Dungeon {
                         dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.FLOOR, currentTarget);
                     }
                 }
-            } else {
+            }
+            else {
                 for (int ii = 1; ii < _blocksHigh - 1; ii++) {
                     Point2 currentTarget = new Point2(entrance.X, ii);
                     if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.WALL) {

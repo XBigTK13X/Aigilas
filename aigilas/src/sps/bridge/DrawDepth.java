@@ -19,7 +19,7 @@ public enum DrawDepth {
     ActionText(0.985f),
     DevConsole(.9993f),
     DevConsoleText(.9995f),
-    Particle(.99999f);
+    Particle(.99999f), Debug(.999999999f);
 
     private final float DrawDepth;
 

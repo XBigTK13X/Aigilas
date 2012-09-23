@@ -1,7 +1,14 @@
 package sps.paths;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import sps.bridge.DrawDepth;
 import sps.core.Point2;
+import sps.core.SpxManager;
+import sps.particles.ParticleEngine;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,10 +65,7 @@ public class Path {
 
     public Point2 getNextMove() {
         moveIndex++;
-        if (moveIndex >= _steps.size()) {
-            return null;
-        }
-        if (_steps.size() == 0) {
+        if (_steps.size() == 0 || moveIndex >= _steps.size()) {
             return null;
         }
         return _steps.size() == 1 ? _steps.get(0) : _steps.get(moveIndex);
@@ -72,6 +76,10 @@ public class Path {
     }
 
     public Point2 getLastStep() {
+        if (_steps.size() == 0)
+        {
+            return null;
+        }
         return _steps.get(_steps.size() - 1);
     }
 
@@ -81,5 +89,15 @@ public class Path {
 
     public int length() {
         return _steps.size();
+    }
+
+    private static Sprite _t;
+    public void draw() {
+        if(_t == null){
+            _t = SpxManager.getSpriteAsset(0);
+        }
+        for(Point2 step:_steps){
+            SpxManager.Renderer.draw(_t,new Point2(step.PosX,step.PosY), DrawDepth.Debug,Color.ORANGE);
+        }
     }
 }

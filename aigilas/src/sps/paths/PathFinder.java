@@ -12,7 +12,6 @@ import java.util.PriorityQueue;
 
 public class PathFinder {
     private static final PriorityQueue<Path> queue = new PriorityQueue<>(100, new Comparator<Path>() {
-
         @Override
         public int compare(Path o1, Path o2) {
             return (int) (o1.getCost() - o2.getCost());
@@ -22,10 +21,8 @@ public class PathFinder {
     private static Path path;
     private static List<Point2> neighbors = new ArrayList<>();
 
-    public static Path findNextMove(Point2 start, Point2 destination, boolean nextMoveOnly) {
+    public static Path findNextMove(Point2 start, Point2 destination) {
         queue.clear();
-        start.reset(start.GridX, start.GridY);
-        destination.reset(destination.GridX, destination.GridY);
         queue.add(PathFactory.create(start, destination));
         while (!queue.isEmpty()) {
             path = queue.peek();
@@ -33,17 +30,18 @@ public class PathFinder {
             if (path.isDone()) {
                 return path;
             }
+
             neighbors.clear();
             neighbors = path.getNeighbors();
             if (neighbors.size() == 0) {
-                continue;
+                return null;
             }
             for (Point2 neighbor : neighbors) {
                 neighbor.setWeight(HitTest.getDistanceSquare(neighbor, destination));
             }
 
             while (neighbors.size() > 0) {
-                node = neighbors.get(RNG.next(0, neighbors.size()));
+                node = neighbors.get(0);
                 for (Point2 neighbor : neighbors) {
                     if (neighbor.Weight < node.Weight) {
                         node = neighbor;
@@ -51,7 +49,6 @@ public class PathFinder {
                 }
                 neighbors.remove(node);
                 if (!CoordVerifier.isBlocked(node) || node.isSameSpot(destination)) {
-                    node.setWeight(Point2.calculateDistanceSquared(node, path.getLastStep()));
                     Path newPath = PathFactory.create(path);
                     if (newPath.add(node)) {
                         queue.add(newPath);
@@ -61,9 +58,5 @@ public class PathFinder {
             }
         }
         return null;
-    }
-
-    public static Path findNextMove(Point2 start, Point2 destination) {
-        return findNextMove(start, destination, true);
     }
 }
