@@ -91,8 +91,8 @@ public class Settings {
                         defaultSpeed = Float.parseFloat(value);
                     if (key.equals("defaultRegen"))
                         defaultRegen = Float.parseFloat(value);
-                    if (key.equals("turnTime"))
-                        turnTime = Float.parseFloat(value);
+                    if (key.equals("turnsPerSecond"))
+                        turnTime = 1/Float.parseFloat(value);
 
                     // Display
                     if (key.equals("spriteHeight"))

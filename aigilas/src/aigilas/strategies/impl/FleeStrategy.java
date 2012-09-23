@@ -24,7 +24,7 @@ public class FleeStrategy extends BaseStrategy {
         if (AbleToMove()) {
             _transfer = targetPath.getNextMove();
             if (_transfer != null) {
-                nextMove.copy(_parent.getLocation().add(_transfer.minus(_parent.getLocation()).rotate180()));
+                nextMove.copy(_parent.getLocation().add(_transfer.minus(_parent.getLocation()).rotate(180)));
                 _parent.moveTo(nextMove);
             }
         }

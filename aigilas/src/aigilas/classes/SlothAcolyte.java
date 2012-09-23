@@ -10,6 +10,6 @@ public class SlothAcolyte extends CreatureClass {
         add(2, SkillId.FLOOR_SPIKES);
         add(3, SkillId.REMOTE_MINE);
         add(4, SkillId.VAPOR_IMPLANT);
-        add(5, SkillId.DART_TRAP);
+        add(1, SkillId.DART_TRAP);
     }
 }

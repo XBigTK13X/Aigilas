@@ -1,7 +1,5 @@
 package sps.core;
 
-import sps.devtools.DevConsole;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,17 +138,17 @@ public class Point2 {
         return target.GridX == GridX && target.GridY == GridY;
     }
 
-    public Point2 rotateClockwise() {
-        double theta = Math.PI / 2.0;
-        double currentRotation = Math.atan2(Y, X);
-        currentRotation -= theta;
-        float x = (float) Math.cos(currentRotation);
-        float y = (float) Math.sin(currentRotation);
-        return new Point2(x, y);
+    public Point2 rotate(){
+        return rotate(45);
     }
 
-    public Point2 rotate180() {
-        return rotateClockwise().rotateClockwise();
+    public Point2 rotate(int degrees) {
+        double theta = degrees * Math.PI / 180;
+        double currentRotation = Math.atan2(Y, X);
+        currentRotation -= theta;
+        float x = (int) Math.round(Math.cos(currentRotation));
+        float y = (int) Math.round(Math.sin(currentRotation));
+        return new Point2(x, y);
     }
 
     public static float distanceSquared(Point2 source, Point2 target) {
@@ -159,6 +157,6 @@ public class Point2 {
 
     @Override
     public String toString() {
-        return "(gX,gY) - (posX,posY) extends  (" + GridX + "," + GridY + ") - (" + PosX + "," + PosY + ")";
+        return "(gX,gY) - (posX,posY):  (" + GridX + "," + GridY + ") - (" + PosX + "," + PosY + ")";
     }
 }

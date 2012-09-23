@@ -16,6 +16,6 @@ public class RotateAnimation extends SkillAnimation {
         location.setX(rotation.GridX + source.getLocation().GridX);
         location.setY(rotation.GridY + source.getLocation().GridY);
         skill.setLocation(location);
-        rotation.copy(rotation.rotateClockwise());
+        rotation.copy(rotation.rotate());
     }
 }

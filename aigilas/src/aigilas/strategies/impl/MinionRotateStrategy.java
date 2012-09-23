@@ -18,7 +18,7 @@ public class MinionRotateStrategy extends BaseStrategy {
     @Override
     public void act() {
         if (_parent.isCooledDown()) {
-            _parent.setSkillVector(_parent.getSkillVector().rotateClockwise());
+            _parent.setSkillVector(_parent.getSkillVector().rotate());
             _parent.useActiveSkill();
             _parent.applyDamage(5, null, false);
             _parent.set(StatType.MOVE_COOL_DOWN, 0);
