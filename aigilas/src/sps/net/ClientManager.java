@@ -13,6 +13,7 @@ public class ClientManager {
     final List<MessageHandler> clients = new ArrayList<>();
     private final HashMap<Integer, Integer> addressToIndex = new HashMap<>();
     ServerSocket server;
+
     Thread clientListener;
     private boolean __otherServerExists = false;
 

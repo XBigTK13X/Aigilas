@@ -2,26 +2,27 @@
 
 package sps.net;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
+import com.esotericsoftware.kryo.io.Output;
 import sps.core.Settings;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Handler definition. The handler contains two threads: One for sending and one
- * for receiving messages. It is initialized with an open socket.
- */
 public class MessageHandler {
-    private ObjectOutputStream oos;
-    private ObjectInputStream ois;
+    private Kryo outKryo;
+    private Output oos;
     private Thread sender;
-    private Thread receiver;
     private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<>();
+
+    private Kryo inKryo;
+    private Input ois;
+    private Thread receiver;
     private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<>();
+
     private Socket connection;
     public String owner = "";
 
@@ -32,8 +33,10 @@ public class MessageHandler {
                 public void run() {
                     if (oos == null) {
                         try {
-                            oos = new ObjectOutputStream(connection.getOutputStream());
-                        } catch (IOException e) {
+                            outKryo = new Kryo();
+                            oos = new Output(connection.getOutputStream());
+                        }
+                        catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
@@ -42,10 +45,10 @@ public class MessageHandler {
                         try {
                             msg = outboundMessages.take();
                             blurt("Sending message: " + msg.MessageType);
-                            oos.reset();
-                            oos.writeObject(msg);
+                            outKryo.writeObject(oos, msg);
                             oos.flush();
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -58,17 +61,20 @@ public class MessageHandler {
                         blurt("Waiting for messages to arrive");
                         if (ois == null) {
                             try {
-                                ois = new ObjectInputStream(connection.getInputStream());
-                            } catch (IOException e) {
+                                inKryo = new Kryo();
+                                ois = new Input(connection.getInputStream());
+                            }
+                            catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
                         Message msg;
                         try {
-                            msg = (Message) ois.readObject();
+                            msg = inKryo.readObject(ois, Message.class);
                             blurt("Getting message: " + msg.MessageType);
                             inboundMessages.add(msg);
-                        } catch (Exception e) {
+                        }
+                        catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -79,7 +85,8 @@ public class MessageHandler {
             blurt("Starting the send/receive threads.");
             sender.start();
             receiver.start();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -92,7 +99,8 @@ public class MessageHandler {
         if (inboundMessages.peek() != null) {
             try {
                 return inboundMessages.take();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
