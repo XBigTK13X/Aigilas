@@ -6,6 +6,7 @@ import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
+import sps.core.RNG;
 
 public class AttackStrategy extends BaseStrategy {
     private int _skillCooldown = 0;
@@ -34,14 +35,14 @@ public class AttackStrategy extends BaseStrategy {
                     if (_parent.getSkillVector().GridX != 0 || _parent.getSkillVector().GridY != 0) {
                         _parent.useActiveSkill();
                     }
-                } else {
+                }
+                else {
                     _parent.useActiveSkill();
                 }
                 _skillCooldown = _skillCooldownMax;
             }
             if (targetPath.hasMoves()) {
                 nextMove.copy(targetPath.getNextMove());
-                System.out.println(nextMove);
                 _parent.moveTo(nextMove);
             }
         }

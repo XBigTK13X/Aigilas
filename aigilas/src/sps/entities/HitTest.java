@@ -27,14 +27,10 @@ public class HitTest {
     public static float getDistanceSquare(Point2 source, Point2 target)
 
     {
-        return getDistanceSquare(source.PosX, target.PosX, source.PosY, target.PosY);
+        return getDistanceSquare(source.GridX, target.GridX, source.GridY, target.GridY);
     }
 
     private static float getDistanceSquare(float x1, float x2, float y1, float y2) {
         return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
-    }
-
-    public static boolean isClose(Point2 start, Point2 end) {
-        return isClose(start.X,end.X,start.Y,end.Y);
     }
 }

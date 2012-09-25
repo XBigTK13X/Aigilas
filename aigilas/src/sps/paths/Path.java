@@ -64,11 +64,10 @@ public class Path {
     }
 
     public Point2 getNextMove() {
-        moveIndex++;
-        if (_steps.size() == 0 || moveIndex >= _steps.size()) {
+        if (_steps.size() == 0 || moveIndex >= _steps.size() - 1) {
             return null;
         }
-        return _steps.size() == 1 ? _steps.get(0) : _steps.get(moveIndex);
+        return _steps.size() == 1 ? _steps.get(0) : _steps.get(++moveIndex);
     }
 
     public boolean isDone() {
@@ -76,8 +75,7 @@ public class Path {
     }
 
     public Point2 getLastStep() {
-        if (_steps.size() == 0)
-        {
+        if (_steps.size() == 0) {
             return null;
         }
         return _steps.get(_steps.size() - 1);
@@ -92,12 +90,13 @@ public class Path {
     }
 
     private static Sprite _t;
+
     public void draw() {
-        if(_t == null){
+        if (_t == null) {
             _t = SpxManager.getSpriteAsset(0);
         }
-        for(Point2 step:_steps){
-            SpxManager.Renderer.draw(_t,new Point2(step.PosX,step.PosY), DrawDepth.Debug,Color.ORANGE);
+        for (Point2 step : _steps) {
+            SpxManager.Renderer.draw(_t, new Point2(step.PosX, step.PosY), DrawDepth.Debug, Color.ORANGE);
         }
     }
 }

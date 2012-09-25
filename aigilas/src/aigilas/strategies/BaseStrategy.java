@@ -41,8 +41,7 @@ public abstract class BaseStrategy {
     protected boolean AbleToMove() {
         opponent = _targets.findClosest();
         // Every player is dead
-        if (targetPath.getLastStep() == null || (null != opponent && !HitTest.isClose(targetPath.getLastStep(), opponent.getLocation()))) {
-            System.out.println("Finding a new path");
+        if (targetPath.getLastStep() == null || (null != opponent && !targetPath.getLastStep().isSameSpot(opponent.getLocation()))){
             targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), opponent.getLocation()));
         }
         if (targetPath.hasMoves() && _parent.isCooledDown()) {
