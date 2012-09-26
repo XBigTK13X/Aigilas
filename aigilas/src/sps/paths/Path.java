@@ -10,6 +10,7 @@ import sps.particles.ParticleEngine;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,15 @@ public class Path {
     private float _totalWeight = 0;
 
     public Path() {
+    }
+
+    public Path(Node node) {
+        Node temp = node;
+        while(temp.Parent != null){
+            _steps.add(temp.Parent.Point);
+            temp = temp.Parent;
+        }
+        Collections.reverse(_steps);
     }
 
     public Path reset(Point2 start, Point2 finish) {

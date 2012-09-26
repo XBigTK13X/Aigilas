@@ -11,55 +11,54 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class PathFinder {
-    private static Point2 node = new Point2(0, 0);
-    private static List<Point2> neighbors = new ArrayList<>();
-
-    private static PriorityQueue<Point2> open = new PriorityQueue<>();
-    private static ArrayList<Point2> closed = new ArrayList<>();
+    private static Node node;
+    private static PriorityQueue<Node> opened = new PriorityQueue<>();
+    private static ArrayList<Node> closed = new ArrayList<>();
     private static Path result = new Path();
 
+
     public static Path findNextMove(Point2 start, Point2 destination) {
-        open.clear();
+        Node nStart = new Node(start);
+        Node nEnd = new Node(destination);
+        opened.clear();
         closed.clear();
-        node.reset(0,0);
-        open.add(start);
-        while(!node.isSameSpot(destination)){
-            node = open.peek();
-            open.remove();
-            if(node.isSameSpot(destination)){
-                return new Path(closed);
+        node = null;
+        opened.add(nStart);
+        while(node == null || !node.Point.isSameSpot(destination)){
+            node = opened.peek();
+            opened.remove();
+            if(node.Point.isSameSpot(destination)){
+                return new Path(node);
             }
             closed.add(node);
-            for(Point2 neighbor:node.getNeighbors()){
-                neighbor.setWeight(node.Weight + 1);
-            }
-        }
 
-        while (we have not reached our goal) {
-            consider the best node in the open list (the node with the lowest f value)
-            if (this node is the goal) {
-                then we're done
-            }
-            else {
-                move the current node to the closed list and consider all of its neighbors
-                for (each neighbor) {
-                    if (this neighbor is in the closed list and our current g value is lower) {
-                        update the neighbor with the new, lower, g value
-                        change the neighbor's parent to our current node
+            for(Point2 neighbor:node.Point.getNeighbors()){
+                neighbor.setWeight(node.Weight + 1 + ((CoordVerifier.isBlocked(node.Point))?10:1));
+                boolean found = false;
+                for(Node close:closed){
+                    if(close.Point.isSameSpot(neighbor) && close.Weight > neighbor.Weight){
+                        close.Point.setWeight(neighbor.Weight);
+                        close.Parent = node;
+                        found = true;
                     }
-                    else if (this neighbor is in the open list and our current g value is lower) {
-                        update the neighbor with the new, lower, g value
-                        change the neighbor's parent to our current node
+                }
+                if(!found){
+                    for(Node open:opened){
+                        if(open.Point.isSameSpot(neighbor) && open.Weight > neighbor.Weight){
+                            open.Point.setWeight(neighbor.Weight);
+                            open.Parent = node;
+                            found = true;
+                        }
                     }
-                    else this neighbor is not in either the open or closed list {
-                        add the neighbor to the open list and set its g value
-                    }
+                }
+                if(!found){
+                    opened.add(new Node(neighbor));
                 }
             }
         }
+        return null;
 
-
-        while (!queue.isEmpty()) {
+        /*while (!queue.isEmpty()) {
             path = queue.peek();
             queue.remove(queue.peek());
             if (path.isDone()) {
@@ -92,6 +91,6 @@ public class PathFinder {
                 }
             }
         }
-        return null;
+        return null;*/
     }
 }
