@@ -19,11 +19,11 @@ public class PathFinder {
 
     public static Path findNextMove(Point2 start, Point2 destination) {
         Node nStart = new Node(start);
-        Node nEnd = new Node(destination);
         opened.clear();
         closed.clear();
         node = null;
         opened.add(nStart);
+
         while(node == null || !node.Point.isSameSpot(destination)){
             node = opened.peek();
             opened.remove();
@@ -33,7 +33,8 @@ public class PathFinder {
             closed.add(node);
 
             for(Point2 neighbor:node.Point.getNeighbors()){
-                neighbor.setWeight(node.Weight + 1 + ((CoordVerifier.isBlocked(node.Point))?10:1));
+                neighbor.setWeight(node.Weight + 1 + ((CoordVerifier.isBlocked(node.Point))?10:0) + HitTest.getDistanceSquare(neighbor,destination));
+
                 boolean found = false;
                 for(Node close:closed){
                     if(close.Point.isSameSpot(neighbor) && close.Weight > neighbor.Weight){
@@ -52,7 +53,9 @@ public class PathFinder {
                     }
                 }
                 if(!found){
-                    opened.add(new Node(neighbor));
+                    Node n = new Node(neighbor);
+                    n.Parent = opened.peek();
+                    opened.add(n);
                 }
             }
         }

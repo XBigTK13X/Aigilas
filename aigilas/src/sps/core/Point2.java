@@ -126,7 +126,7 @@ public class Point2 {
         _neighbors.clear();
         for (int ii = -1; ii < 2; ii++) {
             for (int jj = -1; jj < 2; jj++) {
-                if((ii != 0 || jj != 0) && (GridX + jj >= 0 && GridY + ii >= 0)){
+                if((ii != 0 || jj != 0) && (GridX + jj >= 0 && GridY + ii >= 0) && (GridX + jj < Settings.get().tileMapWidth && GridY + ii < Settings.get().tileMapHeight)){
                     _neighbors.add(_locations[GridY + ii][GridX + jj]);
                 }
             }
