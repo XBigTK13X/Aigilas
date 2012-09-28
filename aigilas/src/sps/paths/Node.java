@@ -17,4 +17,9 @@ public class Node implements Comparable{
         Node n = (Node)o;
         return Math.round(Weight - n.Weight);
     }
+
+    @Override
+    public String toString(){
+        return Weight + ": " + Point.toString();
+    }
 }

@@ -26,25 +26,21 @@ public class Point2 {
     }
 
     public Point2(float x, float y, int weight) {
-        initThis(x, y, weight);
-    }
-
-    public Point2(Point2 target) {
-        initThis(target.X, target.Y, 0);
-    }
-
-    public Point2(int x, int y) {
-        initThis(x, y, 0);
-    }
-
-    public Point2(float x, float y) {
-        initThis(x, y, 0);
-    }
-
-    private void initThis(float x, float y, int weight) {
         setX(x);
         setY(y);
         Weight = weight;
+    }
+
+    public Point2(Point2 target) {
+        this(target.X, target.Y, 0);
+    }
+
+    public Point2(int x, int y) {
+        this(x, y, 0);
+    }
+
+    public Point2(float x, float y) {
+        this(x, y, 0);
     }
 
     public void reset(float x, float y) {

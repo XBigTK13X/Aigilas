@@ -52,7 +52,7 @@ public class TestBotStrategy extends BaseStrategy {
             if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityType.ACTOR).size() == 1) {
                 _stairsTarget = EntityManager.get().getObject(EntityType.DOWNSTAIRS);
                 if (_stairsTarget != null) {
-                    targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), _stairsTarget.getLocation()));
+                    targetPath = PathFinder.find(_parent.getLocation(), _stairsTarget.getLocation());
                 }
             }
         }

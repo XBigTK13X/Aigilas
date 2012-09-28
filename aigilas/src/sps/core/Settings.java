@@ -44,6 +44,7 @@ public class Settings {
     public int tileMapWidth;
 
     public boolean consoleLogging;
+    public boolean viewPaths;
 
     private Settings() {
         try {
@@ -56,63 +57,95 @@ public class Settings {
                     String key = line.split("=")[0];
                     String value = line.split("=")[1];
                     _values.put(key, value);
-                    // Networking
-                    if (key.equals("server_ip"))
-                        serverIp = value;
-                    if (key.equals("socket_port"))
-                        port = Integer.parseInt(value);
-                    if (key.equals("server_log_verbose"))
-                        serverVerbose = isTrue(value);
-                    if (key.equals("client_log_verbose"))
-                        clientVerbose = isTrue(value);
-                    if (key.equals("message_contents_log_verbose"))
-                        messageContentsVerbose = isTrue(value);
-                    if (key.equals("message_handler_log_verbose"))
-                        messageHandlerVerbose = isTrue(value);
-                    if (key.equals("client_manager_log_verbose"))
-                        clientManagerVerbose = isTrue(value);
-                    if (key.equals("networking_enabled"))
-                        networkingEnabled = isTrue(value);
+                    switch (key) {
+                        // Networking
+                        case "server_ip":
+                            serverIp = value;
+                            break;
+                        case "socket_port":
+                            port = Integer.parseInt(value);
+                            break;
+                        case "server_log_verbose":
+                            serverVerbose = isTrue(value);
+                            break;
+                        case "client_log_verbose":
+                            clientVerbose = isTrue(value);
+                            break;
+                        case "message_contents_log_verbose":
+                            messageContentsVerbose = isTrue(value);
+                            break;
+                        case "message_handler_log_verbose":
+                            messageHandlerVerbose = isTrue(value);
+                            break;
+                        case "client_manager_log_verbose":
+                            clientManagerVerbose = isTrue(value);
+                            break;
+                        case "networking_enabled":
+                            networkingEnabled = isTrue(value);
+                            break;
 
-                    // Gameplay
-                    if (key.equals("enemyCap"))
-                        enemyCap = Integer.parseInt(value);
-                    if (key.equals("enemyBase"))
-                        enemyBase = Integer.parseInt(value);
-                    if (key.equals("itemCap"))
-                        itemCap = Integer.parseInt(value);
-                    if (key.equals("itemBase"))
-                        itemBase = Integer.parseInt(value);
-                    if (key.equals("bossLevelMod"))
-                        bossLevelMod = Integer.parseInt(value);
-                    if (key.equals("maxRoomCount"))
-                        maxRoomCount = Integer.parseInt(value);
-                    if (key.equals("defaultSpeed"))
-                        defaultSpeed = Float.parseFloat(value);
-                    if (key.equals("defaultRegen"))
-                        defaultRegen = Float.parseFloat(value);
-                    if (key.equals("turnsPerSecond"))
-                        turnTime = 1/Float.parseFloat(value);
+                        // Gameplay
+                        case "enemyCap":
+                            enemyCap = Integer.parseInt(value);
+                            break;
+                        case "enemyBase":
+                            enemyBase = Integer.parseInt(value);
+                            break;
+                        case "itemCap":
+                            itemCap = Integer.parseInt(value);
+                            break;
+                        case "itemBase":
+                            itemBase = Integer.parseInt(value);
+                            break;
+                        case "bossLevelMod":
+                            bossLevelMod = Integer.parseInt(value);
+                            break;
+                        case "maxRoomCount":
+                            maxRoomCount = Integer.parseInt(value);
+                            break;
+                        case "defaultSpeed":
+                            defaultSpeed = Float.parseFloat(value);
+                            break;
+                        case "defaultRegen":
+                            defaultRegen = Float.parseFloat(value);
+                            break;
+                        case "turnsPerSecond":
+                            turnTime = 1 / Float.parseFloat(value);
+                            break;
 
-                    // Display
-                    if (key.equals("spriteHeight"))
-                        spriteHeight = Integer.parseInt(value);
-                    if (key.equals("spriteWidth"))
-                        spriteWidth = Integer.parseInt(value);
-                    if (key.equals("tileMapHeight"))
-                        tileMapHeight = Integer.parseInt(value);
-                    if (key.equals("tileMapWidth"))
-                        tileMapWidth = Integer.parseInt(value);
+                        // Display
+                        case "spriteHeight":
+                            spriteHeight = Integer.parseInt(value);
+                            break;
+                        case "spriteWidth":
+                            spriteWidth = Integer.parseInt(value);
+                            break;
+                        case "tileMapHeight":
+                            tileMapHeight = Integer.parseInt(value);
+                            break;
+                        case "tileMapWidth":
+                            tileMapWidth = Integer.parseInt(value);
+                            break;
 
-                    // Dev
-                    if (key.equals("consoleLogging"))
-                        consoleLogging = isTrue(value);
-                } else {
+                        // Dev
+                        case "consoleLogging":
+                            consoleLogging = isTrue(value);
+                            break;
+                        case "viewPaths":
+                            viewPaths = isTrue(value);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+                if (line.contains("##")) {
                     System.out.println("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
                 }
             }
             in.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
     }

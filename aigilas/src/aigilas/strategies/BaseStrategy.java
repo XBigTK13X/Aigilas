@@ -3,8 +3,6 @@ package aigilas.strategies;
 import aigilas.creatures.BaseCreature;
 import sps.bridge.ActorType;
 import sps.core.Point2;
-import sps.core.RNG;
-import sps.entities.HitTest;
 import sps.paths.Path;
 import sps.paths.PathFinder;
 
@@ -15,7 +13,7 @@ public abstract class BaseStrategy {
     protected final BaseCreature _parent;
 
     protected BaseCreature opponent;
-    protected final Path targetPath = new Path();
+    protected Path targetPath;
     protected final Point2 nextMove = new Point2(0, 0);
 
     protected final Strategy _strategyId;
@@ -40,14 +38,10 @@ public abstract class BaseStrategy {
 
     protected boolean AbleToMove() {
         opponent = _targets.findClosest();
-        // Every player is dead
-        if (targetPath.getLastStep() == null || (null != opponent && !targetPath.getLastStep().isSameSpot(opponent.getLocation()))){
-            targetPath.copy(PathFinder.findNextMove(_parent.getLocation(), opponent.getLocation()));
+        if (targetPath == null || targetPath.getLastStep() == null ||  (null != opponent && !targetPath.getLastStep().isSameSpot(opponent.getLocation()))){
+            targetPath = PathFinder.find(_parent.getLocation(), opponent.getLocation());
         }
-        if (targetPath.hasMoves() && _parent.isCooledDown()) {
-            return true;
-        }
-        return false;
+        return targetPath.hasMoves() && _parent.isCooledDown();
     }
 
     protected final Point2 diff = new Point2(0, 0);
