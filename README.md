@@ -20,4 +20,5 @@ I am a fan of permissive licenses. Please refer to LICENSE.txt for more details,
 
 ## External links ##
 [Game Site](http://www.aigilas.net)
+
 [Development Blog](http://www.simplepathstudios.com)
