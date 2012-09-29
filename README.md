@@ -17,3 +17,7 @@ Look through current issues, make suggestions via the issues page, if all else f
 
 ## Under what licenses is this game? ##
 I am a fan of permissive licenses. Please refer to LICENSE.txt for more details, which must be contained in any distribution of source code or binaries. Aigilas is intended to be a project that I can use to help teach others how to make games. I believe that a permissive license makes that goal easier to reach.
+
+## External links ##
+[Game Site](http://www.aigilas.net)
+[Development Blog](http://www.simplepathstudios.com)
