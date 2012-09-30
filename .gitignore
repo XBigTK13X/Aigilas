@@ -8,3 +8,5 @@ header.java
 pkg/
 .idea/
 *.iml
+deploy-snapshot.sh
+target/
