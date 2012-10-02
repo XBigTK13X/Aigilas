@@ -1,5 +1,6 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
+import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import sps.bridge.ActorType;
 

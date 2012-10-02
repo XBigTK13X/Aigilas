@@ -1,7 +1,7 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.CreatureFactory;
+import aigilas.creatures.impl.CreatureFactory;
 import aigilas.creatures.StatType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;

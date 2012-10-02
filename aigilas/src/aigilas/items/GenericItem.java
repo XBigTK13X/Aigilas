@@ -1,6 +1,6 @@
 package aigilas.items;
 
-import aigilas.creatures.Player;
+import aigilas.creatures.impl.Player;
 import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
 import sps.bridge.ActorType;

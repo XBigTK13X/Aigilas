@@ -1,4 +1,4 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
@@ -6,11 +6,11 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import sps.bridge.ActorType;
 
-public class PoisonCloud extends Minion {
-    public PoisonCloud() {
+public class Explosion extends Minion {
+    public Explosion() {
         super(ActorType.MINION);
         _strategy = StrategyFactory.create(Strategy.MinionOneUse, this);
-        add(SkillId.POISON_CLOUD);
-        _composition.add(Elements.MENTAL);
+        add(SkillId.EXPLODE);
+        _composition.add(Elements.FIRE);
     }
 }

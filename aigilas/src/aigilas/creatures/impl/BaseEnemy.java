@@ -1,6 +1,9 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
 import aigilas.classes.CreatureClass;
+import aigilas.creatures.BaseCreature;
+import aigilas.creatures.StatType;
+import aigilas.creatures.Stats;
 import aigilas.entities.Elements;
 import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;

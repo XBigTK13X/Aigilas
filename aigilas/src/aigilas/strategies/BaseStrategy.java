@@ -41,7 +41,11 @@ public abstract class BaseStrategy {
         if (targetPath == null || targetPath.getLastStep() == null ||  (null != opponent && !targetPath.getLastStep().isSameSpot(opponent.getLocation()))){
             targetPath = PathFinder.find(_parent.getLocation(), opponent.getLocation());
         }
-        return targetPath.hasMoves() && _parent.isCooledDown();
+        if(targetPath != null)
+        {
+            return targetPath.hasMoves() && _parent.isCooledDown();
+        }
+        return false;
     }
 
     protected final Point2 diff = new Point2(0, 0);

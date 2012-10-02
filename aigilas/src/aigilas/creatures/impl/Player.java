@@ -1,6 +1,7 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
 import aigilas.classes.WrathAcolyte;
+import aigilas.creatures.Stats;
 import aigilas.entities.Elements;
 import aigilas.gods.GodId;
 import aigilas.management.SpriteType;

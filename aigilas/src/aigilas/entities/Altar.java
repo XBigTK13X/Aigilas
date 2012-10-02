@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.creatures.Player;
+import aigilas.creatures.impl.Player;
 import aigilas.gods.God;
 import aigilas.gods.GodId;
 import aigilas.items.GenericItem;

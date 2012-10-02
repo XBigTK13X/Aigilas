@@ -1,5 +1,6 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
 import aigilas.strategies.Strategy;

@@ -1,12 +1,8 @@
 package aigilas.states;
 
-import aigilas.creatures.CreatureFactory;
-import aigilas.dungeons.Dungeon;
-import aigilas.dungeons.DungeonFactory;
 import aigilas.management.AigilasManager;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
-import sps.net.Client;
 import sps.particles.ParticleEngine;
 import sps.states.State;
 import sps.states.StateManager;

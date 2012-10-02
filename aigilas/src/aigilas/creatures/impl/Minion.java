@@ -1,5 +1,7 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
+import aigilas.creatures.BaseCreature;
+import aigilas.creatures.Stats;
 import aigilas.entities.SkillEffect;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;

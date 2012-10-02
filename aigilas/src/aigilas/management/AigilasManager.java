@@ -1,6 +1,6 @@
 package aigilas.management;
 
-import aigilas.creatures.CreatureFactory;
+import aigilas.creatures.impl.CreatureFactory;
 import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFactory;
 import sps.entities.EntityManager;

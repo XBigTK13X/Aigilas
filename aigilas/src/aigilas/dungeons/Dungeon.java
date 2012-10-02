@@ -1,7 +1,7 @@
 package aigilas.dungeons;
 
-import aigilas.creatures.CreatureFactory;
-import aigilas.creatures.Player;
+import aigilas.creatures.impl.CreatureFactory;
+import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;

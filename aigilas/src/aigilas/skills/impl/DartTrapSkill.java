@@ -1,6 +1,6 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.CreatureFactory;
+import aigilas.creatures.impl.CreatureFactory;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import aigilas.entities.SkillEffect;

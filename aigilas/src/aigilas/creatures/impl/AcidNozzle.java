@@ -1,4 +1,4 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;

@@ -1,7 +1,7 @@
 package aigilas.statuses.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.CreatureFactory;
+import aigilas.creatures.impl.CreatureFactory;
 import aigilas.skills.SkillId;
 import aigilas.statuses.BaseStatus;
 

@@ -1,5 +1,6 @@
-package aigilas.creatures;
+package aigilas.creatures.impl;
 
+import aigilas.creatures.*;
 import aigilas.entities.SkillEffect;
 import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
@@ -61,6 +62,20 @@ public class CreatureFactory {
                 return new Serpent();
             case BREAKING_WHEEL:
                 return new BreakingWheel();
+            case WRATH_ACOLYTE:
+                return new WrathEnemyAcolyte();
+            case PRIDE_ACOLYTE:
+                return new PrideEnemyAcolyte();
+            case ENVY_ACOLYTE:
+                return new EnvyEnemyAcolyte();
+            case GLUTTONY_ACOLYTE:
+                return new GluttonyEnemyAcolyte();
+            case LUST_ACOLYTE:
+                return new LustEnemyAcolyte();
+            case SLOTH_ACOLYTE:
+                return new SlothEnemyAcolyte();
+            case GREED_ACOLYTE:
+                return new GreedEnemyAcolyte();
             default:
                 try {
                     throw new Exception("No Factory generation logic for: " + actorType);
@@ -73,7 +88,7 @@ public class CreatureFactory {
     }
 
     public static BaseCreature createRandom(Point2 randomPoint) {
-        return create(Generate.Randoms.get(RNG.next(0, Generate.Randoms.size())), randomPoint);
+        return create(ActorType.getRandomGeneratable(), randomPoint);
     }
 
     public static BaseCreature createMinion(SkillId skillId, BaseCreature source, SkillEffect effectGraphic, Point2 location) {
