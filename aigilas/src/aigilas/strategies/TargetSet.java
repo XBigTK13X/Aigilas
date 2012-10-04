@@ -15,9 +15,9 @@ import java.util.List;
 public class TargetSet
 
 {
-    private final List<BaseCreature> _targets = new ArrayList<>();
-    private final List<ActorType> _targetActorTypes = new ArrayList<>();
-    private final List<Integer> _targetEntityTypes = new ArrayList<>();
+    private final List<BaseCreature> _targets = new ArrayList<BaseCreature>();
+    private final List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
+    private final List<Integer> _targetEntityTypes = new ArrayList<Integer>();
     private final BaseCreature _parent;
 
     public TargetSet(BaseCreature parent)
@@ -75,7 +75,7 @@ public class TargetSet
                 }
             }
             for (ActorType actorType : _targetActorTypes) {
-                _calculatedTargets = new ArrayList<>();
+                _calculatedTargets = new ArrayList<BaseCreature>();
                 for (IEntity entity : EntityManager.get().getActors(actorType)) {
                     _calculatedTargets.add((BaseCreature) entity);
                 }

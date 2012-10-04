@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ComboMeter {
-    private static final HashMap<Integer, ReactionId> __reactions = new HashMap<>();
+    private static final HashMap<Integer, ReactionId> __reactions = new HashMap<Integer,ReactionId>();
 
     static {
         __reactions.put(12, ReactionId.SWEAT);
@@ -45,8 +45,8 @@ public class ComboMeter {
     }
 
     private final BaseCreature _parent;
-    private final List<Elements> _elements = new ArrayList<>();
-    private final List<ComboMarker> _markers = new ArrayList<>();
+    private final List<Elements> _elements = new ArrayList<Elements>();
+    private final List<ComboMarker> _markers = new ArrayList<ComboMarker>();
     private static final int _maxTimer = 120;
     private int _reactionTimer = _maxTimer;
 

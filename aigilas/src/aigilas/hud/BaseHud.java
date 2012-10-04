@@ -14,7 +14,7 @@ public class BaseHud {
     protected final BaseCreature _parent;
     protected static Sprite _menuBase;
     protected final TextHandler _textHandler = new TextHandler();
-    protected final List<Point2> playerHudPositions = new ArrayList<>();
+    protected final List<Point2> playerHudPositions = new ArrayList<Point2>();
     protected final Point2 _dimensions;
 
     protected BaseHud(BaseCreature owner, int width, int height) {

@@ -46,7 +46,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Stats _maxStats;
     protected God _god;
 
-    protected final List<Elements> _composition = new ArrayList<>();
+    protected final List<Elements> _composition = new ArrayList<Elements>();
 
     protected SkillPool _skills;
     protected final Point2 _skillVector = new Point2(0, 0);
@@ -366,7 +366,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     private final Point2 target = new Point2(0, 0);
-    private final List<BaseCreature> creatures = new ArrayList<>();
+    private final List<BaseCreature> creatures = new ArrayList<BaseCreature>();
 
     public void moveIfPossible(float xVel, float yVel) {
 
@@ -475,7 +475,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     private StatType getLowestStat() {
         StatType result = StatType.AGE;
         float min = Float.MAX_VALUE;
-        List<StatType> possibleStats = new ArrayList<>();
+        List<StatType> possibleStats = new ArrayList<StatType>();
         for (StatType stat : StatType.values()) {
             if (get(stat) < min && stat != StatType.AGE && stat != StatType.MOVE_COOL_DOWN && stat != StatType.PIETY) {
                 possibleStats.add(stat);

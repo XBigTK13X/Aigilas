@@ -10,7 +10,7 @@ public class TextHandler {
     private final DefaultHudText[] defaultPool = new DefaultHudText[100];
     private int defaultIndex = 0;
 
-    private final List<Text> _contents = new ArrayList<>();
+    private final List<Text> _contents = new ArrayList<Text>();
 
     public TextHandler() {
         for (int ii = 0; ii < defaultPool.length; ii++) {

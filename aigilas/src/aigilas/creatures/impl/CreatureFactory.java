@@ -139,11 +139,11 @@ public class CreatureFactory {
     private static List<ActorType> __remainingBosses;
 
     static {
-        __remainingBosses = new LinkedList<>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
     }
 
     public static void reset(){
-        __remainingBosses = new LinkedList<>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
         __playerCount = 0;
     }
 

@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SkillPool {
-    private final List<SkillId> _skills = new ArrayList<>();
+    private final List<SkillId> _skills = new ArrayList<SkillId>();
     private int _currentSkillSlot = 0;
     private final BaseCreature _owner;
-    private final HashMap<SkillId, Integer> _usageCounter = new HashMap<>();
-    private final HashMap<Commands, SkillId> _hotSkills = new HashMap<>();
+    private final HashMap<SkillId, Integer> _usageCounter = new HashMap<SkillId,Integer>();
+    private final HashMap<Commands, SkillId> _hotSkills = new HashMap<Commands,SkillId>();
 
     public SkillPool(BaseCreature owner) {
         _owner = owner;

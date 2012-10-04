@@ -9,11 +9,11 @@ import java.util.List;
 public class Stats {
     public static final float DefaultMoveDistance = Settings.get().spriteHeight;
 
-    private HashMap<StatType, Float> _stats = new HashMap<>();
-    private final List<StatBuff> _buffs = new ArrayList<>();
+    private HashMap<StatType, Float> _stats = new HashMap<StatType,Float>();
+    private final List<StatBuff> _buffs = new ArrayList<StatBuff>();
 
     public Stats(Stats target) {
-        _stats = new HashMap<>(target._stats);
+        _stats = new HashMap<StatType,Float>(target._stats);
     }
 
     public Stats(float health, float mana, float strength, float wisdom, float defense, float luck, float age, float weightInLbs, float heightInFeet, float moveCoolDown, float regenRate) {
@@ -69,7 +69,7 @@ public class Stats {
         _buffs.add(buff);
     }
 
-    private final List<Float> deltas = new ArrayList<>();
+    private final List<Float> deltas = new ArrayList<Float>();
 
     public List<Float> getDeltas(Stats stats) {
         deltas.clear();

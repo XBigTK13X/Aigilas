@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Path {
-    private List<Point2> _steps = new ArrayList<>();
+    private List<Point2> _steps = new ArrayList<Point2>();
     private int moveIndex = -1;
 
     public Path() {

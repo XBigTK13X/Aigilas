@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StatusPool {
-    private final List<BaseStatus> _statuses = new ArrayList<>();
+    private final List<BaseStatus> _statuses = new ArrayList<BaseStatus>();
 
     public boolean allows(CreatureAction action) {
         for (BaseStatus _statuse : _statuses) {

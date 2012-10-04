@@ -9,8 +9,8 @@ import java.util.PriorityQueue;
 
 public class PathFinder {
     public static Path find(Point2 start, Point2 destination) {
-        PriorityQueue<Node> opened = new PriorityQueue<>();
-        ArrayList<Node> closed = new ArrayList<>();
+        PriorityQueue<Node> opened = new PriorityQueue<Node>();
+        ArrayList<Node> closed = new ArrayList<Node>();
         Node node = null;
         opened.add(new Node(start));
         while (node == null || !node.Point.isSameSpot(destination)) {

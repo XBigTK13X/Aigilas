@@ -27,8 +27,8 @@ public class Dungeon {
     private static int enemyBaseModifier = 0;
     private final int playerCount = Client.get().getPlayerCount();
 
-    private final List<Room> _rooms = new ArrayList<>();
-    private List<IEntity> _contents = new ArrayList<>();
+    private final List<Room> _rooms = new ArrayList<Room>();
+    private List<IEntity> _contents = new ArrayList<IEntity>();
     private final IEntity[][] dungeon = new IEntity[_blocksWide][_blocksHigh];
     private final Point2 _upSpawnLocation = new Point2(0, 0);
     private final Point2 _downSpawnLocation = new Point2(0, 0);
@@ -99,7 +99,7 @@ public class Dungeon {
             DungeonFactory.addToCache((Entity) player);
             EntityManager.get().removeObject(player);
         }
-        _contents = new ArrayList<>(EntityManager.get().getEntitiesToCache());
+        _contents = new ArrayList<IEntity>(EntityManager.get().getEntitiesToCache());
     }
 
     private void init() {
@@ -185,7 +185,7 @@ public class Dungeon {
     }
 
     private void placeRooms() {
-        ArrayList<Room> newRooms = new ArrayList<>();
+        ArrayList<Room> newRooms = new ArrayList<Room>();
         int roomsToPlace = 3 + RNG.next(0, Settings.get().maxRoomCount);
         int attemptCount = 0;
         while (attemptCount < 1000 && roomsToPlace > 0) {
@@ -240,9 +240,9 @@ public class Dungeon {
 
     private void convertRoomsToWalls() {
         int roomCount = 0;
-        ArrayList<TransientPoint> dungeonEntrances = new ArrayList<>();
+        ArrayList<TransientPoint> dungeonEntrances = new ArrayList<TransientPoint>();
         for (Room room : _rooms) {
-            ArrayList<TransientPoint> entrances = new ArrayList<>();
+            ArrayList<TransientPoint> entrances = new ArrayList<TransientPoint>();
             for (int ii = room.X; ii < room.RightSide; ii++) {
                 for (int jj = room.Y; jj < room.BottomSide; jj++) {
                     if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1) {

@@ -14,7 +14,7 @@ public class Room {
     public final int BottomSide;
     public final int RightSide;
     public final Point2 Center;
-    public final List<Point2> Corners = new ArrayList<>();
+    public final List<Point2> Corners = new ArrayList<Point2>();
 
     public Room(int height, int width, int x, int y) {
         Height = height;

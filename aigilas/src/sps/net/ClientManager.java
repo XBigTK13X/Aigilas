@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ClientManager {
-    final List<MessageHandler> clients = new ArrayList<>();
-    private final HashMap<Integer, Integer> addressToIndex = new HashMap<>();
+    final List<MessageHandler> clients = new ArrayList<MessageHandler>();
+    private final HashMap<Integer, Integer> addressToIndex = new HashMap<Integer,Integer>();
     ServerSocket server;
 
     Thread clientListener;

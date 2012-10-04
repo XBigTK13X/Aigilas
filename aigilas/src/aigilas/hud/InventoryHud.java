@@ -113,7 +113,7 @@ public class InventoryHud extends BaseHud {
         forceRefresh = true;
     }
 
-    private static final HashMap<Integer, String> __classStrings = new HashMap<>();
+    private static final HashMap<Integer, String> __classStrings = new HashMap<Integer,String>();
 
     private String getClassDisplay() {
         if (!__classStrings.containsKey(_currentClass)) {

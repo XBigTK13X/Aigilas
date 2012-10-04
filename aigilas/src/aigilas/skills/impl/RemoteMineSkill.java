@@ -11,7 +11,7 @@ import aigilas.skills.SkillId;
 import java.util.HashMap;
 
 public class RemoteMineSkill extends BaseSkill {
-    private static final HashMap<BaseCreature, RemoteMineSkill> _cache = new HashMap<>();
+    private static final HashMap<BaseCreature, RemoteMineSkill> _cache = new HashMap<BaseCreature,RemoteMineSkill>();
 
     public RemoteMineSkill()
 

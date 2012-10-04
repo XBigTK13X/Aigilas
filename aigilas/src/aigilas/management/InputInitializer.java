@@ -12,7 +12,7 @@ public class InputInitializer implements IInputInitializer {
 
     @Override
     public List<CommandDefinition> getCommands() {
-        ArrayList<CommandDefinition> result = new ArrayList<>();
+        ArrayList<CommandDefinition> result = new ArrayList<CommandDefinition>();
         result.add(make(Commands.MoveUp, Keys.Up, Buttons.LeftThumbstickUp, Contexts.Nonfree));
         result.add(make(Commands.MoveDown, Keys.Down, Buttons.LeftThumbstickDown, Contexts.Nonfree));
         result.add(make(Commands.MoveLeft, Keys.Left, Buttons.LeftThumbstickLeft, Contexts.Nonfree));

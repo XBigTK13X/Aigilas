@@ -16,7 +16,7 @@ public class GameplayState implements State {
         AigilasManager.get().reset();
     }
 
-    List<IActor> players = new ArrayList<>();
+    List<IActor> players = new ArrayList<IActor>();
     @Override
     public void update() {
         players = EntityManager.get().getPlayers();

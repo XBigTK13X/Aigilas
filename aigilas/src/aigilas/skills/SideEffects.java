@@ -13,7 +13,7 @@ public class SideEffects {
     protected final BaseSkill _parent;
 
     protected final AnimationType _animation;
-    protected final List<SkillEffect> _effectGraphics = new ArrayList<>();
+    protected final List<SkillEffect> _effectGraphics = new ArrayList<SkillEffect>();
     protected SpriteType _effectSprite = SpriteType.SKILL_EFFECT;
     protected final float _effectStrength;
     protected boolean _isPersistent = false;

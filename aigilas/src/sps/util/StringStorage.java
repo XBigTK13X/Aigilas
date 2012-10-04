@@ -3,7 +3,7 @@ package sps.util;
 import java.util.HashMap;
 
 public class StringStorage {
-    private static final HashMap<Integer, String> __slots = new HashMap<>();
+    private static final HashMap<Integer, String> __slots = new HashMap<Integer,String>();
 
     public static String get(float value) {
         if (__slots.keySet().size() == 0) {

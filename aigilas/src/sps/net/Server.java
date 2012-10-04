@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Server extends Thread {
     private boolean isRunning = true;
-    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
+    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Commands, Boolean>>();
     private final int _rngSeed = (int) System.currentTimeMillis();
     private Message _message = Message.empty();
     private Integer _turnCount = 0;

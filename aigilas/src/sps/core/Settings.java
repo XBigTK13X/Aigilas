@@ -18,7 +18,7 @@ public class Settings {
         return __instance;
     }
 
-    private final HashMap<String, String> _values = new HashMap<>();
+    private final HashMap<String, String> _values = new HashMap<String, String>();
     public int port;
     public String serverIp;
     public boolean clientVerbose;
@@ -57,97 +57,121 @@ public class Settings {
                     String key = line.split("=")[0];
                     String value = line.split("=")[1];
                     _values.put(key, value);
-                    switch (key) {
-                        // Networking
-                        case "server_ip":
-                            serverIp = value;
-                            break;
-                        case "socket_port":
-                            port = Integer.parseInt(value);
-                            break;
-                        case "server_log_verbose":
-                            serverVerbose = isTrue(value);
-                            break;
-                        case "client_log_verbose":
-                            clientVerbose = isTrue(value);
-                            break;
-                        case "message_contents_log_verbose":
-                            messageContentsVerbose = isTrue(value);
-                            break;
-                        case "message_handler_log_verbose":
-                            messageHandlerVerbose = isTrue(value);
-                            break;
-                        case "client_manager_log_verbose":
-                            clientManagerVerbose = isTrue(value);
-                            break;
-                        case "networking_enabled":
-                            networkingEnabled = isTrue(value);
-                            break;
 
-                        // Gameplay
-                        case "enemyCap":
-                            enemyCap = Integer.parseInt(value);
-                            break;
-                        case "enemyBase":
-                            enemyBase = Integer.parseInt(value);
-                            break;
-                        case "itemCap":
-                            itemCap = Integer.parseInt(value);
-                            break;
-                        case "itemBase":
-                            itemBase = Integer.parseInt(value);
-                            break;
-                        case "bossLevelMod":
-                            bossLevelMod = Integer.parseInt(value);
-                            break;
-                        case "maxRoomCount":
-                            maxRoomCount = Integer.parseInt(value);
-                            break;
-                        case "defaultSpeed":
-                            defaultSpeed = Float.parseFloat(value);
-                            break;
-                        case "defaultRegen":
-                            defaultRegen = Float.parseFloat(value);
-                            break;
-                        case "turnsPerSecond":
-                            turnTime = 1 / Float.parseFloat(value);
-                            break;
-
-                        // Display
-                        case "spriteHeight":
-                            spriteHeight = Integer.parseInt(value);
-                            break;
-                        case "spriteWidth":
-                            spriteWidth = Integer.parseInt(value);
-                            break;
-                        case "tileMapHeight":
-                            tileMapHeight = Integer.parseInt(value);
-                            break;
-                        case "tileMapWidth":
-                            tileMapWidth = Integer.parseInt(value);
-                            break;
-
-                        // Dev
-                        case "consoleLogging":
-                            consoleLogging = isTrue(value);
-                            break;
-                        case "viewPaths":
-                            viewPaths = isTrue(value);
-                            break;
-                        default:
-                            break;
+                    // Networking
+                    if (key.equalsIgnoreCase("server_ip")) {
+                        serverIp = value;
                     }
 
+                    if (key.equalsIgnoreCase("socket_port")) {
+                        port = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("server_log_verbose")) {
+                        serverVerbose = isTrue(value);
+                    }
+
+                    if (key.equalsIgnoreCase("client_log_verbose")) {
+                        clientVerbose = isTrue(value);
+                    }
+
+                    if (key.equalsIgnoreCase("message_contents_log_verbose")) {
+                        messageContentsVerbose = isTrue(value);
+                    }
+
+                    if (key.equalsIgnoreCase("message_handler_log_verbose")) {
+                        messageHandlerVerbose = isTrue(value);
+                    }
+
+                    if (key.equalsIgnoreCase("client_manager_log_verbose")) {
+                        clientManagerVerbose = isTrue(value);
+                    }
+
+                    if (key.equalsIgnoreCase("networking_enabled")) {
+                        networkingEnabled = isTrue(value);
+                    }
+
+
+                    // Gameplay
+                    if (key.equalsIgnoreCase("enemyCap")) {
+                        enemyCap = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("enemyBase")) {
+                        enemyBase = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("itemCap")) {
+                        itemCap = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("itemBase")) {
+                        itemBase = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("bossLevelMod")) {
+                        bossLevelMod = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("maxRoomCount")) {
+                        maxRoomCount = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("defaultSpeed")) {
+                        defaultSpeed = Float.parseFloat(value);
+                    }
+
+                    if (key.equalsIgnoreCase("defaultRegen")) {
+                        defaultRegen = Float.parseFloat(value);
+                    }
+
+                    if (key.equalsIgnoreCase("turnsPerSecond")) {
+                        turnTime = 1 / Float.parseFloat(value);
+                    }
+
+
+                    // Display
+                    if (key.equalsIgnoreCase("spriteHeight")) {
+                        spriteHeight = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("spriteWidth")) {
+                        spriteWidth = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("tileMapHeight")) {
+                        tileMapHeight = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("tileMapWidth")) {
+                        tileMapWidth = Integer.parseInt(value);
+                    }
+
+
+                    // Dev
+                    if (key.equalsIgnoreCase("consoleLogging")) {
+                        consoleLogging = isTrue(value);
+                    }
+
+                    if (key.equalsIgnoreCase("viewPaths")) {
+                        viewPaths = isTrue(value);
+                    }
                 }
                 if (line.contains("##")) {
-                    System.out.println("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
+                    System.out.println("SETTINGS)) Parsing section '" + line.replace("##", "") + "'");
                 }
             }
             in.close();
         }
-        catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+
+        catch (
+                Exception e
+                )
+
+        {
+            System.err.println("Error)) " + e.getMessage());
         }
+
     }
 
     private boolean isTrue(String value) {

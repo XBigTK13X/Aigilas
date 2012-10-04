@@ -109,7 +109,7 @@ public class Point2 {
         return (float) (Math.pow(source.PosY - target.PosY, 2) + Math.pow(source.PosX - target.PosX, 2));
     }
 
-    private static final List<Point2> _neighbors = new ArrayList<>();
+    private static final List<Point2> _neighbors = new ArrayList<Point2>();
 
     public List<Point2> getNeighbors() {
         if (_locations[0][0] == null) {

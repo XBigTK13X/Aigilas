@@ -6,7 +6,7 @@ import sps.entities.EntityManager;
 import java.util.HashMap;
 
 public class Inventory {
-    final HashMap<GenericItem, Integer> _contents = new HashMap<>();
+    final HashMap<GenericItem, Integer> _contents = new HashMap<GenericItem,Integer>();
     private final BaseCreature _parent;
 
     public Inventory(BaseCreature parent) {
@@ -34,7 +34,7 @@ public class Inventory {
         }
     }
 
-    private final HashMap<GenericItem, Integer> _itemResult = new HashMap<>();
+    private final HashMap<GenericItem, Integer> _itemResult = new HashMap<GenericItem,Integer>();
 
     public HashMap<GenericItem, Integer> getItems(ItemClass iClass) {
         _itemResult.clear();

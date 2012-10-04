@@ -25,8 +25,8 @@ public class EntityManager {
 
     private EntityManager(){}
 
-    private List<IEntity> _contents = new ArrayList<>();
-    private HashMap<Point2, List<IEntity>> _gridContents = new HashMap<>();
+    private List<IEntity> _contents = new ArrayList<IEntity>();
+    private HashMap<Point2, List<IEntity>> _gridContents = new HashMap<Point2,List<IEntity>>();
 
     public IEntity addObject(IEntity Entity) {
         Entity.loadContent();
@@ -46,7 +46,7 @@ public class EntityManager {
         return null;
     }
 
-    private final List<IEntity> _gopResults = new ArrayList<>();
+    private final List<IEntity> _gopResults = new ArrayList<IEntity>();
 
     public List<IEntity> getEntities(EntityType type, Point2 target)
 
@@ -65,7 +65,7 @@ public class EntityManager {
         return null;
     }
 
-    private final List<IEntity> _goResults = new ArrayList<>();
+    private final List<IEntity> _goResults = new ArrayList<IEntity>();
 
     public List<IEntity> getObjects(EntityType type) {
         _goResults.clear();
@@ -77,7 +77,7 @@ public class EntityManager {
         return _goResults;
     }
 
-    private final List<IActor> _creatures = new ArrayList<>();
+    private final List<IActor> _creatures = new ArrayList<IActor>();
 
     public List<IActor> getActors(ActorType type) {
         _creatures.clear();
@@ -120,7 +120,7 @@ public class EntityManager {
         return getActorsAt(target, null);
     }
 
-    private final List<IActor> _creatures2 = new ArrayList<>();
+    private final List<IActor> _creatures2 = new ArrayList<IActor>();
 
     public List<IActor> getActorsSurrounding(Point2 target, int distance)
 
@@ -181,8 +181,8 @@ public class EntityManager {
     }
 
     public void clear() {
-        _contents = new ArrayList<>();
-        _gridContents = new HashMap<>();
+        _contents = new ArrayList<IEntity>();
+        _gridContents = new HashMap<Point2, List<IEntity>>();
     }
 
     public void update() {
@@ -230,7 +230,7 @@ public class EntityManager {
         }
     }
 
-    private final List<IActor> _players = new ArrayList<>();
+    private final List<IActor> _players = new ArrayList<IActor>();
 
     public List<IActor> getPlayers() {
         _players.clear();
@@ -243,7 +243,7 @@ public class EntityManager {
     }
 
     public Point2 getEmptyLocation() {
-        List<Point2> emptyLocations = new ArrayList<>();
+        List<Point2> emptyLocations = new ArrayList<Point2>();
         for (Point2 location : _gridContents.keySet()) {
             if (location.GridX > 0 && location.GridY > 0 && location.GridX < Settings.get().tileMapWidth - 1 && location.GridY < Settings.get().tileMapHeight - 1) {
                 boolean exclude = false;
@@ -261,7 +261,7 @@ public class EntityManager {
     }
 
     public List<IEntity> getEntitiesToCache() {
-        List<IEntity> results = new ArrayList<>();
+        List<IEntity> results = new ArrayList<IEntity>();
         for (IEntity _content : _contents) {
             if (_content.getEntityType() != EntityType.FLOOR) {
                 results.add(_content);

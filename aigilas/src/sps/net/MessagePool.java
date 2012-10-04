@@ -8,7 +8,7 @@ public class MessagePool extends Message{
 
     public static Message get(){
         if(messages == null){
-            messages = new ArrayList<>();
+            messages = new ArrayList<Message>();
             do{
             messages.add(new Message());
             }

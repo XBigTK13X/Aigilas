@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextManager {
-    static private final List<Text> _contents = new ArrayList<>();
+    static private final List<Text> _contents = new ArrayList<Text>();
 
     public static void add(Text textToAdd) {
         if (!_contents.contains(textToAdd)) {

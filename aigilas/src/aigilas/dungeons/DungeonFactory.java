@@ -12,8 +12,8 @@ public class DungeonFactory {
 
     private static int __floorCount = 0;
 
-    private static HashMap<Location, DungeonSet> _world = new HashMap<>();
-    private static List<Entity> _cache = new ArrayList<>();
+    private static HashMap<Location, DungeonSet> _world = new HashMap<Location,DungeonSet>();
+    private static List<Entity> _cache = new ArrayList<Entity>();
 
     public static void getNextFloor() {
         _world.get(Location.Depths).gotoNext();
@@ -34,8 +34,8 @@ public class DungeonFactory {
     }
 
     public static void start() {
-        _world = new HashMap<>();
-        _cache = new ArrayList<>();
+        _world = new HashMap<Location, DungeonSet>();
+        _cache = new ArrayList<Entity>();
         _world.put(Location.Depths, new DungeonSet());
         while (CreatureFactory.bossesRemaining() > 0) {
             getNextFloor();

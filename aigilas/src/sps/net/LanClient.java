@@ -19,7 +19,7 @@ public class LanClient implements IClient {
     private boolean _isGameStarting;
     private boolean _dungeonHasLoaded = false;
     private boolean _isConnected;
-    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
+    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Commands, Boolean>>();
 
     public LanClient() {
         if (Settings.get().clientVerbose) {

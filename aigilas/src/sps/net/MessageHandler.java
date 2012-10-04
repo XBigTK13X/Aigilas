@@ -16,12 +16,12 @@ public class MessageHandler {
     private Kryo outKryo;
     private Output oos;
     private Thread sender;
-    private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<>();
+    private final BlockingQueue<Message> outboundMessages = new LinkedBlockingQueue<Message>();
 
     private Kryo inKryo;
     private Input ois;
     private Thread receiver;
-    private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<>();
+    private final BlockingQueue<Message> inboundMessages = new LinkedBlockingQueue<Message>();
 
     private Socket connection;
     public String owner = "";

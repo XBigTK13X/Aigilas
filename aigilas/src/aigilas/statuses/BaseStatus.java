@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BaseStatus {
-    protected final List<CreatureAction> _prevents = new ArrayList<>();
+    protected final List<CreatureAction> _prevents = new ArrayList<CreatureAction>();
 
     protected boolean _wasPassed = false;
     protected int _strength = 0;
@@ -19,9 +19,9 @@ public class BaseStatus {
     protected BaseCreature _target;
     protected StatBuff _buff = null;
     protected boolean _buffMax = false;
-    protected final List<Elements> _blockedElements = new ArrayList<>();
+    protected final List<Elements> _blockedElements = new ArrayList<Elements>();
 
-    protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<>();
+    protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<StatusComponent,List<Status>>();
 
     protected BaseStatus(BaseCreature target) {
         _strength = _maxStrength;

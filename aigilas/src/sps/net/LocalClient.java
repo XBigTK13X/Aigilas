@@ -11,7 +11,7 @@ public class LocalClient implements IClient {
     private boolean _isGameStarting;
     private float _turnTimer = 0;
     private boolean _isConnected;
-    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<>();
+    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Commands, Boolean>>();
 
     private final int maxPlayers = 1;
 

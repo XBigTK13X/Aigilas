@@ -6,7 +6,7 @@ import aigilas.creatures.StatType;
 import java.util.HashMap;
 
 public class Equipment {
-    private final HashMap<ItemSlot, GenericItem> _slots = new HashMap<>();
+    private final HashMap<ItemSlot, GenericItem> _slots = new HashMap<ItemSlot,GenericItem>();
     private final BaseCreature _parent;
 
     public Equipment(BaseCreature owner) {

@@ -18,12 +18,12 @@ public class SkillComponents {
     protected float _effectStrength = 0;
     protected boolean _isPersistent = false;
     protected final List<EntityType> _targetTypes = Arrays.asList(EntityType.WALL);
-    protected List<ActorType> _targetActorTypes = new ArrayList<>();
+    protected List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
 
     public SkillComponents(float strength, boolean isPersistent) {
         _effectStrength = strength;
         _isPersistent = isPersistent;
-        _elements = new ArrayList<>();
+        _elements = new ArrayList<Elements>();
     }
 
     public void addElements(Elements... elements) {

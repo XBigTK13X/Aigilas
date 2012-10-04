@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SkillLogic {
-    private static final HashMap<Elements, List<SkillId>> __elementMap = new HashMap<>();
-    private static final HashMap<SkillId, AnimationType> __skillAnimationMap = new HashMap<>();
-    public static final HashMap<ActorType, List<SkillId>> __actorToSkillMapping = new HashMap<>();
-    private static final List<SkillId> __invalidRandomSkills = new ArrayList<>();
+    private static final HashMap<Elements, List<SkillId>> __elementMap = new HashMap<Elements,List<SkillId>>();
+    private static final HashMap<SkillId, AnimationType> __skillAnimationMap = new HashMap<SkillId,AnimationType>();
+    public static final HashMap<ActorType, List<SkillId>> __actorToSkillMapping = new HashMap<ActorType,List<SkillId>>();
+    private static final List<SkillId> __invalidRandomSkills = new ArrayList<SkillId>();
     private static int skillPick = 0;
 
     private SkillLogic() {
