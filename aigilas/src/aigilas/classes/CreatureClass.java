@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class CreatureClass {
     private Stats _stats;
-    protected final HashMap<Integer, SkillId> _skillUnlocks = new HashMap<>();
+    protected final HashMap<Integer, SkillId> _skillUnlocks = new HashMap<Integer,SkillId>();
     public static final CreatureClass NULL = new NoClass();
 
     protected CreatureClass() {
@@ -25,7 +25,7 @@ public abstract class CreatureClass {
     }
 
     public List<SkillId> getLevelSkills(int level) {
-        List<SkillId> results = new ArrayList<>();
+        List<SkillId> results = new ArrayList<SkillId>();
         for (Integer key : _skillUnlocks.keySet()) {
             if (key <= level) {
                 results.add(_skillUnlocks.get(key));
