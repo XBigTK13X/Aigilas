@@ -7,8 +7,7 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
 public class AbsorbSkill extends BaseSkill {
-    public AbsorbSkill()
-    {
+    public AbsorbSkill() {
         super(SkillId.ABSORB, AnimationType.RANGED);
     }
 

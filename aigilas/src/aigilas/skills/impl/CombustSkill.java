@@ -1,8 +1,6 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -21,8 +19,6 @@ public class CombustSkill extends BaseSkill {
     {
         super(SkillId.COMBUST, AnimationType.RANGED);
 
-        add(Elements.AIR, Elements.PHYSICAL);
-        addCost(StatType.MANA, 10);
 
     }
 

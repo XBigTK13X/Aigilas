@@ -5,7 +5,6 @@ import aigilas.skills.SkillId;
 
 public class GluttonyAcolyte extends CreatureClass {
     public GluttonyAcolyte() {
-        super(new Stats(5, 10, 1, 5, 0, 0, 1, 0, 0, 0));
-        add(1, SkillId.FORGET_SKILL);
+        super(PlayerClass.Gluttony);
     }
 }

@@ -2,8 +2,6 @@ package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.impl.CreatureFactory;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -17,8 +15,6 @@ public class SerpentSupperSkill extends BaseSkill {
     {
         super(SkillId.SERPENT_SUPPER, AnimationType.SELF);
 
-        add(Elements.MENTAL);
-        addCost(StatType.MANA, 10);
 
     }
 

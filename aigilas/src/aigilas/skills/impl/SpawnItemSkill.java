@@ -1,8 +1,6 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.items.ItemFactory;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
@@ -14,8 +12,6 @@ public class SpawnItemSkill extends BaseSkill {
     {
         super(SkillId.SPAWN_ITEM, AnimationType.SELF);
 
-        add(Elements.EARTH);
-        addCost(StatType.MANA, 10);
 
     }
 

@@ -1,0 +1,9 @@
+#Name,Skills,Stats
+Sloth,1:AcidNozzle-2:FloorSpikes-3:RemoteMine-4:VaporImplant-5:DartTrap,5-10-1-5-0-0-1-0-0-0
+Envy,1:Confusion-2:WeakKnees-3:VenomFist-4:Absorb-5:Mutiny,5-10-1-5-0-0-1-0-0-0
+Gluttony,1:ForgetSkill,5-10-1-5-0-0-1-0-0-0
+Greed,1:SoulReinforcement-2:Horder-3:SpawnItem-4:ThrowItem-5:StealItem,5-10-1-5-0-0-1-0-0-0
+Lust,1:RegenAll-2:SpeedUp-3:Envenom-4:ColdShoulder-5:Cavalry,5-10-1-5-0-0-1-0-0-0
+NoClass,0:NoSkill,0-0-0-0-0-0-0-0-0-0
+Pride,1:StrengthUp-2:ManaUp-3:Electrify-4:WallPunch-5:Mimic-6:Valedictorian,5-10-1-5-0-0-1-0-0-0
+Wrath,1:FlameHammer-2:Gush-3:SoulCrush-4:Combust-5:Horrify,5-10-1-5-0-0-1-0-0-0

@@ -1,5 +1,6 @@
 package aigilas.management;
 
+import aigilas.classes.PlayerClassRegistry;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFactory;
@@ -21,6 +22,7 @@ public class AigilasManager {
         __instance = new AigilasManager();
         System.out.println("Generating the dungeon...");
         SkillRegistry.get();
+        PlayerClassRegistry.get();
         EntityManager.reset();
         CreatureFactory.reset();
         DungeonFactory.start();

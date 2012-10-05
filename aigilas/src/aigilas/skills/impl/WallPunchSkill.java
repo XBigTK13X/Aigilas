@@ -1,7 +1,5 @@
 package aigilas.skills.impl;
 
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -15,8 +13,6 @@ public class WallPunchSkill extends BaseSkill {
     {
         super(SkillId.WALL_PUNCH, AnimationType.RANGED);
 
-        add(Elements.EARTH);
-        addCost(StatType.MANA, 10);
 
     }
 

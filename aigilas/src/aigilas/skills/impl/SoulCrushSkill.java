@@ -2,7 +2,6 @@ package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -14,8 +13,6 @@ public class SoulCrushSkill extends BaseSkill {
     {
         super(SkillId.SOUL_CRUSH, AnimationType.RANGED);
 
-        add(Elements.MENTAL);
-        addCost(StatType.MANA, 10);
 
     }
 

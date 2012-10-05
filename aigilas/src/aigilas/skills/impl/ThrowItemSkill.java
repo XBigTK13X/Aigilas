@@ -1,8 +1,6 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.items.GenericItem;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
@@ -16,8 +14,6 @@ public class ThrowItemSkill extends BaseSkill {
     {
         super(SkillId.THROW_ITEM, AnimationType.RANGED);
 
-        add(Elements.AIR);
-        addCost(StatType.MANA, 0);
 
     }
 

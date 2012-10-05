@@ -1,8 +1,6 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -13,8 +11,6 @@ public class ValedictorianSkill extends BaseSkill {
     {
         super(SkillId.VALEDICTORIAN, AnimationType.RANGED);
 
-        add(Elements.MENTAL, Elements.LIGHT);
-        addCost(StatType.MANA, 10);
 
     }
 

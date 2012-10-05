@@ -4,7 +4,10 @@ import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import com.badlogic.gdx.Gdx;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +23,8 @@ public class SkillRegistry {
         return __instance;
     }
 
-    private HashMap<SkillId, SkillInfo> skills;
-
     private SkillRegistry() {
-        skills = new HashMap<SkillId, SkillInfo>();
-        FileInputStream fstream = null;
+        FileInputStream fstream;
         try {
             fstream = new FileInputStream(__skillsDataPath);
             DataInputStream in = new DataInputStream(fstream);
@@ -33,7 +33,6 @@ public class SkillRegistry {
             while ((line = br.readLine()) != null) {
                 if (!line.contains("#")) {
                     String[] values = line.split(",");
-                    System.out.println("Initing " + line);
                     String name = values[0];
                     StatType stat = StatType.get(values[2]);
                     float cost = Float.parseFloat(values[1]);
@@ -44,21 +43,18 @@ public class SkillRegistry {
                     }
                     float magnitude = Float.parseFloat(values[4]);
                     boolean bossOnly = false;
-                    boolean disabled = false;
-                    if (values.length == 6) {
+                    boolean offCenter = false;
+                    if (values.length > 5) {
                         String rawComments = values[5];
                         if (rawComments.contains("Boss")) {
                             bossOnly = true;
                         }
+                        if (rawComments.contains("OffCenter")) {
+                            offCenter = true;
+                        }
                     }
-                    SkillInfo info = null;
-                    if (!disabled) {
-                        info = new SkillInfo(name, stat, cost, magnitude, elements, bossOnly);
-                    }
-                    if (info != null) {
-                        skills.put(SkillId.get(name), info);
-                        SkillId.get(name).Info = skills.get(SkillId.get(name));
-                    }
+                    SkillInfo info = new SkillInfo(name, stat, cost, magnitude, elements, bossOnly, offCenter);
+                    SkillId.get(name).Info = info;
                 }
             }
             in.close();

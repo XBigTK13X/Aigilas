@@ -1,8 +1,6 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.items.ItemFactory;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
@@ -15,8 +13,6 @@ public class StealItemSkill extends BaseSkill {
     {
         super(SkillId.STEAL_ITEM, AnimationType.ROTATE);
 
-        add(Elements.WATER, Elements.AIR);
-        addCost(StatType.MANA, 10);
 
     }
 

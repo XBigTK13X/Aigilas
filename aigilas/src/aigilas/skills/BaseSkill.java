@@ -24,8 +24,6 @@ public abstract class BaseSkill {
     protected final SkillBehavior _behavior;
     protected final SkillComponents _components;
 
-    public boolean StartOffCenter = false;
-
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent, SpriteType effectGraphic) {
         _id = implementationId;
         _components = new SkillComponents(strength, isPersistent);

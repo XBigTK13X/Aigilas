@@ -1,8 +1,6 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -15,8 +13,6 @@ public class MutinySkill extends BaseSkill {
     {
         super(SkillId.MUTINY, AnimationType.RANGED);
 
-        add(Elements.MENTAL, Elements.PHYSICAL);
-        addCost(StatType.MANA, 10);
 
     }
 

@@ -1,6 +1,6 @@
 #Name,Cost,Stat,Elements,Magnitude,Comments
 Absorb,10,Mana,Light,10,
-AcidDrip,20,Mana,Water,10,
+AcidDrip,20,Mana,Water,10,OffCenter
 AcidNozzle,10,Mana,None,10,
 Boil,10,Mana,Air,10,Boss
 BreakingWheel,10,Mana,Dark,10,Boss

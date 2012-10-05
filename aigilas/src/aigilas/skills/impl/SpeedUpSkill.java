@@ -1,8 +1,6 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -14,8 +12,6 @@ public class SpeedUpSkill extends BaseSkill {
     {
         super(SkillId.SPEED_UP, AnimationType.SELF);
 
-        add(Elements.WATER);
-        addCost(StatType.MANA, 10);
 
     }
 

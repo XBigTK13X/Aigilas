@@ -12,12 +12,15 @@ public class SkillInfo {
     public final float Magnitude;
     public final List<Elements> Elements;
     public final boolean Restrict;
-    public SkillInfo(String name, StatType stat, float cost, float magnitude, List<Elements> elements, boolean bossOnly) {
+    public final boolean OffCenter;
+
+    public SkillInfo(String name, StatType stat, float cost, float magnitude, List<Elements> elements, boolean bossOnly, boolean offCenter) {
         Name = name;
         Stat = stat;
         Cost = cost;
         Magnitude = magnitude;
         Elements = elements;
         Restrict = bossOnly;
+        OffCenter = offCenter;
     }
 }

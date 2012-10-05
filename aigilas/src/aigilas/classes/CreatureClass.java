@@ -16,8 +16,11 @@ public abstract class CreatureClass {
     protected CreatureClass() {
     }
 
-    protected CreatureClass(Stats stats) {
-        _stats = new Stats(stats);
+    protected CreatureClass(PlayerClass playerClass) {
+        for(SkillLevel skill:playerClass.Info.Skills){
+            _skillUnlocks.put(skill.Level, skill.Skill);
+        }
+        _stats = new Stats(playerClass.Info.Stats);
     }
 
     public float getBonus(int level, StatType stat) {
