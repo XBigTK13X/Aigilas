@@ -23,7 +23,6 @@ public class SkillLogic {
             BaseSkill skill;
             for (SkillId skillId : SkillId.values()) {
                 if (skillId != SkillId.NO_SKILL) {
-                    System.out.println("Using" + skillId);
                     if (!skillId.Info.Restrict) {
                         __invalidRandomSkills.add(skillId);
                     }

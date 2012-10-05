@@ -33,7 +33,6 @@ public class PlayerClassRegistry {
             while ((line = br.readLine()) != null) {
                 if (!line.contains("#")) {
                     String[] values = line.split(",");
-                    System.out.println("PCR: " + line);
                     PlayerClass pClass = PlayerClass.get(values[0]);
                     List<Float> r = new ArrayList<Float>();
                     for(String stat:values[2].split("-")){
