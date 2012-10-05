@@ -14,7 +14,7 @@ public enum SkillId {
     VAPOR_IMPLANT("Vapor Implant"),
     // = Envy Acolyte
     CONFUSION("Confusion"),
-    WEAK_KNEEES("Weak Knees"),
+    WEAK_KNEES("Weak Knees"),
     VENOM_FIST("Venom Fist"),
     ABSORB("Absorb"),
     MUTINY("Mutiny"),
@@ -68,15 +68,21 @@ public enum SkillId {
     // = Lust
     BRIMSTONE("Brimstone", true);
 
-    public final String Name;
-    public final boolean Restrict;
+    public SkillInfo Info;
 
     private SkillId(String text, boolean restrict) {
-        Restrict = restrict;
-        Name = text;
     }
 
     private SkillId(String text) {
         this(text, false);
+    }
+
+    public static SkillId get(String value) {
+        for(SkillId id:values()){
+            if(id.toString().replace("_","").equalsIgnoreCase(value)){
+                return id;
+            }
+        }
+        return null;
     }
 }

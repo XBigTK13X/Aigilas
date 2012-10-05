@@ -2,6 +2,7 @@ package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
+import aigilas.entities.Elements;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillFactory;
@@ -14,10 +15,10 @@ public class BrimstoneSkill extends BaseSkill {
     public BrimstoneSkill()
 
     {
-        super(SkillId.ACID_NOZZLE, AnimationType.STATIONARY);
+        super(SkillId.BRIMSTONE, AnimationType.STATIONARY);
 
         addCost(StatType.MANA, 10);
-
+        add(Elements.FIRE);
     }
 
     @Override

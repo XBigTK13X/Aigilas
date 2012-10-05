@@ -1,5 +1,8 @@
 package sps.core;
 
+import aigilas.skills.SkillId;
+import aigilas.skills.SkillRegistry;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -7,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Settings {
-    private static final String __configPath = "assets/settings.cfg";
+    private static final String __configPath = "assets/data/settings.cfg";
 
     private static Settings __instance;
 

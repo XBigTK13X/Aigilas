@@ -13,7 +13,7 @@ public class WeakKneesSkill extends BaseSkill {
     public WeakKneesSkill()
 
     {
-        super(SkillId.WEAK_KNEEES, AnimationType.RANGED);
+        super(SkillId.WEAK_KNEES, AnimationType.RANGED);
 
         add(Elements.PHYSICAL);
         addCost(StatType.MANA, 10);

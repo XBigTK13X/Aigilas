@@ -12,5 +12,14 @@ public enum StatType {
     WEIGHT,
     MOVE_COOL_DOWN,
     PIETY,
-    REGEN
+    REGEN;
+
+    public static StatType get(String value) {
+        for(StatType s:values()){
+            if(s.toString().equalsIgnoreCase(value)){
+                return s;
+            }
+        }
+        return null;
+    }
 }

@@ -58,7 +58,7 @@ public class SkillPool {
     }
 
     public String getActiveName() {
-        return _skills.size() > 0 ? findCurrent().Name : SkillId.NO_SKILL.Name;
+        return _skills.size() > 0 ? findCurrent().Info.Name : SkillId.NO_SKILL.Info.Name;
     }
 
     private void removeNone() {
@@ -128,9 +128,9 @@ public class SkillPool {
 
     public String getHotSkillName(Commands hotSkillSlot) {
         if (_hotSkills.containsKey(hotSkillSlot)) {
-            return _hotSkills.get(hotSkillSlot).Name;
+            return _hotSkills.get(hotSkillSlot).Info.Name;
         }
-        return SkillId.NO_SKILL.Name;
+        return SkillId.NO_SKILL.Info.Name;
     }
 
     public float getCurrentCost() {

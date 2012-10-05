@@ -31,7 +31,7 @@ public class TestBotStrategy extends BaseStrategy {
             _parent.useActiveSkill();
         }
         if (AbleToMove()) {
-            if (SkillLogic.isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
+            if (SkillLogic.get().isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
                 if (opponent != null) {
                     _parent.setSkillVector(CalculateTargetVector(_parent.getLocation(), opponent.getLocation()));
                 }

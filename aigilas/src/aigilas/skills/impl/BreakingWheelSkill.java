@@ -24,7 +24,6 @@ public class BreakingWheelSkill extends BaseSkill {
     @Override
     public void activate(BaseCreature source) {
         CreatureFactory.create(ActorType.BREAKING_WHEEL, EntityManager.get().getEmptyLocation());
-
     }
 
 }

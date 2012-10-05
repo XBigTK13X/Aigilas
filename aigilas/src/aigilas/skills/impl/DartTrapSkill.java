@@ -24,7 +24,7 @@ public class DartTrapSkill extends BaseSkill {
     public void cleanup(Entity target, SkillEffect source)
 
     {
-        CreatureFactory.createMinion(_implementationId, _source, source, target.getLocation());
+        CreatureFactory.createMinion(_id, _source, source, target.getLocation());
 
     }
 

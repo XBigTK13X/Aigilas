@@ -23,7 +23,7 @@ public class VaporCloudSkill extends BaseSkill {
     public void affect(BaseCreature target)
 
     {
-        target.addBuff(new StatBuff(StatType.MOVE_COOL_DOWN, -10));
+        target.butBuff(new StatBuff(StatType.MOVE_COOL_DOWN, -10));
 
     }
 

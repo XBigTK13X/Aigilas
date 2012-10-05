@@ -20,15 +20,20 @@ import java.util.List;
 
 public abstract class BaseSkill {
     protected BaseCreature _source;
-    protected final SkillId _implementationId;
+    protected final SkillId _id;
     protected final SkillBehavior _behavior;
     protected final SkillComponents _components;
+
     public boolean StartOffCenter = false;
 
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent, SpriteType effectGraphic) {
-        _implementationId = implementationId;
+        _id = implementationId;
         _components = new SkillComponents(strength, isPersistent);
         _behavior = SkillFactory.create(animation, effectGraphic, this);
+        for(Elements element:_id.Info.Elements){
+            add(element);
+        }
+        addCost(_id.Info.Stat,_id.Info.Cost);
     }
 
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
@@ -118,7 +123,7 @@ public abstract class BaseSkill {
     }
 
     public SkillId getSkillId() {
-        return _implementationId;
+        return _id;
     }
 
     public float getCost() {

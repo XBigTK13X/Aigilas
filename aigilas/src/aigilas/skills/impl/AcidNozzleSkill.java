@@ -12,15 +12,11 @@ public class AcidNozzleSkill extends BaseSkill {
 
     {
         super(SkillId.ACID_NOZZLE, AnimationType.STATIONARY);
-
-        addCost(StatType.MANA, 10);
-
     }
 
     @Override
     public void activate(BaseCreature source) {
-        CreatureFactory.createMinion(_implementationId, source);
-
+        CreatureFactory.createMinion(_id, source);
     }
 
 }

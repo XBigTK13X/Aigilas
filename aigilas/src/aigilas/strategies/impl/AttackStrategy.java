@@ -28,7 +28,7 @@ public class AttackStrategy extends BaseStrategy {
             _skillCooldown--;
             if (_skillCooldown <= 0) {
                 _parent.cycleActiveSkill(1);
-                if (SkillLogic.isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
+                if (SkillLogic.get().isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
                     if (opponent != null) {
                         _parent.setSkillVector(CalculateTargetVector(_parent.getLocation(), opponent.getLocation()));
                     }

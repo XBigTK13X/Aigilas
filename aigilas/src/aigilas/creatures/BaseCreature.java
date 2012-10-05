@@ -87,7 +87,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             _class = (cClass == null) ? CreatureClass.NULL : cClass;
             _skills = new SkillPool(this);
             if (_actorType != ActorType.PLAYER) {
-                for (SkillId skillId : SkillLogic.getElementalSkills(getActorType(), _composition)) {
+                for (SkillId skillId : SkillLogic.get().getElementalSkills(getActorType(), _composition)) {
                     _skills.add(skillId);
                 }
             }

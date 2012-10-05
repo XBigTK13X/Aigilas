@@ -100,7 +100,7 @@ public class SkillFactory {
                 return new VenomFistSkill();
             case WALL_PUNCH:
                 return new WallPunchSkill();
-            case WEAK_KNEEES:
+            case WEAK_KNEES:
                 return new WeakKneesSkill();
             case VAPOR_CLOUD:
                 return new VaporCloudSkill();

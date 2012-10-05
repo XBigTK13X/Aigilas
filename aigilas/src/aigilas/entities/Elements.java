@@ -20,4 +20,13 @@ public enum Elements {
         Value = value;
         Tint = color;
     }
+
+    public static Elements get(String element) {
+        for(Elements e:values()){
+            if(e.toString().equalsIgnoreCase(element)){
+                return e;
+            }
+        }
+        return null;
+    }
 }
