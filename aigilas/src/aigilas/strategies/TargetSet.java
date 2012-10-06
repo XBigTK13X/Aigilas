@@ -6,7 +6,6 @@ import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
-import sps.entities.IEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -76,7 +75,7 @@ public class TargetSet
             }
             for (ActorType actorType : _targetActorTypes) {
                 _calculatedTargets = new ArrayList<BaseCreature>();
-                for (IEntity entity : EntityManager.get().getActors(actorType)) {
+                for (IActor entity : EntityManager.get().getActors(actorType)) {
                     _calculatedTargets.add((BaseCreature) entity);
                 }
 
@@ -94,7 +93,7 @@ public class TargetSet
         return closest;
     }
 
-    public IEntity getCollidedTarget(Entity source)
+    public Entity getCollidedTarget(Entity source)
 
     {
         for (BaseCreature target : _targets) {
@@ -106,7 +105,7 @@ public class TargetSet
         for (ActorType actorType : _targetActorTypes) {
             for (IActor target : EntityManager.get().getActorsAt(source.getLocation())) {
                 if (target.getActorType() == actorType || (actorType == ActorType.NONPLAYER && target.getActorType() != ActorType.PLAYER) || (actorType == ActorType.PLAYER && target.getActorType() == ActorType.PLAYER)) {
-                    return target;
+                    return (Entity) target;
                 }
             }
         }

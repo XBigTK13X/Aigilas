@@ -6,7 +6,7 @@ import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.SpxManager;
-import sps.entities.IEntity;
+import sps.entities.Entity;
 import sps.util.MathHelper;
 
 public class Particle2 extends PEComponent {
@@ -21,7 +21,7 @@ public class Particle2 extends PEComponent {
 
     public float MoveSpeed = 5f;
 
-    public IEntity Entity;
+    public Entity Entity;
     public final Point2 Position = new Point2(0, 0);
     public final Point2 Origin = new Point2(0, 0);
     public double Angle;
@@ -43,11 +43,11 @@ public class Particle2 extends PEComponent {
         init(behavior, position, null, baseColor);
     }
 
-    public void reset(ParticleBehavior behavior, IEntity entity, Color baseColor) {
+    public void reset(ParticleBehavior behavior, Entity entity, Color baseColor) {
         init(behavior, null, entity, baseColor);
     }
 
-    private void init(ParticleBehavior behavior, Point2 position, IEntity entity, Color baseColor) {
+    private void init(ParticleBehavior behavior, Point2 position, Entity entity, Color baseColor) {
         _behavior = behavior;
         if (position != null) {
             Origin.reset(position.X, position.Y);
@@ -60,7 +60,8 @@ public class Particle2 extends PEComponent {
         }
         if (baseColor != null) {
             _color = darken(baseColor, (RNG.next(10, 50)) / 100f);
-        } else {
+        }
+        else {
             _color = new Color(RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, 1f);
         }
         Angle = RNG.angle();

@@ -107,7 +107,8 @@ public class SkillFactory {
             default:
                 try {
                     throw new Exception("A SkillId to Skill mapping was not defined:the SkillFactory for (" + idSkill + "). This is 100% the fault of whoever wrote the code.");
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                     e.printStackTrace();
                 }
@@ -130,7 +131,8 @@ public class SkillFactory {
             default:
                 try {
                     throw new Exception("How dare you create a new Anim type for skills without defining a proper behavior for them!");
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                     e.printStackTrace();
                 }

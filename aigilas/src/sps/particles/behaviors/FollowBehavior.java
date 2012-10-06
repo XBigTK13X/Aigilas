@@ -23,14 +23,16 @@ public class FollowBehavior extends ParticleBehavior {
             if (particle.Radius < 5) {
                 particle.Radius = 5;
                 particle.Toggle = true;
-            } else if (particle.Radius > 16) {
+            }
+            else if (particle.Radius > 16) {
                 particle.Radius = 16;
                 particle.Toggle = false;
             }
             if (particle.Toggle) {
                 particle.Radius += particle.MoveSpeed / 10;
                 particle.Angle += Math.PI / 300;
-            } else {
+            }
+            else {
                 particle.Radius -= particle.MoveSpeed / 10;
                 particle.Angle -= Math.PI / 150;
             }

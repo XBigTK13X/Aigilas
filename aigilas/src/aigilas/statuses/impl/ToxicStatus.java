@@ -18,7 +18,8 @@ public class ToxicStatus extends BaseStatus {
     public void act() {
         try {
             CreatureFactory.createMinion(SkillId.PLAGUE, _target, null, _target.getLocation());
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
 
             e.printStackTrace();
         }

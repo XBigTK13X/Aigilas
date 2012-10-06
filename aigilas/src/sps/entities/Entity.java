@@ -8,7 +8,7 @@ import sps.core.Settings;
 import sps.graphics.AnimatedTexture;
 import sps.graphics.SpriteInfo;
 
-public class Entity implements IEntity {
+public class Entity implements Comparable {
     protected final AnimatedTexture _graphic = new AnimatedTexture();
 
     protected boolean _isActive = true;
@@ -19,12 +19,10 @@ public class Entity implements IEntity {
     protected final Point2 _location = new Point2(0, 0);
     protected EntityType _entityType;
 
-    @Override
     public void loadContent() {
         _graphic.loadContent(_assetName);
     }
 
-    @Override
     public void draw() {
         if (_isOnBoard && _isActive) {
             _graphic.draw();
@@ -47,7 +45,6 @@ public class Entity implements IEntity {
         _graphic.setDrawDepth(depth);
     }
 
-    @Override
     public void update() {
     }
 
@@ -89,17 +86,14 @@ public class Entity implements IEntity {
         return (Settings.get().spriteHeight * factorsOfSpriteHeight * isNeg);
     }
 
-    @Override
     public boolean isActive() {
         return _isActive;
     }
 
-    @Override
     public void setInactive() {
         _isActive = false;
     }
 
-    @Override
     public boolean isBlocking() {
         if (_isBlocking == null) {
             return false;
@@ -107,7 +101,6 @@ public class Entity implements IEntity {
         return _isBlocking;
     }
 
-    @Override
     public Point2 getLocation() {
         return _location;
     }
@@ -120,7 +113,10 @@ public class Entity implements IEntity {
         _graphic.setSpriteInfo(sprite);
     }
 
-    @Override
+    public DrawDepth getDepth() {
+        return _graphic.getDepth();
+    }
+
     public boolean contains(Point2 target)
 
     {
@@ -139,8 +135,13 @@ public class Entity implements IEntity {
         _isInteracting = isInteracting;
     }
 
-    @Override
     public EntityType getEntityType() {
         return _entityType;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Entity e = (Entity) o;
+        return getDepth().DrawDepth - e.getDepth().DrawDepth;
     }
 }

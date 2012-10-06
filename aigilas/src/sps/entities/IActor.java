@@ -2,7 +2,8 @@ package sps.entities;
 
 import sps.bridge.ActorType;
 
-public interface IActor extends IEntity {
+public interface IActor {
     ActorType getActorType();
+
     void performInteraction();
 }

@@ -40,7 +40,8 @@ public class MainMenuState implements State {
             }
 
             StateManager.loadState(new GameplayState());
-        } else {
+        }
+        else {
             if (Input.isActive(Commands.Confirm, Client.get().getFirstPlayerIndex())) {
                 switch (_selection) {
                     case 2:

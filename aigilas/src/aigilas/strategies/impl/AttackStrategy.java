@@ -6,7 +6,6 @@ import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
-import sps.core.RNG;
 
 public class AttackStrategy extends BaseStrategy {
     private int _skillCooldown = 0;

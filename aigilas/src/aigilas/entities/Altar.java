@@ -10,7 +10,6 @@ import sps.bridge.EntityType;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.entities.IEntity;
 import sps.text.ActionText;
 import sps.text.TextManager;
 
@@ -19,7 +18,7 @@ import java.util.List;
 public class Altar extends Entity {
     private final God _god;
     private Player _currentTarget;
-    private List<IEntity> _offerings;
+    private List<Entity> _offerings;
 
     public Altar(Point2 location, GodId godName) {
         _god = godName.getInstance();
@@ -35,7 +34,7 @@ public class Altar extends Entity {
                 _currentTarget.pray(_god);
             }
             _offerings = EntityManager.get().getEntities(EntityType.ITEM, _location);
-            for (IEntity offering : _offerings) {
+            for (Entity offering : _offerings) {
                 _currentTarget.sacrifice(_god, (GenericItem) offering);
             }
             TextManager.add(new ActionText(_god.NameText, 1, (int) getLocation().PosX, (int) getLocation().PosY));

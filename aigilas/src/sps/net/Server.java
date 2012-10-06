@@ -30,7 +30,8 @@ public class Server extends Thread {
         while (isRunning) {
             try {
                 Thread.sleep(1);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
             }
             pollForNewMessages();
@@ -41,28 +42,32 @@ public class Server extends Thread {
     private void pollForNewMessages() {
         _message = clients.readMessage();
         if (_message != null) {
-            if (Settings.get().serverVerbose)
+            if (Settings.get().serverVerbose) {
                 System.out.println("SERVER: Message received: " + _message.MessageType);
+            }
             switch (_message.MessageType) {
                 case CONNECT:
                     System.out.println("SERVER: New client connection");
                     sendMessage(Message.createInit(clients.size() - 1, _rngSeed), _message.LocalPort);
-                    if (Settings.get().serverVerbose)
+                    if (Settings.get().serverVerbose) {
                         System.out.println("SERVER: Accepted new connection");
+                    }
                     _turnCount = 0;
                     break;
                 case CHECK_STATE:
                     initPlayer(_message.PlayerIndex, _message.Command);
                     _message.IsActive = _playerStatus.get(_message.PlayerIndex).get(_message.Command);
-                    if (Settings.get().serverVerbose)
+                    if (Settings.get().serverVerbose) {
                         System.out.println(String.format("SERVER: Check extends  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _playerStatus.get(_message.PlayerIndex).get(_message.Command)));
+                    }
                     sendMessage(_message, _message.LocalPort);
                     break;
 
                 case MOVEMENT:
                     initPlayer(_message.PlayerIndex, _message.Command);
-                    if (Settings.get().serverVerbose)
+                    if (Settings.get().serverVerbose) {
                         System.out.println(String.format("SERVER: Moves:  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _message.IsActive));
+                    }
                     _playerStatus.get(_message.PlayerIndex).put(_message.Command, _message.IsActive);
                     break;
 
@@ -72,14 +77,16 @@ public class Server extends Thread {
                     break;
 
                 case PLAYER_COUNT:
-                    if (Settings.get().serverVerbose)
+                    if (Settings.get().serverVerbose) {
                         System.out.println("SERVER: PLAYER COUNT");
+                    }
                     sendMessage(Message.createPlayerCount(clients.size()), _message.LocalPort);
                     break;
 
                 case READY_FOR_NEXT_TURN:
-                    if (Settings.get().serverVerbose)
+                    if (Settings.get().serverVerbose) {
                         System.out.println("SERVER: Received ready signal from client");
+                    }
                     _readyCheckIn[_message.PlayerIndex] = true;
                     break;
 
@@ -87,8 +94,9 @@ public class Server extends Thread {
                     _readyCheckIn[_message.PlayerIndex] = true;
                     break;
                 default:
-                    if (Settings.get().serverVerbose)
+                    if (Settings.get().serverVerbose) {
                         System.out.println("SERVER: Unknown message");
+                    }
                     break;
             }
         }
@@ -113,8 +121,9 @@ public class Server extends Thread {
             readyCount += a_readyCheckIn ? 1 : 0;
         }
         if (readyCount >= clients.size()) {
-            if (Settings.get().serverVerbose)
+            if (Settings.get().serverVerbose) {
                 System.out.println("SERVER: Announcing player input status.");
+            }
             announce(Message.createPlayerState(_playerStatus, _turnCount++, _rngSeed));
             for (int ii = 0; ii < _readyCheckIn.length; ii++) {
                 _readyCheckIn[ii] = false;

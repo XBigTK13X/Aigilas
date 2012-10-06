@@ -28,7 +28,8 @@ public class Minion extends BaseCreature {
         setup(source.getLocation(), _actorType, _baseStats, null, false);
         if (null != effectGraphic) {
             setSkillVector(effectGraphic.getDirection().rotate(180));
-        } else {
+        }
+        else {
             setSkillVector(new Point2(0, 1));
         }
         _strategy.addTargets(_master);

@@ -17,13 +17,13 @@ public class Input {
 
     // The commands that cannot be used by simply holding down the command's
     // input depending on the given context
-    private static final HashMap<Commands, Contexts> __lockOnPress = new HashMap<Commands,Contexts>();
-    private static final HashMap<Commands, Keys> _keyboardMapping = new HashMap<Commands,Keys>();
-    private static final HashMap<Commands, Buttons> _gamePadMapping = new HashMap<Commands,Buttons>();
+    private static final HashMap<Commands, Contexts> __lockOnPress = new HashMap<Commands, Contexts>();
+    private static final HashMap<Commands, Keys> _keyboardMapping = new HashMap<Commands, Keys>();
+    private static final HashMap<Commands, Buttons> _gamePadMapping = new HashMap<Commands, Buttons>();
     private static boolean __isInputActive = false;
 
     public static void setup(IInputInitializer initializer) {
-        __contexts = new HashMap<Integer,Contexts>();
+        __contexts = new HashMap<Integer, Contexts>();
         __contexts.put(0, Contexts.Free);
         __contexts.put(1, Contexts.Free);
         __contexts.put(2, Contexts.Free);

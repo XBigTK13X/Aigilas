@@ -10,14 +10,14 @@ import java.util.List;
 
 public abstract class CreatureClass {
     private Stats _stats;
-    protected final HashMap<Integer, SkillId> _skillUnlocks = new HashMap<Integer,SkillId>();
+    protected final HashMap<Integer, SkillId> _skillUnlocks = new HashMap<Integer, SkillId>();
     public static final CreatureClass NULL = new NoClass();
 
     protected CreatureClass() {
     }
 
     protected CreatureClass(PlayerClass playerClass) {
-        for(SkillLevel skill:playerClass.Info.Skills){
+        for (SkillLevel skill : playerClass.Info.Skills) {
             _skillUnlocks.put(skill.Level, skill.Skill);
         }
         _stats = new Stats(playerClass.Info.Stats);

@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import sps.entities.IEntity;
+import sps.entities.Entity;
 
 public class NoSkill extends BaseSkill {
     public NoSkill()
@@ -20,7 +20,7 @@ public class NoSkill extends BaseSkill {
     }
 
     @Override
-    public void affect(IEntity target)
+    public void affect(Entity target)
 
     {
 

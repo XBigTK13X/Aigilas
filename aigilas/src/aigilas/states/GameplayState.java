@@ -1,8 +1,8 @@
 package aigilas.states;
 
 import aigilas.management.AigilasManager;
+import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.entities.IActor;
 import sps.particles.ParticleEngine;
 import sps.states.State;
 import sps.states.StateManager;
@@ -16,17 +16,18 @@ public class GameplayState implements State {
         AigilasManager.get().reset();
     }
 
-    List<IActor> players = new ArrayList<IActor>();
+    List<Entity> players = new ArrayList<Entity>();
+
     @Override
     public void update() {
         players = EntityManager.get().getPlayers();
         boolean allDead = true;
-        for(IActor player:players){
-            if(player.isActive()){
+        for (Entity player : players) {
+            if (player.isActive()) {
                 allDead = false;
             }
         }
-        if(allDead){
+        if (allDead) {
             StateManager.loadState(new GameOverState());
         }
         EntityManager.get().update();

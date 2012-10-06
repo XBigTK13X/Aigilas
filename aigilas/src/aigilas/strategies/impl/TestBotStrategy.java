@@ -8,9 +8,9 @@ import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
 import sps.bridge.EntityType;
 import sps.core.RNG;
+import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.HitTest;
-import sps.entities.IEntity;
 import sps.paths.PathFinder;
 
 public class TestBotStrategy extends BaseStrategy {
@@ -20,7 +20,7 @@ public class TestBotStrategy extends BaseStrategy {
         _targets.addTargetTypes(ActorType.NONPLAYER);
     }
 
-    private IEntity _stairsTarget;
+    private Entity _stairsTarget;
 
     @Override
     public void act() {
@@ -44,11 +44,13 @@ public class TestBotStrategy extends BaseStrategy {
                 _parent.moveTo(nextMove);
                 if (_stairsTarget != null && HitTest.isTouching(_parent, _stairsTarget)) {
                     _parent.setInteracting(true);
-                } else {
+                }
+                else {
                     _parent.setInteracting(false);
                 }
             }
-        } else {
+        }
+        else {
             if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityType.ACTOR).size() == 1) {
                 _stairsTarget = EntityManager.get().getObject(EntityType.DOWNSTAIRS);
                 if (_stairsTarget != null) {

@@ -38,7 +38,8 @@ public class LanClient implements IClient {
             sendMessage(Message.createInit(0, 0));
             awaitReply(MessageTypes.CONNECT);
             handleResponse(_message);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -56,8 +57,9 @@ public class LanClient implements IClient {
         if (!_dungeonHasLoaded) {
             _heartBeat--;
             if (_heartBeat <= 0) {
-                if (Settings.get().clientVerbose)
+                if (Settings.get().clientVerbose) {
                     System.out.println("CLIENT: Heartbeating...");
+                }
                 sendMessage(Message.createHeartBeat());
                 _heartBeat = 15;
             }
@@ -157,7 +159,8 @@ public class LanClient implements IClient {
                         System.out.println("CLIENT: Right message received");
                     }
                     return;
-                } else {
+                }
+                else {
                     if (Settings.get().clientVerbose) {
                         System.out.println("CLIENT: Wrong message received:  " + _message.MessageType + "; Expected:  " + messageType);
                     }

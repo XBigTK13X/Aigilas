@@ -18,7 +18,8 @@ public class EntityFactory {
             default:
                 try {
                     throw new Exception("An undefined int case was passed into the EntityFactory.");
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                     e.printStackTrace();
                 }

@@ -35,19 +35,19 @@ public class PlayerClassRegistry {
                     String[] values = line.split(",");
                     PlayerClass pClass = PlayerClass.get(values[0]);
                     List<Float> r = new ArrayList<Float>();
-                    for(String stat:values[2].split("-")){
+                    for (String stat : values[2].split("-")) {
                         r.add(Float.parseFloat(stat));
                     }
 
                     List<SkillLevel> skills = new ArrayList<SkillLevel>();
-                    for(String skill:values[1].split("-")){
+                    for (String skill : values[1].split("-")) {
                         int level = Integer.parseInt(skill.split(":")[0]);
                         SkillId sk = SkillId.get(skill.split(":")[1]);
-                        skills.add(new SkillLevel(level,sk));
+                        skills.add(new SkillLevel(level, sk));
                     }
                     Stats stats = new Stats(r.get(0), r.get(1), r.get(2), r.get(3), r.get(4), r.get(5), r.get(6), r.get(7), r.get(8), r.get(9));
 
-                    pClass.Info = new PlayerClassInfo(skills,stats);
+                    pClass.Info = new PlayerClassInfo(skills, stats);
                 }
             }
             in.close();

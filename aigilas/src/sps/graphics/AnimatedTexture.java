@@ -29,7 +29,7 @@ public class AnimatedTexture {
             _texture = SpxManager.getSpriteAsset(_spriteInfo.SpriteIndex);
         }
         if (_color.a > 0) {
-            SpxManager.setSpriteIndices(_texture,_currentFrame,_spriteInfo.SpriteIndex);
+            SpxManager.setSpriteIndices(_texture, _currentFrame, _spriteInfo.SpriteIndex);
             updateAnimation();
             SpxManager.Renderer.draw(_texture, _position, _depth, _color);
         }
@@ -75,5 +75,9 @@ public class AnimatedTexture {
 
     public void setDrawDepth(DrawDepth depth) {
         _depth = depth;
+    }
+
+    public DrawDepth getDepth() {
+        return _depth;
     }
 }

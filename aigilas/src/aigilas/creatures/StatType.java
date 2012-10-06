@@ -15,8 +15,8 @@ public enum StatType {
     REGEN;
 
     public static StatType get(String value) {
-        for(StatType s:values()){
-            if(s.toString().equalsIgnoreCase(value)){
+        for (StatType s : values()) {
+            if (s.toString().equalsIgnoreCase(value)) {
                 return s;
             }
         }

@@ -2,9 +2,13 @@ package sps.entities;
 
 import sps.bridge.ActorType;
 import sps.bridge.EntityType;
-import sps.core.*;
+import sps.core.Point2;
+import sps.core.RNG;
+import sps.core.Settings;
+import sps.core.SpxManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,21 +27,28 @@ public class EntityManager {
         __instance = new EntityManager();
     }
 
-    private EntityManager(){}
+    private EntityManager() {
+    }
 
-    private List<IEntity> _contents = new ArrayList<IEntity>();
-    private HashMap<Point2, List<IEntity>> _gridContents = new HashMap<Point2,List<IEntity>>();
+    private List<Entity> _contents = new ArrayList<Entity>();
+    private HashMap<Point2, List<Entity>> _gridContents = new HashMap<Point2, List<Entity>>();
 
-    public IEntity addObject(IEntity Entity) {
+    public Entity addObject(Entity Entity) {
         Entity.loadContent();
         _contents.add(Entity);
+        Collections.sort(_contents);
         addToGrid(Entity);
         return Entity;
     }
 
-    public IEntity getObject(EntityType type) {
+    public void addObjects(List<Entity> cache) {
+        _contents.addAll(cache);
+        Collections.sort(_contents);
+    }
+
+    public Entity getObject(EntityType type) {
         if (_contents != null) {
-            for (IEntity entity : _contents) {
+            for (Entity entity : _contents) {
                 if (entity.getEntityType() == type) {
                     return entity;
                 }
@@ -46,16 +57,16 @@ public class EntityManager {
         return null;
     }
 
-    private final List<IEntity> _gopResults = new ArrayList<IEntity>();
+    private final List<Entity> _gopResults = new ArrayList<Entity>();
 
-    public List<IEntity> getEntities(EntityType type, Point2 target)
+    public List<Entity> getEntities(EntityType type, Point2 target)
 
     {
         if (_contents != null) {
             _goResults.clear();
             _goResults.addAll(getObjects(type));
             _gopResults.clear();
-            for (IEntity goResult : _goResults) {
+            for (Entity goResult : _goResults) {
                 if (goResult.contains(target)) {
                     _gopResults.add(goResult);
                 }
@@ -65,11 +76,11 @@ public class EntityManager {
         return null;
     }
 
-    private final List<IEntity> _goResults = new ArrayList<IEntity>();
+    private final List<Entity> _goResults = new ArrayList<Entity>();
 
-    public List<IEntity> getObjects(EntityType type) {
+    public List<Entity> getObjects(EntityType type) {
         _goResults.clear();
-        for (IEntity _content : _contents) {
+        for (Entity _content : _contents) {
             if (_content.getEntityType() == type) {
                 _goResults.add(_content);
             }
@@ -82,15 +93,16 @@ public class EntityManager {
     public List<IActor> getActors(ActorType type) {
         _creatures.clear();
         if (type != ActorType.NONPLAYER) {
-            for (IEntity elem : _contents) {
+            for (Entity elem : _contents) {
                 if (elem.getEntityType() == EntityType.ACTOR) {
                     if (((IActor) elem).getActorType() == type) {
                         _creatures.add(((IActor) elem));
                     }
                 }
             }
-        } else {
-            for (IEntity elem : _contents) {
+        }
+        else {
+            for (Entity elem : _contents) {
                 if (elem.getEntityType() == EntityType.ACTOR) {
                     if (((IActor) elem).getActorType() != ActorType.PLAYER) {
                         _creatures.add(((IActor) elem));
@@ -105,7 +117,7 @@ public class EntityManager {
 
     public List<IActor> getActorsAt(Point2 target, ActorType actorType) {
         _creatures.clear();
-        for (IEntity elem : _gridContents.get(target)) {
+        for (Entity elem : _gridContents.get(target)) {
             if (elem.getEntityType() == EntityType.ACTOR) {
                 _nextResult = (IActor) elem;
                 if (actorType == null || _nextResult.getActorType() == actorType || (actorType == ActorType.NONPLAYER && _nextResult.getActorType() != ActorType.PLAYER)) {
@@ -139,7 +151,7 @@ public class EntityManager {
     }
 
     public boolean isLocationBlocked(Point2 location) {
-        for (IEntity elem : _gridContents.get(location)) {
+        for (Entity elem : _gridContents.get(location)) {
             if (elem.isBlocking()) {
                 return true;
             }
@@ -147,13 +159,13 @@ public class EntityManager {
         return false;
     }
 
-    public IActor getNearestPlayer(IEntity target) {
+    public IActor getNearestPlayer(Entity target) {
         List<IActor> actors = getActors(ActorType.PLAYER);
         if (actors.size() > 0) {
-            IEntity closest = actors.get(0);
-            IEntity player;
+            Entity closest = (Entity) actors.get(0);
+            Entity player;
             for (IActor actor : actors) {
-                player = actor;
+                player = (Entity) actor;
                 if (HitTest.getDistanceSquare(target, player) < HitTest.getDistanceSquare(target, closest)) {
                     closest = player;
                 }
@@ -163,12 +175,8 @@ public class EntityManager {
         return null;
     }
 
-    public void addObjects(List<IEntity> cache) {
-        _contents.addAll(cache);
-    }
-
     public boolean anyContains(Point2 target, EntityType type) {
-        for (IEntity entity : _gridContents.get(target)) {
+        for (Entity entity : _gridContents.get(target)) {
             if (entity.getEntityType() == type) {
                 return true;
             }
@@ -176,13 +184,13 @@ public class EntityManager {
         return false;
     }
 
-    public void removeObject(IEntity target) {
+    public void removeObject(Entity target) {
         _contents.remove(target);
     }
 
     public void clear() {
-        _contents = new ArrayList<IEntity>();
-        _gridContents = new HashMap<Point2, List<IEntity>>();
+        _contents = new ArrayList<Entity>();
+        _gridContents = new HashMap<Point2, List<Entity>>();
     }
 
     public void update() {
@@ -202,7 +210,7 @@ public class EntityManager {
 
     public void draw() {
         if (SpxManager.Renderer != null) {
-            for (IEntity component : _contents) {
+            for (Entity component : _contents) {
                 component.draw();
             }
         }
@@ -210,33 +218,33 @@ public class EntityManager {
 
     public void loadContent() {
         if (SpxManager.Renderer != null) {
-            for (IEntity component : _contents) {
+            for (Entity component : _contents) {
                 component.loadContent();
             }
         }
     }
 
-    private void addToGrid(IEntity entity) {
+    private void addToGrid(Entity entity) {
         if (!_gridContents.containsKey(entity.getLocation())) {
-            _gridContents.put(entity.getLocation(), new ArrayList<IEntity>());
+            _gridContents.put(entity.getLocation(), new ArrayList<Entity>());
         }
         _gridContents.get(entity.getLocation()).add(entity);
     }
 
-    public void updateGridLocation(IEntity Entity, Point2 oldLocation) {
+    public void updateGridLocation(Entity Entity, Point2 oldLocation) {
         if (_gridContents != null && oldLocation != null) {
             _gridContents.get(oldLocation).remove(Entity);
             addToGrid(Entity);
         }
     }
 
-    private final List<IActor> _players = new ArrayList<IActor>();
+    private final List<Entity> _players = new ArrayList<Entity>();
 
-    public List<IActor> getPlayers() {
+    public List<Entity> getPlayers() {
         _players.clear();
-        for (IEntity tile : _contents) {
+        for (Entity tile : _contents) {
             if (tile.getEntityType() == EntityType.ACTOR && ((IActor) tile).getActorType() == ActorType.PLAYER) {
-                _players.add((IActor) tile);
+                _players.add(tile);
             }
         }
         return _players;
@@ -260,9 +268,9 @@ public class EntityManager {
         return emptyLocations.get(RNG.next(0, emptyLocations.size()));
     }
 
-    public List<IEntity> getEntitiesToCache() {
-        List<IEntity> results = new ArrayList<IEntity>();
-        for (IEntity _content : _contents) {
+    public List<Entity> getEntitiesToCache() {
+        List<Entity> results = new ArrayList<Entity>();
+        for (Entity _content : _contents) {
             if (_content.getEntityType() != EntityType.FLOOR) {
                 results.add(_content);
             }
@@ -270,8 +278,8 @@ public class EntityManager {
         return results;
     }
 
-    public IActor getTouchingCreature(IEntity entity) {
-        for (IEntity _content : _contents) {
+    public IActor getTouchingCreature(Entity entity) {
+        for (Entity _content : _contents) {
             if (_content.getEntityType() == EntityType.ACTOR) {
                 if (_content.contains(entity.getLocation())) {
                     return (IActor) _content;

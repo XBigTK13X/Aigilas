@@ -81,7 +81,7 @@ public class Message implements Serializable {
 
     public void writePlayerState(HashMap<Integer, HashMap<Commands, Boolean>> state) {
         for (int jj = 0; jj < PlayerMax; jj++) {
-            for (Commands command:Commands.values()) {
+            for (Commands command : Commands.values()) {
                 switch (jj) {
                     case 0:
                         PlayerOneState[command.ordinal()] = (state.get(jj).get(command)) ? TrueByte : FalseByte;
@@ -102,7 +102,7 @@ public class Message implements Serializable {
 
     public void readPlayerState(HashMap<Integer, HashMap<Commands, Boolean>> result) {
         for (int jj = 0; jj < PlayerMax; jj++) {
-            for (Commands command: Commands.values()) {
+            for (Commands command : Commands.values()) {
                 switch (jj) {
                     case 0:
                         result.get(jj).put(command, (PlayerOneState[command.ordinal()] == TrueByte));

@@ -45,8 +45,9 @@ public class SpxManager {
     public static Sprite getSpriteAsset(int index) {
         return __assetHandler.loadSprite(index);
     }
+
     public static void setSpriteIndices(Sprite texture, int frame, int index) {
-        __assetHandler.setSpriteIndices(texture,frame,index);
+        __assetHandler.setSpriteIndices(texture, frame, index);
     }
 
     public static Texture getGameOverAsset() {

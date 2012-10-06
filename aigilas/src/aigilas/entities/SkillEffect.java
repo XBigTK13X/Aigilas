@@ -12,7 +12,6 @@ import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
-import sps.entities.IEntity;
 import sps.particles.ParticleEngine;
 import sps.particles.behaviors.FollowBehavior;
 
@@ -45,7 +44,7 @@ public class SkillEffect extends Entity {
         ParticleEngine.emit(FollowBehavior.getInstance(), this, _graphic.getColor());
     }
 
-    private IEntity hitTarget;
+    private Entity hitTarget;
 
     public void cleanup(Entity target) {
         _isActive = false;
@@ -59,7 +58,7 @@ public class SkillEffect extends Entity {
     @Override
     public void update() {
         for (EntityType targetType : _skill.getTargetTypes()) {
-            List<IEntity> targets = EntityManager.get().getEntities(targetType, this.getLocation());
+            List<Entity> targets = EntityManager.get().getEntities(targetType, this.getLocation());
             if (targets != null && targets.size() > 0) {
                 hitTarget = targets.get(0);
                 if (null != hitTarget && hitTarget != this && hitTarget != _source) {
@@ -71,7 +70,7 @@ public class SkillEffect extends Entity {
         for (ActorType targetType : _source.getTargetActorTypes()) {
             List<IActor> targets = EntityManager.get().getActorsAt(this.getLocation(), targetType);
             if (targets != null && targets.size() > 0) {
-                hitTarget = targets.get(0);
+                hitTarget = (Entity) targets.get(0);
                 if (null != hitTarget && hitTarget != this && hitTarget != _source) {
                     _skill.affect(hitTarget);
                     cleanup(this);
@@ -80,7 +79,8 @@ public class SkillEffect extends Entity {
         }
         if (_currentStrength < .001) {
             cleanup(_source);
-        } else {
+        }
+        else {
             _coolDown--;
             if (_coolDown <= 0) {
                 if (_startingStrength == 0) {

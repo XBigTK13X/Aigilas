@@ -15,7 +15,7 @@ public class PathFinder {
         opened.add(new Node(start));
         while (node == null || !node.Point.isSameSpot(destination)) {
             node = opened.peek();
-            if(node == null){
+            if (node == null) {
                 return null;
             }
             opened.remove(node);
@@ -34,26 +34,26 @@ public class PathFinder {
                     }
                 }
 
-                if(!isClosed){
+                if (!isClosed) {
                     boolean found = false;
                     if (!CoordVerifier.isBlocked(neighbor)) {
-                        for(Node o:opened){
-                            if(o.Point.isSameSpot(neighbor)){
-                                if(neighbor.Weight < o.Weight){
+                        for (Node o : opened) {
+                            if (o.Point.isSameSpot(neighbor)) {
+                                if (neighbor.Weight < o.Weight) {
                                     o.Point.copy(neighbor);
                                     o.Parent = node;
                                 }
                                 found = true;
                             }
                         }
-                        if(!found){
+                        if (!found) {
                             Node n = new Node(neighbor);
                             n.Parent = node;
                             opened.add(n);
                         }
                     }
-                    else{
-                        if(neighbor.isSameSpot(destination)){
+                    else {
+                        if (neighbor.isSameSpot(destination)) {
                             Node n = new Node(neighbor);
                             n.Parent = node;
                             return new Path(n);

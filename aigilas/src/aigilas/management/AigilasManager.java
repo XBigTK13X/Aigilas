@@ -9,16 +9,19 @@ import sps.entities.EntityManager;
 import sps.net.Client;
 
 public class AigilasManager {
-    private AigilasManager(){}
+    private AigilasManager() {
+    }
+
     private static AigilasManager __instance;
-    public static AigilasManager get(){
-        if(__instance == null){
+
+    public static AigilasManager get() {
+        if (__instance == null) {
             __instance = new AigilasManager();
         }
         return __instance;
     }
 
-    public void reset(){
+    public void reset() {
         __instance = new AigilasManager();
         System.out.println("Generating the dungeon...");
         SkillRegistry.get();

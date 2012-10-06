@@ -7,7 +7,7 @@ import java.util.List;
 
 public enum SpriteType {
     EMPTY(0),
-    PLAYER_STAND(1,2),
+    PLAYER_STAND(1, 2),
     FLOOR(2),
     WALL(3),
     UPSTAIRS(4),
@@ -41,19 +41,19 @@ public enum SpriteType {
     private static ArrayList<SpriteDefinition> Definitions;
 
     private SpriteType(int index) {
-        this(index,1);
+        this(index, 1);
     }
 
-    private SpriteType(int index,int frames){
+    private SpriteType(int index, int frames) {
         Frames = frames;
         Index = index;
     }
 
-    public static List<SpriteDefinition> getDefinitions(){
-        if(Definitions == null){
+    public static List<SpriteDefinition> getDefinitions() {
+        if (Definitions == null) {
             Definitions = new ArrayList<SpriteDefinition>();
-            for(SpriteType s: values()){
-                Definitions.add(new SpriteDefinition(s,s.Index,s.Frames));
+            for (SpriteType s : values()) {
+                Definitions.add(new SpriteDefinition(s, s.Index, s.Frames));
             }
         }
         return Definitions;

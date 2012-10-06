@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class DungeonSet {
     private int _currentFloor = 0;
-    private final HashMap<Integer, Dungeon> _floors = new HashMap<Integer,Dungeon>();
+    private final HashMap<Integer, Dungeon> _floors = new HashMap<Integer, Dungeon>();
 
     /*
       * This whole "area" thing is very messy and doesn't work:an intuitive way.

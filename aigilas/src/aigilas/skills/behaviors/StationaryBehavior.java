@@ -21,7 +21,8 @@ public class StationaryBehavior extends SkillBehavior {
             if (_parent.getSkillId().Info.OffCenter) {
                 Point2 location = new Point2(target.getLocation().GridX + target.getSkillVector().GridX, target.getLocation().GridY + target.getSkillVector().GridY);
                 _sideEffects.Generate(location, new Point2(0, 0), target);
-            } else {
+            }
+            else {
                 _sideEffects.Generate(target.getLocation(), new Point2(0, 0), target);
             }
         }

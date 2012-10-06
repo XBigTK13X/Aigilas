@@ -122,7 +122,8 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (_inventory.getItemCount(item) > 0 && !_equipment.isRegistered(item)) {
             _equipment.register(item);
             _inventory.remove(item);
-        } else {
+        }
+        else {
             if (_equipment.isRegistered(item)) {
                 _equipment.unregister(item);
             }
@@ -135,7 +136,8 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (_inventory.getItemCount(item) > 0) {
                 EntityManager.get().addObject(new GenericItem(item, getLocation()));
                 _inventory.remove(item);
-            } else {
+            }
+            else {
                 if (_inventory.getItemCount(item) == 0) {
                     _equipment.unregister(item);
                     EntityManager.get().addObject(new GenericItem(item, getLocation()));
@@ -167,7 +169,8 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (_isPlaying) {
                 if (!isCooledDown()) {
                     adjust(StatType.MOVE_COOL_DOWN, 1);
-                } else {
+                }
+                else {
                     _statuses.act();
                 }
                 regenerate();
@@ -198,7 +201,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     @Override
     public void draw() {
         Path path = _strategy.getPath();
-        if(path != null){
+        if (path != null) {
             path.draw();
         }
         super.draw();
@@ -352,7 +355,8 @@ public abstract class BaseCreature extends Entity implements IActor {
     public void addBuff(StatBuff buff, boolean applyToMax) {
         if (!applyToMax) {
             _baseStats.addBuff(buff);
-        } else {
+        }
+        else {
             _maxStats.addBuff(buff);
         }
     }
@@ -423,7 +427,8 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (amount > _nextLevelExperience) {
                 diff = _nextLevelExperience;
                 amount -= _nextLevelExperience;
-            } else {
+            }
+            else {
                 amount = 0;
             }
             _experience += diff;
@@ -482,8 +487,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             }
         }
         for (StatType stat : possibleStats) {
-            if(min > get(stat))
-            {
+            if (min > get(stat)) {
                 result = stat;
                 min = get(stat);
             }

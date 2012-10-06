@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ClientManager {
     final List<MessageHandler> clients = new ArrayList<MessageHandler>();
-    private final HashMap<Integer, Integer> addressToIndex = new HashMap<Integer,Integer>();
+    private final HashMap<Integer, Integer> addressToIndex = new HashMap<Integer, Integer>();
     ServerSocket server;
 
     Thread clientListener;
@@ -34,7 +34,8 @@ public class ClientManager {
                             clients.add(new MessageHandler(client));
                             clients.get(clients.size() - 1).owner = "SERVER";
                             addressToIndex.put(client.getPort(), clients.size() - 1);
-                        } catch (IOException e) {
+                        }
+                        catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
@@ -42,7 +43,8 @@ public class ClientManager {
                 }
             }, "ClientManager");
             clientListener.start();
-        } catch (IOException e1) {
+        }
+        catch (IOException e1) {
             __otherServerExists = true;
             System.out.println("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
         }

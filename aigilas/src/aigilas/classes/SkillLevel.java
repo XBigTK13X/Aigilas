@@ -7,7 +7,7 @@ public class SkillLevel {
     public final int Level;
     public final SkillId Skill;
 
-    public SkillLevel(int level,SkillId skill){
+    public SkillLevel(int level, SkillId skill) {
         Skill = skill;
         Level = level;
     }

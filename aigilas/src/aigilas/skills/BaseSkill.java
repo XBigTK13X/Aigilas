@@ -13,8 +13,6 @@ import com.badlogic.gdx.graphics.Color;
 import sps.bridge.EntityType;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.entities.IActor;
-import sps.entities.IEntity;
 
 import java.util.List;
 
@@ -28,10 +26,10 @@ public abstract class BaseSkill {
         _id = implementationId;
         _components = new SkillComponents(strength, isPersistent);
         _behavior = SkillFactory.create(animation, effectGraphic, this);
-        for(Elements element:_id.Info.Elements){
+        for (Elements element : _id.Info.Elements) {
             add(element);
         }
-        addCost(_id.Info.Stat,_id.Info.Cost);
+        addCost(_id.Info.Stat, _id.Info.Cost);
     }
 
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
@@ -63,7 +61,7 @@ public abstract class BaseSkill {
         _behavior.activate(source);
     }
 
-    public void affect(IEntity target) {
+    public void affect(Entity target) {
         BaseCreature creature = Extensions.isCreature(target);
         if (creature != null) {
             affect(creature);
@@ -71,7 +69,7 @@ public abstract class BaseSkill {
     }
 
     public void applyToPlayers(Status statusId) {
-        for (IActor player : EntityManager.get().getPlayers()) {
+        for (Entity player : EntityManager.get().getPlayers()) {
             StatusFactory.apply((BaseCreature) player, statusId);
         }
     }

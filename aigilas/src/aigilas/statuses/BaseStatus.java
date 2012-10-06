@@ -21,7 +21,7 @@ public class BaseStatus {
     protected boolean _buffMax = false;
     protected final List<Elements> _blockedElements = new ArrayList<Elements>();
 
-    protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<StatusComponent,List<Status>>();
+    protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<StatusComponent, List<Status>>();
 
     protected BaseStatus(BaseCreature target) {
         _strength = _maxStrength;

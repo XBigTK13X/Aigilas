@@ -1,7 +1,7 @@
 package aigilas.statuses;
 
-import aigilas.creatures.CreatureAction;
 import aigilas.creatures.BaseCreature;
+import aigilas.creatures.CreatureAction;
 import aigilas.entities.Elements;
 
 import java.util.ArrayList;

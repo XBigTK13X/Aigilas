@@ -2,7 +2,7 @@ package sps.particles;
 
 import com.badlogic.gdx.graphics.Color;
 import sps.core.Point2;
-import sps.entities.IEntity;
+import sps.entities.Entity;
 
 public class ParticleEngine {
     private static final Particle2[] __particles = new Particle2[1000];
@@ -30,7 +30,7 @@ public class ParticleEngine {
         __emitters[__emitterIndex].reset(behavior, position, baseColor);
     }
 
-    public static void emit(ParticleBehavior behavior, IEntity entity, Color baseColor) {
+    public static void emit(ParticleBehavior behavior, Entity entity, Color baseColor) {
         while (__emitters[__emitterIndex].IsActive) {
             __emitterIndex = (__emitterIndex + 1) % __emitters.length;
         }
@@ -58,7 +58,7 @@ public class ParticleEngine {
         return __particles[__particleIndex];
     }
 
-    public static Particle2 createParticle(ParticleBehavior behavior, IEntity entity, Color baseColor) {
+    public static Particle2 createParticle(ParticleBehavior behavior, Entity entity, Color baseColor) {
         setIndexToInactiveParticle();
         __particles[__particleIndex].reset(behavior, entity, baseColor);
         return __particles[__particleIndex];

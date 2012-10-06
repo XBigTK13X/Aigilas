@@ -2,7 +2,7 @@ package sps.particles;
 
 import com.badlogic.gdx.graphics.Color;
 import sps.core.Point2;
-import sps.entities.IEntity;
+import sps.entities.Entity;
 
 class Emitter extends PEComponent {
     private final Particle2[] _particles = new Particle2[10];
@@ -42,7 +42,7 @@ class Emitter extends PEComponent {
         }
     }
 
-    public void reset(ParticleBehavior behavior, IEntity entity, Color baseColor) {
+    public void reset(ParticleBehavior behavior, Entity entity, Color baseColor) {
         IsActive = true;
         _behavior = behavior;
         _index = 0;

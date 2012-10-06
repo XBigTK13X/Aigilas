@@ -13,7 +13,6 @@ import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
-import sps.entities.IEntity;
 import sps.net.Client;
 
 import java.util.ArrayList;
@@ -28,8 +27,8 @@ public class Dungeon {
     private final int playerCount = Client.get().getPlayerCount();
 
     private final List<Room> _rooms = new ArrayList<Room>();
-    private List<IEntity> _contents = new ArrayList<IEntity>();
-    private final IEntity[][] dungeon = new IEntity[_blocksWide][_blocksHigh];
+    private List<Entity> _contents = new ArrayList<Entity>();
+    private final Entity[][] dungeon = new Entity[_blocksWide][_blocksHigh];
     private final Point2 _upSpawnLocation = new Point2(0, 0);
     private final Point2 _downSpawnLocation = new Point2(0, 0);
 
@@ -76,7 +75,7 @@ public class Dungeon {
         }
     }
 
-    private List<IEntity> playerCache;
+    private List<Entity> playerCache;
 
     public void loadTiles(boolean goingUp) {
         EntityManager.get().clear();
@@ -84,12 +83,12 @@ public class Dungeon {
         playerCache = DungeonFactory.flushCache();
         Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
         List<Point2> neighbors = spawn.getNeighbors();
-        for (IEntity player : playerCache) {
+        for (Entity player : playerCache) {
             Player pl = ((Player) player);
             pl.setLocation(getRandomNeighbor(neighbors));
             _contents.add(pl);
         }
-        for (IEntity item : _contents) {
+        for (Entity item : _contents) {
             EntityManager.get().addObject(item);
         }
     }
@@ -97,9 +96,9 @@ public class Dungeon {
     public void cacheContents() {
         for (IActor player : EntityManager.get().getActors(ActorType.PLAYER)) {
             DungeonFactory.addToCache((Entity) player);
-            EntityManager.get().removeObject(player);
+            EntityManager.get().removeObject((Entity) player);
         }
-        _contents = new ArrayList<IEntity>(EntityManager.get().getEntitiesToCache());
+        _contents = new ArrayList<Entity>(EntityManager.get().getEntitiesToCache());
     }
 
     private void init() {
@@ -107,8 +106,8 @@ public class Dungeon {
     }
 
     private void transferDungeonState() {
-        for (IEntity[] row : dungeon) {
-            for (IEntity tile : row) {
+        for (Entity[] row : dungeon) {
+            for (Entity tile : row) {
                 if (tile != null) {
                     if (tile.getEntityType() != EntityType.FLOOR) {
                         _contents.add(tile);
@@ -118,7 +117,7 @@ public class Dungeon {
             }
         }
 
-        List<IEntity> cache = DungeonFactory.flushCache();
+        List<Entity> cache = DungeonFactory.flushCache();
         List<Point2> neighbors = _upSpawnLocation.getNeighbors();
 
         if (cache.size() == 0) {
@@ -127,8 +126,8 @@ public class Dungeon {
             }
         }
         else {
-            for (IEntity player : cache) {
-                ((Entity) player).setLocation(getRandomNeighbor(neighbors));
+            for (Entity player : cache) {
+                player.setLocation(getRandomNeighbor(neighbors));
             }
             EntityManager.get().addObjects(cache);
             _contents.addAll(cache);

@@ -22,8 +22,8 @@ public enum Elements {
     }
 
     public static Elements get(String element) {
-        for(Elements e:values()){
-            if(e.toString().equalsIgnoreCase(element)){
+        for (Elements e : values()) {
+            if (e.toString().equalsIgnoreCase(element)) {
                 return e;
             }
         }

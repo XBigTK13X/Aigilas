@@ -64,7 +64,8 @@ public class Aigilas implements ApplicationListener {
             StateManager.update();
             TextManager.update();
             Client.get().prepareForNextTurn();
-        } else {
+        }
+        else {
             Client.get().heartBeat();
         }
         if (!IsRunning) {

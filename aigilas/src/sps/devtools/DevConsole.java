@@ -56,7 +56,8 @@ public class DevConsole {
     public void add(String message) {
         if (_index < _contents.length) {
             _contents[_index++] = new ConsoleText(margin, getY(_index), message);
-        } else {
+        }
+        else {
             for (int ii = 0; ii < _contents.length - 1; ii++) {
                 _contents[ii] = new ConsoleText(margin, getY(ii), _contents[ii + 1].getContent());
             }

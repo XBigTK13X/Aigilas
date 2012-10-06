@@ -4,13 +4,13 @@ import sps.core.GameManager;
 import sps.core.Point2;
 
 public class HitTest {
-    public static boolean isTouching(IEntity source, IEntity target)
+    public static boolean isTouching(Entity source, Entity target)
 
     {
         return isClose(source, target);
     }
 
-    private static boolean isClose(IEntity source, IEntity target) {
+    private static boolean isClose(Entity source, Entity target) {
         return isClose(source.getLocation().PosX, target.getLocation().PosX, source.getLocation().PosY, target.getLocation().PosY);
     }
 
@@ -18,7 +18,7 @@ public class HitTest {
         return getDistanceSquare(x1, x2, y1, y2) < GameManager.SpriteRadius;
     }
 
-    public static float getDistanceSquare(IEntity source, IEntity target)
+    public static float getDistanceSquare(Entity source, Entity target)
 
     {
         return getDistanceSquare(source.getLocation().PosX, target.getLocation().PosX, source.getLocation().PosY, target.getLocation().PosY);

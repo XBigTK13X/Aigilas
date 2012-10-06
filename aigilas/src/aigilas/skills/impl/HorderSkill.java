@@ -20,7 +20,6 @@ public class HorderSkill extends BaseSkill {
     public void activate(BaseCreature source) {
         super.activate(source);
         StatusFactory.apply(source, Status.Hord);
-
     }
 
 }

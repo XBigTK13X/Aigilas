@@ -4,7 +4,7 @@ public class StateManager {
     private static State _state;
 
     public static void loadState(State state) {
-        if(_state != null){
+        if (_state != null) {
             _state.unload();
         }
         _state = state;

@@ -3,7 +3,6 @@ package aigilas.management;
 import sps.graphics.ISpriteInitializer;
 import sps.graphics.SpriteDefinition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SpriteInitializer implements ISpriteInitializer {

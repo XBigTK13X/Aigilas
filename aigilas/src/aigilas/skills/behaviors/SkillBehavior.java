@@ -11,7 +11,6 @@ import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SideEffects;
 import sps.entities.Entity;
-import sps.entities.IEntity;
 
 public class SkillBehavior {
     protected final SideEffects _sideEffects;
@@ -59,7 +58,7 @@ public class SkillBehavior {
         return costPaid;
     }
 
-    private IEntity hitTarget;
+    private Entity hitTarget;
     private BaseCreature hitCreature;
 
     public boolean affectTarget(BaseCreature source, SkillEffect graphic)

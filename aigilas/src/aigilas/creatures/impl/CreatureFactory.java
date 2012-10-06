@@ -1,14 +1,14 @@
 package aigilas.creatures.impl;
 
-import aigilas.creatures.*;
+import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
 import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
 import sps.core.Point2;
 import sps.core.RNG;
+import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.entities.IEntity;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -79,7 +79,8 @@ public class CreatureFactory {
             default:
                 try {
                     throw new Exception("No Factory generation logic for: " + actorType);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                     e.printStackTrace();
                 }
@@ -115,7 +116,8 @@ public class CreatureFactory {
             default:
                 try {
                     throw new Exception("No minion was defined for the given skillId.");
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                     e.printStackTrace();
                 }
@@ -142,7 +144,7 @@ public class CreatureFactory {
         __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
     }
 
-    public static void reset(){
+    public static void reset() {
         __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
         __playerCount = 0;
     }
@@ -151,7 +153,7 @@ public class CreatureFactory {
         return __remainingBosses.size();
     }
 
-    public static IEntity createNextBoss(Point2 randomPoint) {
+    public static Entity createNextBoss(Point2 randomPoint) {
         ActorType nextBoss = __remainingBosses.get(RNG.next(0, __remainingBosses.size()));
         __remainingBosses.remove(nextBoss);
         return create(nextBoss, randomPoint);

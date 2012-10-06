@@ -2,7 +2,6 @@ package aigilas.dungeons;
 
 import aigilas.creatures.impl.CreatureFactory;
 import sps.entities.Entity;
-import sps.entities.IEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +11,7 @@ public class DungeonFactory {
 
     private static int __floorCount = 0;
 
-    private static HashMap<Location, DungeonSet> _world = new HashMap<Location,DungeonSet>();
+    private static HashMap<Location, DungeonSet> _world = new HashMap<Location, DungeonSet>();
     private static List<Entity> _cache = new ArrayList<Entity>();
 
     public static void getNextFloor() {
@@ -27,8 +26,8 @@ public class DungeonFactory {
         _cache.add(content);
     }
 
-    public static List<IEntity> flushCache() {
-        ArrayList<IEntity> result = new ArrayList<IEntity>(_cache);
+    public static List<Entity> flushCache() {
+        ArrayList<Entity> result = new ArrayList<Entity>(_cache);
         _cache.clear();
         return result;
     }

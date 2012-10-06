@@ -32,8 +32,9 @@ public class SideEffects {
     }
 
     public SkillEffect getFirstGraphic() {
-        if (_effectGraphics.size() > 0)
+        if (_effectGraphics.size() > 0) {
             return _effectGraphics.get(0);
+        }
         return null;
     }
 

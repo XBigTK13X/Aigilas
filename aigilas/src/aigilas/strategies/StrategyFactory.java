@@ -43,7 +43,8 @@ public class StrategyFactory {
             default:
                 try {
                     throw new Exception("An undefined strategy was passed into the strategy factory: " + strategy);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                     e.printStackTrace();
                 }

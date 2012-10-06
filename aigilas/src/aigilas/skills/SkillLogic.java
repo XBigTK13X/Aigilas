@@ -11,8 +11,9 @@ import java.util.List;
 
 public class SkillLogic {
     private static SkillLogic __instance;
-    public static SkillLogic get(){
-        if(__instance == null){
+
+    public static SkillLogic get() {
+        if (__instance == null) {
             __instance = new SkillLogic();
         }
         return __instance;
@@ -39,11 +40,13 @@ public class SkillLogic {
             __skillAnimationMap.put(SkillId.NO_SKILL, null);
         }
     }
-    private final HashMap<Elements, List<SkillId>> __elementMap = new HashMap<Elements,List<SkillId>>();
-    private final HashMap<SkillId, AnimationType> __skillAnimationMap = new HashMap<SkillId,AnimationType>();
-    public final HashMap<ActorType, List<SkillId>> __actorToSkillMapping = new HashMap<ActorType,List<SkillId>>();
+
+    private final HashMap<Elements, List<SkillId>> __elementMap = new HashMap<Elements, List<SkillId>>();
+    private final HashMap<SkillId, AnimationType> __skillAnimationMap = new HashMap<SkillId, AnimationType>();
+    public final HashMap<ActorType, List<SkillId>> __actorToSkillMapping = new HashMap<ActorType, List<SkillId>>();
     private final List<SkillId> __invalidRandomSkills = new ArrayList<SkillId>();
     private int skillPick = 0;
+
     static {
 
     }

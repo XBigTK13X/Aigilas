@@ -1,33 +1,30 @@
 package sps.bridge;
 
 public enum DrawDepth {
-    Default(0f),
-    AnimatedTexture(0f),
-    Floor(0f),
-    Wall(.1f),
-    Altar(.2f),
-    Stairs(.4f),
-    Item(.45f),
-    Creature(.5f),
-    Player(.7f),
-    BaseSkillEffect(.7f),
-    SkillEffect(.75f),
-    ComboMarker(.999f),
-    HudBG(.95f),
-    DefaultHudText(.96f),
-    ActionTextBG(0.98f),
-    ActionText(0.985f),
-    DevConsole(.9993f),
-    DevConsoleText(.9995f),
-    Particle(.99999f), Debug(.999999999f);
+    Default(0),
+    AnimatedTexture(0),
+    Floor(0),
+    Wall(10),
+    Altar(20),
+    Stairs(40),
+    Item(50),
+    Creature(60),
+    Player(70),
+    BaseSkillEffect(80),
+    SkillEffect(90),
+    ComboMarker(100),
+    HudBG(950),
+    DefaultHudText(960),
+    ActionTextBG(980),
+    ActionText(990),
+    DevConsole(1000),
+    DevConsoleText(1010),
+    Particle(1020),
+    Debug(1030);
 
-    private final float DrawDepth;
+    public final int DrawDepth;
 
-    private DrawDepth(float DrawDepth) {
+    private DrawDepth(int DrawDepth) {
         this.DrawDepth = DrawDepth;
-    }
-
-    public float value() {
-        return DrawDepth;
     }
 }

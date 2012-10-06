@@ -9,7 +9,6 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SkillRegistry {
@@ -53,8 +52,7 @@ public class SkillRegistry {
                             offCenter = true;
                         }
                     }
-                    SkillInfo info = new SkillInfo(name, stat, cost, magnitude, elements, bossOnly, offCenter);
-                    SkillId.get(name).Info = info;
+                    SkillId.get(name).Info = new SkillInfo(name, stat, cost, magnitude, elements, bossOnly, offCenter);
                 }
             }
             in.close();

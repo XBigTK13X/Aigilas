@@ -1,7 +1,7 @@
 package aigilas.statuses.impl;
 
-import aigilas.creatures.CreatureAction;
 import aigilas.creatures.BaseCreature;
+import aigilas.creatures.CreatureAction;
 import aigilas.statuses.BaseStatus;
 
 public class BurnStatus extends BaseStatus {

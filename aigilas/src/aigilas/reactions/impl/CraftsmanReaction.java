@@ -11,7 +11,8 @@ public class CraftsmanReaction implements IReaction {
     {
         try {
             ItemFactory.createRandomPlain(target.getLocation());
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
 
             e.printStackTrace();
         }

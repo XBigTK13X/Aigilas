@@ -5,7 +5,7 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import sps.bridge.EntityType;
 import sps.core.Settings;
-import sps.entities.IEntity;
+import sps.entities.Entity;
 
 public class WallPunchSkill extends BaseSkill {
     public WallPunchSkill()
@@ -17,7 +17,7 @@ public class WallPunchSkill extends BaseSkill {
     }
 
     @Override
-    public void affect(IEntity target)
+    public void affect(Entity target)
 
     {
         if (target.getEntityType() == EntityType.WALL) {

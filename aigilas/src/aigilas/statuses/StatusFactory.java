@@ -114,7 +114,8 @@ public class StatusFactory {
             default:
                 try {
                     throw new Exception(String.format("An undefined statusId %s was passed StatusFactory.Apply.", statusId));
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
 
                     e.printStackTrace();
                 }

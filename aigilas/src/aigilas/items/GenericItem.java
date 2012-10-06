@@ -1,8 +1,8 @@
 package aigilas.items;
 
-import aigilas.creatures.impl.Player;
 import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
+import aigilas.creatures.impl.Player;
 import sps.bridge.ActorType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
@@ -43,7 +43,8 @@ public class GenericItem extends Entity {
         if (type == null) {
             try {
                 throw new Exception("Invalid type NULL passed into the GenericItem factory!");
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
 
                 e.printStackTrace();
             }
@@ -79,7 +80,7 @@ public class GenericItem extends Entity {
     public boolean equals(Object obj) {
         if (obj.getClass() == GenericItem.class) {
             GenericItem gI = (GenericItem) obj;
-            if (! Name.equals(gI.Name)) {
+            if (!Name.equals(gI.Name)) {
                 return false;
             }
             for (StatType stat : StatType.values()) {

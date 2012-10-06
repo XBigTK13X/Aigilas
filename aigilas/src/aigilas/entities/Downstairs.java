@@ -24,7 +24,8 @@ public class Downstairs extends Entity {
                 player.performInteraction();
                 try {
                     DungeonFactory.getNextFloor();
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     e.printStackTrace();
                 }
             }

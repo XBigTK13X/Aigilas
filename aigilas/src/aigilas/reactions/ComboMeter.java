@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ComboMeter {
-    private static final HashMap<Integer, ReactionId> __reactions = new HashMap<Integer,ReactionId>();
+    private static final HashMap<Integer, ReactionId> __reactions = new HashMap<Integer, ReactionId>();
 
     static {
         __reactions.put(12, ReactionId.SWEAT);
@@ -79,15 +79,19 @@ public class ComboMeter {
             if (_elements.size() == 2) {
                 if (_elements.get(0).Value > element.Value) {
                     _elements.add(0, element);
-                } else if (_elements.get(1).Value > element.Value) {
+                }
+                else if (_elements.get(1).Value > element.Value) {
                     _elements.add(1, element);
-                } else {
+                }
+                else {
                     _elements.add(element);
                 }
-            } else if (_elements.size() == 1) {
+            }
+            else if (_elements.size() == 1) {
                 if (_elements.get(0).Value > element.Value) {
                     _elements.add(0, element);
-                } else {
+                }
+                else {
                     _elements.add(element);
                 }
             }

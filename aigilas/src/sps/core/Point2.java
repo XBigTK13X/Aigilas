@@ -115,14 +115,14 @@ public class Point2 {
         if (_locations[0][0] == null) {
             for (int ii = 0; ii < Settings.get().tileMapHeight; ii++) {
                 for (int jj = 0; jj < Settings.get().tileMapWidth; jj++) {
-                        _locations[ii][jj] = new Point2(jj, ii);
+                    _locations[ii][jj] = new Point2(jj, ii);
                 }
             }
         }
         _neighbors.clear();
         for (int ii = -1; ii < 2; ii++) {
             for (int jj = -1; jj < 2; jj++) {
-                if((ii != 0 || jj != 0) && (GridX + jj >= 0 && GridY + ii >= 0) && (GridX + jj < Settings.get().tileMapWidth && GridY + ii < Settings.get().tileMapHeight)){
+                if ((ii != 0 || jj != 0) && (GridX + jj >= 0 && GridY + ii >= 0) && (GridX + jj < Settings.get().tileMapWidth && GridY + ii < Settings.get().tileMapHeight)) {
                     _neighbors.add(_locations[GridY + ii][GridX + jj]);
                 }
             }
@@ -134,7 +134,7 @@ public class Point2 {
         return target.GridX == GridX && target.GridY == GridY;
     }
 
-    public Point2 rotate(){
+    public Point2 rotate() {
         return rotate(45);
     }
 

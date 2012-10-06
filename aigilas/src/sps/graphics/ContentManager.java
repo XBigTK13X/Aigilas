@@ -7,18 +7,20 @@ import sps.core.Settings;
 
 public class ContentManager {
 
-    private class Dimensions{
+    private class Dimensions {
         public final int Height;
         public final int Width;
         public final int X;
         public final int Y;
-        public Dimensions(int frame,int index){
+
+        public Dimensions(int frame, int index) {
             X = frame * Settings.get().spriteHeight + frame + 1;
             Y = index * Settings.get().spriteHeight + index + 1;
             Width = Settings.get().spriteWidth - 1;
             Height = Settings.get().spriteHeight - 1;
         }
     }
+
     public String RootDirectory;
     private Texture _spriteSheet;
     private BitmapFont _font;
@@ -31,7 +33,7 @@ public class ContentManager {
         if (_spriteSheet == null) {
             _spriteSheet = AssetManager.get().getImage("GameplaySheet.png");
         }
-        Dimensions d = new Dimensions(0,verticalIndex);
+        Dimensions d = new Dimensions(0, verticalIndex);
         return new Sprite(_spriteSheet, d.X, d.Y, d.Width, d.Height);
     }
 
@@ -43,7 +45,7 @@ public class ContentManager {
     }
 
     public void setSpriteIndices(Sprite texture, int frame, int index) {
-        Dimensions d = new Dimensions(frame,index);
-        texture.setRegion(d.X,d.Y,d.Width,d.Height);
+        Dimensions d = new Dimensions(frame, index);
+        texture.setRegion(d.X, d.Y, d.Width, d.Height);
     }
 }

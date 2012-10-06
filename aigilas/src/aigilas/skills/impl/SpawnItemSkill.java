@@ -7,19 +7,13 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
 public class SpawnItemSkill extends BaseSkill {
-    public SpawnItemSkill()
-
-    {
+    public SpawnItemSkill() {
         super(SkillId.SPAWN_ITEM, AnimationType.SELF);
-
-
     }
 
     @Override
     public void activate(BaseCreature source) {
         super.activate(source);
         ItemFactory.createRandomPlain(source.getLocation());
-
     }
-
 }

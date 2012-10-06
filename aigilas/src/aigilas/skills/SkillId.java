@@ -53,8 +53,8 @@ public enum SkillId {
     public SkillInfo Info;
 
     public static SkillId get(String value) {
-        for(SkillId id:values()){
-            if(id.toString().replace("_","").equalsIgnoreCase(value)){
+        for (SkillId id : values()) {
+            if (id.toString().replace("_", "").equalsIgnoreCase(value)) {
                 return id;
             }
         }

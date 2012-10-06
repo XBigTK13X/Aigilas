@@ -15,7 +15,8 @@ public class Client {
                 while (!__instance.isConnected()) {
                     // Wait
                 }
-            } else {
+            }
+            else {
                 System.out.println("CLIENT: Launching local non-networked game client.");
                 __instance = new LocalClient();
             }
