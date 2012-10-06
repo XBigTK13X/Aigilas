@@ -50,7 +50,7 @@ public class DevConsole {
     }
 
     private int getY(int index) {
-        return SpxManager.WindowHeight - (index * margin / 2);
+        return SpxManager.VirtualHeight - (index * margin / 2);
     }
 
     public void add(String message) {
@@ -67,7 +67,7 @@ public class DevConsole {
 
     public void draw() {
         if (_isVisible) {
-            SpxManager.Renderer.draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, SpxManager.WindowWidth, SpxManager.WindowHeight);
+            SpxManager.Renderer.draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, SpxManager.VirtualWidth, SpxManager.VirtualHeight);
             for (ConsoleText _content : _contents) {
                 if (_content != null) {
                     _content.draw();

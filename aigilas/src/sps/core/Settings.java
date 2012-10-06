@@ -40,8 +40,11 @@ public class Settings {
 
     public int spriteHeight;
     public int spriteWidth;
+    public int spriteGap;
     public int tileMapHeight;
     public int tileMapWidth;
+    public int resolutionHeight;
+    public int resolutionWidth;
 
     public boolean consoleLogging;
     public boolean viewPaths;
@@ -139,6 +142,10 @@ public class Settings {
                         spriteWidth = Integer.parseInt(value);
                     }
 
+                    if (key.equalsIgnoreCase("spriteGap")) {
+                        spriteGap = Integer.parseInt(value);
+                    }
+
                     if (key.equalsIgnoreCase("tileMapHeight")) {
                         tileMapHeight = Integer.parseInt(value);
                     }
@@ -147,6 +154,13 @@ public class Settings {
                         tileMapWidth = Integer.parseInt(value);
                     }
 
+                    if (key.equalsIgnoreCase("resolutionHeight")) {
+                        resolutionHeight = Integer.parseInt(value);
+                    }
+
+                    if (key.equalsIgnoreCase("resolutionWidth")) {
+                        resolutionWidth = Integer.parseInt(value);
+                    }
 
                     // Dev
                     if (key.equalsIgnoreCase("consoleLogging")) {

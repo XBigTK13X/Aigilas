@@ -6,7 +6,7 @@ import sps.core.SpxManager;
 
 public class CoordVerifier {
     public static boolean isValid(Point2 position) {
-        return (position.PosX >= 0 && position.PosY >= 0 && position.PosX < SpxManager.WindowWidth && position.PosY < SpxManager.WindowHeight);
+        return (position.PosX >= 0 && position.PosY >= 0 && position.PosX < SpxManager.VirtualWidth && position.PosY < SpxManager.VirtualHeight);
     }
 
     public static boolean isBlocked(Point2 target)

@@ -13,7 +13,7 @@ public class EquipmentHud extends BaseHud {
     private final Equipment _equipment;
 
     public EquipmentHud(BaseCreature owner, Equipment equipment) {
-        super(owner, SpxManager.WindowWidth / 2, SpxManager.WindowHeight / 2);
+        super(owner, SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2);
         _equipment = equipment;
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class HotkeyHud extends BaseHud {
     public HotkeyHud(BaseCreature owner) {
-        super(owner, SpxManager.WindowWidth / 2, SpxManager.WindowHeight / 2);
+        super(owner, SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2);
         _isVisible = true;
     }
 

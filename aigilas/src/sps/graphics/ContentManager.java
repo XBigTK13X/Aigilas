@@ -14,10 +14,10 @@ public class ContentManager {
         public final int Y;
 
         public Dimensions(int frame, int index) {
-            X = frame * Settings.get().spriteHeight + frame + 1;
-            Y = index * Settings.get().spriteHeight + index + 1;
-            Width = Settings.get().spriteWidth - 1;
-            Height = Settings.get().spriteHeight - 1;
+            X = frame * Settings.get().spriteHeight + (Settings.get().spriteGap*frame) + Settings.get().spriteGap;
+            Y = index * Settings.get().spriteHeight + (Settings.get().spriteGap*index) + Settings.get().spriteGap;
+            Width = Settings.get().spriteWidth - Settings.get().spriteGap;
+            Height = Settings.get().spriteHeight - Settings.get().spriteGap;
         }
     }
 

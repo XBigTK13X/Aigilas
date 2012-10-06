@@ -23,10 +23,10 @@ public class BaseHud {
             _menuBase = SpxManager.getMenuBaseAsset();
         }
         _dimensions = new Point2(width, height);
-        playerHudPositions.add(new Point2(0, SpxManager.WindowHeight - _dimensions.Y));
-        playerHudPositions.add(new Point2(SpxManager.WindowWidth - _dimensions.X, SpxManager.WindowHeight + _dimensions.Y));
+        playerHudPositions.add(new Point2(0, SpxManager.VirtualHeight - _dimensions.Y));
+        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight + _dimensions.Y));
         playerHudPositions.add(new Point2(0, 0));
-        playerHudPositions.add(new Point2(SpxManager.WindowWidth - _dimensions.X, 0));
+        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, 0));
     }
 
     public void toggle() {

@@ -25,8 +25,8 @@ public class DesktopMain {
         System.out.println("Launching the main game loop");
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Aigilas";
-        cfg.width = SpxManager.RenderWidth;
-        cfg.height = SpxManager.RenderHeight;
+        cfg.width = Settings.get().resolutionWidth;
+        cfg.height = Settings.get().resolutionHeight;
         cfg.useGL20 = true;
         new LwjglApplication(new Aigilas(), cfg);
     }

@@ -24,7 +24,7 @@ public class Renderer {
 
     public Renderer() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, SpxManager.WindowWidth, SpxManager.WindowHeight);
+        camera.setToOrtho(false, SpxManager.VirtualWidth, SpxManager.VirtualHeight);
         batch = new SpriteBatch();
         font = new BitmapFont();
     }
@@ -90,7 +90,7 @@ public class Renderer {
     }
 
     private void renderString(String content, Point2 location, Color filter, float scale, DrawDepth depth) {
-        font.setScale(scale);
+        font.setScale(scale*2);
         font.setColor(filter);
         font.draw(batch, content, location.X, location.Y);
     }

@@ -28,7 +28,7 @@ public class InventoryHud extends BaseHud {
     private final DeltasHud _deltas;
 
     public InventoryHud(BaseCreature owner, Inventory inventory, Equipment equipment) {
-        super(owner, SpxManager.WindowWidth / 2, SpxManager.WindowHeight / 2);
+        super(owner, SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2);
         _inventory = inventory;
         _equipment = equipment;
         _deltas = new DeltasHud(owner, equipment);

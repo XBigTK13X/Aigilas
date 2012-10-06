@@ -26,6 +26,6 @@ class DefaultHudText extends Text {
 
     @Override
     public void draw() {
-        SpxManager.Renderer.drawString(_contents, new Point2(_position.X + Settings.get().spriteWidth, SpxManager.WindowHeight - _position.Y + Settings.get().spriteHeight / 2), _color, 1f, DrawDepth.DefaultHudText);
+        SpxManager.Renderer.drawString(_contents, new Point2(_position.X + Settings.get().spriteWidth, SpxManager.VirtualHeight - _position.Y + Settings.get().spriteHeight / 2), _color, 1f, DrawDepth.DefaultHudText);
     }
 }

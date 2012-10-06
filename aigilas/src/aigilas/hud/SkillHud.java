@@ -15,8 +15,8 @@ public class SkillHud extends BaseHud {
     private Point2 _manaPosition = new Point2();
 
     public SkillHud(BaseCreature owner) {
-        super(owner, Settings.get().spriteWidth, SpxManager.WindowHeight / 4);
-        _manaPosition = new Point2(getHudOrigin().X, getHudOrigin().Y - SpxManager.WindowHeight / 4);
+        super(owner, Settings.get().spriteWidth, SpxManager.VirtualHeight / 4);
+        _manaPosition = new Point2(getHudOrigin().X, getHudOrigin().Y - SpxManager.VirtualHeight / 4);
     }
 
     private int calculateHeight(StatType statType) {
