@@ -1,8 +1,5 @@
 package sps.core;
 
-import aigilas.skills.SkillId;
-import aigilas.skills.SkillRegistry;
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -161,7 +158,7 @@ public class Settings {
                     }
                 }
                 if (line.contains("##")) {
-                    System.out.println("SETTINGS)) Parsing section '" + line.replace("##", "") + "'");
+                    System.out.println("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
                 }
             }
             in.close();

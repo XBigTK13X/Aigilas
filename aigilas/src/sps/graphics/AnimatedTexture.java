@@ -29,6 +29,7 @@ public class AnimatedTexture {
             _texture = SpxManager.getSpriteAsset(_spriteInfo.SpriteIndex);
         }
         if (_color.a > 0) {
+            SpxManager.setSpriteIndices(_texture,_currentFrame,_spriteInfo.SpriteIndex);
             updateAnimation();
             SpxManager.Renderer.draw(_texture, _position, _depth, _color);
         }
