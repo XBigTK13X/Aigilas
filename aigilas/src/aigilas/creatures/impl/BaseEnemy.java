@@ -1,9 +1,7 @@
 package aigilas.creatures.impl;
 
 import aigilas.classes.CreatureClass;
-import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
-import aigilas.creatures.Stats;
+import aigilas.creatures.*;
 import aigilas.entities.Elements;
 import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;
@@ -21,6 +19,21 @@ public class BaseEnemy extends BaseCreature {
         _actorType = actorType;
         _baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
         _maxStats = new Stats(_baseStats);
+        if (EnemyRegistry.get().contains(_actorType)) {
+            EnemyInfo info = EnemyRegistry.get().getInfo(_actorType);
+            for (StatType stat : info.Strengths) {
+                strengths(stat);
+            }
+            for (StatType stat : info.Weaknesses) {
+                weaknesses(stat);
+            }
+            for (Elements element : info.Elements) {
+                compose(element);
+            }
+            for (SkillId skill : info.Skills) {
+                add(skill);
+            }
+        }
     }
 
     public BaseEnemy(ActorType actorType, SpriteType spriteType) {
@@ -47,21 +60,21 @@ public class BaseEnemy extends BaseCreature {
 
     float multiplier = 0f;
 
-    protected void Strengths(StatType... stats) {
+    protected void strengths(StatType... stats) {
         for (StatType stat : stats) {
             multiplier = (stat == StatType.MOVE_COOL_DOWN) ? .5f : 2;
             InitStat(stat, get(stat) * multiplier);
         }
     }
 
-    protected void Weaknesses(StatType... stats) {
+    protected void weaknesses(StatType... stats) {
         for (StatType stat : stats) {
             multiplier = (stat == StatType.MOVE_COOL_DOWN) ? 2 : .5f;
             InitStat(stat, get(stat) * multiplier);
         }
     }
 
-    protected void Compose(Elements... elems) {
+    protected void compose(Elements... elems) {
         _composition.addAll(Arrays.asList(elems));
     }
 }

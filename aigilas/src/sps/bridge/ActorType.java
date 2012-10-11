@@ -61,4 +61,13 @@ public enum ActorType {
         }
         return __randoms.get(RNG.Rand.nextInt(__randoms.size()));
     }
+
+    public static ActorType get(String value) {
+        for (ActorType actor : values()) {
+            if (actor.name().replace("_", "").equalsIgnoreCase(value)) {
+                return actor;
+            }
+        }
+        return null;
+    }
 }
