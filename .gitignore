@@ -10,3 +10,4 @@ pkg/
 *.iml
 deploy-snapshot.sh
 target/
+.DS_Store
