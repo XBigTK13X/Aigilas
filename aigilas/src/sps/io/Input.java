@@ -14,39 +14,33 @@ public class Input {
 
     // Lists what commands are locked for a given player
     private static final List<CommandLock> __locks = new ArrayList<CommandLock>();
-
-    // The commands that cannot be used by simply holding down the command's
-    // input depending on the given context
-    private static final HashMap<Commands, Contexts> __lockOnPress = new HashMap<Commands, Contexts>();
-    private static final HashMap<Commands, Keys> _keyboardMapping = new HashMap<Commands, Keys>();
-    private static final HashMap<Commands, Buttons> _gamePadMapping = new HashMap<Commands, Buttons>();
     private static boolean __isInputActive = false;
 
-    public static void setup(IInputInitializer initializer) {
+    public static void setup() {
         __contexts = new HashMap<Integer, Contexts>();
         __contexts.put(0, Contexts.Free);
         __contexts.put(1, Contexts.Free);
         __contexts.put(2, Contexts.Free);
         __contexts.put(3, Contexts.Free);
 
-        for (CommandDefinition command : initializer.getCommands()) {
-            _keyboardMapping.put(command.Command, command.Keyboard);
-            _gamePadMapping.put(command.Command, command.Gamepad);
-            if (command.LockContext != null) {
-                __lockOnPress.put(command.Command, command.LockContext);
-            }
-        }
+        InputBindings.init();
     }
 
     public static boolean detectState(Commands command, int playerIndex) {
         /*
            * boolean gamepadActive = GamePad.GetState(
            * PlayerIndex.values()[playerIndex]).IsButtonDown(
-           * _gamePadMapping.get(command));
+           * command.button());
            */
         // $$$
         boolean gamepadActive = false;
-        return gamepadActive || (playerIndex == Client.get().getFirstPlayerIndex() && Gdx.input.isKeyPressed(_keyboardMapping.get(command).getKeyCode()));
+        try{
+            return gamepadActive || (playerIndex == Client.get().getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode()));
+        }
+        catch(Exception e){
+            int x = 0;
+        }
+        return false;
     }
 
     private static boolean isDown(Commands command, int playerIndex) {
@@ -77,14 +71,7 @@ public class Input {
     // If the key is marked to be locked on press and its lock context is
     // currently inactive
     private static boolean shouldLock(Commands command, int playerIndex) {
-        for (Commands key : __lockOnPress.keySet()) {
-            if (key == command) {
-                if (__lockOnPress.get(key) == __contexts.get(playerIndex) || (__lockOnPress.get(key) == Contexts.Nonfree && __contexts.get(playerIndex) != Contexts.Free) || __lockOnPress.get(key) == Contexts.All) {
-                    return true;
-                }
-            }
-        }
-        return false;
+       return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.Nonfree && __contexts.get(playerIndex) != Contexts.Free) || command.Context == Contexts.All;
     }
 
     public static void setContext(Contexts context, int playerIndex) {
@@ -126,7 +113,7 @@ public class Input {
             }
         }
 
-        for (Commands command : _keyboardMapping.keySet()) {
+        for (Commands command : Commands.values()) {
             Client.get().setState(command, Client.get().getFirstPlayerIndex(), detectState(command, Client.get().getFirstPlayerIndex()));
         }
     }

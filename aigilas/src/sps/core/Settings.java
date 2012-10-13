@@ -1,5 +1,7 @@
 package sps.core;
 
+import aigilas.management.Commands;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -46,8 +48,8 @@ public class Settings {
     public final int resolutionHeight;
     public final int resolutionWidth;
 
-    public boolean consoleLogging;
-    public boolean viewPaths;
+    public final boolean consoleLogging;
+    public final boolean viewPaths;
 
     private Settings() {
         try {

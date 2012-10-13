@@ -1,7 +1,6 @@
 package aigilas;
 
 import aigilas.management.Commands;
-import aigilas.management.InputInitializer;
 import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
@@ -26,7 +25,7 @@ public class Aigilas implements ApplicationListener {
     @Override
     public void create() {
         SpxManager.setup();
-        Input.setup(new InputInitializer());
+        Input.setup();
         SpriteSheetManager.setup(new SpriteInitializer());
         StateManager.loadState(new MainMenuState());
         ParticleEngine.reset();

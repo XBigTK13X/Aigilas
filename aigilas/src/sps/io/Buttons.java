@@ -2,10 +2,10 @@ package sps.io;
 
 public enum Buttons {
 
-    LeftThumbstickUp,
-    LeftThumbstickDown,
-    LeftThumbstickLeft,
-    LeftThumbstickRight,
+    LeftStickUp,
+    LeftStickDown,
+    LeftStickLeft,
+    LeftStickRight,
     RightTrigger,
     DPadUp,
     X,
@@ -17,5 +17,14 @@ public enum Buttons {
     LeftTrigger,
     Y,
     B,
-    DPadDown
+    DPadDown;
+
+    public static Buttons get(String s) {
+        for(Buttons key: values()){
+            if(key.name().equalsIgnoreCase(s)){
+                return key;
+            }
+        }
+        return null;
+    }
 }

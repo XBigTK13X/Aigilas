@@ -35,7 +35,6 @@ public class DungeonSet {
 
     private void loadOrCreateDungeon(boolean goingUp) {
         if (!_floors.containsKey(_currentFloor)) {
-            System.out.println("Creating a new dungeon for floor: " + _currentFloor);
             _floors.put(_currentFloor, new Dungeon(_floors.get(_currentFloor - 1).getDownstairsLocation()));
             DungeonFactory.increaseFloorCount();
         }

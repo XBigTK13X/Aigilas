@@ -17,7 +17,7 @@ public enum Keys {
     D1(Input.Keys.NUM_1),
     D2(Input.Keys.NUM_2),
     D3(Input.Keys.NUM_3),
-    OemTilde(Input.Keys.TAB),
+    Tilde(Input.Keys.TAB),
     E(Input.Keys.E),
     Space(Input.Keys.SPACE);
 
@@ -29,5 +29,14 @@ public enum Keys {
 
     public int getKeyCode() {
         return _keyCode;
+    }
+
+    public static Keys get(String s) {
+        for(Keys key: values()){
+            if(key.name().equalsIgnoreCase(s)){
+                return key;
+            }
+        }
+        return null;
     }
 }
