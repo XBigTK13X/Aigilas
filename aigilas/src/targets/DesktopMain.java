@@ -4,7 +4,6 @@ import aigilas.Aigilas;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import sps.core.Settings;
-import sps.core.SpxManager;
 import sps.net.Server;
 
 public class DesktopMain {

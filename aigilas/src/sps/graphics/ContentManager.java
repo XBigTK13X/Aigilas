@@ -14,8 +14,8 @@ public class ContentManager {
         public final int Y;
 
         public Dimensions(int frame, int index) {
-            X = frame * Settings.get().spriteHeight + (Settings.get().spriteGap*frame) + Settings.get().spriteGap;
-            Y = index * Settings.get().spriteHeight + (Settings.get().spriteGap*index) + Settings.get().spriteGap;
+            X = frame * Settings.get().spriteHeight + (Settings.get().spriteGap * frame) + Settings.get().spriteGap;
+            Y = index * Settings.get().spriteHeight + (Settings.get().spriteGap * index) + Settings.get().spriteGap;
             Width = Settings.get().spriteWidth - Settings.get().spriteGap;
             Height = Settings.get().spriteHeight - Settings.get().spriteGap;
         }

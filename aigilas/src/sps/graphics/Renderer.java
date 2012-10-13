@@ -90,7 +90,7 @@ public class Renderer {
     }
 
     private void renderString(String content, Point2 location, Color filter, float scale, DrawDepth depth) {
-        font.setScale(scale*2);
+        font.setScale(scale * 2);
         font.setColor(filter);
         font.draw(batch, content, location.X, location.Y);
     }
