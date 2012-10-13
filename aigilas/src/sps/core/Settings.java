@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 public class Settings {
     private static final String __configPath = "assets/data/settings.cfg";
-
     private static Settings __instance;
 
     public static Settings get() {
@@ -18,33 +17,34 @@ public class Settings {
         return __instance;
     }
 
-    private final HashMap<String, String> _values = new HashMap<String, String>();
-    public int port;
-    public String serverIp;
-    public boolean clientVerbose;
-    public boolean serverVerbose;
-    public boolean messageContentsVerbose;
-    public boolean messageHandlerVerbose;
-    public boolean clientManagerVerbose;
-    public boolean networkingEnabled;
+    private HashMap<String, String> _settings = new HashMap<String, String>();
 
-    public int enemyCap;
-    public int enemyBase;
-    public int itemCap;
-    public int itemBase;
-    public int bossLevelMod;
-    public int maxRoomCount;
-    public float defaultSpeed;
-    public float defaultRegen;
-    public float turnTime;
+    public final int port;
+    public final String serverIp;
+    public final boolean clientVerbose;
+    public final boolean serverVerbose;
+    public final boolean messageContentsVerbose;
+    public final boolean messageHandlerVerbose;
+    public final boolean clientManagerVerbose;
+    public final boolean networkingEnabled;
 
-    public int spriteHeight;
-    public int spriteWidth;
-    public int spriteGap;
-    public int tileMapHeight;
-    public int tileMapWidth;
-    public int resolutionHeight;
-    public int resolutionWidth;
+    public final int enemyCap;
+    public final int enemyBase;
+    public final int itemCap;
+    public final int itemBase;
+    public final int bossLevelMod;
+    public final int maxRoomCount;
+    public final float defaultSpeed;
+    public final float defaultRegen;
+    public final float turnTime;
+
+    public final int spriteHeight;
+    public final int spriteWidth;
+    public final int spriteGap;
+    public final int tileMapHeight;
+    public final int tileMapWidth;
+    public final int resolutionHeight;
+    public final int resolutionWidth;
 
     public boolean consoleLogging;
     public boolean viewPaths;
@@ -59,117 +59,7 @@ public class Settings {
                 if (!line.contains("##") && line.length() > 1) {
                     String key = line.split("=")[0];
                     String value = line.split("=")[1];
-                    _values.put(key, value);
-
-                    // Networking
-                    if (key.equalsIgnoreCase("server_ip")) {
-                        serverIp = value;
-                    }
-
-                    if (key.equalsIgnoreCase("socket_port")) {
-                        port = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("server_log_verbose")) {
-                        serverVerbose = isTrue(value);
-                    }
-
-                    if (key.equalsIgnoreCase("client_log_verbose")) {
-                        clientVerbose = isTrue(value);
-                    }
-
-                    if (key.equalsIgnoreCase("message_contents_log_verbose")) {
-                        messageContentsVerbose = isTrue(value);
-                    }
-
-                    if (key.equalsIgnoreCase("message_handler_log_verbose")) {
-                        messageHandlerVerbose = isTrue(value);
-                    }
-
-                    if (key.equalsIgnoreCase("client_manager_log_verbose")) {
-                        clientManagerVerbose = isTrue(value);
-                    }
-
-                    if (key.equalsIgnoreCase("networking_enabled")) {
-                        networkingEnabled = isTrue(value);
-                    }
-
-
-                    // Gameplay
-                    if (key.equalsIgnoreCase("enemyCap")) {
-                        enemyCap = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("enemyBase")) {
-                        enemyBase = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("itemCap")) {
-                        itemCap = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("itemBase")) {
-                        itemBase = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("bossLevelMod")) {
-                        bossLevelMod = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("maxRoomCount")) {
-                        maxRoomCount = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("defaultSpeed")) {
-                        defaultSpeed = Float.parseFloat(value);
-                    }
-
-                    if (key.equalsIgnoreCase("defaultRegen")) {
-                        defaultRegen = Float.parseFloat(value);
-                    }
-
-                    if (key.equalsIgnoreCase("turnsPerSecond")) {
-                        turnTime = 1 / Float.parseFloat(value);
-                    }
-
-
-                    // Display
-                    if (key.equalsIgnoreCase("spriteHeight")) {
-                        spriteHeight = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("spriteWidth")) {
-                        spriteWidth = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("spriteGap")) {
-                        spriteGap = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("tileMapHeight")) {
-                        tileMapHeight = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("tileMapWidth")) {
-                        tileMapWidth = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("resolutionHeight")) {
-                        resolutionHeight = Integer.parseInt(value);
-                    }
-
-                    if (key.equalsIgnoreCase("resolutionWidth")) {
-                        resolutionWidth = Integer.parseInt(value);
-                    }
-
-                    // Dev
-                    if (key.equalsIgnoreCase("consoleLogging")) {
-                        consoleLogging = isTrue(value);
-                    }
-
-                    if (key.equalsIgnoreCase("viewPaths")) {
-                        viewPaths = isTrue(value);
-                    }
+                    _settings.put(key, value);
                 }
                 if (line.contains("##")) {
                     System.out.println("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
@@ -177,14 +67,43 @@ public class Settings {
             }
             in.close();
         }
-
-        catch (
-                Exception e
-                )
-
-        {
+        catch (Exception e) {
             System.err.println("Error)) " + e.getMessage());
         }
+
+        // Networking
+        serverIp = _settings.get("server_ip");
+        port = Integer.parseInt(_settings.get("socket_port"));
+        serverVerbose = isTrue(_settings.get("server_log_verbose"));
+        clientVerbose = isTrue(_settings.get("client_log_verbose"));
+        messageContentsVerbose = isTrue(_settings.get("message_contents_log_verbose"));
+        messageHandlerVerbose = isTrue(_settings.get("message_handler_log_verbose"));
+        clientManagerVerbose = isTrue(_settings.get("client_manager_log_verbose"));
+        networkingEnabled = isTrue(_settings.get("networking_enabled"));
+
+        // Gameplay
+        enemyCap = Integer.parseInt(_settings.get("enemyCap"));
+        enemyBase = Integer.parseInt(_settings.get("enemyBase"));
+        itemCap = Integer.parseInt(_settings.get("itemCap"));
+        itemBase = Integer.parseInt(_settings.get("itemBase"));
+        bossLevelMod = Integer.parseInt(_settings.get("bossLevelMod"));
+        maxRoomCount = Integer.parseInt(_settings.get("maxRoomCount"));
+        defaultSpeed = Float.parseFloat(_settings.get("defaultSpeed"));
+        defaultRegen = Float.parseFloat(_settings.get("defaultRegen"));
+        turnTime = 1 / Float.parseFloat(_settings.get("turnsPerSecond"));
+
+        // Display
+        spriteHeight = Integer.parseInt(_settings.get("spriteHeight"));
+        spriteWidth = Integer.parseInt(_settings.get("spriteWidth"));
+        spriteGap = Integer.parseInt(_settings.get("spriteGap"));
+        tileMapHeight = Integer.parseInt(_settings.get("tileMapHeight"));
+        tileMapWidth = Integer.parseInt(_settings.get("tileMapWidth"));
+        resolutionHeight = Integer.parseInt(_settings.get("resolutionHeight"));
+        resolutionWidth = Integer.parseInt(_settings.get("resolutionWidth"));
+
+        // Dev
+        consoleLogging = isTrue(_settings.get("consoleLogging"));
+        viewPaths = isTrue(_settings.get("viewPaths"));
 
     }
 
