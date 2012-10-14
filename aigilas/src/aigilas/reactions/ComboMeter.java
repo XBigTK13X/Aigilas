@@ -3,6 +3,7 @@ package aigilas.reactions;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.ComboMarker;
 import aigilas.entities.Elements;
+import sps.core.Logger;
 import sps.text.ActionText;
 import sps.text.TextManager;
 
@@ -129,6 +130,7 @@ public class ComboMeter {
                 reaction = ReactionFactory.create(__reactions.get(reactionId));
                 if (reaction != null) {
                     reaction.affect(_parent);
+                    Logger.gameplay(_parent + " affected by " + __reactions.get(reactionId).toString());
                     TextManager.add(new ActionText(__reactions.get(reactionId).toString(), 10, (int) _parent.getLocation().PosX, (int) _parent.getLocation().PosY));
                 }
             }

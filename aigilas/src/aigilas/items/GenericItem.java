@@ -1,5 +1,6 @@
 package aigilas.items;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
@@ -67,10 +68,15 @@ public class GenericItem extends Entity {
         super.update();
         if (_isOnBoard) {
             IActor collider = EntityManager.get().getTouchingCreature(this);
-            if (collider != null && collider.getActorType() == ActorType.Player) {
-                _currentTarget = (Player) collider;
-                if (_currentTarget.isInteracting()) {
-                    _currentTarget.pickupItem(this);
+            if (collider != null) {
+                if (collider.getActorType() == ActorType.Player) {
+                    _currentTarget = (Player) collider;
+                    if (_currentTarget.isInteracting()) {
+                        _currentTarget.pickupItem(this);
+                    }
+                }
+                else {
+                    ((BaseCreature) collider).pickupItem(this);
                 }
             }
         }
