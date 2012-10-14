@@ -9,8 +9,8 @@ import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
 
-public class GameOverState implements State {
-    public GameOverState() {
+public class GameLoseState implements State {
+    public GameLoseState() {
     }
 
     @Override

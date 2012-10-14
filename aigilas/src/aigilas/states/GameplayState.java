@@ -28,7 +28,7 @@ public class GameplayState implements State {
             }
         }
         if (allDead) {
-            StateManager.loadState(new GameOverState());
+            StateManager.loadState(new GameLoseState());
         }
         EntityManager.get().update();
     }

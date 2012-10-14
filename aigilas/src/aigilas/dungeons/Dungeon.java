@@ -5,6 +5,7 @@ import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
+import aigilas.states.GameWinState;
 import sps.bridge.ActorType;
 import sps.bridge.EntityType;
 import sps.core.Point2;
@@ -14,6 +15,7 @@ import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
 import sps.net.Client;
+import sps.states.StateManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,9 +172,14 @@ public class Dungeon {
         // = dungeon[random.GridX][random.GridY] =
         // = CreatureFactory.create(ActorType.ENVY, random);
         // = return;
-        if (DungeonFactory.getFloorCount() % Settings.get().bossLevelMod == 1 && CreatureFactory.bossesRemaining() > 0) {
-            Point2 randomPoint = new Point2(findRandomFreeTile());
-            dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
+        if (DungeonFactory.getFloorCount() % Settings.get().bossLevelMod == 1) {
+            if (CreatureFactory.bossesRemaining() > 0) {
+                Point2 randomPoint = new Point2(findRandomFreeTile());
+                dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
+            }
+            else {
+                StateManager.loadState(new GameWinState());
+            }
         }
         else {
             while (amountOfCreatures > 0) {
