@@ -3,6 +3,7 @@ package targets;
 import aigilas.Aigilas;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import sps.core.Logger;
 import sps.core.Settings;
 import sps.net.Server;
 
@@ -21,7 +22,7 @@ public class DesktopMain {
             }
         }
 
-        System.out.println("Launching the main game loop");
+        Logger.info("Launching the main game loop");
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Aigilas";
         cfg.width = Settings.get().resolutionWidth;

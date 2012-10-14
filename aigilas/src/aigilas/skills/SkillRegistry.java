@@ -3,6 +3,7 @@ package aigilas.skills;
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
 import com.badlogic.gdx.Gdx;
+import sps.core.Logger;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -58,7 +59,7 @@ public class SkillRegistry {
             in.close();
         }
         catch (Exception e) {
-            System.out.println("Error occurred while parsing skills.csv.");
+            Logger.error("Error occurred while parsing skills.csv.");
             e.printStackTrace();
             Gdx.app.exit();
         }

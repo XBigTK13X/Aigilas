@@ -1,7 +1,5 @@
 package sps.core;
 
-import aigilas.management.Commands;
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -23,11 +21,6 @@ public class Settings {
 
     public final int port;
     public final String serverIp;
-    public final boolean clientVerbose;
-    public final boolean serverVerbose;
-    public final boolean messageContentsVerbose;
-    public final boolean messageHandlerVerbose;
-    public final boolean clientManagerVerbose;
     public final boolean networkingEnabled;
 
     public final int enemyCap;
@@ -48,8 +41,14 @@ public class Settings {
     public final int resolutionHeight;
     public final int resolutionWidth;
 
-    public final boolean consoleLogging;
+    public boolean devConsoleEnabled;
+    public final boolean clientVerbose;
+    public final boolean serverVerbose;
+    public final boolean messageContentsVerbose;
+    public final boolean messageHandlerVerbose;
+    public final boolean clientManagerVerbose;
     public final boolean viewPaths;
+    public final boolean gameplayVerbose;
 
     private Settings() {
         try {
@@ -64,7 +63,7 @@ public class Settings {
                     _settings.put(key, value);
                 }
                 if (line.contains("##")) {
-                    System.out.println("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
+                    Logger.info("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
                 }
             }
             in.close();
@@ -76,11 +75,6 @@ public class Settings {
         // Networking
         serverIp = _settings.get("server_ip");
         port = Integer.parseInt(_settings.get("socket_port"));
-        serverVerbose = isTrue(_settings.get("server_log_verbose"));
-        clientVerbose = isTrue(_settings.get("client_log_verbose"));
-        messageContentsVerbose = isTrue(_settings.get("message_contents_log_verbose"));
-        messageHandlerVerbose = isTrue(_settings.get("message_handler_log_verbose"));
-        clientManagerVerbose = isTrue(_settings.get("client_manager_log_verbose"));
         networkingEnabled = isTrue(_settings.get("networking_enabled"));
 
         // Gameplay
@@ -104,8 +98,14 @@ public class Settings {
         resolutionWidth = Integer.parseInt(_settings.get("resolutionWidth"));
 
         // Dev
-        consoleLogging = isTrue(_settings.get("consoleLogging"));
+        serverVerbose = isTrue(_settings.get("server_log_verbose"));
+        clientVerbose = isTrue(_settings.get("client_log_verbose"));
+        messageContentsVerbose = isTrue(_settings.get("message_contents_log_verbose"));
+        messageHandlerVerbose = isTrue(_settings.get("message_handler_log_verbose"));
+        clientManagerVerbose = isTrue(_settings.get("client_manager_log_verbose"));
         viewPaths = isTrue(_settings.get("viewPaths"));
+        gameplayVerbose = isTrue(_settings.get("gameplay_log_verbose"));
+        devConsoleEnabled = isTrue(_settings.get("dev_console_enabled"));
 
     }
 

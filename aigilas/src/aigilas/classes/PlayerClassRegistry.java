@@ -3,6 +3,7 @@ package aigilas.classes;
 import aigilas.creatures.Stats;
 import aigilas.skills.SkillId;
 import com.badlogic.gdx.Gdx;
+import sps.core.Logger;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -53,7 +54,7 @@ public class PlayerClassRegistry {
             in.close();
         }
         catch (Exception e) {
-            System.out.println("Error occurred while parsing " + __dataPath);
+            Logger.error("Error occurred while parsing " + __dataPath);
             e.printStackTrace();
             Gdx.app.exit();
         }

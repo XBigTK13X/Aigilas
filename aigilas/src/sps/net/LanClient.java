@@ -1,6 +1,7 @@
 package sps.net;
 
 import aigilas.management.Commands;
+import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
 import sps.devtools.DevConsole;
@@ -23,7 +24,7 @@ public class LanClient implements IClient {
 
     public LanClient() {
         if (Settings.get().clientVerbose) {
-            System.out.println("CLIENT: Attempting to make a new connection");
+            Logger.client("CLIENT: Attempting to make a new connection");
         }
         for (int ii = 0; ii < Message.PlayerMax; ii++) {
             _playerStatus.put(ii, new HashMap<Commands, Boolean>());
@@ -58,7 +59,7 @@ public class LanClient implements IClient {
             _heartBeat--;
             if (_heartBeat <= 0) {
                 if (Settings.get().clientVerbose) {
-                    System.out.println("CLIENT: Heartbeating...");
+                    Logger.client("CLIENT: Heartbeating...");
                 }
                 sendMessage(Message.createHeartBeat());
                 _heartBeat = 15;
@@ -67,7 +68,7 @@ public class LanClient implements IClient {
     }
 
     public void dungeonHasLoaded() {
-        System.out.println("CLIENT: Dungeon has finished loading...");
+        Logger.client("CLIENT: Dungeon has finished loading...");
         _dungeonHasLoaded = true;
     }
 
@@ -115,7 +116,7 @@ public class LanClient implements IClient {
         initPlayer(playerIndex, command);
         if (_playerStatus.get(playerIndex).get(command) != isActive) {
             if (Settings.get().clientVerbose) {
-                System.out.println(String.format("CLIENT: Moves extends  CMD(%s) PI(%s) AC(%s)", command, playerIndex, isActive));
+                Logger.client(String.format("CLIENT: Moves extends  CMD(%s) PI(%s) AC(%s)", command, playerIndex, isActive));
             }
             sendMessage(Message.createMovement(command, playerIndex, isActive));
         }
@@ -138,7 +139,7 @@ public class LanClient implements IClient {
 
     private void sendMessage(Message contents) {
         if (Settings.get().clientVerbose) {
-            System.out.println("CLIENT: Sending message -> " + contents.MessageType);
+            Logger.client("CLIENT: Sending message -> " + contents.MessageType);
         }
         contents.PlayerIndex = _initialPlayerIndex;
         contents.LocalPort = _comm.getLocalPort();
@@ -149,20 +150,20 @@ public class LanClient implements IClient {
     // Then the client will hang in an infinite loop.
     private void awaitReply(MessageTypes messageType) {
         if (Settings.get().clientVerbose) {
-            System.out.println("CLIENT: Waiting for " + messageType);
+            Logger.client("CLIENT: Waiting for " + messageType);
         }
         while (true) {
             _message = _comm.readInboundMessage();
             if (_message != null) {
                 if (_message.MessageType == messageType) {
                     if (Settings.get().clientVerbose) {
-                        System.out.println("CLIENT: Right message received");
+                        Logger.client("CLIENT: Right message received");
                     }
                     return;
                 }
                 else {
                     if (Settings.get().clientVerbose) {
-                        System.out.println("CLIENT: Wrong message received:  " + _message.MessageType + "; Expected:  " + messageType);
+                        Logger.client("CLIENT: Wrong message received:  " + _message.MessageType + "; Expected:  " + messageType);
                     }
                     handleResponse(_message);
                 }
@@ -181,31 +182,31 @@ public class LanClient implements IClient {
         switch (contents.MessageType) {
             case CONNECT:
                 if (Settings.get().clientVerbose) {
-                    System.out.println("CLIENT: Handshake successful. Starting player id extends  " + contents.PlayerIndex);
+                    Logger.client("CLIENT: Handshake successful. Starting player id extends  " + contents.PlayerIndex);
                 }
                 RNG.seed(contents.RngSeed);
                 _initialPlayerIndex = (int) contents.PlayerCount;
                 _isConnected = true;
                 break;
             case START_GAME:
-                System.out.println("CLIENT: Start game reply has been received");
+                Logger.client("CLIENT: Start game reply has been received");
                 _isGameStarting = true;
                 break;
             case SYNC_STATE:
                 if (Settings.get().clientVerbose) {
-                    System.out.println("CLIENT: Input state received");
+                    Logger.client("CLIENT: Input state received");
                 }
                 contents.readPlayerState(_playerStatus);
                 break;
             default:
                 if (Settings.get().clientVerbose) {
-                    System.out.println("CLIENT: Unknown message type received -> " + _message.MessageType);
+                    Logger.client("CLIENT: Unknown message type received -> " + _message.MessageType);
                 }
                 break;
         }
     }
 
     public void close() {
-        System.out.println("CLIENT: Shutting down");
+        Logger.client("CLIENT: Shutting down");
     }
 }

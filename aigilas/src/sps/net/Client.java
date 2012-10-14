@@ -1,5 +1,6 @@
 package sps.net;
 
+import sps.core.Logger;
 import sps.core.Settings;
 
 public class Client {
@@ -10,14 +11,14 @@ public class Client {
             if (Settings.get().networkingEnabled) {
                 __instance = new LanClient();
                 if (Settings.get().clientVerbose) {
-                    System.out.println("CLIENT: Waiting for networked server connection");
+                    Logger.client("CLIENT: Waiting for networked server connection");
                 }
                 while (!__instance.isConnected()) {
                     // Wait
                 }
             }
             else {
-                System.out.println("CLIENT: Launching local non-networked game client.");
+                Logger.client("CLIENT: Launching local non-networked game client.");
                 __instance = new LocalClient();
             }
         }

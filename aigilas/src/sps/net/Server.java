@@ -1,6 +1,7 @@
 package sps.net;
 
 import aigilas.management.Commands;
+import sps.core.Logger;
 import sps.core.Settings;
 
 import java.util.HashMap;
@@ -43,14 +44,14 @@ public class Server extends Thread {
         _message = clients.readMessage();
         if (_message != null) {
             if (Settings.get().serverVerbose) {
-                System.out.println("SERVER: Message received: " + _message.MessageType);
+                Logger.server("SERVER: Message received: " + _message.MessageType);
             }
             switch (_message.MessageType) {
                 case CONNECT:
-                    System.out.println("SERVER: New client connection");
+                    Logger.server("SERVER: New client connection");
                     sendMessage(Message.createInit(clients.size() - 1, _rngSeed), _message.LocalPort);
                     if (Settings.get().serverVerbose) {
-                        System.out.println("SERVER: Accepted new connection");
+                        Logger.server("SERVER: Accepted new connection");
                     }
                     _turnCount = 0;
                     break;
@@ -58,7 +59,7 @@ public class Server extends Thread {
                     initPlayer(_message.PlayerIndex, _message.Command);
                     _message.IsActive = _playerStatus.get(_message.PlayerIndex).get(_message.Command);
                     if (Settings.get().serverVerbose) {
-                        System.out.println(String.format("SERVER: Check extends  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _playerStatus.get(_message.PlayerIndex).get(_message.Command)));
+                        Logger.server(String.format("SERVER: Check extends  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _playerStatus.get(_message.PlayerIndex).get(_message.Command)));
                     }
                     sendMessage(_message, _message.LocalPort);
                     break;
@@ -66,26 +67,26 @@ public class Server extends Thread {
                 case MOVEMENT:
                     initPlayer(_message.PlayerIndex, _message.Command);
                     if (Settings.get().serverVerbose) {
-                        System.out.println(String.format("SERVER: Moves:  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _message.IsActive));
+                        Logger.server(String.format("SERVER: Moves:  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _message.IsActive));
                     }
                     _playerStatus.get(_message.PlayerIndex).put(_message.Command, _message.IsActive);
                     break;
 
                 case START_GAME:
-                    System.out.println("SERVER: Announcing game commencement.");
+                    Logger.server("SERVER: Announcing game commencement.");
                     announce(_message);
                     break;
 
                 case PLAYER_COUNT:
                     if (Settings.get().serverVerbose) {
-                        System.out.println("SERVER: PLAYER COUNT");
+                        Logger.server("SERVER: PLAYER COUNT");
                     }
                     sendMessage(Message.createPlayerCount(clients.size()), _message.LocalPort);
                     break;
 
                 case READY_FOR_NEXT_TURN:
                     if (Settings.get().serverVerbose) {
-                        System.out.println("SERVER: Received ready signal from client");
+                        Logger.server("SERVER: Received ready signal from client");
                     }
                     _readyCheckIn[_message.PlayerIndex] = true;
                     break;
@@ -95,7 +96,7 @@ public class Server extends Thread {
                     break;
                 default:
                     if (Settings.get().serverVerbose) {
-                        System.out.println("SERVER: Unknown message");
+                        Logger.server("SERVER: Unknown message");
                     }
                     break;
             }
@@ -122,7 +123,7 @@ public class Server extends Thread {
         }
         if (readyCount >= clients.size()) {
             if (Settings.get().serverVerbose) {
-                System.out.println("SERVER: Announcing player input status.");
+                Logger.server("SERVER: Announcing player input status.");
             }
             announce(Message.createPlayerState(_playerStatus, _turnCount++, _rngSeed));
             for (int ii = 0; ii < _readyCheckIn.length; ii++) {
@@ -142,6 +143,6 @@ public class Server extends Thread {
 
     public void close() {
         isRunning = false;
-        System.out.println("SERVER: Shutting down");
+        Logger.server("SERVER: Shutting down");
     }
 }

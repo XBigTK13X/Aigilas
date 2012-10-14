@@ -5,7 +5,7 @@ import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import sps.core.Settings;
+import sps.core.Logger;
 import sps.core.SpxManager;
 import sps.devtools.DevConsole;
 import sps.graphics.SpriteSheetManager;
@@ -41,9 +41,7 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void render() {
-        if (Settings.get().consoleLogging) {
-            DevConsole.get().add("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
-        }
+        Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
 
         // Update
         Input.update();

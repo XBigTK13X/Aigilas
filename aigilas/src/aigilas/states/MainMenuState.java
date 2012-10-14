@@ -1,6 +1,7 @@
 package aigilas.states;
 
 import aigilas.management.Commands;
+import sps.core.Logger;
 import sps.io.Contexts;
 import sps.io.Input;
 import sps.net.Client;
@@ -45,7 +46,7 @@ public class MainMenuState implements State {
             if (Input.isActive(Commands.Confirm, Client.get().getFirstPlayerIndex())) {
                 switch (_selection) {
                     case 2:
-                        System.out.println("Starting the game");
+                        Logger.info("Starting the game");
                         Client.get().startGame();
                         return;
                     case 1:

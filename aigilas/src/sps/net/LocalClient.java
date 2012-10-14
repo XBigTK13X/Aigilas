@@ -2,6 +2,7 @@ package sps.net;
 
 import aigilas.management.Commands;
 import com.badlogic.gdx.Gdx;
+import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
 
@@ -17,7 +18,7 @@ public class LocalClient implements IClient {
 
     public LocalClient() {
         if (Settings.get().clientVerbose) {
-            System.out.println("CLIENT: Starting up");
+            Logger.client("CLIENT: Starting up");
         }
         for (int ii = 0; ii < maxPlayers; ii++) {
             _playerStatus.put(ii, new HashMap<Commands, Boolean>());
@@ -68,7 +69,7 @@ public class LocalClient implements IClient {
         initPlayer(playerIndex, command);
         if (_playerStatus.get(playerIndex).get(command) != isActive) {
             if (Settings.get().clientVerbose) {
-                System.out.println(String.format("CLIENT: Moves extends  CMD(%s) PI(%s) AC(%s)", command, playerIndex, isActive));
+                Logger.client(String.format("CLIENT: Moves extends  CMD(%s) PI(%s) AC(%s)", command, playerIndex, isActive));
             }
             _playerStatus.get(playerIndex).put(command, isActive);
         }

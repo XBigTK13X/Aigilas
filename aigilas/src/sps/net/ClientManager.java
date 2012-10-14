@@ -1,5 +1,6 @@
 package sps.net;
 
+import sps.core.Logger;
 import sps.core.Settings;
 
 import java.io.IOException;
@@ -25,11 +26,11 @@ public class ClientManager {
                     while (!Thread.interrupted()) {
                         try {
                             if (Settings.get().clientManagerVerbose) {
-                                System.out.println("MANAGER: Waiting for a client connection");
+                                Logger.clientManager("MANAGER: Waiting for a client connection");
                             }
                             Socket client = server.accept();
                             if (Settings.get().clientManagerVerbose) {
-                                System.out.println("MANAGER: New connection made");
+                                Logger.clientManager("MANAGER: New connection made");
                             }
                             clients.add(new MessageHandler(client));
                             clients.get(clients.size() - 1).owner = "SERVER";
@@ -39,14 +40,14 @@ public class ClientManager {
                             e.printStackTrace();
                         }
                     }
-                    System.out.println("ClientManager was interupted.");
+                    Logger.clientManager("ClientManager was interupted.");
                 }
             }, "ClientManager");
             clientListener.start();
         }
         catch (IOException e1) {
             __otherServerExists = true;
-            System.out.println("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
+            Logger.clientManager("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
         }
     }
 

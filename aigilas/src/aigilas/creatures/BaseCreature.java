@@ -22,6 +22,7 @@ import aigilas.strategies.TargetSet;
 import sps.bridge.ActorType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.entities.CoordVerifier;
 import sps.entities.Entity;
@@ -304,6 +305,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void applyDamage(float damage, BaseCreature attacker, boolean showDamage, StatType statType) {
+        Logger.gameplay(this.toString() + " taking " + damage + " damage");
         if (attacker != null) {
             attacker.passOn(this, StatusComponent.Contagion);
             this.passOn(attacker, StatusComponent.Passive);
