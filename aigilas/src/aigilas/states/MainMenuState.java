@@ -50,7 +50,7 @@ public class MainMenuState implements State {
                         Client.get().startGame();
                         return;
                     case 1:
-                        StateManager.loadState(new OptionsState());
+                        //$$$ StateManager.loadState(new OptionsState());
                         return;
                     case 0:
                         System.exit(0);
