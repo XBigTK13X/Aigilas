@@ -30,8 +30,6 @@ public class Aigilas implements ApplicationListener {
         StateManager.loadState(new MainMenuState());
         ParticleEngine.reset();
         StateManager.loadContent();
-        // //$$$MediaPlayer.Play(Content.Load<Song>("MainTheme"));
-        // //$$$MediaPlayer.IsRepeating = true;
     }
 
     @Override

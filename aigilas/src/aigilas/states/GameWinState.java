@@ -2,6 +2,7 @@ package aigilas.states;
 
 import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Color;
+import sps.audio.MusicPlayer;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.SpxManager;
@@ -11,6 +12,7 @@ import sps.states.StateManager;
 
 public class GameWinState implements State {
     public GameWinState() {
+        MusicPlayer.get().stop();
     }
 
     @Override

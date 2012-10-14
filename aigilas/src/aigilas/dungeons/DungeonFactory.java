@@ -1,6 +1,7 @@
 package aigilas.dungeons;
 
 import aigilas.creatures.impl.CreatureFactory;
+import sps.audio.MusicPlayer;
 import sps.entities.Entity;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class DungeonFactory {
         }
         while (getPreviousFloor()) {
         }
+        MusicPlayer.get().start();
     }
 
     public static int getFloorCount() {
