@@ -8,7 +8,7 @@ public enum Keys {
     Left(Input.Keys.LEFT),
     Right(Input.Keys.RIGHT),
     Enter(Input.Keys.ENTER),
-    Back(Input.Keys.BACK),
+    Backspace(Input.Keys.BACKSPACE),
     R(Input.Keys.R),
     D(Input.Keys.D),
     A(Input.Keys.A),
@@ -32,8 +32,8 @@ public enum Keys {
     }
 
     public static Keys get(String s) {
-        for(Keys key: values()){
-            if(key.name().equalsIgnoreCase(s)){
+        for (Keys key : values()) {
+            if (key.name().equalsIgnoreCase(s)) {
                 return key;
             }
         }
