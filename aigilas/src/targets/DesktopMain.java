@@ -26,6 +26,7 @@ public class DesktopMain {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Aigilas";
         cfg.width = Settings.get().resolutionWidth;
+        cfg.fullscreen = Settings.get().fullScreen;
         cfg.height = Settings.get().resolutionHeight;
         cfg.useGL20 = true;
         new LwjglApplication(new Aigilas(), cfg);

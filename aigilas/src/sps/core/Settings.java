@@ -40,6 +40,7 @@ public class Settings {
     public final int tileMapWidth;
     public final int resolutionHeight;
     public final int resolutionWidth;
+    public final boolean fullScreen;
 
     public boolean devConsoleEnabled;
     public final boolean clientVerbose;
@@ -96,6 +97,7 @@ public class Settings {
         tileMapWidth = Integer.parseInt(_settings.get("tileMapWidth"));
         resolutionHeight = Integer.parseInt(_settings.get("resolutionHeight"));
         resolutionWidth = Integer.parseInt(_settings.get("resolutionWidth"));
+        fullScreen = isTrue(_settings.get("fullScreen"));
 
         // Dev
         serverVerbose = isTrue(_settings.get("server_log_verbose"));
