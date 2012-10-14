@@ -25,9 +25,14 @@ public class DesktopMain {
         Logger.info("Launching the main game loop");
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Aigilas";
-        cfg.width = Settings.get().resolutionWidth;
-        cfg.fullscreen = Settings.get().fullScreen;
-        cfg.height = Settings.get().resolutionHeight;
+        if (Settings.get().fullScreen) {
+            cfg.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
+            cfg.fullscreen = Settings.get().fullScreen;
+        }
+        else {
+            cfg.width = Settings.get().resolutionWidth;
+            cfg.height = Settings.get().resolutionHeight;
+        }
         cfg.useGL20 = true;
         new LwjglApplication(new Aigilas(), cfg);
     }
