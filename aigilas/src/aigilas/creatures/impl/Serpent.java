@@ -7,7 +7,7 @@ import sps.bridge.ActorType;
 
 public class Serpent extends BaseEnemy {
     public Serpent() {
-        super(ActorType.SERPENT, SpriteType.SLOTH);
+        super(ActorType.Serpent, SpriteType.Sloth);
         _strategy = StrategyFactory.create(Strategy.ConfusedAndDying, this);
     }
 }

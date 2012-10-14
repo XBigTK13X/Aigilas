@@ -11,7 +11,7 @@ public class SoulReinforcementSkill extends BaseSkill {
     public SoulReinforcementSkill()
 
     {
-        super(SkillId.SOUL_REINFORCEMENT, AnimationType.SELF);
+        super(SkillId.Soul_Reinforcement, AnimationType.SELF);
 
 
     }

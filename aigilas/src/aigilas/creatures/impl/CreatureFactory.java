@@ -20,7 +20,7 @@ public class CreatureFactory {
     public static BaseCreature create(ActorType actorType, Point2 position) {
         BaseEnemy result;
         switch (actorType) {
-            case PLAYER:
+            case Player:
                 result = new Player(__playerCount++);
                 break;
             default:
@@ -38,43 +38,43 @@ public class CreatureFactory {
 
     private static BaseEnemy generateCreature(ActorType actorType) {
         switch (actorType) {
-            case PEON:
+            case Peon:
                 return new Peon();
-            case ZORB:
+            case Zorb:
                 return new Zorb();
-            case WRATH:
+            case Wrath:
                 return new Wrath();
-            case HAND:
+            case Hand:
                 return new Hand();
-            case PRIDE:
+            case Pride:
                 return new Pride();
-            case ENVY:
+            case Envy:
                 return new Envy();
-            case GLUTTONY:
+            case Gluttony:
                 return new Gluttony();
-            case LUST:
+            case Lust:
                 return new Lust();
-            case SLOTH:
+            case Sloth:
                 return new Sloth();
-            case GREED:
+            case Greed:
                 return new Greed();
-            case SERPENT:
+            case Serpent:
                 return new Serpent();
-            case BREAKING_WHEEL:
+            case Breaking_Wheel:
                 return new BreakingWheel();
-            case WRATH_ACOLYTE:
+            case Wrath_Acolyte:
                 return new WrathEnemyAcolyte();
-            case PRIDE_ACOLYTE:
+            case Pride_Acolyte:
                 return new PrideEnemyAcolyte();
-            case ENVY_ACOLYTE:
+            case Envy_Acolyte:
                 return new EnvyEnemyAcolyte();
-            case GLUTTONY_ACOLYTE:
+            case Gluttony_Acolyte:
                 return new GluttonyEnemyAcolyte();
-            case LUST_ACOLYTE:
+            case Lust_Acolyte:
                 return new LustEnemyAcolyte();
-            case SLOTH_ACOLYTE:
+            case Sloth_Acolyte:
                 return new SlothEnemyAcolyte();
-            case GREED_ACOLYTE:
+            case Greed_Acolyte:
                 return new GreedEnemyAcolyte();
             default:
                 try {
@@ -95,22 +95,22 @@ public class CreatureFactory {
     public static BaseCreature createMinion(SkillId skillId, BaseCreature source, SkillEffect effectGraphic, Point2 location) {
         Minion result = null;
         switch (skillId) {
-            case ACID_NOZZLE:
+            case Acid_Nozzle:
                 result = new AcidNozzle();
                 break;
-            case DART_TRAP:
+            case Dart_Trap:
                 result = new DartTrap();
                 break;
-            case EXPLODE:
+            case Explode:
                 result = new Explosion();
                 break;
-            case ICE_SHARD:
+            case Ice_Shard:
                 result = new IceShard();
                 break;
-            case VAPOR_CLOUD:
+            case Vapor_Cloud:
                 result = new VaporCloud();
                 break;
-            case PLAGUE:
+            case Plague:
                 result = new PoisonCloud();
                 break;
             default:
@@ -141,11 +141,11 @@ public class CreatureFactory {
     private static List<ActorType> __remainingBosses;
 
     static {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.Wrath, ActorType.Envy, ActorType.Pride, ActorType.Sloth, ActorType.Greed, ActorType.Lust, ActorType.Gluttony));
     }
 
     public static void reset() {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.WRATH, ActorType.ENVY, ActorType.PRIDE, ActorType.SLOTH, ActorType.GREED, ActorType.LUST, ActorType.GLUTTONY));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.Wrath, ActorType.Envy, ActorType.Pride, ActorType.Sloth, ActorType.Greed, ActorType.Lust, ActorType.Gluttony));
         __playerCount = 0;
     }
 

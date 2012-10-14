@@ -14,7 +14,7 @@ public class DismembermentSkill extends BaseSkill {
     public DismembermentSkill()
 
     {
-        super(SkillId.DISMEMBERMENT, AnimationType.SELF);
+        super(SkillId.Dismemberment, AnimationType.SELF);
 
 
     }
@@ -27,7 +27,7 @@ public class DismembermentSkill extends BaseSkill {
         int openCell = RNG.next(1, Settings.get().tileMapWidth - 1);
         for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             if (ii != openCell) {
-                CreatureFactory.create(ActorType.HAND, new Point2(ii, 1));
+                CreatureFactory.create(ActorType.Hand, new Point2(ii, 1));
 
             }
 

@@ -8,12 +8,8 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class HorderSkill extends BaseSkill {
-    public HorderSkill()
-
-    {
-        super(SkillId.HORDER, AnimationType.SELF);
-
-
+    public HorderSkill() {
+        super(SkillId.Horder, AnimationType.SELF);
     }
 
     @Override
@@ -21,5 +17,4 @@ public class HorderSkill extends BaseSkill {
         super.activate(source);
         StatusFactory.apply(source, Status.Hord);
     }
-
 }

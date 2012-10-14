@@ -10,7 +10,7 @@ public class CavalrySkill extends BaseSkill {
     public CavalrySkill()
 
     {
-        super(SkillId.CAVALRY, AnimationType.SELF);
+        super(SkillId.Cavalry, AnimationType.SELF);
 
 
     }

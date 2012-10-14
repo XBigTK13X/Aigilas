@@ -9,7 +9,7 @@ public class FloorSpikesSkill extends BaseSkill {
     public FloorSpikesSkill()
 
     {
-        super(SkillId.FLOOR_SPIKES, AnimationType.STATIONARY, Float.MAX_VALUE, true);
+        super(SkillId.Floor_Spikes, AnimationType.STATIONARY, Float.MAX_VALUE, true);
 
 
     }

@@ -10,7 +10,7 @@ public class VaporImplantSkill extends BaseSkill {
     public VaporImplantSkill()
 
     {
-        super(SkillId.VAPOR_IMPLANT, AnimationType.RANGED);
+        super(SkillId.Vapor_Implant, AnimationType.RANGED);
 
 
     }
@@ -19,7 +19,7 @@ public class VaporImplantSkill extends BaseSkill {
     public void affect(Entity target)
 
     {
-        CreatureFactory.createMinion(SkillId.VAPOR_CLOUD, _source, null, target.getLocation());
+        CreatureFactory.createMinion(SkillId.Vapor_Cloud, _source, null, target.getLocation());
 
     }
 

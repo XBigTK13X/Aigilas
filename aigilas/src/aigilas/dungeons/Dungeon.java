@@ -94,7 +94,7 @@ public class Dungeon {
     }
 
     public void cacheContents() {
-        for (IActor player : EntityManager.get().getActors(ActorType.PLAYER)) {
+        for (IActor player : EntityManager.get().getActors(ActorType.Player)) {
             DungeonFactory.addToCache((Entity) player);
             EntityManager.get().removeObject((Entity) player);
         }
@@ -109,7 +109,7 @@ public class Dungeon {
         for (Entity[] row : dungeon) {
             for (Entity tile : row) {
                 if (tile != null) {
-                    if (tile.getEntityType() != EntityType.FLOOR) {
+                    if (tile.getEntityType() != EntityType.Floor) {
                         _contents.add(tile);
                     }
                     EntityManager.get().addObject(tile);
@@ -122,7 +122,7 @@ public class Dungeon {
 
         if (cache.size() == 0) {
             for (int ii = 0; ii < playerCount; ii++) {
-                _contents.add(CreatureFactory.create(ActorType.PLAYER, getRandomNeighbor(neighbors)));
+                _contents.add(CreatureFactory.create(ActorType.Player, getRandomNeighbor(neighbors)));
             }
         }
         else {
@@ -214,7 +214,7 @@ public class Dungeon {
         while (true) {
             int x = RNG.next(0, _blocksWide);
             int y = RNG.next(0, _blocksHigh);
-            if (dungeon[x][y].getEntityType() == EntityType.FLOOR) {
+            if (dungeon[x][y].getEntityType() == EntityType.Floor) {
                 return new Point2(x, y);
             }
         }
@@ -257,17 +257,17 @@ public class Dungeon {
                                 }
                             }
                         }
-                        dungeon[ii][jj] = EntityFactory.create(EntityType.WALL, new Point2(ii, jj));
+                        dungeon[ii][jj] = EntityFactory.create(EntityType.Wall, new Point2(ii, jj));
                     }
                     else {
-                        dungeon[ii][jj] = EntityFactory.create(EntityType.FLOOR, new Point2(ii, jj));
+                        dungeon[ii][jj] = EntityFactory.create(EntityType.Floor, new Point2(ii, jj));
                     }
                 }
             }
             if (roomCount > 0 && entrances.size() > 0) {
                 int index = RNG.next(0, entrances.size() - 1);
                 TransientPoint entrance = entrances.get(index);
-                if (dungeon[entrance.X][entrance.Y].getEntityType() != EntityType.FLOOR) {
+                if (dungeon[entrance.X][entrance.Y].getEntityType() != EntityType.Floor) {
                     dungeonEntrances.add(entrance);
                 }
             }
@@ -277,16 +277,16 @@ public class Dungeon {
             if (entrance.isHorizontal()) {
                 for (int ii = 1; ii < _blocksWide - 1; ii++) {
                     Point2 currentTarget = new Point2(ii, entrance.Y);
-                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.WALL) {
-                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.FLOOR, currentTarget);
+                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.Wall) {
+                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.Floor, currentTarget);
                     }
                 }
             }
             else {
                 for (int ii = 1; ii < _blocksHigh - 1; ii++) {
                     Point2 currentTarget = new Point2(entrance.X, ii);
-                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.WALL) {
-                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.FLOOR, currentTarget);
+                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.Wall) {
+                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.Floor, currentTarget);
                     }
                 }
             }
@@ -294,7 +294,7 @@ public class Dungeon {
     }
 
     private boolean isFloor(int x, int y) {
-        return dungeon[x][y].getEntityType() == EntityType.FLOOR;
+        return dungeon[x][y].getEntityType() == EntityType.Floor;
     }
 
     public Point2 getDownstairsLocation() {

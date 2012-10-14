@@ -9,6 +9,6 @@ public class MindBlownReaction implements IReaction {
     public void affect(BaseCreature target)
 
     {
-        target.applyDamage(10, null, true, StatType.MANA);
+        target.applyDamage(10, null, true, StatType.Mana);
     }
 }

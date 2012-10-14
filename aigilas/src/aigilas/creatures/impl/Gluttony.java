@@ -5,6 +5,6 @@ import sps.bridge.ActorType;
 
 public class Gluttony extends BaseEnemy {
     public Gluttony() {
-        super(ActorType.GLUTTONY, SpriteType.GLUTTONY);
+        super(ActorType.Gluttony, SpriteType.Gluttony);
     }
 }

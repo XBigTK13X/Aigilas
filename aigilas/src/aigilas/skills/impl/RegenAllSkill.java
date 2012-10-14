@@ -10,7 +10,7 @@ public class RegenAllSkill extends BaseSkill {
     public RegenAllSkill()
 
     {
-        super(SkillId.REGEN_ALL, AnimationType.SELF);
+        super(SkillId.Regen_All, AnimationType.SELF);
 
 
     }

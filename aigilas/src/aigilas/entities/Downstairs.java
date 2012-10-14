@@ -11,7 +11,7 @@ import sps.entities.EntityManager;
 
 public class Downstairs extends Entity {
     public Downstairs(Point2 location) {
-        initialize(location, SpriteType.DOWNSTAIRS, EntityType.DOWNSTAIRS, DrawDepth.Stairs);
+        initialize(location, SpriteType.Downstairs, EntityType.Downstairs, DrawDepth.Stairs);
     }
 
     private BaseCreature player;

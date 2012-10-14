@@ -11,7 +11,7 @@ public class DartSkill extends BaseSkill {
     public DartSkill()
 
     {
-        super(SkillId.DART, AnimationType.RANGED);
+        super(SkillId.Dart, AnimationType.RANGED);
 
 
     }

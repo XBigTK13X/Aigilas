@@ -9,11 +9,11 @@ import aigilas.skills.SkillId;
 
 public class VaporCloudSkill extends BaseSkill {
     public VaporCloudSkill() {
-        super(SkillId.VAPOR_CLOUD, AnimationType.CLOUD);
+        super(SkillId.Vapor_Cloud, AnimationType.CLOUD);
     }
 
     @Override
     public void affect(BaseCreature target) {
-        target.addBuff(new StatBuff(StatType.MOVE_COOL_DOWN, -10));
+        target.addBuff(new StatBuff(StatType.Move_Cool_Down, -10));
     }
 }

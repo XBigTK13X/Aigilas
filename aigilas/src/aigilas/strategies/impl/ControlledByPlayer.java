@@ -22,7 +22,7 @@ public class ControlledByPlayer extends BaseStrategy {
     public ControlledByPlayer(BaseCreature parent) {
         super(parent, Strategy.ControlledByPlayer);
 
-        _targets.addTargetTypes(ActorType.NONPLAYER);
+        _targets.addTargetTypes(ActorType.Non_Player);
     }
 
     @Override

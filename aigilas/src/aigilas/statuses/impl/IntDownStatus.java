@@ -11,7 +11,7 @@ public class IntDownStatus extends BaseStatus {
     {
         super(target);
 
-        _buff = new StatBuff(StatType.WISDOM, -10);
+        _buff = new StatBuff(StatType.Wisdom, -10);
         setup();
     }
 }

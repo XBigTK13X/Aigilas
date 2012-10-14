@@ -10,6 +10,6 @@ public class PreventMentalUsageStatus extends BaseStatus {
     {
         super(target);
 
-        _blockedElements.add(Elements.MENTAL);
+        _blockedElements.add(Elements.Mental);
     }
 }

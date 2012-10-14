@@ -17,7 +17,7 @@ public class CombustSkill extends BaseSkill {
     public CombustSkill()
 
     {
-        super(SkillId.COMBUST, AnimationType.RANGED);
+        super(SkillId.Combust, AnimationType.RANGED);
 
 
     }

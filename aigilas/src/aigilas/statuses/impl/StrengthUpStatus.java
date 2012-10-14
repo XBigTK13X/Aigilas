@@ -11,7 +11,7 @@ public class StrengthUpStatus extends BaseStatus {
     {
         super(target);
 
-        _buff = new StatBuff(StatType.STRENGTH, 10f);
+        _buff = new StatBuff(StatType.Strength, 10f);
         setup();
     }
 }

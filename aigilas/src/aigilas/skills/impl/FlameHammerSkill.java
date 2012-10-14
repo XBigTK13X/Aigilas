@@ -7,7 +7,7 @@ import aigilas.skills.SkillId;
 
 public class FlameHammerSkill extends BaseSkill {
     public FlameHammerSkill() {
-        super(SkillId.FLAME_HAMMER, AnimationType.ROTATE);
+        super(SkillId.Flame_Hammer, AnimationType.ROTATE);
     }
 
     @Override

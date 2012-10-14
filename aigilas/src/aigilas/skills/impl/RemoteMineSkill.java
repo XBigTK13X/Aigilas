@@ -14,7 +14,7 @@ public class RemoteMineSkill extends BaseSkill {
     public RemoteMineSkill()
 
     {
-        super(SkillId.REMOTE_MINE, AnimationType.STATIONARY);
+        super(SkillId.Remote_Mine, AnimationType.STATIONARY);
 
 
     }
@@ -47,7 +47,7 @@ public class RemoteMineSkill extends BaseSkill {
 
     private void explode(BaseCreature source) {
         if (_behavior.getGraphic() != null) {
-            CreatureFactory.createMinion(SkillId.EXPLODE, _source, _behavior.getGraphic(), _behavior.getGraphic().getLocation());
+            CreatureFactory.createMinion(SkillId.Explode, _source, _behavior.getGraphic(), _behavior.getGraphic().getLocation());
 
         }
 

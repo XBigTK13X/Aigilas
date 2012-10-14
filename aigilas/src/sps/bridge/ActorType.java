@@ -8,30 +8,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum ActorType {
-    NONPLAYER(null),
-    PLAYER(SpriteType.PLAYER_STAND),
-    MINION(SpriteType.MINION),
-    ACID_NOZZLE(SpriteType.MINION),
-    PEON(SpriteType.CREATURE, true),
-    ZORB(SpriteType.ZORB, true),
-    DART_TRAP(SpriteType.MINION),
-    WRATH(SpriteType.WRATH),
-    HAND(SpriteType.HAND),
-    ENVY(SpriteType.ENVY),
-    PRIDE(SpriteType.PRIDE),
-    SLOTH(SpriteType.SLOTH),
-    GREED(SpriteType.GREED),
-    GLUTTONY(SpriteType.GLUTTONY),
-    LUST(SpriteType.LUST),
-    SERPENT(SpriteType.SLOTH),
-    BREAKING_WHEEL(SpriteType.WHEEL),
-    WRATH_ACOLYTE(SpriteType.WRATH_ACOLYTE, true),
-    ENVY_ACOLYTE(SpriteType.ENVY_ACOLYTE, true),
-    PRIDE_ACOLYTE(SpriteType.PRIDE_ACOLYTE, true),
-    SLOTH_ACOLYTE(SpriteType.SLOTH_ACOLYTE, true),
-    GREED_ACOLYTE(SpriteType.GREED_ACOLYTE, true),
-    GLUTTONY_ACOLYTE(SpriteType.GLUTTONY_ACOLYTE, true),
-    LUST_ACOLYTE(SpriteType.LUST_ACOLYTE, true);
+    Non_Player(null),
+    Player(SpriteType.Player_Stand),
+    Minion(SpriteType.Minion),
+    Acid_Nozzle(SpriteType.Minion),
+    Peon(SpriteType.Creature, true),
+    Zorb(SpriteType.Zorb, true),
+    Dart_Trap(SpriteType.Minion),
+    Wrath(SpriteType.Wrath),
+    Hand(SpriteType.Hand),
+    Envy(SpriteType.Envy),
+    Pride(SpriteType.Pride),
+    Sloth(SpriteType.Sloth),
+    Greed(SpriteType.Greed),
+    Gluttony(SpriteType.Gluttony),
+    Lust(SpriteType.Lust),
+    Serpent(SpriteType.Sloth),
+    Breaking_Wheel(SpriteType.Wheel),
+    Wrath_Acolyte(SpriteType.Wrath_Acolyte, true),
+    Envy_Acolyte(SpriteType.Envy_Acolyte, true),
+    Pride_Acolyte(SpriteType.Pride_Acolyte, true),
+    Sloth_Acolyte(SpriteType.Sloth_Acolyte, true),
+    Greed_Acolyte(SpriteType.Greed_Acolyte, true),
+    Gluttony_Acolyte(SpriteType.Gluttony_Acolyte, true),
+    Lust_Acolyte(SpriteType.Lust_Acolyte, true);
 
     public final SpriteType Sprite;
 
@@ -41,7 +41,7 @@ public enum ActorType {
         this(sprite, false);
     }
 
-    public static final List<ActorType> Randoms = Arrays.asList(ActorType.PEON, ActorType.ZORB);
+    public static final List<ActorType> Randoms = Arrays.asList(ActorType.Peon, ActorType.Zorb);
 
 
     private static List<ActorType> __randoms = new ArrayList<ActorType>();

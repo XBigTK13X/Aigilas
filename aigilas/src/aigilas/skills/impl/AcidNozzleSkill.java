@@ -10,7 +10,7 @@ public class AcidNozzleSkill extends BaseSkill {
     public AcidNozzleSkill()
 
     {
-        super(SkillId.ACID_NOZZLE, AnimationType.STATIONARY);
+        super(SkillId.Acid_Nozzle, AnimationType.STATIONARY);
     }
 
     @Override

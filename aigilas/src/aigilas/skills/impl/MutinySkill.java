@@ -11,7 +11,7 @@ public class MutinySkill extends BaseSkill {
     public MutinySkill()
 
     {
-        super(SkillId.MUTINY, AnimationType.RANGED);
+        super(SkillId.Mutiny, AnimationType.RANGED);
 
 
     }

@@ -10,7 +10,7 @@ public class SpeedUpSkill extends BaseSkill {
     public SpeedUpSkill()
 
     {
-        super(SkillId.SPEED_UP, AnimationType.SELF);
+        super(SkillId.Speed_Up, AnimationType.SELF);
 
 
     }

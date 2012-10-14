@@ -8,9 +8,9 @@ import sps.bridge.ActorType;
 
 public class IceShard extends Minion {
     public IceShard() {
-        super(ActorType.MINION);
+        super(ActorType.Minion);
         _strategy = StrategyFactory.create(Strategy.MinionOneUse, this);
-        add(SkillId.ICE_SHARD);
-        _composition.add(Elements.WATER);
+        add(SkillId.Ice_Shard);
+        _composition.add(Elements.Water);
     }
 }

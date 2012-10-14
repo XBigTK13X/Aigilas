@@ -70,8 +70,8 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected ActorType _actorType;
 
     protected void setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
-        _entityType = EntityType.ACTOR;
-        initialize(location, type.Sprite, EntityType.ACTOR, DrawDepth.Creature);
+        _entityType = EntityType.Actor;
+        initialize(location, type.Sprite, EntityType.Actor, DrawDepth.Creature);
         init(type, stats, creatureClass, setClass);
     }
 
@@ -87,7 +87,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (_class != cClass || cClass == null || cClass == CreatureClass.NULL) {
             _class = (cClass == null) ? CreatureClass.NULL : cClass;
             _skills = new SkillPool(this);
-            if (_actorType != ActorType.PLAYER) {
+            if (_actorType != ActorType.Player) {
                 for (SkillId skillId : SkillLogic.get().getElementalSkills(getActorType(), _composition)) {
                     _skills.add(skillId);
                 }
@@ -157,19 +157,19 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public boolean isCooledDown() {
-        return get(StatType.MOVE_COOL_DOWN) >= getMax(StatType.MOVE_COOL_DOWN);
+        return get(StatType.Move_Cool_Down) >= getMax(StatType.Move_Cool_Down);
     }
 
     @Override
     public void update() {
         _statuses.update();
-        if (get(StatType.HEALTH) <= 0) {
+        if (get(StatType.Health) <= 0) {
             _isActive = false;
         }
         if (_statuses.allows(CreatureAction.Movement)) {
             if (_isPlaying) {
                 if (!isCooledDown()) {
-                    adjust(StatType.MOVE_COOL_DOWN, 1);
+                    adjust(StatType.Move_Cool_Down, 1);
                 }
                 else {
                     _statuses.act();
@@ -190,9 +190,9 @@ public abstract class BaseCreature extends Entity implements IActor {
     private void regenerate() {
         if (_statuses.allows(CreatureAction.Regeneration)) {
             for (StatType stat : StatType.values()) {
-                if (stat != StatType.MOVE_COOL_DOWN && stat != StatType.REGEN) {
+                if (stat != StatType.Move_Cool_Down && stat != StatType.Regen) {
                     if (_baseStats.getRaw(stat) < _maxStats.getRaw(stat)) {
-                        adjust(stat, _baseStats.get(StatType.REGEN) / 50);
+                        adjust(stat, _baseStats.get(StatType.Regen) / 50);
                     }
                 }
             }
@@ -305,13 +305,12 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void applyDamage(float damage, BaseCreature attacker, boolean showDamage, StatType statType) {
-        Logger.gameplay(this.toString() + " taking " + damage + " damage");
         if (attacker != null) {
             attacker.passOn(this, StatusComponent.Contagion);
             this.passOn(attacker, StatusComponent.Passive);
         }
         if (statType == null) {
-            damage -= _baseStats.get(StatType.DEFENSE);
+            damage -= _baseStats.get(StatType.Defense);
         }
         if (damage <= 0 && statType == null) {
             damage = 0;
@@ -320,9 +319,10 @@ public abstract class BaseCreature extends Entity implements IActor {
             _damageText.writeAction(StringStorage.get(damage), 30, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosCenterY));
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
-            adjust((statType == null) ? StatType.HEALTH : statType, -damage);
+            Logger.gameplay(this.toString() + " taking " + damage + " damage" + " from " + attacker);
+            adjust((statType == null) ? StatType.Health : statType, -damage);
         }
-        if (get(StatType.HEALTH) <= 0) {
+        if (get(StatType.Health) <= 0) {
             _isActive = false;
             if (attacker != null) {
                 attacker.addExperience(calculateExperience());
@@ -368,7 +368,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     protected float CalculateDamage() {
-        return get(StatType.STRENGTH);
+        return get(StatType.Strength);
     }
 
     private final Point2 target = new Point2(0, 0);
@@ -381,7 +381,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 target.reset(xVel + getLocation().PosX, yVel + getLocation().PosY);
                 if (!isBlocking() || !CoordVerifier.isBlocked(target)) {
                     move(xVel, yVel);
-                    set(StatType.MOVE_COOL_DOWN, 0);
+                    set(StatType.Move_Cool_Down, 0);
                 }
                 if (_statuses.allows(CreatureAction.Attacking)) {
                     creatures.clear();
@@ -391,7 +391,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                     if (creatures.size() > 0) {
                         for (BaseCreature creature : creatures) {
                             if (creature != this) {
-                                if ((creature.getActorType() != ActorType.PLAYER && _actorType == ActorType.PLAYER) || (creature.getActorType() == ActorType.PLAYER && _actorType != ActorType.PLAYER) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
+                                if ((creature.getActorType() != ActorType.Player && _actorType == ActorType.Player) || (creature.getActorType() == ActorType.Player && _actorType != ActorType.Player) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
                                     creature.applyDamage(CalculateDamage(), this);
                                     if (!creature.isActive()) {
                                         addExperience(creature.calculateExperience());
@@ -399,7 +399,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                                 }
                             }
                         }
-                        set(StatType.MOVE_COOL_DOWN, 0);
+                        set(StatType.Move_Cool_Down, 0);
                     }
                 }
             }
@@ -480,11 +480,11 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     private StatType getLowestStat() {
-        StatType result = StatType.AGE;
+        StatType result = StatType.Age;
         float min = Float.MAX_VALUE;
         List<StatType> possibleStats = new ArrayList<StatType>();
         for (StatType stat : StatType.values()) {
-            if (get(stat) < min && stat != StatType.AGE && stat != StatType.MOVE_COOL_DOWN && stat != StatType.PIETY) {
+            if (get(stat) < min && stat != StatType.Age && stat != StatType.Move_Cool_Down && stat != StatType.Piety) {
                 possibleStats.add(stat);
             }
         }
@@ -499,8 +499,8 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     public void sacrifice(God god, GenericItem sacrifice) {
         assignGod(god);
-        adjust(StatType.PIETY, sacrifice.Modifiers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1), true);
-        adjust(StatType.PIETY, sacrifice.Modifiers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1));
+        adjust(StatType.Piety, sacrifice.Modifiers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1), true);
+        adjust(StatType.Piety, sacrifice.Modifiers.getSum() * ((_god.isGoodSacrifice(sacrifice.getItemClass())) ? 3 : 1) * ((_god.isBadSacrifice(sacrifice.getItemClass())) ? -2 : 1));
         sacrifice.setInactive();
     }
 
@@ -508,14 +508,14 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     public void pray(God god) {
         assignGod(god);
-        if (get(StatType.PIETY) >= pietyCost) {
+        if (get(StatType.Piety) >= pietyCost) {
             StatType lowest = getLowestStat();
-            float adjustment = (get(StatType.PIETY) / 100);
+            float adjustment = (get(StatType.Piety) / 100);
             set(lowest, getMax(lowest) + adjustment);
             set(lowest, adjustment, true);
-            adjust(StatType.PIETY, -pietyCost);
-            if (get(StatType.PIETY) < 0) {
-                set(StatType.PIETY, 0);
+            adjust(StatType.Piety, -pietyCost);
+            if (get(StatType.Piety) < 0) {
+                set(StatType.Piety, 0);
             }
         }
         performInteraction();
@@ -523,8 +523,8 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     protected void assignGod(God god) {
         if (_god != god && _god != null) {
-            applyDamage(get(StatType.PIETY));
-            set(StatType.PIETY, 0);
+            applyDamage(get(StatType.Piety));
+            set(StatType.Piety, 0);
             SetClass(god.getCreatureClass());
         }
         _god = god;
@@ -561,7 +561,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void react(SkillId skillId) {
-        if (_actorType == ActorType.PLAYER && skillId != SkillId.FORGET_SKILL && _god.Id == GodId.GLUTTONY) {
+        if (_actorType == ActorType.Player && skillId != SkillId.Forget_Skill && _god.Id == GodId.Gluttony) {
             if (_skills.count() < _currentLevel) {
                 _skills.add(skillId);
             }

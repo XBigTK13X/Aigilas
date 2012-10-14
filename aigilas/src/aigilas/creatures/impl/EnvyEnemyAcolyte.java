@@ -6,8 +6,8 @@ import sps.bridge.ActorType;
 
 public class EnvyEnemyAcolyte extends BaseEnemy {
     public EnvyEnemyAcolyte() {
-        super(ActorType.ENVY_ACOLYTE);
-        weaknesses(StatType.STRENGTH, StatType.HEALTH, StatType.MOVE_COOL_DOWN);
-        compose(Elements.WATER);
+        super(ActorType.Envy_Acolyte);
+        weaknesses(StatType.Strength, StatType.Health, StatType.Move_Cool_Down);
+        compose(Elements.Water);
     }
 }

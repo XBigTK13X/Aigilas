@@ -104,7 +104,7 @@ public class TargetSet
 
         for (ActorType actorType : _targetActorTypes) {
             for (IActor target : EntityManager.get().getActorsAt(source.getLocation())) {
-                if (target.getActorType() == actorType || (actorType == ActorType.NONPLAYER && target.getActorType() != ActorType.PLAYER) || (actorType == ActorType.PLAYER && target.getActorType() == ActorType.PLAYER)) {
+                if (target.getActorType() == actorType || (actorType == ActorType.Non_Player && target.getActorType() != ActorType.Player) || (actorType == ActorType.Player && target.getActorType() == ActorType.Player)) {
                     return (Entity) target;
                 }
             }

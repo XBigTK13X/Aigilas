@@ -9,7 +9,7 @@ public class FireballSkill extends BaseSkill {
     public FireballSkill()
 
     {
-        super(SkillId.FIREBALL, AnimationType.RANGED);
+        super(SkillId.Fireball, AnimationType.RANGED);
 
 
     }

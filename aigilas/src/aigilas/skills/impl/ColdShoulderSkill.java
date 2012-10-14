@@ -10,7 +10,7 @@ public class ColdShoulderSkill extends BaseSkill {
     public ColdShoulderSkill()
 
     {
-        super(SkillId.COLD_SHOULDER, AnimationType.SELF);
+        super(SkillId.Cold_Shoulder, AnimationType.SELF);
 
 
     }

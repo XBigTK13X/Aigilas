@@ -9,7 +9,7 @@ public class ValedictorianSkill extends BaseSkill {
     public ValedictorianSkill()
 
     {
-        super(SkillId.VALEDICTORIAN, AnimationType.RANGED);
+        super(SkillId.Valedictorian, AnimationType.RANGED);
 
 
     }

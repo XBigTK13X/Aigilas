@@ -86,7 +86,7 @@ public class Stats {
     public float getSum() {
         float result = 0;
         for (StatType key : _stats.keySet()) {
-            if (key != StatType.HEALTH && key != StatType.MOVE_COOL_DOWN && key != StatType.REGEN) {
+            if (key != StatType.Health && key != StatType.Move_Cool_Down && key != StatType.Regen) {
                 result += _stats.get(key);
             }
         }

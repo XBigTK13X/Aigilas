@@ -23,7 +23,7 @@ public class SkillLogic {
         if (__elementMap.size() == 0) {
             BaseSkill skill;
             for (SkillId skillId : SkillId.values()) {
-                if (skillId != SkillId.NO_SKILL) {
+                if (skillId != SkillId.No_Skill) {
                     if (!skillId.Info.Restrict) {
                         __invalidRandomSkills.add(skillId);
                     }
@@ -37,7 +37,7 @@ public class SkillLogic {
                     __skillAnimationMap.put(skillId, skill.getAnimationType());
                 }
             }
-            __skillAnimationMap.put(SkillId.NO_SKILL, null);
+            __skillAnimationMap.put(SkillId.No_Skill, null);
         }
     }
 

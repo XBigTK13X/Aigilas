@@ -10,7 +10,7 @@ public class EnvenomSkill extends BaseSkill {
     public EnvenomSkill()
 
     {
-        super(SkillId.ENVENOM, AnimationType.SELF);
+        super(SkillId.Envenom, AnimationType.SELF);
 
 
     }

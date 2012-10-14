@@ -10,6 +10,6 @@ public class PreventDarkUsageStatus extends BaseStatus {
     {
         super(target);
 
-        _blockedElements.add(Elements.DARK);
+        _blockedElements.add(Elements.Dark);
     }
 }

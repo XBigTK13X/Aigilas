@@ -1,14 +1,14 @@
 package sps.net;
 
 public enum MessageTypes {
-    CONNECT((byte) 1),
-    MOVEMENT((byte) 2),
-    START_GAME((byte) 3),
-    CHECK_STATE((byte) 4),
-    PLAYER_COUNT((byte) 5),
-    SYNC_STATE((byte) 6),
-    READY_FOR_NEXT_TURN((byte) 7),
-    HEART_BEAT((byte) 8);
+    Connect((byte) 1),
+    Movement((byte) 2),
+    Start_Game((byte) 3),
+    Check_State((byte) 4),
+    Player_Count((byte) 5),
+    Sync_State((byte) 6),
+    Ready_For_Next_Turn((byte) 7),
+    Heart_Beat((byte) 8);
 
     private final byte _value;
 

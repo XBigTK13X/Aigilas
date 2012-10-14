@@ -19,19 +19,19 @@ public class God {
 
     public CreatureClass getCreatureClass() {
         switch (Id) {
-            case ENVY:
+            case Envy:
                 return new EnvyAcolyte();
-            case GLUTTONY:
+            case Gluttony:
                 return new GluttonyAcolyte();
-            case GREED:
+            case Greed:
                 return new GreedAcolyte();
-            case LUST:
+            case Lust:
                 return new LustAcolyte();
-            case PRIDE:
+            case Pride:
                 return new PrideAcolyte();
-            case SLOTH:
+            case Sloth:
                 return new SlothAcolyte();
-            case WRATH:
+            case Wrath:
                 return new WrathAcolyte();
         }
         return new NoClass();

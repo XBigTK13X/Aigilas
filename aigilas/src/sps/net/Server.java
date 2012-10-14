@@ -47,7 +47,7 @@ public class Server extends Thread {
                 Logger.server("SERVER: Message received: " + _message.MessageType);
             }
             switch (_message.MessageType) {
-                case CONNECT:
+                case Connect:
                     Logger.server("SERVER: New client connection");
                     sendMessage(Message.createInit(clients.size() - 1, _rngSeed), _message.LocalPort);
                     if (Settings.get().serverVerbose) {
@@ -55,7 +55,7 @@ public class Server extends Thread {
                     }
                     _turnCount = 0;
                     break;
-                case CHECK_STATE:
+                case Check_State:
                     initPlayer(_message.PlayerIndex, _message.Command);
                     _message.IsActive = _playerStatus.get(_message.PlayerIndex).get(_message.Command);
                     if (Settings.get().serverVerbose) {
@@ -64,7 +64,7 @@ public class Server extends Thread {
                     sendMessage(_message, _message.LocalPort);
                     break;
 
-                case MOVEMENT:
+                case Movement:
                     initPlayer(_message.PlayerIndex, _message.Command);
                     if (Settings.get().serverVerbose) {
                         Logger.server(String.format("SERVER: Moves:  CMD(%s) PI(%s) AC(%s)", _message.PlayerIndex, _message.Command, _message.IsActive));
@@ -72,26 +72,26 @@ public class Server extends Thread {
                     _playerStatus.get(_message.PlayerIndex).put(_message.Command, _message.IsActive);
                     break;
 
-                case START_GAME:
+                case Start_Game:
                     Logger.server("SERVER: Announcing game commencement.");
                     announce(_message);
                     break;
 
-                case PLAYER_COUNT:
+                case Player_Count:
                     if (Settings.get().serverVerbose) {
                         Logger.server("SERVER: PLAYER COUNT");
                     }
                     sendMessage(Message.createPlayerCount(clients.size()), _message.LocalPort);
                     break;
 
-                case READY_FOR_NEXT_TURN:
+                case Ready_For_Next_Turn:
                     if (Settings.get().serverVerbose) {
                         Logger.server("SERVER: Received ready signal from client");
                     }
                     _readyCheckIn[_message.PlayerIndex] = true;
                     break;
 
-                case HEART_BEAT:
+                case Heart_Beat:
                     _readyCheckIn[_message.PlayerIndex] = true;
                     break;
                 default:

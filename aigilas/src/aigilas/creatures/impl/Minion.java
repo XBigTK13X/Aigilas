@@ -20,7 +20,7 @@ public class Minion extends BaseCreature {
     }
 
     public Minion() {
-        this(ActorType.MINION, Settings.get().defaultSpeed);
+        this(ActorType.Minion, Settings.get().defaultSpeed);
     }
 
     public void init(BaseCreature source, SkillEffect effectGraphic) {

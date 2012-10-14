@@ -67,7 +67,7 @@ public class EnemyRegistry {
                         }
                     }
                     else {
-                        skills.add(SkillId.NO_SKILL);
+                        skills.add(SkillId.No_Skill);
                     }
 
                     info.put(actorType, new EnemyInfo(strengths, weaknesses, elements, skills));

@@ -11,7 +11,7 @@ public class WallPunchSkill extends BaseSkill {
     public WallPunchSkill()
 
     {
-        super(SkillId.WALL_PUNCH, AnimationType.RANGED);
+        super(SkillId.Wall_Punch, AnimationType.RANGED);
 
 
     }
@@ -20,7 +20,7 @@ public class WallPunchSkill extends BaseSkill {
     public void affect(Entity target)
 
     {
-        if (target.getEntityType() == EntityType.WALL) {
+        if (target.getEntityType() == EntityType.Wall) {
             if (target.getLocation().GridX > 0 && target.getLocation().GridX < Settings.get().tileMapWidth - 1 && target.getLocation().GridY > 0 && target.getLocation().GridY < Settings.get().tileMapHeight - 1) {
                 target.setInactive();
 

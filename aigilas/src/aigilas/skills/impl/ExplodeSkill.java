@@ -9,7 +9,7 @@ public class ExplodeSkill extends BaseSkill {
     public ExplodeSkill()
 
     {
-        super(SkillId.EXPLODE, AnimationType.CLOUD);
+        super(SkillId.Explode, AnimationType.CLOUD);
 
 
     }

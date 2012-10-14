@@ -1,18 +1,18 @@
 package aigilas.creatures;
 
 public enum StatType {
-    HEALTH("H"),
-    MANA("M"),
-    STRENGTH("S"),
-    WISDOM("W"),
-    DEFENSE("D"),
-    LUCK("L"),
-    AGE("A"),
-    HEIGHT("HE"),
-    WEIGHT("WE"),
-    MOVE_COOL_DOWN("MC"),
-    PIETY("P"),
-    REGEN("R");
+    Health("H"),
+    Mana("M"),
+    Strength("S"),
+    Wisdom("W"),
+    Defense("D"),
+    Luck("L"),
+    Age("A"),
+    Height("HE"),
+    Weight("WE"),
+    Move_Cool_Down("MC"),
+    Piety("P"),
+    Regen("R");
 
     private String shortHand;
 

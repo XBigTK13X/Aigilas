@@ -11,7 +11,7 @@ public class DefenseUpStatus extends BaseStatus {
     {
         super(target);
 
-        _buff = new StatBuff(StatType.DEFENSE, 10);
+        _buff = new StatBuff(StatType.Defense, 10);
         setup();
     }
 }

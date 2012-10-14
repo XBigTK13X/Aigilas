@@ -11,7 +11,7 @@ public class SoulCrushSkill extends BaseSkill {
     public SoulCrushSkill()
 
     {
-        super(SkillId.SOUL_CRUSH, AnimationType.RANGED);
+        super(SkillId.Soul_Crush, AnimationType.RANGED);
 
 
     }

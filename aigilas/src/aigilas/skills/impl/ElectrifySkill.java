@@ -11,7 +11,7 @@ public class ElectrifySkill extends BaseSkill {
     public ElectrifySkill()
 
     {
-        super(SkillId.ELECTRIFY, AnimationType.SELF);
+        super(SkillId.Electrify, AnimationType.SELF);
 
 
     }

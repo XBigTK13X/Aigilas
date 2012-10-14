@@ -13,7 +13,7 @@ public class BrimstoneSkill extends BaseSkill {
     public BrimstoneSkill()
 
     {
-        super(SkillId.BRIMSTONE, AnimationType.STATIONARY);
+        super(SkillId.Brimstone, AnimationType.STATIONARY);
 
 
     }
@@ -25,7 +25,7 @@ public class BrimstoneSkill extends BaseSkill {
                 if (ii != 0 || jj != 0) {
                     _direction.reset(ii, jj);
                     source.setSkillVector(_direction);
-                    SkillFactory.create(SkillId.FIREBALL).activate(source);
+                    SkillFactory.create(SkillId.Fireball).activate(source);
 
                 }
 

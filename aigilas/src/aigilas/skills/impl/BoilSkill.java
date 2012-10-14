@@ -9,7 +9,7 @@ import aigilas.statuses.StatusFactory;
 
 public class BoilSkill extends BaseSkill {
     public BoilSkill() {
-        super(SkillId.BOIL, AnimationType.SELF);
+        super(SkillId.Boil, AnimationType.SELF);
     }
 
     @Override

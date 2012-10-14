@@ -7,7 +7,7 @@ import sps.bridge.ActorType;
 
 public class Hand extends BaseEnemy {
     public Hand() {
-        super(ActorType.HAND, SpriteType.HAND);
+        super(ActorType.Hand, SpriteType.Hand);
         _isBlocking = false;
         _strategy = StrategyFactory.create(Strategy.StraightLine, this);
     }

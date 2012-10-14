@@ -11,7 +11,7 @@ public class ManaUpSkill extends BaseSkill {
     public ManaUpSkill()
 
     {
-        super(SkillId.MANA_UP, AnimationType.SELF);
+        super(SkillId.Mana_Up, AnimationType.SELF);
 
 
     }

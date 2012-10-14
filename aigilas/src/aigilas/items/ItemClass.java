@@ -1,16 +1,16 @@
 package aigilas.items;
 
 public enum ItemClass {
-    Melee_Weapon(ItemSlot.RIGHT_HAND),
-    Ranged_Weapon(ItemSlot.RIGHT_HAND),
-    Ranged_Ammo(ItemSlot.LEFT_HAND),
-    Ring(ItemSlot.LEFT_FINGER),
-    Leggings(ItemSlot.LEGS),
-    Torso_Garb(ItemSlot.TORSO),
-    Feet(ItemSlot.FEET),
-    Head_Gear(ItemSlot.HEAD),
-    Gloves(ItemSlot.HANDS),
-    Shield(ItemSlot.LEFT_HAND);
+    Melee_Weapon(ItemSlot.Right_Hand),
+    Ranged_Weapon(ItemSlot.Right_Hand),
+    Ranged_Ammo(ItemSlot.Left_Hand),
+    Ring(ItemSlot.Left_Finger),
+    Leggings(ItemSlot.Legs),
+    Torso_Garb(ItemSlot.Torso),
+    Feet(ItemSlot.Feet),
+    Head_Gear(ItemSlot.Head),
+    Gloves(ItemSlot.Hands),
+    Shield(ItemSlot.Left_Hand);
 
     public final ItemSlot Slot;
 

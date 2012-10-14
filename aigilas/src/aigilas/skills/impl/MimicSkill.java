@@ -9,7 +9,7 @@ public class MimicSkill extends BaseSkill {
     public MimicSkill()
 
     {
-        super(SkillId.MIMIC, AnimationType.RANGED);
+        super(SkillId.Mimic, AnimationType.RANGED);
 
 
     }

@@ -9,6 +9,6 @@ public class FastForwardReaction implements IReaction {
     public void affect(BaseCreature target)
 
     {
-        target.applyDamage(-1, null, false, StatType.AGE);
+        target.applyDamage(-1, null, false, StatType.Age);
     }
 }

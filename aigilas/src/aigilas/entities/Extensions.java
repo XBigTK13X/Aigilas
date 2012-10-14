@@ -6,7 +6,7 @@ import sps.entities.Entity;
 
 public class Extensions {
     public static BaseCreature isCreature(Entity entity) {
-        if (entity.getEntityType() == EntityType.ACTOR) {
+        if (entity.getEntityType() == EntityType.Actor) {
             return (BaseCreature) entity;
         }
         return null;

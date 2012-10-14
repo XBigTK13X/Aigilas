@@ -11,7 +11,7 @@ public class WeakKneesSkill extends BaseSkill {
     public WeakKneesSkill()
 
     {
-        super(SkillId.WEAK_KNEES, AnimationType.RANGED);
+        super(SkillId.Weak_Knees, AnimationType.RANGED);
 
 
     }

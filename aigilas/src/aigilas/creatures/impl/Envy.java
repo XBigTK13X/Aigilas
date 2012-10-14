@@ -5,6 +5,6 @@ import sps.bridge.ActorType;
 
 public class Envy extends BaseEnemy {
     public Envy() {
-        super(ActorType.ENVY, SpriteType.ENVY);
+        super(ActorType.Envy, SpriteType.Envy);
     }
 }

@@ -33,7 +33,7 @@ public class SkillEffect extends Entity {
 
     public SkillEffect(Point2 gridLocation, Point2 velocity, BaseCreature source, BaseSkill skill) {
         _skill = skill;
-        initialize(gridLocation, _skill.getSpriteType(), EntityType.SKILL_EFFECT, DrawDepth.BaseSkillEffect);
+        initialize(gridLocation, _skill.getSpriteType(), EntityType.Skill_Effect, DrawDepth.BaseSkillEffect);
         _velocity.copy(velocity);
         _direction.copy(velocity);
         _source = source;

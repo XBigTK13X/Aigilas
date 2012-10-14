@@ -26,7 +26,7 @@ public class BoilStatus extends BaseStatus {
         super.setup();
         previousStrategy = _target.getStrategyId();
         _target.setStrategy(StrategyFactory.create(null, _target));
-        _target.getTargets().addTargetTypes(ActorType.PLAYER);
+        _target.getTargets().addTargetTypes(ActorType.Player);
     }
 
     @Override
@@ -48,10 +48,10 @@ public class BoilStatus extends BaseStatus {
                 _countdown = _countdownMax;
             }
         }
-        if (_target.get(StatType.HEALTH) < _previousHealth) {
+        if (_target.get(StatType.Health) < _previousHealth) {
             _countDownFailed = true;
             cleanup();
         }
-        _previousHealth = _target.get(StatType.HEALTH);
+        _previousHealth = _target.get(StatType.Health);
     }
 }

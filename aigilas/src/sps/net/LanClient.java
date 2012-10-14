@@ -37,7 +37,7 @@ public class LanClient implements IClient {
             _comm = new MessageHandler(server);
             _comm.owner = "CLIENT";
             sendMessage(Message.createInit(0, 0));
-            awaitReply(MessageTypes.CONNECT);
+            awaitReply(MessageTypes.Connect);
             handleResponse(_message);
         }
         catch (Exception e) {
@@ -75,14 +75,14 @@ public class LanClient implements IClient {
     public boolean nextTurn() {
         update();
         if (_message != null) {
-            if (_message.MessageType == MessageTypes.SYNC_STATE) {
+            if (_message.MessageType == MessageTypes.Sync_State) {
                 if (Settings.get().clientVerbose) {
                     DevConsole.get().add("CLIENT: Synced:  " + _message.TurnCount + ". Seeding:  " + _message.RngSeed);
                 }
                 RNG.seed(_message.RngSeed);
                 _heartBeat = 15;
             }
-            return _message.MessageType == MessageTypes.SYNC_STATE;
+            return _message.MessageType == MessageTypes.Sync_State;
         }
         return false;
     }
@@ -127,14 +127,14 @@ public class LanClient implements IClient {
     public int getPlayerCount() {
         if (_playerCount == 0) {
             sendMessage(Message.createPlayerCount(0));
-            awaitReply(MessageTypes.PLAYER_COUNT);
+            awaitReply(MessageTypes.Player_Count);
             _playerCount = _message.PlayerCount;
         }
         return _playerCount;
     }
 
     public void startGame() {
-        sendMessage(Message.create(MessageTypes.START_GAME));
+        sendMessage(Message.create(MessageTypes.Start_Game));
     }
 
     private void sendMessage(Message contents) {
@@ -180,7 +180,7 @@ public class LanClient implements IClient {
 
     private void handleResponse(Message contents) {
         switch (contents.MessageType) {
-            case CONNECT:
+            case Connect:
                 if (Settings.get().clientVerbose) {
                     Logger.client("CLIENT: Handshake successful. Starting player id extends  " + contents.PlayerIndex);
                 }
@@ -188,11 +188,11 @@ public class LanClient implements IClient {
                 _initialPlayerIndex = (int) contents.PlayerCount;
                 _isConnected = true;
                 break;
-            case START_GAME:
+            case Start_Game:
                 Logger.client("CLIENT: Start game reply has been received");
                 _isGameStarting = true;
                 break;
-            case SYNC_STATE:
+            case Sync_State:
                 if (Settings.get().clientVerbose) {
                     Logger.client("CLIENT: Input state received");
                 }

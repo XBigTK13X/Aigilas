@@ -9,7 +9,7 @@ public class GushSkill extends BaseSkill {
     public GushSkill()
 
     {
-        super(SkillId.GUSH, AnimationType.RANGED);
+        super(SkillId.Gush, AnimationType.RANGED);
 
 
     }

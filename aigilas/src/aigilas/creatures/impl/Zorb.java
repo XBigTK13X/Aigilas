@@ -4,6 +4,6 @@ import sps.bridge.ActorType;
 
 public class Zorb extends BaseEnemy {
     public Zorb() {
-        super(ActorType.ZORB);
+        super(ActorType.Zorb);
     }
 }

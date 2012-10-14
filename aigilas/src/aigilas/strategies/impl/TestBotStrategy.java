@@ -17,7 +17,7 @@ public class TestBotStrategy extends BaseStrategy {
     public TestBotStrategy(BaseCreature parent) {
         super(parent, Strategy.TestBot);
 
-        _targets.addTargetTypes(ActorType.NONPLAYER);
+        _targets.addTargetTypes(ActorType.Non_Player);
     }
 
     private Entity _stairsTarget;
@@ -51,8 +51,8 @@ public class TestBotStrategy extends BaseStrategy {
             }
         }
         else {
-            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityType.ACTOR).size() == 1) {
-                _stairsTarget = EntityManager.get().getObject(EntityType.DOWNSTAIRS);
+            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityType.Actor).size() == 1) {
+                _stairsTarget = EntityManager.get().getObject(EntityType.Downstairs);
                 if (_stairsTarget != null) {
                     targetPath = PathFinder.find(_parent.getLocation(), _stairsTarget.getLocation());
                 }

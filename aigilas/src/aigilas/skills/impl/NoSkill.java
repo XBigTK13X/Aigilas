@@ -10,7 +10,7 @@ public class NoSkill extends BaseSkill {
     public NoSkill()
 
     {
-        super(SkillId.NO_SKILL, AnimationType.NONE);
+        super(SkillId.No_Skill, AnimationType.NONE);
 
     }
 

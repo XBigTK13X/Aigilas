@@ -14,7 +14,7 @@ public class SideEffects {
 
     protected final AnimationType _animation;
     protected final List<SkillEffect> _effectGraphics = new ArrayList<SkillEffect>();
-    protected SpriteType _effectSprite = SpriteType.SKILL_EFFECT;
+    protected SpriteType _effectSprite = SpriteType.Skill_Effect;
     protected final float _effectStrength;
     protected boolean _isPersistent = false;
 

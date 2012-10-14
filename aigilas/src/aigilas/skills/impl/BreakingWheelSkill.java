@@ -12,14 +12,14 @@ public class BreakingWheelSkill extends BaseSkill {
     public BreakingWheelSkill()
 
     {
-        super(SkillId.BREAKING_WHEEL, AnimationType.SELF);
+        super(SkillId.Breaking_Wheel, AnimationType.SELF);
 
 
     }
 
     @Override
     public void activate(BaseCreature source) {
-        CreatureFactory.create(ActorType.BREAKING_WHEEL, EntityManager.get().getEmptyLocation());
+        CreatureFactory.create(ActorType.Breaking_Wheel, EntityManager.get().getEmptyLocation());
     }
 
 }

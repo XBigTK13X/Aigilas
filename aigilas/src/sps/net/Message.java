@@ -39,23 +39,23 @@ public class Message implements Serializable {
     }
 
     public static Message createReadyForNextTurn() {
-        return create(MessageTypes.READY_FOR_NEXT_TURN);
+        return create(MessageTypes.Ready_For_Next_Turn);
     }
 
     public static Message createHeartBeat() {
-        return create(MessageTypes.HEART_BEAT);
+        return create(MessageTypes.Heart_Beat);
     }
 
     public static Message createPlayerCount(int playerCount) {
         Message result = MessagePool.get();
-        result.MessageType = MessageTypes.PLAYER_COUNT;
+        result.MessageType = MessageTypes.Player_Count;
         result.PlayerCount = (byte) playerCount;
         return result;
     }
 
     public static Message createInit(int playerCount, int rngSeed) {
         Message result = MessagePool.get();
-        result.MessageType = MessageTypes.CONNECT;
+        result.MessageType = MessageTypes.Connect;
         result.PlayerCount = (byte) playerCount;
         result.RngSeed = rngSeed;
         return result;
@@ -63,7 +63,7 @@ public class Message implements Serializable {
 
     public static Message createMovement(Commands command, int playerIndex, boolean isActive) {
         Message result = MessagePool.get();
-        result.MessageType = MessageTypes.MOVEMENT;
+        result.MessageType = MessageTypes.Movement;
         result.PlayerIndex = playerIndex;
         result.Command = command;
         result.IsActive = isActive;
@@ -72,7 +72,7 @@ public class Message implements Serializable {
 
     public static Message createPlayerState(HashMap<Integer, HashMap<Commands, Boolean>> playerStatus, Integer turnCount, Integer rngSeed) {
         Message result = MessagePool.get();
-        result.MessageType = MessageTypes.SYNC_STATE;
+        result.MessageType = MessageTypes.Sync_State;
         result.writePlayerState(playerStatus);
         result.TurnCount = turnCount;
         result.RngSeed = rngSeed;

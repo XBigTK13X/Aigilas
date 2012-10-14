@@ -11,7 +11,7 @@ public class PlagueSkill extends BaseSkill {
     public PlagueSkill()
 
     {
-        super(SkillId.STRENGTH_UP, AnimationType.SELF);
+        super(SkillId.Strength_Up, AnimationType.SELF);
 
 
     }

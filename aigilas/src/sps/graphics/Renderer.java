@@ -1,10 +1,10 @@
 package sps.graphics;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,8 +13,11 @@ import sps.core.Point2;
 import sps.core.Settings;
 import sps.core.SpxManager;
 
+import java.io.File;
+
 public class Renderer {
 
+    private final String fontAsset = "assets/graphics/main.fnt";
     private final SpriteBatch batch;
     private final OrthographicCamera camera;
     private final BitmapFont font;
@@ -26,7 +29,8 @@ public class Renderer {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, SpxManager.VirtualWidth, SpxManager.VirtualHeight);
         batch = new SpriteBatch();
-        font = new BitmapFont();
+        File fontFile = new File(fontAsset);
+        font = new BitmapFont(Gdx.files.getFileHandle(fontFile.getAbsolutePath(), Files.FileType.Absolute), false);
     }
 
     public void begin() {
@@ -39,33 +43,6 @@ public class Renderer {
 
     public void end() {
         batch.end();
-    }
-
-    // Texture rendering
-    public void draw(Texture image, Point2 location, DrawDepth depth, Color filter) {
-        render(image, location, filter, depth, __defaultAlpha);
-    }
-
-    public void draw(Texture image, Point2 location, DrawDepth depth, float alpha) {
-        render(image, location, __defaultFilter, depth, alpha);
-    }
-
-    public void draw(Texture image, Point2 location, DrawDepth depth) {
-        render(image, location, __defaultFilter, depth, __defaultAlpha);
-    }
-
-    public void draw(Texture image, Point2 location) {
-        render(image, location, __defaultFilter, DrawDepth.Default, __defaultAlpha);
-    }
-
-    public void draw(Texture texture, Point2 position, DrawDepth depth, Color filter, int scaleX, int scaleY) {
-        batch.draw(texture, position.PosX, position.PosY, 0, 0, scaleX, scaleY);
-    }
-
-    private void render(Texture image, Point2 location, Color filter, DrawDepth depth, float alpha) {
-        batch.setColor(filter);
-        batch.draw(image, location.PosX, location.PosY);
-        batch.setColor(0, 0, 0, 1);
     }
 
     // Sprite rendering
@@ -90,7 +67,7 @@ public class Renderer {
     }
 
     private void renderString(String content, Point2 location, Color filter, float scale, DrawDepth depth) {
-        font.setScale(scale * 2);
+        font.setScale(scale);
         font.setColor(filter);
         font.draw(batch, content, location.X, location.Y);
     }

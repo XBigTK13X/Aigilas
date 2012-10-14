@@ -21,15 +21,15 @@ public class SkillPool {
 
     public void add(SkillId skill) {
         if (skill == null && _skills.size() == 0) {
-            _skills.add(SkillId.NO_SKILL);
+            _skills.add(SkillId.No_Skill);
             findCurrent();
             return;
         }
         if (!_skills.contains(skill)) {
             _skills.add(skill);
         }
-        if (_skills.contains(SkillId.NO_SKILL)) {
-            _skills.remove(SkillId.NO_SKILL);
+        if (_skills.contains(SkillId.No_Skill)) {
+            _skills.remove(SkillId.No_Skill);
             _currentSkillSlot = _skills.indexOf(skill);
         }
     }
@@ -40,7 +40,7 @@ public class SkillPool {
 
     public void add(List<SkillId> getLevelSkills) {
         if (getLevelSkills.size() == 0) {
-            _skills.add(SkillId.NO_SKILL);
+            _skills.add(SkillId.No_Skill);
             return;
         }
         for (SkillId skill : getLevelSkills) {
@@ -64,15 +64,15 @@ public class SkillPool {
     }
 
     public String getActiveName() {
-        return _skills.size() > 0 ? findCurrent().Info.Name : SkillId.NO_SKILL.Info.Name;
+        return _skills.size() > 0 ? findCurrent().Info.Name : SkillId.No_Skill.Info.Name;
     }
 
     private void removeNone() {
-        _skills.remove(SkillId.NO_SKILL);
+        _skills.remove(SkillId.No_Skill);
     }
 
     public void useActive() {
-        if (findCurrent() == SkillId.NO_SKILL) {
+        if (findCurrent() == SkillId.No_Skill) {
             removeNone();
             _currentSkillSlot = 0;
         }
@@ -100,11 +100,11 @@ public class SkillPool {
         }
         _leastUsed = null;
         for (SkillId key : _usageCounter.keySet()) {
-            if ((_leastUsed == null || _leastUsed == SkillId.FORGET_SKILL || _usageCounter.get(key) < _usageCounter.get(_leastUsed)) && key != SkillId.FORGET_SKILL) {
+            if ((_leastUsed == null || _leastUsed == SkillId.Forget_Skill || _usageCounter.get(key) < _usageCounter.get(_leastUsed)) && key != SkillId.Forget_Skill) {
                 _leastUsed = key;
             }
         }
-        if (_leastUsed != SkillId.FORGET_SKILL) {
+        if (_leastUsed != SkillId.Forget_Skill) {
             _skills.remove(_leastUsed);
         }
     }
@@ -137,7 +137,7 @@ public class SkillPool {
         if (_hotSkills.containsKey(hotSkillSlot)) {
             return _hotSkills.get(hotSkillSlot).Info.Name;
         }
-        return SkillId.NO_SKILL.Info.Name;
+        return SkillId.No_Skill.Info.Name;
     }
 
     public float getCurrentCost() {

@@ -11,7 +11,7 @@ public class HorrifySkill extends BaseSkill {
     public HorrifySkill()
 
     {
-        super(SkillId.HORRIFY, AnimationType.RANGED);
+        super(SkillId.Horrify, AnimationType.RANGED);
 
 
     }

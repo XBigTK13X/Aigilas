@@ -24,7 +24,7 @@ public class SkillHud extends BaseHud {
     }
 
     private int costOfCurrentSkill() {
-        return (int) (_parent.getCurrentSkillCost() / _parent.getMax(StatType.MANA) * _dimensions.Y);
+        return (int) (_parent.getCurrentSkillCost() / _parent.getMax(StatType.Mana) * _dimensions.Y);
     }
 
     private String getSkillStrings() {
@@ -44,8 +44,8 @@ public class SkillHud extends BaseHud {
             return;
         }
 
-        SpxManager.Renderer.draw(_menuBase, getHudOrigin(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.HEALTH));
-        SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.MANA));
+        SpxManager.Renderer.draw(_menuBase, getHudOrigin(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
+        SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Mana));
         SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
 
         _textHandler.draw();

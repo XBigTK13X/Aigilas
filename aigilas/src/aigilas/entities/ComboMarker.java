@@ -17,7 +17,7 @@ public class ComboMarker extends Entity {
     private final int _index;
 
     public ComboMarker(BaseCreature source, Elements elementId, int index) {
-        initialize(source.getLocation(), SpriteType.COMBO_MARKER, EntityType.COMBO_MARKER, DrawDepth.ComboMarker);
+        initialize(source.getLocation(), SpriteType.Combo_Marker, EntityType.Combo_Marker, DrawDepth.ComboMarker);
         _graphic.setColor(elementId.Tint);
         _graphic.setAlpha(0);
         ParticleEngine.emit(sps.particles.behaviors.RotateBehavior.getInstance(), this, _graphic.getColor());

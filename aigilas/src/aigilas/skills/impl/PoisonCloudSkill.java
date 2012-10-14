@@ -11,7 +11,7 @@ public class PoisonCloudSkill extends BaseSkill {
     public PoisonCloudSkill()
 
     {
-        super(SkillId.POISON_CLOUD, AnimationType.CLOUD);
+        super(SkillId.Poison_Cloud, AnimationType.CLOUD);
 
 
     }

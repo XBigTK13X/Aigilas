@@ -57,7 +57,7 @@ public class GenericItem extends Entity {
     }
 
     protected void setup(Point2 location, ItemName type) {
-        initialize(location, type.Sprite, EntityType.ITEM, DrawDepth.Item);
+        initialize(location, type.Sprite, EntityType.Item, DrawDepth.Item);
     }
 
     private Player _currentTarget;
@@ -67,7 +67,7 @@ public class GenericItem extends Entity {
         super.update();
         if (_isOnBoard) {
             IActor collider = EntityManager.get().getTouchingCreature(this);
-            if (collider != null && collider.getActorType() == ActorType.PLAYER) {
+            if (collider != null && collider.getActorType() == ActorType.Player) {
                 _currentTarget = (Player) collider;
                 if (_currentTarget.isInteracting()) {
                     _currentTarget.pickupItem(this);

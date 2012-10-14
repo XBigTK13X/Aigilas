@@ -1,14 +1,14 @@
 package sps.bridge;
 
 public enum EntityType {
-    ACTOR,
-    FLOOR,
-    WALL,
-    UPSTAIRS,
-    DOWNSTAIRS,
-    ITEM,
-    SKILL_EFFECT,
-    SKILL_EFFECT_GENERATOR,
-    ALTAR,
-    COMBO_MARKER
+    Actor,
+    Floor,
+    Wall,
+    Upstairs,
+    Downstairs,
+    Item,
+    Skill_Effect,
+    Skill_Efffect_Generator,
+    Altar,
+    Combo_Marker
 }

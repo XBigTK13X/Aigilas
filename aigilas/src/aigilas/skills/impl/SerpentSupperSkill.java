@@ -13,7 +13,7 @@ public class SerpentSupperSkill extends BaseSkill {
     public SerpentSupperSkill()
 
     {
-        super(SkillId.SERPENT_SUPPER, AnimationType.SELF);
+        super(SkillId.Serpent_Supper, AnimationType.SELF);
 
 
     }
@@ -22,14 +22,14 @@ public class SerpentSupperSkill extends BaseSkill {
     public void activate(BaseCreature source) {
         for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             if (ii != Settings.get().tileMapHeight / 2) {
-                CreatureFactory.create(ActorType.SERPENT, new Point2(ii, Settings.get().tileMapHeight / 2));
+                CreatureFactory.create(ActorType.Serpent, new Point2(ii, Settings.get().tileMapHeight / 2));
 
             }
 
         }
         for (int ii = 1; ii < Settings.get().tileMapHeight - 1; ii++) {
             if (ii != Settings.get().tileMapWidth / 2) {
-                CreatureFactory.create(ActorType.SERPENT, new Point2(Settings.get().tileMapWidth / 2, ii));
+                CreatureFactory.create(ActorType.Serpent, new Point2(Settings.get().tileMapWidth / 2, ii));
 
             }
 

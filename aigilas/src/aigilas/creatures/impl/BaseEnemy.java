@@ -41,13 +41,13 @@ public class BaseEnemy extends BaseCreature {
     }
 
     public BaseEnemy(ActorType actorType) {
-        this(actorType, SpriteType.CREATURE, null);
+        this(actorType, SpriteType.Creature, null);
     }
 
     public void setup(Point2 position) {
         setup(position, _actorType, _baseStats, _class);
         if (_strategy == null) {
-            _strategy = StrategyFactory.create(Strategy.Attack, this, ActorType.PLAYER);
+            _strategy = StrategyFactory.create(Strategy.Attack, this, ActorType.Player);
         }
     }
 
@@ -62,14 +62,14 @@ public class BaseEnemy extends BaseCreature {
 
     protected void strengths(StatType... stats) {
         for (StatType stat : stats) {
-            multiplier = (stat == StatType.MOVE_COOL_DOWN) ? .5f : 2;
+            multiplier = (stat == StatType.Move_Cool_Down) ? .5f : 2;
             InitStat(stat, get(stat) * multiplier);
         }
     }
 
     protected void weaknesses(StatType... stats) {
         for (StatType stat : stats) {
-            multiplier = (stat == StatType.MOVE_COOL_DOWN) ? 2 : .5f;
+            multiplier = (stat == StatType.Move_Cool_Down) ? 2 : .5f;
             InitStat(stat, get(stat) * multiplier);
         }
     }

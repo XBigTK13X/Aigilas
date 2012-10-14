@@ -9,7 +9,7 @@ public class IceShardSkill extends BaseSkill {
     public IceShardSkill()
 
     {
-        super(SkillId.ICE_SHARD, AnimationType.CLOUD);
+        super(SkillId.Ice_Shard, AnimationType.CLOUD);
 
 
     }

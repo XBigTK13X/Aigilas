@@ -12,7 +12,7 @@ public class ThrowItemSkill extends BaseSkill {
     public ThrowItemSkill()
 
     {
-        super(SkillId.THROW_ITEM, AnimationType.RANGED);
+        super(SkillId.Throw_Item, AnimationType.RANGED);
 
 
     }

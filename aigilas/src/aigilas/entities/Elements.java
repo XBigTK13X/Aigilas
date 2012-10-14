@@ -3,15 +3,15 @@ package aigilas.entities;
 import com.badlogic.gdx.graphics.Color;
 
 public enum Elements {
-    NORMAL(0, Color.GRAY),
-    FIRE(1, Color.RED),
-    WATER(2, Color.BLUE),
-    EARTH(3, Color.GREEN),
-    AIR(4, Color.YELLOW),
-    LIGHT(5, Color.WHITE),
-    DARK(6, Color.BLACK),
-    PHYSICAL(7, Color.ORANGE),
-    MENTAL(8, Color.MAGENTA);
+    Normal(0, Color.GRAY),
+    Fire(1, Color.RED),
+    Water(2, Color.BLUE),
+    Earth(3, Color.GREEN),
+    Air(4, Color.YELLOW),
+    Light(5, Color.WHITE),
+    Dark(6, Color.BLACK),
+    Physical(7, Color.ORANGE),
+    Mental(8, Color.MAGENTA);
 
     public final Color Tint;
     public final int Value;

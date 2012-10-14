@@ -11,7 +11,7 @@ public class ConfusionSkill extends BaseSkill {
     public ConfusionSkill()
 
     {
-        super(SkillId.CONFUSION, AnimationType.RANGED);
+        super(SkillId.Confusion, AnimationType.RANGED);
 
 
     }

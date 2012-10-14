@@ -5,6 +5,6 @@ import sps.bridge.ActorType;
 
 public class Sloth extends BaseEnemy {
     public Sloth() {
-        super(ActorType.SLOTH, SpriteType.SLOTH);
+        super(ActorType.Sloth, SpriteType.Sloth);
     }
 }

@@ -13,10 +13,10 @@ public class VaporCloud extends Minion {
     private BaseCreature _host = null;
 
     public VaporCloud() {
-        super(ActorType.MINION);
+        super(ActorType.Minion);
         _strategy = StrategyFactory.create(Strategy.MinionCloud, this);
-        add(SkillId.VAPOR_CLOUD);
-        _composition.add(Elements.WATER);
+        add(SkillId.Vapor_Cloud);
+        _composition.add(Elements.Water);
     }
 
     @Override

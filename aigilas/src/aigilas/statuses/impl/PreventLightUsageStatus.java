@@ -10,6 +10,6 @@ public class PreventLightUsageStatus extends BaseStatus {
     {
         super(target);
 
-        _blockedElements.add(Elements.LIGHT);
+        _blockedElements.add(Elements.Light);
     }
 }

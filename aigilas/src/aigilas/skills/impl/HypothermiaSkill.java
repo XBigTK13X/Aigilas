@@ -11,7 +11,7 @@ public class HypothermiaSkill extends BaseSkill {
     public HypothermiaSkill()
 
     {
-        super(SkillId.DISMEMBERMENT, AnimationType.SELF);
+        super(SkillId.Dismemberment, AnimationType.SELF);
 
 
     }
@@ -21,7 +21,7 @@ public class HypothermiaSkill extends BaseSkill {
 
     {
         for (int ii = 0; ii < 4; ii++) {
-            CreatureFactory.createMinion(SkillId.ICE_SHARD, target, _behavior.getGraphic(), EntityManager.get().getEmptyLocation());
+            CreatureFactory.createMinion(SkillId.Ice_Shard, target, _behavior.getGraphic(), EntityManager.get().getEmptyLocation());
 
         }
 

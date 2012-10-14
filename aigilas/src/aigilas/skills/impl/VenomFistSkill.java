@@ -11,7 +11,7 @@ public class VenomFistSkill extends BaseSkill {
     public VenomFistSkill()
 
     {
-        super(SkillId.VENOM_FIST, AnimationType.SELF);
+        super(SkillId.Venom_Fist, AnimationType.SELF);
 
 
     }

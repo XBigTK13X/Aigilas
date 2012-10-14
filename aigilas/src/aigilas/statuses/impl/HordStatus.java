@@ -8,7 +8,7 @@ import aigilas.statuses.BaseStatus;
 public class HordStatus extends BaseStatus {
     public HordStatus(BaseCreature target) {
         super(target);
-        _buff = new StatBuff(StatType.STRENGTH, target.getInventoryCount());
+        _buff = new StatBuff(StatType.Strength, target.getInventoryCount());
         setup();
     }
 }

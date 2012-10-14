@@ -8,9 +8,9 @@ import sps.bridge.ActorType;
 
 public class DartTrap extends Minion {
     public DartTrap() {
-        super(ActorType.MINION);
+        super(ActorType.Minion);
         _strategy = StrategyFactory.create(Strategy.MinionFire, this);
-        add(SkillId.DART);
-        _composition.add(Elements.DARK);
+        add(SkillId.Dart);
+        _composition.add(Elements.Dark);
     }
 }

@@ -23,7 +23,7 @@ public class Altar extends Entity {
     public Altar(Point2 location, GodId godName) {
         _god = godName.getInstance();
         _graphic.setColor(_god.getColor());
-        initialize(location, SpriteType.ALTAR, EntityType.ALTAR, DrawDepth.Altar);
+        initialize(location, SpriteType.Altar, EntityType.Altar, DrawDepth.Altar);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Altar extends Entity {
             if (_currentTarget.isInteracting()) {
                 _currentTarget.pray(_god);
             }
-            _offerings = EntityManager.get().getEntities(EntityType.ITEM, _location);
+            _offerings = EntityManager.get().getEntities(EntityType.Item, _location);
             for (Entity offering : _offerings) {
                 _currentTarget.sacrifice(_god, (GenericItem) offering);
             }

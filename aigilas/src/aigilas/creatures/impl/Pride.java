@@ -5,6 +5,6 @@ import sps.bridge.ActorType;
 
 public class Pride extends BaseEnemy {
     public Pride() {
-        super(ActorType.PRIDE, SpriteType.PRIDE);
+        super(ActorType.Pride, SpriteType.Pride);
     }
 }

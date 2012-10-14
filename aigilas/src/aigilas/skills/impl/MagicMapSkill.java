@@ -9,7 +9,7 @@ public class MagicMapSkill extends BaseSkill {
     public MagicMapSkill()
 
     {
-        super(SkillId.MAGIC_MAP, AnimationType.RANGED);
+        super(SkillId.Magic_Map, AnimationType.RANGED);
 
 
     }

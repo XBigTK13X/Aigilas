@@ -33,15 +33,15 @@ public abstract class BaseSkill {
     }
 
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
-        this(implementationId, animation, strength, isPersistent, SpriteType.SKILL_EFFECT);
+        this(implementationId, animation, strength, isPersistent, SpriteType.Skill_Effect);
     }
 
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength) {
-        this(implementationId, animation, strength, false, SpriteType.SKILL_EFFECT);
+        this(implementationId, animation, strength, false, SpriteType.Skill_Effect);
     }
 
     protected BaseSkill(SkillId implementationId, AnimationType animation) {
-        this(implementationId, animation, SkillEffect.DefaultStrength, false, SpriteType.SKILL_EFFECT);
+        this(implementationId, animation, SkillEffect.DefaultStrength, false, SpriteType.Skill_Effect);
     }
 
     protected void add(Elements... elements) {

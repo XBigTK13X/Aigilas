@@ -7,7 +7,7 @@ import aigilas.skills.SkillId;
 
 public class AcidDripSkill extends BaseSkill {
     public AcidDripSkill() {
-        super(SkillId.ACID_DRIP, AnimationType.STATIONARY);
+        super(SkillId.Acid_Drip, AnimationType.STATIONARY);
     }
 
     @Override

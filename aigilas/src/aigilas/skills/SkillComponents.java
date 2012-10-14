@@ -17,7 +17,7 @@ public class SkillComponents {
     protected StatBuff _buff;
     protected float _effectStrength = 0;
     protected boolean _isPersistent = false;
-    protected final List<EntityType> _targetTypes = Arrays.asList(EntityType.WALL);
+    protected final List<EntityType> _targetTypes = Arrays.asList(EntityType.Wall);
     protected List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
 
     public SkillComponents(float strength, boolean isPersistent) {

@@ -8,7 +8,7 @@ import aigilas.skills.SkillId;
 
 public class SpawnItemSkill extends BaseSkill {
     public SpawnItemSkill() {
-        super(SkillId.SPAWN_ITEM, AnimationType.SELF);
+        super(SkillId.Spawn_Item, AnimationType.SELF);
     }
 
     @Override

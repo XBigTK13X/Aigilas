@@ -10,6 +10,6 @@ public class SoakingWetStatus extends BaseStatus {
     {
         super(target);
 
-        _blockedElements.add(Elements.FIRE);
+        _blockedElements.add(Elements.Fire);
     }
 }

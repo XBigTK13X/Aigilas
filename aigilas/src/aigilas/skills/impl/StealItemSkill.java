@@ -11,7 +11,7 @@ public class StealItemSkill extends BaseSkill {
     public StealItemSkill()
 
     {
-        super(SkillId.STEAL_ITEM, AnimationType.ROTATE);
+        super(SkillId.Steal_Item, AnimationType.ROTATE);
 
 
     }

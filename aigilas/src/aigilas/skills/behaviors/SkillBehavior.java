@@ -49,7 +49,7 @@ public class SkillBehavior {
     protected boolean SubtractCost(BaseCreature owner) {
         boolean costPaid = false;
         for (StatType stat : StatType.values()) {
-            if (stat != StatType.REGEN) {
+            if (stat != StatType.Regen) {
                 if (owner.lowerStat(stat, _cost.get(stat))) {
                     costPaid = true;
                 }
@@ -84,6 +84,6 @@ public class SkillBehavior {
     }
 
     public float getCost() {
-        return _cost.get(StatType.MANA);
+        return _cost.get(StatType.Mana);
     }
 }

@@ -11,7 +11,7 @@ public class ForgetSkill extends BaseSkill
     public ForgetSkill()
 
     {
-        super(SkillId.FORGET_SKILL, AnimationType.SELF);
+        super(SkillId.Forget_Skill, AnimationType.SELF);
 
 
     }

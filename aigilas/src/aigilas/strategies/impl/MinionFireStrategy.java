@@ -19,7 +19,7 @@ public class MinionFireStrategy extends BaseStrategy {
         if (_parent.isCooledDown()) {
             _parent.useActiveSkill();
             _parent.applyDamage(5, null, false);
-            _parent.set(StatType.MOVE_COOL_DOWN, 0);
+            _parent.set(StatType.Move_Cool_Down, 0);
         }
     }
 }

@@ -5,6 +5,6 @@ import sps.bridge.ActorType;
 
 public class Greed extends BaseEnemy {
     public Greed() {
-        super(ActorType.GREED, SpriteType.GREED);
+        super(ActorType.Greed, SpriteType.Greed);
     }
 }
