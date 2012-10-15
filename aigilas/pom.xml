@@ -11,6 +11,7 @@
   <url>http://maven.apache.org</url>
 
   <build>
+    <finalName>aigilas</finalName>
     <sourceDirectory>${basedir}/src</sourceDirectory>
     <plugins>
       <plugin>
