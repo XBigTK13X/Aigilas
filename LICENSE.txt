@@ -12,9 +12,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 All images (and associated project files) are licensed under CC BYSA 3.0. 
 More information about this license can be found here: http://creativecommons.org/licenses/bysa/3.0/
 
-The file "MainTheme.mp3", containing the song "Bach's Organ  2" by Markin Andrey is also licensed under CC BYSA 3.0. 
-See the link above for more information about this license.
-
 ## Contributor Licenses ##
 All contributions that are accepted into the project will also be listed under the MIT or CC BYSA 3.0 license, depending on the type of contribution.
 
