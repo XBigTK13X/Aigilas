@@ -123,7 +123,7 @@ public class Dungeon {
         List<Point2> neighbors = _upSpawnLocation.getNeighbors();
 
         if (cache.size() == 0) {
-            for (int ii = 0; ii < playerCount; ii++) {
+            for (int ii = 0; ii < 4; ii++) {
                 _contents.add(CreatureFactory.create(ActorType.Player, getRandomNeighbor(neighbors)));
             }
         }
@@ -147,7 +147,7 @@ public class Dungeon {
                 return neighborTemp;
             }
         }
-        return null;
+        return neighborTemp;
     }
 
     private void placeItems(int amountToPlace) {

@@ -24,9 +24,9 @@ public class BaseHud {
         }
         _dimensions = new Point2(width, height);
         playerHudPositions.add(new Point2(0, SpxManager.VirtualHeight - _dimensions.Y));
-        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight + _dimensions.Y));
-        playerHudPositions.add(new Point2(0, 0));
-        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, 0));
+        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight - _dimensions.Y));
+        playerHudPositions.add(new Point2(0, _dimensions.Y));
+        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, _dimensions.Y));
     }
 
     public void toggle() {
