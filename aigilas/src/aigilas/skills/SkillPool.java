@@ -51,16 +51,11 @@ public class SkillPool {
     }
 
     public void cycle(int velocity) {
-        try {
-            _currentSkillSlot = (_currentSkillSlot + velocity) % _skills.size();
-            if (_currentSkillSlot < 0) {
-                _currentSkillSlot = _skills.size() - 1;
-            }
-            findCurrent();
+        _currentSkillSlot = (_currentSkillSlot + velocity) % _skills.size();
+        if (_currentSkillSlot < 0) {
+            _currentSkillSlot = _skills.size() - 1;
         }
-        catch (Exception e) {
-            int x = 0;
-        }
+        findCurrent();
     }
 
     public String getActiveName() {

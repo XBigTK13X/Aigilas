@@ -64,8 +64,8 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected boolean _isPlaying = true;
     protected int _currentLevel = 1;
     protected float _experience;
-    protected static final float __levelUpAmonut = 50;
-    protected float _nextLevelExperience = __levelUpAmonut;
+    protected static final float __levelUpAmount = 50;
+    protected float _nextLevelExperience = __levelUpAmount;
 
     protected ActorType _actorType;
 
@@ -86,7 +86,9 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected void SetClass(CreatureClass cClass) {
         if (_class != cClass || cClass == null || cClass == CreatureClass.NULL) {
             _class = (cClass == null) ? CreatureClass.NULL : cClass;
-            _skills = new SkillPool(this);
+            if (_skills == null) {
+                _skills = new SkillPool(this);
+            }
             if (_actorType != ActorType.Player) {
                 for (SkillId skillId : SkillLogic.get().getElementalSkills(getActorType(), _composition)) {
                     _skills.add(skillId);
@@ -435,7 +437,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             }
             _experience += diff;
             if (_experience > _nextLevelExperience) {
-                _nextLevelExperience += __levelUpAmonut;
+                _nextLevelExperience += __levelUpAmount;
                 _experience = 0;
                 _currentLevel++;
                 if (_class != null) {
@@ -451,7 +453,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void cycleActiveSkill(int velocity) {
-        if (_statuses.allows(CreatureAction.SkillCycle)) {
+        if (_statuses.allows(CreatureAction.SkillCycle) && velocity != 0) {
             _skills.cycle(velocity);
         }
     }
