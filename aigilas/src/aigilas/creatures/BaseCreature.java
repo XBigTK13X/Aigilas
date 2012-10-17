@@ -86,7 +86,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected void SetClass(CreatureClass cClass) {
         if (_class != cClass || cClass == null || cClass == CreatureClass.NULL) {
             _class = (cClass == null) ? CreatureClass.NULL : cClass;
-            if (_skills == null) {
+            if (_skills == null || _actorType == ActorType.Player) {
                 _skills = new SkillPool(this);
             }
             if (_actorType != ActorType.Player) {
