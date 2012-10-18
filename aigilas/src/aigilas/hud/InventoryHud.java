@@ -125,11 +125,10 @@ public class InventoryHud extends BaseHud {
     private static final String __delim = ")";
     private static final String __equipDelim = "~";
     private static final String __seper = " x";
-    private static final String __newline = "\n";
 
     private String displayString = "";
     private boolean forceRefresh = false;
-    private final String[] list = new String[10];
+    private String[] list = new String[10];
 
     private void updateInventoryDisplay() {
         _textHandler.writeDefault(getClassDisplay(), 20, 30, getHudOrigin());
@@ -140,6 +139,7 @@ public class InventoryHud extends BaseHud {
                 StringSquisher.clear();
                 displayString = StringSquisher.flush();
                 int count = 0;
+                list = new String[10];
                 for (GenericItem item : _currentClassItems.keySet()) {
                     if (ii == _startingItem) {
                         _currentSelectedItem = item;
@@ -155,7 +155,6 @@ public class InventoryHud extends BaseHud {
                         if (_currentClassItems.get(item) > -1) {
                             StringSquisher.squish(__seper, StringStorage.get(_currentClassItems.get(item)));
                         }
-                        StringSquisher.squish(__newline);
                         if (count < 10) {
                             list[count] = StringSquisher.flush();
                         }

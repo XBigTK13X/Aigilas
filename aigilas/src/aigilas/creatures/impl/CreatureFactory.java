@@ -2,6 +2,7 @@ package aigilas.creatures.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
+import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
 import sps.core.Point2;
@@ -28,6 +29,9 @@ public class CreatureFactory {
         }
         result.setup(position);
         EntityManager.get().addObject(result);
+        for (int ii = 0; ii < 100; ii++) {
+            result.pickupItem(ItemFactory.createRandomPlain());
+        }
         return result;
     }
 
