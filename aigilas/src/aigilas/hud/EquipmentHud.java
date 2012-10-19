@@ -47,10 +47,10 @@ public class EquipmentHud extends BaseHud {
                     }
                 }
             }
-            _textHandler.writeDefault(display, 200, 60, getHudOrigin());
+            _textHandler.writeDefault(display, (int) getStart().X+200, (int) getStart().X + 60, null);
             for (int ii = 0; ii < 10; ii++) {
                 if (list[ii] != null) {
-                    _textHandler.writeDefault(list[ii], 200, 60 + 40 * ii, getHudOrigin());
+                    _textHandler.writeDefault(list[ii], 200, 60 + 40 * ii, getStart());
                 }
             }
         }

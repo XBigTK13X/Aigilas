@@ -13,25 +13,10 @@ public class SkillHud extends BaseHud {
     private static final String __separator = "|";
 
     private Point2 _manaPosition = new Point2();
-    private Point2 pos = new Point2();
 
     public SkillHud(BaseCreature owner) {
         super(owner, Settings.get().spriteWidth, SpxManager.VirtualHeight / 4);
-        _manaPosition = new Point2(getHudOrigin().X, getHudOrigin().Y - SpxManager.VirtualHeight / 4);
-        switch (_parent.getPlayerIndex()) {
-            case 0:
-                pos = new Point2(getHudOrigin().X + Settings.get().spriteWidth, Settings.get().spriteHeight);
-                break;
-            case 1:
-                pos = new Point2(getHudOrigin().X - SpxManager.VirtualWidth / 2, Settings.get().spriteHeight);
-                break;
-            case 2:
-                pos = new Point2(getHudOrigin().X + Settings.get().spriteWidth, SpxManager.VirtualHeight);
-                break;
-            case 3:
-                pos = new Point2(getHudOrigin().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight);
-                break;
-        }
+        _manaPosition = new Point2(getStart().X, getStart().Y - SpxManager.VirtualHeight / 4);
     }
 
     private int calculateHeight(StatType statType) {
@@ -50,7 +35,7 @@ public class SkillHud extends BaseHud {
         if (_isVisible) {
             _textHandler.update();
             _textHandler.clear();
-            _textHandler.writeDefault(getSkillStrings(), (int) pos.X, (int) pos.Y, null);
+            _textHandler.writeDefault(getSkillStrings(), (int) getStart().X, (int) getStart().Y, null);
         }
     }
 
@@ -59,7 +44,7 @@ public class SkillHud extends BaseHud {
             return;
         }
 
-        SpxManager.Renderer.draw(_menuBase, getHudOrigin(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
+        SpxManager.Renderer.draw(_menuBase, getStart(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
         SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Mana));
         SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
 

@@ -39,7 +39,7 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void render() {
-        try {
+
             //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
 
             // Update
@@ -78,11 +78,7 @@ public class Aigilas implements ApplicationListener {
             TextManager.draw();
             DevConsole.get().draw();
             SpxManager.Renderer.end();
-        }
-        catch (Exception e) {
-            Logger.error(e.toString());
-            Gdx.app.exit();
-        }
+
     }
 
     @Override

@@ -38,7 +38,7 @@ public class InventoryHud extends BaseHud {
 
     public void draw() {
         if (_isVisible) {
-            SpxManager.Renderer.draw(_menuBase, getHudOrigin(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.getCenter().X, (int) SpxManager.getCenter().Y);
+            SpxManager.Renderer.draw(_menuBase, getStart(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.getCenter().X, (int) SpxManager.getCenter().Y);
             _textHandler.draw();
             _deltas.draw();
             _equipHud.draw();
@@ -131,7 +131,7 @@ public class InventoryHud extends BaseHud {
     private String[] list = new String[10];
 
     private void updateInventoryDisplay() {
-        _textHandler.writeDefault(getClassDisplay(), 20, 30, getHudOrigin());
+        _textHandler.writeDefault(getClassDisplay(), 20, 30, getStartI());
         _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
         if (_currentClassItems.size() > 0) {
             int ii = 0;
@@ -163,10 +163,10 @@ public class InventoryHud extends BaseHud {
                 }
 
             }
-            _textHandler.writeDefault(displayString, 50, 60, getHudOrigin());
+            _textHandler.writeDefault(displayString, 50, 60, getStartI());
             for (int jj = 0; jj < 10; jj++) {
                 if (list[jj] != null) {
-                    _textHandler.writeDefault(list[jj], 20, 60 + 40 * jj, getHudOrigin());
+                    _textHandler.writeDefault(list[jj], 40,40 + 60 * jj, getStartI());
                 }
             }
         }

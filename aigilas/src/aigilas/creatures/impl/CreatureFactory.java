@@ -29,7 +29,7 @@ public class CreatureFactory {
         }
         result.setup(position);
         EntityManager.get().addObject(result);
-        for (int ii = 0; ii < 100; ii++) {
+        for (int ii = 0; ii < 1000; ii++) {
             result.pickupItem(ItemFactory.createRandomPlain());
         }
         return result;
