@@ -26,13 +26,14 @@ public class EquipmentHud extends BaseHud {
     private static final String sep = ":";
     private String display = "EMPTY";
     private final String title = "Equipped\n";
-    private final String[] list = new String[10];
+    private String[] list = new String[10];
 
     public void update(boolean refresh) {
         if (_isVisible) {
             _textHandler.update();
             _textHandler.clear();
             if (refresh) {
+                list = new String[10];
                 StringSquisher.clear();
                 StringSquisher.squish(title);
                 display = StringSquisher.flush();
@@ -47,10 +48,10 @@ public class EquipmentHud extends BaseHud {
                     }
                 }
             }
-            _textHandler.writeDefault(display, (int) getStart().X+200, (int) getStart().X + 60, null);
+            _textHandler.writeDefault(display, (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9), getStartI());
             for (int ii = 0; ii < 10; ii++) {
                 if (list[ii] != null) {
-                    _textHandler.writeDefault(list[ii], 200, 60 + 40 * ii, getStart());
+                    _textHandler.writeDefault(list[ii], (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9) - 60 * ii, getStartI());
                 }
             }
         }

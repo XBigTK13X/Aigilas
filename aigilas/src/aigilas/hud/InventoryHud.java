@@ -131,7 +131,7 @@ public class InventoryHud extends BaseHud {
     private String[] list = new String[10];
 
     private void updateInventoryDisplay() {
-        _textHandler.writeDefault(getClassDisplay(), 20, 30, getStartI());
+        _textHandler.writeDefault(getClassDisplay(), 20, (int) (_dimensions.Y * .9), getStartI());
         _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
         if (_currentClassItems.size() > 0) {
             int ii = 0;
@@ -166,7 +166,7 @@ public class InventoryHud extends BaseHud {
             _textHandler.writeDefault(displayString, 50, 60, getStartI());
             for (int jj = 0; jj < 10; jj++) {
                 if (list[jj] != null) {
-                    _textHandler.writeDefault(list[jj], 40,40 + 60 * jj, getStartI());
+                    _textHandler.writeDefault(list[jj], 40, (int) (_dimensions.Y * .9) - 60 * jj, getStartI());
                 }
             }
         }

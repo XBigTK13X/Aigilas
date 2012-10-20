@@ -30,10 +30,11 @@ public class BaseHud {
         playerHudPositions.add(new Point2(0, _dimensions.Y));
         playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, _dimensions.Y));
 
+        invertedPlayerHudPositions.add(new Point2(getStart().X + Settings.get().spriteWidth, SpxManager.VirtualHeight - _dimensions.Y));
+        invertedPlayerHudPositions.add(new Point2(getStart().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight));
         invertedPlayerHudPositions.add(new Point2(getStart().X + Settings.get().spriteWidth, Settings.get().spriteHeight));
         invertedPlayerHudPositions.add(new Point2(getStart().X - SpxManager.VirtualWidth / 2, Settings.get().spriteHeight));
-        invertedPlayerHudPositions.add(new Point2(getStart().X + Settings.get().spriteWidth, SpxManager.VirtualHeight));
-        invertedPlayerHudPositions.add(new Point2(getStart().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight));
+
     }
 
     public void toggle() {
