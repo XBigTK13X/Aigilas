@@ -26,7 +26,7 @@ public class Dungeon {
 
     private static int enemyCapModifier = 0;
     private static int enemyBaseModifier = 0;
-    private final int playerCount = Client.get().getPlayerCount();
+    private int playerCount = Client.get().getPlayerCount();
 
     private final List<Room> _rooms = new ArrayList<Room>();
     private List<Entity> _contents = new ArrayList<Entity>();
@@ -123,7 +123,10 @@ public class Dungeon {
         List<Point2> neighbors = _upSpawnLocation.getNeighbors();
 
         if (cache.size() == 0) {
-            for (int ii = 0; ii < 4; ii++) {
+            if (Settings.get().debugFourPlayers) {
+                playerCount = 4;
+            }
+            for (int ii = 0; ii < playerCount; ii++) {
                 _contents.add(CreatureFactory.create(ActorType.Player, getRandomNeighbor(neighbors)));
             }
         }

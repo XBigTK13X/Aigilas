@@ -7,6 +7,7 @@ import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
 import sps.core.Point2;
 import sps.core.RNG;
+import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 
@@ -29,8 +30,10 @@ public class CreatureFactory {
         }
         result.setup(position);
         EntityManager.get().addObject(result);
-        for (int ii = 0; ii < 1000; ii++) {
-            result.pickupItem(ItemFactory.createRandomPlain());
+        if (Settings.get().debugInventory) {
+            for (int ii = 0; ii < 1000; ii++) {
+                result.pickupItem(ItemFactory.createRandomPlain());
+            }
         }
         return result;
     }

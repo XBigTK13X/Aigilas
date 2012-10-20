@@ -42,7 +42,7 @@ public class Settings {
     public final int resolutionWidth;
     public final boolean fullScreen;
 
-    public boolean devConsoleEnabled;
+    public final boolean devConsoleEnabled;
     public final boolean clientVerbose;
     public final boolean serverVerbose;
     public final boolean messageContentsVerbose;
@@ -50,6 +50,8 @@ public class Settings {
     public final boolean clientManagerVerbose;
     public final boolean viewPaths;
     public final boolean gameplayVerbose;
+    public final boolean debugInventory;
+    public final boolean debugFourPlayers;
 
     private Settings() {
         try {
@@ -108,6 +110,8 @@ public class Settings {
         viewPaths = isTrue(_settings.get("viewPaths"));
         gameplayVerbose = isTrue(_settings.get("gameplay_log_verbose"));
         devConsoleEnabled = isTrue(_settings.get("dev_console_enabled"));
+        debugFourPlayers = isTrue(_settings.get("debug_four_players"));
+        debugInventory = isTrue(_settings.get("debug_inventory"));
 
     }
 
