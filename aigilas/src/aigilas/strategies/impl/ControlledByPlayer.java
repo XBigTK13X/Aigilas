@@ -2,11 +2,14 @@ package aigilas.strategies.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.Stats;
+import aigilas.creatures.impl.Player;
 import aigilas.management.Commands;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
 import sps.core.Point2;
+import sps.entities.Entity;
+import sps.entities.EntityManager;
 import sps.io.Contexts;
 import sps.io.Input;
 
@@ -92,6 +95,12 @@ public class ControlledByPlayer extends BaseStrategy {
             }
 
             if (Input.isActive(Commands.Inventory, _parent.getPlayerIndex())) {
+                for (Entity player : EntityManager.get().getPlayers()) {
+                    Player p = (Player) player;
+                    if (p.getPlayerIndex() != _parent.getPlayerIndex()) {
+                        p.toggleInventoryVisibility();
+                    }
+                }
                 Input.setContext(_parent.toggleInventoryVisibility() ? Contexts.Inventory : Contexts.Free, _parent.getPlayerIndex());
             }
         }

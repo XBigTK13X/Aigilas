@@ -35,7 +35,7 @@ public class SkillHud extends BaseHud {
         if (_isVisible) {
             _textHandler.update();
             _textHandler.clear();
-            _textHandler.writeDefault(getSkillStrings(), 0, (int) (_dimensions.Y * .8), getStartI());
+            _textHandler.writeDefault(getSkillStrings(), 0, 0, getStartI());
         }
     }
 
