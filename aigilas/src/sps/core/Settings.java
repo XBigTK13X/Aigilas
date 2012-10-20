@@ -33,6 +33,8 @@ public class Settings {
     public final float defaultRegen;
     public final float turnTime;
 
+    public final boolean musicEnabled;
+
     public final int spriteHeight;
     public final int spriteWidth;
     public final int spriteGap;
@@ -90,6 +92,9 @@ public class Settings {
         defaultSpeed = Float.parseFloat(_settings.get("defaultSpeed"));
         defaultRegen = Float.parseFloat(_settings.get("defaultRegen"));
         turnTime = 1 / Float.parseFloat(_settings.get("turnsPerSecond"));
+
+        // Audio
+        musicEnabled = isTrue(_settings.get("music_enabled"));
 
         // Display
         spriteHeight = Integer.parseInt(_settings.get("spriteHeight"));

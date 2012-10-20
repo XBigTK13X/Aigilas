@@ -1,28 +1,21 @@
 package sps.audio;
 
+import sps.core.Settings;
 
-public class MusicPlayer {
+public abstract class MusicPlayer {
     private static MusicPlayer __instance;
 
     public static MusicPlayer get() {
+        if (!Settings.get().musicEnabled) {
+            __instance = new MuteMusicPlayer();
+        }
         if (__instance == null) {
-            __instance = new MusicPlayer();
+            __instance = new DefaultMusicPlayer();
         }
         return __instance;
     }
 
-    //private final Music mainTheme;
+    public abstract void start();
 
-    public MusicPlayer() {
-        //mainTheme = Gdx.audio.newMusic(Gdx.files.internal("assets/music/MainTheme.mp3"));
-        //mainTheme.setLooping(true);
-    }
-
-    public void start() {
-        //mainTheme.play();
-    }
-
-    public void stop() {
-        //mainTheme.stop();
-    }
+    public abstract void stop();
 }
