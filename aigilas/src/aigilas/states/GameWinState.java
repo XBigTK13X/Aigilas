@@ -24,7 +24,7 @@ public class GameWinState implements State {
     @Override
     public void update() {
         if (Input.isActive(Commands.Confirm, 0, true)) {
-            StateManager.loadState(new GameplayState());
+            StateManager.loadState(new LoadingState());
         }
     }
 

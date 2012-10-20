@@ -40,7 +40,7 @@ public class MainMenuState implements State {
                 Input.setContext(Contexts.Free, ii);
             }
 
-            StateManager.loadState(new GameplayState());
+            StateManager.loadState(new LoadingState());
         }
         else {
             if (Input.isActive(Commands.Confirm, Client.get().getFirstPlayerIndex())) {

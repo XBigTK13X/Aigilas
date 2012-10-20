@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -70,5 +71,13 @@ public class Renderer {
         font.setScale(scale);
         font.setColor(filter);
         font.draw(batch, content, location.X, location.Y);
+    }
+
+    //Textures
+    public void draw(Texture texture, int x, int y) {
+    }
+
+    private void renderTexture(Texture texture, int x, int y) {
+        batch.draw(texture, (float) x, (float) y);
     }
 }
