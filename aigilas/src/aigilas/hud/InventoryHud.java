@@ -49,8 +49,8 @@ public class InventoryHud extends BaseHud {
     private void handleInput() {
         if (Input.isActive(Commands.CycleLeft, _parent.getPlayerIndex())) {
             _currentClass--;
-            if (_currentClass <= 0) {
-                _currentClass = ItemClass.values().length - 2;
+            if (_currentClass < 0) {
+                _currentClass = ItemClass.values().length - 1;
             }
             _startingItem = 0;
             _endingItem = 4;
@@ -60,7 +60,7 @@ public class InventoryHud extends BaseHud {
         if (Input.isActive(Commands.CycleRight, _parent.getPlayerIndex())) {
             _currentClass++;
             if (_currentClass >= ItemClass.values().length) {
-                _currentClass = 1;
+                _currentClass = 0;
             }
             _startingItem = 0;
             _endingItem = 4;
@@ -132,6 +132,9 @@ public class InventoryHud extends BaseHud {
     private String[] list = new String[10];
 
     private void updateInventoryDisplay() {
+        //This needs to be rendered up here, because it won't be rendered if the class contains no items
+        _textHandler.writeDefault(getClassDisplay(), 20, (int) (_dimensions.Y * .9), getInventoryAnchor());
+
         _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
         if (_currentClassItems.size() > 0) {
             int ii = 0;
@@ -163,8 +166,6 @@ public class InventoryHud extends BaseHud {
                 }
 
             }
-
-            _textHandler.writeDefault(getClassDisplay(), 20, (int) (_dimensions.Y * .9), getInventoryAnchor());
             _textHandler.writeDefault(displayString, 50, 60, getInventoryAnchor());
             for (int jj = 0; jj < 10; jj++) {
                 if (list[jj] != null) {
