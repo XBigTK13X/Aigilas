@@ -8,6 +8,7 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
 import sps.core.Point2;
+import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.io.Contexts;
@@ -95,10 +96,12 @@ public class ControlledByPlayer extends BaseStrategy {
             }
 
             if (Input.isActive(Commands.Inventory, _parent.getPlayerIndex())) {
-                for (Entity player : EntityManager.get().getPlayers()) {
-                    Player p = (Player) player;
-                    if (p.getPlayerIndex() != _parent.getPlayerIndex()) {
-                        p.toggleInventoryVisibility();
+                if (Settings.get().debugInventory) {
+                    for (Entity player : EntityManager.get().getPlayers()) {
+                        Player p = (Player) player;
+                        if (p.getPlayerIndex() != _parent.getPlayerIndex()) {
+                            p.toggleInventoryVisibility();
+                        }
                     }
                 }
                 Input.setContext(_parent.toggleInventoryVisibility() ? Contexts.Inventory : Contexts.Free, _parent.getPlayerIndex());
