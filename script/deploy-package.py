@@ -11,8 +11,8 @@ def deleteOld():
 		requests.delete(url + '/' + str(dID) , auth=(username , password))
 def createNewHandle():
 	print "=== Create a new GitHub Download"
-	size = os.path.getsize('aigilas/target/aigilas.jar.zip')
-	payload = {'name':'aigilas.jar.zip','size':size,'description':'Alpha development snapshot of Aigilas','content-type':'text/plain'}
+	size = os.path.getsize('aigilas/target/aigilas.zip')
+	payload = {'name':'aigilas.zip','size':size,'description':'Alpha development snapshot of Aigilas','content-type':'text/plain'}
 	created = requests.post(url,auth=(username,password),data=json.dumps(payload))
 	return created.json
 
@@ -27,13 +27,14 @@ def uploadFile(res):
 	p['Policy'] = res['policy']
 	p['Signature'] = res['signature']
 	p['Content-Type'] = res['mime_type']
-	p['file'] = '@aigilas.jar.zip'
+	p['file'] = '@aigilas.zip'
 
 	cmd = 'cd /home/kretst/dev/aigilas/aigilas/target/ && curl'
 	for key in p.keys():
 		cmd = cmd + ' -F ' + str(key) + '=' + str(p[key])
 	cmd += ' https://github.s3.amazonaws.com/'
 	os.system(cmd)
+	print ""
 
 def update_package():
 	deleteOld()	
