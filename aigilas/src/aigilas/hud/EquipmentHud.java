@@ -48,10 +48,10 @@ public class EquipmentHud extends BaseHud {
                     }
                 }
             }
-            _textHandler.writeDefault(display, (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9), getStartI());
+            _textHandler.writeDefault(display, (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9), getInventoryStart());
             for (int ii = 0; ii < 10; ii++) {
                 if (list[ii] != null) {
-                    _textHandler.writeDefault(list[ii], (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9) - 60 * ii, getStartI());
+                    _textHandler.writeDefault(list[ii], (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9) - 60 * ii, getInventoryStart());
                 }
             }
         }

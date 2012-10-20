@@ -15,8 +15,9 @@ public class BaseHud {
     protected final BaseCreature _parent;
     protected static Sprite _menuBase;
     protected final TextHandler _textHandler = new TextHandler();
-    protected final List<Point2> playerHudPositions = new ArrayList<Point2>();
-    protected final List<Point2> invertedPlayerHudPositions = new ArrayList<Point2>();
+    protected final List<Point2> meterPositions = new ArrayList<Point2>();
+    protected final List<Point2> skillDisplayPositions = new ArrayList<Point2>();
+    protected final List<Point2> inventoryPositions = new ArrayList<Point2>();
     protected final Point2 _dimensions;
 
     protected BaseHud(BaseCreature owner, int width, int height) {
@@ -25,15 +26,21 @@ public class BaseHud {
             _menuBase = SpxManager.getMenuBaseAsset();
         }
         _dimensions = new Point2(width, height);
-        playerHudPositions.add(new Point2(0, SpxManager.VirtualHeight - _dimensions.Y));
-        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight - _dimensions.Y));
-        playerHudPositions.add(new Point2(0, _dimensions.Y));
-        playerHudPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, _dimensions.Y));
 
-        invertedPlayerHudPositions.add(new Point2(getStart().X + Settings.get().spriteWidth, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
-        invertedPlayerHudPositions.add(new Point2(getStart().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
-        invertedPlayerHudPositions.add(new Point2(getStart().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .25)));
-        invertedPlayerHudPositions.add(new Point2(getStart().X - SpxManager.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .25)));
+        inventoryPositions.add(new Point2(0, SpxManager.VirtualHeight / 2));
+        inventoryPositions.add(new Point2(SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2));
+        inventoryPositions.add(new Point2(0, 0));
+        inventoryPositions.add(new Point2(SpxManager.VirtualWidth / 2, 0));
+
+        meterPositions.add(new Point2(0, SpxManager.VirtualHeight - _dimensions.Y));
+        meterPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight - _dimensions.Y));
+        meterPositions.add(new Point2(0, _dimensions.Y));
+        meterPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, _dimensions.Y));
+
+        skillDisplayPositions.add(new Point2(getMeterStart().X + Settings.get().spriteWidth, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
+        skillDisplayPositions.add(new Point2(getMeterStart().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
+        skillDisplayPositions.add(new Point2(getMeterStart().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .25)));
+        skillDisplayPositions.add(new Point2(getMeterStart().X - SpxManager.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .25)));
     }
 
     public void toggle() {
@@ -48,11 +55,15 @@ public class BaseHud {
         _menuBase = SpxManager.getMenuBaseAsset();
     }
 
-    protected Point2 getStart() {
-        return playerHudPositions.get(_parent.getPlayerIndex());
+    protected Point2 getMeterStart() {
+        return meterPositions.get(_parent.getPlayerIndex());
     }
 
-    protected Point2 getStartI() {
-        return invertedPlayerHudPositions.get(_parent.getPlayerIndex());
+    protected Point2 getSkillStart() {
+        return skillDisplayPositions.get(_parent.getPlayerIndex());
+    }
+
+    protected Point2 getInventoryStart() {
+        return inventoryPositions.get(_parent.getPlayerIndex());
     }
 }
