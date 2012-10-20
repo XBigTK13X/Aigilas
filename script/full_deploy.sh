@@ -1,5 +1,5 @@
 #! /bin/sh
 #
-./script/create_jar.sh
+./script/create_package.sh
 python script/deploy-package.py
 
