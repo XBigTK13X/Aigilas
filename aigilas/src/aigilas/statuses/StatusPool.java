@@ -11,8 +11,9 @@ public class StatusPool {
     private final List<BaseStatus> _statuses = new ArrayList<BaseStatus>();
 
     public boolean allows(CreatureAction action) {
-        for (BaseStatus _statuse : _statuses) {
-            if (_statuse.prevents(action)) {
+        for (int ii = 0; ii < _statuses.size(); ii++) {
+            BaseStatus status = _statuses.get(ii);
+            if (status.prevents(action)) {
                 return false;
             }
         }
@@ -34,19 +35,22 @@ public class StatusPool {
     }
 
     public void act() {
-        for (BaseStatus _statuse : _statuses) {
-            _statuse.act();
+        for (int ii = 0; ii < _statuses.size(); ii++) {
+            BaseStatus status = _statuses.get(ii);
+            status.act();
         }
     }
 
     public void passOn(BaseCreature target, StatusComponent componentType) {
-        for (BaseStatus _statuse : _statuses) {
-            _statuse.passOn(target, componentType);
+        for (int ii = 0; ii < _statuses.size(); ii++) {
+            BaseStatus status = _statuses.get(ii);
+            status.passOn(target, componentType);
         }
     }
 
     public boolean isElementBlocked(Elements element) {
-        for (BaseStatus status : _statuses) {
+        for (int ii = 0; ii < _statuses.size(); ii++) {
+            BaseStatus status = _statuses.get(ii);
             if (status.isElementBlocked(element)) {
                 return true;
             }
