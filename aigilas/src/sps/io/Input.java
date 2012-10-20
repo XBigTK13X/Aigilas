@@ -34,10 +34,10 @@ public class Input {
            */
         // $$$
         boolean gamepadActive = false;
-        try{
+        try {
             return gamepadActive || (playerIndex == Client.get().getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode()));
         }
-        catch(Exception e){
+        catch (Exception e) {
             int x = 0;
         }
         return false;
@@ -71,7 +71,7 @@ public class Input {
     // If the key is marked to be locked on press and its lock context is
     // currently inactive
     private static boolean shouldLock(Commands command, int playerIndex) {
-       return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.Nonfree && __contexts.get(playerIndex) != Contexts.Free) || command.Context == Contexts.All;
+        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.Nonfree && __contexts.get(playerIndex) != Contexts.Free) || command.Context == Contexts.All;
     }
 
     public static void setContext(Contexts context, int playerIndex) {

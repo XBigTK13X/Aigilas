@@ -16,6 +16,7 @@ public class DeltasHud extends BaseHud {
         _equipment = equipment;
     }
 
+    @Override
     public void draw() {
         if (_isVisible) {
             _textHandler.draw();

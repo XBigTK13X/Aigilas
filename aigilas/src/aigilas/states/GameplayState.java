@@ -1,5 +1,6 @@
 package aigilas.states;
 
+import aigilas.hud.HudRenderer;
 import aigilas.management.AigilasManager;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -41,6 +42,7 @@ public class GameplayState implements State {
     @Override
     public void unload() {
         EntityManager.get().clear();
+        HudRenderer.reset();
         ParticleEngine.reset();
         TextManager.clear();
     }

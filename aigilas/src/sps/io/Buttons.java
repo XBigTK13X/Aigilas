@@ -20,8 +20,8 @@ public enum Buttons {
     DPadDown;
 
     public static Buttons get(String s) {
-        for(Buttons key: values()){
-            if(key.name().equalsIgnoreCase(s)){
+        for (Buttons key : values()) {
+            if (key.name().equalsIgnoreCase(s)) {
                 return key;
             }
         }

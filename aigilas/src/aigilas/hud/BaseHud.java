@@ -10,7 +10,7 @@ import sps.text.TextHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseHud {
+public abstract class BaseHud {
     protected boolean _isVisible = false;
     protected final BaseCreature _parent;
     protected static Sprite _menuBase;
@@ -66,4 +66,6 @@ public class BaseHud {
     protected Point2 getInventoryAnchor() {
         return inventoryAnchors.get(_parent.getPlayerIndex());
     }
+
+    public abstract void draw();
 }

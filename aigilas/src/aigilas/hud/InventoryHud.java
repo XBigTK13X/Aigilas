@@ -36,6 +36,7 @@ public class InventoryHud extends BaseHud {
         _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
     }
 
+    @Override
     public void draw() {
         if (_isVisible) {
             SpxManager.Renderer.draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.getCenter().X, (int) SpxManager.getCenter().Y);

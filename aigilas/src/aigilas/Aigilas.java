@@ -1,11 +1,11 @@
 package aigilas;
 
+import aigilas.hud.HudRenderer;
 import aigilas.management.Commands;
 import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import sps.core.Logger;
 import sps.core.SpxManager;
 import sps.devtools.DevConsole;
 import sps.graphics.SpriteSheetManager;
@@ -40,44 +40,45 @@ public class Aigilas implements ApplicationListener {
     @Override
     public void render() {
 
-            //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
+        //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
 
-            // Update
-            Input.update();
-            if (Input.isActive(Commands.ToggleDevConsole, Client.get().getFirstPlayerIndex())) {
-                DevConsole.get().toggle();
-            }
-            if (Input.isActive(Commands.Back, Client.get().getFirstPlayerIndex())) {
-                Gdx.app.exit();
-            }
-            if (Client.get().nextTurn()) {
-                /*for (int ii = 0; ii < 4; ii++) {
-                    PlayerIndex player = PlayerIndex.values()[ii];
+        // Update
+        Input.update();
+        if (Input.isActive(Commands.ToggleDevConsole, Client.get().getFirstPlayerIndex())) {
+            DevConsole.get().toggle();
+        }
+        if (Input.isActive(Commands.Back, Client.get().getFirstPlayerIndex())) {
+            Gdx.app.exit();
+        }
+        if (Client.get().nextTurn()) {
+            /*for (int ii = 0; ii < 4; ii++) {
+                PlayerIndex player = PlayerIndex.values()[ii];
 
-                         //$$$ if (GamePad.GetState(player).IsPressed(Buttons.Back) &&
-                          GamePad.GetState(player).IsPressed(Buttons.Start)) {
-                          setIsRunning(false); }
+                     //$$$ if (GamePad.GetState(player).IsPressed(Buttons.Back) &&
+                      GamePad.GetState(player).IsPressed(Buttons.Start)) {
+                      setIsRunning(false); }
 
-                }*/
-                ParticleEngine.update();
-                StateManager.update();
-                TextManager.update();
-                Client.get().prepareForNextTurn();
-            }
-            else {
-                Client.get().heartBeat();
-            }
-            if (!IsRunning) {
-                System.exit(0);
-            }
+            }*/
+            ParticleEngine.update();
+            StateManager.update();
+            TextManager.update();
+            Client.get().prepareForNextTurn();
+        }
+        else {
+            Client.get().heartBeat();
+        }
+        if (!IsRunning) {
+            System.exit(0);
+        }
 
-            // Render
-            SpxManager.Renderer.begin();
-            StateManager.draw();
-            ParticleEngine.draw();
-            TextManager.draw();
-            DevConsole.get().draw();
-            SpxManager.Renderer.end();
+        // Render
+        SpxManager.Renderer.begin();
+        StateManager.draw();
+        ParticleEngine.draw();
+        TextManager.draw();
+        HudRenderer.get().draw();
+        DevConsole.get().draw();
+        SpxManager.Renderer.end();
 
     }
 

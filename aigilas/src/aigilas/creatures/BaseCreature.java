@@ -4,7 +4,7 @@ import aigilas.classes.CreatureClass;
 import aigilas.entities.Elements;
 import aigilas.gods.God;
 import aigilas.gods.GodId;
-import aigilas.hud.HudManager;
+import aigilas.hud.HudContainer;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
@@ -57,7 +57,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Inventory _inventory;
     protected Equipment _equipment;
 
-    protected HudManager _hudManager;
+    protected HudContainer _hudContainer;
     protected final ActionTextHandler _damageText = new ActionTextHandler();
 
     protected int _playerIndex = -1;
@@ -106,7 +106,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         _equipment = new Equipment(this);
         _combo = new ComboMeter(this);
         if (_playerIndex > -1) {
-            _hudManager = new HudManager(this, _inventory, _equipment);
+            _hudContainer = new HudContainer(this, _inventory, _equipment);
         }
         if (_isBlocking == null) {
             _isBlocking = true;
@@ -183,8 +183,8 @@ public abstract class BaseCreature extends Entity implements IActor {
                 _combo.update();
             }
         }
-        if (_hudManager != null) {
-            _hudManager.update();
+        if (_hudContainer != null) {
+            _hudContainer.update();
         }
         _damageText.update();
     }
@@ -208,10 +208,6 @@ public abstract class BaseCreature extends Entity implements IActor {
             path.draw();
         }
         super.draw();
-        if (_hudManager != null) {
-            _hudManager.draw();
-        }
-
         _combo.draw();
         _damageText.draw();
     }
@@ -221,7 +217,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public boolean toggleInventoryVisibility() {
-        return _hudManager != null && _hudManager.toggleInventory();
+        return _hudContainer != null && _hudContainer.toggleInventory();
     }
 
     public void setPlaying(boolean isPlaying) {
