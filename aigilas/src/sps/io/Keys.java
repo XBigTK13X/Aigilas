@@ -13,7 +13,7 @@ public enum Keys {
     D(Input.Keys.D),
     A(Input.Keys.A),
     S(Input.Keys.S),
-    RightControl(Input.Keys.CONTROL_RIGHT),
+    Slash(Input.Keys.SLASH),
     D1(Input.Keys.NUM_1),
     D2(Input.Keys.NUM_2),
     D3(Input.Keys.NUM_3),
