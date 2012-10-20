@@ -47,8 +47,8 @@ public class DeltasHud extends BaseHud {
                     display = StringSquisher.flush();
                 }
             }
-            _textHandler.writeDefault(title, 30, (int) (_dimensions.Y * .2), getInventoryStart());
-            _textHandler.writeDefault(display, 30, (int) (_dimensions.Y * .1), getInventoryStart());
+            _textHandler.writeDefault(title, 30, (int) (_dimensions.Y * .2), getInventoryAnchor());
+            _textHandler.writeDefault(display, 30, (int) (_dimensions.Y * .1), getInventoryAnchor());
         }
     }
 }

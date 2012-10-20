@@ -16,7 +16,7 @@ public class SkillHud extends BaseHud {
 
     public SkillHud(BaseCreature owner) {
         super(owner, Settings.get().spriteWidth, SpxManager.VirtualHeight / 4);
-        _manaPosition = new Point2(getMeterStart().X, getMeterStart().Y - SpxManager.VirtualHeight / 4);
+        _manaPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - SpxManager.VirtualHeight / 4);
     }
 
     private int calculateHeight(StatType statType) {
@@ -35,7 +35,7 @@ public class SkillHud extends BaseHud {
         if (_isVisible) {
             _textHandler.update();
             _textHandler.clear();
-            _textHandler.writeDefault(getSkillStrings(), 0, 0, getSkillStart());
+            _textHandler.writeDefault(getSkillStrings(), 0, 0, getSkillAnchor());
         }
     }
 
@@ -44,7 +44,7 @@ public class SkillHud extends BaseHud {
             return;
         }
 
-        SpxManager.Renderer.draw(_menuBase, getMeterStart(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
+        SpxManager.Renderer.draw(_menuBase, getMeterAnchor(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
         SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Mana));
         SpxManager.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
 

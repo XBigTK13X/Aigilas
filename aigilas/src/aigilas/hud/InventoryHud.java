@@ -38,7 +38,7 @@ public class InventoryHud extends BaseHud {
 
     public void draw() {
         if (_isVisible) {
-            SpxManager.Renderer.draw(_menuBase, getInventoryStart(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.getCenter().X, (int) SpxManager.getCenter().Y);
+            SpxManager.Renderer.draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.getCenter().X, (int) SpxManager.getCenter().Y);
             _textHandler.draw();
             _deltas.draw();
             _equipHud.draw();
@@ -163,11 +163,11 @@ public class InventoryHud extends BaseHud {
 
             }
 
-            _textHandler.writeDefault(getClassDisplay(), 20, (int) (_dimensions.Y * .9), getInventoryStart());
-            _textHandler.writeDefault(displayString, 50, 60, getInventoryStart());
+            _textHandler.writeDefault(getClassDisplay(), 20, (int) (_dimensions.Y * .9), getInventoryAnchor());
+            _textHandler.writeDefault(displayString, 50, 60, getInventoryAnchor());
             for (int jj = 0; jj < 10; jj++) {
                 if (list[jj] != null) {
-                    _textHandler.writeDefault(list[jj], 40, (int) (_dimensions.Y * .9) - 60 * jj, getInventoryStart());
+                    _textHandler.writeDefault(list[jj], 40, (int) (_dimensions.Y * .9) - 60 * jj, getInventoryAnchor());
                 }
             }
         }

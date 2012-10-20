@@ -15,9 +15,9 @@ public class BaseHud {
     protected final BaseCreature _parent;
     protected static Sprite _menuBase;
     protected final TextHandler _textHandler = new TextHandler();
-    protected final List<Point2> meterPositions = new ArrayList<Point2>();
-    protected final List<Point2> skillDisplayPositions = new ArrayList<Point2>();
-    protected final List<Point2> inventoryPositions = new ArrayList<Point2>();
+    protected final List<Point2> meterAnchors = new ArrayList<Point2>();
+    protected final List<Point2> skillAnchors = new ArrayList<Point2>();
+    protected final List<Point2> inventoryAnchors = new ArrayList<Point2>();
     protected final Point2 _dimensions;
 
     protected BaseHud(BaseCreature owner, int width, int height) {
@@ -27,20 +27,20 @@ public class BaseHud {
         }
         _dimensions = new Point2(width, height);
 
-        inventoryPositions.add(new Point2(0, SpxManager.VirtualHeight / 2));
-        inventoryPositions.add(new Point2(SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2));
-        inventoryPositions.add(new Point2(0, 0));
-        inventoryPositions.add(new Point2(SpxManager.VirtualWidth / 2, 0));
+        inventoryAnchors.add(new Point2(0, SpxManager.VirtualHeight / 2));
+        inventoryAnchors.add(new Point2(SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2));
+        inventoryAnchors.add(new Point2(0, 0));
+        inventoryAnchors.add(new Point2(SpxManager.VirtualWidth / 2, 0));
 
-        meterPositions.add(new Point2(0, SpxManager.VirtualHeight - _dimensions.Y));
-        meterPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight - _dimensions.Y));
-        meterPositions.add(new Point2(0, _dimensions.Y));
-        meterPositions.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, _dimensions.Y));
+        meterAnchors.add(new Point2(0, SpxManager.VirtualHeight - _dimensions.Y));
+        meterAnchors.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight - _dimensions.Y));
+        meterAnchors.add(new Point2(0, _dimensions.Y));
+        meterAnchors.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, _dimensions.Y));
 
-        skillDisplayPositions.add(new Point2(getMeterStart().X + Settings.get().spriteWidth, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
-        skillDisplayPositions.add(new Point2(getMeterStart().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
-        skillDisplayPositions.add(new Point2(getMeterStart().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .25)));
-        skillDisplayPositions.add(new Point2(getMeterStart().X - SpxManager.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .25)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .25)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - SpxManager.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .25)));
     }
 
     public void toggle() {
@@ -55,15 +55,15 @@ public class BaseHud {
         _menuBase = SpxManager.getMenuBaseAsset();
     }
 
-    protected Point2 getMeterStart() {
-        return meterPositions.get(_parent.getPlayerIndex());
+    protected Point2 getMeterAnchor() {
+        return meterAnchors.get(_parent.getPlayerIndex());
     }
 
-    protected Point2 getSkillStart() {
-        return skillDisplayPositions.get(_parent.getPlayerIndex());
+    protected Point2 getSkillAnchor() {
+        return skillAnchors.get(_parent.getPlayerIndex());
     }
 
-    protected Point2 getInventoryStart() {
-        return inventoryPositions.get(_parent.getPlayerIndex());
+    protected Point2 getInventoryAnchor() {
+        return inventoryAnchors.get(_parent.getPlayerIndex());
     }
 }
