@@ -38,8 +38,8 @@ public abstract class BaseStrategy {
 
     protected boolean AbleToMove() {
         opponent = _targets.findClosest();
-        if (targetPath == null || targetPath.getLastStep() == null || (null != opponent && !targetPath.getLastStep().isSameSpot(opponent.getLocation()))) {
-            if (_parent != null) {
+        if (opponent != null && _parent != null) {
+            if (targetPath == null || targetPath.getLastStep() == null || (null != opponent && !targetPath.getLastStep().isSameSpot(opponent.getLocation()))) {
                 targetPath = PathFinder.find(_parent.getLocation(), opponent.getLocation());
             }
         }

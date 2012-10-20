@@ -33,7 +33,7 @@ public class StrategyFactory {
             case MinionRotate:
                 return new MinionRotateStrategy(target);
             case Mutiny:
-                return new AttackStrategy(target, ActorType.Non_Player);
+                return new AttackStrategy(target, ActorType.Friendly);
             case StraightLineRotate:
                 return new StraightLineRotateStrategy(target);
             case StraightLine:

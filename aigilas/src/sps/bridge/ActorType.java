@@ -10,6 +10,7 @@ import java.util.List;
 public enum ActorType {
     Non_Player(null),
     Player(SpriteType.Player_Stand),
+    Friendly(null),
     Minion(SpriteType.Minion),
     Acid_Nozzle(SpriteType.Minion),
     Peon(SpriteType.Creature, true),

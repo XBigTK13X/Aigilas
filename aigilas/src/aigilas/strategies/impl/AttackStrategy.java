@@ -11,10 +11,19 @@ public class AttackStrategy extends BaseStrategy {
     private int _skillCooldown = 0;
     private final int _skillCooldownMax = 10;
 
-    public AttackStrategy(BaseCreature parent, ActorType... targetTypes)
-
-    {
+    public AttackStrategy(BaseCreature parent, ActorType... targetTypes) {
         super(parent, Strategy.Attack);
+
+        if (targetTypes.length == 1) {
+            if (targetTypes[0] == ActorType.Friendly) {
+                if (parent.getActorType() != ActorType.Player) {
+                    targetTypes[0] = ActorType.Non_Player;
+                }
+                else {
+                    targetTypes[0] = ActorType.Player;
+                }
+            }
+        }
 
         for (ActorType targetType : targetTypes) {
             _targets.addTargetTypes(targetType);

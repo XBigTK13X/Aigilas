@@ -8,20 +8,12 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class MutinySkill extends BaseSkill {
-    public MutinySkill()
-
-    {
+    public MutinySkill() {
         super(SkillId.Mutiny, AnimationType.RANGED);
-
-
     }
 
     @Override
-    public void affect(BaseCreature target)
-
-    {
+    public void affect(BaseCreature target) {
         StatusFactory.apply(target, Status.Mutiny);
-
     }
-
 }
