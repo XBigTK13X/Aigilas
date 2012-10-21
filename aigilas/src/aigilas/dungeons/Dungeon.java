@@ -39,8 +39,6 @@ public class Dungeon {
         enemyCapModifier = 0;
     }
 
-    private static final int startY = 10;
-
     public Dungeon() {
         generateRooms(true);
         placeAltars();
@@ -67,7 +65,8 @@ public class Dungeon {
     }
 
     private void placeAltars() {
-        int startX = 8;
+        int startY = Settings.get().tileMapHeight / 2;
+        int startX = Settings.get().tileMapWidth / 3;
         for (GodId god : GodId.values()) {
             dungeon[startX][startY] = new Altar(new Point2(startX, startY), god);
             startX += 2;
@@ -132,6 +131,16 @@ public class Dungeon {
         }
     }
 
+    private Point2 findRandomFreeTile() {
+        while (true) {
+            int x = RNG.next(0, _blocksWide);
+            int y = RNG.next(0, _blocksHigh);
+            if (dungeon[x][y].getEntityType() == EntityType.Floor) {
+                return new Point2(x, y);
+            }
+        }
+    }
+
     Point2 neighborTemp = new Point2(0, 0);
 
     private Point2 getRandomNeighbor(List<Point2> neighbors) {
@@ -146,11 +155,10 @@ public class Dungeon {
         return neighborTemp;
     }
 
-    private void placeItems(int amountToPlace) {
-        while (amountToPlace > 0) {
-            amountToPlace--;
-            Point2 randomPoint = findRandomFreeTile();
-            dungeon[randomPoint.GridX][randomPoint.GridY] = ItemFactory.createRandomPlain(randomPoint);
+    private void generateRooms(boolean altarRoom) {
+        _floorPlan = new DungeonFloorPlan(altarRoom);
+        for (Tile tile : _floorPlan.getTiles()) {
+            dungeon[tile.X][tile.Y] = EntityFactory.create(tile.EntityType, tile.Position);
         }
     }
 
@@ -186,16 +194,6 @@ public class Dungeon {
         }
     }
 
-    private Point2 findRandomFreeTile() {
-        while (true) {
-            int x = RNG.next(0, _blocksWide);
-            int y = RNG.next(0, _blocksHigh);
-            if (dungeon[x][y].getEntityType() == EntityType.Floor) {
-                return new Point2(x, y);
-            }
-        }
-    }
-
     private void placeStairs() {
         placeUpstairs();
         placeDownstairs();
@@ -213,10 +211,11 @@ public class Dungeon {
         dungeon[_upSpawnLocation.GridX][_upSpawnLocation.GridY] = new Upstairs(_upSpawnLocation);
     }
 
-    private void generateRooms(boolean altarRoom) {
-        _floorPlan = new DungeonFloorPlan(altarRoom);
-        for (Tile tile : _floorPlan.getTiles()) {
-            dungeon[tile.X][tile.Y] = EntityFactory.create(tile.EntityType, tile.Position);
+    private void placeItems(int amountToPlace) {
+        while (amountToPlace > 0) {
+            amountToPlace--;
+            Point2 randomPoint = findRandomFreeTile();
+            dungeon[randomPoint.GridX][randomPoint.GridY] = ItemFactory.createRandomPlain(randomPoint);
         }
     }
 
