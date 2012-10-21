@@ -3,7 +3,6 @@ package aigilas.skills;
 import aigilas.entities.Elements;
 import sps.bridge.ActorType;
 import sps.core.RNG;
-import sps.devtools.DevConsole;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +54,6 @@ public class SkillLogic {
         while (__invalidRandomSkills.contains(SkillId.values()[skillPick])) {
             skillPick = RNG.next(0, __elementMap.get(elementId).size());
         }
-        DevConsole.get().add(skillPick + "");
         return __elementMap.get(elementId).get(skillPick);
     }
 

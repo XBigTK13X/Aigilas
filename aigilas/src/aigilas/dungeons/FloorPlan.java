@@ -1,7 +1,6 @@
 package aigilas.dungeons;
 
 import sps.bridge.EntityType;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -45,7 +44,6 @@ public class FloorPlan {
                     rooms.add(nextRoom);
                 }
             }
-            Logger.info(attemptCount + "");
         }
     }
 
