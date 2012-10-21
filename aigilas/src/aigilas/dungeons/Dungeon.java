@@ -28,7 +28,7 @@ public class Dungeon {
     private static int enemyBaseModifier = 0;
     private int playerCount = Client.get().getPlayerCount();
 
-    private final List<Room> _rooms = new ArrayList<Room>();
+    private DungeonFloorPlan _floorPlan;
     private List<Entity> _contents = new ArrayList<Entity>();
     private final Entity[][] dungeon = new Entity[_blocksWide][_blocksHigh];
     private final Point2 _upSpawnLocation = new Point2(0, 0);
@@ -42,8 +42,7 @@ public class Dungeon {
     private static final int startY = 10;
 
     public Dungeon() {
-        init();
-        convertRoomsToWalls();
+        generateRooms(true);
         placeAltars();
         placeStairs();
         placeFloor();
@@ -54,9 +53,7 @@ public class Dungeon {
         enemyCapModifier++;
         enemyBaseModifier = Settings.get().enemyBase + enemyCapModifier / 5;
         EntityManager.get().clear();
-        init();
-        placeRooms();
-        convertRoomsToWalls();
+        generateRooms(false);
         _upSpawnLocation.copy(upstairsSpawn);
         placeStairs();
         int enemiesToPlace = RNG.next(Settings.get().enemyBase + enemyBaseModifier, Settings.get().enemyCap + enemyCapModifier);
@@ -101,10 +98,6 @@ public class Dungeon {
             EntityManager.get().removeObject((Entity) player);
         }
         _contents = new ArrayList<Entity>(EntityManager.get().getEntitiesToCache());
-    }
-
-    private void init() {
-        _rooms.add(new Room(_blocksHigh, _blocksWide, 0, 0));
     }
 
     private void transferDungeonState() {
@@ -193,33 +186,6 @@ public class Dungeon {
         }
     }
 
-    private void placeRooms() {
-        ArrayList<Room> newRooms = new ArrayList<Room>();
-        int roomsToPlace = 3 + RNG.next(0, Settings.get().maxRoomCount);
-        int attemptCount = 0;
-        while (attemptCount < 1000 && roomsToPlace > 0) {
-            attemptCount++;
-            int startX = RNG.next(0, _blocksWide - 5);
-            int startY = RNG.next(0, _blocksHigh - 5);
-            int startWidth = 5 + RNG.next(0, 2);
-            int startHeight = 5 + RNG.next(0, 2);
-            roomsToPlace--;
-            Room nextRoom = new Room(startHeight, startWidth, startX, startY);
-            boolean collides = false;
-            for (Room room : newRooms) {
-                if (room.collides(nextRoom)) {
-                    collides = true;
-                }
-            }
-            if (!collides && !nextRoom.isBad()) {
-                newRooms.add(nextRoom);
-            }
-        }
-        for (Room room : newRooms) {
-            _rooms.add(room);
-        }
-    }
-
     private Point2 findRandomFreeTile() {
         while (true) {
             int x = RNG.next(0, _blocksWide);
@@ -247,64 +213,11 @@ public class Dungeon {
         dungeon[_upSpawnLocation.GridX][_upSpawnLocation.GridY] = new Upstairs(_upSpawnLocation);
     }
 
-    private void convertRoomsToWalls() {
-        int roomCount = 0;
-        ArrayList<TransientPoint> dungeonEntrances = new ArrayList<TransientPoint>();
-        for (Room room : _rooms) {
-            ArrayList<TransientPoint> entrances = new ArrayList<TransientPoint>();
-            for (int ii = room.X; ii < room.RightSide; ii++) {
-                for (int jj = room.Y; jj < room.BottomSide; jj++) {
-                    if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1) {
-                        if (!room.Corners.contains(new Point2(ii, jj))) {
-                            if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < _blocksWide)) {
-                                if (isFloor(ii - 1, jj) && isFloor(ii + 1, jj)) {
-                                    entrances.add(new TransientPoint(ii, jj, true));
-                                }
-                            }
-                            if ((jj == room.Y && jj > 0) || (jj == room.BottomSide && jj < _blocksHigh)) {
-                                if (isFloor(ii, jj - 1) && isFloor(ii, jj + 1)) {
-                                    entrances.add(new TransientPoint(ii, jj));
-                                }
-                            }
-                        }
-                        dungeon[ii][jj] = EntityFactory.create(EntityType.Wall, new Point2(ii, jj));
-                    }
-                    else {
-                        dungeon[ii][jj] = EntityFactory.create(EntityType.Floor, new Point2(ii, jj));
-                    }
-                }
-            }
-            if (roomCount > 0 && entrances.size() > 0) {
-                int index = RNG.next(0, entrances.size() - 1);
-                TransientPoint entrance = entrances.get(index);
-                if (dungeon[entrance.X][entrance.Y].getEntityType() != EntityType.Floor) {
-                    dungeonEntrances.add(entrance);
-                }
-            }
-            roomCount++;
+    private void generateRooms(boolean altarRoom) {
+        _floorPlan = new DungeonFloorPlan(altarRoom);
+        for (Tile tile : _floorPlan.getTiles()) {
+            dungeon[tile.X][tile.Y] = EntityFactory.create(tile.EntityType, tile.Position);
         }
-        for (TransientPoint entrance : dungeonEntrances) {
-            if (entrance.isHorizontal()) {
-                for (int ii = 1; ii < _blocksWide - 1; ii++) {
-                    Point2 currentTarget = new Point2(ii, entrance.Y);
-                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.Wall) {
-                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.Floor, currentTarget);
-                    }
-                }
-            }
-            else {
-                for (int ii = 1; ii < _blocksHigh - 1; ii++) {
-                    Point2 currentTarget = new Point2(entrance.X, ii);
-                    if (dungeon[currentTarget.GridX][currentTarget.GridY].getEntityType() == EntityType.Wall) {
-                        dungeon[currentTarget.GridX][currentTarget.GridY] = EntityFactory.create(EntityType.Floor, currentTarget);
-                    }
-                }
-            }
-        }
-    }
-
-    private boolean isFloor(int x, int y) {
-        return dungeon[x][y].getEntityType() == EntityType.Floor;
     }
 
     public Point2 getDownstairsLocation() {
