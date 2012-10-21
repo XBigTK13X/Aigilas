@@ -164,11 +164,15 @@ public class DungeonFloor {
     }
 
     private void placeCreatures(int amountOfCreatures) {
-        // $$$ Easiest way to test specific bosses
-        // = Point2 random = new Point2(findRandomFreeTile());
-        // = dungeon[random.GridX][random.GridY] =
-        // = CreatureFactory.create(ActorType.ENVY, random);
-        // = return;
+//        $$$ Easiest way to test specific bosses
+//        Point2 random = new Point2(findRandomFreeTile());
+//        dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorType.Sloth, random);
+//        while(CreatureFactory.bossesRemaining() > 0){
+//                CreatureFactory.createNextBoss(Point2.Zero);
+//        }
+//
+//        return;
+
         if (Settings.get().bossLevelMod <= 1 || Dungeon.getFloorCount() % Settings.get().bossLevelMod == 1) {
             Point2 randomPoint = new Point2(findRandomFreeTile());
             dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
