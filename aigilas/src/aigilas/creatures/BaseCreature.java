@@ -321,7 +321,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             adjust((statType == null) ? StatType.Health : statType, -damage);
         }
         if (get(StatType.Health) <= 0) {
-            _isActive = false;
+            setInactive();
             if (attacker != null) {
                 attacker.addExperience(calculateExperience());
                 attacker.passOn(attacker, StatusComponent.KillReward);

@@ -47,7 +47,7 @@ public class SkillEffect extends Entity {
     private Entity hitTarget;
 
     public void cleanup(Entity target) {
-        _isActive = false;
+        setInactive();
         _skill.cleanup(target, this);
     }
 
