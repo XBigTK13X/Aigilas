@@ -41,4 +41,8 @@ public class DungeonSet {
         ParticleEngine.reset();
         _floors.get(_currentFloor).loadTiles(goingUp);
     }
+
+    public int getFloorCount() {
+        return _currentFloor;
+    }
 }
