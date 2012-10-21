@@ -28,7 +28,7 @@ public class Dungeon {
     private static int enemyBaseModifier = 0;
     private int playerCount = Client.get().getPlayerCount();
 
-    private DungeonFloorPlan _floorPlan;
+    private FloorPlan _floorPlan;
     private List<Entity> _contents = new ArrayList<Entity>();
     private final Entity[][] dungeon = new Entity[_blocksWide][_blocksHigh];
     private final Point2 _upSpawnLocation = new Point2(0, 0);
@@ -66,7 +66,7 @@ public class Dungeon {
 
     private void placeAltars() {
         int startY = Settings.get().tileMapHeight / 2;
-        int startX = Settings.get().tileMapWidth / 3;
+        int startX = Settings.get().tileMapWidth / 3 - 1;
         for (GodId god : GodId.values()) {
             dungeon[startX][startY] = new Altar(new Point2(startX, startY), god);
             startX += 2;
@@ -156,7 +156,7 @@ public class Dungeon {
     }
 
     private void generateRooms(boolean altarRoom) {
-        _floorPlan = new DungeonFloorPlan(altarRoom);
+        _floorPlan = new FloorPlan(altarRoom);
         for (Tile tile : _floorPlan.getTiles()) {
             dungeon[tile.X][tile.Y] = EntityFactory.create(tile.EntityType, tile.Position);
         }

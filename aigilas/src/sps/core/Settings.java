@@ -28,7 +28,9 @@ public class Settings {
     public final int itemCap;
     public final int itemBase;
     public final int bossLevelMod;
+    public final int minRoomCount;
     public final int maxRoomCount;
+    public final int wallDecayPercent;
     public final float defaultSpeed;
     public final float defaultRegen;
     public final float turnTime;
@@ -79,31 +81,33 @@ public class Settings {
 
         // Networking
         serverIp = _settings.get("server_ip");
-        port = Integer.parseInt(_settings.get("socket_port"));
+        port = getInt(_settings.get("socket_port"));
         networkingEnabled = isTrue(_settings.get("networking_enabled"));
 
         // Gameplay
-        enemyCap = Integer.parseInt(_settings.get("enemyCap"));
-        enemyBase = Integer.parseInt(_settings.get("enemyBase"));
-        itemCap = Integer.parseInt(_settings.get("itemCap"));
-        itemBase = Integer.parseInt(_settings.get("itemBase"));
-        bossLevelMod = Integer.parseInt(_settings.get("bossLevelMod"));
-        maxRoomCount = Integer.parseInt(_settings.get("maxRoomCount"));
-        defaultSpeed = Float.parseFloat(_settings.get("defaultSpeed"));
-        defaultRegen = Float.parseFloat(_settings.get("defaultRegen"));
-        turnTime = 1 / Float.parseFloat(_settings.get("turnsPerSecond"));
+        enemyCap = getInt(_settings.get("enemyCap"));
+        enemyBase = getInt(_settings.get("enemyBase"));
+        itemCap = getInt(_settings.get("itemCap"));
+        itemBase = getInt(_settings.get("itemBase"));
+        bossLevelMod = getInt(_settings.get("bossLevelMod"));
+        minRoomCount = getInt(_settings.get("minRoomCount"));
+        maxRoomCount = getInt(_settings.get("maxRoomCount"));
+        wallDecayPercent = getInt(_settings.get("wallDecayPercent"));
+        defaultSpeed = getFloat(_settings.get("defaultSpeed"));
+        defaultRegen = getFloat(_settings.get("defaultRegen"));
+        turnTime = 1 / getFloat(_settings.get("turnsPerSecond"));
 
         // Audio
         musicEnabled = isTrue(_settings.get("music_enabled"));
 
         // Display
-        spriteHeight = Integer.parseInt(_settings.get("spriteHeight"));
-        spriteWidth = Integer.parseInt(_settings.get("spriteWidth"));
-        spriteGap = Integer.parseInt(_settings.get("spriteGap"));
-        tileMapHeight = Integer.parseInt(_settings.get("tileMapHeight"));
-        tileMapWidth = Integer.parseInt(_settings.get("tileMapWidth"));
-        resolutionHeight = Integer.parseInt(_settings.get("resolutionHeight"));
-        resolutionWidth = Integer.parseInt(_settings.get("resolutionWidth"));
+        spriteHeight = getInt(_settings.get("spriteHeight"));
+        spriteWidth = getInt(_settings.get("spriteWidth"));
+        spriteGap = getInt(_settings.get("spriteGap"));
+        tileMapHeight = getInt(_settings.get("tileMapHeight"));
+        tileMapWidth = getInt(_settings.get("tileMapWidth"));
+        resolutionHeight = getInt(_settings.get("resolutionHeight"));
+        resolutionWidth = getInt(_settings.get("resolutionWidth"));
         fullScreen = isTrue(_settings.get("fullScreen"));
 
         // Dev
@@ -122,5 +126,13 @@ public class Settings {
 
     private boolean isTrue(String value) {
         return value.equalsIgnoreCase("true");
+    }
+
+    private int getInt(String value) {
+        return Integer.parseInt(value);
+    }
+
+    private float getFloat(String value) {
+        return Float.parseFloat(value);
     }
 }
