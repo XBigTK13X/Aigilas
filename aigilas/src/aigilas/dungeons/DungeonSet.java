@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class DungeonSet {
     private int _currentFloor = 0;
-    private final HashMap<Integer, Dungeon> _floors = new HashMap<Integer, Dungeon>();
+    private final HashMap<Integer, DungeonFloor> _floors = new HashMap<Integer, DungeonFloor>();
 
     /*
       * This whole "area" thing is very messy and doesn't work:an intuitive way.
@@ -14,7 +14,7 @@ public class DungeonSet {
       * start.
       */
     public DungeonSet() {
-        _floors.put(_currentFloor, new Dungeon());
+        _floors.put(_currentFloor, new DungeonFloor());
     }
 
     public void gotoNext() {
@@ -35,8 +35,8 @@ public class DungeonSet {
 
     private void loadOrCreateDungeon(boolean goingUp) {
         if (!_floors.containsKey(_currentFloor)) {
-            _floors.put(_currentFloor, new Dungeon(_floors.get(_currentFloor - 1).getDownstairsLocation()));
-            DungeonFactory.increaseFloorCount();
+            _floors.put(_currentFloor, new DungeonFloor(_floors.get(_currentFloor - 1).getDownstairsLocation()));
+            Dungeon.increaseFloorCount();
         }
         ParticleEngine.reset();
         _floors.get(_currentFloor).loadTiles(goingUp);

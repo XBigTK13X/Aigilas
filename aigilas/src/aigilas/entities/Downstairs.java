@@ -1,7 +1,7 @@
 package aigilas.entities;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.dungeons.DungeonFactory;
+import aigilas.dungeons.Dungeon;
 import aigilas.management.SpriteType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
@@ -23,7 +23,7 @@ public class Downstairs extends Entity {
             if (player.isInteracting()) {
                 player.performInteraction();
                 try {
-                    DungeonFactory.getNextFloor();
+                    Dungeon.getNextFloor();
                 }
                 catch (Exception e) {
                     e.printStackTrace();

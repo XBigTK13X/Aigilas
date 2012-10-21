@@ -3,7 +3,7 @@ package aigilas.management;
 import aigilas.classes.PlayerClassRegistry;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.dungeons.Dungeon;
-import aigilas.dungeons.DungeonFactory;
+import aigilas.dungeons.DungeonFloor;
 import aigilas.skills.SkillRegistry;
 import sps.core.Logger;
 import sps.entities.EntityManager;
@@ -29,8 +29,8 @@ public class AigilasManager {
         PlayerClassRegistry.get();
         EntityManager.reset();
         CreatureFactory.reset();
-        DungeonFactory.start();
-        Dungeon.reset();
+        Dungeon.start();
+        DungeonFloor.reset();
         Client.get().dungeonHasLoaded();
 
     }
