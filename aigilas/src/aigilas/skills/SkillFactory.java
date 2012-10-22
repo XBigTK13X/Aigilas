@@ -154,6 +154,6 @@ public class SkillFactory {
     }
 
     public static float getCost(SkillId skillId) {
-        return create(skillId).getCost();
+        return create(skillId).behavior().getCost();
     }
 }

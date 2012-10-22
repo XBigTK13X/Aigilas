@@ -7,6 +7,7 @@ import aigilas.skills.animations.SkillAnimation;
 import sps.bridge.ActorType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.Entity;
@@ -33,13 +34,13 @@ public class SkillEffect extends Entity {
 
     public SkillEffect(Point2 gridLocation, Point2 velocity, BaseCreature source, BaseSkill skill) {
         _skill = skill;
-        initialize(gridLocation, _skill.getSpriteType(), EntityType.Skill_Effect, DrawDepth.BaseSkillEffect);
+        initialize(gridLocation, _skill.behavior().getSpriteType(), EntityType.Skill_Effect, DrawDepth.BaseSkillEffect);
         _velocity.copy(velocity);
         _direction.copy(velocity);
         _source = source;
-        _startingStrength = _currentStrength = _skill.getStrength();
-        _animation = SkillFactory.create(_skill.getAnimationType());
-        _graphic.setColor(skill.getElementColor());
+        _startingStrength = _currentStrength = _skill.components().getStrength();
+        _animation = SkillFactory.create(_skill.behavior().getAnimationType());
+        _graphic.setColor(skill.components().getColor());
         _graphic.setAlpha(0);
         ParticleEngine.emit(FollowBehavior.getInstance(), this, _graphic.getColor());
     }
@@ -57,11 +58,12 @@ public class SkillEffect extends Entity {
 
     @Override
     public void update() {
-        for (EntityType targetType : _skill.getTargetTypes()) {
+        for (EntityType targetType : _skill.components().getTargetTypes()) {
             List<Entity> targets = EntityManager.get().getEntities(targetType, this.getLocation());
             if (targets != null && targets.size() > 0) {
                 hitTarget = targets.get(0);
-                if (null != hitTarget && hitTarget != this && hitTarget != _source) {
+                if (null != hitTarget && hitTarget != this && hitTarget != _source && _skill.components().onlyAffects(hitTarget.getEntityType())) {
+                    Logger.info("Activate 1");
                     _skill.affect(hitTarget);
                     cleanup(this);
                 }
@@ -71,7 +73,8 @@ public class SkillEffect extends Entity {
             List<IActor> targets = EntityManager.get().getActorsAt(this.getLocation(), targetType);
             if (targets != null && targets.size() > 0) {
                 hitTarget = (Entity) targets.get(0);
-                if (null != hitTarget && hitTarget != this && hitTarget != _source) {
+                if (null != hitTarget && hitTarget != this && hitTarget != _source && _skill.components().onlyAffects(hitTarget.getEntityType())) {
+                    Logger.info("Activate 2");
                     _skill.affect(hitTarget);
                     cleanup(this);
                 }
@@ -90,7 +93,7 @@ public class SkillEffect extends Entity {
                 _velocity.setX(_velocity.X * _currentStrength);
                 _velocity.setY(_velocity.Y * _currentStrength);
                 _animation.animate(this, _source, _velocity);
-                _isActive = _skill.affectTarget(_source, this);
+                _isActive = _skill.behavior().affectTarget(_source, this);
                 _coolDown = CoolDown;
             }
         }

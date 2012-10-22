@@ -27,7 +27,7 @@ public class RemoteMineSkill extends BaseSkill {
 
         }
         else {
-            if (_cache.get(source).isActive()) {
+            if (_cache.get(source).behavior().isActive()) {
                 _cache.get(source).explode(source);
                 _cache.get(source).cleanup(source, null);
                 _cache.remove(source);

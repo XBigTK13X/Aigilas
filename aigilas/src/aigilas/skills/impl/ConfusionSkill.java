@@ -8,20 +8,12 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class ConfusionSkill extends BaseSkill {
-    public ConfusionSkill()
-
-    {
+    public ConfusionSkill() {
         super(SkillId.Confusion, AnimationType.RANGED);
-
-
     }
 
     @Override
-    public void affect(BaseCreature target)
-
-    {
+    public void affect(BaseCreature target) {
         StatusFactory.apply(target, Status.Confusion);
-
     }
-
 }

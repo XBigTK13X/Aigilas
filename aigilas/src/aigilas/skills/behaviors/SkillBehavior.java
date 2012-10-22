@@ -31,9 +31,6 @@ public class SkillBehavior {
     public void activate(BaseCreature target) {
     }
 
-    public void cleanup(Entity target, SkillEffect source) {
-    }
-
     public boolean isActive() {
         return !_used;
     }
@@ -61,18 +58,17 @@ public class SkillBehavior {
     private Entity hitTarget;
     private BaseCreature hitCreature;
 
-    public boolean affectTarget(BaseCreature source, SkillEffect graphic)
-
-    {
+    public boolean affectTarget(BaseCreature source, SkillEffect graphic) {
         hitTarget = source.getTargets().getCollidedTarget(graphic);
-        if (null != hitTarget && hitTarget != source) {
+        if (null != hitTarget && hitTarget != source && _parent.components().onlyAffects(hitTarget.getEntityType())) {
             _parent.affect(hitTarget);
             hitCreature = Extensions.isCreature(hitTarget);
             if (hitCreature != null) {
-                hitCreature.combo(_parent.getElements());
+                hitCreature.combo(_parent.components().getElements());
                 hitCreature.react(_parent.getSkillId());
             }
-            if (!_parent.isPersistent()) {
+            if (!_parent.components().isPersistent()) {
+                _parent.cleanup(hitTarget, _sideEffects.getFirstGraphic());
                 return false;
             }
         }

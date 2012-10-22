@@ -20,7 +20,7 @@ public class SideEffects {
 
     public SideEffects(SpriteType effectGraphic, AnimationType animation, BaseSkill parent) {
         _parent = parent;
-        _effectStrength = parent.getStrength();
+        _effectStrength = parent.components().getStrength();
         _effectSprite = effectGraphic;
         _animation = animation;
     }

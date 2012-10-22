@@ -1,9 +1,8 @@
 package aigilas.skills;
 
-import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
-import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
+import com.badlogic.gdx.graphics.Color;
 import sps.bridge.ActorType;
 import sps.bridge.EntityType;
 
@@ -19,6 +18,7 @@ public class SkillComponents {
     protected boolean _isPersistent = false;
     protected final List<EntityType> _targetTypes = Arrays.asList(EntityType.Wall);
     protected List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
+    protected EntityType _onlyAffects;
 
     public SkillComponents(float strength, boolean isPersistent) {
         _effectStrength = strength;
@@ -28,14 +28,6 @@ public class SkillComponents {
 
     public void addElements(Elements... elements) {
         Collections.addAll(_elements, elements);
-    }
-
-    public void buff(BaseCreature target) {
-        target.addBuff(_buff);
-    }
-
-    public void setBuff(StatType stat, float amount) {
-        _buff = new StatBuff(stat, amount);
     }
 
     public float getStrength() {
@@ -50,9 +42,19 @@ public class SkillComponents {
         return _elements;
     }
 
-    public List<EntityType> getTargetTypes()
+    public Color getColor() {
+        return _elements.get(0).Tint;
+    }
 
-    {
+    public void setOnlyAffects(EntityType type) {
+        _onlyAffects = type;
+    }
+
+    public boolean onlyAffects(EntityType type) {
+        return type == _onlyAffects || _onlyAffects == null;
+    }
+
+    public List<EntityType> getTargetTypes() {
         return _targetTypes;
     }
 }

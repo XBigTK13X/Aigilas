@@ -27,13 +27,13 @@ public class SkillLogic {
                         __invalidRandomSkills.add(skillId);
                     }
                     skill = SkillFactory.create(skillId);
-                    for (Elements elem : skill.getElements()) {
+                    for (Elements elem : skill.components().getElements()) {
                         if (!__elementMap.containsKey(elem)) {
                             __elementMap.put(elem, new ArrayList<SkillId>());
                         }
                         __elementMap.get(elem).add(skillId);
                     }
-                    __skillAnimationMap.put(skillId, skill.getAnimationType());
+                    __skillAnimationMap.put(skillId, skill.behavior().getAnimationType());
                 }
             }
             __skillAnimationMap.put(SkillId.No_Skill, null);
