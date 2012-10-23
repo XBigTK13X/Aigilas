@@ -7,7 +7,6 @@ import aigilas.skills.animations.SkillAnimation;
 import sps.bridge.ActorType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.Entity;
@@ -63,7 +62,6 @@ public class SkillEffect extends Entity {
             if (targets != null && targets.size() > 0) {
                 hitTarget = targets.get(0);
                 if (null != hitTarget && hitTarget != this && hitTarget != _source && _skill.components().onlyAffects(hitTarget.getEntityType())) {
-                    Logger.info("Activate 1");
                     _skill.affect(hitTarget);
                     cleanup(this);
                 }
@@ -74,7 +72,6 @@ public class SkillEffect extends Entity {
             if (targets != null && targets.size() > 0) {
                 hitTarget = (Entity) targets.get(0);
                 if (null != hitTarget && hitTarget != this && hitTarget != _source && _skill.components().onlyAffects(hitTarget.getEntityType())) {
-                    Logger.info("Activate 2");
                     _skill.affect(hitTarget);
                     cleanup(this);
                 }

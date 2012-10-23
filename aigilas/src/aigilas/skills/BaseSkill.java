@@ -8,7 +8,6 @@ import aigilas.management.SpriteType;
 import aigilas.skills.behaviors.SkillBehavior;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
-import sps.core.Logger;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 
@@ -71,7 +70,6 @@ public abstract class BaseSkill {
     }
 
     public void cleanup(Entity target, SkillEffect source) {
-        Logger.info("BaseSkill cleanup called");
     }
 
     public SkillId getSkillId() {

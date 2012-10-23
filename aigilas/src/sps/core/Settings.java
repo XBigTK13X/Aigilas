@@ -31,6 +31,7 @@ public class Settings {
     public final int minRoomCount;
     public final int maxRoomCount;
     public final int wallDecayPercent;
+    public final int enemyStatMultiplier;
     public final float defaultSpeed;
     public final float defaultRegen;
     public final float turnTime;
@@ -93,6 +94,7 @@ public class Settings {
         minRoomCount = getInt(_settings.get("minRoomCount"));
         maxRoomCount = getInt(_settings.get("maxRoomCount"));
         wallDecayPercent = getInt(_settings.get("wallDecayPercent"));
+        enemyStatMultiplier = getInt(_settings.get("enemyStatMultiplier"));
         defaultSpeed = getFloat(_settings.get("defaultSpeed"));
         defaultRegen = getFloat(_settings.get("defaultRegen"));
         turnTime = 1 / getFloat(_settings.get("turnsPerSecond"));
