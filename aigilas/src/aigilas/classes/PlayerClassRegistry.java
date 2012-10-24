@@ -35,9 +35,9 @@ public class PlayerClassRegistry {
                 if (!line.contains("#")) {
                     String[] values = line.split(",");
                     PlayerClass pClass = PlayerClass.get(values[0]);
-                    List<Float> r = new ArrayList<Float>();
+                    List<Integer> r = new ArrayList<Integer>();
                     for (String stat : values[2].split("-")) {
-                        r.add(Float.parseFloat(stat));
+                        r.add(Integer.parseInt(stat));
                     }
 
                     List<SkillLevel> skills = new ArrayList<SkillLevel>();

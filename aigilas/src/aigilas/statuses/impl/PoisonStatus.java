@@ -11,6 +11,6 @@ public class PoisonStatus extends BaseStatus {
     @Override
     public void update() {
         super.update();
-        _target.applyDamage(2.1f);
+        _target.applyDamage(5);
     }
 }

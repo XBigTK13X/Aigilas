@@ -16,6 +16,6 @@ public class BurnStatus extends BaseStatus {
     @Override
     public void update() {
         super.update();
-        _target.applyDamage(1.0f);
+        _target.applyDamage(1);
     }
 }

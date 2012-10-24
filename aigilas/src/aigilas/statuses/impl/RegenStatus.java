@@ -12,6 +12,6 @@ public class RegenStatus extends BaseStatus {
     public void update() {
 
         super.update();
-        _target.applyDamage(-1f);
+        _target.applyDamage(-1);
     }
 }

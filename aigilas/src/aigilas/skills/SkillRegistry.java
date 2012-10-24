@@ -35,13 +35,13 @@ public class SkillRegistry {
                     String[] values = line.split(",");
                     String name = values[0];
                     StatType stat = StatType.get(values[2]);
-                    float cost = Float.parseFloat(values[1]);
+                    int cost = Integer.parseInt(values[1]);
                     String rawElements = values[3];
                     List<Elements> elements = new ArrayList<Elements>();
                     for (String element : rawElements.split("-")) {
                         elements.add(Elements.get(element));
                     }
-                    float magnitude = Float.parseFloat(values[4]);
+                    int magnitude = Integer.parseInt(values[4]);
                     boolean bossOnly = false;
                     boolean offCenter = false;
                     if (values.length > 5) {

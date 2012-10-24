@@ -7,38 +7,38 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Stats {
-    public static final float DefaultMoveDistance = Settings.get().spriteHeight;
+    public static final int DefaultMoveDistance = Settings.get().spriteHeight;
 
-    private HashMap<StatType, Float> _stats = new HashMap<StatType, Float>();
+    private HashMap<StatType, Integer> _stats = new HashMap<StatType, Integer>();
     private final List<StatBuff> _buffs = new ArrayList<StatBuff>();
 
     public Stats(Stats target) {
-        _stats = new HashMap<StatType, Float>(target._stats);
+        _stats = new HashMap<StatType, Integer>(target._stats);
     }
 
-    public Stats(float health, float mana, float strength, float wisdom, float defense, float luck, float age, float weightInLbs, float heightInFeet, float moveCoolDown, float regenRate) {
+    public Stats(int health, int mana, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet, int moveCoolDown, int regenRate) {
 
         setup(health, mana, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, moveCoolDown, 0, regenRate);
     }
 
-    public Stats(float health, float mana, float strength, float wisdom, float defense, float luck, float age, float weightInLbs, float heightInFeet, float moveCoolDown) {
+    public Stats(int health, int mana, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet, int moveCoolDown) {
         setup(health, mana, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, moveCoolDown, 0, Settings.get().defaultRegen);
     }
 
-    public Stats(float health, float mana, float strength, float wisdom, float defense, float luck, float age, float weightInLbs, float heightInFeet) {
+    public Stats(int health, int mana, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet) {
         setup(health, mana, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, Settings.get().defaultSpeed, 0, Settings.get().defaultRegen);
 
     }
 
-    private void setup(float... list) {
+    private void setup(int... list) {
         for (int ii = 0; ii < list.length; ii++) {
             _stats.put(StatType.values()[ii], list[ii]);
         }
     }
 
-    private float statSum = 0;
+    private int statSum = 0;
 
-    public float get(StatType stat) {
+    public int get(StatType stat) {
         if (_buffs != null) {
             if (!_buffs.contains(null)) {
                 statSum = 0;
@@ -53,11 +53,11 @@ public class Stats {
         return getRaw(stat);
     }
 
-    public float getRaw(StatType stat) {
+    public int getRaw(StatType stat) {
         return _stats.get(stat);
     }
 
-    public float set(StatType stat, float value) {
+    public int set(StatType stat, int value) {
         return _stats.put(stat, value);
     }
 
@@ -69,9 +69,9 @@ public class Stats {
         _buffs.add(buff);
     }
 
-    private final List<Float> deltas = new ArrayList<Float>();
+    private final List<Integer> deltas = new ArrayList<Integer>();
 
-    public List<Float> getDeltas(Stats stats) {
+    public List<Integer> getDeltas(Stats stats) {
         deltas.clear();
         for (StatType stat : StatType.values()) {
             deltas.add(_stats.get(stat) - stats._stats.get(stat));
@@ -79,12 +79,12 @@ public class Stats {
         return deltas;
     }
 
-    public float getBonus(int level, StatType stat) {
+    public int getBonus(int level, StatType stat) {
         return _stats.get(stat) * level;
     }
 
-    public float getSum() {
-        float result = 0;
+    public int getSum() {
+        int result = 0;
         for (StatType key : _stats.keySet()) {
             if (key != StatType.Health && key != StatType.Move_Cool_Down && key != StatType.Regen) {
                 result += _stats.get(key);

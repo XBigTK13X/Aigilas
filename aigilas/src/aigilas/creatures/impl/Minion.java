@@ -10,9 +10,10 @@ import sps.core.Point2;
 import sps.core.Settings;
 
 public class Minion extends BaseCreature {
-    public Minion(ActorType actorType, float coolDown) {
+    public Minion(ActorType actorType, int coolDown) {
         _actorType = actorType;
-        _baseStats = new Stats(80f, 999f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, coolDown);
+        //TODO Move into config
+        _baseStats = new Stats(80, 999, 0, 0, 0, 0, 0, 0, 0, coolDown);
     }
 
     public Minion(ActorType actorType) {

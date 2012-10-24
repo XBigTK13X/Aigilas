@@ -23,7 +23,7 @@ public abstract class CreatureClass {
         _stats = new Stats(playerClass.Info.Stats);
     }
 
-    public float getBonus(int level, StatType stat) {
+    public int getBonus(int level, StatType stat) {
         return _stats.getBonus(level, stat);
     }
 

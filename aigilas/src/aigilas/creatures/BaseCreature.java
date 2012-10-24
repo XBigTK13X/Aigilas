@@ -24,6 +24,7 @@ import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
 import sps.core.Logger;
 import sps.core.Point2;
+import sps.core.Settings;
 import sps.entities.CoordVerifier;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -47,7 +48,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Stats _maxStats;
     protected God _god;
 
-    protected final int BaseWaitTime = 40 * 40;
+    protected final int BaseWaitTime = Settings.get().defaultSpeed / 2 * Settings.get().defaultSpeed;
     protected int waitTime = BaseWaitTime;
 
     protected final List<Elements> _composition = new ArrayList<Elements>();
@@ -234,53 +235,53 @@ public abstract class BaseCreature extends Entity implements IActor {
         return _isPlaying;
     }
 
-    public float get(StatType stat) {
+    public int get(StatType stat) {
         return _baseStats.get(stat) + calculateEquipmentBonus(stat) + calculateInstrinsicBonus(stat);
     }
 
-    private float getRaw(StatType stat, boolean isMax) {
+    private int getRaw(StatType stat, boolean isMax) {
         return isMax ? _maxStats.getRaw(stat) : _baseStats.getRaw(stat);
     }
 
-    private float getRaw(StatType stat) {
+    private int getRaw(StatType stat) {
         return getRaw(stat, false);
     }
 
-    private float calculateInstrinsicBonus(StatType stat) {
+    private int calculateInstrinsicBonus(StatType stat) {
         if (_class == null) {
             return 0;
         }
         return _class.getBonus(_currentLevel, stat);
     }
 
-    private float calculateEquipmentBonus(StatType stat) {
+    private int calculateEquipmentBonus(StatType stat) {
         if (_equipment != null) {
             return _equipment.calculateBonus(stat);
         }
         return 0;
     }
 
-    public float getMax(StatType stat) {
-        return (int) _maxStats.get(stat) + calculateEquipmentBonus(stat) + calculateInstrinsicBonus(stat);
+    public int getMax(StatType stat) {
+        return _maxStats.get(stat) + calculateEquipmentBonus(stat) + calculateInstrinsicBonus(stat);
     }
 
-    public float setBase(StatType stat, float value) {
+    public int setBase(StatType stat, int value) {
         return _baseStats.set(stat, value);
     }
 
-    public float setMax(StatType stat, float value) {
+    public int setMax(StatType stat, int value) {
         return _maxStats.set(stat, value);
     }
 
-    public float set(StatType stat, float value, boolean setMax) {
+    public int set(StatType stat, int value, boolean setMax) {
         return setMax ? setMax(stat, value) : setBase(stat, value);
     }
 
-    public float set(StatType stat, float value) {
+    public int set(StatType stat, int value) {
         return set(stat, value, false);
     }
 
-    protected void InitStat(StatType stat, float value) {
+    protected void InitStat(StatType stat, int value) {
 
         _maxStats.set(stat, value);
         _baseStats.set(stat, value);
@@ -295,8 +296,8 @@ public abstract class BaseCreature extends Entity implements IActor {
         return _actorType;
     }
 
-    protected float adjust(StatType stat, float adjustment, boolean adjustMax) {
-        float result = getRaw(stat) + adjustment;
+    protected int adjust(StatType stat, int adjustment, boolean adjustMax) {
+        int result = getRaw(stat) + adjustment;
         if (!adjustMax) {
             if (result > getMax(stat)) {
                 result = getMax(stat);
@@ -305,11 +306,11 @@ public abstract class BaseCreature extends Entity implements IActor {
         return set(stat, (result), adjustMax);
     }
 
-    protected float adjust(StatType stat, float adjustment) {
+    protected float adjust(StatType stat, int adjustment) {
         return adjust(stat, adjustment, false);
     }
 
-    public void applyDamage(float damage, BaseCreature attacker, boolean showDamage, StatType statType) {
+    public void applyDamage(int damage, BaseCreature attacker, boolean showDamage, StatType statType) {
         if (attacker != null) {
             attacker.passOn(this, StatusComponent.Contagion);
             this.passOn(attacker, StatusComponent.Passive);
@@ -336,19 +337,19 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
     }
 
-    public void applyDamage(float damage, BaseCreature attacker, boolean showDamage) {
+    public void applyDamage(int damage, BaseCreature attacker, boolean showDamage) {
         applyDamage(damage, attacker, showDamage, null);
     }
 
-    public void applyDamage(float damage, BaseCreature attacker) {
+    public void applyDamage(int damage, BaseCreature attacker) {
         applyDamage(damage, attacker, true, null);
     }
 
-    public void applyDamage(float damage) {
+    public void applyDamage(int damage) {
         applyDamage(damage, null, true, null);
     }
 
-    public boolean lowerStat(StatType stat, float amount) {
+    public boolean lowerStat(StatType stat, int amount) {
         if (amount != 0) {
             if (get(stat) >= amount) {
                 adjust(stat, -amount);
@@ -372,7 +373,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         addBuff(buff, false);
     }
 
-    protected float CalculateDamage() {
+    protected int CalculateDamage() {
         return get(StatType.Strength);
     }
 
@@ -515,7 +516,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         assignGod(god);
         if (get(StatType.Piety) >= pietyCost) {
             StatType lowest = getLowestStat();
-            float adjustment = (get(StatType.Piety) / 100);
+            int adjustment = (get(StatType.Piety) / 100);
             set(lowest, getMax(lowest) + adjustment);
             set(lowest, adjustment, true);
             adjust(StatType.Piety, -pietyCost);

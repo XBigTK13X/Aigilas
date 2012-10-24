@@ -7,7 +7,7 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
 public class ThrowItemSkill extends BaseSkill {
-    private float _itemStrength = 0;
+    private int _itemStrength = 0;
 
     public ThrowItemSkill()
 

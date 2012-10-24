@@ -40,9 +40,9 @@ public class Equipment {
         return _slots.containsKey(itemClass) && (item == _slots.get(itemClass));
     }
 
-    private float bonusSum;
+    private int bonusSum;
 
-    public float calculateBonus(StatType stat) {
+    public int calculateBonus(StatType stat) {
         bonusSum = 0;
         for (ItemSlot slot : _slots.keySet()) {
             bonusSum += _slots.get(slot).getStatBonus(stat);

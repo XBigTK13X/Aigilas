@@ -3,9 +3,7 @@ package aigilas.strategies.impl;
 import aigilas.creatures.BaseCreature;
 
 public class ConfusedAndDyingStrategy extends ConfusedStrategy {
-    public ConfusedAndDyingStrategy(BaseCreature parent)
-
-    {
+    public ConfusedAndDyingStrategy(BaseCreature parent) {
         super(parent);
 
     }
@@ -13,6 +11,6 @@ public class ConfusedAndDyingStrategy extends ConfusedStrategy {
     @Override
     public void act() {
         super.act();
-        _parent.applyDamage(1.1f, null, false);
+        _parent.applyDamage(2, null, false);
     }
 }
