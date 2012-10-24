@@ -14,6 +14,6 @@ public class VaporCloudSkill extends BaseSkill {
 
     @Override
     public void affect(BaseCreature target) {
-        target.addBuff(new StatBuff(StatType.Move_Cool_Down, -10));
+        target.addBuff(new StatBuff(StatType.Move_Cool_Down, -1000));
     }
 }

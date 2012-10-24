@@ -47,6 +47,9 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Stats _maxStats;
     protected God _god;
 
+    protected final int BaseWaitTime = 40 * 40;
+    protected int waitTime = BaseWaitTime;
+
     protected final List<Elements> _composition = new ArrayList<Elements>();
 
     protected SkillPool _skills;
@@ -159,7 +162,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public boolean isCooledDown() {
-        return get(StatType.Move_Cool_Down) >= getMax(StatType.Move_Cool_Down);
+        return waitTime <= 0;
     }
 
     @Override
@@ -171,7 +174,10 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (_statuses.allows(CreatureAction.Movement)) {
             if (_isPlaying) {
                 if (!isCooledDown()) {
-                    adjust(StatType.Move_Cool_Down, 1);
+                    waitTime -= get(StatType.Move_Cool_Down);
+                    if (waitTime > BaseWaitTime) {
+                        waitTime = BaseWaitTime;
+                    }
                 }
                 else {
                     _statuses.act();
@@ -380,7 +386,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 target.reset(xVel + getLocation().PosX, yVel + getLocation().PosY);
                 if (!isBlocking() || !CoordVerifier.isBlocked(target)) {
                     move(xVel, yVel);
-                    set(StatType.Move_Cool_Down, 0);
+                    waitTime = BaseWaitTime;
                 }
                 if (_statuses.allows(CreatureAction.Attacking)) {
                     creatures.clear();
@@ -398,7 +404,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                                 }
                             }
                         }
-                        set(StatType.Move_Cool_Down, 0);
+                        waitTime = BaseWaitTime;
                     }
                 }
             }
@@ -595,5 +601,9 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     public SkillId getActiveSkill() {
         return _skills.getActive();
+    }
+
+    public void resetWaitTime() {
+        waitTime = BaseWaitTime;
     }
 }

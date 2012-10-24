@@ -10,7 +10,7 @@ public class SpeedUpStatus extends BaseStatus {
 
     {
         super(target);
-        _buff = new StatBuff(StatType.Move_Cool_Down, 5f);
+        _buff = new StatBuff(StatType.Move_Cool_Down, 100);
         setup();
     }
 }

@@ -24,12 +24,10 @@ public class BaseEnemy extends BaseCreature {
         if (EnemyRegistry.get().contains(_actorType)) {
             EnemyInfo info = EnemyRegistry.get().getInfo(_actorType);
             for (StatType stat : info.Strengths) {
-                multiplier = (stat == StatType.Move_Cool_Down) ? (float) 1 / Settings.get().enemyStatMultiplier : Settings.get().enemyStatMultiplier;
-                InitStat(stat, get(stat) * multiplier);
+                InitStat(stat, get(stat) + Settings.get().enemyStatMultiplier);
             }
             for (StatType stat : info.Weaknesses) {
-                multiplier = (stat == StatType.Move_Cool_Down) ? Settings.get().enemyStatMultiplier : (float) 1 / Settings.get().enemyStatMultiplier;
-                InitStat(stat, get(stat) * multiplier);
+                InitStat(stat, get(stat) - Settings.get().enemyStatMultiplier);
             }
             for (Elements element : info.Elements) {
                 _composition.add(element);

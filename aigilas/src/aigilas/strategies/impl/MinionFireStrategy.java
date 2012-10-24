@@ -1,7 +1,6 @@
 package aigilas.strategies.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 
@@ -19,7 +18,7 @@ public class MinionFireStrategy extends BaseStrategy {
         if (_parent.isCooledDown()) {
             _parent.useActiveSkill();
             _parent.applyDamage(5, null, false);
-            _parent.set(StatType.Move_Cool_Down, 0);
+            _parent.resetWaitTime();
         }
     }
 }

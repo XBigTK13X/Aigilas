@@ -11,7 +11,7 @@ public class SlowDownStatus extends BaseStatus {
     {
         super(target);
 
-        _buff = new StatBuff(StatType.Move_Cool_Down, 10);
+        _buff = new StatBuff(StatType.Move_Cool_Down, -100);
         _buffMax = true;
         setup();
     }
