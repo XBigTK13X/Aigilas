@@ -8,7 +8,6 @@ import sps.bridge.ActorType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
 import sps.core.Point2;
-import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
@@ -20,7 +19,7 @@ import java.util.List;
 public class SkillEffect extends Entity {
     private static final float _strengthDecayAmount = .75f;
     public static final float DefaultStrength = 1;
-    private static final float CoolDown = Settings.get().defaultSpeed / 8;
+    private static final float CoolDown = 5;
 
     private final Point2 _velocity = new Point2(0, 0);
     private final BaseCreature _source;
