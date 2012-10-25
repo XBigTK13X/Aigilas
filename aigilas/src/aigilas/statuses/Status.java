@@ -1,5 +1,7 @@
 package aigilas.statuses;
 
+import sps.graphics.SpriteDefinition;
+
 public enum Status {
     Poison,
     Regen,
@@ -35,5 +37,16 @@ public enum Status {
     WeakMuscles,
     Blind,
     Toxic,
-    Boil
+    Boil;
+
+    public StatusInfo Info;
+
+    public static Status get(String name) {
+        for(Status s:values()){
+            if(s.toString().equalsIgnoreCase(name)){
+                return s;
+            }
+        }
+        return null;
+    }
 }
