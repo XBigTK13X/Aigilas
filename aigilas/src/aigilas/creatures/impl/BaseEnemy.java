@@ -3,7 +3,6 @@ package aigilas.creatures.impl;
 import aigilas.classes.CreatureClass;
 import aigilas.creatures.*;
 import aigilas.entities.Elements;
-import aigilas.management.SpriteType;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;
 import aigilas.strategies.Strategy;
@@ -15,10 +14,10 @@ import sps.core.Settings;
 public class BaseEnemy extends BaseCreature {
     float multiplier = 0f;
 
-    public BaseEnemy(ActorType actorType, SpriteType spriteType, CreatureClass cClass) {
+    public BaseEnemy(ActorType actorType, CreatureClass cClass) {
         SetClass(cClass);
         _actorType = actorType;
-        _baseStats = new Stats(3, 1, 1, 1, 1, 1, 1, 1, 1);
+        _baseStats = new Stats(1000, 50, 110, 1, 90, 1, 1, 1, 1);
         _maxStats = new Stats(_baseStats);
 
         if (EnemyRegistry.get().contains(_actorType)) {
@@ -41,12 +40,9 @@ public class BaseEnemy extends BaseCreature {
         }
     }
 
-    public BaseEnemy(ActorType actorType, SpriteType spriteType) {
-        this(actorType, spriteType, null);
-    }
 
     public BaseEnemy(ActorType actorType) {
-        this(actorType, SpriteType.Creature, null);
+        this(actorType, null);
     }
 
     public void setup(Point2 position) {
