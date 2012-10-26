@@ -1,7 +1,7 @@
 package aigilas.reactions;
 
 
-public enum ReactionId {
+public enum Reaction {
     Sweat,
     Magma,
     Explosion,
@@ -29,5 +29,16 @@ public enum ReactionId {
     Enlighten,
     Atrophy,
     Neurosis,
-    Confuse
+    Confuse;
+
+    public ReactionInfo Info;
+
+    public static Reaction get(String name) {
+        for (Reaction s : values()) {
+            if (s.toString().replace("_", "").equalsIgnoreCase(name)) {
+                return s;
+            }
+        }
+        return null;
+    }
 }

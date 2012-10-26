@@ -12,37 +12,37 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ComboMeter {
-    private static final HashMap<Integer, ReactionId> __reactions = new HashMap<Integer, ReactionId>();
+    private static final HashMap<Integer, Reaction> __reactions = new HashMap<Integer, Reaction>();
 
     static {
-        __reactions.put(12, ReactionId.Sweat);
-        __reactions.put(13, ReactionId.Magma);
-        __reactions.put(14, ReactionId.Explosion);
-        __reactions.put(15, ReactionId.Scorch);
-        __reactions.put(16, ReactionId.Blind);
-        __reactions.put(17, ReactionId.Lactic_Acid);
-        __reactions.put(18, ReactionId.Mind_Blown);
-        __reactions.put(23, ReactionId.Vent);
-        __reactions.put(24, ReactionId.Drown);
-        __reactions.put(25, ReactionId.Reflect);
-        __reactions.put(26, ReactionId.Drench);
-        __reactions.put(27, ReactionId.Pneumonia);
-        __reactions.put(28, ReactionId.Lobotomy);
-        __reactions.put(34, ReactionId.Rust);
-        __reactions.put(35, ReactionId.Purify);
-        __reactions.put(36, ReactionId.Eclipse);
-        __reactions.put(37, ReactionId.Respect);
-        __reactions.put(38, ReactionId.Craftsman);
-        __reactions.put(45, ReactionId.Flash);
-        __reactions.put(46, ReactionId.Metabolism);
-        __reactions.put(47, ReactionId.Fast_Forward);
-        __reactions.put(48, ReactionId.Blank);
-        __reactions.put(56, ReactionId.Yin_Yang);
-        __reactions.put(57, ReactionId.Expose);
-        __reactions.put(58, ReactionId.Enlighten);
-        __reactions.put(67, ReactionId.Atrophy);
-        __reactions.put(68, ReactionId.Neurosis);
-        __reactions.put(78, ReactionId.Confuse);
+        __reactions.put(12, Reaction.Sweat);
+        __reactions.put(13, Reaction.Magma);
+        __reactions.put(14, Reaction.Explosion);
+        __reactions.put(15, Reaction.Scorch);
+        __reactions.put(16, Reaction.Blind);
+        __reactions.put(17, Reaction.Lactic_Acid);
+        __reactions.put(18, Reaction.Mind_Blown);
+        __reactions.put(23, Reaction.Vent);
+        __reactions.put(24, Reaction.Drown);
+        __reactions.put(25, Reaction.Reflect);
+        __reactions.put(26, Reaction.Drench);
+        __reactions.put(27, Reaction.Pneumonia);
+        __reactions.put(28, Reaction.Lobotomy);
+        __reactions.put(34, Reaction.Rust);
+        __reactions.put(35, Reaction.Purify);
+        __reactions.put(36, Reaction.Eclipse);
+        __reactions.put(37, Reaction.Respect);
+        __reactions.put(38, Reaction.Craftsman);
+        __reactions.put(45, Reaction.Flash);
+        __reactions.put(46, Reaction.Metabolism);
+        __reactions.put(47, Reaction.Fast_Forward);
+        __reactions.put(48, Reaction.Blank);
+        __reactions.put(56, Reaction.Yin_Yang);
+        __reactions.put(57, Reaction.Expose);
+        __reactions.put(58, Reaction.Enlighten);
+        __reactions.put(67, Reaction.Atrophy);
+        __reactions.put(68, Reaction.Neurosis);
+        __reactions.put(78, Reaction.Confuse);
     }
 
     private final BaseCreature _parent;
@@ -103,7 +103,7 @@ public class ComboMeter {
         }
     }
 
-    private IReaction reaction;
+    private BaseReaction reaction;
 
     public void update() {
         for (ComboMarker marker : _markers) {

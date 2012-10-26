@@ -1,13 +1,11 @@
 package aigilas.reactions.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.reactions.IReaction;
+import aigilas.reactions.BaseReaction;
 
-public class RustReaction implements IReaction {
+public class RustReaction extends BaseReaction {
     @Override
-    public void affect(BaseCreature target)
-
-    {
+    public void affect(BaseCreature target) {
         target.destroyRandomItemFromInventory();
     }
 }
