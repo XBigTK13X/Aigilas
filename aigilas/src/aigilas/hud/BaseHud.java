@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.core.SpxManager;
+import sps.core.Spx;
 import sps.text.TextHandler;
 
 import java.util.ArrayList;
@@ -23,24 +23,24 @@ public abstract class BaseHud {
     protected BaseHud(BaseCreature owner, int width, int height) {
         _parent = owner;
         if (_menuBase == null) {
-            _menuBase = SpxManager.getMenuBaseAsset();
+            _menuBase = Spx.getMenuBaseAsset();
         }
         _dimensions = new Point2(width, height);
 
-        inventoryAnchors.add(new Point2(0, SpxManager.VirtualHeight / 2));
-        inventoryAnchors.add(new Point2(SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2));
+        inventoryAnchors.add(new Point2(0, Spx.VirtualHeight / 2));
+        inventoryAnchors.add(new Point2(Spx.VirtualWidth / 2, Spx.VirtualHeight / 2));
         inventoryAnchors.add(new Point2(0, 0));
-        inventoryAnchors.add(new Point2(SpxManager.VirtualWidth / 2, 0));
+        inventoryAnchors.add(new Point2(Spx.VirtualWidth / 2, 0));
 
-        meterAnchors.add(new Point2(0, SpxManager.VirtualHeight - _dimensions.Y));
-        meterAnchors.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, SpxManager.VirtualHeight - _dimensions.Y));
+        meterAnchors.add(new Point2(0, Spx.VirtualHeight - _dimensions.Y));
+        meterAnchors.add(new Point2(Spx.VirtualWidth - _dimensions.X, Spx.VirtualHeight - _dimensions.Y));
         meterAnchors.add(new Point2(0, _dimensions.Y));
-        meterAnchors.add(new Point2(SpxManager.VirtualWidth - _dimensions.X, _dimensions.Y));
+        meterAnchors.add(new Point2(Spx.VirtualWidth - _dimensions.X, _dimensions.Y));
 
-        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
-        skillAnchors.add(new Point2(getMeterAnchor().X - SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight - (int) (.2 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, Spx.VirtualHeight - (int) (.2 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - Spx.VirtualWidth / 2, Spx.VirtualHeight - (int) (.2 * _dimensions.Y)));
         skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .25)));
-        skillAnchors.add(new Point2(getMeterAnchor().X - SpxManager.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .25)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - Spx.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .25)));
     }
 
     public void toggle() {
@@ -52,7 +52,7 @@ public abstract class BaseHud {
     }
 
     public void loadContent() {
-        _menuBase = SpxManager.getMenuBaseAsset();
+        _menuBase = Spx.getMenuBaseAsset();
     }
 
     protected Point2 getMeterAnchor() {

@@ -7,7 +7,7 @@ import sps.graphics.ContentManager;
 import sps.graphics.Renderer;
 import sps.net.Client;
 
-public class SpxManager {
+public class Spx {
     // This is the resolution used by the game internally
     public static final int VirtualHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
     public static final int VirtualWidth = Settings.get().spriteWidth * Settings.get().tileMapWidth;

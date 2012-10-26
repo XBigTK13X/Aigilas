@@ -8,7 +8,7 @@ import aigilas.items.ItemClass;
 import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
-import sps.core.SpxManager;
+import sps.core.Spx;
 import sps.io.Input;
 import sps.util.StringSquisher;
 import sps.util.StringStorage;
@@ -28,7 +28,7 @@ public class InventoryHud extends BaseHud {
     private final DeltasHud _deltas;
 
     public InventoryHud(BaseCreature owner, Inventory inventory, Equipment equipment) {
-        super(owner, SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2);
+        super(owner, Spx.VirtualWidth / 2, Spx.VirtualHeight / 2);
         _inventory = inventory;
         _equipment = equipment;
         _deltas = new DeltasHud(owner, equipment);
@@ -39,7 +39,7 @@ public class InventoryHud extends BaseHud {
     @Override
     public void draw() {
         if (_isVisible) {
-            SpxManager.Renderer.draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) SpxManager.getCenter().X, (int) SpxManager.getCenter().Y);
+            Spx.Renderer.draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) Spx.getCenter().X, (int) Spx.getCenter().Y);
             _textHandler.draw();
             _deltas.draw();
             _equipHud.draw();

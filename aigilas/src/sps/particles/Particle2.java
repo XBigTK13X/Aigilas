@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.RNG;
-import sps.core.SpxManager;
+import sps.core.Spx;
 import sps.entities.Entity;
 import sps.util.MathHelper;
 
@@ -16,7 +16,7 @@ public class Particle2 extends PEComponent {
     public float Width = 1;
 
     private float _life = DefaultLife;
-    private final Sprite _texture = SpxManager.getParticleAsset();
+    private final Sprite _texture = Spx.getParticleAsset();
     private Color _color = Color.WHITE;
 
     public float MoveSpeed = 5f;
@@ -35,7 +35,7 @@ public class Particle2 extends PEComponent {
 
     public void draw() {
         if (IsActive) {
-            SpxManager.Renderer.draw(_texture, Position, DrawDepth.Particle, _color, Width, Height);
+            Spx.Renderer.draw(_texture, Position, DrawDepth.Particle, _color, Width, Height);
         }
     }
 

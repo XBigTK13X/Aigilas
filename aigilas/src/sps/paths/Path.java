@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.core.SpxManager;
+import sps.core.Spx;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,10 +50,10 @@ public class Path {
     public void draw() {
         if (Settings.get().viewPaths) {
             if (_t == null) {
-                _t = SpxManager.getSpriteAsset(0);
+                _t = Spx.getSpriteAsset(0);
             }
             for (Point2 step : _steps) {
-                SpxManager.Renderer.draw(_t, new Point2(step.PosX, step.PosY), DrawDepth.Debug, Color.ORANGE);
+                Spx.Renderer.draw(_t, new Point2(step.PosX, step.PosY), DrawDepth.Debug, Color.ORANGE);
             }
         }
     }

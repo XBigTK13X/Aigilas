@@ -2,11 +2,11 @@ package sps.entities;
 
 import sps.bridge.EntityType;
 import sps.core.Point2;
-import sps.core.SpxManager;
+import sps.core.Spx;
 
 public class CoordVerifier {
     public static boolean isValid(Point2 position) {
-        return (position.PosX >= 0 && position.PosY >= 0 && position.PosX < SpxManager.VirtualWidth && position.PosY < SpxManager.VirtualHeight);
+        return (position.PosX >= 0 && position.PosY >= 0 && position.PosX < Spx.VirtualWidth && position.PosY < Spx.VirtualHeight);
     }
 
     public static boolean isBlocked(Point2 target)

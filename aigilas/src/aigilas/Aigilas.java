@@ -6,7 +6,7 @@ import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import sps.core.SpxManager;
+import sps.core.Spx;
 import sps.devtools.DevConsole;
 import sps.graphics.SpriteSheetManager;
 import sps.io.Input;
@@ -24,7 +24,7 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void create() {
-        SpxManager.setup();
+        Spx.setup();
         Input.setup();
         SpriteSheetManager.setup(new SpriteInitializer());
         StateManager.loadState(new MainMenuState());
@@ -72,13 +72,13 @@ public class Aigilas implements ApplicationListener {
         }
 
         // Render
-        SpxManager.Renderer.begin();
+        Spx.Renderer.begin();
         StateManager.draw();
         ParticleEngine.draw();
         TextManager.draw();
         HudRenderer.get().draw();
         DevConsole.get().draw();
-        SpxManager.Renderer.end();
+        Spx.Renderer.end();
 
     }
 

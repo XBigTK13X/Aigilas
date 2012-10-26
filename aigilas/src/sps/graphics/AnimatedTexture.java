@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.core.GameManager;
 import sps.core.Point2;
-import sps.core.SpxManager;
+import sps.core.Spx;
 
 public class AnimatedTexture {
     private int _currentFrame;
@@ -26,12 +26,12 @@ public class AnimatedTexture {
 
     public void draw() {
         if (_texture == null) {
-            _texture = SpxManager.getSpriteAsset(_spriteInfo.SpriteIndex);
+            _texture = Spx.getSpriteAsset(_spriteInfo.SpriteIndex);
         }
         if (_color.a > 0) {
-            SpxManager.setSpriteIndices(_texture, _currentFrame, _spriteInfo.SpriteIndex);
+            Spx.setSpriteIndices(_texture, _currentFrame, _spriteInfo.SpriteIndex);
             updateAnimation();
-            SpxManager.Renderer.draw(_texture, _position, _depth, _color);
+            Spx.Renderer.draw(_texture, _position, _depth, _color);
         }
     }
 

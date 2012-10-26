@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
-import sps.core.SpxManager;
+import sps.core.Spx;
 import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
@@ -17,8 +17,8 @@ public class GameLoseState implements State {
 
     @Override
     public void draw() {
-        SpxManager.Renderer.drawString("Game Over", SpxManager.getCenter(), Color.WHITE, 1, DrawDepth.ActionText);
-        SpxManager.Renderer.drawString("Press SPACEBAR to restart", new Point2(200, 200), Color.WHITE, 1, DrawDepth.ActionText);
+        Spx.Renderer.drawString("Game Over", Spx.getCenter(), Color.WHITE, 1, DrawDepth.ActionText);
+        Spx.Renderer.drawString("Press SPACEBAR to restart", new Point2(200, 200), Color.WHITE, 1, DrawDepth.ActionText);
     }
 
     @Override

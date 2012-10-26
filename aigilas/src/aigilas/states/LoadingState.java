@@ -3,7 +3,7 @@ package aigilas.states;
 import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
 import sps.bridge.DrawDepth;
-import sps.core.SpxManager;
+import sps.core.Spx;
 import sps.states.State;
 import sps.states.StateManager;
 
@@ -14,7 +14,7 @@ public class LoadingState implements State {
 
     @Override
     public void draw() {
-        SpxManager.Renderer.drawString("Preparing for adventure!", SpxManager.getCenter(), Color.WHITE, 1, DrawDepth.ActionText);
+        Spx.Renderer.drawString("Preparing for adventure!", Spx.getCenter(), Color.WHITE, 1, DrawDepth.ActionText);
     }
 
     int delay = 10;

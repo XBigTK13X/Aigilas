@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
-import sps.core.SpxManager;
+import sps.core.Spx;
 import sps.util.StringSquisher;
 import sps.util.StringStorage;
 
@@ -12,7 +12,7 @@ public class DeltasHud extends BaseHud {
     private final Equipment _equipment;
 
     public DeltasHud(BaseCreature owner, Equipment equipment) {
-        super(owner, SpxManager.VirtualWidth / 2, SpxManager.VirtualHeight / 2);
+        super(owner, Spx.VirtualWidth / 2, Spx.VirtualHeight / 2);
         _equipment = equipment;
     }
 

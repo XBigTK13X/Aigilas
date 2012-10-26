@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.core.SpxManager;
+import sps.core.Spx;
 
 import java.io.File;
 
@@ -28,7 +28,7 @@ public class Renderer {
 
     public Renderer() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, SpxManager.VirtualWidth, SpxManager.VirtualHeight);
+        camera.setToOrtho(false, Spx.VirtualWidth, Spx.VirtualHeight);
         batch = new SpriteBatch();
         File fontFile = new File(fontAsset);
         font = new BitmapFont(Gdx.files.getFileHandle(fontFile.getAbsolutePath(), Files.FileType.Absolute), false);
