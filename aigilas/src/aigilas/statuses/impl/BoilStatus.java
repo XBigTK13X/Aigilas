@@ -3,6 +3,7 @@ package aigilas.statuses.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.statuses.BaseStatus;
+import aigilas.statuses.Status;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import sps.bridge.ActorType;
@@ -14,11 +15,8 @@ public class BoilStatus extends BaseStatus {
     private static final int _countdownMax = 10;
     private int _countdown = _countdownMax;
 
-    public BoilStatus(BaseCreature target)
-
-    {
-        super(target);
-
+    public BoilStatus(BaseCreature target) {
+        super(target, Status.Boil);
     }
 
     @Override
@@ -33,7 +31,7 @@ public class BoilStatus extends BaseStatus {
     public void cleanup() {
         super.cleanup();
         if (!_countDownFailed) {
-            _target.getTargets().findClosest().applyDamage(30);
+            _target.getTargets().findClosest().applyDamage(impl.Info.Magnitude);
         }
         _target.setStrategy(StrategyFactory.create(previousStrategy, _target));
     }

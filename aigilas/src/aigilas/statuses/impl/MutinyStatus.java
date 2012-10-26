@@ -11,7 +11,6 @@ public class MutinyStatus extends BaseStatus {
 
     public MutinyStatus(BaseCreature target) {
         super(target);
-
         _prevents.add(CreatureAction.WontHitNonTargets);
     }
 

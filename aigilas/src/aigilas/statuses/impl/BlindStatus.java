@@ -9,7 +9,6 @@ public class BlindStatus extends BaseStatus {
 
     {
         super(target);
-
         _prevents.add(CreatureAction.WontHitNonTargets);
     }
 }

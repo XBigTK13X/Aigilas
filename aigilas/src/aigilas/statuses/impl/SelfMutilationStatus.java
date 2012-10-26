@@ -8,9 +8,7 @@ import aigilas.strategies.StrategyFactory;
 public class SelfMutilationStatus extends BaseStatus {
     private Strategy previousStrategy;
 
-    public SelfMutilationStatus(BaseCreature target)
-
-    {
+    public SelfMutilationStatus(BaseCreature target) {
         super(target);
 
     }

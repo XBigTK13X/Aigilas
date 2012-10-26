@@ -6,11 +6,8 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusComponent;
 
 public class PoisonOneHitStatus extends BaseStatus {
-    public PoisonOneHitStatus(BaseCreature target)
-
-    {
+    public PoisonOneHitStatus(BaseCreature target) {
         super(target);
-
         add(Status.Poison, StatusComponent.Contagion);
     }
 

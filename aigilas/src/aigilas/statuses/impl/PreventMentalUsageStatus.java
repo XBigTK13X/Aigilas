@@ -5,11 +5,8 @@ import aigilas.entities.Elements;
 import aigilas.statuses.BaseStatus;
 
 public class PreventMentalUsageStatus extends BaseStatus {
-    public PreventMentalUsageStatus(BaseCreature target)
-
-    {
+    public PreventMentalUsageStatus(BaseCreature target) {
         super(target);
-
         _blockedElements.add(Elements.Mental);
     }
 }

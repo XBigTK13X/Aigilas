@@ -5,6 +5,7 @@ import aigilas.creatures.impl.CreatureFactory;
 import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFloor;
 import aigilas.skills.SkillRegistry;
+import aigilas.statuses.StatusRegistry;
 import sps.core.Logger;
 import sps.entities.EntityManager;
 import sps.net.Client;
@@ -26,6 +27,8 @@ public class AigilasManager {
         __instance = new AigilasManager();
         Logger.info("Generating the dungeon...");
         SkillRegistry.get();
+        StatusRegistry.get();
+        //TODO enable -> ReactionRegistry.get();
         PlayerClassRegistry.get();
         EntityManager.reset();
         CreatureFactory.reset();

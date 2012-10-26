@@ -5,11 +5,8 @@ import aigilas.creatures.CreatureAction;
 import aigilas.statuses.BaseStatus;
 
 public class MuteStatus extends BaseStatus {
-    public MuteStatus(BaseCreature target)
-
-    {
+    public MuteStatus(BaseCreature target) {
         super(target);
-
         _prevents.add(CreatureAction.SkillUsage);
     }
 }

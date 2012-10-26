@@ -2,9 +2,9 @@ package aigilas.creatures;
 
 public class StatBuff {
     public final StatType Stat;
-    public final float Amount;
+    public final int Amount;
 
-    public StatBuff(StatType stat, float amount) {
+    public StatBuff(StatType stat, int amount) {
         Stat = stat;
         Amount = amount;
     }

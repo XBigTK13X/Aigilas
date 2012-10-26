@@ -6,11 +6,8 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusComponent;
 
 public class BurnOneHitStatus extends BaseStatus {
-    public BurnOneHitStatus(BaseCreature target)
-
-    {
+    public BurnOneHitStatus(BaseCreature target) {
         super(target);
-
         add(Status.Burn, StatusComponent.Contagion);
     }
 

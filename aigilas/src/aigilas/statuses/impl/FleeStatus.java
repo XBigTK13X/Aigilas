@@ -9,11 +9,8 @@ import aigilas.strategies.StrategyFactory;
 public class FleeStatus extends BaseStatus {
     private Strategy previousStrategy;
 
-    public FleeStatus(BaseCreature target)
-
-    {
+    public FleeStatus(BaseCreature target) {
         super(target);
-
         _prevents.add(CreatureAction.WontHitNonTargets);
     }
 

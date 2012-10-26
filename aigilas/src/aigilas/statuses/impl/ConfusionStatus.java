@@ -9,11 +9,8 @@ import aigilas.strategies.StrategyFactory;
 public class ConfusionStatus extends BaseStatus {
     private Strategy previousStrategy;
 
-    public ConfusionStatus(BaseCreature target)
-
-    {
+    public ConfusionStatus(BaseCreature target) {
         super(target);
-
         _prevents.add(CreatureAction.WontHitNonTargets);
     }
 

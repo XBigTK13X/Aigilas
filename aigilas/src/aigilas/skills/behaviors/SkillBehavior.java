@@ -39,7 +39,7 @@ public class SkillBehavior {
         return _sideEffects.getFirstGraphic();
     }
 
-    public void addCost(StatType stat, float cost) {
+    public void addCost(StatType stat, int cost) {
         _cost.addBuff(new StatBuff(stat, cost));
     }
 

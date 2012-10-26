@@ -558,7 +558,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         return _strategy.getId();
     }
 
-    public float getInventoryCount() {
+    public int getInventoryCount() {
         return _inventory.nonZeroCount();
     }
 

@@ -20,6 +20,7 @@ public class BaseStatus {
     protected StatBuff _buff = null;
     protected boolean _buffMax = false;
     protected final List<Elements> _blockedElements = new ArrayList<Elements>();
+    protected Status impl;
 
     protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<StatusComponent, List<Status>>();
 
@@ -27,6 +28,11 @@ public class BaseStatus {
         _strength = _maxStrength;
         _target = target;
         setup();
+    }
+
+    protected BaseStatus(BaseCreature target, Status impl) {
+        this(target);
+        this.impl = impl;
     }
 
     public boolean isActive() {

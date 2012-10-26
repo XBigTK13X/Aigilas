@@ -76,9 +76,9 @@ public class Inventory {
         }
     }
 
-    float _nonZeroResult;
+    private int _nonZeroResult;
 
-    public float nonZeroCount() {
+    public int nonZeroCount() {
         _nonZeroResult = 0;
         for (GenericItem item : _contents.keySet()) {
             if (_contents.get(item) > 0) {
