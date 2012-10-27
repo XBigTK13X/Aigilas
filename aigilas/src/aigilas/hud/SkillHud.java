@@ -20,11 +20,11 @@ public class SkillHud extends BaseHud {
     }
 
     private int calculateHeight(StatType statType) {
-        return (int) ((_parent.get(statType) / _parent.getMax(statType)) * _dimensions.Y);
+        return (int) (((float) _parent.get(statType) / _parent.getMax(statType)) * _dimensions.Y);
     }
 
     private int costOfCurrentSkill() {
-        return (int) (_parent.getCurrentSkillCost() / _parent.getMax(StatType.Mana) * _dimensions.Y);
+        return (int) (_parent.getCurrentSkillCost() / (float) _parent.getMax(StatType.Mana) * _dimensions.Y);
     }
 
     private String getSkillStrings() {
