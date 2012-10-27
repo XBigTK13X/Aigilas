@@ -1,7 +1,7 @@
 package aigilas.creatures.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.Stats;
+import aigilas.creatures.StatsRegistry;
 import aigilas.entities.SkillEffect;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;
@@ -12,8 +12,7 @@ import sps.core.Settings;
 public class Minion extends BaseCreature {
     public Minion(ActorType actorType, int coolDown) {
         _actorType = actorType;
-        //TODO Move into config
-        _baseStats = new Stats(80, 999, 0, 0, 0, 0, 0, 0, 0, coolDown);
+        _baseStats = StatsRegistry.get().baseStats(ActorType.Minion);
     }
 
     public Minion(ActorType actorType) {

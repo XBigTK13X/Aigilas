@@ -17,7 +17,7 @@ public class BaseEnemy extends BaseCreature {
     public BaseEnemy(ActorType actorType, CreatureClass cClass) {
         SetClass(cClass);
         _actorType = actorType;
-        _baseStats = new Stats(1000, 50, 110, 1, 90, 1, 1, 1, 1);
+        _baseStats = StatsRegistry.get().baseStats(ActorType.Non_Player);
         _maxStats = new Stats(_baseStats);
 
         if (EnemyRegistry.get().contains(_actorType)) {

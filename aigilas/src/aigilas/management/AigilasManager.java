@@ -1,6 +1,7 @@
 package aigilas.management;
 
 import aigilas.classes.PlayerClassRegistry;
+import aigilas.creatures.StatsRegistry;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFloor;
@@ -31,6 +32,7 @@ public class AigilasManager {
         StatusRegistry.get();
         ReactionRegistry.get();
         PlayerClassRegistry.get();
+        StatsRegistry.get();
         EntityManager.reset();
         CreatureFactory.reset();
         Dungeon.start();

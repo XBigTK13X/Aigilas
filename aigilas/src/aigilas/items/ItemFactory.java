@@ -28,7 +28,6 @@ public class ItemFactory {
 
     public static GenericItem createRandomMagic() {
         return null;
-        // $$$ return new IItem(new Stats(1,1,1,1,1,1,0,1,0,0,0),)}
     }
 
     private static ItemName selectRandomType() {
