@@ -22,7 +22,7 @@ public class Player extends BaseEnemy {
         _graphic.setColor(__colors.get(_playerIndex));
         _strategy = StrategyFactory.create(Strategy.ControlledByPlayer, this);
         //TODO Move into config
-        _baseStats = new Stats(5000, 500, 100, 1, 90, 10, 35, 50, 6, Settings.get().defaultSpeed * 3, 1);
+        _baseStats = new Stats(5000, 500, 100, 1, 90, 10, 35, 50, 6, Settings.get().defaultSpeed * 3, Settings.get().defaultRegen);
         _maxStats = new Stats(_baseStats);
         assignGod(GodId.Gluttony.getInstance());
         _composition.add(Elements.Physical);

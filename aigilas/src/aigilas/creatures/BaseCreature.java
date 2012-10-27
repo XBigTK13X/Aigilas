@@ -201,7 +201,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             for (StatType stat : StatType.values()) {
                 if (stat != StatType.Move_Cool_Down && stat != StatType.Regen) {
                     if (_baseStats.getRaw(stat) < _maxStats.getRaw(stat)) {
-                        adjust(stat, _baseStats.get(StatType.Regen) / 50);
+                        adjust(stat, _baseStats.get(StatType.Regen));
                     }
                 }
             }
