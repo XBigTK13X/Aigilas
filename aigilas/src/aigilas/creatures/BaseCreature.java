@@ -326,7 +326,9 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
             Logger.gameplay(this.toString() + " taking " + damage + " damage" + " from " + attacker);
-            adjust((statType == null) ? StatType.Health : statType, -damage);
+            if (_actorType != ActorType.Dummy) {
+                adjust((statType == null) ? StatType.Health : statType, -damage);
+            }
         }
         if (get(StatType.Health) <= 0) {
             setInactive();

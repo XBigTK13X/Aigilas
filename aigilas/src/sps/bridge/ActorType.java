@@ -33,7 +33,7 @@ public enum ActorType {
     Greed_Acolyte(SpriteType.Greed_Acolyte, true),
     Gluttony_Acolyte(SpriteType.Gluttony_Acolyte, true),
     Lust_Acolyte(SpriteType.Lust_Acolyte, true),
-    Dummy(SpriteType.Player_Stand);
+    Dummy(SpriteType.Dummy);
 
     public final SpriteType Sprite;
 
