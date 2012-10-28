@@ -92,4 +92,10 @@ public class Particle2 extends PEComponent {
         }
         _behavior.update(this);
     }
+
+    public void clear() {
+        _color.a = 0;
+        _life = 0;
+        IsActive = false;
+    }
 }

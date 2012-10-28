@@ -9,7 +9,7 @@ import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
 import aigilas.management.Commands;
-import aigilas.reactions.ComboMeter;
+import aigilas.reactions.ReactionMeter;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillLogic;
 import aigilas.skills.SkillPool;
@@ -55,7 +55,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     protected SkillPool _skills;
     protected final Point2 _skillVector = new Point2(0, 0);
-    protected ComboMeter _combo;
+    protected ReactionMeter _combo;
     protected final StatusPool _statuses = new StatusPool();
 
     protected Inventory _inventory;
@@ -108,7 +108,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
         _inventory = new Inventory(this);
         _equipment = new Equipment(this);
-        _combo = new ComboMeter(this);
+        _combo = new ReactionMeter(this);
         if (_playerIndex > -1) {
             _hudContainer = new HudContainer(this, _inventory, _equipment);
         }

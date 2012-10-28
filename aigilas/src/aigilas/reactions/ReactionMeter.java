@@ -1,8 +1,8 @@
 package aigilas.reactions;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.entities.ComboMarker;
 import aigilas.entities.Elements;
+import aigilas.entities.ReactionMarker;
 import sps.core.Logger;
 import sps.text.ActionText;
 import sps.text.TextManager;
@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ComboMeter {
+public class ReactionMeter {
     private static final HashMap<Integer, Reaction> __reactions = new HashMap<Integer, Reaction>();
 
+
+    //TODO Move into config
     static {
         __reactions.put(12, Reaction.Sweat);
         __reactions.put(13, Reaction.Magma);
@@ -47,36 +49,35 @@ public class ComboMeter {
 
     private final BaseCreature _parent;
     private final List<Elements> _elements = new ArrayList<Elements>();
-    private final List<ComboMarker> _markers = new ArrayList<ComboMarker>();
+    private final List<ReactionMarker> _markers = new ArrayList<ReactionMarker>();
     private static final int _maxTimer = 120;
     private int _reactionTimer = _maxTimer;
 
-    public ComboMeter(BaseCreature parent) {
+    public ReactionMeter(BaseCreature parent) {
         _parent = parent;
     }
 
     private void resetComboDisplay() {
         _reactionTimer = _maxTimer;
-        for (ComboMarker _marker : _markers) {
+        for (ReactionMarker _marker : _markers) {
             _marker.setInactive();
         }
         _markers.clear();
-        int jj = 0;
         for (Elements element : _elements) {
-            _markers.add(new ComboMarker(_parent, element, jj));
-            jj++;
+            _markers.add(new ReactionMarker(_parent, element));
             _markers.get(_markers.size() - 1).loadContent();
         }
     }
 
     public void draw() {
-        for (ComboMarker marker : _markers) {
+        for (ReactionMarker marker : _markers) {
             marker.draw();
         }
     }
 
     public void add(Elements element) {
         if (!_elements.contains(element)) {
+            Logger.info(element.toString());
             if (_elements.size() == 2) {
                 if (_elements.get(0).Value > element.Value) {
                     _elements.add(0, element);
@@ -99,6 +100,9 @@ public class ComboMeter {
             if (_elements.size() == 0) {
                 _elements.add(element);
             }
+            for (Elements el : _elements) {
+                Logger.info(el + ";;");
+            }
             resetComboDisplay();
         }
     }
@@ -106,21 +110,20 @@ public class ComboMeter {
     private BaseReaction reaction;
 
     public void update() {
-        for (ComboMarker marker : _markers) {
+        for (ReactionMarker marker : _markers) {
             marker.update();
         }
-        int key;
+        int key = 0;
         if (_elements.size() == 3) {
             key = _elements.get(0).Value * 100 + _elements.get(1).Value * 10 + _elements.get(2).Value;
-            react(key);
         }
         if (_elements.size() == 2) {
             key = _elements.get(0).Value * 10 + _elements.get(1).Value;
-            react(key);
         }
         if (_elements.size() == 1) {
-            react(_elements.get(0).Value);
+            key = _elements.get(0).Value;
         }
+        react(key);
     }
 
     private void react(int reactionId) {

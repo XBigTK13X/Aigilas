@@ -18,7 +18,6 @@ public enum SpriteType {
     Altar(9),
     Zorb(10),
     Minion(11),
-    Combo_Marker(13),
     Wrath(14),
     Hand(15),
     Envy(16),

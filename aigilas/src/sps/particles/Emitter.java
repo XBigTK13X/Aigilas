@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import sps.core.Point2;
 import sps.entities.Entity;
 
-class Emitter extends PEComponent {
+public class Emitter extends PEComponent {
     private final Particle2[] _particles = new Particle2[10];
     private int _index = 0;
     ParticleBehavior _behavior;
@@ -49,6 +49,14 @@ class Emitter extends PEComponent {
         while (_index < behavior.getParticleCount()) {
             _particles[_index] = ParticleEngine.createParticle(behavior, entity, baseColor);
             _index++;
+        }
+    }
+
+    public void clear() {
+        for (Particle2 p : _particles) {
+            if (p != null) {
+                p.clear();
+            }
         }
     }
 }

@@ -30,12 +30,13 @@ public class ParticleEngine {
         __emitters[__emitterIndex].reset(behavior, position, baseColor);
     }
 
-    public static void emit(ParticleBehavior behavior, Entity entity, Color baseColor) {
+    public static Emitter emit(ParticleBehavior behavior, Entity entity, Color baseColor) {
         while (__emitters[__emitterIndex].IsActive) {
             __emitterIndex = (__emitterIndex + 1) % __emitters.length;
         }
 
         __emitters[__emitterIndex].reset(behavior, entity, baseColor);
+        return __emitters[__emitterIndex];
     }
 
     public static void update() {
