@@ -85,7 +85,6 @@ public class ReactionMeter {
         react(key);
     }
 
-
     private BaseReaction reaction;
 
     private void react(int key) {

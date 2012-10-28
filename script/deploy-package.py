@@ -29,7 +29,7 @@ def uploadFile(res):
 	p['Content-Type'] = res['mime_type']
 	p['file'] = '@aigilas.zip'
 
-	cmd = 'cd /home/kretst/dev/aigilas/aigilas/target/ && curl'
+	cmd = 'cd ./aigilas/target/ && curl'
 	for key in p.keys():
 		cmd = cmd + ' -F ' + str(key) + '=' + str(p[key])
 	cmd += ' https://github.s3.amazonaws.com/'
