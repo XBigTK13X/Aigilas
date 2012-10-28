@@ -8,7 +8,7 @@ public class DefaultMusicPlayer extends MusicPlayer {
     private final Music mainTheme;
 
     public DefaultMusicPlayer() {
-        FileHandle mainThemeFh = new FileHandle("assets/music/MainTheme.mp3");
+        FileHandle mainThemeFh = new FileHandle("assets/music/MainTheme.ogg");
         mainTheme = Gdx.audio.newMusic(mainThemeFh);
         mainTheme.setLooping(true);
     }
