@@ -78,6 +78,8 @@ public class CreatureFactory {
                 return new SlothEnemyAcolyte();
             case Greed_Acolyte:
                 return new GreedEnemyAcolyte();
+            case Dummy:
+                return new Dummy();
             default:
                 try {
                     throw new Exception("No Factory generation logic for: " + actorType);

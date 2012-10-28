@@ -32,7 +32,8 @@ public enum ActorType {
     Sloth_Acolyte(SpriteType.Sloth_Acolyte, true),
     Greed_Acolyte(SpriteType.Greed_Acolyte, true),
     Gluttony_Acolyte(SpriteType.Gluttony_Acolyte, true),
-    Lust_Acolyte(SpriteType.Lust_Acolyte, true);
+    Lust_Acolyte(SpriteType.Lust_Acolyte, true),
+    Dummy(SpriteType.Player_Stand);
 
     public final SpriteType Sprite;
 
