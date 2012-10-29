@@ -1,4 +1,4 @@
 #Name-Health-Energy-Strength-Wisdom-Defense
 Player,5000-500-100-1-90-10-35-50-6-120-1
-NonPlayer,1000-50-110-1-90-1-1-40-1
-Minion,80-999-0-0-0-0-0-0-0-0
+NonPlayer,1000-50-110-1-90-1-1-0-0-40-0
+Minion,80-999-10-10-10-10-10-10-10-40-0

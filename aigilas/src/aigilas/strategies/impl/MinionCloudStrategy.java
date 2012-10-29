@@ -5,11 +5,8 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 
 public class MinionCloudStrategy extends BaseStrategy {
-    public MinionCloudStrategy(BaseCreature parent)
-
-    {
+    public MinionCloudStrategy(BaseCreature parent) {
         super(parent, Strategy.MinionCloud);
-
         parent.setSkillVector(parent.getSkillVector());
     }
 
