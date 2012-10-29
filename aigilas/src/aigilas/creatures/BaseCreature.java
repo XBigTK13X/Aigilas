@@ -530,7 +530,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     protected void assignGod(God god) {
-        if (_god != god && _god != null) {
+        if (_god != god || _god == null) {
             applyDamage(get(StatType.Piety));
             set(StatType.Piety, 0);
             SetClass(god.getCreatureClass());
