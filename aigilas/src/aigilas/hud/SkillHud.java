@@ -28,7 +28,7 @@ public class SkillHud extends BaseHud {
     }
 
     private String getSkillStrings() {
-        return "A:" + _parent.getActiveSkillName() + __separator + "X:" + _parent.getHotSkillName(Commands.HotSkill1) + __separator + "Y:" + _parent.getHotSkillName(Commands.HotSkill2) + __separator + "B:" + _parent.getHotSkillName(Commands.HotSkill3) + __separator;
+        return "S:" + _parent.getActiveSkillName() + __separator + "Z:" + _parent.getHotSkillName(Commands.HotSkill1) + __separator + "X:" + _parent.getHotSkillName(Commands.HotSkill2) + __separator + "C:" + _parent.getHotSkillName(Commands.HotSkill3) + __separator;
     }
 
     public void update() {
