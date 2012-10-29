@@ -17,17 +17,11 @@ public class Stats {
     }
 
     public Stats(int health, int mana, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet, int moveCoolDown, int regenRate) {
-
         setup(health, mana, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, moveCoolDown, 0, regenRate);
     }
 
     public Stats(int health, int mana, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet, int moveCoolDown) {
         setup(health, mana, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, moveCoolDown, 0, Settings.get().defaultRegen);
-    }
-
-    public Stats(int health, int mana, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet) {
-        setup(health, mana, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, Settings.get().defaultSpeed, 0, Settings.get().defaultRegen);
-
     }
 
     private void setup(int... list) {
