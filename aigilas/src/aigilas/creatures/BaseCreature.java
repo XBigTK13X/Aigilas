@@ -175,7 +175,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (_statuses.allows(CreatureAction.Movement)) {
             if (_isPlaying) {
                 if (!isCooledDown()) {
-                    waitTime -= get(StatType.Move_Cool_Down);
+                    waitTime -= get(StatType.Move_Cool_Down) + 1;
                     if (waitTime > BaseWaitTime) {
                         waitTime = BaseWaitTime;
                     }
@@ -302,6 +302,9 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (result > getMax(stat)) {
                 result = getMax(stat);
             }
+        }
+        if (result < 0) {
+            result = 0;
         }
         return set(stat, (result), adjustMax);
     }
