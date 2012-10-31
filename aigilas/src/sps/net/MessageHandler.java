@@ -51,6 +51,7 @@ public class MessageHandler {
                         }
                         catch (Exception e) {
                             e.printStackTrace();
+                            System.exit(-1);
                         }
                     }
                 }
@@ -77,6 +78,7 @@ public class MessageHandler {
                         }
                         catch (Exception e) {
                             e.printStackTrace();
+                            System.exit(-1);
                         }
                     }
 
@@ -112,9 +114,6 @@ public class MessageHandler {
         if (Settings.get().messageHandlerVerbose) {
             Logger.messageHandler(owner + ": " + message);
         }
-    }
-
-    public void destroy() {
     }
 
     public Integer getLocalPort() {

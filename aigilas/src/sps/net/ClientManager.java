@@ -38,6 +38,7 @@ public class ClientManager {
                         }
                         catch (IOException e) {
                             e.printStackTrace();
+                            System.exit(-1);
                         }
                     }
                     Logger.clientManager("ClientManager was interupted.");
