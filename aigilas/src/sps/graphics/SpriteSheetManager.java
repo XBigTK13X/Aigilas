@@ -1,6 +1,6 @@
 package sps.graphics;
 
-import aigilas.management.SpriteType;
+import aigilas.energygement.SpriteType;
 
 import java.util.HashMap;
 

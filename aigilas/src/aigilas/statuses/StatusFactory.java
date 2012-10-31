@@ -30,8 +30,8 @@ public class StatusFactory {
             case SpeedUp:
                 target.addStatus(new SpeedUpStatus(target));
                 break;
-            case ManaUp:
-                target.addStatus(new ManaUpStatus(target));
+            case EnergyUp:
+                target.addStatus(new EnergyUpStatus(target));
                 break;
             case Electrify:
                 target.addStatus(new ElectrifyStatus(target));

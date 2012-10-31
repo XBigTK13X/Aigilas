@@ -33,7 +33,7 @@ public enum SkillId {
     Cold_Shoulder,
     Cavalry,
     Strength_Up,
-    Mana_Up,
+    Energy_Up,
     Electrify,
     Wall_Punch,
     Mimic,

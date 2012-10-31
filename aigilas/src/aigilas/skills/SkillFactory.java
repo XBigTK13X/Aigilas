@@ -1,6 +1,6 @@
 package aigilas.skills;
 
-import aigilas.management.SpriteType;
+import aigilas.energygement.SpriteType;
 import aigilas.skills.animations.*;
 import aigilas.skills.behaviors.*;
 import aigilas.skills.impl.*;
@@ -60,8 +60,8 @@ public class SkillFactory {
                 return new IceShardSkill();
             case Magic_Map:
                 return new MagicMapSkill();
-            case Mana_Up:
-                return new ManaUpSkill();
+            case Energy_Up:
+                return new EnergyUpSkill();
             case Mimic:
                 return new MimicSkill();
             case Mutiny:

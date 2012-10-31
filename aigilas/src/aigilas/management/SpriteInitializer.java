@@ -1,4 +1,4 @@
-package aigilas.management;
+package aigilas.energygement;
 
 import sps.graphics.ISpriteInitializer;
 import sps.graphics.SpriteDefinition;

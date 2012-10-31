@@ -15,7 +15,7 @@ public class AbsorbSkill extends BaseSkill {
     public void affect(BaseCreature target) {
         target.applyDamage(_id.Info.Magnitude, _source);
         _source.applyDamage(-_id.Info.Magnitude);
-        target.applyDamage(_id.Info.Magnitude, _source, true, StatType.Mana);
-        _source.applyDamage(-_id.Info.Magnitude, _source, true, StatType.Mana);
+        target.applyDamage(_id.Info.Magnitude, _source, true, StatType.Energy);
+        _source.applyDamage(-_id.Info.Magnitude, _source, true, StatType.Energy);
     }
 }

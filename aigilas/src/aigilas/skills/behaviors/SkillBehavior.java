@@ -4,9 +4,9 @@ import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatBuff;
 import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
+import aigilas.energygement.SpriteType;
 import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
-import aigilas.management.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SideEffects;
@@ -80,6 +80,6 @@ public class SkillBehavior {
     }
 
     public float getCost() {
-        return _cost.get(StatType.Mana);
+        return _cost.get(StatType.Energy);
     }
 }

@@ -2,7 +2,7 @@ package aigilas.hud;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.management.Commands;
+import aigilas.energygement.Commands;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
@@ -12,11 +12,11 @@ import sps.core.Spx;
 public class SkillHud extends BaseHud {
     private static final String __separator = "|";
 
-    private Point2 _manaPosition = new Point2();
+    private Point2 _energyPosition = new Point2();
 
     public SkillHud(BaseCreature owner) {
         super(owner, Settings.get().spriteWidth, Spx.VirtualHeight / 4);
-        _manaPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - Spx.VirtualHeight / 4);
+        _energyPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - Spx.VirtualHeight / 4);
     }
 
     private int calculateHeight(StatType statType) {
@@ -24,7 +24,7 @@ public class SkillHud extends BaseHud {
     }
 
     private int costOfCurrentSkill() {
-        return (int) (_parent.getCurrentSkillCost() / (float) _parent.getMax(StatType.Mana) * _dimensions.Y);
+        return (int) (_parent.getCurrentSkillCost() / (float) _parent.getMax(StatType.Energy) * _dimensions.Y);
     }
 
     private String getSkillStrings() {
@@ -46,8 +46,8 @@ public class SkillHud extends BaseHud {
         }
 
         Spx.Renderer.draw(_menuBase, getMeterAnchor(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
-        Spx.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Mana));
-        Spx.Renderer.draw(_menuBase, _manaPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
+        Spx.Renderer.draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
+        Spx.Renderer.draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
 
         _textHandler.draw();
     }

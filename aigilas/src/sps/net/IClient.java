@@ -1,6 +1,6 @@
 package sps.net;
 
-import aigilas.management.Commands;
+import aigilas.energygement.Commands;
 
 public interface IClient {
     boolean isActive(Commands command, int playerIndex);

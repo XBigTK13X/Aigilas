@@ -6,10 +6,10 @@ import aigilas.creatures.StatType;
 import aigilas.statuses.BaseStatus;
 import aigilas.statuses.Status;
 
-public class ManaUpStatus extends BaseStatus {
-    public ManaUpStatus(BaseCreature target) {
-        super(target, Status.ManaUp);
-        _buff = new StatBuff(StatType.Mana, impl.Info.Magnitude);
+public class EnergyUpStatus extends BaseStatus {
+    public EnergyUpStatus(BaseCreature target) {
+        super(target, Status.EnergyUp);
+        _buff = new StatBuff(StatType.Energy, impl.Info.Magnitude);
         setup();
     }
 }

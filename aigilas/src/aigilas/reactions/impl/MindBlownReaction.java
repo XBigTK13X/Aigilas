@@ -12,6 +12,6 @@ public class MindBlownReaction extends BaseReaction {
 
     @Override
     public void affect(BaseCreature target) {
-        target.applyDamage(reactionImpl.Info.Magnitude, null, true, StatType.Mana);
+        target.applyDamage(reactionImpl.Info.Magnitude, null, true, StatType.Energy);
     }
 }

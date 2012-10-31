@@ -1,8 +1,8 @@
 package aigilas.skills;
 
 import aigilas.creatures.BaseCreature;
+import aigilas.energygement.SpriteType;
 import aigilas.entities.SkillEffect;
-import aigilas.management.SpriteType;
 import sps.core.Point2;
 import sps.entities.EntityManager;
 

@@ -2,7 +2,7 @@ package aigilas.entities;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.dungeons.Dungeon;
-import aigilas.management.SpriteType;
+import aigilas.energygement.SpriteType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
 import sps.core.Point2;

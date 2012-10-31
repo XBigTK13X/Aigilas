@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.management.Commands;
+import aigilas.energygement.Commands;
 import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
 import sps.bridge.DrawDepth;

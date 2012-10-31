@@ -1,6 +1,6 @@
 package sps.io;
 
-import aigilas.management.Commands;
+import aigilas.energygement.Commands;
 import sps.core.Logger;
 
 import java.io.BufferedReader;

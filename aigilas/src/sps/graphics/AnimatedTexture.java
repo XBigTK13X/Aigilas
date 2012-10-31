@@ -1,6 +1,6 @@
 package sps.graphics;
 
-import aigilas.management.SpriteType;
+import aigilas.energygement.SpriteType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;

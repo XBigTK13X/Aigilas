@@ -2,7 +2,7 @@ package aigilas.creatures;
 
 public enum StatType {
     Health("H"),
-    Mana("M"),
+    Energy("E"),
     Strength("S"),
     Wisdom("W"),
     Defense("D"),
@@ -10,7 +10,7 @@ public enum StatType {
     Age("A"),
     Height("HE"),
     Weight("WE"),
-    Move_Cool_Down("MC"),
+    Move_Cool_Down("M"),
     Piety("P"),
     Regen("R");
 

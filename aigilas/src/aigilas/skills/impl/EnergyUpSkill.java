@@ -7,11 +7,11 @@ import aigilas.skills.SkillId;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
-public class ManaUpSkill extends BaseSkill {
-    public ManaUpSkill()
+public class EnergyUpSkill extends BaseSkill {
+    public EnergyUpSkill()
 
     {
-        super(SkillId.Mana_Up, AnimationType.SELF);
+        super(SkillId.Energy_Up, AnimationType.SELF);
 
 
     }
@@ -19,7 +19,7 @@ public class ManaUpSkill extends BaseSkill {
     @Override
     public void activate(BaseCreature source) {
         super.activate(source);
-        StatusFactory.apply(source, Status.ManaUp);
+        StatusFactory.apply(source, Status.EnergyUp);
 
     }
 

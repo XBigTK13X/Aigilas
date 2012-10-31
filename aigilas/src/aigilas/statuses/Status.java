@@ -8,7 +8,7 @@ public enum Status {
     WeakKnees,
     VenomFist,
     Mutiny,
-    ManaUp,
+    EnergyUp,
     SpeedUp,
     Electrify,
     Zap,

@@ -1,4 +1,4 @@
-package aigilas.management;
+package aigilas.energygement;
 
 import aigilas.classes.PlayerClassRegistry;
 import aigilas.creatures.StatsRegistry;
