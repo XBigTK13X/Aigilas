@@ -7,21 +7,33 @@ import sps.core.Settings;
 
 public class ContentManager {
 
-    private class Dimensions {
-        public final int Height;
-        public final int Width;
-        public final int X;
-        public final int Y;
 
-        public Dimensions(int frame, int index) {
+    private static class Dimensions {
+        private static Dimensions instance = new Dimensions();
+
+        public static Dimensions get(int frame, int index) {
+            return instance.reset(frame, index);
+        }
+
+        private Dimensions() {
+        }
+
+        ;
+
+        public int Height;
+        public int Width;
+        public int X;
+        public int Y;
+
+        private Dimensions reset(int frame, int index) {
             X = frame * Settings.get().spriteHeight + (Settings.get().spriteGap * frame) + Settings.get().spriteGap;
             Y = index * Settings.get().spriteHeight + (Settings.get().spriteGap * index) + Settings.get().spriteGap;
             Width = Settings.get().spriteWidth - Settings.get().spriteGap;
             Height = Settings.get().spriteHeight - Settings.get().spriteGap;
+            return this;
         }
     }
 
-    public String RootDirectory;
     private Texture _spriteSheet;
     private BitmapFont _font;
 
@@ -29,23 +41,18 @@ public class ContentManager {
         return AssetManager.get().getImage(resourceName);
     }
 
+    Dimensions d;
+
     public Sprite loadSprite(int verticalIndex) {
         if (_spriteSheet == null) {
             _spriteSheet = AssetManager.get().getImage("GameplaySheet.png");
         }
-        Dimensions d = new Dimensions(0, verticalIndex);
+        d = Dimensions.get(0, verticalIndex);
         return new Sprite(_spriteSheet, d.X, d.Y, d.Width, d.Height);
     }
 
-    public BitmapFont loadFont(String resourceName) {
-        if (_font == null) {
-            _font = AssetManager.get().getFont("Main.font");
-        }
-        return _font;
-    }
-
     public void setSpriteIndices(Sprite texture, int frame, int index) {
-        Dimensions d = new Dimensions(frame, index);
+        d = Dimensions.get(frame, index);
         texture.setRegion(d.X, d.Y, d.Width, d.Height);
     }
 }
