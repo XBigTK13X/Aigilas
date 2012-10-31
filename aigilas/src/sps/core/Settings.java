@@ -35,6 +35,7 @@ public class Settings {
     public final int defaultSpeed;
     public final int defaultRegen;
     public final float turnTime;
+    public final int turnsPerSecond;
 
     public final boolean musicEnabled;
 
@@ -98,6 +99,7 @@ public class Settings {
         defaultSpeed = getInt(_settings.get("defaultSpeed"));
         defaultRegen = getInt(_settings.get("defaultRegen"));
         turnTime = 1 / getFloat(_settings.get("turnsPerSecond"));
+        turnsPerSecond = getInt(_settings.get("turnsPerSecond"));
 
         // Audio
         musicEnabled = isTrue(_settings.get("music_enabled"));

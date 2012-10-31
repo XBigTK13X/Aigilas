@@ -48,7 +48,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Stats _maxStats;
     protected God _god;
 
-    protected final int BaseWaitTime = Settings.get().defaultSpeed / 2 * Settings.get().defaultSpeed;
+    protected final int BaseWaitTime = Settings.get().defaultSpeed * Settings.get().turnsPerSecond;
     protected int waitTime = BaseWaitTime;
 
     protected final List<Elements> _composition = new ArrayList<Elements>();
