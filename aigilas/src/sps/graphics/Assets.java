@@ -38,12 +38,17 @@ public class Assets {
         }
     }
 
+    private enum Sprites {
+        Gameplay,
+        Particle,
+        MenuBase
+    }
+
     private static final String assetPath = "assets";
     private static Assets instance;
     private static final String __menuBaseSprite = "MenuBase.png";
     private static final String __particleSprite = "Particle.png";
     private static final String fontAsset = "assets/graphics/main.fnt";
-    private static Map<String, Texture> textures = new HashMap<String, Texture>();
 
     public static Assets get() {
         if (instance == null) {
@@ -54,13 +59,21 @@ public class Assets {
 
 
     private final BitmapFont _font;
-    private Texture _spriteSheet;
+    private final Texture _spriteSheet;
+    private final Sprite _sprite;
     Dimensions d;
+
+    private Map<String, Texture> textures = new HashMap<String, Texture>();
+    private Map<Sprites, Sprite> sprites = new HashMap<Sprites, Sprite>();
 
     private Assets() {
         File fontFile = new File(fontAsset);
         _font = new BitmapFont(Gdx.files.getFileHandle(fontFile.getAbsolutePath(), Files.FileType.Absolute), false);
         _spriteSheet = image("GameplaySheet.png");
+        d = Dimensions.get(0, 0);
+        _sprite = new Sprite(_spriteSheet, d.X, d.Y, d.Width, d.Height);
+        sprites.put(Sprites.Particle, new Sprite(image(__particleSprite)));
+        sprites.put(Sprites.MenuBase, new Sprite(image(__menuBaseSprite)));
     }
 
     public BitmapFont font() {
@@ -75,20 +88,20 @@ public class Assets {
     }
 
     public Sprite sprite(int verticalIndex) {
-        d = Dimensions.get(0, verticalIndex);
-        return new Sprite(_spriteSheet, d.X, d.Y, d.Width, d.Height);
+        setIndices(_sprite, 0, verticalIndex);
+        return _sprite;
     }
 
-    public void setIndices(Sprite texture, int frame, int index) {
+    public void setIndices(Sprite sprite, int frame, int index) {
         d = Dimensions.get(frame, index);
-        texture.setRegion(d.X, d.Y, d.Width, d.Height);
+        sprite.setRegion(d.X, d.Y, d.Width, d.Height);
     }
 
     public Sprite particle() {
-        return new Sprite(image(__particleSprite));
+        return sprites.get(Sprites.Particle);
     }
 
     public Sprite baseMenu() {
-        return new Sprite(image(__menuBaseSprite));
+        return sprites.get(Sprites.MenuBase);
     }
 }
