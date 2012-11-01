@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.energygement.SpriteType;
+import aigilas.management.SpriteType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
 import sps.core.Point2;

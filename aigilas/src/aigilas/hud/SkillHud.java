@@ -2,12 +2,12 @@ package aigilas.hud;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.energygement.Commands;
+import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.core.Spx;
+import sps.graphics.Renderer;
 
 public class SkillHud extends BaseHud {
     private static final String __separator = "|";
@@ -15,8 +15,8 @@ public class SkillHud extends BaseHud {
     private Point2 _energyPosition = new Point2();
 
     public SkillHud(BaseCreature owner) {
-        super(owner, Settings.get().spriteWidth, Spx.VirtualHeight / 4);
-        _energyPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - Spx.VirtualHeight / 4);
+        super(owner, Settings.get().spriteWidth, Renderer.VirtualHeight / 4);
+        _energyPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - Renderer.VirtualHeight / 4);
     }
 
     private int calculateHeight(StatType statType) {
@@ -45,9 +45,9 @@ public class SkillHud extends BaseHud {
             return;
         }
 
-        Spx.Renderer.draw(_menuBase, getMeterAnchor(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
-        Spx.Renderer.draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
-        Spx.Renderer.draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
+        Renderer.get().draw(_menuBase, getMeterAnchor(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
 
         _textHandler.draw();
     }

@@ -1,6 +1,6 @@
 package sps.io;
 
-import aigilas.energygement.Commands;
+import aigilas.management.Commands;
 
 public class CommandLock {
     public CommandLock(Commands command, int playerIndex) {

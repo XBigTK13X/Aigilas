@@ -1,7 +1,6 @@
 package aigilas.creatures;
 
 import aigilas.classes.CreatureClass;
-import aigilas.energygement.Commands;
 import aigilas.entities.Elements;
 import aigilas.gods.God;
 import aigilas.gods.GodId;
@@ -9,6 +8,7 @@ import aigilas.hud.HudContainer;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
+import aigilas.management.Commands;
 import aigilas.reactions.ReactionMeter;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillLogic;

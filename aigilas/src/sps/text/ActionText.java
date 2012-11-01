@@ -2,7 +2,7 @@ package sps.text;
 
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
-import sps.core.Spx;
+import sps.graphics.Renderer;
 
 public class ActionText extends Text {
 
@@ -32,7 +32,7 @@ public class ActionText extends Text {
 
     @Override
     public void draw() {
-        Spx.Renderer.drawString(_contents, _position, Color.BLACK, 1.15f * _scalePercent, DrawDepth.ActionTextBG);
-        Spx.Renderer.drawString(_contents, _position, Color.WHITE, 1.0f * _scalePercent, DrawDepth.ActionText);
+        Renderer.get().drawString(_contents, _position, Color.BLACK, 1.15f * _scalePercent, DrawDepth.ActionTextBG);
+        Renderer.get().drawString(_contents, _position, Color.WHITE, 1.0f * _scalePercent, DrawDepth.ActionText);
     }
 }

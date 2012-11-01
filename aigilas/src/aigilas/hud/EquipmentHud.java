@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
-import sps.core.Spx;
+import sps.graphics.Renderer;
 import sps.util.StringSquisher;
 
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class EquipmentHud extends BaseHud {
     private final Equipment _equipment;
 
     public EquipmentHud(BaseCreature owner, Equipment equipment) {
-        super(owner, Spx.VirtualWidth / 2, Spx.VirtualHeight / 2);
+        super(owner, Renderer.VirtualWidth / 2, Renderer.VirtualHeight / 2);
         _equipment = equipment;
     }
 

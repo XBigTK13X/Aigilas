@@ -1,10 +1,10 @@
 package aigilas.skills;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.energygement.SpriteType;
 import aigilas.entities.Elements;
 import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
+import aigilas.management.SpriteType;
 import aigilas.skills.behaviors.SkillBehavior;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;

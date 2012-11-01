@@ -12,26 +12,41 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.core.Spx;
 
 import java.io.File;
 
 public class Renderer {
 
-    private final String fontAsset = "assets/graphics/main.fnt";
+    // This is the resolution used by the game internally
+    public static final int VirtualHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
+    public static final int VirtualWidth = Settings.get().spriteWidth * Settings.get().tileMapWidth;
+    private static final String fontAsset = "assets/graphics/main.fnt";
+
+    private static Renderer instance;
+
+    private final Color __defaultFilter = Color.WHITE;
+    private final float __defaultAlpha = 1f;
     private final SpriteBatch batch;
     private final OrthographicCamera camera;
     private final BitmapFont font;
 
-    private static final Color __defaultFilter = Color.WHITE;
-    private static final float __defaultAlpha = 1f;
+    public static Renderer get() {
+        if (instance == null) {
+            instance = new Renderer();
+        }
+        return instance;
+    }
 
-    public Renderer() {
+    private Renderer() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Spx.VirtualWidth, Spx.VirtualHeight);
+        camera.setToOrtho(false, VirtualWidth, VirtualHeight);
         batch = new SpriteBatch();
         File fontFile = new File(fontAsset);
         font = new BitmapFont(Gdx.files.getFileHandle(fontFile.getAbsolutePath(), Files.FileType.Absolute), false);
+    }
+
+    public Point2 getCenter() {
+        return new Point2(VirtualWidth / 2, VirtualHeight / 2);
     }
 
     public void begin() {

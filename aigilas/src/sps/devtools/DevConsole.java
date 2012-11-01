@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
-import sps.core.Spx;
+import sps.graphics.AssetManager;
+import sps.graphics.Renderer;
 import sps.text.TextType;
 
 public class DevConsole {
@@ -18,7 +19,7 @@ public class DevConsole {
 
         @Override
         public void draw() {
-            Spx.Renderer.drawString(_contents, _position, Color.WHITE, 1.0f, DrawDepth.DevConsoleText);
+            Renderer.get().drawString(_contents, _position, Color.WHITE, 1.0f, DrawDepth.DevConsoleText);
         }
 
         public String getContent() {
@@ -45,12 +46,12 @@ public class DevConsole {
     private DevConsole() {
         _bgColor = Color.BLACK;
         _bgColor.a = (byte) 180;
-        _consoleBase = Spx.getMenuBaseAsset();
+        _consoleBase = AssetManager.get().getMenuBaseAsset();
         add("The development console has been started.");
     }
 
     private int getY(int index) {
-        return Spx.VirtualHeight - (index * margin / 2);
+        return Renderer.VirtualHeight - (index * margin / 2);
     }
 
     public void add(String message) {
@@ -67,7 +68,7 @@ public class DevConsole {
 
     public void draw() {
         if (_isVisible) {
-            Spx.Renderer.draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, Spx.VirtualWidth, Spx.VirtualHeight);
+            Renderer.get().draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, Renderer.VirtualWidth, Renderer.VirtualHeight);
             for (ConsoleText _content : _contents) {
                 if (_content != null) {
                     _content.draw();

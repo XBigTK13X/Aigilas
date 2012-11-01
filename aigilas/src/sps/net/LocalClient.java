@@ -1,6 +1,6 @@
 package sps.net;
 
-import aigilas.energygement.Commands;
+import aigilas.management.Commands;
 import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
 import sps.core.RNG;

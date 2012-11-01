@@ -1,7 +1,7 @@
 package aigilas.states;
 
-import aigilas.energygement.AigilasManager;
 import aigilas.hud.HudRenderer;
+import aigilas.management.AigilasManager;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.particles.ParticleEngine;

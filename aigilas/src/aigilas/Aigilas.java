@@ -1,13 +1,14 @@
 package aigilas;
 
-import aigilas.energygement.Commands;
-import aigilas.energygement.SpriteInitializer;
 import aigilas.hud.HudRenderer;
+import aigilas.management.Commands;
+import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import sps.core.Spx;
 import sps.devtools.DevConsole;
+import sps.graphics.Renderer;
 import sps.graphics.SpriteSheetManager;
 import sps.io.Input;
 import sps.net.Client;
@@ -72,13 +73,13 @@ public class Aigilas implements ApplicationListener {
         }
 
         // Render
-        Spx.Renderer.begin();
+        Renderer.get().begin();
         StateManager.draw();
         ParticleEngine.draw();
         TextManager.draw();
         HudRenderer.get().draw();
         DevConsole.get().draw();
-        Spx.Renderer.end();
+        Renderer.get().end();
 
     }
 

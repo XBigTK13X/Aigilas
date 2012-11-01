@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.core.Spx;
+import sps.graphics.Renderer;
 
 class DefaultHudText extends Text {
     private final Color _color;
@@ -28,6 +28,6 @@ class DefaultHudText extends Text {
     public void draw() {
         float x = (int) _origin.X + _position.X + Settings.get().spriteWidth;
         float y = (int) _origin.Y + _position.Y + Settings.get().spriteHeight / 2;
-        Spx.Renderer.drawString(_contents, new Point2(x, y), _color, 1f, DrawDepth.DefaultHudText);
+        Renderer.get().drawString(_contents, new Point2(x, y), _color, 1f, DrawDepth.DefaultHudText);
     }
 }

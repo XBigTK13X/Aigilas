@@ -1,6 +1,6 @@
 package aigilas.items;
 
-import aigilas.energygement.SpriteType;
+import aigilas.management.SpriteType;
 
 import java.util.Arrays;
 

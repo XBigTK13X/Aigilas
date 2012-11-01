@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.energygement.Commands;
+import aigilas.management.Commands;
 import sps.io.Contexts;
 import sps.io.Input;
 import sps.net.Client;

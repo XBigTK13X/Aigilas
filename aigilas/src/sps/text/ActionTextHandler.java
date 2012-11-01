@@ -1,6 +1,6 @@
 package sps.text;
 
-import sps.core.Spx;
+import sps.graphics.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class ActionTextHandler {
 
     public void draw() {
 
-        if (Spx.Renderer != null) {
+        if (Renderer.get() != null) {
             for (Text component : _contents) {
                 component.draw();
             }

@@ -1,6 +1,6 @@
 package sps.bridge;
 
-import aigilas.energygement.SpriteType;
+import aigilas.management.SpriteType;
 import sps.core.RNG;
 
 import java.util.ArrayList;

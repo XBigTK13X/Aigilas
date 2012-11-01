@@ -1,6 +1,6 @@
 package sps.graphics;
 
-import aigilas.energygement.SpriteType;
+import aigilas.management.SpriteType;
 
 public class SpriteDefinition {
     public final SpriteType Type;

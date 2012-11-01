@@ -1,6 +1,6 @@
 package sps.io;
 
-import aigilas.energygement.Commands;
+import aigilas.management.Commands;
 import com.badlogic.gdx.Gdx;
 import sps.net.Client;
 

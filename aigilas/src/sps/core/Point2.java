@@ -18,8 +18,6 @@ public class Point2 {
     public float PosCenterX;
     public float PosCenterY;
 
-    public static final Point2[] _rotateTargets = {new Point2(1, 0), new Point2(1, 1), new Point2(0, 1), new Point2(0, -1), new Point2(-1, -1), new Point2(-1, 0), new Point2(-1, 1), new Point2(1, -1)};
-
     public static final Point2[][] _locations = new Point2[Settings.get().tileMapHeight][Settings.get().tileMapWidth];
 
     public Point2() {

@@ -5,7 +5,7 @@ import sps.bridge.EntityType;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
-import sps.core.Spx;
+import sps.graphics.Renderer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -209,7 +209,7 @@ public class EntityManager {
     }
 
     public void draw() {
-        if (Spx.Renderer != null) {
+        if (Renderer.get() != null) {
             for (Entity component : _contents) {
                 component.draw();
             }
@@ -217,7 +217,7 @@ public class EntityManager {
     }
 
     public void loadContent() {
-        if (Spx.Renderer != null) {
+        if (Renderer.get() != null) {
             for (Entity component : _contents) {
                 component.loadContent();
             }

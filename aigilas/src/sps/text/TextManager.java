@@ -1,6 +1,6 @@
 package sps.text;
 
-import sps.core.Spx;
+import sps.graphics.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class TextManager {
 
     public static void draw() {
         for (Text component : _contents) {
-            if (Spx.Renderer != null) {
+            if (Renderer.get() != null) {
                 component.draw();
             }
         }

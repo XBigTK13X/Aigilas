@@ -1,6 +1,6 @@
 package aigilas.skills;
 
-import aigilas.energygement.SpriteType;
+import aigilas.management.SpriteType;
 import aigilas.skills.animations.*;
 import aigilas.skills.behaviors.*;
 import aigilas.skills.impl.*;

@@ -1,19 +1,18 @@
 package sps.graphics;
 
-import aigilas.energygement.SpriteType;
+import aigilas.management.SpriteType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.core.GameManager;
 import sps.core.Point2;
-import sps.core.Spx;
 
 public class AnimatedTexture {
     private int _currentFrame;
     private SpriteInfo _spriteInfo;
     private int _animationTimer;
     private Color _color = Color.WHITE;
-    private Sprite _texture;
+    private Sprite _sprite;
     private DrawDepth _depth = DrawDepth.AnimatedTexture;
 
     protected Point2 _position = Point2.Zero;
@@ -25,13 +24,13 @@ public class AnimatedTexture {
     }
 
     public void draw() {
-        if (_texture == null) {
-            _texture = Spx.getSpriteAsset(_spriteInfo.SpriteIndex);
+        if (_sprite == null) {
+            _sprite = AssetManager.get().getSprite(_spriteInfo.SpriteIndex);
         }
         if (_color.a > 0) {
-            Spx.setSpriteIndices(_texture, _currentFrame, _spriteInfo.SpriteIndex);
+            AssetManager.get().setIndices(_sprite, _currentFrame, _spriteInfo.SpriteIndex);
             updateAnimation();
-            Spx.Renderer.draw(_texture, _position, _depth, _color);
+            Renderer.get().draw(_sprite, _position, _depth, _color);
         }
     }
 

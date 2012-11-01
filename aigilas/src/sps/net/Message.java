@@ -1,6 +1,6 @@
 package sps.net;
 
-import aigilas.energygement.Commands;
+import aigilas.management.Commands;
 
 import java.io.Serializable;
 import java.util.HashMap;

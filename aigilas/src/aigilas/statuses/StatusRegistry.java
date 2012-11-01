@@ -1,9 +1,5 @@
 package aigilas.statuses;
 
-import aigilas.creatures.StatType;
-import aigilas.entities.Elements;
-import aigilas.skills.SkillId;
-import aigilas.skills.SkillInfo;
 import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
 
@@ -11,8 +7,6 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StatusRegistry {
     private static StatusRegistry __instance;
