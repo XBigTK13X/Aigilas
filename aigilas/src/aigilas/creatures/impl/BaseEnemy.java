@@ -23,10 +23,10 @@ public class BaseEnemy extends BaseCreature {
         if (EnemyRegistry.get().contains(_actorType)) {
             EnemyInfo info = EnemyRegistry.get().getInfo(_actorType);
             for (StatType stat : info.Strengths) {
-                InitStat(stat, get(stat) + Settings.get().enemyStatMultiplier);
+                initStat(stat, get(stat) + Settings.get().enemyStatMultiplier);
             }
             for (StatType stat : info.Weaknesses) {
-                InitStat(stat, get(stat) - Settings.get().enemyStatMultiplier);
+                initStat(stat, get(stat) - Settings.get().enemyStatMultiplier);
             }
             for (Elements element : info.Elements) {
                 _composition.add(element);

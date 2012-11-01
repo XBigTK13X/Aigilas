@@ -7,10 +7,8 @@ import sps.core.RNG;
 
 public class ConfusedStrategy extends BaseStrategy {
     public ConfusedStrategy(BaseCreature parent)
-
     {
-        super(parent, Strategy.Confused);
-
+        super(parent,Strategy.Confused);
     }
 
     @Override
