@@ -25,10 +25,10 @@ public class AnimatedTexture {
 
     public void draw() {
         if (_sprite == null) {
-            _sprite = AssetManager.get().getSprite(_spriteInfo.SpriteIndex);
+            _sprite = Assets.get().sprite(_spriteInfo.SpriteIndex);
         }
         if (_color.a > 0) {
-            AssetManager.get().setIndices(_sprite, _currentFrame, _spriteInfo.SpriteIndex);
+            Assets.get().setIndices(_sprite, _currentFrame, _spriteInfo.SpriteIndex);
             updateAnimation();
             Renderer.get().draw(_sprite, _position, _depth, _color);
         }

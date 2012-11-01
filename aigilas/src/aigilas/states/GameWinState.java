@@ -17,7 +17,7 @@ public class GameWinState implements State {
 
     @Override
     public void draw() {
-        Renderer.get().drawString("Victory to you!", Renderer.get().getCenter(), Color.WHITE, 1, DrawDepth.ActionText);
+        Renderer.get().drawString("Victory to you!", Renderer.get().center(), Color.WHITE, 1, DrawDepth.ActionText);
         Renderer.get().drawString("Press SPACEBAR to restart", new Point2(200, 200), Color.WHITE, 1, DrawDepth.ActionText);
     }
 

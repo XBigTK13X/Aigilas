@@ -14,7 +14,7 @@ public class LoadingState implements State {
 
     @Override
     public void draw() {
-        Renderer.get().drawString("Preparing for adventure!", Renderer.get().getCenter(), Color.WHITE, 1, DrawDepth.ActionText);
+        Renderer.get().drawString("Preparing for adventure!", Renderer.get().center(), Color.WHITE, 1, DrawDepth.ActionText);
     }
 
     int delay = 10;

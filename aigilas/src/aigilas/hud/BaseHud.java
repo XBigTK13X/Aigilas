@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.graphics.AssetManager;
+import sps.graphics.Assets;
 import sps.graphics.Renderer;
 import sps.text.TextHandler;
 
@@ -24,7 +24,7 @@ public abstract class BaseHud {
     protected BaseHud(BaseCreature owner, int width, int height) {
         _parent = owner;
         if (_menuBase == null) {
-            _menuBase = AssetManager.get().getMenuBaseAsset();
+            _menuBase = Assets.get().baseMenu();
         }
         _dimensions = new Point2(width, height);
 
@@ -53,7 +53,7 @@ public abstract class BaseHud {
     }
 
     public void loadContent() {
-        _menuBase = AssetManager.get().getMenuBaseAsset();
+        _menuBase = Assets.get().baseMenu();
     }
 
     protected Point2 getMeterAnchor() {

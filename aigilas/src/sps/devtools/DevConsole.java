@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
-import sps.graphics.AssetManager;
+import sps.graphics.Assets;
 import sps.graphics.Renderer;
 import sps.text.TextType;
 
@@ -46,7 +46,7 @@ public class DevConsole {
     private DevConsole() {
         _bgColor = Color.BLACK;
         _bgColor.a = (byte) 180;
-        _consoleBase = AssetManager.get().getMenuBaseAsset();
+        _consoleBase = Assets.get().baseMenu();
         add("The development console has been started.");
     }
 

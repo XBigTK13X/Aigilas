@@ -1,34 +1,22 @@
 package sps.graphics;
 
-import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.Settings;
 
-import java.io.File;
-
 public class Renderer {
 
     // This is the resolution used by the game internally
     public static final int VirtualHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
     public static final int VirtualWidth = Settings.get().spriteWidth * Settings.get().tileMapWidth;
-    private static final String fontAsset = "assets/graphics/main.fnt";
 
     private static Renderer instance;
-
-    private final Color __defaultFilter = Color.WHITE;
-    private final float __defaultAlpha = 1f;
-    private final SpriteBatch batch;
-    private final OrthographicCamera camera;
-    private final BitmapFont font;
 
     public static Renderer get() {
         if (instance == null) {
@@ -37,15 +25,16 @@ public class Renderer {
         return instance;
     }
 
+    private final SpriteBatch batch;
+    private final OrthographicCamera camera;
+
     private Renderer() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, VirtualWidth, VirtualHeight);
         batch = new SpriteBatch();
-        File fontFile = new File(fontAsset);
-        font = new BitmapFont(Gdx.files.getFileHandle(fontFile.getAbsolutePath(), Files.FileType.Absolute), false);
     }
 
-    public Point2 getCenter() {
+    public Point2 center() {
         return new Point2(VirtualWidth / 2, VirtualHeight / 2);
     }
 
@@ -83,16 +72,8 @@ public class Renderer {
     }
 
     private void renderString(String content, Point2 location, Color filter, float scale, DrawDepth depth) {
-        font.setScale(scale);
-        font.setColor(filter);
-        font.draw(batch, content, location.X, location.Y);
-    }
-
-    //Textures
-    public void draw(Texture texture, int x, int y) {
-    }
-
-    private void renderTexture(Texture texture, int x, int y) {
-        batch.draw(texture, (float) x, (float) y);
+        Assets.get().font().setScale(scale);
+        Assets.get().font().setColor(filter);
+        Assets.get().font().draw(batch, content, location.X, location.Y);
     }
 }

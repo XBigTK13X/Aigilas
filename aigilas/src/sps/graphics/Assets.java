@@ -1,14 +1,17 @@
 package sps.graphics;
 
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.core.Settings;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AssetManager {
+public class Assets {
     private static class Dimensions {
         private static Dimensions instance = new Dimensions();
 
@@ -36,40 +39,42 @@ public class AssetManager {
     }
 
     private static final String assetPath = "assets";
-    private static AssetManager instance;
+    private static Assets instance;
     private static final String __menuBaseSprite = "MenuBase.png";
     private static final String __particleSprite = "Particle.png";
+    private static final String fontAsset = "assets/graphics/main.fnt";
     private static Map<String, Texture> textures = new HashMap<String, Texture>();
 
-    public static AssetManager get() {
+    public static Assets get() {
         if (instance == null) {
-            instance = new AssetManager();
+            instance = new Assets();
         }
         return instance;
     }
 
-    private static String graphic(String fileName) {
-        return assetPath + "/graphics/" + fileName;
-    }
 
+    private final BitmapFont _font;
     private Texture _spriteSheet;
-    private BitmapFont _font;
     Dimensions d;
 
-    private AssetManager() {
+    private Assets() {
+        File fontFile = new File(fontAsset);
+        _font = new BitmapFont(Gdx.files.getFileHandle(fontFile.getAbsolutePath(), Files.FileType.Absolute), false);
+        _spriteSheet = image("GameplaySheet.png");
     }
 
-    public Texture getImage(String fileName) {
+    public BitmapFont font() {
+        return _font;
+    }
+
+    public Texture image(String fileName) {
         if (!textures.containsKey(fileName)) {
-            textures.put(fileName, new Texture(graphic(fileName)));
+            textures.put(fileName, new Texture(assetPath + "/graphics/" + fileName));
         }
         return textures.get(fileName);
     }
 
-    public Sprite getSprite(int verticalIndex) {
-        if (_spriteSheet == null) {
-            _spriteSheet = getImage("GameplaySheet.png");
-        }
+    public Sprite sprite(int verticalIndex) {
         d = Dimensions.get(0, verticalIndex);
         return new Sprite(_spriteSheet, d.X, d.Y, d.Width, d.Height);
     }
@@ -79,11 +84,11 @@ public class AssetManager {
         texture.setRegion(d.X, d.Y, d.Width, d.Height);
     }
 
-    public Sprite getParticleAsset() {
-        return new Sprite(getImage(__particleSprite));
+    public Sprite particle() {
+        return new Sprite(image(__particleSprite));
     }
 
-    public Sprite getMenuBaseAsset() {
-        return new Sprite(getImage(__menuBaseSprite));
+    public Sprite baseMenu() {
+        return new Sprite(image(__menuBaseSprite));
     }
 }

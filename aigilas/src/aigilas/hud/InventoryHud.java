@@ -39,7 +39,7 @@ public class InventoryHud extends BaseHud {
     @Override
     public void draw() {
         if (_isVisible) {
-            Renderer.get().draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) Renderer.get().getCenter().X, (int) Renderer.get().getCenter().Y);
+            Renderer.get().draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) Renderer.get().center().X, (int) Renderer.get().center().Y);
             _textHandler.draw();
             _deltas.draw();
             _equipHud.draw();
