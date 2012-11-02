@@ -1,49 +1,49 @@
-#Name	Cost	Stat	Elements	Magnitude	Comments
-Absorb	100	Energy	Light	100	
-AcidDrip	200	Energy	Water	100	OffCenter
-AcidNozzle	100	Energy	None	100	
-Boil	100	Energy	Air	100	Boss
-BreakingWheel	100	Energy	Dark	100	Boss
-Brimstone	100	Energy	Fire	100	Boss
-Cavalry	100	Energy	Earth	100	
-ColdShoulder	100	Energy	Fire	100	
-Combust	100	Energy	Physical-Air	100	
-Confusion	100	Energy	Mental	100	
-Dart	50	Energy	Dark	5	
-DartTrap	100	Energy	Dark	100	
-Dismemberment	100	Energy	Physical	100	Boss
-Electrify	100	Energy	Air	100	
-Envenom	100	Energy	Earth	100	
-Explode	100	Energy	Fire	100	
-Fireball	150	Energy	Fire	100	
-FlameHammer	150	Energy	Fire	200	
-FloorSpikes	100	Energy	Earth	250	
-ForgetSkill	200	Energy	Mental	100	
-Gush	100	Energy	Water	100	
-Horder	100	Energy	Mental	100	
-Horrify	100	Energy	Dark-Fire	100	
-Hypothermia	100	Energy	Water	100	Boss
-IceShard	50	Energy	Water	100	
-MagicMap	100	Energy	Light	100	Unimplemented
-EnergyUp	100	Energy	Water	100	
-Mimic	100	Energy	Dark	100	
-Mutiny	100	Energy	Physical	100	
-NoSkill	100	Energy	Mental	100	
-Plague	100	Energy	Mental	100	Boss
-PoisonCloud	100	Energy	Mental	100	
-RegenAll	100	Energy	Light	100	
-RemoteMine	100	Energy	Fire	100	
-SerpentSupper	300	Energy	Mental	100	Boss
-SoulCrush	500	Energy	Mental	5	
-SoulReinforcement	100	Energy	Light	100	
-SpawnItem	200	Energy	Earth	100	
-SpeedUp	100	Energy	Water	100	
-StealItem	100	Energy	Air	100	
-StrengthUp	100	Energy	Fire	100	
-ThrowItem	0	Energy	Air	100	
-Valedictorian	100	Energy	Light	100	Unimplemented
-VaporCloud	100	Energy	Physical	100	
-VaporImplant	100	Energy	Air	100	
-VenomFist	100	Energy	Dark	100	
-WallPunch	400	Energy	Earth	100	
-WeakKnees	100	Energy	Physical	100	
+#Name,Cost,Stat,Elements,Magnitude,Comments
+Absorb,100,Energy,Light,100,
+AcidDrip,200,Energy,Water,100,OffCenter
+AcidNozzle,100,Energy,None,100,
+Boil,100,Energy,Air,100,Boss
+BreakingWheel,100,Energy,Dark,100,Boss
+Brimstone,100,Energy,Fire,100,Boss
+Cavalry,100,Energy,Earth,100,
+ColdShoulder,100,Energy,Fire,100,
+Combust,100,Energy,Physical-Air,100,
+Confusion,100,Energy,Mental,100,
+Dart,50,Energy,Dark,5,
+DartTrap,100,Energy,Dark,100,
+Dismemberment,100,Energy,Physical,100,Boss
+Electrify,100,Energy,Air,100,
+Envenom,100,Energy,Earth,100,
+Explode,100,Energy,Fire,100,
+Fireball,150,Energy,Fire,100,
+FlameHammer,150,Energy,Fire,200,
+FloorSpikes,100,Energy,Earth,250,
+ForgetSkill,200,Energy,Mental,100,
+Gush,100,Energy,Water,100,
+Horder,100,Energy,Mental,100,
+Horrify,100,Energy,Dark-Fire,100,
+Hypothermia,100,Energy,Water,100,Boss
+IceShard,50,Energy,Water,100,
+MagicMap,100,Energy,Light,100,Unimplemented
+EnergyUp,100,Energy,Water,100,
+Mimic,100,Energy,Dark,100,
+Mutiny,100,Energy,Physical,100,
+NoSkill,100,Energy,Mental,100,
+Plague,100,Energy,Mental,100,Boss
+PoisonCloud,100,Energy,Mental,100,
+RegenAll,100,Energy,Light,100,
+RemoteMine,100,Energy,Fire,100,
+SerpentSupper,300,Energy,Mental,100,Boss
+SoulCrush,500,Energy,Mental,5,
+SoulReinforcement,100,Energy,Light,100,
+SpawnItem,200,Energy,Earth,100,
+SpeedUp,100,Energy,Water,100,
+StealItem,100,Energy,Air,100,
+StrengthUp,100,Energy,Fire,100,
+ThrowItem,0,Energy,Air,100,
+Valedictorian,100,Energy,Light,100,Unimplemented
+VaporCloud,100,Energy,Physical,100,
+VaporImplant,100,Energy,Air,100,
+VenomFist,100,Energy,Dark,100,
+WallPunch,400,Energy,Earth,100,
+WeakKnees,100,Energy,Physical,100,
