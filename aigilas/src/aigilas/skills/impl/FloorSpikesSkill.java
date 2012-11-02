@@ -6,20 +6,12 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
 public class FloorSpikesSkill extends BaseSkill {
-    public FloorSpikesSkill()
-
-    {
+    public FloorSpikesSkill() {
         super(SkillId.Floor_Spikes, AnimationType.STATIONARY, Float.MAX_VALUE, true);
-
-
     }
 
     @Override
-    public void affect(BaseCreature target)
-
-    {
-        target.applyDamage(80, _source);
-
+    public void affect(BaseCreature target) {
+        target.applyDamage(_id.Info.Magnitude, _source);
     }
-
 }
