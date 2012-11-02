@@ -9,6 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FloorPlan {
+    private final int minRoomHeight = 2;
+    private final int maxRoomHeight = 6;
+    private final int minRoomWidth = 2;
+    private final int maxRoomWidth = 6;
+    private final int buffer = 2;
+
+
     private List<Room> rooms;
     private EntityType[][] tiles;
 
@@ -27,12 +34,13 @@ public class FloorPlan {
             int attemptCount = 0;
             while (attemptCount < 100 && roomsToPlace > 0) {
                 attemptCount++;
-                int startX = RNG.next(0, Settings.get().tileMapWidth - 5);
-                int startY = RNG.next(0, Settings.get().tileMapHeight - 5);
-                int startWidth = 5 + RNG.next(0, 2);
-                int startHeight = 5 + RNG.next(0, 2);
+                int width = minRoomWidth + RNG.next(0, maxRoomWidth - minRoomHeight);
+                int height = minRoomHeight + RNG.next(0, maxRoomHeight - minRoomHeight);
+                int x = RNG.next(buffer, Settings.get().tileMapWidth - width - buffer);
+                int y = RNG.next(buffer, Settings.get().tileMapHeight - height - buffer);
+
                 roomsToPlace--;
-                Room nextRoom = new Room(startHeight, startWidth, startX, startY);
+                Room nextRoom = new Room(height, width, x, y);
                 boolean collides = false;
                 for (int ii = 1; ii < rooms.size(); ii++) {
                     Room room = rooms.get(ii);
