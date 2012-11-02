@@ -4,6 +4,7 @@ import aigilas.management.SpriteType;
 import aigilas.skills.animations.*;
 import aigilas.skills.behaviors.*;
 import aigilas.skills.impl.*;
+import sps.core.Logger;
 
 public class SkillFactory {
     public static BaseSkill create(SkillId idSkill) {
@@ -105,13 +106,7 @@ public class SkillFactory {
             case Vapor_Cloud:
                 return new VaporCloudSkill();
             default:
-                try {
-                    throw new Exception("A SkillId to Skill mapping was not defined:the SkillFactory for (" + idSkill + "). This is 100% the fault of whoever wrote the code.");
-                }
-                catch (Exception e) {
-
-                    e.printStackTrace();
-                }
+                Logger.error("A SkillId to Skill mapping was not defined:the SkillFactory for (" + idSkill + "). This is 100% the fault of whoever wrote the code.");
                 return null;
         }
     }

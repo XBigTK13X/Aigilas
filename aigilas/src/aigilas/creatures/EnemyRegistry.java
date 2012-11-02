@@ -2,7 +2,6 @@ package aigilas.creatures;
 
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
-import com.badlogic.gdx.Gdx;
 import sps.bridge.ActorType;
 import sps.core.Logger;
 
@@ -76,9 +75,7 @@ public class EnemyRegistry {
             in.close();
         }
         catch (Exception e) {
-            Logger.error("Error occurred while parsing enemies.csv.");
-            e.printStackTrace();
-            Gdx.app.exit();
+            Logger.exception("Error occurred while parsing enemies.csv.", e);
         }
     }
 

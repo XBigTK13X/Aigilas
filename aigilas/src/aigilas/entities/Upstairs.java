@@ -22,12 +22,7 @@ public class Upstairs extends Entity {
         if (player != null) {
             if (player.isInteracting()) {
                 player.performInteraction();
-                try {
-                    Dungeon.getPreviousFloor();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Dungeon.getPreviousFloor();
             }
         }
     }

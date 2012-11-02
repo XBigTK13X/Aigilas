@@ -17,8 +17,7 @@ public class DesktopMain {
                 Thread.sleep(100);
             }
             catch (InterruptedException e) {
-
-                e.printStackTrace();
+                Logger.exception(e);
             }
         }
 

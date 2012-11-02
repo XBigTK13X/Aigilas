@@ -1,6 +1,5 @@
 package aigilas.reactions;
 
-import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -71,9 +70,7 @@ public class ReactionRegistry {
             in.close();
         }
         catch (Exception e) {
-            Logger.error("Error occurred while parsing reactions.csv.");
-            e.printStackTrace();
-            Gdx.app.exit();
+            Logger.exception("Error occurred while parsing reactions.csv.", e);
         }
     }
 

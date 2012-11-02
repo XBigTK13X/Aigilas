@@ -8,7 +8,6 @@ import com.esotericsoftware.kryo.io.Output;
 import sps.core.Logger;
 import sps.core.Settings;
 
-import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -32,27 +31,21 @@ public class MessageHandler {
             this.connection = connection;
             this.sender = new Thread(new Runnable() {
                 public void run() {
-                    if (oos == null) {
-                        try {
+                    try {
+                        if (oos == null) {
                             outKryo = new Kryo();
                             oos = new Output(connection.getOutputStream());
                         }
-                        catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    while (!Thread.interrupted()) {
-                        Message msg;
-                        try {
+                        while (!Thread.interrupted()) {
+                            Message msg;
                             msg = outboundMessages.take();
-                            blurt("Sending message: " + msg.MessageType);
+                            //blurt("Sending message" + msg.MessageType);
                             outKryo.writeObject(oos, msg);
                             oos.flush();
                         }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                            System.exit(-1);
-                        }
+                    }
+                    catch (Exception e) {
+                        Logger.exception(e);
                     }
                 }
             }, String.format("SenderThread-%s", connection.getLocalPort()));
@@ -61,24 +54,19 @@ public class MessageHandler {
                 public void run() {
                     while (!Thread.interrupted()) {
                         blurt("Waiting for messages to arrive");
-                        if (ois == null) {
-                            try {
+                        try {
+                            if (ois == null) {
                                 inKryo = new Kryo();
                                 ois = new Input(connection.getInputStream());
                             }
-                            catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        Message msg;
-                        try {
+                            Message msg;
+
                             msg = inKryo.readObject(ois, Message.class);
-                            blurt("Getting message: " + msg.MessageType);
+                            //blurt("Getting message: " + msg.MessageType);
                             inboundMessages.add(msg);
                         }
                         catch (Exception e) {
-                            e.printStackTrace();
-                            System.exit(-1);
+                            Logger.exception(e);
                         }
                     }
 
@@ -90,7 +78,7 @@ public class MessageHandler {
             receiver.start();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            Logger.exception(e);
         }
     }
 
@@ -104,7 +92,7 @@ public class MessageHandler {
                 return inboundMessages.take();
             }
             catch (InterruptedException e) {
-                e.printStackTrace();
+                Logger.exception(e);
             }
         }
         return null;

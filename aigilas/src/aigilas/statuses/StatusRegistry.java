@@ -1,6 +1,5 @@
 package aigilas.statuses;
 
-import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -37,9 +36,7 @@ public class StatusRegistry {
             in.close();
         }
         catch (Exception e) {
-            Logger.error("Error occurred while parsing statuses.csv.");
-            e.printStackTrace();
-            Gdx.app.exit();
+            Logger.exception("Error occurred while parsing statuses.csv.", e);
         }
     }
 }

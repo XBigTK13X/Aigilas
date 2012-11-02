@@ -1,6 +1,7 @@
 package aigilas.entities;
 
 import sps.bridge.EntityType;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.entities.Entity;
 
@@ -16,14 +17,7 @@ public class EntityFactory {
             case Upstairs:
                 return new Upstairs(location);
             default:
-                try {
-                    throw new Exception("An undefined int case was passed into the EntityFactory.");
-                }
-                catch (Exception e) {
-
-                    e.printStackTrace();
-                }
-
+                Logger.error("An undefined entityType was passed into the EntityFactory: " + type);
                 return null;
         }
     }

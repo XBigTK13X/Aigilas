@@ -37,8 +37,7 @@ public class ClientManager {
                             addressToIndex.put(client.getPort(), clients.size() - 1);
                         }
                         catch (IOException e) {
-                            e.printStackTrace();
-                            System.exit(-1);
+                            Logger.exception(e);
                         }
                     }
                     Logger.clientManager("ClientManager was interupted.");

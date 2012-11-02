@@ -3,6 +3,7 @@ package aigilas.strategies;
 import aigilas.creatures.BaseCreature;
 import aigilas.strategies.impl.*;
 import sps.bridge.ActorType;
+import sps.core.Logger;
 
 public class StrategyFactory {
     public static BaseStrategy create(Strategy strategy, BaseCreature target, ActorType... actorTypes) {
@@ -41,13 +42,7 @@ public class StrategyFactory {
             case TestBot:
                 return new TestBotStrategy(target);
             default:
-                try {
-                    throw new Exception("An undefined strategy was passed into the strategy factory: " + strategy);
-                }
-                catch (Exception e) {
-
-                    e.printStackTrace();
-                }
+                Logger.error("An undefined strategy was passed into the strategy factory: " + strategy);
                 return null;
         }
     }

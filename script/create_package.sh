@@ -1,8 +1,8 @@
 #! /bin/sh
 #
 cd aigilas
-mvn clean
-mvn package
+mvn -q clean
+mvn -q package
 cd target
 git log --max-count=1 > version.txt
 ln ../../dist/README.txt ./README.txt

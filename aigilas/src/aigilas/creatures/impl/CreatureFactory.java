@@ -5,6 +5,7 @@ import aigilas.entities.SkillEffect;
 import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -81,13 +82,7 @@ public class CreatureFactory {
             case Dummy:
                 return new Dummy();
             default:
-                try {
-                    throw new Exception("No Factory generation logic for: " + actorType);
-                }
-                catch (Exception e) {
-
-                    e.printStackTrace();
-                }
+                Logger.error("Unknown actorType passed into CreatureFactory: " + actorType);
                 return null;
         }
     }

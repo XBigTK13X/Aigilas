@@ -22,12 +22,7 @@ public class Downstairs extends Entity {
         if (player != null) {
             if (player.isInteracting()) {
                 player.performInteraction();
-                try {
-                    Dungeon.getNextFloor();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Dungeon.getNextFloor();
             }
         }
     }

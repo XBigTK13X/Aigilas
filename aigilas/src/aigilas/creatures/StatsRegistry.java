@@ -1,6 +1,5 @@
 package aigilas.creatures;
 
-import com.badlogic.gdx.Gdx;
 import sps.bridge.ActorType;
 import sps.core.Logger;
 
@@ -50,9 +49,7 @@ public class StatsRegistry {
             in.close();
         }
         catch (Exception e) {
-            Logger.error("Error occurred while parsing base_stats.csv.");
-            e.printStackTrace();
-            Gdx.app.exit();
+            Logger.exception("Error occurred while parsing base_stats.csv.", e);
         }
     }
 

@@ -36,7 +36,7 @@ public class InputBindings {
             in.close();
         }
         catch (Exception e) {
-            System.err.println("Error) " + e.getMessage());
+            Logger.exception(e);
         }
     }
 

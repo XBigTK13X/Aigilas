@@ -6,6 +6,7 @@ import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import sps.core.Logger;
 import sps.core.Spx;
 import sps.devtools.DevConsole;
 import sps.graphics.Renderer;
@@ -40,47 +41,50 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void render() {
+        try {
+            //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
 
-        //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
+            // Update
+            Input.update();
+            if (Input.isActive(Commands.ToggleDevConsole, Client.get().getFirstPlayerIndex())) {
+                DevConsole.get().toggle();
+            }
+            if (Input.isActive(Commands.Back, Client.get().getFirstPlayerIndex())) {
+                Gdx.app.exit();
+            }
+            if (Client.get().nextTurn()) {
+                /*for (int ii = 0; ii < 4; ii++) {
+                    PlayerIndex player = PlayerIndex.values()[ii];
 
-        // Update
-        Input.update();
-        if (Input.isActive(Commands.ToggleDevConsole, Client.get().getFirstPlayerIndex())) {
-            DevConsole.get().toggle();
+                         //$$$ if (GamePad.GetState(player).IsPressed(Buttons.Back) &&
+                          GamePad.GetState(player).IsPressed(Buttons.Start)) {
+                          setIsRunning(false); }
+
+                }*/
+                ParticleEngine.update();
+                StateManager.update();
+                TextManager.update();
+                Client.get().prepareForNextTurn();
+            }
+            else {
+                Client.get().heartBeat();
+            }
+            if (!IsRunning) {
+                System.exit(0);
+            }
+
+            // Render
+            Renderer.get().begin();
+            StateManager.draw();
+            ParticleEngine.draw();
+            TextManager.draw();
+            HudRenderer.get().draw();
+            DevConsole.get().draw();
+            Renderer.get().end();
         }
-        if (Input.isActive(Commands.Back, Client.get().getFirstPlayerIndex())) {
-            Gdx.app.exit();
+        catch (Exception e) {
+            Logger.exception(e);
         }
-        if (Client.get().nextTurn()) {
-            /*for (int ii = 0; ii < 4; ii++) {
-                PlayerIndex player = PlayerIndex.values()[ii];
-
-                     //$$$ if (GamePad.GetState(player).IsPressed(Buttons.Back) &&
-                      GamePad.GetState(player).IsPressed(Buttons.Start)) {
-                      setIsRunning(false); }
-
-            }*/
-            ParticleEngine.update();
-            StateManager.update();
-            TextManager.update();
-            Client.get().prepareForNextTurn();
-        }
-        else {
-            Client.get().heartBeat();
-        }
-        if (!IsRunning) {
-            System.exit(0);
-        }
-
-        // Render
-        Renderer.get().begin();
-        StateManager.draw();
-        ParticleEngine.draw();
-        TextManager.draw();
-        HudRenderer.get().draw();
-        DevConsole.get().draw();
-        Renderer.get().end();
-
     }
 
     @Override

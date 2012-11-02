@@ -1,5 +1,6 @@
 package sps.core;
 
+import com.badlogic.gdx.Gdx;
 import sps.devtools.DevConsole;
 
 public class Logger {
@@ -55,5 +56,22 @@ public class Logger {
         if (Settings.get().devConsoleEnabled) {
             DevConsole.get().add(message);
         }
+    }
+
+    public static void exception(Exception e) {
+        log(e.toString());
+        if (e.getCause() != null) {
+            log(e.getCause().getMessage());
+        }
+        for (StackTraceElement el : e.getStackTrace()) {
+            log("  " + el.toString());
+        }
+        Gdx.app.exit();
+        System.exit(-1);
+    }
+
+    public static void exception(String s, Exception e) {
+        log(s);
+        exception(e);
     }
 }

@@ -2,6 +2,7 @@ package aigilas.statuses;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.statuses.impl.*;
+import sps.core.Logger;
 
 public class StatusFactory {
     public static void apply(BaseCreature target, Status statusId) {
@@ -112,13 +113,7 @@ public class StatusFactory {
                 target.addStatus(new BoilStatus(target));
                 break;
             default:
-                try {
-                    throw new Exception(String.format("An undefined statusId %s was passed StatusFactory.Apply.", statusId));
-                }
-                catch (Exception e) {
-
-                    e.printStackTrace();
-                }
+                Logger.error(String.format("An undefined statusId %s was passed StatusFactory.Apply.", statusId));
         }
     }
 }

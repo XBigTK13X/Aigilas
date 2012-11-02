@@ -33,7 +33,7 @@ public class Server extends Thread {
                 Thread.sleep(1);
             }
             catch (InterruptedException e) {
-                e.printStackTrace();
+                Logger.exception(e);
             }
             pollForNewMessages();
             broadCastGameState();

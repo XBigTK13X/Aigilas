@@ -41,7 +41,7 @@ public class LanClient implements IClient {
             handleResponse(_message);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            Logger.exception(e);
         }
     }
 

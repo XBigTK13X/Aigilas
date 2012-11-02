@@ -7,6 +7,7 @@ import aigilas.creatures.impl.Player;
 import sps.bridge.ActorType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -42,13 +43,7 @@ public class GenericItem extends Entity {
 
     public GenericItem(Stats modifiers, String suffix, String prefix, ItemName type, Point2 location, boolean onGround) {
         if (type == null) {
-            try {
-                throw new Exception("Invalid type NULL passed into the GenericItem factory!");
-            }
-            catch (Exception e) {
-
-                e.printStackTrace();
-            }
+            Logger.error("Invalid type NULL passed into the GenericItem factory!");
         }
         initialize(_suffix, _prefix, type, type.Slots, modifiers, location);
     }
