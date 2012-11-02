@@ -25,14 +25,14 @@ public class BaseStatus {
     protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<StatusComponent, List<Status>>();
 
     protected BaseStatus(BaseCreature target) {
-        _strength = _maxStrength;
-        _target = target;
-        setup();
+        this(target, null);
     }
 
     protected BaseStatus(BaseCreature target, Status impl) {
-        this(target);
+        _target = target;
         this.impl = impl;
+        _strength = _maxStrength;
+        setup();
     }
 
     public boolean isActive() {
