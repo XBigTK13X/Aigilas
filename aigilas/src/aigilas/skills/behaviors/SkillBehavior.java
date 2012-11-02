@@ -45,14 +45,18 @@ public class SkillBehavior {
 
     protected boolean SubtractCost(BaseCreature owner) {
         boolean costPaid = false;
+        boolean costIsZero = true;
         for (StatType stat : StatType.values()) {
             if (stat != StatType.Regen) {
-                if (owner.lowerStat(stat, _cost.get(stat))) {
-                    costPaid = true;
+                if (_cost.get(stat) != 0) {
+                    costIsZero = false;
+                    if (owner.lowerStat(stat, _cost.get(stat))) {
+                        costPaid = true;
+                    }
                 }
             }
         }
-        return costPaid;
+        return costPaid || costIsZero;
     }
 
     private Entity hitTarget;
