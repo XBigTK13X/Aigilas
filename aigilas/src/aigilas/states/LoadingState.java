@@ -1,11 +1,10 @@
 package aigilas.states;
 
-import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
-import sps.bridge.DrawDepth;
 import sps.graphics.Renderer;
 import sps.states.State;
 import sps.states.StateManager;
+import sps.text.StaticTextPool;
 
 public class LoadingState implements State {
     public LoadingState() {
@@ -32,7 +31,7 @@ public class LoadingState implements State {
     @Override
     public void load() {
         MusicPlayer.get().stop();
-        Renderer.get().drawString("Preparing for adventure!", Renderer.get().center(), Color.WHITE, 1, DrawDepth.ActionText);
+        StaticTextPool.get().write("Preparing for adventure!", Renderer.get().center());
     }
 
     @Override
