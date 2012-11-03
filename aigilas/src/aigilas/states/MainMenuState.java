@@ -2,12 +2,14 @@ package aigilas.states;
 
 import aigilas.management.Commands;
 import sps.core.Logger;
+import sps.core.Point2;
 import sps.io.Contexts;
 import sps.io.Input;
 import sps.net.Client;
 import sps.states.State;
 import sps.states.StateManager;
 import sps.text.ActionTextHandler;
+import sps.text.StaticTextPool;
 
 public class MainMenuState implements State {
     private final ActionTextHandler _text = new ActionTextHandler();
@@ -17,6 +19,7 @@ public class MainMenuState implements State {
     private static final String QuitText = "Quit Game";
     private static final String SelectionText = "--<";
 
+    private boolean drawnOnce = false;
     private int _selection = 2;
 
     public MainMenuState() {
@@ -25,11 +28,8 @@ public class MainMenuState implements State {
 
     @Override
     public void update() {
-        _text.writeAction(PlayText, 1, 300, 300);
-        _text.writeAction(OptionsText, 1, 300, 200);
-        _text.writeAction(QuitText, 1, 300, 100);
-
-        _selection += (Input.isActive(Commands.MoveUp, Client.get().getFirstPlayerIndex()) ? 1 : 0) + (Input.isActive(Commands.MoveDown, Client.get().getFirstPlayerIndex()) ? -1 : 0);
+        int selectionVelocity = (Input.isActive(Commands.MoveUp, Client.get().getFirstPlayerIndex()) ? 1 : 0) + (Input.isActive(Commands.MoveDown, Client.get().getFirstPlayerIndex()) ? -1 : 0);
+        _selection += selectionVelocity;
         _selection %= 3;
         if (_selection < 0) {
             _selection = 0;
@@ -61,11 +61,18 @@ public class MainMenuState implements State {
             }
         }
 
-        _text.writeAction(SelectionText, 1, 225, 100 * (_selection + 1));
+        if (selectionVelocity != 0 || !drawnOnce) {
+            drawnOnce = true;
+            StaticTextPool.get().clear();
+            StaticTextPool.get().write(PlayText, new Point2(300, 300));
+            StaticTextPool.get().write(OptionsText, new Point2(300, 200));
+            StaticTextPool.get().write(QuitText, new Point2(300, 100));
+            StaticTextPool.get().write(SelectionText, new Point2(225, 100 * (_selection + 1)));
+        }
     }
 
     @Override
-    public void loadContent() {
+    public void load() {
 
     }
 

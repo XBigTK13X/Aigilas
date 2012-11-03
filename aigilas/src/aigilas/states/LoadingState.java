@@ -9,12 +9,12 @@ import sps.states.StateManager;
 
 public class LoadingState implements State {
     public LoadingState() {
-        MusicPlayer.get().stop();
+
     }
 
     @Override
     public void draw() {
-        Renderer.get().drawString("Preparing for adventure!", Renderer.get().center(), Color.WHITE, 1, DrawDepth.ActionText);
+
     }
 
     int delay = 10;
@@ -30,8 +30,9 @@ public class LoadingState implements State {
     }
 
     @Override
-    public void loadContent() {
-
+    public void load() {
+        MusicPlayer.get().stop();
+        Renderer.get().drawString("Preparing for adventure!", Renderer.get().center(), Color.WHITE, 1, DrawDepth.ActionText);
     }
 
     @Override

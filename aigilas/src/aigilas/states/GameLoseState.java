@@ -1,24 +1,21 @@
 package aigilas.states;
 
 import aigilas.management.Commands;
-import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
-import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.graphics.Renderer;
 import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
+import sps.text.StaticTextPool;
 
 public class GameLoseState implements State {
     public GameLoseState() {
-        MusicPlayer.get().stop();
     }
 
     @Override
     public void draw() {
-        Renderer.get().drawString("Game Over", Renderer.get().center(), Color.WHITE, 1, DrawDepth.ActionText);
-        Renderer.get().drawString("Press SPACEBAR to restart", new Point2(200, 200), Color.WHITE, 1, DrawDepth.ActionText);
+
     }
 
     @Override
@@ -29,8 +26,10 @@ public class GameLoseState implements State {
     }
 
     @Override
-    public void loadContent() {
-
+    public void load() {
+        MusicPlayer.get().stop();
+        StaticTextPool.get().write("Game Over", Renderer.get().center());
+        StaticTextPool.get().write("Press SPACEBAR to restart", new Point2(200, 200));
     }
 
     @Override

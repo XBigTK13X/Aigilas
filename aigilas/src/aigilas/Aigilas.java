@@ -15,6 +15,7 @@ import sps.io.Input;
 import sps.net.Client;
 import sps.particles.ParticleEngine;
 import sps.states.StateManager;
+import sps.text.StaticTextPool;
 import sps.text.TextManager;
 
 public class Aigilas implements ApplicationListener {
@@ -79,6 +80,7 @@ public class Aigilas implements ApplicationListener {
             ParticleEngine.draw();
             TextManager.draw();
             HudRenderer.get().draw();
+            StaticTextPool.get().draw();
             DevConsole.get().draw();
             Renderer.get().end();
         }

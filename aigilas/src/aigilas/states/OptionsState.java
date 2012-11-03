@@ -52,7 +52,7 @@ public class OptionsState implements State {
     }
 
     @Override
-    public void loadContent() {
+    public void load() {
 
     }
 

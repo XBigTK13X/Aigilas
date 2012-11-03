@@ -35,7 +35,7 @@ public class GameplayState implements State {
     }
 
     @Override
-    public void loadContent() {
+    public void load() {
         EntityManager.get().loadContent();
     }
 
