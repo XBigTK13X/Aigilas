@@ -5,8 +5,7 @@ import aigilas.entities.Elements;
 import aigilas.entities.ReactionMarker;
 import sps.core.Logger;
 import sps.core.Settings;
-import sps.text.ActionText;
-import sps.text.TextManager;
+import sps.text.StaticTextPool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,14 +88,17 @@ public class ReactionMeter {
 
     private void react(int key) {
         _reactionTimer--;
-        if (_reactionTimer <= 0) {
+        if (_reactionTimer <= 0 && key != 0) {
             Reaction reactionId = ReactionRegistry.get().get(key);
-            if (reaction != null) {
+            if (reactionId != null) {
                 reaction = ReactionFactory.create(reactionId);
                 if (reaction != null) {
+                    Logger.info("Made it");
                     reaction.affect(_parent);
                     Logger.gameplay(_parent + " affected by " + reactionId.toString());
-                    TextManager.add(new ActionText(reactionId.toString(), 10, (int) _parent.getLocation().PosX, (int) _parent.getLocation().PosY));
+                    StaticTextPool.get().write(reactionId.toString(), _parent.getLocation(), 2);
+                    Logger.info("Should have worked");
+
                 }
             }
             _elements.clear();

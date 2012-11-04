@@ -66,7 +66,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     protected int _playerIndex = -1;
     protected boolean _isPlaying = true;
-    protected int _currentLevel = 1;
+    protected int _currentLevel = 5;
     protected float _experience;
     protected static final float __levelUpAmount = 50;
     protected float _nextLevelExperience = __levelUpAmount;

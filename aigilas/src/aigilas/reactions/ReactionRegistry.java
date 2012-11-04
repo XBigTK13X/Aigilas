@@ -75,6 +75,10 @@ public class ReactionRegistry {
     }
 
     public Reaction get(int key) {
+        Logger.info("Trying to get: " + key);
+        if (__reactions.containsKey(key)) {
+            Logger.info(__reactions.get(key).toString());
+        }
         return __reactions.get(key);
     }
 }

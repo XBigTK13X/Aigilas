@@ -33,7 +33,11 @@ public class StaticTextPool {
     }
 
     public void write(String message, Point2 position) {
-        texts.get(index).reset(position, message, 1);
+        write(message, position, StaticText.NotTimed);
+    }
+
+    public void write(String message, Point2 position, float lifeInSeconds) {
+        texts.get(index).reset(position, message, 1, lifeInSeconds);
         index = (index + 1) % texts.size();
     }
 
@@ -41,6 +45,14 @@ public class StaticTextPool {
         for (StaticText text : texts) {
             if (text.isVisible()) {
                 text.draw();
+            }
+        }
+    }
+
+    public void update() {
+        for (StaticText text : texts) {
+            if (text.isVisible()) {
+                text.update();
             }
         }
     }

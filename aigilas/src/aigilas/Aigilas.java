@@ -74,6 +74,8 @@ public class Aigilas implements ApplicationListener {
                 System.exit(0);
             }
 
+            StaticTextPool.get().update();
+
             // Render
             Renderer.get().begin();
             StateManager.draw();
