@@ -13,7 +13,7 @@ public class SpawnItemSkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
+
         ItemFactory.createRandomPlain(source.getLocation());
     }
 }

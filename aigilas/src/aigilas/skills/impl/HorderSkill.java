@@ -14,7 +14,7 @@ public class HorderSkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
+
         StatusFactory.apply(source, Status.Hord);
     }
 }

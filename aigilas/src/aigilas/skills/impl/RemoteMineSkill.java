@@ -23,7 +23,7 @@ public class RemoteMineSkill extends BaseSkill {
     public void activate(BaseCreature source) {
         if (!_cache.containsKey(source)) {
             _cache.put(source, this);
-            super.activate(source);
+
 
         }
         else {
@@ -37,7 +37,7 @@ public class RemoteMineSkill extends BaseSkill {
             else {
                 _cache.remove(source);
                 _cache.put(source, this);
-                super.activate(source);
+
 
             }
 

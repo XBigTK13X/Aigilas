@@ -15,9 +15,7 @@ public class SelfBehavior extends SkillBehavior {
 
     @Override
     public void activate(BaseCreature target) {
-        if (SubtractCost(target)) {
-            _sideEffects.Generate(target.getLocation(), new Point2(0, 0), target);
-        }
+        _sideEffects.Generate(target.getLocation(), new Point2(0, 0), target);
     }
 
     @Override

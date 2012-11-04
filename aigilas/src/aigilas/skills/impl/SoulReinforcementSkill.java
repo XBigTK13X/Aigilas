@@ -8,19 +8,13 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class SoulReinforcementSkill extends BaseSkill {
-    public SoulReinforcementSkill()
-
-    {
+    public SoulReinforcementSkill() {
         super(SkillId.Soul_Reinforcement, AnimationType.SELF);
-
-
     }
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
         StatusFactory.apply(source, Status.Berserk);
 
     }
-
 }

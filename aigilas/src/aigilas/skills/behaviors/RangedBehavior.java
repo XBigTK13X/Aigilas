@@ -12,9 +12,6 @@ public class RangedBehavior extends SkillBehavior {
 
     @Override
     public void activate(BaseCreature target) {
-        if (SubtractCost(target)) {
-            _sideEffects.Generate(target.getLocation().add(target.getSkillVector()), target.getSkillVector(), target);
-        }
+        _sideEffects.Generate(target.getLocation().add(target.getSkillVector()), target.getSkillVector(), target);
     }
-
 }

@@ -282,7 +282,9 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     protected void initStat(StatType stat, int value) {
-
+        if (value <= 0) {
+            value = 30;
+        }
         _maxStats.set(stat, value);
         _baseStats.set(stat, value);
     }

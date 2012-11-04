@@ -17,7 +17,7 @@ public class CavalrySkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
+
         applyToPlayers(Status.DefenseUp);
     }
 }

@@ -17,7 +17,7 @@ public class SpeedUpSkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
+
         applyToPlayers(Status.SpeedUp);
 
     }

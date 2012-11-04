@@ -7,9 +7,7 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 
 public class AcidNozzleSkill extends BaseSkill {
-    public AcidNozzleSkill()
-
-    {
+    public AcidNozzleSkill() {
         super(SkillId.Acid_Nozzle, AnimationType.STATIONARY);
     }
 
@@ -17,5 +15,4 @@ public class AcidNozzleSkill extends BaseSkill {
     public void activate(BaseCreature source) {
         CreatureFactory.createMinion(_id, source);
     }
-
 }

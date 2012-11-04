@@ -18,7 +18,7 @@ public class StrengthUpSkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
+
         StatusFactory.apply(source, Status.StrengthUp);
 
     }

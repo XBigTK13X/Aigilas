@@ -36,12 +36,12 @@ public class StatsRegistry {
                     String[] values = convert.split(",");
                     ActorType actorType = ActorType.get(values[0]);
                     String[] raw = values[1].split("-");
-                    int[] r = new int[11];
+                    int[] r = new int[12];
                     for (int ii = 0; ii < raw.length; ii++) {
                         r[ii] = Integer.parseInt(raw[ii]);
                     }
 
-                    Stats stats = new Stats(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10]);
+                    Stats stats = new Stats(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], r[8], r[9], r[10], r[11]);
 
                     baseStats.put(actorType, stats);
                 }

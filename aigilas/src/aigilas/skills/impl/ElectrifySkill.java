@@ -14,7 +14,7 @@ public class ElectrifySkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
+
         StatusFactory.apply(source, Status.Electrify);
     }
 }

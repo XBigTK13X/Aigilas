@@ -18,7 +18,7 @@ public class ForgetSkill extends BaseSkill
 
     @Override
     public void activate(BaseCreature source) {
-        super.activate(source);
+
         _source.removeLeastUsedSkill();
 
     }

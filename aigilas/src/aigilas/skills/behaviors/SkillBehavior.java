@@ -21,7 +21,7 @@ public class SkillBehavior {
     public SkillBehavior(SpriteType effectGraphic, AnimationType animation, BaseSkill parentSkill) {
         _parent = parentSkill;
         _sideEffects = new SideEffects(effectGraphic, animation, _parent);
-        _cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        _cost = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
     public SpriteType getSpriteType() {
@@ -43,7 +43,7 @@ public class SkillBehavior {
         _cost.addBuff(new StatBuff(stat, cost));
     }
 
-    protected boolean SubtractCost(BaseCreature owner) {
+    public boolean subtractCost(BaseCreature owner) {
         boolean costPaid = false;
         boolean costIsZero = true;
         for (StatType stat : StatType.values()) {

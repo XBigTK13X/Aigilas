@@ -40,8 +40,11 @@ public abstract class BaseSkill {
     }
 
     public void activate(BaseCreature source) {
+    }
+
+    public void prepForActivation(BaseCreature source) {
         _source = source;
-        _behavior.activate(source);
+        _behavior.activate(_source);
     }
 
     public void affect(Entity target) {
@@ -74,5 +77,9 @@ public abstract class BaseSkill {
 
     public SkillId getSkillId() {
         return _id;
+    }
+
+    public boolean isAffordableTo(BaseCreature target) {
+        return _behavior.subtractCost(target);
     }
 }

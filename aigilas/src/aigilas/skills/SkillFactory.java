@@ -1,5 +1,6 @@
 package aigilas.skills;
 
+import aigilas.creatures.BaseCreature;
 import aigilas.management.SpriteType;
 import aigilas.skills.animations.*;
 import aigilas.skills.behaviors.*;
@@ -150,5 +151,22 @@ public class SkillFactory {
 
     public static float getCost(SkillId skillId) {
         return create(skillId).behavior().getCost();
+    }
+
+    public static void activateIfAble(SkillId skill, BaseCreature target) {
+        BaseSkill impl = SkillFactory.create(skill);
+        if (impl.isAffordableTo(target)) {
+            activate(impl, target);
+        }
+        ;
+    }
+
+    public static void activate(SkillId skill, BaseCreature target) {
+        activate(SkillFactory.create(skill), target);
+    }
+
+    private static void activate(BaseSkill skill, BaseCreature target) {
+        skill.prepForActivation(target);
+        skill.activate(target);
     }
 }

@@ -25,14 +25,10 @@ public class BrimstoneSkill extends BaseSkill {
                 if (ii != 0 || jj != 0) {
                     _direction.reset(ii, jj);
                     source.setSkillVector(_direction);
-                    SkillFactory.create(SkillId.Fireball).activate(source);
+                    SkillFactory.activate(SkillId.Fireball, source);
 
                 }
-
             }
-
         }
-
     }
-
 }

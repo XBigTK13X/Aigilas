@@ -1,7 +1,7 @@
 #Name,Cost,Stat,Elements,Magnitude,Comments
 Absorb,100,Energy,Light,100,
 AcidDrip,200,Energy,Water,100,OffCenter
-AcidNozzle,100,Energy,None,100,
+AcidNozzle,100,Energy,Water,100,
 Boil,100,Energy,Air,100,Boss
 BreakingWheel,100,Energy,Dark,100,Boss
 Brimstone,100,Energy,Fire,100,Boss

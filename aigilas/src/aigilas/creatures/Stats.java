@@ -16,18 +16,19 @@ public class Stats {
         _stats = new HashMap<StatType, Integer>(target._stats);
     }
 
-    public Stats(int health, int energy, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet, int moveCoolDown, int regenRate) {
-        setup(health, energy, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, moveCoolDown, 0, regenRate);
-    }
-
-    public Stats(int health, int energy, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet, int moveCoolDown) {
-        setup(health, energy, strength, wisdom, defense, luck, age, weightInLbs, heightInFeet, moveCoolDown, 0, Settings.get().defaultRegen);
-    }
-
-    private void setup(int... list) {
-        for (int ii = 0; ii < list.length; ii++) {
-            _stats.put(StatType.values()[ii], list[ii]);
-        }
+    public Stats(int health, int energy, int strength, int wisdom, int defense, int luck, int age, int weightInLbs, int heightInFeet, int moveCoolDown, int regenRate, int piety) {
+        _stats.put(StatType.Health, health);
+        _stats.put(StatType.Energy, energy);
+        _stats.put(StatType.Strength, strength);
+        _stats.put(StatType.Wisdom, wisdom);
+        _stats.put(StatType.Defense, defense);
+        _stats.put(StatType.Luck, luck);
+        _stats.put(StatType.Age, age);
+        _stats.put(StatType.Weight, weightInLbs);
+        _stats.put(StatType.Height, heightInFeet);
+        _stats.put(StatType.Move_Cool_Down, moveCoolDown);
+        _stats.put(StatType.Regen, regenRate);
+        _stats.put(StatType.Piety, 0);
     }
 
     private int statSum = 0;

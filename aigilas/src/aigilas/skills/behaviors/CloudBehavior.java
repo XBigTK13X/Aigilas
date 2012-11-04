@@ -13,14 +13,12 @@ public class CloudBehavior extends SkillBehavior {
 
     @Override
     public void activate(BaseCreature target) {
-        if (SubtractCost(target)) {
-            Point2 referencePoint = target.getLocation();
-            for (int ii = -1; ii < 2; ii++) {
-                for (int jj = -1; jj < 2; jj++) {
-                    if (ii != 0 || jj != 0) {
-                        Point2 cloudPosition = new Point2(referencePoint.GridX + ii, referencePoint.GridY + jj);
-                        _sideEffects.Generate(cloudPosition, new Point2(0, 0), target);
-                    }
+        Point2 referencePoint = target.getLocation();
+        for (int ii = -1; ii < 2; ii++) {
+            for (int jj = -1; jj < 2; jj++) {
+                if (ii != 0 || jj != 0) {
+                    Point2 cloudPosition = new Point2(referencePoint.GridX + ii, referencePoint.GridY + jj);
+                    _sideEffects.Generate(cloudPosition, new Point2(0, 0), target);
                 }
             }
         }

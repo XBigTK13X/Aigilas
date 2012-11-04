@@ -77,7 +77,7 @@ public class SkillPool {
     }
 
     private void useSkill(SkillId skillId) {
-        SkillFactory.create(findCurrent()).activate(_owner);
+        SkillFactory.activateIfAble(findCurrent(), _owner);
         Logger.gameplay(_owner.toString() + " used " + findCurrent().toString());
         if (!_usageCounter.containsKey(skillId)) {
             _usageCounter.put(skillId, 0);
