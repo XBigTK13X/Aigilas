@@ -93,12 +93,9 @@ public class ReactionMeter {
             if (reactionId != null) {
                 reaction = ReactionFactory.create(reactionId);
                 if (reaction != null) {
-                    Logger.info("Made it");
                     reaction.affect(_parent);
                     Logger.gameplay(_parent + " affected by " + reactionId.toString());
                     StaticTextPool.get().write(reactionId.toString(), _parent.getLocation(), 2);
-                    Logger.info("Should have worked");
-
                 }
             }
             _elements.clear();
