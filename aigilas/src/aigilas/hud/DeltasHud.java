@@ -5,6 +5,8 @@ import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
 import sps.graphics.Renderer;
+import sps.text.StaticText;
+import sps.text.StaticTextPool;
 import sps.util.StringSquisher;
 import sps.util.StringStorage;
 
@@ -18,9 +20,6 @@ public class DeltasHud extends BaseHud {
 
     @Override
     public void draw() {
-        if (_isVisible) {
-            _textHandler.draw();
-        }
     }
 
     private GenericItem getEquipmentIn(ItemSlot slot) {
@@ -35,10 +34,11 @@ public class DeltasHud extends BaseHud {
     private static final String title = "Deltas";
     private String display = "EMPTY";
 
+    private StaticText heading;
+    private StaticText deltas;
+
     public void update(GenericItem item, boolean refresh) {
         if (_isVisible) {
-            _textHandler.update();
-            _textHandler.clear();
             if (item != null && refresh) {
                 if (getEquipmentIn(item.getItemClass().Slot) != null) {
                     StringSquisher.clear();
@@ -48,8 +48,16 @@ public class DeltasHud extends BaseHud {
                     display = StringSquisher.flush();
                 }
             }
-            _textHandler.writeDefault(title, 30, (int) (_dimensions.Y * .2), getInventoryAnchor());
-            _textHandler.writeDefault(display, 30, (int) (_dimensions.Y * .1), getInventoryAnchor());
+            if (heading == null || !heading.isVisible() || refresh) {
+                heading = StaticTextPool.get().write(title, getInventoryAnchor().add(30, (int) (_dimensions.Y * .2)));
+                deltas = StaticTextPool.get().write(display, getInventoryAnchor().add(30, (int) (_dimensions.Y * .1)));
+            }
+        }
+        else {
+            if (heading != null) {
+                heading.hide();
+                deltas.hide();
+            }
         }
     }
 }

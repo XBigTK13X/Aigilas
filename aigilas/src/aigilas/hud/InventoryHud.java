@@ -96,7 +96,6 @@ public class InventoryHud extends BaseHud {
         if (_isVisible) {
             handleInput();
             _textHandler.update();
-            _deltas.update(_currentSelectedItem, forceRefresh);
             _equipHud.update(forceRefresh);
             _textHandler.clear();
             updateInventoryDisplay();
@@ -104,6 +103,7 @@ public class InventoryHud extends BaseHud {
                 forceRefresh = false;
             }
         }
+        _deltas.update(_currentSelectedItem, forceRefresh);
     }
 
     @Override
