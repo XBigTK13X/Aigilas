@@ -6,24 +6,27 @@ import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.graphics.Assets;
 import sps.graphics.Renderer;
-import sps.text.TextType;
+import sps.text.TextPool;
 
 public class DevConsole {
 
     public static final int margin = 50;
 
-    private class ConsoleText extends sps.text.Text {
+    private class ConsoleText {
+        private Point2 position = new Point2(0, 0);
+        private String content;
+
         public ConsoleText(int x, int y, String content) {
-            super(content, x, y, TextType.Inventory);
+            this.position.reset(0, 0, false);
+            this.content = content;
         }
 
-        @Override
         public void draw() {
-            Renderer.get().drawString(_contents, _position, Color.WHITE, 1.0f, DrawDepth.DevConsoleText);
+            TextPool.get().write(content, position);
         }
 
         public String getContent() {
-            return _contents;
+            return content;
         }
     }
 

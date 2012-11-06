@@ -1,38 +1,77 @@
 package sps.text;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.graphics.Renderer;
 
 public class Text {
-    protected String _contents;
-    protected final Point2 _position = new Point2(0, 0);
-    protected TextType _textType = TextType.Inventory;
+    public static final float NotTimed = Float.MIN_VALUE;
+
+    private Point2 position = new Point2(0, 0);
+    private String message;
+    private float scale;
+    private boolean visible = false;
+    private float lifeInSeconds;
+    private TextEffect effect;
+    private float xVel;
+    private float yVel;
+    private float dX;
+    private float dY;
 
     public Text() {
     }
 
-    public void reset(String contents, int x, int y) {
-        _contents = contents;
-        _position.reset(x, y);
+    public void reset(Point2 position, String message, float scale, float lifeInSeconds, TextEffect effect) {
+        if (position.equals(Point2.Zero)) {
+            visible = false;
+            return;
+        }
+        this.position.copy(position);
+        this.message = message;
+        this.scale = scale;
+        visible = true;
+        this.lifeInSeconds = lifeInSeconds;
+        this.effect = effect;
+        effect.init(this);
     }
 
-    public Text(String contents, int x, int y, TextType type) {
-        reset(contents, x, y);
-        _textType = type;
+    public void hide() {
+        visible = false;
     }
 
-    public int update() {
-        return 0;
-    }
-
-    public TextType getTextType() {
-        return _textType;
-    }
-
-    protected void DrawText(Renderer target) {
+    public void update() {
+        if (lifeInSeconds != NotTimed && (position.X != 0 || position.Y != 0)) {
+            effect.update(this);
+            lifeInSeconds -= Gdx.graphics.getDeltaTime();
+            if (lifeInSeconds <= 0) {
+                visible = false;
+            }
+        }
     }
 
     public void draw() {
+        Renderer.get().drawString(message, position, Color.WHITE, scale, DrawDepth.ActionText);
+    }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVel(float x, float y) {
+        xVel = x;
+        yVel = y;
+    }
+
+    public void accel() {
+        xVel += dX;
+        yVel += dY;
+        position.reset(position.PosX + xVel, position.PosY + yVel, false);
+    }
+
+    public void setAccel(float dX, float dY) {
+        this.dX = dX;
+        this.dY = dY;
     }
 }

@@ -10,8 +10,8 @@ import sps.bridge.EntityType;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.text.StaticText;
-import sps.text.StaticTextPool;
+import sps.text.Text;
+import sps.text.TextPool;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Altar extends Entity {
     private final God _god;
     private Player _currentTarget;
     private List<Entity> _offerings;
-    private StaticText text;
+    private Text text;
 
     public Altar(Point2 location, GodId godName) {
         _god = godName.getInstance();
@@ -39,7 +39,7 @@ public class Altar extends Entity {
                 _currentTarget.sacrifice(_god, (GenericItem) offering);
             }
             if (text == null || !text.isVisible()) {
-                text = StaticTextPool.get().write(_god.NameText, getLocation());
+                text = TextPool.get().write(_god.NameText, getLocation());
             }
         }
         else {

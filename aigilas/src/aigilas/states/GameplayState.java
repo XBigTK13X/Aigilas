@@ -7,7 +7,6 @@ import sps.entities.EntityManager;
 import sps.particles.ParticleEngine;
 import sps.states.State;
 import sps.states.StateManager;
-import sps.text.TextManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,6 @@ public class GameplayState implements State {
         EntityManager.get().clear();
         HudRenderer.reset();
         ParticleEngine.reset();
-        TextManager.clear();
     }
 
     @Override

@@ -31,8 +31,8 @@ import sps.entities.EntityManager;
 import sps.entities.IActor;
 import sps.io.Input;
 import sps.paths.Path;
-import sps.text.StaticTextPool;
 import sps.text.TextEffects;
+import sps.text.TextPool;
 import sps.util.StringStorage;
 
 import java.util.ArrayList;
@@ -318,7 +318,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             damage = 0;
         }
         if (showDamage) {
-            StaticTextPool.get().write(StringStorage.get(damage), getLocation(), 1, TextEffects.Fountain);
+            TextPool.get().write(StringStorage.get(damage), getLocation(), 1, TextEffects.Fountain);
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
             Logger.gameplay(this.toString() + " taking " + damage + " damage" + " from " + attacker);
@@ -445,7 +445,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 if (_class != null) {
                     _skills.add(_class.getLevelSkills(_currentLevel));
                 }
-                StaticTextPool.get().write("LEVEL UP!", getLocation(), 10);
+                TextPool.get().write("LEVEL UP!", getLocation(), 10);
             }
         }
     }
@@ -471,7 +471,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             lastSum = _baseStats.getSum();
             _skills.useActive();
             if (lastSum != _baseStats.getSum()) {
-                StaticTextPool.get().write(getActiveSkillName(), getLocation(), 4);
+                TextPool.get().write(getActiveSkillName(), getLocation(), 4);
             }
         }
     }

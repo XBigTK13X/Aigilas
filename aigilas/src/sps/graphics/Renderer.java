@@ -74,6 +74,6 @@ public class Renderer {
     private void renderString(String content, Point2 location, Color filter, float scale, DrawDepth depth) {
         Assets.get().font().setScale(scale);
         Assets.get().font().setColor(filter);
-        Assets.get().font().draw(batch, content, location.PosX, location.PosY);
+        Assets.get().font().draw(batch, content, location.X, location.Y);
     }
 }

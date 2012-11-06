@@ -8,8 +8,11 @@ import aigilas.items.ItemClass;
 import aigilas.management.Commands;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
+import sps.core.Point2;
 import sps.graphics.Renderer;
 import sps.io.Input;
+import sps.text.Text;
+import sps.text.TextPool;
 import sps.util.StringSquisher;
 import sps.util.StringStorage;
 
@@ -40,7 +43,6 @@ public class InventoryHud extends BaseHud {
     public void draw() {
         if (_isVisible) {
             Renderer.get().draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) Renderer.get().center().X, (int) Renderer.get().center().Y);
-            _textHandler.draw();
             _deltas.draw();
             _equipHud.draw();
         }
@@ -95,14 +97,23 @@ public class InventoryHud extends BaseHud {
     public void update() {
         if (_isVisible) {
             handleInput();
-            _textHandler.update();
-            _equipHud.update(forceRefresh);
-            _textHandler.clear();
             updateInventoryDisplay();
             if (forceRefresh) {
                 forceRefresh = false;
             }
         }
+        else {
+            if (header != null) {
+                header.hide();
+                itemClass.hide();
+                for (Text text : itemList) {
+                    if (text != null) {
+                        text.hide();
+                    }
+                }
+            }
+        }
+        _equipHud.update(forceRefresh);
         _deltas.update(_currentSelectedItem, forceRefresh);
     }
 
@@ -131,14 +142,25 @@ public class InventoryHud extends BaseHud {
     private boolean forceRefresh = false;
     private String[] list = new String[10];
 
+    private Text header;
+    private Text itemClass;
+    private Text[] itemList = new Text[10];
+
+    private Point2 inventoryPosition = new Point2(0, 0);
+
     private void updateInventoryDisplay() {
         //This needs to be rendered up here, because it won't be rendered if the class contains no items
-        _textHandler.writeDefault(getClassDisplay(), 20, (int) (_dimensions.Y * .9), getInventoryAnchor());
+        if (forceRefresh) {
+            if (header != null) {
+                header.hide();
+            }
+            inventoryPosition.reset(getInventoryAnchor().X + 20, getInventoryAnchor().Y + (int) (_dimensions.Y * .9), false);
+            header = TextPool.get().write(getClassDisplay(), inventoryPosition);
 
-        _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
-        if (_currentClassItems.size() > 0) {
-            int ii = 0;
-            if (forceRefresh) {
+            _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
+            if (_currentClassItems.size() > 0) {
+                int ii = 0;
+
                 StringSquisher.clear();
                 displayString = StringSquisher.flush();
                 int count = 0;
@@ -166,10 +188,18 @@ public class InventoryHud extends BaseHud {
                 }
 
             }
-            _textHandler.writeDefault(displayString, 50, 60, getInventoryAnchor());
+            inventoryPosition.reset(getInventoryAnchor().X + 50, getInventoryAnchor().Y + 60, false);
+            if (itemClass != null) {
+                itemClass.hide();
+            }
+            itemClass = TextPool.get().write(displayString, inventoryPosition);
             for (int jj = 0; jj < 10; jj++) {
+                if (itemList[jj] != null) {
+                    itemList[jj].hide();
+                }
                 if (list[jj] != null) {
-                    _textHandler.writeDefault(list[jj], 40, (int) (_dimensions.Y * .9) - 60 * jj, getInventoryAnchor());
+                    inventoryPosition.reset(getInventoryAnchor().X + 40, getInventoryAnchor().Y + (int) (_dimensions.Y * .9) - 60 * jj, false);
+                    itemList[jj] = TextPool.get().write(list[jj], inventoryPosition);
                 }
             }
         }

@@ -8,24 +8,24 @@ public class TextEffects {
 
     private static class Fountain implements TextEffect {
         @Override
-        public void init(StaticText text) {
+        public void init(Text text) {
             text.setVel(0, RNG.next(10, 20));
             text.setAccel(RNG.next(-25, 25) / 100f, -RNG.next(50, 100) / 100f);
         }
 
         @Override
-        public void update(StaticText text) {
+        public void update(Text text) {
             text.accel();
         }
     }
 
     private static class None implements TextEffect {
         @Override
-        public void init(StaticText text) {
+        public void init(Text text) {
         }
 
         @Override
-        public void update(StaticText text) {
+        public void update(Text text) {
         }
     }
 }

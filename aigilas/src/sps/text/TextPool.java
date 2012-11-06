@@ -5,50 +5,50 @@ import sps.core.Point2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaticTextPool {
+public class TextPool {
 
-    private static StaticTextPool instance;
+    private static TextPool instance;
 
-    public static StaticTextPool get() {
+    public static TextPool get() {
         if (instance == null) {
-            instance = new StaticTextPool();
+            instance = new TextPool();
         }
         return instance;
     }
 
 
-    private List<StaticText> texts = new ArrayList<StaticText>();
+    private List<Text> texts = new ArrayList<Text>();
     private int index = 0;
 
-    private StaticTextPool() {
+    private TextPool() {
         for (int ii = 0; ii < 1000; ii++) {
-            texts.add(new StaticText());
+            texts.add(new Text());
         }
     }
 
     public void clear() {
-        for (StaticText text : texts) {
+        for (Text text : texts) {
             text.hide();
         }
     }
 
-    public StaticText write(String message, Point2 position) {
-        return write(message, position, StaticText.NotTimed);
+    public Text write(String message, Point2 position) {
+        return write(message, position, Text.NotTimed);
     }
 
-    public StaticText write(String message, Point2 position, float lifeInSeconds) {
+    public Text write(String message, Point2 position, float lifeInSeconds) {
         return write(message, position, lifeInSeconds, TextEffects.None);
     }
 
-    public StaticText write(String message, Point2 position, float lifeInSeconds, TextEffect effect) {
-        StaticText result = texts.get(index);
+    public Text write(String message, Point2 position, float lifeInSeconds, TextEffect effect) {
+        Text result = texts.get(index);
         result.reset(position, message, 1, lifeInSeconds, effect);
         index = (index + 1) % texts.size();
         return result;
     }
 
     public void draw() {
-        for (StaticText text : texts) {
+        for (Text text : texts) {
             if (text.isVisible()) {
                 text.draw();
             }
@@ -56,7 +56,7 @@ public class StaticTextPool {
     }
 
     public void update() {
-        for (StaticText text : texts) {
+        for (Text text : texts) {
             if (text.isVisible()) {
                 text.update();
             }

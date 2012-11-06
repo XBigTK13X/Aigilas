@@ -7,7 +7,7 @@ import sps.graphics.Renderer;
 import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
-import sps.text.StaticTextPool;
+import sps.text.TextPool;
 
 public class GameWinState implements State {
     public GameWinState() {
@@ -28,8 +28,8 @@ public class GameWinState implements State {
     @Override
     public void load() {
         MusicPlayer.get().stop();
-        StaticTextPool.get().write("Victory to you!", Renderer.get().center());
-        StaticTextPool.get().write("Press SPACEBAR to restart", new Point2(200, 200));
+        TextPool.get().write("Victory to you!", Renderer.get().center());
+        TextPool.get().write("Press SPACEBAR to restart", new Point2(200, 200));
     }
 
     @Override

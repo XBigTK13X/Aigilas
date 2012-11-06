@@ -4,7 +4,10 @@ import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
+import sps.core.Point2;
 import sps.graphics.Renderer;
+import sps.text.Text;
+import sps.text.TextPool;
 import sps.util.StringSquisher;
 
 import java.util.HashMap;
@@ -19,9 +22,6 @@ public class EquipmentHud extends BaseHud {
 
     @Override
     public void draw() {
-        if (_isVisible) {
-            _textHandler.draw();
-        }
     }
 
     private static final String sep = ":";
@@ -29,10 +29,12 @@ public class EquipmentHud extends BaseHud {
     private final String title = "Equipped\n";
     private String[] list = new String[10];
 
+    private Text header;
+    private Text[] equipList = new Text[10];
+    private Point2 headerPosition = new Point2(0, 0);
+
     public void update(boolean refresh) {
         if (_isVisible) {
-            _textHandler.update();
-            _textHandler.clear();
             if (refresh) {
                 list = new String[10];
                 StringSquisher.clear();
@@ -48,11 +50,28 @@ public class EquipmentHud extends BaseHud {
                         list[count] = StringSquisher.flush();
                     }
                 }
+                if (header != null) {
+                    header.hide();
+                }
+                headerPosition.reset(getInventoryAnchor().X + (int) (_dimensions.X * .5), getInventoryAnchor().Y + (int) (_dimensions.Y * .9), false);
+                header = TextPool.get().write(display, headerPosition);
+                for (int ii = 0; ii < 10; ii++) {
+                    if (list[ii] != null) {
+                        if (equipList[ii] != null) {
+                            equipList[ii].hide();
+                        }
+                        equipList[ii] = TextPool.get().write(list[ii], getInventoryAnchor().add((int) (_dimensions.X * .5), (int) (_dimensions.Y * .9) - 60 * ii));
+                    }
+                }
             }
-            _textHandler.writeDefault(display, (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9), getInventoryAnchor());
-            for (int ii = 0; ii < 10; ii++) {
-                if (list[ii] != null) {
-                    _textHandler.writeDefault(list[ii], (int) (_dimensions.X * .5), (int) (_dimensions.Y * .9) - 60 * ii, getInventoryAnchor());
+        }
+        else {
+            if (header != null) {
+                header.hide();
+                for (Text text : equipList) {
+                    if (text != null) {
+                        text.hide();
+                    }
                 }
             }
         }

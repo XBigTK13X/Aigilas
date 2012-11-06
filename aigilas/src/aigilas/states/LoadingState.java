@@ -4,7 +4,7 @@ import sps.audio.MusicPlayer;
 import sps.graphics.Renderer;
 import sps.states.State;
 import sps.states.StateManager;
-import sps.text.StaticTextPool;
+import sps.text.TextPool;
 
 public class LoadingState implements State {
     public LoadingState() {
@@ -31,7 +31,7 @@ public class LoadingState implements State {
     @Override
     public void load() {
         MusicPlayer.get().stop();
-        StaticTextPool.get().write("Preparing for adventure!", Renderer.get().center());
+        TextPool.get().write("Preparing for adventure!", Renderer.get().center());
     }
 
     @Override

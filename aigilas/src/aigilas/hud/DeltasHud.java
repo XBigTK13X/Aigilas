@@ -5,8 +5,8 @@ import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
 import sps.graphics.Renderer;
-import sps.text.StaticText;
-import sps.text.StaticTextPool;
+import sps.text.Text;
+import sps.text.TextPool;
 import sps.util.StringSquisher;
 import sps.util.StringStorage;
 
@@ -34,8 +34,8 @@ public class DeltasHud extends BaseHud {
     private static final String title = "Deltas";
     private String display = "EMPTY";
 
-    private StaticText heading;
-    private StaticText deltas;
+    private Text heading;
+    private Text deltas;
 
     public void update(GenericItem item, boolean refresh) {
         if (_isVisible) {
@@ -49,8 +49,8 @@ public class DeltasHud extends BaseHud {
                 }
             }
             if (heading == null || !heading.isVisible() || refresh) {
-                heading = StaticTextPool.get().write(title, getInventoryAnchor().add(30, (int) (_dimensions.Y * .2)));
-                deltas = StaticTextPool.get().write(display, getInventoryAnchor().add(30, (int) (_dimensions.Y * .1)));
+                heading = TextPool.get().write(title, getInventoryAnchor().add(30, (int) (_dimensions.Y * .2)));
+                deltas = TextPool.get().write(display, getInventoryAnchor().add(30, (int) (_dimensions.Y * .1)));
             }
         }
         else {

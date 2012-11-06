@@ -6,7 +6,6 @@ import sps.core.Point2;
 import sps.core.Settings;
 import sps.graphics.Assets;
 import sps.graphics.Renderer;
-import sps.text.TextHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ public abstract class BaseHud {
     protected boolean _isVisible = false;
     protected final BaseCreature _parent;
     protected static Sprite _menuBase;
-    protected final TextHandler _textHandler = new TextHandler();
     protected final List<Point2> meterAnchors = new ArrayList<Point2>();
     protected final List<Point2> skillAnchors = new ArrayList<Point2>();
     protected final List<Point2> inventoryAnchors = new ArrayList<Point2>();
@@ -38,10 +36,10 @@ public abstract class BaseHud {
         meterAnchors.add(new Point2(0, _dimensions.Y));
         meterAnchors.add(new Point2(Renderer.VirtualWidth - _dimensions.X, _dimensions.Y));
 
-        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, Renderer.VirtualHeight - (int) (.2 * _dimensions.Y)));
-        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.VirtualWidth / 2, Renderer.VirtualHeight - (int) (.2 * _dimensions.Y)));
-        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .25)));
-        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .25)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, Renderer.VirtualHeight - (int) (.1 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.VirtualWidth / 2, Renderer.VirtualHeight - (int) (.1 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .8)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .8)));
     }
 
     public void toggle() {
@@ -50,10 +48,6 @@ public abstract class BaseHud {
 
     public boolean isVisible() {
         return _isVisible;
-    }
-
-    public void loadContent() {
-        _menuBase = Assets.get().baseMenu();
     }
 
     protected Point2 getMeterAnchor() {

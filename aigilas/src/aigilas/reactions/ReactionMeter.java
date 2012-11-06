@@ -5,7 +5,7 @@ import aigilas.entities.Elements;
 import aigilas.entities.ReactionMarker;
 import sps.core.Logger;
 import sps.core.Settings;
-import sps.text.StaticTextPool;
+import sps.text.TextPool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +95,7 @@ public class ReactionMeter {
                 if (reaction != null) {
                     reaction.affect(_parent);
                     Logger.gameplay(_parent + " affected by " + reactionId.toString());
-                    StaticTextPool.get().write(reactionId.toString(), _parent.getLocation(), 2);
+                    TextPool.get().write(reactionId.toString(), _parent.getLocation(), 2);
                 }
             }
             _elements.clear();

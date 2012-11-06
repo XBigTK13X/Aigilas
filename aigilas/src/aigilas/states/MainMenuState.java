@@ -8,7 +8,7 @@ import sps.io.Input;
 import sps.net.Client;
 import sps.states.State;
 import sps.states.StateManager;
-import sps.text.StaticTextPool;
+import sps.text.TextPool;
 
 public class MainMenuState implements State {
 
@@ -61,11 +61,11 @@ public class MainMenuState implements State {
 
         if (selectionVelocity != 0 || !drawnOnce) {
             drawnOnce = true;
-            StaticTextPool.get().clear();
-            StaticTextPool.get().write(PlayText, new Point2(300, 300));
-            StaticTextPool.get().write(OptionsText, new Point2(300, 200));
-            StaticTextPool.get().write(QuitText, new Point2(300, 100));
-            StaticTextPool.get().write(SelectionText, new Point2(225, 100 * (_selection + 1)));
+            TextPool.get().clear();
+            TextPool.get().write(PlayText, new Point2(300, 300));
+            TextPool.get().write(OptionsText, new Point2(300, 200));
+            TextPool.get().write(QuitText, new Point2(300, 100));
+            TextPool.get().write(SelectionText, new Point2(225, 100 * (_selection + 1)));
         }
     }
 

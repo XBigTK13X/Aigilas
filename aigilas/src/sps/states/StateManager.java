@@ -1,6 +1,6 @@
 package sps.states;
 
-import sps.text.StaticTextPool;
+import sps.text.TextPool;
 
 public class StateManager {
     private static State _state;
@@ -9,7 +9,7 @@ public class StateManager {
         if (_state != null) {
             _state.unload();
         }
-        StaticTextPool.get().clear();
+        TextPool.get().clear();
         _state = state;
         _state.load();
     }

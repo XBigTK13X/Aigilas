@@ -1,7 +1,7 @@
 package sps.text;
 
 public interface TextEffect {
-    public void init(StaticText text);
+    public void init(Text text);
 
-    public void update(StaticText text);
+    public void update(Text text);
 }

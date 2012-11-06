@@ -15,8 +15,7 @@ import sps.io.Input;
 import sps.net.Client;
 import sps.particles.ParticleEngine;
 import sps.states.StateManager;
-import sps.text.StaticTextPool;
-import sps.text.TextManager;
+import sps.text.TextPool;
 
 public class Aigilas implements ApplicationListener {
     private boolean IsRunning = true;
@@ -64,7 +63,6 @@ public class Aigilas implements ApplicationListener {
                 }*/
                 ParticleEngine.update();
                 StateManager.update();
-                TextManager.update();
                 Client.get().prepareForNextTurn();
             }
             else {
@@ -74,15 +72,14 @@ public class Aigilas implements ApplicationListener {
                 System.exit(0);
             }
 
-            StaticTextPool.get().update();
+            TextPool.get().update();
 
             // Render
             Renderer.get().begin();
             StateManager.draw();
             ParticleEngine.draw();
-            TextManager.draw();
             HudRenderer.get().draw();
-            StaticTextPool.get().draw();
+            TextPool.get().draw();
             DevConsole.get().draw();
             Renderer.get().end();
         }
