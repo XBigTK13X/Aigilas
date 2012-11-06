@@ -14,7 +14,7 @@ public class DevConsole {
 
     private class ConsoleText extends sps.text.Text {
         public ConsoleText(int x, int y, String content) {
-            super(content, x, y, TextType.Action);
+            super(content, x, y, TextType.Inventory);
         }
 
         @Override

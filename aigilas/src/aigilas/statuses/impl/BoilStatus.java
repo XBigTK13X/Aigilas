@@ -7,6 +7,9 @@ import aigilas.statuses.Status;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import sps.bridge.ActorType;
+import sps.text.StaticTextPool;
+import sps.text.TextEffects;
+import sps.util.StringStorage;
 
 public class BoilStatus extends BaseStatus {
     private Strategy previousStrategy;
@@ -41,7 +44,7 @@ public class BoilStatus extends BaseStatus {
         super.update();
         if (_target.isCooledDown()) {
             _countdown--;
-            _target.write(sps.util.StringStorage.get(_strength));
+            StaticTextPool.get().write(StringStorage.get(_strength), _target.getLocation(), 1, TextEffects.Fountain);
             if (_countdown <= 0) {
                 _countdown = _countdownMax;
             }

@@ -46,6 +46,17 @@ public class Point2 {
         setY(y);
     }
 
+    public void reset(float x, float y, boolean isGrid) {
+        if (isGrid) {
+            setAdjustedX(x);
+            setAdjustedY(y);
+        }
+        else {
+            setRawX(x);
+            setRawY(y);
+        }
+    }
+
     public void copy(Point2 point) {
         if (point != null) {
             setX(point.X);
@@ -79,20 +90,54 @@ public class Point2 {
         return false;
     }
 
-    public void setX(float xValue) {
-        X = xValue;
+    public void setX(float x) {
+        X = x;
         boolean isGrid = (Math.abs(X) < Settings.get().tileMapWidth);
-        PosX = (isGrid) ? X * Settings.get().spriteWidth : X;
-        PosCenterX = PosX + halfWidth;
-        GridX = (isGrid) ? (int) X : (int) (X / Settings.get().spriteWidth);
+        if (isGrid) {
+            setAdjustedX(x);
+        }
+        else {
+            setRawX(x);
+        }
     }
 
-    public void setY(float yValue) {
-        Y = yValue;
-        boolean isGrid = (Math.abs(Y) < Settings.get().tileMapWidth);
-        PosY = (isGrid) ? Y * Settings.get().spriteHeight : Y;
+    private void setRawX(float x) {
+        X = x;
+        PosX = X;
+        PosCenterX = PosX + halfWidth;
+        GridX = (int) (X / Settings.get().spriteWidth);
+    }
+
+    private void setAdjustedX(float x) {
+        X = x;
+        PosX = X * Settings.get().spriteWidth;
+        PosCenterX = PosX + halfWidth;
+        GridX = (int) X;
+    }
+
+    public void setY(float y) {
+        Y = y;
+        boolean isGrid = (Math.abs(Y) < Settings.get().tileMapHeight);
+        if (isGrid) {
+            setAdjustedY(y);
+        }
+        else {
+            setRawY(y);
+        }
+    }
+
+    private void setRawY(float y) {
+        Y = y;
+        PosY = Y;
+        PosCenterY = PosY + halfWidth;
+        GridY = (int) (Y / Settings.get().spriteHeight);
+    }
+
+    private void setAdjustedY(float y) {
+        Y = y;
+        PosY = Y * Settings.get().spriteHeight;
         PosCenterY = PosY + halfHeight;
-        GridY = (isGrid) ? (int) Y : (int) (Y / Settings.get().spriteHeight);
+        GridY = (int) Y;
     }
 
     public void setWeight(float weight) {
@@ -151,6 +196,6 @@ public class Point2 {
 
     @Override
     public String toString() {
-        return "(gX,gY) - (posX,posY):  (" + GridX + "," + GridY + ") - (" + PosX + "," + PosY + ")";
+        return "(X,Y) - (gX,gY) - (posX,posY):  (" + X + "," + Y + ") - (" + GridX + "," + GridY + ") - (" + PosX + "," + PosY + ")";
     }
 }

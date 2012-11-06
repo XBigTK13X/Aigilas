@@ -8,11 +8,9 @@ import sps.io.Input;
 import sps.net.Client;
 import sps.states.State;
 import sps.states.StateManager;
-import sps.text.ActionTextHandler;
 import sps.text.StaticTextPool;
 
 public class MainMenuState implements State {
-    private final ActionTextHandler _text = new ActionTextHandler();
 
     private static final String PlayText = "Play Game";
     private static final String OptionsText = "Options";
@@ -83,7 +81,5 @@ public class MainMenuState implements State {
 
     @Override
     public void draw() {
-        _text.draw();
-        _text.clear();
     }
 }

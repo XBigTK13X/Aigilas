@@ -32,13 +32,19 @@ public class StaticTextPool {
         }
     }
 
-    public void write(String message, Point2 position) {
-        write(message, position, StaticText.NotTimed);
+    public StaticText write(String message, Point2 position) {
+        return write(message, position, StaticText.NotTimed);
     }
 
-    public void write(String message, Point2 position, float lifeInSeconds) {
-        texts.get(index).reset(position, message, 1, lifeInSeconds);
+    public StaticText write(String message, Point2 position, float lifeInSeconds) {
+        return write(message, position, lifeInSeconds, TextEffects.None);
+    }
+
+    public StaticText write(String message, Point2 position, float lifeInSeconds, TextEffect effect) {
+        StaticText result = texts.get(index);
+        result.reset(position, message, 1, lifeInSeconds, effect);
         index = (index + 1) % texts.size();
+        return result;
     }
 
     public void draw() {

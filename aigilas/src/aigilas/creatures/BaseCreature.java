@@ -31,10 +31,8 @@ import sps.entities.EntityManager;
 import sps.entities.IActor;
 import sps.io.Input;
 import sps.paths.Path;
-import sps.text.ActionText;
-import sps.text.ActionTextHandler;
-import sps.text.TextManager;
-import sps.util.IntegerStorage;
+import sps.text.StaticTextPool;
+import sps.text.TextEffects;
 import sps.util.StringStorage;
 
 import java.util.ArrayList;
@@ -62,7 +60,6 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Equipment _equipment;
 
     protected HudContainer _hudContainer;
-    protected final ActionTextHandler _damageText = new ActionTextHandler();
 
     protected int _playerIndex = -1;
     protected boolean _isPlaying = true;
@@ -193,7 +190,6 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (_hudContainer != null) {
             _hudContainer.update();
         }
-        _damageText.update();
     }
 
     private void regenerate() {
@@ -216,11 +212,6 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
         super.draw();
         _combo.draw();
-        _damageText.draw();
-    }
-
-    public void write(String text) {
-        _damageText.writeAction(text, 30, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosCenterY));
     }
 
     public boolean toggleInventoryVisibility() {
@@ -327,7 +318,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             damage = 0;
         }
         if (showDamage) {
-            _damageText.writeAction(StringStorage.get(damage), 30, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosCenterY));
+            StaticTextPool.get().write(StringStorage.get(damage), getLocation(), 1, TextEffects.Fountain);
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
             Logger.gameplay(this.toString() + " taking " + damage + " damage" + " from " + attacker);
@@ -454,7 +445,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 if (_class != null) {
                     _skills.add(_class.getLevelSkills(_currentLevel));
                 }
-                TextManager.add(new ActionText("LEVEL UP!", 100, (int) getLocation().PosX, (int) getLocation().PosY));
+                StaticTextPool.get().write("LEVEL UP!", getLocation(), 10);
             }
         }
     }
@@ -480,7 +471,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             lastSum = _baseStats.getSum();
             _skills.useActive();
             if (lastSum != _baseStats.getSum()) {
-                _damageText.writeAction(getActiveSkillName(), 40, IntegerStorage.get(getLocation().PosCenterX), IntegerStorage.get(getLocation().PosY));
+                StaticTextPool.get().write(getActiveSkillName(), getLocation(), 4);
             }
         }
     }
