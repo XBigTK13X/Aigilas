@@ -3,15 +3,16 @@ package aigilas.strategies.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
-import sps.bridge.Commands;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
+import sps.bridge.Command;
+import sps.bridge.Commands;
+import sps.bridge.Contexts;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.bridge.Contexts;
 import sps.io.Input;
 
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class ControlledByPlayer extends BaseStrategy {
     private boolean _isCasting = false;
     private final Point2 _keyVelocity = new Point2(0, 0);
 
-    private static final List<Commands> __hotkeys = Arrays.asList(Commands.HotSkill1, Commands.HotSkill2, Commands.HotSkill3);
+    private static final List<Command> __hotkeys = Arrays.asList(Commands.get("HotSkill1"), Commands.get("HotSkill2"), Commands.get("HotSkill3"));
 
     public ControlledByPlayer(BaseCreature parent) {
         super(parent, Strategy.ControlledByPlayer);
@@ -31,35 +32,35 @@ public class ControlledByPlayer extends BaseStrategy {
 
     @Override
     public void act() {
-        if (Input.isActive(Commands.Start, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("Start"), _parent.getPlayerIndex())) {
             _parent.setPlaying(true);
         }
-        if (Input.isActive(Commands.Back, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("Back"), _parent.getPlayerIndex())) {
             _parent.setPlaying(false);
         }
         if (_parent.isPlaying()) {
-            if (!Input.isContext(Contexts.Inventory, _parent.getPlayerIndex())) {
-                float leftVelocity = (Input.isActive(Commands.MoveLeft, _parent.getPlayerIndex()) ? -Stats.DefaultMoveDistance : 0);
-                float rightVelocity = ((Input.isActive(Commands.MoveRight, _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
+            if (!Input.isContext(Contexts.get("Inventory"), _parent.getPlayerIndex())) {
+                float leftVelocity = (Input.isActive(Commands.get("MoveLeft"), _parent.getPlayerIndex()) ? -Stats.DefaultMoveDistance : 0);
+                float rightVelocity = ((Input.isActive(Commands.get("MoveRight"), _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
                 _keyVelocity.setX(rightVelocity + leftVelocity);
 
-                float downVelocity = ((Input.isActive(Commands.MoveDown, _parent.getPlayerIndex())) ? -Stats.DefaultMoveDistance : 0);
-                float upVelocity = ((Input.isActive(Commands.MoveUp, _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
+                float downVelocity = ((Input.isActive(Commands.get("MoveDown"), _parent.getPlayerIndex())) ? -Stats.DefaultMoveDistance : 0);
+                float upVelocity = ((Input.isActive(Commands.get("MoveUp"), _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
                 _keyVelocity.setY(upVelocity + downVelocity);
 
-                if (Input.isContext(Contexts.Free, _parent.getPlayerIndex())) {
-                    boolean isPress = Input.isActive(Commands.Confirm, _parent.getPlayerIndex());
+                if (Input.isContext(Contexts.get("Free"), _parent.getPlayerIndex())) {
+                    boolean isPress = Input.isActive(Commands.get("Confirm"), _parent.getPlayerIndex());
                     if (!isPress) {
                         _parent.setInteraction(false);
                     }
                     if (isPress && !_parent.isInteracting()) {
                         _parent.setInteraction(true);
                     }
-                    int skillCycleVelocity = ((Input.isActive(Commands.CycleLeft, _parent.getPlayerIndex())) ? -1 : 0) + ((Input.isActive(Commands.CycleRight, _parent.getPlayerIndex())) ? 1 : 0);
+                    int skillCycleVelocity = ((Input.isActive(Commands.get("CycleLeft"), _parent.getPlayerIndex())) ? -1 : 0) + ((Input.isActive(Commands.get("CycleRight"), _parent.getPlayerIndex())) ? 1 : 0);
                     _parent.cycleActiveSkill(skillCycleVelocity);
 
                     if (!_isCasting) {
-                        if (!Input.isActive(Commands.Confirm, _parent.getPlayerIndex(), false)) {
+                        if (!Input.isActive(Commands.get("Confirm"), _parent.getPlayerIndex(), false)) {
                             _parent.moveIfPossible(_keyVelocity.X, _keyVelocity.Y);
                         }
                         if (!_keyVelocity.isZero()) {
@@ -67,13 +68,13 @@ public class ControlledByPlayer extends BaseStrategy {
                         }
                     }
                 }
-                if (Input.isActive(Commands.Skill, _parent.getPlayerIndex())) {
+                if (Input.isActive(Commands.get("Skill"), _parent.getPlayerIndex())) {
                     _isCasting = true;
                 }
 
-                for (Commands hotkey : __hotkeys) {
+                for (Command hotkey : __hotkeys) {
                     if (Input.isActive(hotkey, _parent.getPlayerIndex())) {
-                        if (!Input.isActive(Commands.LockSkill, _parent.getPlayerIndex(), false)) {
+                        if (!Input.isActive(Commands.get("LockSkill"), _parent.getPlayerIndex(), false)) {
                             if (_parent.setHotSkillActive(hotkey)) {
                                 _isCasting = true;
                             }
@@ -95,7 +96,7 @@ public class ControlledByPlayer extends BaseStrategy {
                 }
             }
 
-            if (Input.isActive(Commands.Inventory, _parent.getPlayerIndex())) {
+            if (Input.isActive(Commands.get("Inventory"), _parent.getPlayerIndex())) {
                 if (Settings.get().debugInventory) {
                     for (Entity player : EntityManager.get().getPlayers()) {
                         Player p = (Player) player;
@@ -104,7 +105,7 @@ public class ControlledByPlayer extends BaseStrategy {
                         }
                     }
                 }
-                Input.setContext(_parent.toggleInventoryVisibility() ? Contexts.Inventory : Contexts.Free, _parent.getPlayerIndex());
+                Input.setContext(_parent.toggleInventoryVisibility() ? Contexts.get("Inventory") : Contexts.get("Free"), _parent.getPlayerIndex());
             }
         }
     }

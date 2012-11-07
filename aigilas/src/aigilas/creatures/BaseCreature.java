@@ -8,7 +8,6 @@ import aigilas.hud.HudContainer;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
-import sps.bridge.Commands;
 import aigilas.reactions.ReactionMeter;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillLogic;
@@ -19,9 +18,7 @@ import aigilas.statuses.StatusPool;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.TargetSet;
-import sps.bridge.ActorType;
-import sps.bridge.DrawDepth;
-import sps.bridge.EntityType;
+import sps.bridge.*;
 import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.Settings;
@@ -575,18 +572,18 @@ public abstract class BaseCreature extends Entity implements IActor {
     @Override
     public void performInteraction() {
         setInteracting(false);
-        Input.lock(Commands.Confirm, getPlayerIndex());
+        Input.lock(Commands.get("Confirm"), getPlayerIndex());
     }
 
-    public void markHotSkill(Commands hotSkillSlot) {
+    public void markHotSkill(Command hotSkillSlot) {
         _skills.makeActiveSkillHot(hotSkillSlot);
     }
 
-    public boolean setHotSkillActive(Commands hotkey) {
+    public boolean setHotSkillActive(Command hotkey) {
         return _skills.setHotSkillsActive(hotkey);
     }
 
-    public String getHotSkillName(Commands hotSkillSlot) {
+    public String getHotSkillName(Command hotSkillSlot) {
         return _skills.getHotSkillName(hotSkillSlot);
     }
 

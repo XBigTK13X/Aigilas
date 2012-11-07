@@ -1,54 +1,63 @@
 package sps.bridge;
 
-import sps.io.Buttons;
-import sps.io.Keys;
+import sps.core.Logger;
 
-public enum Commands {
-    MoveUp(Contexts.Nonfree),
-    MoveDown(Contexts.Nonfree),
-    MoveLeft(Contexts.Nonfree),
-    MoveRight(Contexts.Nonfree),
-    Confirm(Contexts.All),
-    Inventory(Contexts.All),
-    Skill(Contexts.All),
-    CycleLeft(Contexts.All),
-    CycleRight(Contexts.All),
-    Cancel(Contexts.All),
-    Start(Contexts.All),
-    Back(Contexts.All),
-    LockSkill(Contexts.All),
-    HotSkill1(Contexts.All),
-    HotSkill2(Contexts.All),
-    HotSkill3(Contexts.All),
-    ToggleDevConsole(Contexts.All);
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    private Buttons _button;
-    private Keys _key;
-    public final Contexts Context;
+public class Commands {
+    private static Commands instance;
 
-    private Commands(Contexts context) {
-        Context = context;
+    public static Command get(String name) {
+        return instance.resolve(name);
     }
 
-    public void bind(Buttons button, Keys key) {
-        _button = button;
-        _key = key;
+    public static void add(Command command) {
+        if (instance == null) {
+            instance = new Commands();
+        }
+        instance.put(command);
     }
 
-    public Buttons button() {
-        return _button;
+    public static List<Command> values() {
+        return instance.all();
     }
 
-    public Keys key() {
-        return _key;
+    public static int size() {
+        return instance.all().size();
     }
 
-    public static Commands get(String s) {
-        for (Commands key : values()) {
-            if (key.name().equalsIgnoreCase(s)) {
-                return key;
+
+    private Map<String, Command> commands = new HashMap<String, Command>();
+
+    private Commands() {
+
+    }
+
+    public void put(Command command) {
+        commands.put(command.name(), command);
+    }
+
+    public Command resolve(String name) {
+        if (!commands.containsKey(name.toLowerCase())) {
+            Logger.exception("The context " + name + " is not defined.", new Exception("Add it to contexts.cfg"));
+        }
+        return commands.get(name.toLowerCase());
+    }
+
+    private List<Command> values;
+
+    public List<Command> all() {
+        if (values == null) {
+            values = new ArrayList<Command>();
+            for (String key : commands.keySet()) {
+                values.add(commands.get(key));
             }
         }
-        return null;
+        return values;
     }
+
+
 }

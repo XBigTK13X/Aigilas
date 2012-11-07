@@ -1,7 +1,9 @@
 package sps.io;
 
-import sps.bridge.Commands;
 import com.badlogic.gdx.Gdx;
+import sps.bridge.Command;
+import sps.bridge.Commands;
+import sps.bridge.Context;
 import sps.bridge.Contexts;
 import sps.net.Client;
 
@@ -11,23 +13,23 @@ import java.util.List;
 
 public class Input {
     // $$$ FIXME (Integer -> PlayerId) Maps a playerId to a context
-    private static HashMap<Integer, Contexts> __contexts;
+    private static HashMap<Integer, Context> __contexts;
 
     // Lists what commands are locked for a given player
     private static final List<CommandLock> __locks = new ArrayList<CommandLock>();
     private static boolean __isInputActive = false;
 
     public static void setup() {
-        __contexts = new HashMap<Integer, Contexts>();
-        __contexts.put(0, Contexts.Free);
-        __contexts.put(1, Contexts.Free);
-        __contexts.put(2, Contexts.Free);
-        __contexts.put(3, Contexts.Free);
+        __contexts = new HashMap<Integer, Context>();
+        __contexts.put(0, Contexts.get("Free"));
+        __contexts.put(1, Contexts.get("Free"));
+        __contexts.put(2, Contexts.get("Free"));
+        __contexts.put(3, Contexts.get("Free"));
 
         InputBindings.init();
     }
 
-    public static boolean detectState(Commands command, int playerIndex) {
+    public static boolean detectState(Command command, int playerIndex) {
         /*
            * boolean gamepadActive = GamePad.GetState(
            * PlayerIndex.values()[playerIndex]).IsButtonDown(
@@ -44,15 +46,15 @@ public class Input {
         return false;
     }
 
-    private static boolean isDown(Commands command, int playerIndex) {
+    private static boolean isDown(Command command, int playerIndex) {
         return Client.get().isActive(command, playerIndex);
     }
 
-    public static boolean isActive(Commands command, int playerIndex) {
+    public static boolean isActive(Command command, int playerIndex) {
         return isActive(command, playerIndex, true);
     }
 
-    public static boolean isActive(Commands command, int playerIndex, boolean failIfLocked) {
+    public static boolean isActive(Command command, int playerIndex, boolean failIfLocked) {
         __isInputActive = isDown(command, playerIndex);
         if (!__isInputActive && shouldLock(command, playerIndex)) {
             unlock(command, playerIndex);
@@ -71,19 +73,19 @@ public class Input {
 
     // If the key is marked to be locked on press and its lock context is
     // currently inactive
-    private static boolean shouldLock(Commands command, int playerIndex) {
-        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.Nonfree && __contexts.get(playerIndex) != Contexts.Free) || command.Context == Contexts.All;
+    private static boolean shouldLock(Command command, int playerIndex) {
+        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get("Nonfree") && __contexts.get(playerIndex) != Contexts.get("Free") || command.Context == Contexts.get("All"));
     }
 
-    public static void setContext(Contexts context, int playerIndex) {
+    public static void setContext(Context context, int playerIndex) {
         __contexts.put(playerIndex, context);
     }
 
-    public static boolean isContext(Contexts context, int playerIndex) {
+    public static boolean isContext(Context context, int playerIndex) {
         return __contexts.get(playerIndex) == context;
     }
 
-    public static boolean isLocked(Commands command, int playerIndex) {
+    public static boolean isLocked(Command command, int playerIndex) {
         for (CommandLock pair : __locks) {
             if (pair.Command == command && pair.PlayerIndex == playerIndex) {
                 return true;
@@ -92,11 +94,11 @@ public class Input {
         return false;
     }
 
-    public static void lock(Commands command, int playerIndex) {
+    public static void lock(Command command, int playerIndex) {
         __locks.add(new CommandLock(command, playerIndex));
     }
 
-    public static void unlock(Commands command, int playerIndex) {
+    public static void unlock(Command command, int playerIndex) {
         for (int ii = 0; ii < __locks.size(); ii++) {
             if (__locks.get(ii).Command == command && __locks.get(ii).PlayerIndex == playerIndex) {
                 __locks.remove(__locks.get(ii));
@@ -114,7 +116,7 @@ public class Input {
             }
         }
 
-        for (Commands command : Commands.values()) {
+        for (Command command : Commands.values()) {
             Client.get().setState(command, Client.get().getFirstPlayerIndex(), detectState(command, Client.get().getFirstPlayerIndex()));
         }
     }

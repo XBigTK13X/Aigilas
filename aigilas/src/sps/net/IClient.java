@@ -1,13 +1,13 @@
 package sps.net;
 
-import sps.bridge.Commands;
+import sps.bridge.Command;
 
 public interface IClient {
-    boolean isActive(Commands command, int playerIndex);
+    boolean isActive(Command command, int playerIndex);
 
     boolean nextTurn();
 
-    void setState(Commands command, int playerIndex, boolean isActive);
+    void setState(Command command, int playerIndex, boolean isActive);
 
     int getPlayerCount();
 

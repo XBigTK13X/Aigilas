@@ -2,8 +2,8 @@ package aigilas.hud;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import sps.bridge.Commands;
 import com.badlogic.gdx.graphics.Color;
+import sps.bridge.Commands;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.core.Settings;
@@ -32,7 +32,7 @@ public class SkillHud extends BaseHud {
     }
 
     private String getSkillStrings() {
-        return "S:" + _parent.getActiveSkillName() + __separator + "Z:" + _parent.getHotSkillName(Commands.HotSkill1) + __separator + "X:" + _parent.getHotSkillName(Commands.HotSkill2) + __separator + "C:" + _parent.getHotSkillName(Commands.HotSkill3) + __separator;
+        return "S:" + _parent.getActiveSkillName() + __separator + "Z:" + _parent.getHotSkillName(Commands.get("HotSkill1")) + __separator + "X:" + _parent.getHotSkillName(Commands.get("HotSkill2")) + __separator + "C:" + _parent.getHotSkillName(Commands.get("HotSkill3")) + __separator;
     }
 
     public void update() {

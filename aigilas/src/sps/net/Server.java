@@ -1,5 +1,6 @@
 package sps.net;
 
+import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.core.Logger;
 import sps.core.Settings;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 
 public class Server extends Thread {
     private boolean isRunning = true;
-    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Commands, Boolean>>();
+    private final HashMap<Integer, HashMap<Command, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Command, Boolean>>();
     private final int _rngSeed = (int) System.currentTimeMillis();
     private Message _message = Message.empty();
     private Integer _turnCount = 0;
@@ -20,8 +21,8 @@ public class Server extends Thread {
         setName("Server");
         clients = new ClientManager();
         for (int ii = 0; ii < Message.PlayerMax; ii++) {
-            _playerStatus.put(ii, new HashMap<Commands, Boolean>());
-            for (Commands command : Commands.values()) {
+            _playerStatus.put(ii, new HashMap<Command, Boolean>());
+            for (Command command : Commands.values()) {
                 _playerStatus.get(ii).put(command, false);
             }
         }
@@ -103,9 +104,9 @@ public class Server extends Thread {
         }
     }
 
-    private void initPlayer(int playerIndex, Commands command) {
+    private void initPlayer(int playerIndex, Command command) {
         if (!_playerStatus.containsKey(playerIndex)) {
-            _playerStatus.put(playerIndex, new HashMap<Commands, Boolean>());
+            _playerStatus.put(playerIndex, new HashMap<Command, Boolean>());
         }
         if (!_playerStatus.get(playerIndex).containsKey(command)) {
             _playerStatus.get(playerIndex).put(command, false);

@@ -1,5 +1,6 @@
 package sps.net;
 
+import sps.bridge.Command;
 import sps.bridge.Commands;
 
 import java.io.Serializable;
@@ -16,16 +17,20 @@ public class Message implements Serializable {
     public Integer TurnCount;
     public MessageTypes MessageType;
     public Integer PlayerIndex;
-    public Commands Command;
+    public Command Command;
     public boolean IsActive;
     public Integer RngSeed;
     public byte PlayerCount;
-    public final byte[] PlayerOneState = new byte[Commands.values().length];
-    public final byte[] PlayerTwoState = new byte[Commands.values().length];
-    public final byte[] PlayerThreeState = new byte[Commands.values().length];
-    public final byte[] PlayerFourState = new byte[Commands.values().length];
+    public final byte[] PlayerOneState;
+    public final byte[] PlayerTwoState;
+    public final byte[] PlayerThreeState;
+    public final byte[] PlayerFourState;
 
     protected Message() {
+        PlayerOneState = new byte[Commands.size()];
+        PlayerTwoState = new byte[Commands.size()];
+        PlayerThreeState = new byte[Commands.size()];
+        PlayerFourState = new byte[Commands.size()];
     }
 
     public static Message empty() {
@@ -61,7 +66,7 @@ public class Message implements Serializable {
         return result;
     }
 
-    public static Message createMovement(Commands command, int playerIndex, boolean isActive) {
+    public static Message createMovement(Command command, int playerIndex, boolean isActive) {
         Message result = MessagePool.get();
         result.MessageType = MessageTypes.Movement;
         result.PlayerIndex = playerIndex;
@@ -70,7 +75,7 @@ public class Message implements Serializable {
         return result;
     }
 
-    public static Message createPlayerState(HashMap<Integer, HashMap<Commands, Boolean>> playerStatus, Integer turnCount, Integer rngSeed) {
+    public static Message createPlayerState(HashMap<Integer, HashMap<Command, Boolean>> playerStatus, Integer turnCount, Integer rngSeed) {
         Message result = MessagePool.get();
         result.MessageType = MessageTypes.Sync_State;
         result.writePlayerState(playerStatus);
@@ -79,9 +84,9 @@ public class Message implements Serializable {
         return result;
     }
 
-    public void writePlayerState(HashMap<Integer, HashMap<Commands, Boolean>> state) {
+    public void writePlayerState(HashMap<Integer, HashMap<Command, Boolean>> state) {
         for (int jj = 0; jj < PlayerMax; jj++) {
-            for (Commands command : Commands.values()) {
+            for (Command command : Commands.values()) {
                 switch (jj) {
                     case 0:
                         PlayerOneState[command.ordinal()] = (state.get(jj).get(command)) ? TrueByte : FalseByte;
@@ -100,9 +105,9 @@ public class Message implements Serializable {
         }
     }
 
-    public void readPlayerState(HashMap<Integer, HashMap<Commands, Boolean>> result) {
+    public void readPlayerState(HashMap<Integer, HashMap<Command, Boolean>> result) {
         for (int jj = 0; jj < PlayerMax; jj++) {
-            for (Commands command : Commands.values()) {
+            for (Command command : Commands.values()) {
                 switch (jj) {
                     case 0:
                         result.get(jj).put(command, (PlayerOneState[command.ordinal()] == TrueByte));

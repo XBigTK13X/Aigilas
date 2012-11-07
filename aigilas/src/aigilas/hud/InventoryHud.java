@@ -5,8 +5,8 @@ import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
 import aigilas.items.ItemClass;
-import sps.bridge.Commands;
 import com.badlogic.gdx.graphics.Color;
+import sps.bridge.Commands;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;
 import sps.graphics.Renderer;
@@ -49,7 +49,7 @@ public class InventoryHud extends BaseHud {
     }
 
     private void handleInput() {
-        if (Input.isActive(Commands.CycleLeft, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("CycleLeft"), _parent.getPlayerIndex())) {
             _currentClass--;
             if (_currentClass < 0) {
                 _currentClass = ItemClass.values().length - 1;
@@ -59,7 +59,7 @@ public class InventoryHud extends BaseHud {
             forceRefresh = true;
         }
 
-        if (Input.isActive(Commands.CycleRight, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("CycleRight"), _parent.getPlayerIndex())) {
             _currentClass++;
             if (_currentClass >= ItemClass.values().length) {
                 _currentClass = 0;
@@ -69,7 +69,7 @@ public class InventoryHud extends BaseHud {
             forceRefresh = true;
         }
 
-        if (Input.isActive(Commands.MoveDown, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("MoveDown"), _parent.getPlayerIndex())) {
             if (_startingItem < _currentClassItems.size() - 1) {
                 _startingItem++;
                 _endingItem++;
@@ -77,18 +77,18 @@ public class InventoryHud extends BaseHud {
             }
         }
 
-        if (Input.isActive(Commands.MoveUp, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("MoveUp"), _parent.getPlayerIndex())) {
             if (_startingItem > 0) {
                 _startingItem--;
                 _endingItem--;
                 forceRefresh = true;
             }
         }
-        if (Input.isActive(Commands.Confirm, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("Confirm"), _parent.getPlayerIndex())) {
             _parent.equip(_currentSelectedItem);
             forceRefresh = true;
         }
-        if (Input.isActive(Commands.Cancel, _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get("Cancel"), _parent.getPlayerIndex())) {
             _parent.drop(_currentSelectedItem);
             forceRefresh = true;
         }

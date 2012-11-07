@@ -1,7 +1,7 @@
 package aigilas.skills;
 
 import aigilas.creatures.BaseCreature;
-import sps.bridge.Commands;
+import sps.bridge.Command;
 import sps.core.Logger;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class SkillPool {
     private int _currentSkillSlot = 0;
     private final BaseCreature _owner;
     private final HashMap<SkillId, Integer> _usageCounter = new HashMap<SkillId, Integer>();
-    private final HashMap<Commands, SkillId> _hotSkills = new HashMap<Commands, SkillId>();
+    private final HashMap<Command, SkillId> _hotSkills = new HashMap<Command, SkillId>();
 
     public SkillPool(BaseCreature owner) {
         _owner = owner;
@@ -108,14 +108,14 @@ public class SkillPool {
         return _skills.size();
     }
 
-    public void makeActiveSkillHot(Commands hotSkillSlot) {
+    public void makeActiveSkillHot(Command hotSkillSlot) {
         if (!_hotSkills.containsKey(hotSkillSlot)) {
             _hotSkills.put(hotSkillSlot, findCurrent());
         }
         _hotSkills.put(hotSkillSlot, findCurrent());
     }
 
-    public boolean setHotSkillsActive(Commands hotkey) {
+    public boolean setHotSkillsActive(Command hotkey) {
         if (_hotSkills.containsKey(hotkey)) {
             for (int ii = 0; ii < _skills.size(); ii++) {
                 if (_skills.get(ii) == _hotSkills.get(hotkey)) {
@@ -128,7 +128,7 @@ public class SkillPool {
         return false;
     }
 
-    public String getHotSkillName(Commands hotSkillSlot) {
+    public String getHotSkillName(Command hotSkillSlot) {
         if (_hotSkills.containsKey(hotSkillSlot)) {
             return _hotSkills.get(hotSkillSlot).Info.Name;
         }

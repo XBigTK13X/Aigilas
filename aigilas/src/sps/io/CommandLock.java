@@ -1,13 +1,13 @@
 package sps.io;
 
-import sps.bridge.Commands;
+import sps.bridge.Command;
 
 public class CommandLock {
-    public CommandLock(Commands command, int playerIndex) {
+    public CommandLock(Command command, int playerIndex) {
         Command = command;
         PlayerIndex = playerIndex;
     }
 
-    public final Commands Command;
+    public final Command Command;
     public final int PlayerIndex;
 }

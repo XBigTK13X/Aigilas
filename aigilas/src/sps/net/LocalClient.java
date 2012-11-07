@@ -1,7 +1,8 @@
 package sps.net;
 
-import sps.bridge.Commands;
 import com.badlogic.gdx.Gdx;
+import sps.bridge.Command;
+import sps.bridge.Commands;
 import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -12,7 +13,7 @@ public class LocalClient implements IClient {
     private boolean _isGameStarting;
     private float _turnTimer = 0;
     private boolean _isConnected;
-    private final HashMap<Integer, HashMap<Commands, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Commands, Boolean>>();
+    private final HashMap<Integer, HashMap<Command, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Command, Boolean>>();
 
     private final int maxPlayers = 1;
 
@@ -21,8 +22,8 @@ public class LocalClient implements IClient {
             Logger.client("CLIENT: Starting up");
         }
         for (int ii = 0; ii < maxPlayers; ii++) {
-            _playerStatus.put(ii, new HashMap<Commands, Boolean>());
-            for (Commands command : Commands.values()) {
+            _playerStatus.put(ii, new HashMap<Command, Boolean>());
+            for (Command command : Commands.values()) {
                 _playerStatus.get(ii).put(command, false);
             }
         }
@@ -45,9 +46,9 @@ public class LocalClient implements IClient {
         return false;
     }
 
-    private void initPlayer(int playerIndex, Commands command) {
+    private void initPlayer(int playerIndex, Command command) {
         if (!_playerStatus.containsKey(playerIndex)) {
-            _playerStatus.put(playerIndex, new HashMap<Commands, Boolean>());
+            _playerStatus.put(playerIndex, new HashMap<Command, Boolean>());
         }
         if (!_playerStatus.get(playerIndex).containsKey(command)) {
             _playerStatus.get(playerIndex).put(command, false);
@@ -58,14 +59,14 @@ public class LocalClient implements IClient {
         return 0;
     }
 
-    public boolean isActive(Commands command, int playerIndex) {
+    public boolean isActive(Command command, int playerIndex) {
         if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
             return _playerStatus.get(playerIndex).get(command);
         }
         return false;
     }
 
-    public void setState(Commands command, int playerIndex, boolean isActive) {
+    public void setState(Command command, int playerIndex, boolean isActive) {
         initPlayer(playerIndex, command);
         if (_playerStatus.get(playerIndex).get(command) != isActive) {
             if (Settings.get().clientVerbose) {

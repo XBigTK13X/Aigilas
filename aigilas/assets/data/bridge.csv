@@ -1,0 +1,24 @@
+## Contexts
+context,Inventory
+context,All
+context,NonFree
+context,Free
+
+##Commands
+command,MoveUp,NonFree
+command,MoveDown,NonFree
+command,MoveLeft,NonFree
+command,MoveRight,NonFree
+command,Confirm,All
+command,Inventory,All
+command,Skill,All
+command,CycleLeft,All
+command,CycleRight,All
+command,Cancel,All
+command,Start,All
+command,Back,All
+command,LockSkill,All
+command,HotSkill1,All
+command,HotSkill2,All
+command,HotSkill3,All
+command,ToggleDevConsole,All

@@ -1,14 +1,14 @@
 package aigilas;
 
 import aigilas.hud.HudRenderer;
-import sps.bridge.Commands;
 import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import sps.core.Logger;
+import sps.bridge.Commands;
 import sps.bridge.Spx;
 import sps.core.DevConsole;
+import sps.core.Logger;
 import sps.graphics.Renderer;
 import sps.graphics.SpriteSheetManager;
 import sps.io.Input;
@@ -46,10 +46,10 @@ public class Aigilas implements ApplicationListener {
 
             // Update
             Input.update();
-            if (Input.isActive(Commands.ToggleDevConsole, Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get("ToggleDevConsole"), Client.get().getFirstPlayerIndex())) {
                 DevConsole.get().toggle();
             }
-            if (Input.isActive(Commands.Back, Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get("Back"), Client.get().getFirstPlayerIndex())) {
                 Gdx.app.exit();
             }
             if (Client.get().nextTurn()) {
