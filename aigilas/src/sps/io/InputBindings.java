@@ -1,6 +1,6 @@
 package sps.io;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 import sps.core.Logger;
 
 import java.io.BufferedReader;

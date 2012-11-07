@@ -1,7 +1,8 @@
 package sps.io;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 import com.badlogic.gdx.Gdx;
+import sps.bridge.Contexts;
 import sps.net.Client;
 
 import java.util.ArrayList;

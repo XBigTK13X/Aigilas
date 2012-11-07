@@ -1,6 +1,6 @@
 package sps.graphics;
 
-import sps.core.SpriteType;
+import sps.bridge.SpriteType;
 
 public class SpriteDefinition {
     public final SpriteType Type;

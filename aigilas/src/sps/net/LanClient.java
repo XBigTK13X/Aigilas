@@ -1,10 +1,10 @@
 package sps.net;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
-import sps.devtools.DevConsole;
+import sps.core.DevConsole;
 
 import java.net.Socket;
 import java.util.HashMap;

@@ -6,7 +6,7 @@ import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
 import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
-import sps.core.SpriteType;
+import sps.bridge.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SideEffects;

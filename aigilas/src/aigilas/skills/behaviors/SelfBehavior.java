@@ -2,7 +2,7 @@ package aigilas.skills.behaviors;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
-import sps.core.SpriteType;
+import sps.bridge.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import sps.core.Point2;

@@ -1,7 +1,6 @@
-package sps.core;
+package sps.bridge;
 
 import sps.io.Buttons;
-import sps.io.Contexts;
 import sps.io.Keys;
 
 public enum Commands {

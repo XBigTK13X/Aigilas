@@ -1,6 +1,6 @@
 package sps.graphics;
 
-import sps.core.SpriteType;
+import sps.bridge.SpriteType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;

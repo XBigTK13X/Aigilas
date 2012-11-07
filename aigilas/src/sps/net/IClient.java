@@ -1,6 +1,6 @@
 package sps.net;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 
 public interface IClient {
     boolean isActive(Commands command, int playerIndex);

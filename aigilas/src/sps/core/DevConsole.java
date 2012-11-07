@@ -1,9 +1,8 @@
-package sps.devtools;
+package sps.core;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
-import sps.core.Point2;
 import sps.graphics.Assets;
 import sps.graphics.Renderer;
 import sps.text.TextPool;

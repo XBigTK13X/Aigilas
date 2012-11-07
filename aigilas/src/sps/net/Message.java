@@ -1,6 +1,6 @@
 package sps.net;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 
 import java.io.Serializable;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package sps.entities;
 
-import sps.core.SpriteType;
+import sps.bridge.SpriteType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
 import sps.core.Point2;

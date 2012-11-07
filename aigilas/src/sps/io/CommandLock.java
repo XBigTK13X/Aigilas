@@ -1,6 +1,6 @@
 package sps.io;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 
 public class CommandLock {
     public CommandLock(Commands command, int playerIndex) {

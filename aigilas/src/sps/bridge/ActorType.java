@@ -1,6 +1,5 @@
 package sps.bridge;
 
-import sps.core.SpriteType;
 import sps.core.RNG;
 
 import java.util.ArrayList;

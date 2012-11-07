@@ -1,4 +1,4 @@
-package sps.core;
+package sps.bridge;
 
 import com.badlogic.gdx.utils.GdxNativesLoader;
 import sps.graphics.Assets;

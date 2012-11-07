@@ -3,7 +3,7 @@ package aigilas.strategies.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
-import sps.core.Commands;
+import sps.bridge.Commands;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
@@ -11,7 +11,7 @@ import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.io.Contexts;
+import sps.bridge.Contexts;
 import sps.io.Input;
 
 import java.util.Arrays;

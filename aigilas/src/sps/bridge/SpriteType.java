@@ -1,4 +1,4 @@
-package sps.core;
+package sps.bridge;
 
 import sps.graphics.SpriteDefinition;
 

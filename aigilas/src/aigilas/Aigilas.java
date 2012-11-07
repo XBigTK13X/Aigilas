@@ -1,14 +1,14 @@
 package aigilas;
 
 import aigilas.hud.HudRenderer;
-import sps.core.Commands;
+import sps.bridge.Commands;
 import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
-import sps.core.Spx;
-import sps.devtools.DevConsole;
+import sps.bridge.Spx;
+import sps.core.DevConsole;
 import sps.graphics.Renderer;
 import sps.graphics.SpriteSheetManager;
 import sps.io.Input;

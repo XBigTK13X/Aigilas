@@ -1,9 +1,9 @@
 package aigilas.states;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 import sps.core.Logger;
 import sps.core.Point2;
-import sps.io.Contexts;
+import sps.bridge.Contexts;
 import sps.io.Input;
 import sps.net.Client;
 import sps.states.State;

@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import sps.core.Commands;
+import sps.bridge.Commands;
 import sps.audio.MusicPlayer;
 import sps.core.Point2;
 import sps.graphics.Renderer;
