@@ -1,6 +1,6 @@
 package aigilas.items;
 
-import aigilas.management.SpriteType;
+import sps.core.SpriteType;
 
 import java.util.Arrays;
 

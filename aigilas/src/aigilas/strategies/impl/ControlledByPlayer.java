@@ -3,7 +3,7 @@ package aigilas.strategies.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
-import aigilas.management.Commands;
+import sps.core.Commands;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;

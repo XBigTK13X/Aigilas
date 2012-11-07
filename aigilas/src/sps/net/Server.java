@@ -1,6 +1,6 @@
 package sps.net;
 
-import aigilas.management.Commands;
+import sps.core.Commands;
 import sps.core.Logger;
 import sps.core.Settings;
 

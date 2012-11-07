@@ -1,7 +1,7 @@
 package aigilas;
 
 import aigilas.hud.HudRenderer;
-import aigilas.management.Commands;
+import sps.core.Commands;
 import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;

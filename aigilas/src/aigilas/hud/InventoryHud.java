@@ -5,7 +5,7 @@ import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
 import aigilas.items.ItemClass;
-import aigilas.management.Commands;
+import sps.core.Commands;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;

@@ -2,7 +2,7 @@ package aigilas.hud;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.management.Commands;
+import sps.core.Commands;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepth;
 import sps.core.Point2;

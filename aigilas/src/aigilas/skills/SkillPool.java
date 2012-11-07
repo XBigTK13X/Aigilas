@@ -1,7 +1,7 @@
 package aigilas.skills;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.management.Commands;
+import sps.core.Commands;
 import sps.core.Logger;
 
 import java.util.ArrayList;

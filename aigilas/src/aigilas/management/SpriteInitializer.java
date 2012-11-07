@@ -1,5 +1,6 @@
 package aigilas.management;
 
+import sps.core.SpriteType;
 import sps.graphics.ISpriteInitializer;
 import sps.graphics.SpriteDefinition;
 

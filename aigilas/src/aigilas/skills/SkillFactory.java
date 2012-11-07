@@ -1,7 +1,7 @@
 package aigilas.skills;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.management.SpriteType;
+import sps.core.SpriteType;
 import aigilas.skills.animations.*;
 import aigilas.skills.behaviors.*;
 import aigilas.skills.impl.*;

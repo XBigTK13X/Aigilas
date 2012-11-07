@@ -1,6 +1,6 @@
 package sps.net;
 
-import aigilas.management.Commands;
+import sps.core.Commands;
 
 import java.io.Serializable;
 import java.util.HashMap;

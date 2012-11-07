@@ -1,4 +1,4 @@
-package aigilas.management;
+package sps.core;
 
 import sps.io.Buttons;
 import sps.io.Contexts;

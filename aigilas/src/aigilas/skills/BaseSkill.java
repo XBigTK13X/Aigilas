@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
-import aigilas.management.SpriteType;
+import sps.core.SpriteType;
 import aigilas.skills.behaviors.SkillBehavior;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
