@@ -26,13 +26,13 @@ public class DrawDepths {
     }
 
     public DrawDepth resolve(String name) {
-        if (!drawDepths.containsKey(name.toLowerCase())) {
+        if (!drawDepths.containsKey(name)) {
             Logger.exception("The drawDepth " + name + " is not defined.", new Exception("Add it to bridge.cfg"));
         }
-        return drawDepths.get(name.toLowerCase());
+        return drawDepths.get(name);
     }
 
     public void put(DrawDepth DrawDepth) {
-        drawDepths.put(DrawDepth.Name.toLowerCase(), DrawDepth);
+        drawDepths.put(DrawDepth.Name, DrawDepth);
     }
 }

@@ -2,6 +2,7 @@ package aigilas.states;
 
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
+import sps.core.Core;
 import sps.core.Logger;
 import sps.core.Point2;
 import sps.io.Input;
@@ -21,7 +22,7 @@ public class MainMenuState implements State {
     private int _selection = 2;
 
     public MainMenuState() {
-        Input.setContext(Contexts.get("Nonfree"), Client.get().getFirstPlayerIndex());
+        Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
     }
 
     @Override

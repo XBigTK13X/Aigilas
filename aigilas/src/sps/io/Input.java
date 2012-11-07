@@ -5,6 +5,7 @@ import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.bridge.Context;
 import sps.bridge.Contexts;
+import sps.core.Core;
 import sps.net.Client;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class Input {
     // If the key is marked to be locked on press and its lock context is
     // currently inactive
     private static boolean shouldLock(Command command, int playerIndex) {
-        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get("Nonfree") && __contexts.get(playerIndex) != Contexts.get("Free") || command.Context == Contexts.get("All"));
+        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get(Core.Non_Free) && __contexts.get(playerIndex) != Contexts.get("Free") || command.Context == Contexts.get(Core.All));
     }
 
     public static void setContext(Context context, int playerIndex) {

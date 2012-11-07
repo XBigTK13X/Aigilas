@@ -29,10 +29,10 @@ public class ActorTypes {
     }
 
     public ActorType resolve(String name) {
-        if (!actorTypes.containsKey(name.toLowerCase())) {
+        if (!actorTypes.containsKey(name)) {
             Logger.exception("The ActorType " + name + " is not defined.", new Exception("Add it to bridge.cfg"));
         }
-        return actorTypes.get(name.toLowerCase());
+        return actorTypes.get(name);
     }
 
     public void put(ActorType actorType) {

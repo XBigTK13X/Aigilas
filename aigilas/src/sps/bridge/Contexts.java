@@ -26,10 +26,10 @@ public class Contexts {
     }
 
     public Context resolve(String name) {
-        if (!contexts.containsKey(name.toLowerCase())) {
+        if (!contexts.containsKey(name)) {
             Logger.exception("The context " + name + " is not defined.", new Exception("Add it to bridge.cfg"));
         }
-        return contexts.get(name.toLowerCase());
+        return contexts.get(name);
     }
 
     public void put(Context context) {

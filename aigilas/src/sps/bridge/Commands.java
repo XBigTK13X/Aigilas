@@ -41,10 +41,10 @@ public class Commands {
     }
 
     public Command resolve(String name) {
-        if (!commands.containsKey(name.toLowerCase())) {
+        if (!commands.containsKey(name)) {
             Logger.exception("The command " + name + " is not defined.", new Exception("Add it to bridge.cfg"));
         }
-        return commands.get(name.toLowerCase());
+        return commands.get(name);
     }
 
     private List<Command> values;

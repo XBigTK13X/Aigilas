@@ -26,10 +26,10 @@ public class EntityTypes {
     }
 
     public EntityType resolve(String name) {
-        if (!EntityTypes.containsKey(name.toLowerCase())) {
+        if (!EntityTypes.containsKey(name)) {
             Logger.exception("The entityType " + name + " is not defined.", new Exception("Add it to bridge.cfg"));
         }
-        return EntityTypes.get(name.toLowerCase());
+        return EntityTypes.get(name);
     }
 
     public void put(EntityType EntityType) {
