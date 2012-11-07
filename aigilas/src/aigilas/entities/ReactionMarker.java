@@ -2,7 +2,7 @@ package aigilas.entities;
 
 import aigilas.creatures.BaseCreature;
 import sps.bridge.DrawDepths;
-import sps.bridge.EntityType;
+import sps.bridge.EntityTypes;
 import sps.entities.Entity;
 import sps.particles.Emitter;
 import sps.particles.ParticleEngine;
@@ -12,7 +12,7 @@ public class ReactionMarker extends Entity {
     private final Emitter emitter;
 
     public ReactionMarker(BaseCreature source, Elements elementId) {
-        initialize(source.getLocation(), null, EntityType.Combo_Marker, DrawDepths.get("ComboMarker"));
+        initialize(source.getLocation(), null, EntityTypes.get("ComboMarker"), DrawDepths.get("ComboMarker"));
         _graphic.setColor(elementId.Tint);
         _graphic.setAlpha(0);
         _parent = source;

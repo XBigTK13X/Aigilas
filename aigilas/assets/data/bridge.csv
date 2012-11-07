@@ -44,3 +44,15 @@ drawDepth,DevConsole,1000
 drawDepth,DevConsoleText,1010
 drawDepth,Particle,1020
 drawDepth,Debug,1030
+
+## Entity Types
+entityType,Actor
+entityType,Floor
+entityType,Wall
+entityType,Upstairs
+entityType,Downstairs
+entityType,Item
+entityType,Skill_Effect
+entityType,Skill_Efffect_Generator
+entityType,Altar
+entityType,Combo_Marker

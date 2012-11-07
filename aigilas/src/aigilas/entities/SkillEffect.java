@@ -7,6 +7,7 @@ import aigilas.skills.animations.SkillAnimation;
 import sps.bridge.ActorType;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityType;
+import sps.bridge.EntityTypes;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -32,7 +33,7 @@ public class SkillEffect extends Entity {
 
     public SkillEffect(Point2 gridLocation, Point2 velocity, BaseCreature source, BaseSkill skill) {
         _skill = skill;
-        initialize(gridLocation, _skill.behavior().getSpriteType(), EntityType.Skill_Effect, DrawDepths.get("BaseSkillEffect"));
+        initialize(gridLocation, _skill.behavior().getSpriteType(), EntityTypes.get("Skill_Effect"), DrawDepths.get("BaseSkillEffect"));
         _velocity.copy(velocity);
         _direction.copy(velocity);
         _source = source;

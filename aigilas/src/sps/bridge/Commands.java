@@ -42,7 +42,7 @@ public class Commands {
 
     public Command resolve(String name) {
         if (!commands.containsKey(name.toLowerCase())) {
-            Logger.exception("The context " + name + " is not defined.", new Exception("Add it to contexts.cfg"));
+            Logger.exception("The command " + name + " is not defined.", new Exception("Add it to bridge.cfg"));
         }
         return commands.get(name.toLowerCase());
     }

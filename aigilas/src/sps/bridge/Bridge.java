@@ -44,7 +44,8 @@ public class Bridge {
                         DrawDepths.add(new DrawDepth(id, depth));
                     }
                     if (name.equals("entityType")) {
-
+                        String id = values[1].toLowerCase();
+                        EntityTypes.add(new EntityType(id));
                     }
                     if (name.equals("spriteType")) {
 

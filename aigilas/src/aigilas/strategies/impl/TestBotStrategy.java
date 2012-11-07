@@ -6,7 +6,7 @@ import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
-import sps.bridge.EntityType;
+import sps.bridge.EntityTypes;
 import sps.core.RNG;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -51,8 +51,8 @@ public class TestBotStrategy extends BaseStrategy {
             }
         }
         else {
-            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityType.Actor).size() == 1) {
-                _stairsTarget = EntityManager.get().getObject(EntityType.Downstairs);
+            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityTypes.get("Actor")).size() == 1) {
+                _stairsTarget = EntityManager.get().getObject(EntityTypes.get("Downstairs"));
                 if (_stairsTarget != null) {
                     targetPath = PathFinder.find(_parent.getLocation(), _stairsTarget.getLocation());
                 }

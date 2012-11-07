@@ -5,7 +5,7 @@ import aigilas.gods.God;
 import aigilas.gods.GodId;
 import aigilas.items.GenericItem;
 import sps.bridge.DrawDepths;
-import sps.bridge.EntityType;
+import sps.bridge.EntityTypes;
 import sps.bridge.SpriteType;
 import sps.core.Point2;
 import sps.entities.Entity;
@@ -24,7 +24,7 @@ public class Altar extends Entity {
     public Altar(Point2 location, GodId godName) {
         _god = godName.getInstance();
         _graphic.setColor(_god.getColor());
-        initialize(location, SpriteType.Altar, EntityType.Altar, DrawDepths.get("Altar"));
+        initialize(location, SpriteType.Altar, EntityTypes.get("Altar"), DrawDepths.get("Altar"));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Altar extends Entity {
             if (_currentTarget.isInteracting()) {
                 _currentTarget.pray(_god);
             }
-            _offerings = EntityManager.get().getEntities(EntityType.Item, _location);
+            _offerings = EntityManager.get().getEntities(EntityTypes.get("Item"), _location);
             for (Entity offering : _offerings) {
                 _currentTarget.sacrifice(_god, (GenericItem) offering);
             }

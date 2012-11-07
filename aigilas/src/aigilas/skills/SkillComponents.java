@@ -5,6 +5,7 @@ import aigilas.entities.Elements;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.ActorType;
 import sps.bridge.EntityType;
+import sps.bridge.EntityTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +17,7 @@ public class SkillComponents {
     protected StatBuff _buff;
     protected float _effectStrength = 0;
     protected boolean _isPersistent = false;
-    protected final List<EntityType> _targetTypes = Arrays.asList(EntityType.Wall);
+    protected final List<EntityType> _targetTypes = Arrays.asList(EntityTypes.get("Wall"));
     protected List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
     protected EntityType _onlyAffects;
 

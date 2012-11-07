@@ -6,7 +6,7 @@ import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
 import sps.bridge.ActorType;
-import sps.bridge.EntityType;
+import sps.bridge.EntityTypes;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -99,7 +99,7 @@ public class DungeonFloor {
         for (Entity[] row : dungeon) {
             for (Entity tile : row) {
                 if (tile != null) {
-                    if (tile.getEntityType() != EntityType.Floor) {
+                    if (tile.getEntityType() != EntityTypes.get("Floor")) {
                         _contents.add(tile);
                     }
                     EntityManager.get().addObject(tile);
@@ -131,7 +131,7 @@ public class DungeonFloor {
         while (true) {
             int x = RNG.next(0, Settings.get().tileMapWidth);
             int y = RNG.next(0, Settings.get().tileMapHeight);
-            if (dungeon[x][y].getEntityType() == EntityType.Floor) {
+            if (dungeon[x][y].getEntityType() == EntityTypes.get("Floor")) {
                 return new Point2(x, y);
             }
         }
