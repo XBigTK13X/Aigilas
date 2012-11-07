@@ -1,5 +1,7 @@
 package sps.core;
 
+import sps.util.Parse;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -83,60 +85,48 @@ public class Settings {
 
         // Networking
         serverIp = _settings.get("server_ip");
-        port = getInt(_settings.get("socket_port"));
-        networkingEnabled = isTrue(_settings.get("networking_enabled"));
+        port = Parse.inte(_settings.get("socket_port"));
+        networkingEnabled = Parse.bool(_settings.get("networking_enabled"));
 
         // Gameplay
-        enemyCap = getInt(_settings.get("enemyCap"));
-        enemyBase = getInt(_settings.get("enemyBase"));
-        itemCap = getInt(_settings.get("itemCap"));
-        itemBase = getInt(_settings.get("itemBase"));
-        bossLevelMod = getInt(_settings.get("bossLevelMod"));
-        minRoomCount = getInt(_settings.get("minRoomCount"));
-        maxRoomCount = getInt(_settings.get("maxRoomCount"));
-        wallDecayPercent = getInt(_settings.get("wallDecayPercent"));
-        enemyStatMultiplier = getInt(_settings.get("enemyStatMultiplier"));
-        defaultSpeed = getInt(_settings.get("defaultSpeed"));
-        defaultRegen = getInt(_settings.get("defaultRegen"));
-        turnTime = 1 / getFloat(_settings.get("turnsPerSecond"));
-        turnsPerSecond = getInt(_settings.get("turnsPerSecond"));
+        enemyCap = Parse.inte(_settings.get("enemyCap"));
+        enemyBase = Parse.inte(_settings.get("enemyBase"));
+        itemCap = Parse.inte(_settings.get("itemCap"));
+        itemBase = Parse.inte(_settings.get("itemBase"));
+        bossLevelMod = Parse.inte(_settings.get("bossLevelMod"));
+        minRoomCount = Parse.inte(_settings.get("minRoomCount"));
+        maxRoomCount = Parse.inte(_settings.get("maxRoomCount"));
+        wallDecayPercent = Parse.inte(_settings.get("wallDecayPercent"));
+        enemyStatMultiplier = Parse.inte(_settings.get("enemyStatMultiplier"));
+        defaultSpeed = Parse.inte(_settings.get("defaultSpeed"));
+        defaultRegen = Parse.inte(_settings.get("defaultRegen"));
+        turnTime = 1 / Parse.floa(_settings.get("turnsPerSecond"));
+        turnsPerSecond = Parse.inte(_settings.get("turnsPerSecond"));
 
         // Audio
-        musicEnabled = isTrue(_settings.get("music_enabled"));
+        musicEnabled = Parse.bool(_settings.get("music_enabled"));
 
         // Display
-        spriteHeight = getInt(_settings.get("spriteHeight"));
-        spriteWidth = getInt(_settings.get("spriteWidth"));
-        spriteGap = getInt(_settings.get("spriteGap"));
-        tileMapHeight = getInt(_settings.get("tileMapHeight"));
-        tileMapWidth = getInt(_settings.get("tileMapWidth"));
-        resolutionHeight = getInt(_settings.get("resolutionHeight"));
-        resolutionWidth = getInt(_settings.get("resolutionWidth"));
-        fullScreen = isTrue(_settings.get("fullScreen"));
+        spriteHeight = Parse.inte(_settings.get("spriteHeight"));
+        spriteWidth = Parse.inte(_settings.get("spriteWidth"));
+        spriteGap = Parse.inte(_settings.get("spriteGap"));
+        tileMapHeight = Parse.inte(_settings.get("tileMapHeight"));
+        tileMapWidth = Parse.inte(_settings.get("tileMapWidth"));
+        resolutionHeight = Parse.inte(_settings.get("resolutionHeight"));
+        resolutionWidth = Parse.inte(_settings.get("resolutionWidth"));
+        fullScreen = Parse.bool(_settings.get("fullScreen"));
 
         // Dev
-        serverVerbose = isTrue(_settings.get("server_log_verbose"));
-        clientVerbose = isTrue(_settings.get("client_log_verbose"));
-        messageContentsVerbose = isTrue(_settings.get("message_contents_log_verbose"));
-        messageHandlerVerbose = isTrue(_settings.get("message_handler_log_verbose"));
-        clientManagerVerbose = isTrue(_settings.get("client_manager_log_verbose"));
-        viewPaths = isTrue(_settings.get("viewPaths"));
-        gameplayVerbose = isTrue(_settings.get("gameplay_log_verbose"));
-        devConsoleEnabled = isTrue(_settings.get("dev_console_enabled"));
-        debugFourPlayers = isTrue(_settings.get("debug_four_players"));
-        debugInventory = isTrue(_settings.get("debug_inventory"));
+        serverVerbose = Parse.bool(_settings.get("server_log_verbose"));
+        clientVerbose = Parse.bool(_settings.get("client_log_verbose"));
+        messageContentsVerbose = Parse.bool(_settings.get("message_contents_log_verbose"));
+        messageHandlerVerbose = Parse.bool(_settings.get("message_handler_log_verbose"));
+        clientManagerVerbose = Parse.bool(_settings.get("client_manager_log_verbose"));
+        viewPaths = Parse.bool(_settings.get("viewPaths"));
+        gameplayVerbose = Parse.bool(_settings.get("gameplay_log_verbose"));
+        devConsoleEnabled = Parse.bool(_settings.get("dev_console_enabled"));
+        debugFourPlayers = Parse.bool(_settings.get("debug_four_players"));
+        debugInventory = Parse.bool(_settings.get("debug_inventory"));
 
-    }
-
-    private boolean isTrue(String value) {
-        return value.equalsIgnoreCase("true");
-    }
-
-    private int getInt(String value) {
-        return Integer.parseInt(value);
-    }
-
-    private float getFloat(String value) {
-        return Float.parseFloat(value);
     }
 }

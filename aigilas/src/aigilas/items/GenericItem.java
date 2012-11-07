@@ -7,6 +7,7 @@ import aigilas.creatures.impl.Player;
 import sps.bridge.ActorTypes;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
+import sps.core.Core;
 import sps.core.Logger;
 import sps.core.Point2;
 import sps.entities.Entity;
@@ -64,7 +65,7 @@ public class GenericItem extends Entity {
         if (_isOnBoard) {
             IActor collider = EntityManager.get().getTouchingCreature(this);
             if (collider != null) {
-                if (collider.getActorType() == ActorTypes.get("Player")) {
+                if (collider.getActorType() == ActorTypes.get(Core.Player)) {
                     _currentTarget = (Player) collider;
                     if (_currentTarget.isInteracting()) {
                         _currentTarget.pickupItem(this);

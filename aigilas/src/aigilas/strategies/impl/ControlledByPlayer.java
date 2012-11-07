@@ -9,6 +9,7 @@ import sps.bridge.ActorTypes;
 import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
+import sps.core.Core;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.Entity;
@@ -27,7 +28,7 @@ public class ControlledByPlayer extends BaseStrategy {
     public ControlledByPlayer(BaseCreature parent) {
         super(parent, Strategy.ControlledByPlayer);
 
-        _targets.addTargetTypes(ActorTypes.get("Non_Player"));
+        _targets.addTargetTypes(new sps.bridge.ActorType[]{ActorTypes.get(Core.Non_Player)});
     }
 
     @Override

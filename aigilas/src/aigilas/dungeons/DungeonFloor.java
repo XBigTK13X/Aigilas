@@ -7,6 +7,7 @@ import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
+import sps.core.Core;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -88,7 +89,7 @@ public class DungeonFloor {
     }
 
     public void cacheContents() {
-        for (IActor player : EntityManager.get().getActors(ActorTypes.get("Player"))) {
+        for (IActor player : EntityManager.get().getActors(ActorTypes.get(Core.Player))) {
             Dungeon.addToCache((Entity) player);
             EntityManager.get().removeObject((Entity) player);
         }
@@ -115,7 +116,7 @@ public class DungeonFloor {
                 playerCount = 4;
             }
             for (int ii = 0; ii < playerCount; ii++) {
-                _contents.add(CreatureFactory.create(ActorTypes.get("Player"), getRandomNeighbor(neighbors)));
+                _contents.add(CreatureFactory.create(ActorTypes.get(Core.Player), getRandomNeighbor(neighbors)));
             }
         }
         else {
@@ -168,7 +169,7 @@ public class DungeonFloor {
     private void placeCreatures(int amountOfCreatures) {
 //        $$$ Easiest way to test specific bosses
 //        Point2 random = new Point2(findRandomFreeTile());
-//        dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorTypes.get("Player")Sloth, random);
+//        dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorTypes.get(Core.Player)Sloth, random);
 //        while(CreatureFactory.bossesRemaining() > 0){
 //                CreatureFactory.createNextBoss(Point2.Zero);
 //        }

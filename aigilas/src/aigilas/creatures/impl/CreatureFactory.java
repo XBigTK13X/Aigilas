@@ -6,10 +6,7 @@ import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
-import sps.core.Logger;
-import sps.core.Point2;
-import sps.core.RNG;
-import sps.core.Settings;
+import sps.core.*;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 
@@ -22,7 +19,7 @@ public class CreatureFactory {
 
     public static BaseCreature create(ActorType actorType, Point2 position) {
         BaseEnemy result;
-        if (actorType.is("Player")) {
+        if (actorType.is(Core.Player)) {
             result = new Player(__playerCount++);
         }
         else {

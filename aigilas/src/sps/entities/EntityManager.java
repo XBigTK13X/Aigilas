@@ -4,6 +4,7 @@ import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityType;
 import sps.bridge.EntityTypes;
+import sps.core.Core;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -94,7 +95,7 @@ public class EntityManager {
 
     public List<IActor> getActors(ActorType type) {
         _creatures.clear();
-        if (type != ActorTypes.get("Non_Player")) {
+        if (type != ActorTypes.get(Core.Non_Player)) {
             for (Entity elem : _contents) {
                 if (elem.getEntityType() == EntityTypes.get("Actor")) {
                     if (((IActor) elem).getActorType() == type) {
@@ -106,7 +107,7 @@ public class EntityManager {
         else {
             for (Entity elem : _contents) {
                 if (elem.getEntityType() == EntityTypes.get("Actor")) {
-                    if (((IActor) elem).getActorType() != ActorTypes.get("Player")) {
+                    if (((IActor) elem).getActorType() != ActorTypes.get(Core.Player)) {
                         _creatures.add(((IActor) elem));
                     }
                 }
@@ -122,7 +123,7 @@ public class EntityManager {
         for (Entity elem : _gridContents.get(target)) {
             if (elem.getEntityType() == EntityTypes.get("Actor")) {
                 _nextResult = (IActor) elem;
-                if (actorType == null || _nextResult.getActorType() == actorType || (actorType == ActorTypes.get("Non_Player ") && _nextResult.getActorType() != ActorTypes.get("Player"))) {
+                if (actorType == null || _nextResult.getActorType() == actorType || (actorType == ActorTypes.get(Core.Non_Player) && _nextResult.getActorType() != ActorTypes.get(Core.Player))) {
                     _creatures.add(_nextResult);
                 }
             }
@@ -162,7 +163,7 @@ public class EntityManager {
     }
 
     public IActor getNearestPlayer(Entity target) {
-        List<IActor> actors = getActors(ActorTypes.get("Player"));
+        List<IActor> actors = getActors(ActorTypes.get(Core.Player));
         if (actors.size() > 0) {
             Entity closest = (Entity) actors.get(0);
             Entity player;
@@ -245,7 +246,7 @@ public class EntityManager {
     public List<Entity> getPlayers() {
         _players.clear();
         for (Entity tile : _contents) {
-            if (tile.getEntityType() == EntityTypes.get("Actor") && ((IActor) tile).getActorType() == ActorTypes.get("Player")) {
+            if (tile.getEntityType() == EntityTypes.get("Actor") && ((IActor) tile).getActorType() == ActorTypes.get(Core.Player)) {
                 _players.add(tile);
             }
         }

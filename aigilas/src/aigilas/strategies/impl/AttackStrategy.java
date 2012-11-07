@@ -7,6 +7,7 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
+import sps.core.Core;
 
 public class AttackStrategy extends BaseStrategy {
     private int _skillCooldown = 0;
@@ -16,12 +17,12 @@ public class AttackStrategy extends BaseStrategy {
         super(parent, Strategy.Attack);
 
         if (targetTypes.length == 1) {
-            if (targetTypes[0] == ActorTypes.get("Friendly")) {
-                if (parent.getActorType() != ActorTypes.get("Player")) {
-                    targetTypes[0] = ActorTypes.get("Non_Player");
+            if (targetTypes[0] == ActorTypes.get(Core.Friendly)) {
+                if (ActorTypes.get(Core.Player) != parent.getActorType()) {
+                    targetTypes[0] = ActorTypes.get(Core.Non_Player);
                 }
                 else {
-                    targetTypes[0] = ActorTypes.get("Player");
+                    targetTypes[0] = ActorTypes.get(Core.Player);
                 }
             }
         }

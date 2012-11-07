@@ -7,6 +7,7 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
+import sps.core.Core;
 import sps.core.RNG;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -17,7 +18,7 @@ public class TestBotStrategy extends BaseStrategy {
     public TestBotStrategy(BaseCreature parent) {
         super(parent, Strategy.TestBot);
 
-        _targets.addTargetTypes(ActorTypes.get("Non_Player"));
+        _targets.addTargetTypes(new sps.bridge.ActorType[]{ActorTypes.get(Core.Non_Player)});
     }
 
     private Entity _stairsTarget;

@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class Bridge {
     private static Bridge __instance;
-    private static String __bridgePath = "assets/data/bridge.csv";
+    private static String __bridgePath = "assets/data/bridge.cfg";
 
     public static Bridge get() {
         if (__instance == null) {
@@ -61,7 +61,7 @@ public class Bridge {
                         String spriteType = values[2].toLowerCase();
                         boolean generatable = false;
                         if (values.length == 4) {
-                            generatable = Boolean.parseBoolean(values[3]);
+                            generatable = values[3].toLowerCase().equals("true");
                         }
                         ActorTypes.add(new ActorType(id, SpriteTypes.get(spriteType), generatable));
                     }

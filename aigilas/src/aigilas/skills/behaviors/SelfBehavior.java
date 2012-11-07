@@ -2,9 +2,9 @@ package aigilas.skills.behaviors;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
-import sps.bridge.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
+import sps.bridge.SpriteType;
 import sps.core.Point2;
 
 public class SelfBehavior extends SkillBehavior {

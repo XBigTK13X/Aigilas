@@ -1,8 +1,8 @@
 package sps.entities;
 
-import sps.bridge.SpriteType;
 import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
+import sps.bridge.SpriteType;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.graphics.AnimatedTexture;

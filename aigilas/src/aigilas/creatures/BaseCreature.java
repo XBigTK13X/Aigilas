@@ -19,6 +19,7 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.TargetSet;
 import sps.bridge.*;
+import sps.core.Core;
 import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.Settings;
@@ -84,10 +85,10 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected void SetClass(CreatureClass cClass) {
         if (_class != cClass || cClass == null || cClass == CreatureClass.NULL) {
             _class = (cClass == null) ? CreatureClass.NULL : cClass;
-            if (_skills == null || _actorType == ActorTypes.get("Player")) {
+            if (_skills == null || _actorType == ActorTypes.get(Core.Player)) {
                 _skills = new SkillPool(this);
             }
-            if (_actorType != ActorTypes.get("Player")) {
+            if (_actorType != ActorTypes.get(Core.Player)) {
                 for (SkillId skillId : SkillLogic.get().getElementalSkills(getActorType(), _composition)) {
                     _skills.add(skillId);
                 }
@@ -392,7 +393,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                     if (creatures.size() > 0) {
                         for (BaseCreature creature : creatures) {
                             if (creature != this) {
-                                if ((creature.getActorType() != ActorTypes.get("Player") && _actorType == ActorTypes.get("Player")) || (creature.getActorType() == ActorTypes.get("Player") && _actorType != ActorTypes.get("Player")) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
+                                if ((creature.getActorType() != ActorTypes.get(Core.Player) && _actorType == ActorTypes.get(Core.Player)) || (creature.getActorType() == ActorTypes.get(Core.Player) && _actorType != ActorTypes.get(Core.Player)) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
                                     creature.applyDamage(CalculateDamage(), this);
                                     if (!creature.isActive()) {
                                         addExperience(creature.calculateExperience());
@@ -562,7 +563,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void react(SkillId skillId) {
-        if (_actorType == ActorTypes.get("Player") && skillId != SkillId.Forget_Skill && _god.Id == GodId.Gluttony) {
+        if (_actorType == ActorTypes.get(Core.Player) && skillId != SkillId.Forget_Skill && _god.Id == GodId.Gluttony) {
             if (_skills.count() < _currentLevel) {
                 _skills.add(skillId);
             }

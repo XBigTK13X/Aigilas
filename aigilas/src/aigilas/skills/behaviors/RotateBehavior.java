@@ -1,9 +1,9 @@
 package aigilas.skills.behaviors;
 
 import aigilas.creatures.BaseCreature;
-import sps.bridge.SpriteType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
+import sps.bridge.SpriteType;
 import sps.core.Point2;
 
 public class RotateBehavior extends SkillBehavior {

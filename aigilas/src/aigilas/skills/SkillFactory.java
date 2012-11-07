@@ -1,10 +1,10 @@
 package aigilas.skills;
 
 import aigilas.creatures.BaseCreature;
-import sps.bridge.SpriteType;
 import aigilas.skills.animations.*;
 import aigilas.skills.behaviors.*;
 import aigilas.skills.impl.*;
+import sps.bridge.SpriteType;
 import sps.core.Logger;
 
 public class SkillFactory {
