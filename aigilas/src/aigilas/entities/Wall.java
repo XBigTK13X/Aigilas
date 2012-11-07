@@ -1,14 +1,14 @@
 package aigilas.entities;
 
-import sps.bridge.SpriteType;
-import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
 import sps.bridge.EntityType;
+import sps.bridge.SpriteType;
 import sps.core.Point2;
 import sps.entities.Entity;
 
 public class Wall extends Entity {
     public Wall(Point2 location) {
-        initialize(location, SpriteType.Wall, EntityType.Wall, DrawDepth.Wall);
+        initialize(location, SpriteType.Wall, EntityType.Wall, DrawDepths.get("Wall"));
         _isBlocking = true;
     }
 }

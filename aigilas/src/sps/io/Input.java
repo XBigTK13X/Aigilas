@@ -37,13 +37,7 @@ public class Input {
            */
         // $$$
         boolean gamepadActive = false;
-        try {
-            return gamepadActive || (playerIndex == Client.get().getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode()));
-        }
-        catch (Exception e) {
-            int x = 0;
-        }
-        return false;
+        return gamepadActive || (playerIndex == Client.get().getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode()));
     }
 
     private static boolean isDown(Command command, int playerIndex) {

@@ -38,6 +38,11 @@ public class Bridge {
                         String context = values[2];
                         Commands.add(new Command(id, Contexts.get(context)));
                     }
+                    if (name.equals("drawDepth")) {
+                        String id = values[1].toLowerCase();
+                        int depth = Integer.parseInt(values[2]);
+                        DrawDepths.add(new DrawDepth(id, depth));
+                    }
                     if (name.equals("entityType")) {
 
                     }

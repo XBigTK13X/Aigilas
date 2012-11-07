@@ -1,9 +1,10 @@
 package sps.graphics;
 
-import sps.bridge.SpriteType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
+import sps.bridge.SpriteType;
 import sps.core.GameManager;
 import sps.core.Point2;
 
@@ -13,9 +14,13 @@ public class AnimatedTexture {
     private int _animationTimer;
     private Color _color = Color.WHITE;
     private Sprite _sprite;
-    private DrawDepth _depth = DrawDepth.AnimatedTexture;
+    private DrawDepth _depth;
 
     protected Point2 _position = Point2.Zero;
+
+    public AnimatedTexture() {
+        _depth = DrawDepths.get("AnimatedTexture");
+    }
 
     public void loadContent(SpriteType assetName) {
         _spriteInfo = SpriteSheetManager.getSpriteInfo(assetName);

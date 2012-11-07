@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.Commands;
-import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.graphics.Renderer;
@@ -53,8 +53,8 @@ public class SkillHud extends BaseHud {
             return;
         }
 
-        Renderer.get().draw(_menuBase, getMeterAnchor(), DrawDepth.HudBG, Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
-        Renderer.get().draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
-        Renderer.get().draw(_menuBase, _energyPosition, DrawDepth.HudBG, Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
+        Renderer.get().draw(_menuBase, getMeterAnchor(), DrawDepths.get("HudBG"), Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get("HudBG"), Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get("HudBG"), Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
     }
 }

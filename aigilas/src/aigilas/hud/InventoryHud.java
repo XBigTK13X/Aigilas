@@ -7,7 +7,7 @@ import aigilas.items.Inventory;
 import aigilas.items.ItemClass;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.Commands;
-import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
 import sps.core.Point2;
 import sps.graphics.Renderer;
 import sps.io.Input;
@@ -42,7 +42,7 @@ public class InventoryHud extends BaseHud {
     @Override
     public void draw() {
         if (_isVisible) {
-            Renderer.get().draw(_menuBase, getInventoryAnchor(), DrawDepth.HudBG, Color.BLACK, (int) Renderer.get().center().X, (int) Renderer.get().center().Y);
+            Renderer.get().draw(_menuBase, getInventoryAnchor(), DrawDepths.get("HudBG"), Color.BLACK, (int) Renderer.get().center().X, (int) Renderer.get().center().Y);
             _deltas.draw();
             _equipHud.draw();
         }

@@ -5,7 +5,7 @@ import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
 import sps.bridge.ActorType;
-import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
 import sps.bridge.EntityType;
 import sps.core.Logger;
 import sps.core.Point2;
@@ -53,7 +53,7 @@ public class GenericItem extends Entity {
     }
 
     protected void setup(Point2 location, ItemName type) {
-        initialize(location, type.Sprite, EntityType.Item, DrawDepth.Item);
+        initialize(location, type.Sprite, EntityType.Item, DrawDepths.get("Item"));
     }
 
     private Player _currentTarget;

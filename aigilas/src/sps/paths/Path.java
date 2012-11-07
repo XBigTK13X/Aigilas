@@ -2,7 +2,7 @@ package sps.paths;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.graphics.Assets;
@@ -54,7 +54,7 @@ public class Path {
                 _t = Assets.get().sprite(0);
             }
             for (Point2 step : _steps) {
-                Renderer.get().draw(_t, new Point2(step.PosX, step.PosY), DrawDepth.Debug, Color.ORANGE);
+                Renderer.get().draw(_t, new Point2(step.PosX, step.PosY), DrawDepths.get("Debug"), Color.ORANGE);
             }
         }
     }

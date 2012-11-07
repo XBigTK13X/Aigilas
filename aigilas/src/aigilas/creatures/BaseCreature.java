@@ -69,7 +69,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     protected void setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
         _entityType = EntityType.Actor;
-        initialize(location, type.Sprite, EntityType.Actor, DrawDepth.Creature);
+        initialize(location, type.Sprite, EntityType.Actor, DrawDepths.get("Creature"));
         init(type, stats, creatureClass, setClass);
     }
 

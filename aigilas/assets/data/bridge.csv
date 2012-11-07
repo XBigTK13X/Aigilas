@@ -22,3 +22,25 @@ command,HotSkill1,All
 command,HotSkill2,All
 command,HotSkill3,All
 command,ToggleDevConsole,All
+
+## Draw Depths
+drawDepth,Default,0
+drawDepth,AnimatedTexture,0
+drawDepth,Floor,0
+drawDepth,Wall,10
+drawDepth,Altar,20
+drawDepth,Stairs,40
+drawDepth,Item,50
+drawDepth,Creature,60
+drawDepth,Player,70
+drawDepth,BaseSkillEffect,80
+drawDepth,SkillEffect,90
+drawDepth,ComboMarker,100
+drawDepth,HudBG,950
+drawDepth,DefaultHudText,960
+drawDepth,ActionTextBG,980
+drawDepth,ActionText,990
+drawDepth,DevConsole,1000
+drawDepth,DevConsoleText,1010
+drawDepth,Particle,1020
+drawDepth,Debug,1030

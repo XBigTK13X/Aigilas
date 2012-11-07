@@ -2,7 +2,7 @@ package sps.core;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
 import sps.graphics.Assets;
 import sps.graphics.Renderer;
 import sps.text.TextPool;
@@ -70,7 +70,7 @@ public class DevConsole {
 
     public void draw() {
         if (_isVisible) {
-            Renderer.get().draw(_consoleBase, Point2.Zero, DrawDepth.DevConsole, _bgColor, Renderer.VirtualWidth, Renderer.VirtualHeight);
+            Renderer.get().draw(_consoleBase, Point2.Zero, DrawDepths.get("DevConsole"), _bgColor, Renderer.VirtualWidth, Renderer.VirtualHeight);
             for (ConsoleText _content : _contents) {
                 if (_content != null) {
                     _content.draw();

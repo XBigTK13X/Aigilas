@@ -4,9 +4,9 @@ import aigilas.creatures.impl.Player;
 import aigilas.gods.God;
 import aigilas.gods.GodId;
 import aigilas.items.GenericItem;
-import sps.bridge.SpriteType;
-import sps.bridge.DrawDepth;
+import sps.bridge.DrawDepths;
 import sps.bridge.EntityType;
+import sps.bridge.SpriteType;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -24,7 +24,7 @@ public class Altar extends Entity {
     public Altar(Point2 location, GodId godName) {
         _god = godName.getInstance();
         _graphic.setColor(_god.getColor());
-        initialize(location, SpriteType.Altar, EntityType.Altar, DrawDepth.Altar);
+        initialize(location, SpriteType.Altar, EntityType.Altar, DrawDepths.get("Altar"));
     }
 
     @Override
