@@ -12,4 +12,3 @@ deploy-snapshot.sh
 target/
 .DS_Store
 *~
-out/
