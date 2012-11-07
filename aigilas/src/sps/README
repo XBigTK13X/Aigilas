@@ -1,10 +1,13 @@
-SimplePathXna is a lightweight developemnt framework that wraps XNA 4.0. 
+sps-gamelib is a lightweight game engine wrapping libgdx.
 
 It provides:
  - Command based input detection system
  - Spritesheet animation sub-system
  - State management architecture 
+ - Path finding
+ - Asset management
+ - Audio player
+ - Efficient text rendering
 
-See http://simplepathstudios.com/blog/2011/04/18/new-development-framework-simplepathxna/ for more information on using the template (if using the out of date template system.)
 
-This framework uses the MIT license. See the included license for terms of that license.
+This framework uses the MIT license. See LICENSE.txt for terms of that license.
