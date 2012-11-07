@@ -5,6 +5,7 @@ import aigilas.entities.SkillEffect;
 import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
@@ -21,74 +22,97 @@ public class CreatureFactory {
 
     public static BaseCreature create(ActorType actorType, Point2 position) {
         BaseEnemy result;
-        switch (actorType) {
-            case Player:
-                result = new Player(__playerCount++);
-                break;
-            default:
-                result = generateCreature(actorType);
-                break;
+        if (actorType.is("Player")) {
+            result = new Player(__playerCount++);
         }
+        else {
+            result = generateCreature(actorType);
+        }
+
         result.setup(position);
-        EntityManager.get().addObject(result);
-        if (Settings.get().debugInventory) {
+        EntityManager.get().
+
+                addObject(result);
+
+        if (Settings.get().debugInventory)
+
+        {
             for (int ii = 0; ii < 1000; ii++) {
                 result.pickupItem(ItemFactory.createRandomPlain());
             }
         }
+
         return result;
     }
 
     private static BaseEnemy generateCreature(ActorType actorType) {
-        switch (actorType) {
-            case Peon:
-                return new Peon();
-            case Zorb:
-                return new Zorb();
-            case Wrath:
-                return new Wrath();
-            case Hand:
-                return new Hand();
-            case Pride:
-                return new Pride();
-            case Envy:
-                return new Envy();
-            case Gluttony:
-                return new Gluttony();
-            case Lust:
-                return new Lust();
-            case Sloth:
-                return new Sloth();
-            case Greed:
-                return new Greed();
-            case Serpent:
-                return new Serpent();
-            case Breaking_Wheel:
-                return new BreakingWheel();
-            case Wrath_Acolyte:
-                return new WrathEnemyAcolyte();
-            case Pride_Acolyte:
-                return new PrideEnemyAcolyte();
-            case Envy_Acolyte:
-                return new EnvyEnemyAcolyte();
-            case Gluttony_Acolyte:
-                return new GluttonyEnemyAcolyte();
-            case Lust_Acolyte:
-                return new LustEnemyAcolyte();
-            case Sloth_Acolyte:
-                return new SlothEnemyAcolyte();
-            case Greed_Acolyte:
-                return new GreedEnemyAcolyte();
-            case Dummy:
-                return new Dummy();
-            default:
-                Logger.error("Unknown actorType passed into CreatureFactory: " + actorType);
-                return null;
+        if (actorType.is("Peon")) {
+            return new Peon();
         }
+        if (actorType.is("Zorb")) {
+            return new Zorb();
+        }
+        if (actorType.is("Wrath")) {
+            return new Wrath();
+        }
+        if (actorType.is("Hand")) {
+            return new Hand();
+        }
+        if (actorType.is("Pride")) {
+            return new Pride();
+        }
+        if (actorType.is("Envy")) {
+            return new Envy();
+        }
+        if (actorType.is("Gluttony")) {
+            return new Gluttony();
+        }
+        if (actorType.is("Lust")) {
+            return new Lust();
+        }
+        if (actorType.is("Sloth")) {
+            return new Sloth();
+        }
+        if (actorType.is("Greed")) {
+            return new Greed();
+        }
+        if (actorType.is("Serpent")) {
+            return new Serpent();
+        }
+        if (actorType.is("Breaking_Wheel")) {
+            return new BreakingWheel();
+        }
+        if (actorType.is("Wrath_Acolyte")) {
+            return new WrathEnemyAcolyte();
+        }
+        if (actorType.is("Pride_Acolyte")) {
+            return new PrideEnemyAcolyte();
+        }
+        if (actorType.is("Envy_Acolyte")) {
+            return new EnvyEnemyAcolyte();
+        }
+        if (actorType.is("Gluttony_Acolyte")) {
+            return new GluttonyEnemyAcolyte();
+        }
+        if (actorType.is("Lust_Acolyte")) {
+            return new LustEnemyAcolyte();
+        }
+        if (actorType.is("Sloth_Acolyte")) {
+            return new SlothEnemyAcolyte();
+        }
+        if (actorType.is("Greed_Acolyte")) {
+            return new GreedEnemyAcolyte();
+        }
+        if (actorType.is("Dummy")) {
+            return new Dummy();
+        }
+
+        Logger.error("Unknown actorType passed into CreatureFactory: " + actorType.Name);
+        return null;
     }
 
     public static BaseCreature createRandom(Point2 randomPoint) {
-        return create(ActorType.getRandomGeneratable(), randomPoint);
+        return create(ActorTypes.getRandomGeneratable(), randomPoint);
     }
 
     public static BaseCreature createMinion(SkillId skillId, BaseCreature source, SkillEffect effectGraphic, Point2 location) {
@@ -140,11 +164,11 @@ public class CreatureFactory {
     private static List<ActorType> __remainingBosses;
 
     static {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.Wrath, ActorType.Envy, ActorType.Pride, ActorType.Sloth, ActorType.Greed, ActorType.Lust, ActorType.Gluttony));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get("Wrath"), ActorTypes.get("Envy"), ActorTypes.get("Pride"), ActorTypes.get("Sloth"), ActorTypes.get("Greed"), ActorTypes.get("Lust"), ActorTypes.get("Gluttony")));
     }
 
     public static void reset() {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorType.Wrath, ActorType.Envy, ActorType.Pride, ActorType.Sloth, ActorType.Greed, ActorType.Lust, ActorType.Gluttony));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get("Wrath"), ActorTypes.get("Envy"), ActorTypes.get("Pride"), ActorTypes.get("Sloth"), ActorTypes.get("Greed"), ActorTypes.get("Lust"), ActorTypes.get("Gluttony")));
         __playerCount = 0;
     }
 

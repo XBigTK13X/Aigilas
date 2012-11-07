@@ -6,7 +6,7 @@ import aigilas.gods.GodId;
 import aigilas.items.GenericItem;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
-import sps.bridge.SpriteType;
+import sps.bridge.SpriteTypes;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -24,7 +24,7 @@ public class Altar extends Entity {
     public Altar(Point2 location, GodId godName) {
         _god = godName.getInstance();
         _graphic.setColor(_god.getColor());
-        initialize(location, SpriteType.Altar, EntityTypes.get("Altar"), DrawDepths.get("Altar"));
+        initialize(location, SpriteTypes.get("Altar"), EntityTypes.get("Altar"), DrawDepths.get("Altar"));
     }
 
     @Override

@@ -6,13 +6,14 @@ import aigilas.entities.SkillEffect;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;
 import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 import sps.core.Point2;
 import sps.core.Settings;
 
 public class Minion extends BaseCreature {
     public Minion(ActorType actorType, int coolDown) {
         _actorType = actorType;
-        _baseStats = StatsRegistry.get().baseStats(ActorType.Minion);
+        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get("Minion"));
     }
 
     public Minion(ActorType actorType) {
@@ -20,7 +21,7 @@ public class Minion extends BaseCreature {
     }
 
     public Minion() {
-        this(ActorType.Minion, Settings.get().defaultSpeed);
+        this(ActorTypes.get("Minion"), Settings.get().defaultSpeed);
     }
 
     public void init(BaseCreature source, SkillEffect effectGraphic) {

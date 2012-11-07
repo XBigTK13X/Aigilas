@@ -1,10 +1,10 @@
-## Contexts
+## Contexts (Name)
 context,Inventory
 context,All
 context,NonFree
 context,Free
 
-##Commands
+##Commands (Name, Context)
 command,MoveUp,NonFree
 command,MoveDown,NonFree
 command,MoveLeft,NonFree
@@ -23,7 +23,7 @@ command,HotSkill2,All
 command,HotSkill3,All
 command,ToggleDevConsole,All
 
-## Draw Depths
+## Draw Depths (Name, Depth)
 drawDepth,Default,0
 drawDepth,AnimatedTexture,0
 drawDepth,Floor,0
@@ -45,7 +45,7 @@ drawDepth,DevConsoleText,1010
 drawDepth,Particle,1020
 drawDepth,Debug,1030
 
-## Entity Types
+## Entity Types (Name)
 entityType,Actor
 entityType,Floor
 entityType,Wall
@@ -56,3 +56,62 @@ entityType,Skill_Effect
 entityType,Skill_Efffect_Generator
 entityType,Altar
 entityType,Combo_Marker
+
+## Sprite Types (Name,Vertical Index, Frames of Animation
+spriteType,Empty,0
+spriteType,Player_Stand,1,2
+spriteType,Floor,2
+spriteType,Wall,3
+spriteType,Upstairs,4
+spriteType,Downstairs,5
+spriteType,Creature,6
+spriteType,Item,7
+spriteType,Skill_Effect,8
+spriteType,Altar,9
+spriteType,Zorb,10
+spriteType,Minion,11
+spriteType,Dummy,13
+spriteType,Wrath,14
+spriteType,Hand,15
+spriteType,Envy,16
+spriteType,Sloth,17
+spriteType,Greed,18
+spriteType,Gluttony,19
+spriteType,Lust,20
+spriteType,Pride,21
+spriteType,Wheel,22
+spriteType,Wrath_Acolyte,23
+spriteType,Envy_Acolyte,24
+spriteType,Pride_Acolyte,25
+spriteType,Sloth_Acolyte,26
+spriteType,Greed_Acolyte,27
+spriteType,Gluttony_Acolyte,28
+spriteType,Lust_Acolyte,29
+
+## Actor Types (Name,SpriteType)
+actorType,Non_Player,Empty
+actorType,Player,Player_Stand
+actorType,Friendly,Empty
+actorType,Minion,Minion
+actorType,Acid_Nozzle,Minion
+actorType,Peon,Creature, true
+actorType,Zorb,Zorb, true
+actorType,Dart_Trap,Minion
+actorType,Wrath,Wrath
+actorType,Hand,Hand
+actorType,Envy,Envy
+actorType,Pride,Pride
+actorType,Sloth,Sloth
+actorType,Greed,Greed
+actorType,Gluttony,Gluttony
+actorType,Lust,Lust
+actorType,Serpent,Sloth
+actorType,Breaking_Wheel,Wheel
+actorType,Wrath_Acolyte,Wrath_Acolyte, true
+actorType,Envy_Acolyte,Envy_Acolyte, true
+actorType,Pride_Acolyte,Pride_Acolyte, true
+actorType,Sloth_Acolyte,Sloth_Acolyte, true
+actorType,Greed_Acolyte,Greed_Acolyte, true
+actorType,Gluttony_Acolyte,Gluttony_Acolyte, true
+actorType,Lust_Acolyte,Lust_Acolyte, true
+actorType,Dummy,Dummy

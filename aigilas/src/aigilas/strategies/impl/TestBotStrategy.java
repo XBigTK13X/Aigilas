@@ -5,7 +5,7 @@ import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
 import sps.core.RNG;
 import sps.entities.Entity;
@@ -17,7 +17,7 @@ public class TestBotStrategy extends BaseStrategy {
     public TestBotStrategy(BaseCreature parent) {
         super(parent, Strategy.TestBot);
 
-        _targets.addTargetTypes(ActorType.Non_Player);
+        _targets.addTargetTypes(ActorTypes.get("Non_Player"));
     }
 
     private Entity _stairsTarget;

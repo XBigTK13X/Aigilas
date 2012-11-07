@@ -8,6 +8,7 @@ import aigilas.skills.SkillPool;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 import sps.core.Point2;
 import sps.core.Settings;
 
@@ -17,7 +18,7 @@ public class BaseEnemy extends BaseCreature {
     public BaseEnemy(ActorType actorType, CreatureClass cClass) {
         SetClass(cClass);
         _actorType = actorType;
-        _baseStats = StatsRegistry.get().baseStats(ActorType.Non_Player);
+        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get("Non_Player"));
         _maxStats = new Stats(_baseStats);
 
         if (EnemyRegistry.get().contains(_actorType)) {
@@ -48,7 +49,7 @@ public class BaseEnemy extends BaseCreature {
     public void setup(Point2 position) {
         setup(position, _actorType, _baseStats, _class);
         if (_strategy == null) {
-            _strategy = StrategyFactory.create(Strategy.Attack, this, ActorType.Player);
+            _strategy = StrategyFactory.create(Strategy.Attack, this, ActorTypes.get("Player"));
         }
     }
 }

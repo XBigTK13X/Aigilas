@@ -1,9 +1,9 @@
 package aigilas.creatures.impl;
 
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 
 public class LustEnemyAcolyte extends BaseEnemy {
     public LustEnemyAcolyte() {
-        super(ActorType.Lust_Acolyte);
+        super(ActorTypes.get("Lust_Acolyte"));
     }
 }

@@ -48,10 +48,22 @@ public class Bridge {
                         EntityTypes.add(new EntityType(id));
                     }
                     if (name.equals("spriteType")) {
-
+                        String id = values[1].toLowerCase();
+                        int index = Integer.parseInt(values[2]);
+                        int frameCount = 1;
+                        if (values.length == 4) {
+                            frameCount = Integer.parseInt(values[3]);
+                        }
+                        SpriteTypes.add(new SpriteType(id, index, frameCount));
                     }
                     if (name.equals("actorType")) {
-
+                        String id = values[1].toLowerCase();
+                        String spriteType = values[2].toLowerCase();
+                        boolean generatable = false;
+                        if (values.length == 4) {
+                            generatable = Boolean.parseBoolean(values[3]);
+                        }
+                        ActorTypes.add(new ActorType(id, SpriteTypes.get(spriteType), generatable));
                     }
                 }
             }

@@ -1,9 +1,9 @@
 package aigilas.creatures.impl;
 
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 
 public class Gluttony extends BaseEnemy {
     public Gluttony() {
-        super(ActorType.Gluttony);
+        super(ActorTypes.get("Gluttony"));
     }
 }

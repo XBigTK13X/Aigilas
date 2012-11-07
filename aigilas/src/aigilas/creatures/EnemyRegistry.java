@@ -3,6 +3,7 @@ package aigilas.creatures;
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -38,7 +39,7 @@ public class EnemyRegistry {
                     String convert = line.replace(",,", ",-,");
 
                     String[] values = convert.split(",");
-                    ActorType actorType = ActorType.get(values[0]);
+                    ActorType actorType = ActorTypes.get(values[0]);
 
                     String rawStrengths = values[1];
                     List<StatType> strengths = new ArrayList<StatType>();

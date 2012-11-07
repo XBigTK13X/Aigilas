@@ -11,9 +11,7 @@ import sps.entities.CoordVerifier;
 public class StraightLineRotateStrategy extends BaseStrategy {
     private final Point2 _direction = new Point2(0, 1);
 
-    public StraightLineRotateStrategy(BaseCreature parent, ActorType... targetTypes)
-
-    {
+    public StraightLineRotateStrategy(BaseCreature parent, ActorType... targetTypes) {
         super(parent, Strategy.StraightLineRotate);
 
         for (ActorType targetType : targetTypes) {

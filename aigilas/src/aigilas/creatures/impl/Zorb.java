@@ -1,9 +1,9 @@
 package aigilas.creatures.impl;
 
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 
 public class Zorb extends BaseEnemy {
     public Zorb() {
-        super(ActorType.Zorb);
+        super(ActorTypes.get("Zorb"));
     }
 }

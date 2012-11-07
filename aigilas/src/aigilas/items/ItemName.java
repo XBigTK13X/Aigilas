@@ -1,6 +1,7 @@
 package aigilas.items;
 
 import sps.bridge.SpriteType;
+import sps.bridge.SpriteTypes;
 
 import java.util.Arrays;
 
@@ -18,12 +19,13 @@ public enum ItemName {
     Shirt(ItemClass.Torso_Garb, null),
     Flak(null, null);
 
-    public final SpriteType Sprite = SpriteType.Item;
+    public final SpriteType Sprite;
     public final ItemClass Category;
     public final Slots Slots;
 
     private ItemName(ItemClass category, Slots slots) {
         Category = category;
         Slots = slots;
+        Sprite = SpriteTypes.get("Item");
     }
 }

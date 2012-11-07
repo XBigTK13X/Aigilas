@@ -1,9 +1,9 @@
 package aigilas.creatures.impl;
 
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 
 public class Envy extends BaseEnemy {
     public Envy() {
-        super(ActorType.Envy);
+        super(ActorTypes.get("Envy"));
     }
 }

@@ -2,11 +2,11 @@ package aigilas.creatures.impl;
 
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 
 public class BreakingWheel extends BaseEnemy {
     public BreakingWheel() {
-        super(ActorType.Breaking_Wheel);
+        super(ActorTypes.get("Breaking_Wheel"));
         _strategy = StrategyFactory.create(Strategy.StraightLineRotate, this);
     }
 }

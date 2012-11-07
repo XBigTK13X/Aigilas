@@ -5,7 +5,7 @@ import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
@@ -27,7 +27,7 @@ public class ControlledByPlayer extends BaseStrategy {
     public ControlledByPlayer(BaseCreature parent) {
         super(parent, Strategy.ControlledByPlayer);
 
-        _targets.addTargetTypes(ActorType.Non_Player);
+        _targets.addTargetTypes(ActorTypes.get("Non_Player"));
     }
 
     @Override

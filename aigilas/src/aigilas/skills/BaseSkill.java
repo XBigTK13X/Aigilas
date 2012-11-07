@@ -4,10 +4,10 @@ import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
-import sps.bridge.SpriteType;
 import aigilas.skills.behaviors.SkillBehavior;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
+import sps.bridge.SpriteTypes;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 
@@ -17,26 +17,22 @@ public abstract class BaseSkill {
     protected final SkillBehavior _behavior;
     protected final SkillComponents _components;
 
-    protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent, SpriteType effectGraphic) {
+    protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
         _id = implementationId;
         _components = new SkillComponents(strength, isPersistent);
-        _behavior = SkillFactory.create(animation, effectGraphic, this);
+        _behavior = SkillFactory.create(animation, SpriteTypes.get("Skill_Effect"), this);
         for (Elements element : _id.Info.Elements) {
             _components.addElements(element);
         }
         _behavior.addCost(_id.Info.Stat, _id.Info.Cost);
     }
 
-    protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
-        this(implementationId, animation, strength, isPersistent, SpriteType.Skill_Effect);
-    }
-
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength) {
-        this(implementationId, animation, strength, false, SpriteType.Skill_Effect);
+        this(implementationId, animation, strength, false);
     }
 
     protected BaseSkill(SkillId implementationId, AnimationType animation) {
-        this(implementationId, animation, SkillEffect.DefaultStrength, false, SpriteType.Skill_Effect);
+        this(implementationId, animation, SkillEffect.DefaultStrength, false);
     }
 
     public void activate(BaseCreature source) {

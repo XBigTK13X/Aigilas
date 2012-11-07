@@ -84,10 +84,10 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected void SetClass(CreatureClass cClass) {
         if (_class != cClass || cClass == null || cClass == CreatureClass.NULL) {
             _class = (cClass == null) ? CreatureClass.NULL : cClass;
-            if (_skills == null || _actorType == ActorType.Player) {
+            if (_skills == null || _actorType == ActorTypes.get("Player")) {
                 _skills = new SkillPool(this);
             }
-            if (_actorType != ActorType.Player) {
+            if (_actorType != ActorTypes.get("Player")) {
                 for (SkillId skillId : SkillLogic.get().getElementalSkills(getActorType(), _composition)) {
                     _skills.add(skillId);
                 }
@@ -319,7 +319,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
             Logger.gameplay(this.toString() + " taking " + damage + " damage" + " from " + attacker);
-            if (_actorType != ActorType.Dummy) {
+            if (_actorType != ActorTypes.get("Dummy")) {
                 adjust((statType == null) ? StatType.Health : statType, -damage);
             }
         }
@@ -392,7 +392,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                     if (creatures.size() > 0) {
                         for (BaseCreature creature : creatures) {
                             if (creature != this) {
-                                if ((creature.getActorType() != ActorType.Player && _actorType == ActorType.Player) || (creature.getActorType() == ActorType.Player && _actorType != ActorType.Player) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
+                                if ((creature.getActorType() != ActorTypes.get("Player") && _actorType == ActorTypes.get("Player")) || (creature.getActorType() == ActorTypes.get("Player") && _actorType != ActorTypes.get("Player")) || !_statuses.allows(CreatureAction.WontHitNonTargets)) {
                                     creature.applyDamage(CalculateDamage(), this);
                                     if (!creature.isActive()) {
                                         addExperience(creature.calculateExperience());
@@ -562,7 +562,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void react(SkillId skillId) {
-        if (_actorType == ActorType.Player && skillId != SkillId.Forget_Skill && _god.Id == GodId.Gluttony) {
+        if (_actorType == ActorTypes.get("Player") && skillId != SkillId.Forget_Skill && _god.Id == GodId.Gluttony) {
             if (_skills.count() < _currentLevel) {
                 _skills.add(skillId);
             }

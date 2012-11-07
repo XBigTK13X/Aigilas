@@ -1,9 +1,9 @@
 package aigilas.creatures.impl;
 
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 
 public class Peon extends BaseEnemy {
     public Peon() {
-        super(ActorType.Peon);
+        super(ActorTypes.get("Peon"));
     }
 }

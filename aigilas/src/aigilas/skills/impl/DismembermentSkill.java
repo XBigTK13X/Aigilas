@@ -5,7 +5,7 @@ import aigilas.creatures.impl.CreatureFactory;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
-import sps.bridge.ActorType;
+import sps.bridge.ActorTypes;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -27,7 +27,7 @@ public class DismembermentSkill extends BaseSkill {
         int openCell = RNG.next(1, Settings.get().tileMapWidth - 1);
         for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             if (ii != openCell) {
-                CreatureFactory.create(ActorType.Hand, new Point2(ii, 1));
+                CreatureFactory.create(ActorTypes.get("Hand"), new Point2(ii, 1));
 
             }
 
