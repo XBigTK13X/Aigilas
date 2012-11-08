@@ -152,9 +152,18 @@ public class InventoryHud extends BaseHud {
         if (forceRefresh) {
             if (header != null) {
                 header.hide();
+                itemClass.hide();
+                for (int ii = 0; ii < 10; ii++) {
+                    if (itemList[ii] != null) {
+                        itemList[ii].hide();
+                    }
+                }
             }
-            inventoryPosition.reset(getInventoryAnchor().X + 20, getInventoryAnchor().Y + (int) (_dimensions.Y * .9), false);
+            inventoryPosition.reset(getInventoryAnchor().X + 50, getInventoryAnchor().Y + (int) (_dimensions.Y * .9), false);
             header = TextPool.get().write(getClassDisplay(), inventoryPosition);
+
+
+            list = new String[10];
 
             _currentClassItems = _inventory.getItems(ItemClass.values()[_currentClass]);
             if (_currentClassItems.size() > 0) {
@@ -163,7 +172,6 @@ public class InventoryHud extends BaseHud {
                 StringSquisher.clear();
                 displayString = StringSquisher.flush();
                 int count = 0;
-                list = new String[10];
                 for (GenericItem item : _currentClassItems.keySet()) {
                     if (ii == _startingItem) {
                         _currentSelectedItem = item;

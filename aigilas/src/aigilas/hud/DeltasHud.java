@@ -54,7 +54,7 @@ public class DeltasHud extends BaseHud {
                     deltas.hide();
                 }
                 heading = TextPool.get().write(title, getInventoryAnchor().add(30, (int) (_dimensions.Y * .2)));
-                deltas = TextPool.get().write(display, getInventoryAnchor().add(30, (int) (_dimensions.Y * .1)));
+                deltas = TextPool.get().write(display, getInventoryAnchor().add(30, (int) (_dimensions.Y * .1) + 20));
             }
         }
         else {
