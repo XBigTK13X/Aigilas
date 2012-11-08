@@ -444,7 +444,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 if (_class != null) {
                     _skills.add(_class.getLevelSkills(_currentLevel));
                 }
-                TextPool.get().write("LEVEL UP!", getLocation(), 3);
+                TextPool.get().write("LEVEL UP!", getLocation(), 1);
             }
         }
     }
@@ -470,7 +470,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             lastSum = _baseStats.getSum();
             _skills.useActive();
             if (lastSum != _baseStats.getSum()) {
-                TextPool.get().write(getActiveSkillName(), getLocation(), 4);
+                TextPool.get().write(getActiveSkillName(), getLocation(), .5f);
             }
         }
     }

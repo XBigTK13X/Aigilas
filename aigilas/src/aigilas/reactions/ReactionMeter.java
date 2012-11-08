@@ -95,7 +95,7 @@ public class ReactionMeter {
                 if (reaction != null) {
                     reaction.affect(_parent);
                     Logger.gameplay(_parent + " affected by " + reactionId.toString());
-                    TextPool.get().write(reactionId.toString(), _parent.getLocation(), 2);
+                    TextPool.get().write(reactionId.toString(), _parent.getLocation(), .5f);
                 }
             }
             _elements.clear();
