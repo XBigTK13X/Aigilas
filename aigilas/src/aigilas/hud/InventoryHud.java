@@ -44,13 +44,11 @@ public class InventoryHud extends BaseHud {
     public void draw() {
         if (_isVisible) {
             Renderer.get().draw(_menuBase, getInventoryAnchor(), DrawDepths.get(Common.Hud_BG), Color.BLACK, (int) Renderer.get().center().X, (int) Renderer.get().center().Y);
-            _deltas.draw();
-            _equipHud.draw();
         }
     }
 
     private void handleInput() {
-        if (Input.isActive(Commands.get(Common.CycleRight), _parent.getPlayerIndex())) {
+        if (Input.isActive(Commands.get(Common.CycleLeft), _parent.getPlayerIndex())) {
             _currentClass--;
             if (_currentClass < 0) {
                 _currentClass = ItemClass.values().length - 1;
@@ -99,9 +97,6 @@ public class InventoryHud extends BaseHud {
         if (_isVisible) {
             handleInput();
             updateInventoryDisplay();
-            if (forceRefresh) {
-                forceRefresh = false;
-            }
         }
         else {
             if (header != null) {
@@ -116,6 +111,9 @@ public class InventoryHud extends BaseHud {
         }
         _equipHud.update(forceRefresh);
         _deltas.update(_currentSelectedItem, forceRefresh);
+        if (forceRefresh) {
+            forceRefresh = false;
+        }
     }
 
     @Override

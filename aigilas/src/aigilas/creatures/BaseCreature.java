@@ -62,7 +62,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     protected int _playerIndex = -1;
     protected boolean _isPlaying = true;
-    protected int _currentLevel = 5;
+    protected int _currentLevel = 1;
     protected float _experience;
     protected static final float __levelUpAmount = 50;
     protected float _nextLevelExperience = __levelUpAmount;
@@ -444,7 +444,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 if (_class != null) {
                     _skills.add(_class.getLevelSkills(_currentLevel));
                 }
-                TextPool.get().write("LEVEL UP!", getLocation(), 10);
+                TextPool.get().write("LEVEL UP!", getLocation(), 3);
             }
         }
     }

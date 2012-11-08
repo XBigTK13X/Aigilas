@@ -4,6 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.ItemSlot;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.graphics.Renderer;
 import sps.text.Text;
@@ -55,12 +56,13 @@ public class EquipmentHud extends BaseHud {
                 }
                 headerPosition.reset(getInventoryAnchor().X + (int) (_dimensions.X * .5), getInventoryAnchor().Y + (int) (_dimensions.Y * .9), false);
                 header = TextPool.get().write(display, headerPosition);
+                Logger.info(header.toString());
                 for (int ii = 0; ii < 10; ii++) {
                     if (list[ii] != null) {
                         if (equipList[ii] != null) {
                             equipList[ii].hide();
                         }
-                        equipList[ii] = TextPool.get().write(list[ii], getInventoryAnchor().add((int) (_dimensions.X * .5), (int) (_dimensions.Y * .9) - 60 * ii));
+                        equipList[ii] = TextPool.get().write(list[ii], getInventoryAnchor().add((int) (_dimensions.X * .5), (int) (_dimensions.Y * .9 - 5) - 32 * ii));
                     }
                 }
             }
