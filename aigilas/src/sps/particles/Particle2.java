@@ -3,6 +3,7 @@ package sps.particles;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepths;
+import sps.core.Core;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.entities.Entity;
@@ -36,7 +37,7 @@ public class Particle2 extends PEComponent {
 
     public void draw() {
         if (IsActive) {
-            Renderer.get().draw(_texture, Position, DrawDepths.get("Particle"), _color, Width, Height);
+            Renderer.get().draw(_texture, Position, DrawDepths.get(Core.Particle), _color, Width, Height);
         }
     }
 

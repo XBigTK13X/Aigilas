@@ -1,5 +1,6 @@
 package sps.io;
 
+import aigilas.Common;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
 import sps.bridge.Commands;
@@ -22,10 +23,10 @@ public class Input {
 
     public static void setup() {
         __contexts = new HashMap<Integer, Context>();
-        __contexts.put(0, Contexts.get("Free"));
-        __contexts.put(1, Contexts.get("Free"));
-        __contexts.put(2, Contexts.get("Free"));
-        __contexts.put(3, Contexts.get("Free"));
+        __contexts.put(0, Contexts.get(Common.Free));
+        __contexts.put(1, Contexts.get(Common.Free));
+        __contexts.put(2, Contexts.get(Common.Free));
+        __contexts.put(3, Contexts.get(Common.Free));
 
         InputBindings.init();
     }
@@ -69,7 +70,7 @@ public class Input {
     // If the key is marked to be locked on press and its lock context is
     // currently inactive
     private static boolean shouldLock(Command command, int playerIndex) {
-        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get(Core.Non_Free) && __contexts.get(playerIndex) != Contexts.get("Free") || command.Context == Contexts.get(Core.All));
+        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get(Core.Non_Free) && __contexts.get(playerIndex) != Contexts.get(Common.Free) || command.Context == Contexts.get(Core.All));
     }
 
     public static void setContext(Context context, int playerIndex) {

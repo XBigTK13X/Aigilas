@@ -1,5 +1,6 @@
 package sps.entities;
 
+import aigilas.Common;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityType;
@@ -97,7 +98,7 @@ public class EntityManager {
         _creatures.clear();
         if (type != ActorTypes.get(Core.Non_Player)) {
             for (Entity elem : _contents) {
-                if (elem.getEntityType() == EntityTypes.get("Actor")) {
+                if (elem.getEntityType() == EntityTypes.get(Common.Actor)) {
                     if (((IActor) elem).getActorType() == type) {
                         _creatures.add(((IActor) elem));
                     }
@@ -106,7 +107,7 @@ public class EntityManager {
         }
         else {
             for (Entity elem : _contents) {
-                if (elem.getEntityType() == EntityTypes.get("Actor")) {
+                if (elem.getEntityType() == EntityTypes.get(Common.Actor)) {
                     if (((IActor) elem).getActorType() != ActorTypes.get(Core.Player)) {
                         _creatures.add(((IActor) elem));
                     }
@@ -121,7 +122,7 @@ public class EntityManager {
     public List<IActor> getActorsAt(Point2 target, ActorType actorType) {
         _creatures.clear();
         for (Entity elem : _gridContents.get(target)) {
-            if (elem.getEntityType() == EntityTypes.get("Actor")) {
+            if (elem.getEntityType() == EntityTypes.get(Common.Actor)) {
                 _nextResult = (IActor) elem;
                 if (actorType == null || _nextResult.getActorType() == actorType || (actorType == ActorTypes.get(Core.Non_Player) && _nextResult.getActorType() != ActorTypes.get(Core.Player))) {
                     _creatures.add(_nextResult);
@@ -246,7 +247,7 @@ public class EntityManager {
     public List<Entity> getPlayers() {
         _players.clear();
         for (Entity tile : _contents) {
-            if (tile.getEntityType() == EntityTypes.get("Actor") && ((IActor) tile).getActorType() == ActorTypes.get(Core.Player)) {
+            if (tile.getEntityType() == EntityTypes.get(Common.Actor) && ((IActor) tile).getActorType() == ActorTypes.get(Core.Player)) {
                 _players.add(tile);
             }
         }
@@ -259,7 +260,7 @@ public class EntityManager {
             if (location.GridX > 0 && location.GridY > 0 && location.GridX < Settings.get().tileMapWidth - 1 && location.GridY < Settings.get().tileMapHeight - 1) {
                 boolean exclude = false;
                 for (int ii = 0; ii < _gridContents.get(location).size(); ii++) {
-                    if (_gridContents.get(location).get(ii).getEntityType() == EntityTypes.get("Actor")) {
+                    if (_gridContents.get(location).get(ii).getEntityType() == EntityTypes.get(Common.Actor)) {
                         exclude = true;
                     }
                 }
@@ -274,7 +275,7 @@ public class EntityManager {
     public List<Entity> getEntitiesToCache() {
         List<Entity> results = new ArrayList<Entity>();
         for (Entity _content : _contents) {
-            if (_content.getEntityType() != EntityTypes.get("Floor")) {
+            if (_content.getEntityType() != EntityTypes.get(Common.Floor)) {
                 results.add(_content);
             }
         }
@@ -283,7 +284,7 @@ public class EntityManager {
 
     public IActor getTouchingCreature(Entity entity) {
         for (Entity _content : _contents) {
-            if (_content.getEntityType() == EntityTypes.get("Actor")) {
+            if (_content.getEntityType() == EntityTypes.get(Common.Actor)) {
                 if (_content.contains(entity.getLocation())) {
                     return (IActor) _content;
                 }

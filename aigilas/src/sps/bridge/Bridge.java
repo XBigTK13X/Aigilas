@@ -22,15 +22,11 @@ public class Bridge {
             BufferedReader br = new BufferedReader(reader);
             String line;
             while ((line = br.readLine()) != null) {
-                Logger.info(line);
                 if (line.contains("_")) {
                     int x = 0;
                 }
                 if (!line.contains("#")) {
                     String[] values = line.split(",");
-                    if (values.length >= 2) {
-                        Logger.info(values[0] + "," + values[1]);
-                    }
                     String name = values[0];
                     if (name.equals("context")) {
                         String id = values[1];

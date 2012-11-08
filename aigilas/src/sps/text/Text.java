@@ -3,6 +3,7 @@ package sps.text;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.DrawDepths;
+import sps.core.Core;
 import sps.core.Point2;
 import sps.graphics.Renderer;
 
@@ -52,7 +53,7 @@ public class Text {
     }
 
     public void draw() {
-        Renderer.get().drawString(message, position, Color.WHITE, scale, DrawDepths.get("ActionText"));
+        Renderer.get().drawString(message, position, Color.WHITE, scale, DrawDepths.get(Core.Default_Text));
     }
 
     public boolean isVisible() {

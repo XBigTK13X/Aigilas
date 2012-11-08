@@ -43,7 +43,6 @@ public class SpriteTypes {
         spriteTypes.put(spriteType.Name, spriteType);
     }
 
-    //TODO Remove this system. Not needed anymore.
     private ArrayList<SpriteDefinition> Definitions;
 
     public List<SpriteDefinition> getDefinitions() {
