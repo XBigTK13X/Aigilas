@@ -1,5 +1,6 @@
 package aigilas.states;
 
+import aigilas.management.Common;
 import sps.audio.MusicPlayer;
 import sps.bridge.Commands;
 import sps.core.Point2;
@@ -20,7 +21,7 @@ public class GameLoseState implements State {
 
     @Override
     public void update() {
-        if (Input.isActive(Commands.get("Confirm"), 0, true)) {
+        if (Input.isActive(Commands.get(Common.Confirm), 0, true)) {
             StateManager.loadState(new LoadingState());
         }
     }

@@ -3,6 +3,7 @@ package aigilas.creatures.impl;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
 import aigilas.items.ItemFactory;
+import aigilas.management.Common;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
@@ -43,64 +44,64 @@ public class CreatureFactory {
     }
 
     private static BaseEnemy generateCreature(ActorType actorType) {
-        if (actorType.is("Peon")) {
+        if (actorType.is(Common.Peon)) {
             return new Peon();
         }
-        if (actorType.is("Zorb")) {
+        if (actorType.is(Common.Zorb)) {
             return new Zorb();
         }
-        if (actorType.is("Wrath")) {
+        if (actorType.is(Common.Wrath)) {
             return new Wrath();
         }
-        if (actorType.is("Hand")) {
+        if (actorType.is(Common.Hand)) {
             return new Hand();
         }
-        if (actorType.is("Pride")) {
+        if (actorType.is(Common.Pride)) {
             return new Pride();
         }
-        if (actorType.is("Envy")) {
+        if (actorType.is(Common.Envy)) {
             return new Envy();
         }
-        if (actorType.is("Gluttony")) {
+        if (actorType.is(Common.Gluttony)) {
             return new Gluttony();
         }
-        if (actorType.is("Lust")) {
+        if (actorType.is(Common.Lust)) {
             return new Lust();
         }
-        if (actorType.is("Sloth")) {
+        if (actorType.is(Common.Sloth)) {
             return new Sloth();
         }
-        if (actorType.is("Greed")) {
+        if (actorType.is(Common.Greed)) {
             return new Greed();
         }
-        if (actorType.is("Serpent")) {
+        if (actorType.is(Common.Serpent)) {
             return new Serpent();
         }
-        if (actorType.is("Breaking_Wheel")) {
+        if (actorType.is(Common.Breaking_Wheel)) {
             return new BreakingWheel();
         }
-        if (actorType.is("Wrath_Acolyte")) {
+        if (actorType.is(Common.Wrath_Acolyte)) {
             return new WrathEnemyAcolyte();
         }
-        if (actorType.is("Pride_Acolyte")) {
+        if (actorType.is(Common.Pride_Acolyte)) {
             return new PrideEnemyAcolyte();
         }
-        if (actorType.is("Envy_Acolyte")) {
+        if (actorType.is(Common.Envy_Acolyte)) {
             return new EnvyEnemyAcolyte();
         }
-        if (actorType.is("Gluttony_Acolyte")) {
+        if (actorType.is(Common.Gluttony_Acolyte)) {
             return new GluttonyEnemyAcolyte();
         }
-        if (actorType.is("Lust_Acolyte")) {
+        if (actorType.is(Common.Lust_Acolyte)) {
             return new LustEnemyAcolyte();
         }
-        if (actorType.is("Sloth_Acolyte")) {
+        if (actorType.is(Common.Sloth_Acolyte)) {
             return new SlothEnemyAcolyte();
         }
-        if (actorType.is("Greed_Acolyte")) {
+        if (actorType.is(Common.Greed_Acolyte)) {
             return new GreedEnemyAcolyte();
         }
-        if (actorType.is("Dummy")) {
+        if (actorType.is(Common.Dummy)) {
             return new Dummy();
         }
 
@@ -161,11 +162,11 @@ public class CreatureFactory {
     private static List<ActorType> __remainingBosses;
 
     static {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get("Wrath"), ActorTypes.get("Envy"), ActorTypes.get("Pride"), ActorTypes.get("Sloth"), ActorTypes.get("Greed"), ActorTypes.get("Lust"), ActorTypes.get("Gluttony")));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get(Common.Wrath), ActorTypes.get(Common.Envy), ActorTypes.get(Common.Pride), ActorTypes.get(Common.Sloth), ActorTypes.get(Common.Greed), ActorTypes.get(Common.Lust), ActorTypes.get(Common.Gluttony)));
     }
 
     public static void reset() {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get("Wrath"), ActorTypes.get("Envy"), ActorTypes.get("Pride"), ActorTypes.get("Sloth"), ActorTypes.get("Greed"), ActorTypes.get("Lust"), ActorTypes.get("Gluttony")));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get(Common.Wrath), ActorTypes.get(Common.Envy), ActorTypes.get(Common.Pride), ActorTypes.get(Common.Sloth), ActorTypes.get(Common.Greed), ActorTypes.get(Common.Lust), ActorTypes.get(Common.Gluttony)));
         __playerCount = 0;
     }
 

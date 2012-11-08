@@ -2,6 +2,7 @@ package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.impl.CreatureFactory;
+import aigilas.management.Common;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -27,7 +28,7 @@ public class DismembermentSkill extends BaseSkill {
         int openCell = RNG.next(1, Settings.get().tileMapWidth - 1);
         for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             if (ii != openCell) {
-                CreatureFactory.create(ActorTypes.get("Hand"), new Point2(ii, 1));
+                CreatureFactory.create(ActorTypes.get(Common.Hand), new Point2(ii, 1));
 
             }
 

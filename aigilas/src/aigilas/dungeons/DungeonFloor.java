@@ -5,6 +5,7 @@ import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
+import aigilas.management.Common;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
 import sps.core.Core;
@@ -67,7 +68,7 @@ public class DungeonFloor {
             startX += 2;
         }
 
-        dungeon[Settings.get().tileMapWidth / 2][startY - 2] = CreatureFactory.create(ActorTypes.get("Dummy"), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
+        dungeon[Settings.get().tileMapWidth / 2][startY - 2] = CreatureFactory.create(ActorTypes.get(Common.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
     }
 
     private List<Entity> playerCache;
@@ -100,7 +101,7 @@ public class DungeonFloor {
         for (Entity[] row : dungeon) {
             for (Entity tile : row) {
                 if (tile != null) {
-                    if (tile.getEntityType() != EntityTypes.get("Floor")) {
+                    if (tile.getEntityType() != EntityTypes.get(Common.Floor)) {
                         _contents.add(tile);
                     }
                     EntityManager.get().addObject(tile);
@@ -132,7 +133,7 @@ public class DungeonFloor {
         while (true) {
             int x = RNG.next(0, Settings.get().tileMapWidth);
             int y = RNG.next(0, Settings.get().tileMapHeight);
-            if (dungeon[x][y].getEntityType() == EntityTypes.get("Floor")) {
+            if (dungeon[x][y].getEntityType() == EntityTypes.get(Common.Floor)) {
                 return new Point2(x, y);
             }
         }

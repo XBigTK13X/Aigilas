@@ -13,7 +13,7 @@ public class ReactionMarker extends Entity {
     private final Emitter emitter;
 
     public ReactionMarker(BaseCreature source, Elements elementId) {
-        initialize(source.getLocation(), null, EntityTypes.get(Common.ComboMarker), DrawDepths.get(Common.ComboMarker));
+        initialize(source.getLocation(), null, EntityTypes.get(Common.Combo_Marker), DrawDepths.get(Common.Combo_Marker));
         _graphic.setColor(elementId.Tint);
         _graphic.setAlpha(0);
         _parent = source;

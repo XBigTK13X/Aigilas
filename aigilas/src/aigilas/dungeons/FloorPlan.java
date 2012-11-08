@@ -1,5 +1,6 @@
 package aigilas.dungeons;
 
+import aigilas.management.Common;
 import sps.bridge.EntityType;
 import sps.bridge.EntityTypes;
 import sps.core.Point2;
@@ -25,7 +26,7 @@ public class FloorPlan {
         tiles = new EntityType[Settings.get().tileMapWidth][Settings.get().tileMapHeight];
         for (int ii = 0; ii < Settings.get().tileMapWidth; ii++) {
             for (int jj = 0; jj < Settings.get().tileMapHeight; jj++) {
-                tiles[ii][jj] = EntityTypes.get("Floor");
+                tiles[ii][jj] = EntityTypes.get(Common.Floor);
             }
         }
 
@@ -66,27 +67,27 @@ public class FloorPlan {
                     if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1) {
                         if (!room.Corners.contains(new Point2(ii, jj))) {
                             if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < Settings.get().tileMapWidth)) {
-                                if (is(ii - 1, jj, EntityTypes.get("Floor")) && is(ii + 1, jj, EntityTypes.get("Floor"))) {
+                                if (is(ii - 1, jj, EntityTypes.get(Common.Floor)) && is(ii + 1, jj, EntityTypes.get(Common.Floor))) {
                                     possibleEntrances.add(new OrientedPoint(ii, jj, true));
                                 }
                             }
                             if ((jj == room.Y && jj > 0) || (jj == room.BottomSide && jj < Settings.get().tileMapHeight)) {
-                                if (is(ii, jj - 1, EntityTypes.get("Floor")) && is(ii, jj + 1, EntityTypes.get("Floor"))) {
+                                if (is(ii, jj - 1, EntityTypes.get(Common.Floor)) && is(ii, jj + 1, EntityTypes.get(Common.Floor))) {
                                     possibleEntrances.add(new OrientedPoint(ii, jj));
                                 }
                             }
                         }
-                        tiles[ii][jj] = EntityTypes.get("Wall");
+                        tiles[ii][jj] = EntityTypes.get(Common.Wall);
                     }
                     else {
-                        tiles[ii][jj] = EntityTypes.get("Floor");
+                        tiles[ii][jj] = EntityTypes.get(Common.Floor);
                     }
                 }
             }
             if (roomCount > 0 && possibleEntrances.size() > 0) {
                 int index = RNG.next(0, possibleEntrances.size() - 1);
                 OrientedPoint entrance = possibleEntrances.get(index);
-                if (!is(entrance.X, entrance.Y, EntityTypes.get("Floor"))) {
+                if (!is(entrance.X, entrance.Y, EntityTypes.get(Common.Floor))) {
                     entrances.add(entrance);
                 }
             }
@@ -102,7 +103,7 @@ public class FloorPlan {
                 int startX = (entrance.isHorizontal()) ? ii : entrance.X;
                 int startY = (entrance.isHorizontal()) ? entrance.Y : ii;
                 Point2 target = new Point2(startX, startY);
-                tiles[target.GridX][target.GridY] = EntityTypes.get("Floor");
+                tiles[target.GridX][target.GridY] = EntityTypes.get(Common.Floor);
             }
         }
 
@@ -111,7 +112,7 @@ public class FloorPlan {
             for (int jj = 0; jj < Settings.get().tileMapHeight; jj++) {
                 EntityType tile = tiles[ii][jj];
                 if (ii > 0 && jj > 0 && ii < Settings.get().tileMapWidth - 1 && jj < Settings.get().tileMapHeight - 1) {
-                    tile = RNG.percent(Settings.get().wallDecayPercent) ? EntityTypes.get("Floor") : tile;
+                    tile = RNG.percent(Settings.get().wallDecayPercent) ? EntityTypes.get(Common.Floor) : tile;
                 }
                 walls.add(new Tile(tile, ii, jj));
             }

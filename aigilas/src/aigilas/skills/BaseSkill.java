@@ -4,6 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
+import aigilas.management.Common;
 import aigilas.skills.behaviors.SkillBehavior;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
@@ -20,7 +21,7 @@ public abstract class BaseSkill {
     protected BaseSkill(SkillId implementationId, AnimationType animation, float strength, boolean isPersistent) {
         _id = implementationId;
         _components = new SkillComponents(strength, isPersistent);
-        _behavior = SkillFactory.create(animation, SpriteTypes.get("Skill_Effect"), this);
+        _behavior = SkillFactory.create(animation, SpriteTypes.get(Common.Skill_Effect), this);
         for (Elements element : _id.Info.Elements) {
             _components.addElements(element);
         }

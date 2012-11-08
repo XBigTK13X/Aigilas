@@ -1,6 +1,7 @@
 package aigilas.strategies.impl;
 
 import aigilas.creatures.BaseCreature;
+import aigilas.management.Common;
 import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
@@ -52,8 +53,8 @@ public class TestBotStrategy extends BaseStrategy {
             }
         }
         else {
-            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityTypes.get("Actor")).size() == 1) {
-                _stairsTarget = EntityManager.get().getObject(EntityTypes.get("Downstairs"));
+            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getObjects(EntityTypes.get(Common.Actor)).size() == 1) {
+                _stairsTarget = EntityManager.get().getObject(EntityTypes.get(Common.Downstairs));
                 if (_stairsTarget != null) {
                     targetPath = PathFinder.find(_parent.getLocation(), _stairsTarget.getLocation());
                 }

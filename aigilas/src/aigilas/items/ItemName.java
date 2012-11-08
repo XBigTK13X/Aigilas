@@ -1,5 +1,6 @@
 package aigilas.items;
 
+import aigilas.management.Common;
 import sps.bridge.SpriteType;
 import sps.bridge.SpriteTypes;
 
@@ -26,6 +27,6 @@ public enum ItemName {
     private ItemName(ItemClass category, Slots slots) {
         Category = category;
         Slots = slots;
-        Sprite = SpriteTypes.get("Item");
+        Sprite = SpriteTypes.get(Common.Item);
     }
 }

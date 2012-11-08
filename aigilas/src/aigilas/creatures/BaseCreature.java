@@ -8,6 +8,7 @@ import aigilas.hud.HudContainer;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
+import aigilas.management.Common;
 import aigilas.reactions.ReactionMeter;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillLogic;
@@ -69,8 +70,8 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected ActorType _actorType;
 
     protected void setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
-        _entityType = EntityTypes.get("Actor");
-        initialize(location, type.Sprite, EntityTypes.get("Actor"), DrawDepths.get("Creature"));
+        _entityType = EntityTypes.get(Common.Actor);
+        initialize(location, type.Sprite, EntityTypes.get(Common.Actor), DrawDepths.get(Common.Creature));
         init(type, stats, creatureClass, setClass);
     }
 
@@ -320,7 +321,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
             Logger.gameplay(this.toString() + " taking " + damage + " damage" + " from " + attacker);
-            if (_actorType != ActorTypes.get("Dummy")) {
+            if (_actorType != ActorTypes.get(Common.Dummy)) {
                 adjust((statType == null) ? StatType.Health : statType, -damage);
             }
         }
@@ -573,7 +574,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     @Override
     public void performInteraction() {
         setInteracting(false);
-        Input.lock(Commands.get("Confirm"), getPlayerIndex());
+        Input.lock(Commands.get(Common.Confirm), getPlayerIndex());
     }
 
     public void markHotSkill(Command hotSkillSlot) {

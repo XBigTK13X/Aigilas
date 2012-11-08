@@ -2,6 +2,7 @@ package aigilas.creatures.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
+import aigilas.management.Common;
 import aigilas.skills.SkillId;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
@@ -13,7 +14,7 @@ public class VaporCloud extends Minion {
     private BaseCreature _host = null;
 
     public VaporCloud() {
-        super(ActorTypes.get("Minion"));
+        super(ActorTypes.get(Common.Minion));
         _strategy = StrategyFactory.create(Strategy.MinionCloud, this);
         add(SkillId.Vapor_Cloud);
         _composition.add(Elements.Water);

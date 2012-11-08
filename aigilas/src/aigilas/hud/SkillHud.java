@@ -2,6 +2,7 @@ package aigilas.hud;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
+import aigilas.management.Common;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.Commands;
 import sps.bridge.DrawDepths;
@@ -32,7 +33,7 @@ public class SkillHud extends BaseHud {
     }
 
     private String getSkillStrings() {
-        return "S:" + _parent.getActiveSkillName() + __separator + "Z:" + _parent.getHotSkillName(Commands.get("HotSkill1")) + __separator + "X:" + _parent.getHotSkillName(Commands.get("HotSkill2")) + __separator + "C:" + _parent.getHotSkillName(Commands.get("HotSkill3")) + __separator;
+        return "S:" + _parent.getActiveSkillName() + __separator + "Z:" + _parent.getHotSkillName(Commands.get(Common.Hot_Skill_1)) + __separator + "X:" + _parent.getHotSkillName(Commands.get(Common.Hot_Skill_2)) + __separator + "C:" + _parent.getHotSkillName(Commands.get(Common.Hot_Skill_3)) + __separator;
     }
 
     public void update() {
@@ -53,8 +54,8 @@ public class SkillHud extends BaseHud {
             return;
         }
 
-        Renderer.get().draw(_menuBase, getMeterAnchor(), DrawDepths.get("HudBG"), Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
-        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get("HudBG"), Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
-        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get("HudBG"), Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
+        Renderer.get().draw(_menuBase, getMeterAnchor(), DrawDepths.get(Common.Hud_BG), Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get(Common.Hud_BG), Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get(Common.Hud_BG), Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
     }
 }

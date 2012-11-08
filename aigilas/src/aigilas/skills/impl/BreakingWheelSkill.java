@@ -2,6 +2,7 @@ package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.impl.CreatureFactory;
+import aigilas.management.Common;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
@@ -19,7 +20,7 @@ public class BreakingWheelSkill extends BaseSkill {
 
     @Override
     public void activate(BaseCreature source) {
-        CreatureFactory.create(ActorTypes.get("Breaking_Wheel"), EntityManager.get().getEmptyLocation());
+        CreatureFactory.create(ActorTypes.get(Common.Breaking_Wheel), EntityManager.get().getEmptyLocation());
     }
 
 }

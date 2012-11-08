@@ -2,6 +2,7 @@ package aigilas.skills;
 
 import aigilas.creatures.StatBuff;
 import aigilas.entities.Elements;
+import aigilas.management.Common;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.ActorType;
 import sps.bridge.EntityType;
@@ -17,7 +18,7 @@ public class SkillComponents {
     protected StatBuff _buff;
     protected float _effectStrength = 0;
     protected boolean _isPersistent = false;
-    protected final List<EntityType> _targetTypes = Arrays.asList(EntityTypes.get("Wall"));
+    protected final List<EntityType> _targetTypes = Arrays.asList(EntityTypes.get(Common.Wall));
     protected List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
     protected EntityType _onlyAffects;
 

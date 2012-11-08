@@ -1,6 +1,7 @@
 package aigilas;
 
 import aigilas.hud.HudRenderer;
+import aigilas.management.Common;
 import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
@@ -46,10 +47,10 @@ public class Aigilas implements ApplicationListener {
 
             // Update
             Input.update();
-            if (Input.isActive(Commands.get("ToggleDevConsole"), Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get(Common.ToggleDevConsole), Client.get().getFirstPlayerIndex())) {
                 DevConsole.get().toggle();
             }
-            if (Input.isActive(Commands.get("Back"), Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get(Common.Back), Client.get().getFirstPlayerIndex())) {
                 Gdx.app.exit();
             }
             if (Client.get().nextTurn()) {

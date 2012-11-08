@@ -1,5 +1,6 @@
 package aigilas.states;
 
+import aigilas.management.Common;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
@@ -27,7 +28,7 @@ public class MainMenuState implements State {
 
     @Override
     public void update() {
-        int selectionVelocity = (Input.isActive(Commands.get("MoveUp"), Client.get().getFirstPlayerIndex()) ? 1 : 0) + (Input.isActive(Commands.get("MoveDown"), Client.get().getFirstPlayerIndex()) ? -1 : 0);
+        int selectionVelocity = (Input.isActive(Commands.get(Common.MoveUp), Client.get().getFirstPlayerIndex()) ? 1 : 0) + (Input.isActive(Commands.get(Common.MoveDown), Client.get().getFirstPlayerIndex()) ? -1 : 0);
         _selection += selectionVelocity;
         _selection %= 3;
         if (_selection < 0) {
@@ -36,13 +37,13 @@ public class MainMenuState implements State {
 
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get("Free"), ii);
+                Input.setContext(Contexts.get(Common.Free), ii);
             }
 
             StateManager.loadState(new LoadingState());
         }
         else {
-            if (Input.isActive(Commands.get("Confirm"), Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get(Common.Confirm), Client.get().getFirstPlayerIndex())) {
                 switch (_selection) {
                     case 2:
                         Logger.info("Starting the game");
