@@ -1,6 +1,6 @@
 package aigilas.skills.impl;
 
-import aigilas.management.Common;
+import aigilas.Common;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;

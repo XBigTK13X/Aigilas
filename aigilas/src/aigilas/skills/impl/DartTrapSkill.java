@@ -1,8 +1,8 @@
 package aigilas.skills.impl;
 
+import aigilas.Common;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.entities.SkillEffect;
-import aigilas.management.Common;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;

@@ -1,9 +1,9 @@
 package aigilas.creatures.impl;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatsRegistry;
 import aigilas.entities.SkillEffect;
-import aigilas.management.Common;
 import aigilas.skills.SkillId;
 import aigilas.skills.SkillPool;
 import sps.bridge.ActorType;

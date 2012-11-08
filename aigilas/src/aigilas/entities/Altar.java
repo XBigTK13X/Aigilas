@@ -1,10 +1,10 @@
 package aigilas.entities;
 
+import aigilas.Common;
 import aigilas.creatures.impl.Player;
 import aigilas.gods.God;
 import aigilas.gods.GodId;
 import aigilas.items.GenericItem;
-import aigilas.management.Common;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
 import sps.bridge.SpriteTypes;

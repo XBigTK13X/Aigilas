@@ -1,4 +1,4 @@
-package aigilas.management;
+package aigilas;
 
 public class Common {
     public static final String Actor = "Actor";

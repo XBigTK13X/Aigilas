@@ -1,7 +1,7 @@
 package aigilas.entities;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
-import aigilas.management.Common;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillFactory;
 import aigilas.skills.animations.SkillAnimation;

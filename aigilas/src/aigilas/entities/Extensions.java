@@ -1,7 +1,7 @@
 package aigilas.entities;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
-import aigilas.management.Common;
 import sps.bridge.EntityTypes;
 import sps.entities.Entity;
 

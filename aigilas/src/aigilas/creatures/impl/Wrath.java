@@ -1,6 +1,6 @@
 package aigilas.creatures.impl;
 
-import aigilas.management.Common;
+import aigilas.Common;
 import sps.bridge.ActorTypes;
 
 public class Wrath extends BaseEnemy {

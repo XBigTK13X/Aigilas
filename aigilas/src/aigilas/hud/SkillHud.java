@@ -1,8 +1,8 @@
 package aigilas.hud;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
-import aigilas.management.Common;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.Commands;
 import sps.bridge.DrawDepths;

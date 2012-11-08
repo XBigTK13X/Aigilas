@@ -1,10 +1,10 @@
 package aigilas.items;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
-import aigilas.management.Common;
 import sps.bridge.ActorTypes;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;

@@ -1,11 +1,11 @@
 package aigilas.dungeons;
 
+import aigilas.Common;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
-import aigilas.management.Common;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
 import sps.core.Core;

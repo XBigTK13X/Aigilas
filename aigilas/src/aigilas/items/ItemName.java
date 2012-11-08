@@ -1,6 +1,6 @@
 package aigilas.items;
 
-import aigilas.management.Common;
+import aigilas.Common;
 import sps.bridge.SpriteType;
 import sps.bridge.SpriteTypes;
 

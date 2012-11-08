@@ -1,7 +1,7 @@
 package aigilas.creatures.impl;
 
+import aigilas.Common;
 import aigilas.entities.Elements;
-import aigilas.management.Common;
 import aigilas.skills.SkillId;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;

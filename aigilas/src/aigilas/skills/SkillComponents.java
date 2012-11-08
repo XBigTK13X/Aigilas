@@ -1,8 +1,8 @@
 package aigilas.skills;
 
+import aigilas.Common;
 import aigilas.creatures.StatBuff;
 import aigilas.entities.Elements;
-import aigilas.management.Common;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.ActorType;
 import sps.bridge.EntityType;

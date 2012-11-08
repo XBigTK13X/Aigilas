@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.management.Common;
+import aigilas.Common;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
 import sps.bridge.SpriteTypes;

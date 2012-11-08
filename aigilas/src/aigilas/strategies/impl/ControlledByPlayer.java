@@ -1,9 +1,9 @@
 package aigilas.strategies.impl;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
-import aigilas.management.Common;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorTypes;

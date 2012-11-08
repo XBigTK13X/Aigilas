@@ -1,10 +1,10 @@
 package aigilas.skills;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.entities.Extensions;
 import aigilas.entities.SkillEffect;
-import aigilas.management.Common;
 import aigilas.skills.behaviors.SkillBehavior;
 import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;

@@ -1,12 +1,11 @@
 package aigilas;
 
 import aigilas.hud.HudRenderer;
-import aigilas.management.Common;
-import aigilas.management.SpriteInitializer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Commands;
+import sps.bridge.SpriteTypes;
 import sps.bridge.Spx;
 import sps.core.DevConsole;
 import sps.core.Logger;
@@ -29,7 +28,7 @@ public class Aigilas implements ApplicationListener {
     public void create() {
         Spx.setup();
         Input.setup();
-        SpriteSheetManager.setup(new SpriteInitializer());
+        SpriteSheetManager.setup(SpriteTypes.getDefs());
         StateManager.loadState(new MainMenuState());
         ParticleEngine.reset();
         StateManager.loadContent();

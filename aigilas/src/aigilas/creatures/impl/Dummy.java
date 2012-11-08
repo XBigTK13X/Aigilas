@@ -1,9 +1,9 @@
 package aigilas.creatures.impl;
 
+import aigilas.Common;
 import aigilas.creatures.Stats;
 import aigilas.creatures.StatsRegistry;
 import aigilas.entities.Elements;
-import aigilas.management.Common;
 import aigilas.strategies.StrategyFactory;
 import sps.bridge.ActorTypes;
 import sps.core.Core;

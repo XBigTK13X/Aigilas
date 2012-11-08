@@ -1,11 +1,11 @@
 package aigilas.hud;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import aigilas.items.Equipment;
 import aigilas.items.GenericItem;
 import aigilas.items.Inventory;
 import aigilas.items.ItemClass;
-import aigilas.management.Common;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.Commands;
 import sps.bridge.DrawDepths;

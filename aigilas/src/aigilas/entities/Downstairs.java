@@ -1,8 +1,8 @@
 package aigilas.entities;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import aigilas.dungeons.Dungeon;
-import aigilas.management.Common;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
 import sps.bridge.SpriteTypes;

@@ -1,7 +1,7 @@
 package aigilas.strategies.impl;
 
+import aigilas.Common;
 import aigilas.creatures.BaseCreature;
-import aigilas.management.Common;
 import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
 import aigilas.strategies.BaseStrategy;
