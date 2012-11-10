@@ -1,4 +1,4 @@
-package sps.net;
+package aigilas.net;
 
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;

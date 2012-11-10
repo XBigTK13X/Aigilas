@@ -12,7 +12,7 @@ import sps.core.Logger;
 import sps.graphics.Renderer;
 import sps.graphics.SpriteSheetManager;
 import sps.io.Input;
-import sps.net.Client;
+import aigilas.net.Client;
 import sps.particles.ParticleEngine;
 import sps.states.StateManager;
 import sps.text.TextPool;

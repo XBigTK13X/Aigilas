@@ -39,6 +39,17 @@ public class Settings {
     public final float turnTime;
     public final int turnsPerSecond;
 
+    public final boolean clientVerbose;
+    public final boolean serverVerbose;
+    public final boolean messageContentsVerbose;
+    public final boolean messageHandlerVerbose;
+    public final boolean clientManagerVerbose;
+    public final boolean gameplayVerbose;
+    public final boolean viewPaths;
+
+    public final boolean debugInventory;
+    public final boolean debugFourPlayers;
+
     public final boolean musicEnabled;
 
     public final int spriteHeight;
@@ -51,15 +62,7 @@ public class Settings {
     public final boolean fullScreen;
 
     public final boolean devConsoleEnabled;
-    public final boolean clientVerbose;
-    public final boolean serverVerbose;
-    public final boolean messageContentsVerbose;
-    public final boolean messageHandlerVerbose;
-    public final boolean clientManagerVerbose;
-    public final boolean viewPaths;
-    public final boolean gameplayVerbose;
-    public final boolean debugInventory;
-    public final boolean debugFourPlayers;
+
 
     private Settings() {
         try {

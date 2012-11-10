@@ -1,4 +1,4 @@
-package sps.net;
+package aigilas.net;
 
 import sps.core.Logger;
 import sps.core.Settings;

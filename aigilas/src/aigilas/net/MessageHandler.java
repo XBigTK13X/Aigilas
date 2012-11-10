@@ -1,6 +1,6 @@
 // Modified from: http://stackoverflow.com/questions/2828447/using-threads-to-handle-sockets
 
-package sps.net;
+package aigilas.net;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;

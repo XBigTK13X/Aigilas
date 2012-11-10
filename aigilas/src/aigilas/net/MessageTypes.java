@@ -1,4 +1,4 @@
-package sps.net;
+package aigilas.net;
 
 public enum MessageTypes {
     Connect((byte) 1),

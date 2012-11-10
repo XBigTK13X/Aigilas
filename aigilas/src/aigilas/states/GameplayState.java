@@ -12,7 +12,7 @@ import aigilas.statuses.StatusRegistry;
 import sps.core.Logger;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.net.Client;
+import aigilas.net.Client;
 import sps.particles.ParticleEngine;
 import sps.states.State;
 import sps.states.StateManager;

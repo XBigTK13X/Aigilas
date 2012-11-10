@@ -7,7 +7,7 @@ import sps.bridge.Commands;
 import sps.bridge.Context;
 import sps.bridge.Contexts;
 import sps.core.Core;
-import sps.net.Client;
+import aigilas.net.Client;
 
 import java.util.ArrayList;
 import java.util.HashMap;

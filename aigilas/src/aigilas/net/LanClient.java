@@ -1,4 +1,4 @@
-package sps.net;
+package aigilas.net;
 
 import sps.bridge.Command;
 import sps.bridge.Commands;

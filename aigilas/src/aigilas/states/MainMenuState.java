@@ -7,7 +7,7 @@ import sps.core.Core;
 import sps.core.Logger;
 import sps.core.Point2;
 import sps.io.Input;
-import sps.net.Client;
+import aigilas.net.Client;
 import sps.states.State;
 import sps.states.StateManager;
 import sps.text.TextPool;

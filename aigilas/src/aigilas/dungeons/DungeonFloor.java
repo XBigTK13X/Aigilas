@@ -15,7 +15,7 @@ import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
-import sps.net.Client;
+import aigilas.net.Client;
 
 import java.util.ArrayList;
 import java.util.List;

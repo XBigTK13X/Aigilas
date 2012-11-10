@@ -5,7 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import sps.core.Logger;
 import sps.core.Settings;
-import sps.net.Server;
+import aigilas.net.Server;
 
 public class DesktopMain {
     public static void main(String[] args) {
