@@ -7,6 +7,7 @@ import sps.core.DevConsole;
 import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
+import sps.io.CommandState;
 
 import java.net.Socket;
 import java.util.HashMap;
@@ -22,15 +23,9 @@ public class LanClient implements IClient {
     private boolean _isGameStarting;
     private boolean _dungeonHasLoaded = false;
     private boolean _isConnected;
-    private final HashMap<Integer, HashMap<Command, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Command, Boolean>>();
+    private final CommandState state = new CommandState();
 
     public LanClient() {
-        for (int ii = 0; ii < Message.PlayerMax; ii++) {
-            _playerStatus.put(ii, new HashMap<Command, Boolean>());
-            for (Command command : Commands.values()) {
-                _playerStatus.get(ii).put(command, false);
-            }
-        }
         try {
             Socket server = new Socket(Config.get().serverIp, Config.get().port);
             _comm = new MessageHandler(server);
@@ -79,15 +74,6 @@ public class LanClient implements IClient {
         return false;
     }
 
-    private void initPlayer(int playerIndex, Command command) {
-        if (!_playerStatus.containsKey(playerIndex)) {
-            _playerStatus.put(playerIndex, new HashMap<Command, Boolean>());
-        }
-        if (!_playerStatus.get(playerIndex).containsKey(command)) {
-            _playerStatus.get(playerIndex).put(command, false);
-        }
-    }
-
     public int getFirstPlayerIndex() {
         return _initialPlayerIndex;
     }
@@ -98,15 +84,11 @@ public class LanClient implements IClient {
 
     // Client <-> Server communication
     public boolean isActive(Command command, int playerIndex) {
-        if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
-            return _playerStatus.get(playerIndex).get(command);
-        }
-        return false;
+        return state.isActive(playerIndex,command);
     }
 
     public void setState(Command command, int playerIndex, boolean isActive) {
-        initPlayer(playerIndex, command);
-        if (_playerStatus.get(playerIndex).get(command) != isActive) {
+        if (!state.isActive(playerIndex,command)) {
             sendMessage(Message.createMovement(command, playerIndex, isActive));
         }
     }
@@ -166,7 +148,7 @@ public class LanClient implements IClient {
                 _isGameStarting = true;
                 break;
             case Sync_State:
-                contents.readPlayerState(_playerStatus);
+                contents.readPlayerState(state.getData());
                 break;
             default:
                 break;

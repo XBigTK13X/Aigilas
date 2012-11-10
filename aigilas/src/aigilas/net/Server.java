@@ -4,12 +4,13 @@ import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.core.Logger;
 import sps.core.Settings;
+import sps.io.CommandState;
 
 import java.util.HashMap;
 
 public class Server extends Thread {
     private boolean isRunning = true;
-    private final HashMap<Integer, HashMap<Command, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Command, Boolean>>();
+    private final CommandState state = new CommandState();
     private final int _rngSeed = (int) System.currentTimeMillis();
     private Message _message = Message.empty();
     private Integer _turnCount = 0;
@@ -20,12 +21,6 @@ public class Server extends Thread {
     public Server() {
         setName("Server");
         clients = new ClientManager();
-        for (int ii = 0; ii < Message.PlayerMax; ii++) {
-            _playerStatus.put(ii, new HashMap<Command, Boolean>());
-            for (Command command : Commands.values()) {
-                _playerStatus.get(ii).put(command, false);
-            }
-        }
     }
 
     public void run() {
@@ -50,14 +45,12 @@ public class Server extends Thread {
                     _turnCount = 0;
                     break;
                 case Check_State:
-                    initPlayer(_message.PlayerIndex, _message.Command);
-                    _message.IsActive = _playerStatus.get(_message.PlayerIndex).get(_message.Command);
+                    _message.IsActive = state.isActive(_message.PlayerIndex,_message.Command);
                     sendMessage(_message, _message.LocalPort);
                     break;
 
                 case Movement:
-                    initPlayer(_message.PlayerIndex, _message.Command);
-                    _playerStatus.get(_message.PlayerIndex).put(_message.Command, _message.IsActive);
+                    state.setState(_message.PlayerIndex,_message.Command, _message.IsActive);
                     break;
 
                 case Start_Game:
@@ -81,26 +74,13 @@ public class Server extends Thread {
         }
     }
 
-    private void initPlayer(int playerIndex, Command command) {
-        if (!_playerStatus.containsKey(playerIndex)) {
-            _playerStatus.put(playerIndex, new HashMap<Command, Boolean>());
-        }
-        if (!_playerStatus.get(playerIndex).containsKey(command)) {
-            _playerStatus.get(playerIndex).put(command, false);
-        }
-    }
-
-    public boolean isOnlyInstance() {
-        return clients.isOnlyInstance();
-    }
-
     private void broadCastGameState() {
         int readyCount = 0;
         for (boolean a_readyCheckIn : _readyCheckIn) {
             readyCount += a_readyCheckIn ? 1 : 0;
         }
         if (readyCount >= clients.size()) {
-            announce(Message.createPlayerState(_playerStatus, _turnCount++, _rngSeed));
+            announce(Message.createPlayerState(state.getData(), _turnCount++, _rngSeed));
             for (int ii = 0; ii < _readyCheckIn.length; ii++) {
                 _readyCheckIn[ii] = false;
             }

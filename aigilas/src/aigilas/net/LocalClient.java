@@ -7,6 +7,7 @@ import sps.bridge.Commands;
 import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
+import sps.io.CommandState;
 
 import java.util.HashMap;
 
@@ -14,17 +15,10 @@ public class LocalClient implements IClient {
     private boolean _isGameStarting;
     private float _turnTimer = 0;
     private boolean _isConnected;
-    private final HashMap<Integer, HashMap<Command, Boolean>> _playerStatus = new HashMap<Integer, HashMap<Command, Boolean>>();
-
-    private final int maxPlayers = 1;
+    private final CommandState state = new CommandState();
 
     public LocalClient() {
-        for (int ii = 0; ii < maxPlayers; ii++) {
-            _playerStatus.put(ii, new HashMap<Command, Boolean>());
-            for (Command command : Commands.values()) {
-                _playerStatus.get(ii).put(command, false);
-            }
-        }
+
     }
 
     public boolean isGameStarting() {
@@ -44,40 +38,20 @@ public class LocalClient implements IClient {
         return false;
     }
 
-    private void initPlayer(int playerIndex, Command command) {
-        if (!_playerStatus.containsKey(playerIndex)) {
-            _playerStatus.put(playerIndex, new HashMap<Command, Boolean>());
-        }
-        if (!_playerStatus.get(playerIndex).containsKey(command)) {
-            _playerStatus.get(playerIndex).put(command, false);
-        }
-    }
-
     public int getFirstPlayerIndex() {
         return 0;
     }
 
     public boolean isActive(Command command, int playerIndex) {
-        if (_playerStatus.containsKey(playerIndex) && _playerStatus.get(playerIndex).containsKey(command)) {
-            return _playerStatus.get(playerIndex).get(command);
-        }
-        return false;
+        return state.isActive(playerIndex,command);
     }
 
     public void setState(Command command, int playerIndex, boolean isActive) {
-        initPlayer(playerIndex, command);
-        if (_playerStatus.get(playerIndex).get(command) != isActive) {
-            _playerStatus.get(playerIndex).put(command, isActive);
-        }
+        state.setState(playerIndex,command,isActive);
     }
 
-    int _playerCount = 0;
-
     public int getPlayerCount() {
-        if (_playerCount == 0) {
-            _playerCount = _playerStatus.keySet().size();
-        }
-        return _playerCount;
+        return 1;
     }
 
     public void startGame() {
