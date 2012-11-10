@@ -26,20 +26,20 @@ public abstract class BaseHud {
         }
         _dimensions = new Point2(width, height);
 
-        inventoryAnchors.add(new Point2(0, Renderer.VirtualHeight / 2));
-        inventoryAnchors.add(new Point2(Renderer.VirtualWidth / 2, Renderer.VirtualHeight / 2));
+        inventoryAnchors.add(new Point2(0, Renderer.get().VirtualHeight / 2));
+        inventoryAnchors.add(new Point2(Renderer.get().VirtualWidth / 2, Renderer.get().VirtualHeight / 2));
         inventoryAnchors.add(new Point2(0, 0));
-        inventoryAnchors.add(new Point2(Renderer.VirtualWidth / 2, 0));
+        inventoryAnchors.add(new Point2(Renderer.get().VirtualWidth / 2, 0));
 
-        meterAnchors.add(new Point2(0, Renderer.VirtualHeight - _dimensions.Y));
-        meterAnchors.add(new Point2(Renderer.VirtualWidth - _dimensions.X, Renderer.VirtualHeight - _dimensions.Y));
+        meterAnchors.add(new Point2(0, Renderer.get().VirtualHeight - _dimensions.Y));
+        meterAnchors.add(new Point2(Renderer.get().VirtualWidth - _dimensions.X, Renderer.get().VirtualHeight - _dimensions.Y));
         meterAnchors.add(new Point2(0, _dimensions.Y));
-        meterAnchors.add(new Point2(Renderer.VirtualWidth - _dimensions.X, _dimensions.Y));
+        meterAnchors.add(new Point2(Renderer.get().VirtualWidth - _dimensions.X, _dimensions.Y));
 
-        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, Renderer.VirtualHeight - (int) (.1 * _dimensions.Y)));
-        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.VirtualWidth / 2, Renderer.VirtualHeight - (int) (.1 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, Renderer.get().VirtualHeight - (int) (.1 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.get().VirtualWidth / 2, Renderer.get().VirtualHeight - (int) (.1 * _dimensions.Y)));
         skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .8)));
-        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.VirtualWidth / 2, (int) (Settings.get().spriteHeight * .8)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.get().VirtualWidth / 2, (int) (Settings.get().spriteHeight * .8)));
     }
 
     public void toggle() {

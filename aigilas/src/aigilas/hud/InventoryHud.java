@@ -32,7 +32,7 @@ public class InventoryHud extends BaseHud {
     private final DeltasHud _deltas;
 
     public InventoryHud(BaseCreature owner, Inventory inventory, Equipment equipment) {
-        super(owner, Renderer.VirtualWidth / 2, Renderer.VirtualHeight / 2);
+        super(owner, Renderer.get().VirtualWidth / 2, Renderer.get().VirtualHeight / 2);
         _inventory = inventory;
         _equipment = equipment;
         _deltas = new DeltasHud(owner, equipment);

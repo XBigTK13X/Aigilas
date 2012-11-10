@@ -6,7 +6,7 @@ import sps.graphics.Renderer;
 
 public class CoordVerifier {
     public static boolean isValid(Point2 position) {
-        return (position.PosX >= 0 && position.PosY >= 0 && position.PosX < Renderer.VirtualWidth && position.PosY < Renderer.VirtualHeight);
+        return (position.PosX >= 0 && position.PosY >= 0 && position.PosX < Renderer.get().VirtualWidth && position.PosY < Renderer.get().VirtualHeight);
     }
 
     public static boolean isBlocked(Point2 target)

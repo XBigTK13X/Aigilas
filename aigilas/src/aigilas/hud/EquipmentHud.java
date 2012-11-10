@@ -17,7 +17,7 @@ public class EquipmentHud extends BaseHud {
     private final Equipment _equipment;
 
     public EquipmentHud(BaseCreature owner, Equipment equipment) {
-        super(owner, Renderer.VirtualWidth / 2, Renderer.VirtualHeight / 2);
+        super(owner, Renderer.get().VirtualWidth / 2, Renderer.get().VirtualHeight / 2);
         _equipment = equipment;
     }
 

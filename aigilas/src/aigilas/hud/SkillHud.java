@@ -20,8 +20,8 @@ public class SkillHud extends BaseHud {
     private Point2 _energyPosition = new Point2();
 
     public SkillHud(BaseCreature owner) {
-        super(owner, Settings.get().spriteWidth, Renderer.VirtualHeight / 4);
-        _energyPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - Renderer.VirtualHeight / 4);
+        super(owner, Settings.get().spriteWidth, Renderer.get().VirtualHeight / 4);
+        _energyPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - Renderer.get().VirtualHeight / 4);
     }
 
     private int calculateHeight(StatType statType) {
