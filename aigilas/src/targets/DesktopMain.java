@@ -1,6 +1,7 @@
 package targets;
 
 import aigilas.Aigilas;
+import aigilas.Config;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import sps.core.Logger;
@@ -10,7 +11,7 @@ import aigilas.net.Server;
 public class DesktopMain {
     public static void main(String[] args) {
 
-        if (Settings.get().networkingEnabled) {
+        if (Config.get().networkingEnabled) {
             Thread server = new Server();
             server.start();
             try {

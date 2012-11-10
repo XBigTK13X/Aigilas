@@ -1,6 +1,7 @@
 package aigilas.creatures.impl;
 
 import aigilas.Common;
+import aigilas.Config;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatsRegistry;
 import aigilas.entities.SkillEffect;
@@ -18,11 +19,11 @@ public class Minion extends BaseCreature {
     }
 
     public Minion(ActorType actorType) {
-        this(actorType, Settings.get().defaultSpeed);
+        this(actorType, Config.get().defaultSpeed);
     }
 
     public Minion() {
-        this(ActorTypes.get(Common.Minion), Settings.get().defaultSpeed);
+        this(ActorTypes.get(Common.Minion), Config.get().defaultSpeed);
     }
 
     public void init(BaseCreature source, SkillEffect effectGraphic) {

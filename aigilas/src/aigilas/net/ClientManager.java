@@ -1,5 +1,6 @@
 package aigilas.net;
 
+import aigilas.Config;
 import sps.core.Logger;
 import sps.core.Settings;
 
@@ -20,18 +21,13 @@ public class ClientManager {
 
     public ClientManager() {
         try {
-            this.server = new ServerSocket(Settings.get().port);
+            this.server = new ServerSocket(Config.get().port);
             clientListener = new Thread(new Runnable() {
                 public void run() {
                     while (!Thread.interrupted()) {
                         try {
-                            if (Settings.get().clientManagerVerbose) {
-                                Logger.clientManager("MANAGER: Waiting for a client connection");
-                            }
                             Socket client = server.accept();
-                            if (Settings.get().clientManagerVerbose) {
-                                Logger.clientManager("MANAGER: New connection made");
-                            }
+
                             clients.add(new MessageHandler(client));
                             clients.get(clients.size() - 1).owner = "SERVER";
                             addressToIndex.put(client.getPort(), clients.size() - 1);
@@ -40,14 +36,13 @@ public class ClientManager {
                             Logger.exception(e);
                         }
                     }
-                    Logger.clientManager("ClientManager was interupted.");
                 }
             }, "ClientManager");
             clientListener.start();
         }
         catch (IOException e1) {
             __otherServerExists = true;
-            Logger.clientManager("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
+            Logger.info("SERVER: Failure to start. If this isn't the host machine, then this message is harmless.");
         }
     }
 

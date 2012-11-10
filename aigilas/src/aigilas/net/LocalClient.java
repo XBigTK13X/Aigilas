@@ -1,5 +1,6 @@
 package aigilas.net;
 
+import aigilas.Config;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
 import sps.bridge.Commands;
@@ -18,9 +19,6 @@ public class LocalClient implements IClient {
     private final int maxPlayers = 1;
 
     public LocalClient() {
-        if (Settings.get().clientVerbose) {
-            Logger.client("CLIENT: Starting up");
-        }
         for (int ii = 0; ii < maxPlayers; ii++) {
             _playerStatus.put(ii, new HashMap<Command, Boolean>());
             for (Command command : Commands.values()) {
@@ -39,7 +37,7 @@ public class LocalClient implements IClient {
 
     public boolean nextTurn() {
         update();
-        if (_turnTimer >= Settings.get().turnTime) {
+        if (_turnTimer >= Config.get().turnTime) {
             _turnTimer = 0;
             return true;
         }
@@ -69,9 +67,6 @@ public class LocalClient implements IClient {
     public void setState(Command command, int playerIndex, boolean isActive) {
         initPlayer(playerIndex, command);
         if (_playerStatus.get(playerIndex).get(command) != isActive) {
-            if (Settings.get().clientVerbose) {
-                Logger.client(String.format("CLIENT: Moves extends  CMD(%s) PI(%s) AC(%s)", command, playerIndex, isActive));
-            }
             _playerStatus.get(playerIndex).put(command, isActive);
         }
     }

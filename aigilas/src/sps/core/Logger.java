@@ -1,5 +1,6 @@
 package sps.core;
 
+import aigilas.Config;
 import com.badlogic.gdx.Gdx;
 
 public class Logger {
@@ -12,37 +13,7 @@ public class Logger {
     }
 
     public static void gameplay(String message) {
-        if (Settings.get().gameplayVerbose) {
-            log(message);
-        }
-    }
-
-    public static void client(String message) {
-        if (Settings.get().clientVerbose) {
-            log(message);
-        }
-    }
-
-    public static void server(String message) {
-        if (Settings.get().serverVerbose) {
-            log(message);
-        }
-    }
-
-    public static void clientManager(String message) {
-        if (Settings.get().clientManagerVerbose) {
-            log(message);
-        }
-    }
-
-    public static void messageContents(String message) {
-        if (Settings.get().messageContentsVerbose) {
-            log(message);
-        }
-    }
-
-    public static void messageHandler(String message) {
-        if (Settings.get().messageHandlerVerbose) {
+        if (Config.get().gameplayVerbose) {
             log(message);
         }
     }

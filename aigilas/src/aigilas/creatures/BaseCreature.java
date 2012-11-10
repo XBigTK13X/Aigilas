@@ -1,6 +1,7 @@
 package aigilas.creatures;
 
 import aigilas.Common;
+import aigilas.Config;
 import aigilas.classes.CreatureClass;
 import aigilas.entities.Elements;
 import aigilas.gods.God;
@@ -45,7 +46,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Stats _maxStats;
     protected God _god;
 
-    protected final int BaseWaitTime = Settings.get().defaultSpeed * Settings.get().turnsPerSecond;
+    protected final int BaseWaitTime = Config.get().defaultSpeed * Config.get().turnsPerSecond;
     protected int waitTime = BaseWaitTime;
 
     protected final List<Elements> _composition = new ArrayList<Elements>();

@@ -1,6 +1,7 @@
 package aigilas.dungeons;
 
 import aigilas.Common;
+import aigilas.Config;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
@@ -45,17 +46,17 @@ public class DungeonFloor {
 
     public DungeonFloor(Point2 upstairsSpawn) {
         enemyCapModifier++;
-        enemyBaseModifier = Settings.get().enemyBase + enemyCapModifier / 5;
+        enemyBaseModifier = Config.get().enemyBase + enemyCapModifier / 5;
         EntityManager.get().clear();
         generateRooms(false);
         _upSpawnLocation.copy(upstairsSpawn);
         placeStairs();
-        int enemiesToPlace = RNG.next(Settings.get().enemyBase + enemyBaseModifier, Settings.get().enemyCap + enemyCapModifier);
+        int enemiesToPlace = RNG.next(Config.get().enemyBase + enemyBaseModifier, Config.get().enemyCap + enemyCapModifier);
         if (enemiesToPlace <= 0) {
             enemiesToPlace = 1;
         }
         placeCreatures(enemiesToPlace);
-        placeItems(RNG.next(Settings.get().itemBase, Settings.get().itemCap));
+        placeItems(RNG.next(Config.get().itemBase, Config.get().itemCap));
         placeFloor();
         transferDungeonState();
     }
@@ -113,7 +114,7 @@ public class DungeonFloor {
         List<Point2> neighbors = _upSpawnLocation.getNeighbors();
 
         if (cache.size() == 0) {
-            if (Settings.get().debugFourPlayers) {
+            if (Config.get().debugFourPlayers) {
                 playerCount = 4;
             }
             for (int ii = 0; ii < playerCount; ii++) {
@@ -177,7 +178,7 @@ public class DungeonFloor {
 //
 //        return;
 
-        if (Settings.get().bossLevelMod <= 1 || Dungeon.getFloorCount() % Settings.get().bossLevelMod == 1) {
+        if (Config.get().bossLevelMod <= 1 || Dungeon.getFloorCount() % Config.get().bossLevelMod == 1) {
             Point2 randomPoint = new Point2(findRandomFreeTile());
             dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
         }

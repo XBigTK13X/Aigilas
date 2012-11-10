@@ -53,7 +53,6 @@ public class MessageHandler {
             this.receiver = new Thread(new Runnable() {
                 public void run() {
                     while (!Thread.interrupted()) {
-                        blurt("Waiting for messages to arrive");
                         try {
                             if (ois == null) {
                                 inKryo = new Kryo();
@@ -73,7 +72,6 @@ public class MessageHandler {
                 }
             }, String.format("ReceiverThread-%s", connection.getLocalPort()));
 
-            blurt("Starting the send/receive threads.");
             sender.start();
             receiver.start();
         }
@@ -96,12 +94,6 @@ public class MessageHandler {
             }
         }
         return null;
-    }
-
-    private void blurt(String message) {
-        if (Settings.get().messageHandlerVerbose) {
-            Logger.messageHandler(owner + ": " + message);
-        }
     }
 
     public Integer getLocalPort() {

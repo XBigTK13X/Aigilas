@@ -1,6 +1,7 @@
 package aigilas.dungeons;
 
 import aigilas.Common;
+import aigilas.Config;
 import sps.bridge.EntityType;
 import sps.bridge.EntityTypes;
 import sps.core.Point2;
@@ -32,7 +33,7 @@ public class FloorPlan {
 
         rooms.add(new Room(Settings.get().tileMapHeight, Settings.get().tileMapWidth, 0, 0));
         if (!altarRoom) {
-            int roomsToPlace = Settings.get().minRoomCount + RNG.next(0, Settings.get().maxRoomCount);
+            int roomsToPlace = Config.get().minRoomCount + RNG.next(0, Config.get().maxRoomCount);
             int attemptCount = 0;
             while (attemptCount < 100 && roomsToPlace > 0) {
                 attemptCount++;
@@ -112,7 +113,7 @@ public class FloorPlan {
             for (int jj = 0; jj < Settings.get().tileMapHeight; jj++) {
                 EntityType tile = tiles[ii][jj];
                 if (ii > 0 && jj > 0 && ii < Settings.get().tileMapWidth - 1 && jj < Settings.get().tileMapHeight - 1) {
-                    tile = RNG.percent(Settings.get().wallDecayPercent) ? EntityTypes.get(Common.Floor) : tile;
+                    tile = RNG.percent(Config.get().wallDecayPercent) ? EntityTypes.get(Common.Floor) : tile;
                 }
                 walls.add(new Tile(tile, ii, jj));
             }
