@@ -58,7 +58,7 @@ public class AnimatedTexture {
     }
 
     public void setPosition(Point2 position) {
-        _position.reset(git position.PosX, position.PosY);
+        _position.reset(position.PosX, position.PosY);
     }
 
     public void setColor(Color color) {
