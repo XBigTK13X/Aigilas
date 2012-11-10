@@ -17,7 +17,7 @@ public class AnimatedTexture {
     private Sprite _sprite;
     private DrawDepth _depth;
 
-    protected Point2 _position = Point2.Zero;
+    protected Point2 _position = new Point2(0,0);
 
     public AnimatedTexture() {
         _depth = DrawDepths.get(Common.Animated_Texture);
@@ -57,13 +57,8 @@ public class AnimatedTexture {
         }
     }
 
-    public void setPosition(float x, float y) {
-        _position.X = (int) x;
-        _position.Y = (int) y;
-    }
-
     public void setPosition(Point2 position) {
-        _position = new Point2(position.PosX, position.PosY);
+        _position.reset(git position.PosX, position.PosY);
     }
 
     public void setColor(Color color) {
