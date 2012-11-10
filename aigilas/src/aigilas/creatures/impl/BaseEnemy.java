@@ -12,7 +12,6 @@ import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
 import sps.core.Core;
 import sps.core.Point2;
-import sps.core.Settings;
 
 public class BaseEnemy extends BaseCreature {
     float multiplier = 0f;

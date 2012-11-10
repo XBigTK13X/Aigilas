@@ -10,7 +10,6 @@ import aigilas.skills.SkillPool;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
 import sps.core.Point2;
-import sps.core.Settings;
 
 public class Minion extends BaseCreature {
     public Minion(ActorType actorType, int coolDown) {

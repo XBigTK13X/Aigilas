@@ -1,8 +1,6 @@
 package aigilas.net;
 
 import aigilas.Config;
-import sps.core.Logger;
-import sps.core.Settings;
 
 public class Client {
     private static IClient __instance;

@@ -1,20 +1,14 @@
 package aigilas.net;
 
-import aigilas.Common;
 import aigilas.Config;
 import sps.bridge.Command;
-import sps.bridge.Commands;
-import sps.core.DevConsole;
 import sps.core.Logger;
 import sps.core.RNG;
-import sps.core.Settings;
 import sps.io.CommandState;
-import sps.io.StateProvider;
 
 import java.net.Socket;
-import java.util.HashMap;
 
-public class LanClient extends IClient{
+public class LanClient extends IClient {
     // Client <-> Server
     private Message _message;
     private MessageHandler _comm;
@@ -86,12 +80,11 @@ public class LanClient extends IClient{
 
     // Client <-> Server communication
     public boolean isActive(Command command, int playerIndex) {
-        return state.isActive(playerIndex,command);
+        return state.isActive(playerIndex, command);
     }
 
     public void setState(Command command, int playerIndex, boolean isActive) {
-        if (isActive != state.isActive(playerIndex,command)) {
-            Logger.info(isActive+"");
+        if (isActive != state.isActive(playerIndex, command)) {
             sendMessage(Message.createMovement(command, playerIndex, isActive));
         }
     }

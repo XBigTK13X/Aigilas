@@ -1,13 +1,11 @@
 package sps.io;
 
-import aigilas.Common;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.bridge.Context;
 import sps.bridge.Contexts;
 import sps.core.Core;
-import sps.core.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +29,10 @@ public class Input {
         __contexts.put(2, Contexts.get(Core.Free));
         __contexts.put(3, Contexts.get(Core.Free));
 
-        if(stateProvider == null){
+        if (stateProvider == null) {
             Input.stateProvider = new DefaultStateProvider();
         }
-        else{
+        else {
             Input.stateProvider = stateProvider;
         }
 

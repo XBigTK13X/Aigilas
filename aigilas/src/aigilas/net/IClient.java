@@ -3,7 +3,7 @@ package aigilas.net;
 import sps.bridge.Command;
 import sps.io.StateProvider;
 
-public abstract class IClient implements StateProvider{
+public abstract class IClient implements StateProvider {
     public abstract boolean isActive(Command command, int playerIndex);
 
     public abstract boolean nextTurn();

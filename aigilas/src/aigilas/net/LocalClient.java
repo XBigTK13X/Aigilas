@@ -3,16 +3,10 @@ package aigilas.net;
 import aigilas.Config;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
-import sps.bridge.Commands;
-import sps.core.Logger;
 import sps.core.RNG;
-import sps.core.Settings;
 import sps.io.CommandState;
-import sps.io.StateProvider;
 
-import java.util.HashMap;
-
-public class LocalClient extends IClient{
+public class LocalClient extends IClient {
     private boolean _isGameStarting;
     private float _turnTimer = 0;
     private boolean _isConnected;
@@ -44,11 +38,11 @@ public class LocalClient extends IClient{
     }
 
     public boolean isActive(Command command, int playerIndex) {
-        return state.isActive(playerIndex,command);
+        return state.isActive(playerIndex, command);
     }
 
     public void setState(Command command, int playerIndex, boolean isActive) {
-        state.setState(playerIndex,command,isActive);
+        state.setState(playerIndex, command, isActive);
     }
 
     public int getPlayerCount() {

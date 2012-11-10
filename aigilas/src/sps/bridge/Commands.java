@@ -11,7 +11,7 @@ public class Commands {
     private static Commands instance;
 
     public static Command get(String name) {
-        if(instance == null){
+        if (instance == null) {
             instance = new Commands();
         }
         return instance.resolve(name);

@@ -2,7 +2,7 @@ package sps.io;
 
 import sps.bridge.Command;
 
-public class DefaultStateProvider implements StateProvider{
+public class DefaultStateProvider implements StateProvider {
     private final CommandState state = new CommandState();
 
     @Override
@@ -17,6 +17,6 @@ public class DefaultStateProvider implements StateProvider{
 
     @Override
     public void setState(Command command, int playerIndex, boolean isActive) {
-        state.setState(playerIndex,command,isActive);
+        state.setState(playerIndex, command, isActive);
     }
 }

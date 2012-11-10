@@ -2,7 +2,6 @@ package sps.io;
 
 import sps.bridge.Command;
 import sps.bridge.Commands;
-import sps.core.Logger;
 
 import java.util.HashMap;
 
@@ -10,7 +9,7 @@ public class CommandState {
     private final HashMap<Integer, HashMap<Command, Boolean>> _state = new HashMap<Integer, HashMap<Command, Boolean>>();
     private final int MaxPlayers = 4;
 
-    public CommandState(){
+    public CommandState() {
         for (int ii = 0; ii < MaxPlayers; ii++) {
             _state.put(ii, new HashMap<Command, Boolean>());
             for (Command command : Commands.values()) {
@@ -19,14 +18,14 @@ public class CommandState {
         }
     }
 
-    public boolean isActive(int player,Command command){
-        initPlayer(player,command);
+    public boolean isActive(int player, Command command) {
+        initPlayer(player, command);
         return _state.get(player).get(command);
     }
 
-    public void setState(int player, Command command, boolean isActive){
-        initPlayer(player,command);
-        _state.get(player).put(command,isActive);
+    public void setState(int player, Command command, boolean isActive) {
+        initPlayer(player, command);
+        _state.get(player).put(command, isActive);
     }
 
     private void initPlayer(int playerIndex, Command command) {
@@ -38,17 +37,12 @@ public class CommandState {
         }
     }
 
-    public void reset(CommandState cs){
-        for(int ii = 0; ii < 4; ii++){
-            if(cs._state.containsKey(ii)){
-                for(Command command: Commands.values())
-                {
-                    if(cs._state.get(ii).containsKey(command)){
-                        if(command.name().equalsIgnoreCase("Move_Down")){
-                            //TODO This should be true, but it is not
-                            Logger.info("TRUE?: " + cs._state.get(0).get(command));
-                        }
-                        setState(ii,command,_state.get(ii).get(command));
+    public void reset(CommandState cs) {
+        for (int ii = 0; ii < MaxPlayers; ii++) {
+            if (cs._state.containsKey(ii)) {
+                for (Command command : Commands.values()) {
+                    if (cs._state.get(ii).containsKey(command)) {
+                        setState(ii, command, cs._state.get(ii).get(command));
                     }
                 }
             }

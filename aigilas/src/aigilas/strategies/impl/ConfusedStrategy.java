@@ -6,9 +6,8 @@ import aigilas.strategies.Strategy;
 import sps.core.RNG;
 
 public class ConfusedStrategy extends BaseStrategy {
-    public ConfusedStrategy(BaseCreature parent)
-    {
-        super(parent,Strategy.Confused);
+    public ConfusedStrategy(BaseCreature parent) {
+        super(parent, Strategy.Confused);
     }
 
     @Override

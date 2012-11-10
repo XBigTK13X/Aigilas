@@ -7,6 +7,7 @@ import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
+import aigilas.net.Client;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
 import sps.core.Core;
@@ -16,7 +17,6 @@ import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
-import aigilas.net.Client;
 
 import java.util.ArrayList;
 import java.util.List;

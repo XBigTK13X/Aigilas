@@ -6,7 +6,6 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import sps.core.Logger;
-import sps.core.Settings;
 
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;

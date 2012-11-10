@@ -1,11 +1,9 @@
 package aigilas.net;
 
 import sps.bridge.Command;
-import sps.bridge.Commands;
 import sps.io.CommandState;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;

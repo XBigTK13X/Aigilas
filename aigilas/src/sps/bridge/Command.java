@@ -4,22 +4,18 @@ import sps.io.Buttons;
 import sps.io.Keys;
 
 public class Command {
-
-    private static int commandCount = 0;
     private Buttons _button;
     private Keys _key;
     private String _name;
-    public  Context Context;
-    private int _ordinal;
+    public Context Context;
 
-    public Command(){
+    public Command() {
 
     }
 
     public Command(String name, Context context) {
         Context = context;
         _name = name;
-        _ordinal = commandCount++;
     }
 
     public void bind(Buttons button, Keys key) {
@@ -39,7 +35,16 @@ public class Command {
         return _name;
     }
 
-    public int ordinal() {
-        return _ordinal;
+    @Override
+    public int hashCode() {
+        return _name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        return obj.hashCode() == hashCode();
     }
 }

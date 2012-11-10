@@ -1,6 +1,7 @@
 package aigilas;
 
 import aigilas.hud.HudRenderer;
+import aigilas.net.Client;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -13,7 +14,6 @@ import sps.core.Logger;
 import sps.graphics.Renderer;
 import sps.graphics.SpriteSheetManager;
 import sps.io.Input;
-import aigilas.net.Client;
 import sps.particles.ParticleEngine;
 import sps.states.StateManager;
 import sps.text.TextPool;

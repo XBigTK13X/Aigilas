@@ -2,12 +2,12 @@ package targets;
 
 import aigilas.Aigilas;
 import aigilas.Config;
+import aigilas.net.Server;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import sps.bridge.Bridge;
 import sps.core.Logger;
 import sps.core.Settings;
-import aigilas.net.Server;
 
 public class DesktopMain {
     public static void main(String[] args) {

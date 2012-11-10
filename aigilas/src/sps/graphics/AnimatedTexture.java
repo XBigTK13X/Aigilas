@@ -16,7 +16,7 @@ public class AnimatedTexture {
     private Sprite _sprite;
     private DrawDepth _depth;
 
-    protected Point2 _position = new Point2(0,0);
+    protected Point2 _position = new Point2(0, 0);
 
     public AnimatedTexture() {
         _depth = DrawDepths.get(Core.Animated_Texture);

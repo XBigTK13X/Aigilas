@@ -8,7 +8,10 @@ import aigilas.items.ItemFactory;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
-import sps.core.*;
+import sps.core.Core;
+import sps.core.Logger;
+import sps.core.Point2;
+import sps.core.RNG;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 

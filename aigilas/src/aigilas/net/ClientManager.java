@@ -2,7 +2,6 @@ package aigilas.net;
 
 import aigilas.Config;
 import sps.core.Logger;
-import sps.core.Settings;
 
 import java.io.IOException;
 import java.net.ServerSocket;

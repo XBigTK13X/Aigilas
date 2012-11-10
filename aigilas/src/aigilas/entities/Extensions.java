@@ -1,6 +1,5 @@
 package aigilas.entities;
 
-import aigilas.Common;
 import aigilas.creatures.BaseCreature;
 import sps.bridge.EntityTypes;
 import sps.core.Core;

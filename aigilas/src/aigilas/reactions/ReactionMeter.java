@@ -5,8 +5,6 @@ import aigilas.GameplayLogger;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.entities.ReactionMarker;
-import sps.core.Logger;
-import sps.core.Settings;
 import sps.text.TextPool;
 
 import java.util.ArrayList;

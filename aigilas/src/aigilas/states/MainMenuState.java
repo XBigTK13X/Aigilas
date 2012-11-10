@@ -1,13 +1,13 @@
 package aigilas.states;
 
 import aigilas.Common;
+import aigilas.net.Client;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
 import sps.core.Logger;
 import sps.core.Point2;
 import sps.io.Input;
-import aigilas.net.Client;
 import sps.states.State;
 import sps.states.StateManager;
 import sps.text.TextPool;

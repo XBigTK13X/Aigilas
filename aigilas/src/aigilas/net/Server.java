@@ -1,13 +1,7 @@
 package aigilas.net;
 
-import aigilas.Common;
-import sps.bridge.Command;
-import sps.bridge.Commands;
 import sps.core.Logger;
-import sps.core.Settings;
 import sps.io.CommandState;
-
-import java.util.HashMap;
 
 public class Server extends Thread {
     private boolean isRunning = true;
@@ -51,7 +45,6 @@ public class Server extends Thread {
                     break;
 
                 case Movement:
-                    Logger.info(_message.IsActive+": Server");
                     state.setState(_message.PlayerIndex, _message.Command, _message.IsActive);
                     break;
 

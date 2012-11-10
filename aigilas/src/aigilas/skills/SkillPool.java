@@ -3,7 +3,6 @@ package aigilas.skills;
 import aigilas.GameplayLogger;
 import aigilas.creatures.BaseCreature;
 import sps.bridge.Command;
-import sps.core.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;

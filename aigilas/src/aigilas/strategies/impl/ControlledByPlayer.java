@@ -13,7 +13,6 @@ import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
 import sps.core.Point2;
-import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.io.Input;
