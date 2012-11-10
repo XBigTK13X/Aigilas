@@ -8,10 +8,11 @@ import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
 import sps.io.CommandState;
+import sps.io.StateProvider;
 
 import java.util.HashMap;
 
-public class LocalClient implements IClient {
+public class LocalClient extends IClient{
     private boolean _isGameStarting;
     private float _turnTimer = 0;
     private boolean _isConnected;

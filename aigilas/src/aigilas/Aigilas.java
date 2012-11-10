@@ -30,7 +30,7 @@ public class Aigilas implements ApplicationListener {
 
         Spx.setup();
         Client.get();
-        Input.setup();
+        Input.setup(Client.get());
         SpriteSheetManager.setup(SpriteTypes.getDefs());
         StateManager.loadState(new MainMenuState());
         ParticleEngine.reset();

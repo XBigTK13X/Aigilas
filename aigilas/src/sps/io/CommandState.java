@@ -2,6 +2,7 @@ package sps.io;
 
 import sps.bridge.Command;
 import sps.bridge.Commands;
+import sps.core.Logger;
 
 import java.util.HashMap;
 
@@ -28,16 +29,29 @@ public class CommandState {
         _state.get(player).put(command,isActive);
     }
 
-    public HashMap<Integer, HashMap<Command, Boolean>> getData(){
-        return _state;
-    }
-
     private void initPlayer(int playerIndex, Command command) {
         if (!_state.containsKey(playerIndex)) {
             _state.put(playerIndex, new HashMap<Command, Boolean>());
         }
         if (!_state.get(playerIndex).containsKey(command)) {
             _state.get(playerIndex).put(command, false);
+        }
+    }
+
+    public void reset(CommandState cs){
+        for(int ii = 0; ii < 4; ii++){
+            if(cs._state.containsKey(ii)){
+                for(Command command: Commands.values())
+                {
+                    if(cs._state.get(ii).containsKey(command)){
+                        if(command.name().equalsIgnoreCase("Move_Down")){
+                            //TODO This should be true, but it is not
+                            Logger.info("TRUE?: " + cs._state.get(0).get(command));
+                        }
+                        setState(ii,command,_state.get(ii).get(command));
+                    }
+                }
+            }
         }
     }
 }

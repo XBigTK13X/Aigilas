@@ -1,29 +1,30 @@
 package aigilas.net;
 
 import sps.bridge.Command;
+import sps.io.StateProvider;
 
-public interface IClient {
-    boolean isActive(Command command, int playerIndex);
+public abstract class IClient implements StateProvider{
+    public abstract boolean isActive(Command command, int playerIndex);
 
-    boolean nextTurn();
+    public abstract boolean nextTurn();
 
-    void setState(Command command, int playerIndex, boolean isActive);
+    public abstract void setState(Command command, int playerIndex, boolean isActive);
 
-    int getPlayerCount();
+    public abstract int getPlayerCount();
 
-    void update();
+    public abstract void update();
 
-    int getFirstPlayerIndex();
+    public abstract int getFirstPlayerIndex();
 
-    void dungeonHasLoaded();
+    public abstract void dungeonHasLoaded();
 
-    void heartBeat();
+    public abstract void heartBeat();
 
-    boolean isConnected();
+    public abstract boolean isConnected();
 
-    boolean isGameStarting();
+    public abstract boolean isGameStarting();
 
-    void prepareForNextTurn();
+    public abstract void prepareForNextTurn();
 
-    void startGame();
+    public abstract void startGame();
 }

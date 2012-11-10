@@ -1,8 +1,11 @@
 package sps.bridge;
 
 public class Context {
-    public final String Name;
+    public String Name;
 
+    public Context(){
+
+    }
     public Context(String name) {
         Name = name;
     }

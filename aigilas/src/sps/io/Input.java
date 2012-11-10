@@ -1,17 +1,22 @@
 package sps.io;
 
+import aigilas.Common;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.bridge.Context;
 import sps.bridge.Contexts;
 import sps.core.Core;
+import sps.core.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Input {
+
+    private static StateProvider stateProvider;
+
     // $$$ FIXME (Integer -> PlayerId) Maps a playerId to a context
     private static HashMap<Integer, Context> __contexts;
 
@@ -19,12 +24,19 @@ public class Input {
     private static final List<CommandLock> __locks = new ArrayList<CommandLock>();
     private static boolean __isInputActive = false;
 
-    public static void setup() {
+    public static void setup(StateProvider stateProvider) {
         __contexts = new HashMap<Integer, Context>();
         __contexts.put(0, Contexts.get(Core.Free));
         __contexts.put(1, Contexts.get(Core.Free));
         __contexts.put(2, Contexts.get(Core.Free));
         __contexts.put(3, Contexts.get(Core.Free));
+
+        if(stateProvider == null){
+            Input.stateProvider = new DefaultStateProvider();
+        }
+        else{
+            Input.stateProvider = stateProvider;
+        }
 
         InputBindings.init();
     }
@@ -37,11 +49,12 @@ public class Input {
            */
         // $$$
         boolean gamepadActive = false;
-        return gamepadActive || (playerIndex == Client.get().getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode()));
+        return gamepadActive || (playerIndex == stateProvider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode()));
     }
 
     private static boolean isDown(Command command, int playerIndex) {
-        return Client.get().isActive(command, playerIndex);
+        //Logger.info(stateProvider.isActive(command, playerIndex)+"");
+        return stateProvider.isActive(command, playerIndex);
     }
 
     public static boolean isActive(Command command, int playerIndex) {
@@ -111,7 +124,7 @@ public class Input {
         }
 
         for (Command command : Commands.values()) {
-            Client.get().setState(command, Client.get().getFirstPlayerIndex(), detectState(command, Client.get().getFirstPlayerIndex()));
+            stateProvider.setState(command, stateProvider.getFirstPlayerIndex(), detectState(command, stateProvider.getFirstPlayerIndex()));
         }
     }
 }

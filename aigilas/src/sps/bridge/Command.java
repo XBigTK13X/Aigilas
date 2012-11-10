@@ -9,8 +9,12 @@ public class Command {
     private Buttons _button;
     private Keys _key;
     private String _name;
-    public final Context Context;
+    public  Context Context;
     private int _ordinal;
+
+    public Command(){
+
+    }
 
     public Command(String name, Context context) {
         Context = context;

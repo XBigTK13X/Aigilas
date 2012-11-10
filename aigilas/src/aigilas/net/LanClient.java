@@ -1,5 +1,6 @@
 package aigilas.net;
 
+import aigilas.Common;
 import aigilas.Config;
 import sps.bridge.Command;
 import sps.bridge.Commands;
@@ -8,11 +9,12 @@ import sps.core.Logger;
 import sps.core.RNG;
 import sps.core.Settings;
 import sps.io.CommandState;
+import sps.io.StateProvider;
 
 import java.net.Socket;
 import java.util.HashMap;
 
-public class LanClient implements IClient {
+public class LanClient extends IClient{
     // Client <-> Server
     private Message _message;
     private MessageHandler _comm;
@@ -23,7 +25,7 @@ public class LanClient implements IClient {
     private boolean _isGameStarting;
     private boolean _dungeonHasLoaded = false;
     private boolean _isConnected;
-    private final CommandState state = new CommandState();
+    private CommandState state = new CommandState();
 
     public LanClient() {
         try {
@@ -88,7 +90,8 @@ public class LanClient implements IClient {
     }
 
     public void setState(Command command, int playerIndex, boolean isActive) {
-        if (!state.isActive(playerIndex,command)) {
+        if (isActive != state.isActive(playerIndex,command)) {
+            Logger.info(isActive+"");
             sendMessage(Message.createMovement(command, playerIndex, isActive));
         }
     }
@@ -148,7 +151,7 @@ public class LanClient implements IClient {
                 _isGameStarting = true;
                 break;
             case Sync_State:
-                contents.readPlayerState(state.getData());
+                state.reset(contents.CommandState);
                 break;
             default:
                 break;
