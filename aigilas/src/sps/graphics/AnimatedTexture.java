@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.bridge.DrawDepths;
 import sps.bridge.SpriteType;
-import sps.core.GameManager;
+import sps.core.Core;
 import sps.core.Point2;
 
 public class AnimatedTexture {
@@ -26,7 +26,7 @@ public class AnimatedTexture {
     public void loadContent(SpriteType assetName) {
         _spriteInfo = SpriteSheetManager.getSpriteInfo(assetName);
         _currentFrame = 0;
-        _animationTimer = GameManager.AnimationFps;
+        _animationTimer = Core.AnimationFps;
     }
 
     public void draw() {
@@ -45,7 +45,7 @@ public class AnimatedTexture {
             _animationTimer--;
             if (_animationTimer <= 0) {
                 _currentFrame = (_currentFrame + 1) % _spriteInfo.MaxFrame;
-                _animationTimer = GameManager.AnimationFps;
+                _animationTimer = Core.AnimationFps;
             }
         }
     }
