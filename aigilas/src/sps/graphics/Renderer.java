@@ -13,7 +13,7 @@ import sps.core.Settings;
 public class Renderer {
 
     // This is the resolution used by the game internally
-    public static final int VirtualHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
+    public gi final int VirtualHeight = Settings.get().spriteHeight * Settings.get().tileMapHeight;
     public static final int VirtualWidth = Settings.get().spriteWidth * Settings.get().tileMapWidth;
 
     private static Renderer instance;

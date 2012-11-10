@@ -1,8 +1,9 @@
-package sps.audio;
+package aigilas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
+import sps.audio.MusicPlayer;
 
 public class DefaultMusicPlayer extends MusicPlayer {
     private final Music mainTheme;

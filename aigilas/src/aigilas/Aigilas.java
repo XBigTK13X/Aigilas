@@ -4,6 +4,7 @@ import aigilas.hud.HudRenderer;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import sps.audio.MusicPlayer;
 import sps.bridge.Commands;
 import sps.bridge.SpriteTypes;
 import sps.bridge.Spx;
@@ -31,6 +32,7 @@ public class Aigilas implements ApplicationListener {
         SpriteSheetManager.setup(SpriteTypes.getDefs());
         StateManager.loadState(new MainMenuState());
         ParticleEngine.reset();
+        MusicPlayer.get(new DefaultMusicPlayer());
         StateManager.loadContent();
     }
 
