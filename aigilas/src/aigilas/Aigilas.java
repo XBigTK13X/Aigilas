@@ -27,7 +27,9 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void create() {
+
         Spx.setup();
+        Client.get();gi
         Input.setup();
         SpriteSheetManager.setup(SpriteTypes.getDefs());
         StateManager.loadState(new MainMenuState());
