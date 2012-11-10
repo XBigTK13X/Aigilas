@@ -102,7 +102,7 @@ public class DungeonFloor {
         for (Entity[] row : dungeon) {
             for (Entity tile : row) {
                 if (tile != null) {
-                    if (tile.getEntityType() != EntityTypes.get(Common.Floor)) {
+                    if (tile.getEntityType() != EntityTypes.get(Core.Floor)) {
                         _contents.add(tile);
                     }
                     EntityManager.get().addObject(tile);
@@ -134,7 +134,7 @@ public class DungeonFloor {
         while (true) {
             int x = RNG.next(0, Settings.get().tileMapWidth);
             int y = RNG.next(0, Settings.get().tileMapHeight);
-            if (dungeon[x][y].getEntityType() == EntityTypes.get(Common.Floor)) {
+            if (dungeon[x][y].getEntityType() == EntityTypes.get(Core.Floor)) {
                 return new Point2(x, y);
             }
         }

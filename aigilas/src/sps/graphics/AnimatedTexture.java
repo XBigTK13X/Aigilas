@@ -1,6 +1,5 @@
 package sps.graphics;
 
-import aigilas.Common;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
@@ -20,7 +19,7 @@ public class AnimatedTexture {
     protected Point2 _position = new Point2(0,0);
 
     public AnimatedTexture() {
-        _depth = DrawDepths.get(Common.Animated_Texture);
+        _depth = DrawDepths.get(Core.Animated_Texture);
     }
 
     public void loadContent(SpriteType assetName) {

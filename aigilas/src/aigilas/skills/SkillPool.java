@@ -1,5 +1,6 @@
 package aigilas.skills;
 
+import aigilas.GameplayLogger;
 import aigilas.creatures.BaseCreature;
 import sps.bridge.Command;
 import sps.core.Logger;
@@ -78,7 +79,7 @@ public class SkillPool {
 
     private void useSkill(SkillId skillId) {
         SkillFactory.activateIfAble(findCurrent(), _owner);
-        Logger.gameplay(_owner.toString() + " used " + findCurrent().toString());
+        GameplayLogger.log(_owner.toString() + " used " + findCurrent().toString());
         if (!_usageCounter.containsKey(skillId)) {
             _usageCounter.put(skillId, 0);
         }

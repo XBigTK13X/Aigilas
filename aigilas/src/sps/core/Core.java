@@ -1,6 +1,10 @@
 package sps.core;
 
 public class Core {
+    public static final String Actor = "Actor";
+    public static final String Animated_Texture = "Animated_Texture";
+    public static final String Floor = "Floor";
+
     public static final String Non_Player = "Non_Player";
     public static final String Friendly = "Friendly";
     public static final String Player = "Player";

@@ -1,6 +1,7 @@
 package aigilas.reactions;
 
 import aigilas.Config;
+import aigilas.GameplayLogger;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.entities.ReactionMarker;
@@ -95,7 +96,7 @@ public class ReactionMeter {
                 reaction = ReactionFactory.create(reactionId);
                 if (reaction != null) {
                     reaction.affect(_parent);
-                    Logger.gameplay(_parent + " affected by " + reactionId.toString());
+                    GameplayLogger.log(_parent + " affected by " + reactionId.toString());
                     TextPool.get().write(reactionId.toString(), _parent.getLocation(), .5f);
                 }
             }

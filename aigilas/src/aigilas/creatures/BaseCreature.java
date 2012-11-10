@@ -2,6 +2,7 @@ package aigilas.creatures;
 
 import aigilas.Common;
 import aigilas.Config;
+import aigilas.GameplayLogger;
 import aigilas.classes.CreatureClass;
 import aigilas.entities.Elements;
 import aigilas.gods.God;
@@ -71,8 +72,8 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected ActorType _actorType;
 
     protected void setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
-        _entityType = EntityTypes.get(Common.Actor);
-        initialize(location, type.Sprite, EntityTypes.get(Common.Actor), DrawDepths.get(Common.Creature));
+        _entityType = EntityTypes.get(Core.Actor);
+        initialize(location, type.Sprite, EntityTypes.get(Core.Actor), DrawDepths.get(Common.Creature));
         init(type, stats, creatureClass, setClass);
     }
 
@@ -321,7 +322,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             TextPool.get().write(StringStorage.get(damage), getLocation(), 1, TextEffects.Fountain);
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
-            Logger.gameplay(this.toString() + " taking " + damage + " damage" + " from " + attacker);
+            GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
             if (_actorType != ActorTypes.get(Common.Dummy)) {
                 adjust((statType == null) ? StatType.Health : statType, -damage);
             }

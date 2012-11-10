@@ -29,7 +29,7 @@ public class Aigilas implements ApplicationListener {
     public void create() {
 
         Spx.setup();
-        Client.get();gi
+        Client.get();
         Input.setup();
         SpriteSheetManager.setup(SpriteTypes.getDefs());
         StateManager.loadState(new MainMenuState());

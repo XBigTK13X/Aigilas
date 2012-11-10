@@ -1,9 +1,8 @@
 package aigilas;
 
 public class Common {
-    public static final String Actor = "Actor";
+
     public static final String Altar = "Altar";
-    public static final String Animated_Texture = "Animated_Texture";
     public static final String Back = "Back";
     public static final String Base_Skill_Effect = "Base_Skill_Effect";
     public static final String Breaking_Wheel = "Breaking_Wheel";
@@ -16,7 +15,6 @@ public class Common {
     public static final String Dummy = "Dummy";
     public static final String Envy = "Envy";
     public static final String Envy_Acolyte = "Envy_Acolyte";
-    public static final String Floor = "Floor";
     public static final String Free = "Free";
     public static final String Gluttony = "Gluttony";
     public static final String Gluttony_Acolyte = "Gluttony_Acolyte";

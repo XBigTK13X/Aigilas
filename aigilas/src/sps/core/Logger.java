@@ -1,6 +1,5 @@
 package sps.core;
 
-import aigilas.Config;
 import com.badlogic.gdx.Gdx;
 
 public class Logger {
@@ -12,16 +11,11 @@ public class Logger {
         log(message);
     }
 
-    public static void gameplay(String message) {
-        if (Config.get().gameplayVerbose) {
-            log(message);
-        }
-    }
-
     private static void log(String message) {
         System.out.println(message);
     }
 
+    //TODO See why this isn't being called
     public static void devConsole(String message) {
         if (Settings.get().devConsoleEnabled) {
             DevConsole.get().add(message);
