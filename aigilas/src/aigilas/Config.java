@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Config {
-    private static final String __configPath = "assets/data/settings.cfg";
+    private static final String __configPath = "assets/data/aigilas.cfg";
     private static Config __instance;
 
     public static Config get() {

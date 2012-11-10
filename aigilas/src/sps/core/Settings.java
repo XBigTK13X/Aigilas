@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Settings {
-    private static final String __configPath = "assets/data/settings.cfg";
+    private static final String __configPath = "assets/data/sps-gamelib.cfg";
     private static Settings __instance;
 
     public static Settings get() {
