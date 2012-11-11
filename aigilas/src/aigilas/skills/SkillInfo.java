@@ -14,13 +14,13 @@ public class SkillInfo {
     public final boolean Restrict;
     public final boolean OffCenter;
 
-    public SkillInfo(String name, StatType stat, int cost, int magnitude, List<Elements> elements, boolean bossOnly, boolean offCenter) {
+    public SkillInfo(String name, StatType stat, int cost, int magnitude, List<Elements> elements, boolean restrict, boolean offCenter) {
         Name = name;
         Stat = stat;
         Cost = cost;
         Magnitude = magnitude;
         Elements = elements;
-        Restrict = bossOnly;
+        Restrict = restrict;
         OffCenter = offCenter;
     }
 }

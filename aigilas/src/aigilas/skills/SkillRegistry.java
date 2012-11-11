@@ -41,18 +41,18 @@ public class SkillRegistry {
                         elements.add(Elements.get(element));
                     }
                     int magnitude = Integer.parseInt(values[4]);
-                    boolean bossOnly = false;
+                    boolean restrict = false;
                     boolean offCenter = false;
                     if (values.length > 5) {
                         String rawComments = values[5];
-                        if (rawComments.contains("Boss")) {
-                            bossOnly = true;
+                        if (rawComments.contains("Boss") || rawComments.contains("Restrict")) {
+                            restrict = true;
                         }
                         if (rawComments.contains("OffCenter")) {
                             offCenter = true;
                         }
                     }
-                    SkillId.get(name).Info = new SkillInfo(name.replace("_", " "), stat, cost, magnitude, elements, bossOnly, offCenter);
+                    SkillId.get(name).Info = new SkillInfo(name.replace("_", " "), stat, cost, magnitude, elements, restrict, offCenter);
                 }
             }
             in.close();

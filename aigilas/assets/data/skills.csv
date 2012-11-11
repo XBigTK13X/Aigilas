@@ -19,7 +19,7 @@ Explode,100,Energy,Fire,100,
 Fireball,150,Energy,Fire,100,
 Flame_Hammer,150,Energy,Fire,200,
 Floor_Spikes,100,Energy,Earth,250,
-Forget_Skill,200,Energy,Mental,100,
+Forget_Skill,200,Energy,Mental,100,Restrict
 Gush,100,Energy,Water,100,
 Horder,100,Energy,Mental,100,
 Horrify,100,Energy,Dark-Fire,100,

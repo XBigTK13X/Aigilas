@@ -23,7 +23,7 @@ public class SkillLogic {
             BaseSkill skill;
             for (SkillId skillId : SkillId.values()) {
                 if (skillId != SkillId.No_Skill) {
-                    if (!skillId.Info.Restrict) {
+                    if (skillId.Info.Restrict) {
                         __invalidRandomSkills.add(skillId);
                     }
                     skill = SkillFactory.create(skillId);
@@ -46,12 +46,9 @@ public class SkillLogic {
     private final List<SkillId> __invalidRandomSkills = new ArrayList<SkillId>();
     private int skillPick = 0;
 
-    static {
-
-    }
-
     private SkillId getElementalSkill(Elements elementId) {
-        while (__invalidRandomSkills.contains(SkillId.values()[skillPick])) {
+        skillPick = RNG.next(0, __elementMap.get(elementId).size() - 1);
+        while (__invalidRandomSkills.contains(__elementMap.get(elementId).get(skillPick))) {
             skillPick = RNG.next(0, __elementMap.get(elementId).size() - 1);
         }
         return __elementMap.get(elementId).get(skillPick);

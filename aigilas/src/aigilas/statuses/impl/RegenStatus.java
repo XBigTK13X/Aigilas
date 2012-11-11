@@ -1,6 +1,7 @@
 package aigilas.statuses.impl;
 
 import aigilas.creatures.BaseCreature;
+import aigilas.creatures.StatType;
 import aigilas.statuses.BaseStatus;
 import aigilas.statuses.Status;
 
@@ -12,6 +13,6 @@ public class RegenStatus extends BaseStatus {
     @Override
     public void update() {
         super.update();
-        _target.applyDamage(-impl.Info.Magnitude);
+        _target.applyDamage(-impl.Info.Magnitude, null, true, StatType.Health);
     }
 }

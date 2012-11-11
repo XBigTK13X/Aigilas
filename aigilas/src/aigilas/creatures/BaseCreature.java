@@ -190,8 +190,8 @@ public abstract class BaseCreature extends Entity implements IActor {
                     }
                 }
                 else {
-                    _statuses.act();
                     regenerate();
+                    _statuses.act();
                 }
             }
             if (_strategy != null) {
@@ -316,7 +316,12 @@ public abstract class BaseCreature extends Entity implements IActor {
             damage = 0;
         }
         if (showDamage) {
-            TextPool.get().write(StringStorage.get(damage), getLocation(), .5f, TextEffects.Fountain);
+            if (damage < 0) {
+                TextPool.get().write("+" + StringStorage.get(Math.abs(damage)), getLocation(), .5f, TextEffects.Fountain);
+            }
+            else {
+                TextPool.get().write(StringStorage.get(damage), getLocation(), .5f, TextEffects.Fountain);
+            }
         }
         if (damage > 0 || (damage < 0 && _statuses.allows(CreatureAction.ReceiveHealing))) {
             GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
