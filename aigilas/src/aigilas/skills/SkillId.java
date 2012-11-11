@@ -1,63 +1,67 @@
 package aigilas.skills;
 
+import sps.core.Logger;
+
 public enum SkillId {
-    Fireball,
-    No_Skill,
-    Floor_Spikes,
-    Dart,
-    Dart_Trap,
+    Absorb,
     Acid_Drip,
     Acid_Nozzle,
-    Remote_Mine,
-    Vapor_Implant,
-    Confusion,
-    Weak_Knees,
-    Venom_Fist,
-    Absorb,
-    Mutiny,
-    Soul_Reinforcement,
-    Horder,
-    Spawn_Item,
-    Throw_Item,
-    Steal_Item,
-    Flame_Hammer,
-    Gush,
-    Soul_Crush,
-    Combust,
-    Horrify,
-    Forget_Skill,
-    Regen_All,
-    Speed_Up,
-    Envenom,
-    Magic_Map,
-    Cold_Shoulder,
+    Boil,
+    Breaking_Wheel,
+    Brimstone,
     Cavalry,
-    Strength_Up,
-    Energy_Up,
-    Electrify,
-    Wall_Punch,
-    Mimic,
-    Valedictorian,
-    Explode,
-    Vapor_Cloud,
+    Cold_Shoulder,
+    Combust,
+    Confusion,
+    Dart,
+    Dart_Trap,
     Dismemberment,
+    Electrify,
+    Energy_Up,
+    Envenom,
+    Explode,
+    Fireball,
+    Flame_Hammer,
+    Floor_Spikes,
+    Forget_Skill,
+    Gush,
+    Horder,
+    Horrify,
     Hypothermia,
     Ice_Shard,
+    Magic_Map,
+    Mimic,
+    Mutiny,
+    No_Skill,
     Plague,
     Poison_Cloud,
+    Regen_All,
+    Remote_Mine,
     Serpent_Supper,
-    Breaking_Wheel,
-    Boil,
-    Brimstone;
+    Soul_Crush,
+    Soul_Reinforcement,
+    Spawn_Item,
+    Speed_Up,
+    Steal_Item,
+    Strength_Up,
+    Throw_Item,
+    Valedictorian,
+    Vapor_Cloud,
+    Vapor_Implant,
+    Venom_Fist,
+    Wall_Punch,
+    Weak_Knees;
+
 
     public SkillInfo Info;
 
     public static SkillId get(String value) {
         for (SkillId id : values()) {
-            if (id.toString().replace("_", "").equalsIgnoreCase(value)) {
+            if (id.toString().equalsIgnoreCase(value)) {
                 return id;
             }
         }
+        Logger.info("12039123: " + value);
         return null;
     }
 }

@@ -1,9 +1,9 @@
 #Name,Skills,health-energy-strength-wisdom-defense-luck-age-weightInLbs-heightInFeet-moveCoolDown-regenRate
-Sloth,1:AcidNozzle-2:FloorSpikes-3:RemoteMine-4:VaporImplant-5:DartTrap,5-10-1-5-0-0-1-0-0-0-0-0
-Envy,1:Confusion-2:WeakKnees-3:VenomFist-4:Absorb-5:Mutiny,5-10-1-5-0-0-1-0-0-0-0-0
-Gluttony,1:ForgetSkill,5-10-1-5-0-0-1-0-0-0-0-0
-Greed,1:SoulReinforcement-2:Horder-3:SpawnItem-4:ThrowItem-5:StealItem,5-10-1-5-0-0-1-0-0-0-0-0
-Lust,1:RegenAll-2:SpeedUp-3:Envenom-4:ColdShoulder-5:Cavalry,5-10-1-5-0-0-1-0-0-0-0-0
-NoClass,0:NoSkill,0-0-0-0-0-0-0-0-0-0-0-0
-Pride,1:StrengthUp-2:EnergyUp-3:Electrify-4:WallPunch-5:Mimic-6:Valedictorian,5-10-1-5-0-0-1-0-0-0-0-0
-Wrath,1:FlameHammer-2:Gush-3:SoulCrush-4:Combust-5:Horrify,5-10-1-5-0-0-1-0-0-0-0-0
+Sloth,1:Acid_Nozzle-2:Floor_Spikes-3:Remote_Mine-4:Vapor_Implant-5:Dart_Trap,5-10-1-5-0-0-1-0-0-0-0-0
+Envy,1:Confusion-2:Weak_Knees-3:Venom_Fist-4:Absorb-5:Mutiny,5-10-1-5-0-0-1-0-0-0-0-0
+Gluttony,1:Forget_Skill,5-10-1-5-0-0-1-0-0-0-0-0
+Greed,1:Soul_Reinforcement-2:Horder-3:Spawn_Item-4:Throw_Item-5:Steal_Item,5-10-1-5-0-0-1-0-0-0-0-0
+Lust,1:Regen_All-2:Speed_Up-3:Envenom-4:Cold_Shoulder-5:Cavalry,5-10-1-5-0-0-1-0-0-0-0-0
+NoClass,0:No_Skill,0-0-0-0-0-0-0-0-0-0-0-0
+Pride,1:Strength_Up-2:Energy_Up-3:Electrify-4:Wall_Punch-5:Mimic-6:Valedictorian,5-10-1-5-0-0-1-0-0-0-0-0
+Wrath,1:Flame_Hammer-2:Gush-3:Soul_Crush-4:Combust-5:Horrify,5-10-1-5-0-0-1-0-0-0-0-0

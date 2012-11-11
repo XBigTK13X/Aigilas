@@ -52,7 +52,7 @@ public class SkillRegistry {
                             offCenter = true;
                         }
                     }
-                    SkillId.get(name).Info = new SkillInfo(name, stat, cost, magnitude, elements, bossOnly, offCenter);
+                    SkillId.get(name).Info = new SkillInfo(name.replace("_", " "), stat, cost, magnitude, elements, bossOnly, offCenter);
                 }
             }
             in.close();

@@ -52,7 +52,7 @@ public class SkillLogic {
 
     private SkillId getElementalSkill(Elements elementId) {
         while (__invalidRandomSkills.contains(SkillId.values()[skillPick])) {
-            skillPick = RNG.next(0, __elementMap.get(elementId).size());
+            skillPick = RNG.next(0, __elementMap.get(elementId).size() - 1);
         }
         return __elementMap.get(elementId).get(skillPick);
     }

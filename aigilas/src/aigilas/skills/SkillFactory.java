@@ -158,7 +158,6 @@ public class SkillFactory {
         if (impl.isAffordableTo(target)) {
             activate(impl, target);
         }
-        ;
     }
 
     public static void activate(SkillId skill, BaseCreature target) {
