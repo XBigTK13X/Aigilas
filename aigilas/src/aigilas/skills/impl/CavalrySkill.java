@@ -8,16 +8,12 @@ import aigilas.statuses.Status;
 
 public class CavalrySkill extends BaseSkill {
     public CavalrySkill()
-
     {
         super(SkillId.Cavalry, AnimationType.SELF);
-
-
     }
 
     @Override
     public void activate(BaseCreature source) {
-
         applyToPlayers(Status.DefenseUp);
     }
 }

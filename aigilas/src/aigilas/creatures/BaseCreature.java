@@ -64,7 +64,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected boolean _isPlaying = true;
     protected int _currentLevel = 1;
     protected float _experience;
-    protected static final float __levelUpAmount = 50;
+    protected static final float __levelUpAmount = 1500;
     protected float _nextLevelExperience = __levelUpAmount;
 
     protected ActorType _actorType;
@@ -317,7 +317,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             damage = 0;
         }
         if (showDamage) {
-            TextPool.get().write(StringStorage.get(damage), getLocation(), 1, TextEffects.Fountain);
+            TextPool.get().write(StringStorage.get(damage), getLocation(), .5f, TextEffects.Fountain);
         }
         if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
             GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
