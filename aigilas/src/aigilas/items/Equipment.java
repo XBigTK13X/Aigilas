@@ -1,7 +1,7 @@
 package aigilas.items;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatType;
+import aigilas.creatures.Stats;
 
 import java.util.HashMap;
 
@@ -40,17 +40,17 @@ public class Equipment {
         return _slots.containsKey(itemClass) && (item == _slots.get(itemClass));
     }
 
-    private int bonusSum;
-
-    public int calculateBonus(StatType stat) {
-        bonusSum = 0;
-        for (ItemSlot slot : _slots.keySet()) {
-            bonusSum += _slots.get(slot).getStatBonus(stat);
-        }
-        return bonusSum;
-    }
-
     public HashMap<ItemSlot, GenericItem> getItems() {
         return _slots;
+    }
+
+    private Stats modifiers = new Stats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    public Stats getModifiers() {
+        modifiers.zeroOut();
+        for (ItemSlot slot : _slots.keySet()) {
+            modifiers.add(_slots.get(slot).getModifiers());
+        }
+        return modifiers;
     }
 }

@@ -98,4 +98,16 @@ public class Stats {
         }
         return hash.hashCode();
     }
+
+    public void zeroOut() {
+        for (StatType stat : StatType.values()) {
+            set(stat, 0);
+        }
+    }
+
+    public void add(Stats modifiers) {
+        for (StatType stat : StatType.values()) {
+            set(stat, get(stat) + modifiers.get(stat));
+        }
+    }
 }

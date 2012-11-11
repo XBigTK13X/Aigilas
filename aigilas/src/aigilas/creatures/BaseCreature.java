@@ -21,10 +21,8 @@ import aigilas.statuses.StatusPool;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.TargetSet;
-import com.sun.java.swing.plaf.gtk.GTKConstants;
 import sps.bridge.*;
 import sps.core.Core;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.entities.CoordVerifier;
 import sps.entities.Entity;
@@ -98,6 +96,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             }
             _skills.add(_class.getLevelSkills(_currentLevel));
         }
+        reinitStats();
     }
 
     private void init(ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
@@ -114,8 +113,19 @@ public abstract class BaseCreature extends Entity implements IActor {
             _isBlocking = true;
         }
         _actorType = type;
-        _baseStats = new Stats(stats);
-        _maxStats = new Stats(_baseStats);
+        reinitStats();
+        _baseStats = new Stats(_maxStats);
+    }
+
+    public void reinitStats() {
+        _maxStats = StatsRegistry.get().baseStats(_actorType);
+        if (_equipment != null) {
+            _maxStats.add(_equipment.getModifiers());
+            //TODO Come up with a way to factor level into stats
+        }
+        if (_class != null) {
+            _maxStats.add(_class.getModifiers());
+        }
     }
 
     public void pickupItem(GenericItem item) {
@@ -133,6 +143,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 _equipment.unregister(item);
             }
         }
+        reinitStats();
     }
 
     public void drop(GenericItem item) {
@@ -228,7 +239,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public int get(StatType stat) {
-        return _baseStats.get(stat) + calculateEquipmentBonus(stat) + calculateInstrinsicBonus(stat);
+        return _baseStats.get(stat);
     }
 
     private int getRaw(StatType stat, boolean isMax) {
@@ -239,22 +250,8 @@ public abstract class BaseCreature extends Entity implements IActor {
         return getRaw(stat, false);
     }
 
-    private int calculateInstrinsicBonus(StatType stat) {
-        if (_class == null) {
-            return 0;
-        }
-        return _class.getBonus(_currentLevel, stat);
-    }
-
-    private int calculateEquipmentBonus(StatType stat) {
-        if (_equipment != null) {
-            return _equipment.calculateBonus(stat);
-        }
-        return 0;
-    }
-
     public int getMax(StatType stat) {
-        return _maxStats.get(stat) + calculateEquipmentBonus(stat) + calculateInstrinsicBonus(stat);
+        return _maxStats.get(stat);
     }
 
     public int setBase(StatType stat, int value) {

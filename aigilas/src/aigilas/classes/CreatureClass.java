@@ -1,6 +1,5 @@
 package aigilas.classes;
 
-import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
 import aigilas.skills.SkillId;
 
@@ -23,10 +22,6 @@ public abstract class CreatureClass {
         _stats = new Stats(playerClass.Info.Stats);
     }
 
-    public int getBonus(int level, StatType stat) {
-        return _stats.getBonus(level, stat);
-    }
-
     public List<SkillId> getLevelSkills(int level) {
         List<SkillId> results = new ArrayList<SkillId>();
         for (Integer key : _skillUnlocks.keySet()) {
@@ -39,5 +34,9 @@ public abstract class CreatureClass {
 
     protected void add(int level, SkillId skillId) {
         _skillUnlocks.put(level, skillId);
+    }
+
+    public Stats getModifiers() {
+        return _stats;
     }
 }

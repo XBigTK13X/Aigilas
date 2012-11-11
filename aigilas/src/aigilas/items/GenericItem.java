@@ -101,7 +101,7 @@ public class GenericItem extends Entity {
         return Name.hashCode() + Modifiers.hashCode();
     }
 
-    public float getStatBonus(StatType stat) {
-        return Modifiers.get(stat);
+    public Stats getModifiers() {
+        return Modifiers;
     }
 }
