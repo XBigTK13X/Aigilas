@@ -8,6 +8,8 @@ import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
 import sps.core.Core;
+import sps.core.Logger;
+import sps.core.RNG;
 
 public class AttackStrategy extends BaseStrategy {
     private int _skillCooldown = 0;
@@ -37,19 +39,23 @@ public class AttackStrategy extends BaseStrategy {
         if (AbleToMove()) {
             _skillCooldown--;
             if (_skillCooldown <= 0) {
-                _parent.cycleActiveSkill(1);
-                if (SkillLogic.get().isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
-                    if (opponent != null) {
-                        _parent.setSkillVector(CalculateTargetVector(_parent.getLocation(), opponent.getLocation()));
+                if (RNG.percent(50)) {
+                    if (RNG.coinFlip()) {
+                        _parent.cycleActiveSkill(1);
                     }
-                    if (_parent.getSkillVector().GridX != 0 || _parent.getSkillVector().GridY != 0) {
+                    if (SkillLogic.get().isSkill(_parent.getActiveSkill(), AnimationType.RANGED)) {
+                        if (opponent != null) {
+                            _parent.setSkillVector(CalculateTargetVector(_parent.getLocation(), opponent.getLocation()));
+                        }
+                        if (_parent.getSkillVector().X != 0 || _parent.getSkillVector().Y != 0) {
+                            _parent.useActiveSkill();
+                        }
+                    }
+                    else {
                         _parent.useActiveSkill();
                     }
+                    _skillCooldown = _skillCooldownMax;
                 }
-                else {
-                    _parent.useActiveSkill();
-                }
-                _skillCooldown = _skillCooldownMax;
             }
             if (targetPath.hasMoves()) {
                 nextMove.copy(targetPath.getNextMove());

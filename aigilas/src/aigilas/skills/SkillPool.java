@@ -3,6 +3,7 @@ package aigilas.skills;
 import aigilas.GameplayLogger;
 import aigilas.creatures.BaseCreature;
 import sps.bridge.Command;
+import sps.util.MathHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ public class SkillPool {
     }
 
     private SkillId findCurrent() {
+        normalizeSlot();
         return _skills.get(_currentSkillSlot);
     }
 
@@ -51,11 +53,13 @@ public class SkillPool {
     }
 
     public void cycle(int velocity) {
-        _currentSkillSlot = (_currentSkillSlot + velocity) % _skills.size();
-        if (_currentSkillSlot < 0) {
-            _currentSkillSlot = _skills.size() - 1;
-        }
+        _currentSkillSlot += velocity;
+        normalizeSlot();
         findCurrent();
+    }
+
+    private void normalizeSlot() {
+        _currentSkillSlot = MathHelper.clamp(_currentSkillSlot, 0, _skills.size() - 1);
     }
 
     public String getActiveName() {

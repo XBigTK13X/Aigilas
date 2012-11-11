@@ -1,4 +1,4 @@
 #health,energy,strength,wisdom,defense,luck,age,weightInLbs,heightInFeet,moveCoolDown,regenRate,piety
-Player,5000-500-100-1-90-10-35-50-6-300-1-0
-Non_Player,100-50-110-1-90-1-1-0-0-30-0-0
-Minion,80-999-10-10-10-10-10-10-10-60-0-0
+Player,5000-500-100-1-90-10-35-50-6-300-10-0
+Non_Player,100-50-110-1-90-1-1-0-0-30-10-0
+Minion,80-999-10-10-10-10-10-10-10-60-10-0

@@ -21,8 +21,10 @@ import aigilas.statuses.StatusPool;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.TargetSet;
+import com.sun.java.swing.plaf.gtk.GTKConstants;
 import sps.bridge.*;
 import sps.core.Core;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.entities.CoordVerifier;
 import sps.entities.Entity;
@@ -165,7 +167,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     @Override
     public void update() {
         _statuses.update();
-        if (get(StatType.Health) <= 0) {
+        if (getRaw(StatType.Health) <= 0) {
             _isActive = false;
         }
         if (_statuses.allows(CreatureAction.Movement)) {
@@ -178,8 +180,8 @@ public abstract class BaseCreature extends Entity implements IActor {
                 }
                 else {
                     _statuses.act();
+                    regenerate();
                 }
-                regenerate();
             }
             if (_strategy != null) {
                 _strategy.act();
@@ -319,13 +321,13 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (showDamage) {
             TextPool.get().write(StringStorage.get(damage), getLocation(), .5f, TextEffects.Fountain);
         }
-        if (damage > 0 && _statuses.allows(CreatureAction.ReceiveHealing)) {
+        if (damage > 0 || (damage < 0 && _statuses.allows(CreatureAction.ReceiveHealing))) {
             GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
             if (_actorType != ActorTypes.get(Common.Dummy)) {
                 adjust((statType == null) ? StatType.Health : statType, -damage);
             }
         }
-        if (get(StatType.Health) <= 0) {
+        if (getRaw(StatType.Health) <= 0) {
             setInactive();
             if (attacker != null) {
                 attacker.addExperience(calculateExperience());
