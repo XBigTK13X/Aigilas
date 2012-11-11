@@ -131,9 +131,13 @@ public class DungeonFloor {
     }
 
     private Point2 findRandomFreeTile() {
+        return findRandomFreeTile(1);
+    }
+
+    private Point2 findRandomFreeTile(int buffer) {
         while (true) {
-            int x = RNG.next(0, Settings.get().tileMapWidth);
-            int y = RNG.next(0, Settings.get().tileMapHeight);
+            int x = RNG.next(buffer, Settings.get().tileMapWidth - buffer);
+            int y = RNG.next(buffer, Settings.get().tileMapHeight - buffer);
             if (dungeon[x][y].getEntityType() == EntityTypes.get(Core.Floor)) {
                 return new Point2(x, y);
             }
@@ -197,13 +201,13 @@ public class DungeonFloor {
     }
 
     private void placeDownstairs() {
-        _downSpawnLocation.copy(findRandomFreeTile());
+        _downSpawnLocation.copy(findRandomFreeTile(2));
         dungeon[_downSpawnLocation.GridX][_downSpawnLocation.GridY] = new Downstairs(_downSpawnLocation);
     }
 
     private void placeUpstairs() {
         if (_upSpawnLocation.isZero()) {
-            _upSpawnLocation.copy(findRandomFreeTile());
+            _upSpawnLocation.copy(findRandomFreeTile(2));
         }
         dungeon[_upSpawnLocation.GridX][_upSpawnLocation.GridY] = new Upstairs(_upSpawnLocation);
     }
