@@ -47,6 +47,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     protected final int BaseWaitTime = Config.get().defaultSpeed * Config.get().turnsPerSecond;
     protected int waitTime = BaseWaitTime;
+    protected int regenTime = BaseWaitTime;
 
     protected final List<Elements> _composition = new ArrayList<Elements>();
 
@@ -175,6 +176,10 @@ public abstract class BaseCreature extends Entity implements IActor {
         return waitTime <= 0;
     }
 
+    public boolean canRegenAgain() {
+        return regenTime <= 0;
+    }
+
     @Override
     public void update() {
         _statuses.update();
@@ -190,9 +195,9 @@ public abstract class BaseCreature extends Entity implements IActor {
                     }
                 }
                 else {
-                    regenerate();
                     _statuses.act();
                 }
+                regenerate();
             }
             if (_strategy != null) {
                 _strategy.act();
@@ -205,14 +210,19 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     private void regenerate() {
-        if (_statuses.allows(CreatureAction.Regeneration)) {
+        regenTime -= get(StatType.Move_Cool_Down) + 1;
+        if (regenTime > BaseWaitTime) {
+            regenTime = BaseWaitTime;
+        }
+        if (_statuses.allows(CreatureAction.Regeneration) && canRegenAgain()) {
             for (StatType stat : StatType.values()) {
-                if (stat != StatType.Move_Cool_Down && stat != StatType.Regen) {
-                    if (_baseStats.getRaw(stat) < _maxStats.getRaw(stat)) {
-                        adjust(stat, _baseStats.get(StatType.Regen));
+                if (stat != StatType.Move_Cool_Down) {
+                    if (getRaw(stat) < getRaw(stat, true)) {
+                        adjust(stat, get(StatType.Regen));
                     }
                 }
             }
+            resetRegenTime();
         }
     }
 
@@ -607,5 +617,9 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     public void resetWaitTime() {
         waitTime = BaseWaitTime;
+    }
+
+    public void resetRegenTime() {
+        regenTime = BaseWaitTime;
     }
 }
