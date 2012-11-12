@@ -56,6 +56,9 @@ public class Aigilas implements ApplicationListener {
             if (Input.isActive(Commands.get(Common.Back), Client.get().getFirstPlayerIndex())) {
                 Gdx.app.exit();
             }
+            if (Input.isActive(Commands.get(Common.Music), Client.get().getFirstPlayerIndex())) {
+                MusicPlayer.get().toggle();
+            }
             if (Client.get().nextTurn()) {
                 /*for (int ii = 0; ii < 4; ii++) {
                     PlayerIndex player = PlayerIndex.values()[ii];

@@ -35,6 +35,7 @@ public class Common {
     public static final String MoveLeft = "Move_Left";
     public static final String MoveRight = "Move_Right";
     public static final String MoveUp = "Move_Up";
+    public static final String Music = "Music";
     public static final String Peon = "Peon";
     public static final String Pride = "Pride";
     public static final String Pride_Acolyte = "Pride_Acolyte";
