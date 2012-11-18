@@ -25,6 +25,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -62,15 +64,34 @@ public class UITest implements ApplicationListener {
         Table table = new Table();
         table.setFillParent(true);
 
-        TextButton button1 = new TextButton("Start Game", style);
+        final TextButton button1 = new TextButton("Start Game", style);
         button1.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
-                Logger.info("The button has been activated");
+                Logger.info("The first button has been activated");
             }
         });
+        button1.addListener(new InputListener(){
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if(super.keyDown(event, keycode)){
+                    button1.notify(new ChangeListener.ChangeEvent(),true);
+                }
+                return true;
+            }
+        });
+
         table.add(button1);
 
+        TextButton button2 = new TextButton("Deploy Nukes", style);
+        button2.addListener(new ChangeListener() {
+            public void changed (ChangeEvent event, Actor actor) {
+                Logger.info("Deploying the nukes");
+            }
+        });
+        table.add(button2);
+
         stage.addActor(table);
+        stage.setKeyboardFocus(button1);
 
 	}
 
