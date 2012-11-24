@@ -24,7 +24,6 @@ public class Config {
 
     private int port;
     private String serverIp;
-    public final boolean networkingEnabled;
 
     public final int enemyCap;
     public final int enemyBase;
@@ -71,7 +70,6 @@ public class Config {
         // Networking
         serverIp = _settings.get("server_ip");
         port = Parse.inte(_settings.get("socket_port"));
-        networkingEnabled = Parse.bool(_settings.get("networking_enabled"));
 
         // Gameplay
         enemyCap = Parse.inte(_settings.get("enemyCap"));

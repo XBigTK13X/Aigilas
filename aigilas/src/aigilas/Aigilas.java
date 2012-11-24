@@ -2,6 +2,7 @@ package aigilas;
 
 import aigilas.hud.HudRenderer;
 import aigilas.net.Client;
+import aigilas.net.LocalClient;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -27,9 +28,8 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void create() {
-
         Spx.setup();
-        Client.get();
+        Client.reset(new LocalClient());
         Input.setup(Client.get());
         SpriteSheetManager.setup(SpriteTypes.getDefs());
         StateManager.loadState(new MainMenuState());

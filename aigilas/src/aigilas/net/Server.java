@@ -4,6 +4,18 @@ import sps.core.Logger;
 import sps.io.CommandState;
 
 public class Server extends Thread {
+    public static void reset() {
+        Logger.info("Starting the server");
+        Thread server = new Server();
+        server.start();
+        try {
+            Thread.sleep(100);
+        }
+        catch (InterruptedException e) {
+            Logger.exception(e);
+        }
+    }
+
     private boolean isRunning = true;
     private final CommandState state = new CommandState();
     private final int _rngSeed = (int) System.currentTimeMillis();
@@ -13,7 +25,7 @@ public class Server extends Thread {
 
     private final ClientManager clients;
 
-    public Server() {
+    private Server() {
         setName("Server");
         clients = new ClientManager();
     }

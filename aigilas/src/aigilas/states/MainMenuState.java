@@ -5,17 +5,14 @@ import aigilas.net.Client;
 import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
 import sps.core.Logger;
-import sps.graphics.Assets;
 import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
@@ -34,20 +31,10 @@ public class MainMenuState implements State {
 
         Gdx.input.setInputProcessor(stage);
 
-        TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.font = Assets.get().font();
-
-        style.overFontColor = Color.YELLOW;
-        style.downFontColor = Color.GREEN;
-        style.fontColor = Color.WHITE;
-        style.down = UiAssets.getNewBtnBg();
-        style.up = UiAssets.getNewBtnBg();
-        style.over = UiAssets.getNewBtnBg();
-
         Table table = new Table();
         table.setFillParent(true);
 
-        final SelectableButton startGameBtn = new SelectableButton("Start", style);
+        final SelectableButton startGameBtn = new SelectableButton("Start Local Game", UiAssets.getButtonStyle());
         startGameBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 Logger.info("Starting the game");
@@ -55,28 +42,28 @@ public class MainMenuState implements State {
             }
         });
 
-        SelectableButton startServerBtn = new SelectableButton("Host LAN Game", style);
+        SelectableButton startServerBtn = new SelectableButton("Host LAN Game", UiAssets.getButtonStyle());
         startServerBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 StateManager.loadState(new StartServerState());
             }
         });
 
-        SelectableButton connectToServerBtn = new SelectableButton("Join LAN Game", style);
+        SelectableButton connectToServerBtn = new SelectableButton("Join LAN Game", UiAssets.getButtonStyle());
         connectToServerBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 StateManager.loadState(new ServerConnectState());
             }
         });
 
-        SelectableButton optionsBtn = new SelectableButton("Options", style);
+        SelectableButton optionsBtn = new SelectableButton("Options", UiAssets.getButtonStyle());
         optionsBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 //$$$ StateManager.loadState(new OptionsState());
             }
         });
 
-        SelectableButton exitBtn = new SelectableButton("Exit", style);
+        SelectableButton exitBtn = new SelectableButton("Exit", UiAssets.getButtonStyle());
         exitBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
@@ -122,13 +109,16 @@ public class MainMenuState implements State {
                         Logger.info("Starting the game");
                         Client.get().startGame();
                         return;
-                    case 2:
-                        //$$$ StateManager.loadState(new OptionsState());
-                        return;
                     case 1:
+                        StateManager.loadState(new StartServerState());
+                        return;
+                    case 2:
                         StateManager.loadState(new ServerConnectState());
                         return;
                     case 3:
+                        //$$$ StateManager.loadState(new OptionsState());
+                        return;
+                    case 4:
                         System.exit(0);
                         return;
                     default:

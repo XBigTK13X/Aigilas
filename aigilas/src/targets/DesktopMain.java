@@ -1,8 +1,6 @@
 package targets;
 
 import aigilas.Aigilas;
-import aigilas.Config;
-import aigilas.net.Server;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import sps.bridge.Bridge;
@@ -13,16 +11,6 @@ public class DesktopMain {
     public static void main(String[] args) {
 
         Bridge.get();
-        if (Config.get().networkingEnabled) {
-            Thread server = new Server();
-            server.start();
-            try {
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e) {
-                Logger.exception(e);
-            }
-        }
 
         Logger.info("Launching the main game loop");
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();

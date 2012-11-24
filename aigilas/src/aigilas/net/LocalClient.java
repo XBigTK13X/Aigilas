@@ -9,7 +9,6 @@ import sps.io.CommandState;
 public class LocalClient extends IClient {
     private boolean _isGameStarting;
     private float _turnTimer = 0;
-    private boolean _isConnected;
     private final CommandState state = new CommandState();
 
     public LocalClient() {
@@ -21,7 +20,7 @@ public class LocalClient extends IClient {
     }
 
     public boolean isConnected() {
-        return _isConnected;
+        return true;
     }
 
     public boolean nextTurn() {
@@ -51,7 +50,6 @@ public class LocalClient extends IClient {
 
     public void startGame() {
         RNG.seed((int) System.currentTimeMillis());
-        _isConnected = true;
         _isGameStarting = true;
     }
 

@@ -6,6 +6,7 @@ import sps.core.Logger;
 import sps.core.RNG;
 import sps.io.CommandState;
 
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class LanClient extends IClient {
@@ -22,6 +23,10 @@ public class LanClient extends IClient {
     private CommandState state = new CommandState();
 
     public LanClient() {
+        connect();
+    }
+
+    private void connect() {
         try {
             Socket server = new Socket(Config.get().serverIp(), Config.get().port());
             _comm = new MessageHandler(server);
@@ -29,6 +34,16 @@ public class LanClient extends IClient {
             sendMessage(Message.createInit(0, 0));
             awaitReply(MessageTypes.Connect);
             handleResponse(_message);
+        }
+        catch (ConnectException cE) {
+            try {
+                Thread.sleep(1000);
+                Logger.info("Waiting to connect");
+                connect();
+            }
+            catch (InterruptedException e) {
+                Logger.exception(e);
+            }
         }
         catch (Exception e) {
             Logger.exception(e);
