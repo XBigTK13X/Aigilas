@@ -22,7 +22,7 @@ public class Config {
 
     private HashMap<String, String> _settings = new HashMap<String, String>();
 
-    private String int port;
+    private int port;
     private String serverIp;
     public final boolean networkingEnabled;
 
@@ -92,6 +92,21 @@ public class Config {
         gameplayVerbose = Parse.bool(_settings.get("gameplay_log_verbose"));
         debugFourPlayers = Parse.bool(_settings.get("debug_four_players"));
         debugInventory = Parse.bool(_settings.get("debug_inventory"));
+    }
 
+    public int port() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public String serverIp() {
+        return serverIp;
+    }
+
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
     }
 }

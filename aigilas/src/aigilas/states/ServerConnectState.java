@@ -1,5 +1,7 @@
 package aigilas.states;
 
+import aigilas.Common;
+import aigilas.Config;
 import aigilas.net.Client;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.Gdx;
@@ -10,18 +12,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import sps.bridge.Commands;
 import sps.bridge.Contexts;
-import sps.bridge.Spx;
 import sps.core.Core;
-import sps.core.Settings;
 import sps.graphics.Assets;
-import sps.graphics.Renderer;
 import sps.io.Input;
 import sps.states.State;
+import sps.util.Parse;
 
 public class ServerConnectState implements State {
 
     private Stage stage;
+    final TextField ipIn;
 
     public ServerConnectState() {
         Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
@@ -29,8 +31,8 @@ public class ServerConnectState implements State {
 
         Gdx.input.setInputProcessor(stage);
 
-        Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(),Color.WHITE);
-        Label label = new Label("Server IP:",lblStyle);
+        Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
+        Label label = new Label("Server IP:", lblStyle);
 
         TextField.TextFieldStyle style = new TextField.TextFieldStyle();
         style.font = Assets.get().font();
@@ -38,12 +40,10 @@ public class ServerConnectState implements State {
 
         style.fontColor = Color.WHITE;
         style.background = UiAssets.getNewBtnBg();
-        final TextField ipIn = new TextField("",style);
+        ipIn = new TextField("", style);
         stage.setKeyboardFocus(ipIn);
 
-
-
-        ipIn.addListener(new ChangeListener(){
+        ipIn.addListener(new ChangeListener() {
 
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -60,7 +60,17 @@ public class ServerConnectState implements State {
 
     @Override
     public void update() {
-
+        if (Input.isActive(Commands.get(Common.Start), 0)) {
+            if (ipIn.getText() != null && !ipIn.getText().isEmpty()) {
+                String[] contents = ipIn.getText().split(":");
+                String address = contents[0];
+                if (contents.length > 1) {
+                    int port = Parse.inte(contents[1]);
+                    Config.get().setPort(port);
+                }
+                Config.get().setServerIp(address);
+            }
+        }
     }
 
     @Override

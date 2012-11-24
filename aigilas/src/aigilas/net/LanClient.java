@@ -23,7 +23,7 @@ public class LanClient extends IClient {
 
     public LanClient() {
         try {
-            Socket server = new Socket(Config.get().serverIp, Config.get().port);
+            Socket server = new Socket(Config.get().serverIp(), Config.get().port());
             _comm = new MessageHandler(server);
             _comm.owner = "CLIENT";
             sendMessage(Message.createInit(0, 0));
