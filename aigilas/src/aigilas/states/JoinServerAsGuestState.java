@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
+import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.io.Input;
 import sps.states.State;
@@ -27,6 +28,9 @@ public class JoinServerAsGuestState implements State {
     private Stage stage;
     final TextField ipIn;
     final Label label;
+    private static final String waitMessage = "Waiting for host to start the game.";
+    private boolean connectStarted = false;
+    private boolean readyToConnect = false;
 
     public JoinServerAsGuestState() {
         Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
@@ -64,6 +68,11 @@ public class JoinServerAsGuestState implements State {
 
     @Override
     public void update() {
+        if (readyToConnect && !connectStarted) {
+            Client.reset(new LanClient());
+            connectStarted = true;
+            Logger.info("Trying to start");
+        }
         if (Input.isActive(Commands.get(Common.Start), 0)) {
             if (ipIn.getText() != null && !ipIn.getText().isEmpty()) {
                 String[] contents = ipIn.getText().split(":");
@@ -72,17 +81,17 @@ public class JoinServerAsGuestState implements State {
                     int port = Parse.inte(contents[1]);
                     Config.get().setPort(port);
                 }
+
+                label.setText(waitMessage);
                 Config.get().setServerIp(address);
-                Client.reset(new LanClient());
+                readyToConnect = true;
                 ipIn.setVisible(false);
-                label.setText("Waiting for the host to start...");
             }
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
                 Input.setContext(Contexts.get(Common.Free), ii);
             }
-
             StateManager.loadState(new LoadingState());
         }
     }
