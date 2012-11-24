@@ -9,4 +9,9 @@ public class UiAssets {
     public static TextureRegionDrawable getNewBtnBg(){
         return new TextureRegionDrawable(buttonBg);
     }
+
+    private static TextureRegion cursor = new TextureRegion(new Texture("assets/graphics/cursor.png"));
+    public static TextureRegionDrawable getNewCursor(){
+        return new TextureRegionDrawable(cursor);
+    }
 }

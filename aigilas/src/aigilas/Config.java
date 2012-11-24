@@ -22,8 +22,8 @@ public class Config {
 
     private HashMap<String, String> _settings = new HashMap<String, String>();
 
-    public final int port;
-    public final String serverIp;
+    private String int port;
+    private String serverIp;
     public final boolean networkingEnabled;
 
     public final int enemyCap;
