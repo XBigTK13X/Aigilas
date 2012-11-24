@@ -19,7 +19,7 @@ public class LanClient extends IClient {
     private Integer _initialPlayerIndex;
     private boolean _isGameStarting;
     private boolean _dungeonHasLoaded = false;
-    private boolean _isConnected;
+    private boolean _isConnected = false;
     private CommandState state = new CommandState();
 
     public LanClient() {

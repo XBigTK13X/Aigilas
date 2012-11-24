@@ -21,12 +21,12 @@ import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
 
-public class StartServerState implements State {
+public class StartHostServerState implements State {
 
     private Stage stage;
     private Label connectedPlayersLbl;
 
-    public StartServerState() {
+    public StartHostServerState() {
         //Server
         Server.reset();
         Client.reset(new LanClient());

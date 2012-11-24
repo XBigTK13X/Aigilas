@@ -3,6 +3,7 @@ package aigilas.states;
 import aigilas.Common;
 import aigilas.Config;
 import aigilas.net.Client;
+import aigilas.net.LanClient;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -18,14 +19,15 @@ import sps.core.Core;
 import sps.graphics.Assets;
 import sps.io.Input;
 import sps.states.State;
+import sps.states.StateManager;
 import sps.util.Parse;
 
-public class ServerConnectState implements State {
+public class JoinServerAsGuestState implements State {
 
     private Stage stage;
     final TextField ipIn;
 
-    public ServerConnectState() {
+    public JoinServerAsGuestState() {
         Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
@@ -70,7 +72,15 @@ public class ServerConnectState implements State {
                     Config.get().setPort(port);
                 }
                 Config.get().setServerIp(address);
+                Client.reset(new LanClient());
             }
+        }
+        if (Client.get().isGameStarting()) {
+            for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
+                Input.setContext(Contexts.get(Common.Free), ii);
+            }
+
+            StateManager.loadState(new LoadingState());
         }
     }
 
