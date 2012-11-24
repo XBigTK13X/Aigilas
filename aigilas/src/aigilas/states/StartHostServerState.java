@@ -64,7 +64,8 @@ public class StartHostServerState implements State {
     @Override
     public void update() {
         if (connectedPlayers != Client.get().getPlayerCount()) {
-            connectedPlayersLbl.setText(connectedPlayers + " players are ready.");
+            connectedPlayers = Client.get().getPlayerCount();
+            connectedPlayersLbl.setText(connectedPlayers + " players connected");
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {

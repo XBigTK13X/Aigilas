@@ -1,6 +1,8 @@
 package aigilas.states;
 
+import aigilas.net.Client;
 import sps.audio.MusicPlayer;
+import sps.core.Logger;
 import sps.graphics.Renderer;
 import sps.states.State;
 import sps.states.StateManager;
@@ -8,7 +10,8 @@ import sps.text.TextPool;
 
 public class LoadingState implements State {
     public LoadingState() {
-
+        Logger.info(Client.get().getFirstPlayerIndex() + " is the player index");
+        Logger.info(Client.get().getPlayerCount() + " is the player count");
     }
 
     @Override

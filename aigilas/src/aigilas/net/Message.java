@@ -85,4 +85,8 @@ public class Message implements Serializable {
         clear();
         return this;
     }
+
+    public void setPlayerCount(int playerCount) {
+        PlayerCount = (byte) playerCount;
+    }
 }

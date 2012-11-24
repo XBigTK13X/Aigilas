@@ -69,8 +69,4 @@ public class ClientManager {
     public void send(Message contents) {
         clients.get(addressToIndex.get(contents.LocalPort)).sendOutboundMessage(contents);
     }
-
-    public boolean isOnlyInstance() {
-        return !__otherServerExists;
-    }
 }

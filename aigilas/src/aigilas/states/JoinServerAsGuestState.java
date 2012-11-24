@@ -26,6 +26,7 @@ public class JoinServerAsGuestState implements State {
 
     private Stage stage;
     final TextField ipIn;
+    final Label label;
 
     public JoinServerAsGuestState() {
         Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
@@ -34,7 +35,7 @@ public class JoinServerAsGuestState implements State {
         Gdx.input.setInputProcessor(stage);
 
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
-        Label label = new Label("Server IP:", lblStyle);
+        label = new Label("Server IP:", lblStyle);
 
         TextField.TextFieldStyle style = new TextField.TextFieldStyle();
         style.font = Assets.get().font();
@@ -73,6 +74,8 @@ public class JoinServerAsGuestState implements State {
                 }
                 Config.get().setServerIp(address);
                 Client.reset(new LanClient());
+                ipIn.setVisible(false);
+                label.setText("Waiting for the host to start...");
             }
         }
         if (Client.get().isGameStarting()) {

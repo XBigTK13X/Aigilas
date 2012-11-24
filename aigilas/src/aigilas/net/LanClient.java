@@ -107,7 +107,7 @@ public class LanClient extends IClient {
     int _playerCount = 0;
 
     public int getPlayerCount() {
-        if (_playerCount == 0) {
+        if (_playerCount == 0 || !isGameStarting()) {
             sendMessage(Message.createPlayerCount(0));
             awaitReply(MessageTypes.Player_Count);
             _playerCount = _message.PlayerCount;
@@ -152,11 +152,12 @@ public class LanClient extends IClient {
         switch (contents.MessageType) {
             case Connect:
                 RNG.seed(contents.RngSeed);
-                _initialPlayerIndex = (int) contents.PlayerCount;
+                _initialPlayerIndex = (int) contents.PlayerCount - 1;
                 _isConnected = true;
                 break;
             case Start_Game:
                 _isGameStarting = true;
+                _playerCount = contents.PlayerCount;
                 break;
             case Sync_State:
                 state.reset(contents.CommandState);
