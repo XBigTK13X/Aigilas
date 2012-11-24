@@ -34,7 +34,7 @@ public class MainMenuState implements State {
         Table table = new Table();
         table.setFillParent(true);
 
-        final SelectableButton startGameBtn = new SelectableButton("Start Local Game", UiAssets.getButtonStyle());
+        final SelectableButton startGameBtn = new SelectableButton("Start Local", UiAssets.getButtonStyle());
         startGameBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 Logger.info("Starting the game");
@@ -42,14 +42,14 @@ public class MainMenuState implements State {
             }
         });
 
-        SelectableButton startServerBtn = new SelectableButton("Host LAN Game", UiAssets.getButtonStyle());
+        SelectableButton startServerBtn = new SelectableButton("Host LAN", UiAssets.getButtonStyle());
         startServerBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 StateManager.loadState(new StartHostServerState());
             }
         });
 
-        SelectableButton connectToServerBtn = new SelectableButton("Join LAN Game", UiAssets.getButtonStyle());
+        SelectableButton connectToServerBtn = new SelectableButton("Join LAN", UiAssets.getButtonStyle());
         connectToServerBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 StateManager.loadState(new JoinServerAsGuestState());

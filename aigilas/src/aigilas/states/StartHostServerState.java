@@ -1,6 +1,7 @@
 package aigilas.states;
 
 import aigilas.Common;
+import aigilas.Config;
 import aigilas.net.Client;
 import aigilas.net.LanClient;
 import aigilas.net.Server;
@@ -28,6 +29,7 @@ public class StartHostServerState implements State {
 
     public StartHostServerState() {
         //Server
+        Logger.info("IP is " + Config.get().serverIp());
         Server.reset();
         Client.reset(new LanClient());
 
@@ -38,9 +40,9 @@ public class StartHostServerState implements State {
         Gdx.input.setInputProcessor(stage);
 
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
-        connectedPlayersLbl = new Label("", lblStyle);
+        connectedPlayersLbl = new Label("0 players connected", lblStyle);
 
-        final SelectableButton startGameBtn = new SelectableButton("Start Local Game", UiAssets.getButtonStyle());
+        final SelectableButton startGameBtn = new SelectableButton("Start", UiAssets.getButtonStyle());
         startGameBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 Logger.info("Starting the game");
@@ -62,7 +64,7 @@ public class StartHostServerState implements State {
     @Override
     public void update() {
         if (connectedPlayers != Client.get().getPlayerCount()) {
-            connectedPlayersLbl.setText(connectedPlayers + " players are ready to play.");
+            connectedPlayersLbl.setText(connectedPlayers + " players are ready.");
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
