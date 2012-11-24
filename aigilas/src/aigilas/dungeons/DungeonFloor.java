@@ -40,7 +40,6 @@ public class DungeonFloor {
         generateRooms(true);
         placeAltars();
         placeStairs();
-        placeFloor();
         transferDungeonState();
     }
 
@@ -57,7 +56,6 @@ public class DungeonFloor {
         }
         placeCreatures(enemiesToPlace);
         placeItems(RNG.next(Config.get().itemBase, Config.get().itemCap));
-        placeFloor();
         transferDungeonState();
     }
 
@@ -88,6 +86,8 @@ public class DungeonFloor {
         for (Entity item : _contents) {
             EntityManager.get().addObject(item);
         }
+        //Force an update so that tiles with dynamic sprites render correctly without any flicker
+        EntityManager.get().update();
     }
 
     public void cacheContents() {
