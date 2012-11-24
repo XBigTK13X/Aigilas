@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
-import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.io.Input;
 import sps.states.State;
@@ -71,7 +70,6 @@ public class JoinServerAsGuestState implements State {
         if (readyToConnect && !connectStarted) {
             Client.reset(new LanClient());
             connectStarted = true;
-            Logger.info("Trying to start");
         }
         if (Input.isActive(Commands.get(Common.Start), 0)) {
             if (ipIn.getText() != null && !ipIn.getText().isEmpty()) {

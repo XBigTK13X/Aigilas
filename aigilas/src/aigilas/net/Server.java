@@ -50,7 +50,6 @@ public class Server extends Thread {
                 case Connect:
                     sendMessage(Message.createInit(clients.size(), _rngSeed), _message.LocalPort);
                     _turnCount = 0;
-                    Logger.info("New player connected");
                     break;
                 case Check_State:
                     _message.IsActive = state.isActive(_message.PlayerIndex, _message.Command);
