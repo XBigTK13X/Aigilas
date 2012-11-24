@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class MainMenuState implements State {
     private int _selection = 0;
+    private final int horizDelta = 1;
+    private final int verticalDelta = 3;
 
     private Stage stage;
     private ArrayList<SelectableButton> buttons = new ArrayList<SelectableButton>();
@@ -88,7 +90,8 @@ public class MainMenuState implements State {
 
     @Override
     public void update() {
-        int selectionVelocity = (Input.isActive(Commands.get(Common.MoveRight), Client.get().getFirstPlayerIndex()) ? 1 : 0) + (Input.isActive(Commands.get(Common.MoveLeft), Client.get().getFirstPlayerIndex()) ? -1 : 0);
+        int selectionVelocity = (Input.isActive(Commands.get(Common.MoveRight), Client.get().getFirstPlayerIndex()) ? horizDelta : 0) + (Input.isActive(Commands.get(Common.MoveLeft), Client.get().getFirstPlayerIndex()) ? -horizDelta : 0);
+        selectionVelocity += (Input.isActive(Commands.get(Common.MoveUp), Client.get().getFirstPlayerIndex()) ? -verticalDelta : 0) + (Input.isActive(Commands.get(Common.MoveDown), Client.get().getFirstPlayerIndex()) ? verticalDelta : 0);
         _selection += selectionVelocity;
         _selection %= buttons.size();
         if (_selection < 0) {
@@ -103,7 +106,7 @@ public class MainMenuState implements State {
             StateManager.loadState(new LoadingState());
         }
         else {
-            if (Input.isActive(Commands.get(Common.Confirm), Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get(Common.Confirm), Client.get().getFirstPlayerIndex()) || Input.isActive(Commands.get(Common.Start), Client.get().getFirstPlayerIndex())) {
                 switch (_selection) {
                     case 0:
                         Logger.info("Starting the game");
@@ -128,7 +131,7 @@ public class MainMenuState implements State {
         }
 
         if (selectionVelocity != 0) {
-            for (int ii = 0; ii < 3; ii++) {
+            for (int ii = 0; ii < buttons.size(); ii++) {
                 buttons.get(ii).setSelected(false);
             }
             buttons.get(_selection).setSelected(true);
