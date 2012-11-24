@@ -20,12 +20,12 @@ import sps.io.Input;
 import sps.states.State;
 import sps.util.Parse;
 
-public class ServerConnectState implements State {
+public class StartServerState implements State {
 
     private Stage stage;
     final TextField ipIn;
 
-    public ServerConnectState() {
+    public StartServerState() {
         Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
@@ -53,7 +53,6 @@ public class ServerConnectState implements State {
 
         Table table = new Table();
         table.setFillParent(true);
-        table.add(label);
         table.add(ipIn).minWidth(300);
 
         stage.addActor(table);

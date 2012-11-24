@@ -6,14 +6,11 @@ import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
@@ -58,17 +55,19 @@ public class MainMenuState implements State {
             }
         });
 
-        table.add(startGameBtn);
-        buttons.add(startGameBtn);
+        SelectableButton startServerBtn = new SelectableButton("Host LAN Game", style);
+        startServerBtn.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                StateManager.loadState(new StartServerState());
+            }
+        });
 
-        SelectableButton connectToServerBtn = new SelectableButton("Join Game", style);
+        SelectableButton connectToServerBtn = new SelectableButton("Join LAN Game", style);
         connectToServerBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 StateManager.loadState(new ServerConnectState());
             }
         });
-        table.add(connectToServerBtn);
-        buttons.add(connectToServerBtn);
 
         SelectableButton optionsBtn = new SelectableButton("Options", style);
         optionsBtn.addListener(new ChangeListener() {
@@ -76,8 +75,6 @@ public class MainMenuState implements State {
                 //$$$ StateManager.loadState(new OptionsState());
             }
         });
-        table.add(optionsBtn);
-        buttons.add(optionsBtn);
 
         SelectableButton exitBtn = new SelectableButton("Exit", style);
         exitBtn.addListener(new ChangeListener() {
@@ -85,6 +82,16 @@ public class MainMenuState implements State {
                 Gdx.app.exit();
             }
         });
+
+        table.add(startGameBtn);
+        buttons.add(startGameBtn);
+        table.add(startServerBtn);
+        buttons.add(startServerBtn);
+        table.add(connectToServerBtn);
+        buttons.add(connectToServerBtn);
+        table.row();
+        table.add(optionsBtn);
+        buttons.add(optionsBtn);
         table.add(exitBtn);
         buttons.add(exitBtn);
 
