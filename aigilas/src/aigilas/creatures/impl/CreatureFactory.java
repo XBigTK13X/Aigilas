@@ -48,12 +48,6 @@ public class CreatureFactory {
     }
 
     private static BaseEnemy generateCreature(ActorType actorType) {
-        if (actorType.is(Common.Peon)) {
-            return new Peon();
-        }
-        if (actorType.is(Common.Zorb)) {
-            return new Zorb();
-        }
         if (actorType.is(Common.Wrath)) {
             return new Wrath();
         }

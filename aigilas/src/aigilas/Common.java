@@ -36,7 +36,6 @@ public class Common {
     public static final String MoveRight = "Move_Right";
     public static final String MoveUp = "Move_Up";
     public static final String Music = "Music";
-    public static final String Peon = "Peon";
     public static final String Pride = "Pride";
     public static final String Pride_Acolyte = "Pride_Acolyte";
     public static final String Serpent = "Serpent";
@@ -51,6 +50,5 @@ public class Common {
     public static final String Wall = "Wall";
     public static final String Wrath = "Wrath";
     public static final String Wrath_Acolyte = "Wrath_Acolyte";
-    public static final String Zorb = "Zorb";
     public static final String Combo_Marker = "Combo_Marker";
 }
