@@ -13,14 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
-import sps.core.Logger;
 import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
 
 import java.util.ArrayList;
 
-public class MainMenuState implements State {
+public class OptionsState implements State {
     private int _selection = 0;
     private final int horizDelta = 1;
     private final int verticalDelta = 3;
@@ -28,7 +27,7 @@ public class MainMenuState implements State {
     private Stage stage;
     private ArrayList<SelectableButton> buttons = new ArrayList<SelectableButton>();
 
-    public MainMenuState() {
+    public OptionsState() {
         Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
@@ -37,56 +36,31 @@ public class MainMenuState implements State {
         Table table = new Table();
         table.setFillParent(true);
 
-        final SelectableButton startGameBtn = new SelectableButton("Start Local", UiAssets.getButtonStyle());
-        startGameBtn.addListener(new ChangeListener() {
+        final SelectableButton fullScreenBtn = new SelectableButton("Toggle Fullscreen", UiAssets.getButtonStyle());
+        fullScreenBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                Logger.info("Starting the game");
-                Client.get().startGame();
+                toggleFullscreen();
             }
         });
 
-        SelectableButton startServerBtn = new SelectableButton("Host LAN", UiAssets.getButtonStyle());
-        startServerBtn.addListener(new ChangeListener() {
+        final SelectableButton backBtn = new SelectableButton("Main Menu", UiAssets.getButtonStyle());
+        backBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                StateManager.loadState(new StartHostServerState());
+                StateManager.loadState(new MainMenuState());
             }
         });
 
-        SelectableButton connectToServerBtn = new SelectableButton("Join LAN", UiAssets.getButtonStyle());
-        connectToServerBtn.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                StateManager.loadState(new JoinServerAsGuestState());
-            }
-        });
-
-        SelectableButton optionsBtn = new SelectableButton("Options", UiAssets.getButtonStyle());
-        optionsBtn.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                StateManager.loadState(new OptionsState());
-            }
-        });
-
-        SelectableButton exitBtn = new SelectableButton("Exit", UiAssets.getButtonStyle());
-        exitBtn.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
-            }
-        });
-
-        table.add(startGameBtn);
-        buttons.add(startGameBtn);
-        table.add(startServerBtn);
-        buttons.add(startServerBtn);
-        table.add(connectToServerBtn);
-        buttons.add(connectToServerBtn);
-        table.row();
-        table.add(optionsBtn);
-        buttons.add(optionsBtn);
-        table.add(exitBtn);
-        buttons.add(exitBtn);
+        table.add(fullScreenBtn);
+        buttons.add(fullScreenBtn);
+        table.add(backBtn);
+        buttons.add(backBtn);
 
         stage.addActor(table);
-        startGameBtn.setSelected(true);
+    }
+
+    private void toggleFullscreen() {
+        Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, !Gdx.graphics.isFullscreen());
+        StateManager.loadState(new OptionsState());
     }
 
     @Override
@@ -110,20 +84,7 @@ public class MainMenuState implements State {
             if (UiSelection.commandActive()) {
                 switch (_selection) {
                     case 0:
-                        Logger.info("Starting the game");
-                        Client.get().startGame();
-                        return;
-                    case 1:
-                        StateManager.loadState(new StartHostServerState());
-                        return;
-                    case 2:
-                        StateManager.loadState(new JoinServerAsGuestState());
-                        return;
-                    case 3:
-                        StateManager.loadState(new OptionsState());
-                        return;
-                    case 4:
-                        System.exit(0);
+                        toggleFullscreen();
                         return;
                     default:
                         break;
