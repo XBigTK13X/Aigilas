@@ -69,6 +69,7 @@ public class JoinServerAsGuestState implements State {
     public void update() {
         if (readyToConnect && !connectStarted) {
             Client.reset(new LanClient());
+            Input.setup(Client.get());
             connectStarted = true;
         }
         if (Input.isActive(Commands.get(Common.Start), 0)) {

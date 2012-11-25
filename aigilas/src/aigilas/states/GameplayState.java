@@ -13,7 +13,6 @@ import aigilas.statuses.StatusRegistry;
 import sps.core.Logger;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.io.Input;
 import sps.particles.ParticleEngine;
 import sps.states.State;
 import sps.states.StateManager;
@@ -24,7 +23,6 @@ import java.util.List;
 public class GameplayState implements State {
     public GameplayState() {
         Logger.info("Generating the dungeon...");
-        Input.setup(Client.get());
         SkillRegistry.get();
         StatusRegistry.get();
         ReactionRegistry.get();

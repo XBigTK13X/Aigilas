@@ -72,6 +72,7 @@ public class StartHostServerState implements State {
                 Input.setContext(Contexts.get(Common.Free), ii);
             }
 
+            Input.setup(Client.get());
             StateManager.loadState(new LoadingState());
         }
     }
