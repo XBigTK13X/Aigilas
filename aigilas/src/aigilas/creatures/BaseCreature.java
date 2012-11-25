@@ -24,6 +24,7 @@ import aigilas.strategies.TargetSet;
 import sps.bridge.*;
 import sps.core.Core;
 import sps.core.Point2;
+import sps.core.Settings;
 import sps.entities.CoordVerifier;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -314,6 +315,8 @@ public abstract class BaseCreature extends Entity implements IActor {
         return adjust(stat, adjustment, false);
     }
 
+    private String textPrepend = "";
+
     public void applyDamage(int damage, BaseCreature attacker, boolean showDamage, StatType statType) {
         if (attacker != null) {
             attacker.passOn(this, StatusComponent.Contagion);
@@ -326,12 +329,11 @@ public abstract class BaseCreature extends Entity implements IActor {
             damage = 0;
         }
         if (showDamage) {
+            textPrepend = "";
             if (damage < 0) {
-                TextPool.get().write("+" + StringStorage.get(Math.abs(damage)), getLocation(), .5f, TextEffects.Fountain);
+                textPrepend = "+";
             }
-            else {
-                TextPool.get().write(StringStorage.get(damage), getLocation(), .5f, TextEffects.Fountain);
-            }
+            TextPool.get().write(textPrepend + StringStorage.get(Math.abs(damage)), new Point2(getLocation().PosX + Settings.get().spriteWidth / 3, getLocation().PosY + Settings.get().spriteHeight), .5f, TextEffects.Fountain);
         }
         if (damage > 0 || (damage < 0 && _statuses.allows(CreatureAction.ReceiveHealing))) {
             GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
@@ -458,7 +460,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 if (_class != null) {
                     _skills.add(_class.getLevelSkills(_currentLevel));
                 }
-                TextPool.get().write("LEVEL UP!", getLocation(), 1);
+                TextPool.get().write("LEVEL UP!", new Point2(getLocation().PosX, getLocation().PosY + Settings.get().spriteHeight), 1);
             }
         }
     }
@@ -484,7 +486,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             lastSum = _baseStats.getSum();
             _skills.useActive();
             if (lastSum != _baseStats.getSum()) {
-                TextPool.get().write(getActiveSkillName(), getLocation(), .5f);
+                TextPool.get().write(getActiveSkillName(), new Point2(getLocation().PosX, getLocation().PosY + Settings.get().spriteHeight), .5f);
             }
         }
     }
