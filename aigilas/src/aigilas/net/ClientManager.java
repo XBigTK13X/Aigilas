@@ -45,10 +45,12 @@ public class ClientManager {
         }
     }
 
+    private int clientIndex = 0;
+
     public Message readMessage() {
         Message result;
-        for (MessageHandler client : clients) {
-            result = client.readInboundMessage();
+        for (clientIndex = 0; clientIndex < clients.size(); clientIndex++) {
+            result = clients.get(clientIndex).readInboundMessage();
             if (result != null) {
                 return result;
             }
@@ -61,8 +63,8 @@ public class ClientManager {
     }
 
     public void announce(Message contents) {
-        for (MessageHandler client : clients) {
-            client.sendOutboundMessage(contents);
+        for (clientIndex = 0; clientIndex < clients.size(); clientIndex++) {
+            clients.get(clientIndex).sendOutboundMessage(contents);
         }
     }
 

@@ -78,6 +78,7 @@ public class LanClient extends IClient {
     public boolean nextTurn() {
         update();
         if (_message != null && _message.MessageType == MessageTypes.Sync_State) {
+            RNG.seed(_message.RngSeed);
             _heartBeat = _heartBeatWaitSeconds;
             return true;
         }

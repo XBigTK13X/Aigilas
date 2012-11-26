@@ -89,8 +89,8 @@ public class Server extends Thread {
         _turnTime += Gdx.graphics.getDeltaTime();
         if (_turnTime >= Config.get().turnTime) {
             int readyCount = 0;
-            for (boolean a_readyCheckIn : _readyCheckIn) {
-                readyCount += a_readyCheckIn ? 1 : 0;
+            for (boolean checkedIn : _readyCheckIn) {
+                readyCount += checkedIn ? 1 : 0;
             }
             if (readyCount >= clients.size()) {
                 _turnTime = 0;
