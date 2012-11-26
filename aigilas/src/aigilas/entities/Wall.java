@@ -14,8 +14,13 @@ public class Wall extends Entity {
         _isBlocking = true;
     }
 
+    private boolean firstRender = true;
+
     @Override
     public void update() {
-        _graphic.setEdge(SpriteEdge.determine(_entityType, _location));
+        if (firstRender) {
+            firstRender = false;
+            _graphic.setEdge(SpriteEdge.determine(_entityType, _location));
+        }
     }
 }
