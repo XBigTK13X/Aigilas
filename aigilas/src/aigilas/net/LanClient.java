@@ -1,6 +1,7 @@
 package aigilas.net;
 
 import aigilas.Config;
+import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
 import sps.core.Logger;
 import sps.core.RNG;
@@ -13,7 +14,8 @@ public class LanClient extends IClient {
     // Client <-> Server
     private Message _message;
     private MessageHandler _comm;
-    private int _heartBeat = 30;
+    private static final float _heartBeatWaitSeconds = .5f;
+    private float _heartBeat = _heartBeatWaitSeconds;
 
     // Client <-> Game
     private Integer _initialPlayerIndex;
@@ -61,10 +63,10 @@ public class LanClient extends IClient {
 
     public void heartBeat() {
         if (!_dungeonHasLoaded) {
-            _heartBeat--;
+            _heartBeat -= Gdx.graphics.getDeltaTime();
             if (_heartBeat <= 0) {
                 sendMessage(Message.createHeartBeat());
-                _heartBeat = 15;
+                _heartBeat = _heartBeatWaitSeconds;
             }
         }
     }
@@ -78,7 +80,7 @@ public class LanClient extends IClient {
         if (_message != null) {
             if (_message.MessageType == MessageTypes.Sync_State) {
                 RNG.seed(_message.RngSeed);
-                _heartBeat = 15;
+                _heartBeat = _heartBeatWaitSeconds;
             }
             return _message.MessageType == MessageTypes.Sync_State;
         }
