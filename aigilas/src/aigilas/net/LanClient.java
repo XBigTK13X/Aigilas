@@ -14,7 +14,7 @@ public class LanClient extends IClient {
     // Client <-> Server
     private Message _message;
     private MessageHandler _comm;
-    private static final float _heartBeatWaitSeconds = .5f;
+    private static final float _heartBeatWaitSeconds = .1f;
     private float _heartBeat = _heartBeatWaitSeconds;
 
     // Client <-> Game
@@ -77,12 +77,10 @@ public class LanClient extends IClient {
 
     public boolean nextTurn() {
         update();
-        if (_message != null) {
-            if (_message.MessageType == MessageTypes.Sync_State) {
-                RNG.seed(_message.RngSeed);
-                _heartBeat = _heartBeatWaitSeconds;
-            }
-            return _message.MessageType == MessageTypes.Sync_State;
+        if (_message != null && _message.MessageType == MessageTypes.Sync_State) {
+            RNG.seed(_message.RngSeed);
+            _heartBeat = _heartBeatWaitSeconds;
+            return true;
         }
         return false;
     }

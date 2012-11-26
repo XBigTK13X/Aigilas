@@ -1,5 +1,7 @@
 package aigilas.net;
 
+import aigilas.Config;
+import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
 import sps.io.CommandState;
 
@@ -22,6 +24,7 @@ public class Server extends Thread {
     private Message _message = Message.empty();
     private Integer _turnCount = 0;
     private final boolean[] _readyCheckIn = {true, true, true, true};
+    private float _turnTime = 0;
 
     private final ClientManager clients;
 
@@ -83,14 +86,18 @@ public class Server extends Thread {
     }
 
     private void broadCastGameState() {
-        int readyCount = 0;
-        for (boolean a_readyCheckIn : _readyCheckIn) {
-            readyCount += a_readyCheckIn ? 1 : 0;
-        }
-        if (readyCount >= clients.size()) {
-            announce(Message.createPlayerState(state, _turnCount++, _rngSeed));
-            for (int ii = 0; ii < _readyCheckIn.length; ii++) {
-                _readyCheckIn[ii] = false;
+        _turnTime += Gdx.graphics.getDeltaTime();
+        if (_turnTime >= Config.get().turnTime) {
+            int readyCount = 0;
+            for (boolean a_readyCheckIn : _readyCheckIn) {
+                readyCount += a_readyCheckIn ? 1 : 0;
+            }
+            if (readyCount >= clients.size()) {
+                _turnTime = 0;
+                announce(Message.createPlayerState(state, _turnCount++, _rngSeed));
+                for (int ii = 0; ii < _readyCheckIn.length; ii++) {
+                    _readyCheckIn[ii] = false;
+                }
             }
         }
     }
