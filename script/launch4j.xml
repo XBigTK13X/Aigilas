@@ -1,0 +1,51 @@
+<launch4jConfig>
+  <headerType>gui</headerType>
+  <outfile>aigilas.exe</outfile>
+  <jar>../aigilas/target/aigilas.jar</jar>
+  <dontWrapJar>true</dontWrapJar>
+  <priority>high</priority>
+  <customProcName>true</customProcName>
+  <icon>Aigilas.ico</icon>
+  <classPath>
+    <mainClass>targets.DesktopMain</mainClass>
+    <cp>./</cp>
+  </classPath>
+  <singleInstance>
+    <mutexName>aigilasLocked</mutexName>
+    <windowTitle>Aigilas</windowTitle>
+  </singleInstance> 
+  <jre>
+    <!-- Specify one of the following or both -->
+    <minVersion>1.6.0_00</minVersion>
+    <maxVersion>1.6.0_99</maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <!-- Heap sizes in MB and % of free memory -->
+    <initialHeapSize>1024</initialHeapSize>
+    <maxHeapSize>1024</maxHeapSize>
+    <opt>text</opt>
+  </jre>
+  <splash>
+    <file>Splash.png</file>
+    <waitForWindow>true</waitForWindow>
+    <timeout>60</timeout>
+    <timeoutErr>false</timeoutErr>
+  </splash>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>EEEEE</txtFileVersion>
+    <fileDescription>Rawr!</fileDescription>
+    <copyright>Timothy "XBigTK13X" Kretschmer</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>WHOOO</txtProductVersion>
+    <productName>Aigilas</productName>
+    <companyName>Simple Path Studios</companyName>
+    <internalName>aigilas</internalName>
+    <originalFilename>aigilas.exe</originalFilename>
+  </versionInfo>
+  <messages>
+    <startupErr>There was an error launching the game.</startupErr>
+    <bundledJreErr>Unable to load a bundled JRE</bundledJreErr>
+    <jreVersionErr>Only Java version 6 is supported.</jreVersionErr>
+    <launcherErr>There was an error caused by launch4j</launcherErr>
+  </messages>
+</launch4jConfig>
