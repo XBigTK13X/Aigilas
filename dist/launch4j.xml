@@ -1,8 +1,8 @@
 <launch4jConfig>
-  <dontWrapJar>false</dontWrapJar>
+  <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>/Users/kretst/dev/aigilas/aigilas/target/aigilas.jar</jar>
-  <outfile>/Users/kretst/dev/aigilas/aigilas/target/aigilas.exe</outfile>
+  <jar>aigilas.jar</jar>
+  <outfile>/home/kretst/dev/aigilas/aigilas/target/aigilas.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
@@ -12,7 +12,7 @@
   <customProcName>false</customProcName>
   <stayAlive>false</stayAlive>
   <manifest></manifest>
-  <icon>/Users/kretst/dev/aigilas/script/Aigilas.ico</icon>
+  <icon>/home/kretst/dev/aigilas/script/Aigilas.ico</icon>
   <jre>
     <path></path>
     <minVersion>1.6.0_00</minVersion>
@@ -22,7 +22,7 @@
     <maxHeapSize>1024</maxHeapSize>
   </jre>
   <splash>
-    <file>/Users/kretst/dev/aigilas/script/Splash.png</file>
+    <file>/home/kretst/dev/aigilas/script/Splash.png</file>
     <waitForWindow>true</waitForWindow>
     <timeout>60</timeout>
     <timeoutErr>true</timeoutErr>

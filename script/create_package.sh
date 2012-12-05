@@ -7,6 +7,7 @@ cd target
 git log --max-count=1 > version.txt
 ln ../../dist/README.txt ./README.txt
 cp -r ../assets .
-cp ../../script/start_game.sh .
-zip -r aigilas.zip aigilas.jar assets version.txt README.txt start_game.sh
+cp ../../dist/Start\ Aigilas\ \(Linux\).sh .
+cp ../../dist/Start\ Aigilas\ \(Windows\).bat .
+zip -r aigilas.zip aigilas.jar assets version.txt README.txt Start\ Aigilas\ \(Linux\).sh Start\ Aigilas\ \(Windows\).bat
 cd ../..
