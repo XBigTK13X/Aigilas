@@ -23,6 +23,7 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.TargetSet;
 import sps.bridge.*;
 import sps.core.Core;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.CoordVerifier;
@@ -229,9 +230,15 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     @Override
     public void draw() {
-        Path path = _strategy.getPath();
-        if (path != null) {
-            path.draw();
+        if(Settings.get().viewPaths){
+            Path path = _strategy.getPath();
+            if (path != null) {
+                path.draw();
+            }
+        }
+        if(_actorType == ActorTypes.get(Core.Player))
+        {
+            Logger.info("Position: " + getLocation());
         }
         super.draw();
         _combo.draw();
