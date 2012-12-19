@@ -7,6 +7,7 @@ import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import sps.audio.MusicPlayer;
+import sps.bridge.Bridge;
 import sps.bridge.Commands;
 import sps.bridge.SpriteTypes;
 import sps.bridge.Spx;
@@ -28,6 +29,7 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void create() {
+        Bridge.get();
         Spx.setup();
         Client.reset(new LocalClient());
         Input.setup(Client.get());

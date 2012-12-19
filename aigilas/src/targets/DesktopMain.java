@@ -10,8 +10,6 @@ import sps.core.Settings;
 public class DesktopMain {
     public static void main(String[] args) {
 
-        Bridge.get();
-
         Logger.info("Launching the main game loop");
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Aigilas";
