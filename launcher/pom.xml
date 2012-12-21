@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>aigilas</groupId>
-    <artifactId>aigilas-launcher</artifactId>
+    <artifactId>aigilas-launchWindow</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
@@ -26,7 +26,7 @@
     </dependencies>
 
     <build>
-        <finalName>aigilas-launcher</finalName>
+        <finalName>aigilas-launchWindow</finalName>
         <sourceDirectory>${basedir}/src</sourceDirectory>
         <plugins>
             <plugin>
@@ -52,7 +52,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>targets.DesktopLauncher</mainClass>
+                                    <mainClass>launchWindow.DesktopMain</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
