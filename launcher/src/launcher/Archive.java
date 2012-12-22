@@ -11,6 +11,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class Archive {
+    private Archive(){}
+
     static public void unzip(File zipFile) {
         try {
             int BUFFER = 2048;

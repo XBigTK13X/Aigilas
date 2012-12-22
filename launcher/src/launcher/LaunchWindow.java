@@ -1,7 +1,5 @@
 package launcher;
 
-import sps.core.Logger;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +12,11 @@ public class LaunchWindow {
 
     //UI Elements
     private JPanel mainPanel;
+    private JPanel secPanel;
     private JLabel licenseLbl;
     private JTextField licenseIpt;
     private JButton launchBtn;
+    private JLabel messageArea;
 
     Updater updater;
 
@@ -39,12 +39,21 @@ public class LaunchWindow {
         guiFrame.setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
+        secPanel = new JPanel();
         licenseLbl = new JLabel("License");
         licenseIpt = new JTextField();
+        messageArea = new JLabel("TESTBlah");
 
         if (!licenseFound) {
             mainPanel.add(licenseLbl);
             mainPanel.add(licenseIpt);
+
+            secPanel.add(messageArea);
+
+            //guiFrame.add(licenseLbl, BorderLayout.NORTH);
+            //guiFrame.add(licenseIpt, BorderLayout.CENTER);
+            guiFrame.add(mainPanel,BorderLayout.CENTER);
+            guiFrame.add(secPanel,BorderLayout.NORTH);
         }
         final JButton launchBtn = new JButton("Launch");
 
@@ -55,15 +64,14 @@ public class LaunchWindow {
             }
         });
 
-        guiFrame.add(licenseLbl, BorderLayout.NORTH);
-        guiFrame.add(licenseIpt, BorderLayout.CENTER);
+
         guiFrame.add(launchBtn, BorderLayout.SOUTH);
 
         guiFrame.setVisible(true);
     }
 
     private void launchAigilas() {
-        Logger.info("Preparing to launch the game.");
+        Logger.info("Preparing to launch the game.",messageArea);
         updater.runIfNeeded(licenseIpt.getText());
         runAigilas();
         System.exit(0);
