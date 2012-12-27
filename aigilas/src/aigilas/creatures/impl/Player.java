@@ -21,7 +21,7 @@ public class Player extends BaseEnemy {
         super(ActorTypes.get(Core.Player));
         _playerIndex = playerIndex;
         _graphic.setColor(__colors.get(_playerIndex));
-        _strategy = StrategyFactory.create(Strategy.ControlledByPlayer, this);
+        setStrategy(StrategyFactory.create(Strategy.ControlledByPlayer, this));
         _baseStats = StatsRegistry.get().baseStats(_actorType);
         _maxStats = new Stats(_baseStats);
         assignGod(GodId.values()[RNG.next(0, GodId.values().length)].getInstance());

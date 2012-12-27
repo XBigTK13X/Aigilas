@@ -20,10 +20,10 @@ import aigilas.statuses.StatusComponent;
 import aigilas.statuses.StatusPool;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
+import aigilas.strategies.StrategyPlan;
 import aigilas.strategies.TargetSet;
 import sps.bridge.*;
 import sps.core.Core;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.CoordVerifier;
@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseCreature extends Entity implements IActor {
-    protected BaseStrategy _strategy;
+    protected StrategyPlan _strategies;
     protected BaseCreature _master;
     protected CreatureClass _class;
     protected Stats _baseStats;
@@ -201,8 +201,8 @@ public abstract class BaseCreature extends Entity implements IActor {
                 }
                 regenerate();
             }
-            if (_strategy != null) {
-                _strategy.act();
+            if (_strategies != null) {
+                _strategies.current().act();
                 _combo.update();
             }
         }
@@ -230,8 +230,8 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     @Override
     public void draw() {
-        if(Settings.get().viewPaths){
-            Path path = _strategy.getPath();
+        if (Settings.get().viewPaths) {
+            Path path = _strategies.current().getPath();
             if (path != null) {
                 path.draw();
             }
@@ -495,10 +495,10 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public TargetSet getTargets() {
-        if (_strategy == null) {
+        if (_strategies.current() == null) {
             return _master.getTargets();
         }
-        return _strategy.getTargets();
+        return _strategies.current().getTargets();
     }
 
     private StatType getLowestStat() {
@@ -567,11 +567,18 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public void setStrategy(BaseStrategy strategy) {
-        _strategy = strategy;
+        if (_strategies == null) {
+            _strategies = new StrategyPlan();
+        }
+        _strategies.add(strategy);
+    }
+
+    public void removeStrategy(BaseStrategy strategy) {
+        _strategies.remove(strategy);
     }
 
     public Strategy getStrategyId() {
-        return _strategy.getId();
+        return _strategies.current().getId();
     }
 
     public int getInventoryCount() {
@@ -609,7 +616,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     public List<ActorType> getTargetActorTypes() {
-        return _strategy.getTargetActorTypes();
+        return _strategies.current().getTargetActorTypes();
     }
 
     public float getCurrentSkillCost() {

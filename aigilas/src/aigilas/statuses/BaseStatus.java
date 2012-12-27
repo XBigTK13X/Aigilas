@@ -4,6 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.creatures.CreatureAction;
 import aigilas.creatures.StatBuff;
 import aigilas.entities.Elements;
+import aigilas.strategies.BaseStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class BaseStatus {
     protected boolean _buffMax = false;
     protected final List<Elements> _blockedElements = new ArrayList<Elements>();
     protected Status impl;
+    protected BaseStrategy causedStrategy;
 
     protected final HashMap<StatusComponent, List<Status>> _passables = new HashMap<StatusComponent, List<Status>>();
 
@@ -100,5 +102,8 @@ public class BaseStatus {
 
     public void cleanup() {
         cycleBuff();
+        if (causedStrategy != null) {
+            _target.removeStrategy(causedStrategy);
+        }
     }
 }

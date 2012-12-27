@@ -12,6 +12,6 @@ public class ConfusedStrategy extends BaseStrategy {
 
     @Override
     public void act() {
-        _parent.moveIfPossible(RNG.Rand.nextInt(3) - 1, RNG.Rand.nextInt(3) - 1);
+        _parent.moveIfPossible(RNG.coinFlip() ? 1 : RNG.coinFlip() ? 0 : -1, RNG.coinFlip() ? 1 : RNG.coinFlip() ? 0 : -1);
     }
 }

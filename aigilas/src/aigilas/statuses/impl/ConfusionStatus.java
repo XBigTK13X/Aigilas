@@ -7,8 +7,6 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 
 public class ConfusionStatus extends BaseStatus {
-    private Strategy previousStrategy;
-
     public ConfusionStatus(BaseCreature target) {
         super(target);
         _prevents.add(CreatureAction.WontHitNonTargets);
@@ -17,13 +15,7 @@ public class ConfusionStatus extends BaseStatus {
     @Override
     public void setup() {
         super.setup();
-        previousStrategy = _target.getStrategyId();
-        _target.setStrategy(StrategyFactory.create(Strategy.Confused, _target));
-    }
-
-    @Override
-    public void cleanup() {
-        super.cleanup();
-        _target.setStrategy(StrategyFactory.create(previousStrategy, _target));
+        causedStrategy = StrategyFactory.create(Strategy.Confused, _target);
+        _target.setStrategy(causedStrategy);
     }
 }

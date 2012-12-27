@@ -34,7 +34,7 @@ public class Minion extends BaseCreature {
         else {
             setSkillVector(new Point2(0, 1));
         }
-        _strategy.addTargets(_master);
+        _strategies.current().addTargets(_master);
     }
 
     protected void add(SkillId skill) {

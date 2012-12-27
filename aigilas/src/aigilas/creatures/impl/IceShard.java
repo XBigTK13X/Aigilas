@@ -10,7 +10,7 @@ import sps.bridge.ActorTypes;
 public class IceShard extends Minion {
     public IceShard() {
         super(ActorTypes.get(Common.Minion));
-        _strategy = StrategyFactory.create(Strategy.MinionOneUse, this);
+        setStrategy(StrategyFactory.create(Strategy.MinionOneUse, this));
         add(SkillId.Ice_Shard);
         _composition.add(Elements.Water);
     }

@@ -1,7 +1,5 @@
 package aigilas.skills;
 
-import sps.core.Logger;
-
 public enum SkillId {
     Absorb,
     Acid_Drip,
@@ -61,7 +59,6 @@ public enum SkillId {
                 return id;
             }
         }
-        Logger.info("12039123: " + value);
         return null;
     }
 }

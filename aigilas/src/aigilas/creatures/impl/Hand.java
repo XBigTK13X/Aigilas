@@ -9,6 +9,6 @@ public class Hand extends BaseEnemy {
     public Hand() {
         super(ActorTypes.get(Common.Hand));
         _isBlocking = false;
-        _strategy = StrategyFactory.create(Strategy.StraightLine, this);
+        setStrategy(StrategyFactory.create(Strategy.StraightLine, this));
     }
 }

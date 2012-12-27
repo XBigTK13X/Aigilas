@@ -49,8 +49,8 @@ public class BaseEnemy extends BaseCreature {
 
     public void setup(Point2 position) {
         setup(position, _actorType, _baseStats, _class);
-        if (_strategy == null) {
-            _strategy = StrategyFactory.create(Strategy.Attack, this, ActorTypes.get(Core.Player));
+        if (_strategies == null) {
+            setStrategy(StrategyFactory.create(Strategy.Attack, this, ActorTypes.get(Core.Player)));
         }
     }
 }
