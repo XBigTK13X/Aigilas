@@ -2,7 +2,6 @@ package launcher;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import sps.core.Logger;
 
 import java.io.File;
 import java.net.URL;
@@ -11,7 +10,6 @@ public class Updater {
     //Working update paths
     private File update = new File("aigilas-update.zip");
     private File updateDir = new File("aigilas-update");
-    private String licenseText;
 
     public Updater() {
 
@@ -19,56 +17,67 @@ public class Updater {
 
     public boolean runIfNeeded(String license) {
         boolean success = false;
-        if(checkLicense(license) && checkVersion() && downloadUpdate() && applyUpdate()){
+        if (checkLicense(license) && checkVersion() && downloadUpdate(license) && applyUpdate()) {
             success = true;
         }
         clean();
-        Logger.info("Finished applying updates.");
         return success;
     }
 
 
     private boolean checkLicense(String license) {
         try {
-            Logger.info("Validating SE license");
-            Logger.info("Checking to see if a stable edition license has been entered.");
-            if (licenseText != null && !licenseText.isEmpty()) {
-                URL licenseCheckUrl = new URL("http://www.simplepathstudios.com");
+            LaunchLogger.info("Checking to see if a stable edition license has been entered.");
+            if (license != null && !license.isEmpty()) {
+                URL licenseCheckUrl = new URL("http://www.simplepathstudios.com/download.php?target=aigilas-validate&license="+license);
                 String response = IOUtils.toString(licenseCheckUrl.openStream());
-                return response.contains("true");
+                if (response.contains("true")) {
+                    LaunchLogger.info(LaunchLogger.Tab + "License is valid.");
+                    return true;
+                }
             }
         }
         catch (Exception e) {
-            Logger.exception(e);
+            LaunchLogger.exception(e);
         }
+        LaunchLogger.info(LaunchLogger.Tab + "No valid license found.");
         return false;
     }
 
     private boolean checkVersion() {
         try {
-            Logger.info("Checking for updates.");
+            LaunchLogger.info("Checking for updates.");
+
             //TODO makeRequest <- store in uR
             File versionPath = new File("assets/data/version.dat");
+            if(versionPath.exists()){
+                String myVersion = FileUtils.readFileToString(versionPath);
+                LaunchLogger.info("Detected version: " + myVersion);
 
-            String myVersion = FileUtils.readFileToString(versionPath);
-            Logger.info("Detected version: " + myVersion);
+                URL versionCheckUrl = new URL("http://www.simplepathstudios.com/download.php?target=aigilas-version&version=" + myVersion);
 
-            URL versionCheckUrl = new URL("http://www.simplepathstudios.com/download.php?target=aigilas&version=" + myVersion);
-            //TODO This is most likely not the actual way to query
-
-            String result = IOUtils.toString(versionCheckUrl.openStream());
-            Logger.info("Result is: " + result);
-            return result.contains("true");
+                String result = IOUtils.toString(versionCheckUrl.openStream());
+                if (result.contains("true")) {
+                    LaunchLogger.info(LaunchLogger.Tab + "Local copy of the game is out of date.");
+                    return true;
+                }
+            }
+            else{
+                LaunchLogger.info(LaunchLogger.Tab + "No version information was found");
+                LaunchLogger.info(LaunchLogger.Tab + versionPath.getAbsolutePath());
+                return false;
+            }
         }
         catch (Exception e) {
-            Logger.exception(e);
+            LaunchLogger.exception(e);
         }
-        return true;
+        LaunchLogger.info(LaunchLogger.Tab + "Local copy of the game is up to date. No update required.");
+        return false;
     }
 
-    private boolean downloadUpdate() {
+    private boolean downloadUpdate(String license) {
         try {
-            Logger.info("Preparing the update location");
+            LaunchLogger.info("Preparing the update location");
 
             if (update.exists()) {
                 FileUtils.forceDelete(update);
@@ -76,22 +85,23 @@ public class Updater {
 
             int responseTimeoutMs = 10000;
             int downloadTimeoutMs = 60000;
-            Logger.info("Attempting to download an update using license: [" + licenseText + "]");
-            String spsLicenseUrl = "http://www.simplepathstudios.com/download.php?target=aigilas&license=" + licenseText;
-            Logger.info("Downloading latest stable edition");
+            LaunchLogger.info("Attempting to download an update using license: [" + license + "]");
+            String spsLicenseUrl = "http://www.simplepathstudios.com/download.php?target=aigilas&license=" + license;
+            LaunchLogger.info("Downloading latest stable edition");
             FileUtils.copyURLToFile(new URL(spsLicenseUrl), update, responseTimeoutMs, downloadTimeoutMs);
         }
         catch (Exception e) {
-            Logger.exception(e);
+            LaunchLogger.info(LaunchLogger.Tab + "There was a problem downloading the update.");
+            LaunchLogger.exception(e);
         }
+        LaunchLogger.info(LaunchLogger.Tab + "Update downloaded successfully.");
         return true;
     }
 
     private boolean applyUpdate() {
         try {
-            Logger.info("Unzipping: " + update.getAbsolutePath());
             Archive.unzip(update);
-            Logger.info("Replacing old content");
+            LaunchLogger.info("Replacing old content");
             File updateAssets = new File("aigilas-update/assets");
             File baseAssets = new File("./");
             FileUtils.copyDirectoryToDirectory(updateAssets, baseAssets);
@@ -101,14 +111,16 @@ public class Updater {
             FileUtils.copyFile(updateCore, baseCore);
         }
         catch (Exception e) {
-            Logger.exception(e);
+            LaunchLogger.info(LaunchLogger.Tab + "There was a problem applying the update.");
+            LaunchLogger.exception(e);
         }
+        LaunchLogger.info(LaunchLogger.Tab + "Update applied successfully.");
         return true;
     }
 
     private boolean clean() {
         try {
-            Logger.info("Cleaning up temporary files");
+            LaunchLogger.info("Cleaning up temporary files");
             if (update.exists()) {
                 FileUtils.forceDelete(update);
             }
@@ -117,7 +129,7 @@ public class Updater {
             }
         }
         catch (Exception e) {
-            Logger.exception(e);
+            LaunchLogger.exception(e);
         }
         return true;
     }

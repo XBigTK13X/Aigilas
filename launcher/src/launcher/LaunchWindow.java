@@ -11,29 +11,44 @@ public class LaunchWindow {
     boolean licenseFound = false;
 
     //UI Elements
+    private JFrame guiFrame;
     private JPanel mainPanel;
     private JPanel secPanel;
     private JLabel licenseLbl;
     private JTextField licenseIpt;
     private JButton launchBtn;
-    private JLabel messageArea;
+    static private JLabel messageArea;
 
     Updater updater;
 
     public LaunchWindow() {
-        Logger.setLogFile("launcher.log");
+        LaunchLogger.setLogFile("launcher.log");
         updater = new Updater();
     }
 
-    public void show() {
-        if (!(new File("license.dat").exists())) {
-            licenseFound = false;
-        }
+    private int dW(double percent){
+        return (int)(guiFrame.getWidth() * percent);
+    }
 
-        JFrame guiFrame = new JFrame();
+    private int dH(double percent){
+        return (int)(guiFrame.getHeight() * percent);
+    }
+
+    private Dimension dim(double pW,double pH){
+        return new Dimension(dW(pW),dH(pH));
+    }
+
+    public static JLabel getMessageArea(){
+        return messageArea;
+    }
+
+    public void show() {
+        licenseFound = new File("license.dat").exists();
+
+        guiFrame = new JFrame();
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         guiFrame.setTitle("Aigilas Launcher");
-        guiFrame.setSize(600, 400);
+        guiFrame.setSize(800, 600);
 
         //This will center the JFrame in the middle of the screen
         guiFrame.setLocationRelativeTo(null);
@@ -42,7 +57,14 @@ public class LaunchWindow {
         secPanel = new JPanel();
         licenseLbl = new JLabel("License");
         licenseIpt = new JTextField();
-        messageArea = new JLabel("TESTBlah");
+        messageArea = new JLabel();
+        launchBtn = new JButton("Launch");
+
+        licenseIpt.setPreferredSize(dim(.8,.1));
+        messageArea.setPreferredSize(dim(.8,.5));
+        launchBtn.setPreferredSize(dim(.8,.1));
+
+        messageArea.setVerticalAlignment(JLabel.TOP);
 
         if (!licenseFound) {
             mainPanel.add(licenseLbl);
@@ -50,34 +72,33 @@ public class LaunchWindow {
 
             secPanel.add(messageArea);
 
-            //guiFrame.add(licenseLbl, BorderLayout.NORTH);
-            //guiFrame.add(licenseIpt, BorderLayout.CENTER);
             guiFrame.add(mainPanel,BorderLayout.CENTER);
             guiFrame.add(secPanel,BorderLayout.NORTH);
         }
-        final JButton launchBtn = new JButton("Launch");
+
 
         launchBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                messageArea.setText("");
                 launchAigilas();
             }
         });
 
 
         guiFrame.add(launchBtn, BorderLayout.SOUTH);
-
         guiFrame.setVisible(true);
     }
 
     private void launchAigilas() {
-        Logger.info("Preparing to launch the game.",messageArea);
+        LaunchLogger.info("Preparing to launch the game.");
         updater.runIfNeeded(licenseIpt.getText());
-        runAigilas();
-        System.exit(0);
+        if(runAigilas()){
+            System.exit(0);
+        }
     }
 
-    private void runAigilas() {
+    private boolean runAigilas() {
         try {
             Process p = Runtime.getRuntime().exec("java -jar aigilas.jar");
             ProcessWatcher errorWatcher = new
@@ -91,9 +112,14 @@ public class LaunchWindow {
             while (endTime - startTime < launcherWaitInMs) {
                 endTime = System.currentTimeMillis();
             }
+            if(errorWatcher.outputDetected()){
+                return false;
+            }
         }
         catch (Exception e) {
-            Logger.exception(e);
+            LaunchLogger.exception(e);
+            return false;
         }
+        return true;
     }
 }

@@ -1,5 +1,7 @@
 package launcher;
 
+import sps.core.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +10,7 @@ import java.io.InputStreamReader;
 public class ProcessWatcher extends Thread {
     InputStream is;
     String type;
+    boolean hasOutput = false;
 
     ProcessWatcher(InputStream is, String type) {
         this.is = is;
@@ -20,10 +23,17 @@ public class ProcessWatcher extends Thread {
             BufferedReader br = new BufferedReader(isr);
             String line = null;
             while ((line = br.readLine()) != null)
-                System.out.println(type + "> " + line);
+            {
+                LaunchLogger.info(LaunchLogger.Tab + type + "> " + line);
+                hasOutput = true;
+            }
         }
         catch (IOException ioe) {
-            ioe.printStackTrace();
+            Logger.exception(ioe);
         }
+    }
+
+    public boolean outputDetected(){
+        return hasOutput;
     }
 }
