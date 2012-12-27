@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>aigilas</groupId>
-    <artifactId>aigilas-launchWindow</artifactId>
+    <artifactId>aigilas-launcher</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
@@ -26,7 +26,7 @@
     </dependencies>
 
     <build>
-        <finalName>aigilas-launchWindow</finalName>
+        <finalName>aigilas-launcher</finalName>
         <sourceDirectory>${basedir}/src</sourceDirectory>
         <plugins>
             <plugin>
@@ -38,6 +38,14 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12.4</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
