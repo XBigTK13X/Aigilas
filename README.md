@@ -1,5 +1,5 @@
-# Aigilas - Currently in Open Alpha Development#
-> A battle to become an ambassador to Earth from the Underworld.
+# Aigilas - A battle to become the Underworld's ambassador to Earth #
+> Currently in Open Alpha Development#
 
 ## How to Build the Game##
 Prerequisites:
@@ -7,8 +7,7 @@ Prerequisites:
 * Oracle JDK 6
 * Maven 3
 
-Running '''mvn package''' from the aigilas/ directory will create an executable JAR.
-script/create_package.sh will generate a development snapshop archive. This contains the double click launch scripts.
+Running '''script/create_package.sh''' from the project root  will generate a development snapshop archive. This contains the game and the launcher.
 
 ## Supported Platforms ##
 Windows 7, Mac OS X Lion+ and Ubuntu 12.04+
