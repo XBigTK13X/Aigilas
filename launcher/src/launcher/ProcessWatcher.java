@@ -1,7 +1,5 @@
 package launcher;
 
-import sps.core.Logger;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +27,7 @@ public class ProcessWatcher extends Thread {
             }
         }
         catch (IOException ioe) {
-            Logger.exception(ioe);
+            LaunchLogger.exception(ioe);
         }
     }
 

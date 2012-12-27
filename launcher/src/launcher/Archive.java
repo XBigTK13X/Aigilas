@@ -1,7 +1,5 @@
 package launcher;
 
-import sps.core.Logger;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -55,7 +53,7 @@ public class Archive {
             }
         }
         catch (Exception e) {
-            Logger.exception(e);
+            LaunchLogger.exception(e);
         }
     }
 }

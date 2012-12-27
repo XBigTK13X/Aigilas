@@ -22,7 +22,6 @@ public class LaunchWindow {
     Updater updater;
 
     public LaunchWindow() {
-        LaunchLogger.setLogFile("launcher.log");
         updater = new Updater();
     }
 
