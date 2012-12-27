@@ -59,7 +59,7 @@ public class SkillPool {
     }
 
     private void normalizeSlot() {
-        _currentSkillSlot = MathHelper.clamp(_currentSkillSlot, 0, _skills.size() - 1);
+        _currentSkillSlot = MathHelper.wrap(_currentSkillSlot, 0, _skills.size() - 1);
     }
 
     public String getActiveName() {

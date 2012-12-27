@@ -15,7 +15,6 @@ import sps.text.TextPool;
 public class SkillHud extends BaseHud {
     private static final String __separator = "|";
     private Text skillHeader;
-    private String lastSkillString;
 
     private Point2 _energyPosition = new Point2();
 
@@ -37,7 +36,7 @@ public class SkillHud extends BaseHud {
     }
 
     public void update() {
-        if (_isVisible && (lastSkillString == null || !getSkillStrings().equals(lastSkillString))) {
+        if (_isVisible) {
             if (skillHeader != null) {
                 skillHeader.hide();
             }
