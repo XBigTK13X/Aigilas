@@ -236,10 +236,6 @@ public abstract class BaseCreature extends Entity implements IActor {
                 path.draw();
             }
         }
-        if(_actorType == ActorTypes.get(Core.Player))
-        {
-            Logger.info("Position: " + getLocation());
-        }
         super.draw();
         _combo.draw();
     }
