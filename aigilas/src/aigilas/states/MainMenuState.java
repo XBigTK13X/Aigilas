@@ -6,18 +6,25 @@ import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
 import aigilas.ui.UiSelection;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import org.apache.commons.io.FileUtils;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
+import sps.bridge.Spx;
 import sps.core.Core;
 import sps.core.Logger;
+import sps.graphics.Assets;
+import sps.graphics.Renderer;
 import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainMenuState implements State {
@@ -34,6 +41,8 @@ public class MainMenuState implements State {
 
         Gdx.input.setInputProcessor(stage);
 
+        Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
+        Label title = new Label("Aigilas",lblStyle);
         Table table = new Table();
         table.setFillParent(true);
 
@@ -85,7 +94,23 @@ public class MainMenuState implements State {
         table.add(exitBtn);
         buttons.add(exitBtn);
 
+
+        title.setY((int)(Renderer.get().VirtualHeight*.8));
+        title.setX((int)(Renderer.get().VirtualWidth*.4));
+        stage.addActor(title);
         stage.addActor(table);
+
+        File versionDat = new File("assets/data/version.dat");
+        if(versionDat.exists()){
+            try{
+            String versionText = FileUtils.readFileToString(versionDat);
+            Label version = new Label("Version: " + versionText, lblStyle);
+            stage.addActor(version);
+            }
+            catch(Exception e){
+                Logger.info("WARNING: No version information found at " + versionDat.getAbsolutePath());
+            }
+        }
         startGameBtn.setSelected(true);
     }
 
