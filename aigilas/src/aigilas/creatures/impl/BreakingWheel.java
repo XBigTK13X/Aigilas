@@ -7,7 +7,7 @@ import sps.bridge.ActorTypes;
 
 public class BreakingWheel extends BaseEnemy {
     public BreakingWheel() {
-        super(ActorTypes.get(Common.Breaking_Wheel));
+        super(ActorTypes.get(Common.Actors.Breaking_Wheel));
         setStrategy(StrategyFactory.create(Strategy.StraightLineRotate, this));
     }
 }

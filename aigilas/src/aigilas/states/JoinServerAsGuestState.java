@@ -72,7 +72,7 @@ public class JoinServerAsGuestState implements State {
             Input.setup(Client.get());
             connectStarted = true;
         }
-        if (Input.isActive(Commands.get(Common.Start), 0)) {
+        if (Input.isActive(Commands.get(Common.Commands.Start), 0)) {
             if (ipIn.getText() != null && !ipIn.getText().isEmpty()) {
                 String[] contents = ipIn.getText().split(":");
                 String address = contents[0];
@@ -89,7 +89,7 @@ public class JoinServerAsGuestState implements State {
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Common.Free), ii);
+                Input.setContext(Contexts.get(Common.Contexts.Free), ii);
             }
             StateManager.loadState(new LoadingState());
         }

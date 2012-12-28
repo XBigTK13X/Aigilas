@@ -52,16 +52,16 @@ public class Aigilas implements ApplicationListener {
 
             // Update
             Input.update();
-            if (Input.isActive(Commands.get(Common.ToggleDevConsole), Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get(Common.Commands.ToggleDevConsole), Client.get().getFirstPlayerIndex())) {
                 DevConsole.get().toggle();
             }
-            if (Input.isActive(Commands.get(Common.Back), Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get(Common.Commands.Back), Client.get().getFirstPlayerIndex())) {
                 Gdx.app.exit();
             }
-            if (Input.isActive(Commands.get(Common.Music), Client.get().getFirstPlayerIndex())) {
+            if (Input.isActive(Commands.get(Common.Commands.Music), Client.get().getFirstPlayerIndex())) {
                 MusicPlayer.get().toggle();
             }
-            if(Input.isActive(Commands.get(Common.ToggleFullScreen),Client.get().getFirstPlayerIndex())){
+            if(Input.isActive(Commands.get(Common.Commands.ToggleFullScreen),Client.get().getFirstPlayerIndex())){
                 Renderer.get().toggleFullScreen();
             }
             if (Client.get().nextTurn()) {

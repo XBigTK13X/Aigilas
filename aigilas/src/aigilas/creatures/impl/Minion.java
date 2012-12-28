@@ -14,7 +14,7 @@ import sps.core.Point2;
 public class Minion extends BaseCreature {
     public Minion(ActorType actorType, int coolDown) {
         _actorType = actorType;
-        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get(Common.Minion));
+        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get(Common.Actors.Minion));
     }
 
     public Minion(ActorType actorType) {
@@ -22,7 +22,7 @@ public class Minion extends BaseCreature {
     }
 
     public Minion() {
-        this(ActorTypes.get(Common.Minion), Config.get().defaultSpeed);
+        this(ActorTypes.get(Common.Actors.Minion), Config.get().defaultSpeed);
     }
 
     public void init(BaseCreature source, SkillEffect effectGraphic) {

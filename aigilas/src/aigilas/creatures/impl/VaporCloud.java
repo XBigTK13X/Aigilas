@@ -14,7 +14,7 @@ public class VaporCloud extends Minion {
     private BaseCreature _host = null;
 
     public VaporCloud() {
-        super(ActorTypes.get(Common.Minion));
+        super(ActorTypes.get(Common.Actors.Minion));
         setStrategy(StrategyFactory.create(Strategy.MinionCloud, this));
         add(SkillId.Vapor_Cloud);
         _composition.add(Elements.Water);

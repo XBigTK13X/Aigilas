@@ -12,7 +12,7 @@ import sps.entities.Entity;
 public class DartTrapSkill extends BaseSkill {
     public DartTrapSkill() {
         super(SkillId.Dart_Trap, AnimationType.RANGED);
-        _components.setOnlyAffects(EntityTypes.get(Common.Wall));
+        _components.setOnlyAffects(EntityTypes.get(Common.Entities.Wall));
     }
 
     @Override

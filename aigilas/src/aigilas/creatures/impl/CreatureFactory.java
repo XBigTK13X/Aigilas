@@ -48,58 +48,58 @@ public class CreatureFactory {
     }
 
     private static BaseEnemy generateCreature(ActorType actorType) {
-        if (actorType.is(Common.Wrath)) {
+        if (actorType.is(Common.Actors.Wrath)) {
             return new Wrath();
         }
-        if (actorType.is(Common.Hand)) {
+        if (actorType.is(Common.Actors.Hand)) {
             return new Hand();
         }
-        if (actorType.is(Common.Pride)) {
+        if (actorType.is(Common.Actors.Pride)) {
             return new Pride();
         }
-        if (actorType.is(Common.Envy)) {
+        if (actorType.is(Common.Actors.Envy)) {
             return new Envy();
         }
-        if (actorType.is(Common.Gluttony)) {
+        if (actorType.is(Common.Actors.Gluttony)) {
             return new Gluttony();
         }
-        if (actorType.is(Common.Lust)) {
+        if (actorType.is(Common.Actors.Lust)) {
             return new Lust();
         }
-        if (actorType.is(Common.Sloth)) {
+        if (actorType.is(Common.Actors.Sloth)) {
             return new Sloth();
         }
-        if (actorType.is(Common.Greed)) {
+        if (actorType.is(Common.Actors.Greed)) {
             return new Greed();
         }
-        if (actorType.is(Common.Serpent)) {
+        if (actorType.is(Common.Actors.Serpent)) {
             return new Serpent();
         }
-        if (actorType.is(Common.Breaking_Wheel)) {
+        if (actorType.is(Common.Actors.Breaking_Wheel)) {
             return new BreakingWheel();
         }
-        if (actorType.is(Common.Wrath_Acolyte)) {
+        if (actorType.is(Common.Actors.Wrath_Acolyte)) {
             return new WrathEnemyAcolyte();
         }
-        if (actorType.is(Common.Pride_Acolyte)) {
+        if (actorType.is(Common.Actors.Pride_Acolyte)) {
             return new PrideEnemyAcolyte();
         }
-        if (actorType.is(Common.Envy_Acolyte)) {
+        if (actorType.is(Common.Actors.Envy_Acolyte)) {
             return new EnvyEnemyAcolyte();
         }
-        if (actorType.is(Common.Gluttony_Acolyte)) {
+        if (actorType.is(Common.Actors.Gluttony_Acolyte)) {
             return new GluttonyEnemyAcolyte();
         }
-        if (actorType.is(Common.Lust_Acolyte)) {
+        if (actorType.is(Common.Actors.Lust_Acolyte)) {
             return new LustEnemyAcolyte();
         }
-        if (actorType.is(Common.Sloth_Acolyte)) {
+        if (actorType.is(Common.Actors.Sloth_Acolyte)) {
             return new SlothEnemyAcolyte();
         }
-        if (actorType.is(Common.Greed_Acolyte)) {
+        if (actorType.is(Common.Actors.Greed_Acolyte)) {
             return new GreedEnemyAcolyte();
         }
-        if (actorType.is(Common.Dummy)) {
+        if (actorType.is(Common.Actors.Dummy)) {
             return new Dummy();
         }
 
@@ -160,11 +160,11 @@ public class CreatureFactory {
     private static List<ActorType> __remainingBosses;
 
     static {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get(Common.Wrath), ActorTypes.get(Common.Envy), ActorTypes.get(Common.Pride), ActorTypes.get(Common.Sloth), ActorTypes.get(Common.Greed), ActorTypes.get(Common.Lust), ActorTypes.get(Common.Gluttony)));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get(Common.Actors.Wrath), ActorTypes.get(Common.Actors.Envy), ActorTypes.get(Common.Actors.Pride), ActorTypes.get(Common.Actors.Sloth), ActorTypes.get(Common.Actors.Greed), ActorTypes.get(Common.Actors.Lust), ActorTypes.get(Common.Actors.Gluttony)));
     }
 
     public static void reset() {
-        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get(Common.Wrath), ActorTypes.get(Common.Envy), ActorTypes.get(Common.Pride), ActorTypes.get(Common.Sloth), ActorTypes.get(Common.Greed), ActorTypes.get(Common.Lust), ActorTypes.get(Common.Gluttony)));
+        __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get(Common.Actors.Wrath), ActorTypes.get(Common.Actors.Envy), ActorTypes.get(Common.Actors.Pride), ActorTypes.get(Common.Actors.Sloth), ActorTypes.get(Common.Actors.Greed), ActorTypes.get(Common.Actors.Lust), ActorTypes.get(Common.Actors.Gluttony)));
         __playerCount = 0;
     }
 

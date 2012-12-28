@@ -67,7 +67,7 @@ public class DungeonFloor {
             startX += 2;
         }
 
-        dungeon[Settings.get().tileMapWidth / 2][startY - 2] = CreatureFactory.create(ActorTypes.get(Common.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
+        dungeon[Settings.get().tileMapWidth / 2][startY - 2] = CreatureFactory.create(ActorTypes.get(Common.Actors.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
     }
 
     private List<Entity> playerCache;

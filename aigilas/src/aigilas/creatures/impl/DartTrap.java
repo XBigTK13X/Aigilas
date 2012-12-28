@@ -9,7 +9,7 @@ import sps.bridge.ActorTypes;
 
 public class DartTrap extends Minion {
     public DartTrap() {
-        super(ActorTypes.get(Common.Minion));
+        super(ActorTypes.get(Common.Actors.Minion));
         setStrategy(StrategyFactory.create(Strategy.MinionFire, this));
         add(SkillId.Dart);
         _composition.add(Elements.Dark);

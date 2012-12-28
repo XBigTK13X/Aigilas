@@ -12,7 +12,7 @@ import sps.entities.HitTest;
 
 public class Darkness extends Entity {
     public Darkness(Point2 location) {
-        initialize(location, SpriteTypes.get(Common.Darkness), EntityTypes.get(Common.Darkness), DrawDepths.get(Common.Darkness));
+        initialize(location, SpriteTypes.get(Common.Entities.Darkness), EntityTypes.get(Common.Entities.Darkness), DrawDepths.get(Common.Entities.Darkness));
     }
 
     boolean playerNear;

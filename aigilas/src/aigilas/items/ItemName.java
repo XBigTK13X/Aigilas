@@ -27,6 +27,6 @@ public enum ItemName {
     private ItemName(ItemClass category, Slots slots) {
         Category = category;
         Slots = slots;
-        Sprite = SpriteTypes.get(Common.Item);
+        Sprite = SpriteTypes.get(Common.Entities.Item);
     }
 }

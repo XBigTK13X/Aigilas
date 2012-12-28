@@ -9,7 +9,7 @@ import sps.bridge.ActorTypes;
 
 public class PoisonCloud extends Minion {
     public PoisonCloud() {
-        super(ActorTypes.get(Common.Minion));
+        super(ActorTypes.get(Common.Actors.Minion));
         setStrategy(StrategyFactory.create(Strategy.MinionOneUse, this));
         add(SkillId.Poison_Cloud);
         _composition.add(Elements.Mental);

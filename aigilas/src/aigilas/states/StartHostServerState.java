@@ -69,7 +69,7 @@ public class StartHostServerState implements State {
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Common.Free), ii);
+                Input.setContext(Contexts.get(Common.Contexts.Free), ii);
             }
 
             Input.setup(Client.get());

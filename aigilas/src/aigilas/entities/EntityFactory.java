@@ -12,13 +12,13 @@ public class EntityFactory {
         if (EntityTypes.get(Core.Floor) == type) {
             return new Floor(location);
         }
-        if (EntityTypes.get(Common.Wall) == type) {
+        if (EntityTypes.get(Common.Entities.Wall) == type) {
             return new Wall(location);
         }
-        if (EntityTypes.get(Common.Downstairs) == type) {
+        if (EntityTypes.get(Common.Entities.Downstairs) == type) {
             return new Downstairs(location);
         }
-        if (EntityTypes.get(Common.Upstairs) == type) {
+        if (EntityTypes.get(Common.Entities.Upstairs) == type) {
             return new Upstairs(location);
         }
         return null;

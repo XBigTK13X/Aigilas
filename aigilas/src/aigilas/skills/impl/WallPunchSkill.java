@@ -15,7 +15,7 @@ public class WallPunchSkill extends BaseSkill {
 
     @Override
     public void affect(Entity target) {
-        if (target.getEntityType() == EntityTypes.get(Common.Wall)) {
+        if (target.getEntityType() == EntityTypes.get(Common.Entities.Wall)) {
             if (target.getLocation().GridX > 0 && target.getLocation().GridX < Settings.get().tileMapWidth - 1 && target.getLocation().GridY > 0 && target.getLocation().GridY < Settings.get().tileMapHeight - 1) {
                 target.setInactive();
 

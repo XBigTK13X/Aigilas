@@ -7,6 +7,6 @@ import sps.io.Input;
 
 public class UiSelection {
     public static boolean commandActive() {
-        return Input.isActive(Commands.get(Common.Confirm), Client.get().getFirstPlayerIndex()) || Input.isActive(Commands.get(Common.Start), Client.get().getFirstPlayerIndex());
+        return Input.isActive(Commands.get(Common.Commands.Confirm), Client.get().getFirstPlayerIndex()) || Input.isActive(Commands.get(Common.Commands.Start), Client.get().getFirstPlayerIndex());
     }
 }

@@ -66,8 +66,8 @@ public class OptionsState implements State {
 
     @Override
     public void update() {
-        int selectionVelocity = (Input.isActive(Commands.get(Common.MoveRight), Client.get().getFirstPlayerIndex()) ? horizDelta : 0) + (Input.isActive(Commands.get(Common.MoveLeft), Client.get().getFirstPlayerIndex()) ? -horizDelta : 0);
-        selectionVelocity += (Input.isActive(Commands.get(Common.MoveUp), Client.get().getFirstPlayerIndex()) ? -verticalDelta : 0) + (Input.isActive(Commands.get(Common.MoveDown), Client.get().getFirstPlayerIndex()) ? verticalDelta : 0);
+        int selectionVelocity = (Input.isActive(Commands.get(Common.Commands.MoveRight), Client.get().getFirstPlayerIndex()) ? horizDelta : 0) + (Input.isActive(Commands.get(Common.Commands.MoveLeft), Client.get().getFirstPlayerIndex()) ? -horizDelta : 0);
+        selectionVelocity += (Input.isActive(Commands.get(Common.Commands.MoveUp), Client.get().getFirstPlayerIndex()) ? -verticalDelta : 0) + (Input.isActive(Commands.get(Common.Commands.MoveDown), Client.get().getFirstPlayerIndex()) ? verticalDelta : 0);
         _selection += selectionVelocity;
         _selection %= buttons.size();
         if (_selection < 0) {
@@ -76,7 +76,7 @@ public class OptionsState implements State {
 
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Common.Free), ii);
+                Input.setContext(Contexts.get(Common.Contexts.Free), ii);
             }
 
             StateManager.loadState(new LoadingState());

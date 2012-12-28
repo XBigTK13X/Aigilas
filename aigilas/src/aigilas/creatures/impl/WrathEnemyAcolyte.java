@@ -5,6 +5,6 @@ import sps.bridge.ActorTypes;
 
 public class WrathEnemyAcolyte extends BaseEnemy {
     public WrathEnemyAcolyte() {
-        super(ActorTypes.get(Common.Wrath_Acolyte));
+        super(ActorTypes.get(Common.Actors.Wrath_Acolyte));
     }
 }

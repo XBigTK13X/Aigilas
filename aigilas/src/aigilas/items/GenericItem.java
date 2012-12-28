@@ -55,7 +55,7 @@ public class GenericItem extends Entity {
     }
 
     protected void setup(Point2 location, ItemName type) {
-        initialize(location, type.Sprite, EntityTypes.get(Common.Item), DrawDepths.get(Common.Item));
+        initialize(location, type.Sprite, EntityTypes.get(Common.Entities.Item), DrawDepths.get(Common.Entities.Item));
     }
 
     private Player _currentTarget;

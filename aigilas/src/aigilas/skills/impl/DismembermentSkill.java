@@ -28,7 +28,7 @@ public class DismembermentSkill extends BaseSkill {
         int openCell = RNG.next(1, Settings.get().tileMapWidth - 1);
         for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             if (ii != openCell) {
-                CreatureFactory.create(ActorTypes.get(Common.Hand), new Point2(ii, 1));
+                CreatureFactory.create(ActorTypes.get(Common.Actors.Hand), new Point2(ii, 1));
 
             }
 

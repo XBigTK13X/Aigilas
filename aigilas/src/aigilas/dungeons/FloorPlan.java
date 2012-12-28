@@ -79,7 +79,7 @@ public class FloorPlan {
                                 }
                             }
                         }
-                        tiles[ii][jj] = EntityTypes.get(Common.Wall);
+                        tiles[ii][jj] = EntityTypes.get(Common.Entities.Wall);
                     }
                     else {
                         tiles[ii][jj] = EntityTypes.get(Core.Floor);

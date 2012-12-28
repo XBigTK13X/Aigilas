@@ -25,7 +25,6 @@ import aigilas.strategies.StrategyPlan;
 import aigilas.strategies.TargetSet;
 import sps.bridge.*;
 import sps.core.Core;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.CoordVerifier;
@@ -76,7 +75,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     protected void setup(Point2 location, ActorType type, Stats stats, CreatureClass creatureClass, boolean setClass) {
         _entityType = EntityTypes.get(Core.Actor);
-        initialize(location, type.Sprite, EntityTypes.get(Core.Actor), DrawDepths.get(Common.Creature));
+        initialize(location, type.Sprite, EntityTypes.get(Core.Actor), DrawDepths.get(Common.DrawDepths.Creature));
         init(type, stats, creatureClass, setClass);
     }
 
@@ -239,7 +238,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 path.draw();
             }
         }
-        darkness = EntityManager.get().getEntities(EntityTypes.get(Common.Darkness),getLocation());
+        darkness = EntityManager.get().getEntities(EntityTypes.get(Common.Entities.Darkness),getLocation());
         if((darkness.size() > 0 && ((Darkness)darkness.get(0)).beingLit()) || darkness.size() == 0){
             super.draw();
             _combo.draw();
@@ -346,7 +345,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
         if (damage > 0 || (damage < 0 && _statuses.allows(CreatureAction.ReceiveHealing))) {
             GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
-            if (_actorType != ActorTypes.get(Common.Dummy)) {
+            if (_actorType != ActorTypes.get(Common.Actors.Dummy)) {
                 adjust((statType == null) ? StatType.Health : statType, -damage);
             }
         }
@@ -606,7 +605,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     @Override
     public void performInteraction() {
         setInteracting(false);
-        Input.lock(Commands.get(Common.Confirm), getPlayerIndex());
+        Input.lock(Commands.get(Common.Commands.Confirm), getPlayerIndex());
     }
 
     public void markHotSkill(Command hotSkillSlot) {

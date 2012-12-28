@@ -9,7 +9,7 @@ import sps.bridge.ActorTypes;
 
 public class Explosion extends Minion {
     public Explosion() {
-        super(ActorTypes.get(Common.Minion));
+        super(ActorTypes.get(Common.Actors.Minion));
         setStrategy(StrategyFactory.create(Strategy.MinionOneUse, this));
         add(SkillId.Explode);
         _composition.add(Elements.Fire);

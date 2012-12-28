@@ -18,7 +18,7 @@ public class SkillComponents {
     protected StatBuff _buff;
     protected float _effectStrength = 0;
     protected boolean _isPersistent = false;
-    protected final List<EntityType> _targetTypes = Arrays.asList(EntityTypes.get(Common.Wall));
+    protected final List<EntityType> _targetTypes = Arrays.asList(EntityTypes.get(Common.Entities.Wall));
     protected List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
     protected EntityType _onlyAffects;
 

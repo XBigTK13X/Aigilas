@@ -11,13 +11,10 @@ import sps.core.Core;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.entities.IActor;
-
-import java.util.List;
 
 public class Downstairs extends Entity {
     public Downstairs(Point2 location) {
-        initialize(location, SpriteTypes.get(Common.Downstairs), EntityTypes.get(Common.Downstairs), DrawDepths.get(Common.Stairs));
+        initialize(location, SpriteTypes.get(Common.Entities.Downstairs), EntityTypes.get(Common.Entities.Downstairs), DrawDepths.get(Common.DrawDepths.Stairs));
     }
 
     boolean disabled = false;
@@ -26,8 +23,8 @@ public class Downstairs extends Entity {
     @Override
     public void update() {
         int nonPlayerCount = EntityManager.get().getActors(ActorTypes.get(Core.Non_Player)).size();
-        int dummyCount = EntityManager.get().getActors(ActorTypes.get(Common.Dummy)).size();
-        int minionCount = EntityManager.get().getActors(ActorTypes.get(Common.Minion)).size();
+        int dummyCount = EntityManager.get().getActors(ActorTypes.get(Common.Actors.Dummy)).size();
+        int minionCount = EntityManager.get().getActors(ActorTypes.get(Common.Actors.Minion)).size();
 
         if (nonPlayerCount - dummyCount - minionCount > 0) {
             disabled = true;
