@@ -7,18 +7,15 @@ import aigilas.skills.SkillId;
 
 public class GushSkill extends BaseSkill {
     public GushSkill()
-
     {
         super(SkillId.Gush, AnimationType.RANGED);
-
-
     }
 
     @Override
     public void affect(BaseCreature target)
 
     {
-        target.applyDamage(10, _source, true);
+        target.applyDamage(_id.Info.Magnitude, _source, true);
 
     }
 
