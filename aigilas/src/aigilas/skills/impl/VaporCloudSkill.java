@@ -1,11 +1,11 @@
 package aigilas.skills.impl;
 
 import aigilas.creatures.BaseCreature;
-import aigilas.creatures.StatBuff;
-import aigilas.creatures.StatType;
 import aigilas.skills.AnimationType;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
+import aigilas.statuses.Status;
+import aigilas.statuses.StatusFactory;
 
 public class VaporCloudSkill extends BaseSkill {
     public VaporCloudSkill() {
@@ -14,6 +14,6 @@ public class VaporCloudSkill extends BaseSkill {
 
     @Override
     public void affect(BaseCreature target) {
-        target.addBuff(new StatBuff(StatType.Move_Cool_Down, -1000));
+        StatusFactory.apply(target, Status.SlowDown);
     }
 }
