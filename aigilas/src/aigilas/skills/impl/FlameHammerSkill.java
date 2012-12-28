@@ -13,5 +13,6 @@ public class FlameHammerSkill extends BaseSkill {
     @Override
     public void affect(BaseCreature target) {
         target.applyDamage(_id.Info.Magnitude, _source);
+
     }
 }

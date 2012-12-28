@@ -20,10 +20,16 @@ public class Darkness extends Entity {
     @Override
     public void update() {
         Entity player = (Entity) EntityManager.get().getNearestPlayer(this);
-        float distance = HitTest.getDistanceSquare(player, this);
-        if (distance < Settings.get().spriteWidth * Settings.get().spriteWidth * 6) {
-            _graphic.setAlpha(0);
-            playerNear = true;
+        if (player.isActive()) {
+            float distance = HitTest.getDistanceSquare(player, this);
+            if (distance < Settings.get().spriteWidth * Settings.get().spriteWidth * 7) {
+                _graphic.setAlpha(0);
+                playerNear = true;
+            }
+            else{
+                _graphic.setAlpha(1);
+                playerNear = false;
+            }
         }
         else {
             _graphic.setAlpha(1);
@@ -36,8 +42,8 @@ public class Darkness extends Entity {
     }
 
     @Override
-    public void draw(){
-        if(!playerNear){
+    public void draw() {
+        if (!playerNear) {
             super.draw();
         }
     }
