@@ -10,10 +10,7 @@ import aigilas.items.ItemFactory;
 import aigilas.net.Client;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
-import sps.core.Core;
-import sps.core.Point2;
-import sps.core.RNG;
-import sps.core.Settings;
+import sps.core.*;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.IActor;
@@ -60,6 +57,7 @@ public class DungeonFloor {
     }
 
     private void placeAltars() {
+        Logger.info("Placing the altars and dummy");
         int startY = Settings.get().tileMapHeight / 2;
         int startX = Settings.get().tileMapWidth / 3 - 1;
         for (GodId god : GodId.values()) {
@@ -67,7 +65,7 @@ public class DungeonFloor {
             startX += 2;
         }
 
-        dungeon[Settings.get().tileMapWidth / 2][startY - 2] = CreatureFactory.create(ActorTypes.get(Common.Actors.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
+        CreatureFactory.create(ActorTypes.get(Common.Actors.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
     }
 
     private List<Entity> playerCache;
