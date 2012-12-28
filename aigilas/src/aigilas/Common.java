@@ -47,6 +47,7 @@ public class Common {
     public static final String Stairs = "Stairs";
     public static final String Start = "Start";
     public static final String ToggleDevConsole = "Toggle_Dev_Console";
+    public static final String ToggleFullScreen = "Toggle_Full_Screen";
     public static final String Upstairs = "Upstairs";
     public static final String Wall = "Wall";
     public static final String Wrath = "Wrath";

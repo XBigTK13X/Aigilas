@@ -61,6 +61,9 @@ public class Aigilas implements ApplicationListener {
             if (Input.isActive(Commands.get(Common.Music), Client.get().getFirstPlayerIndex())) {
                 MusicPlayer.get().toggle();
             }
+            if(Input.isActive(Commands.get(Common.ToggleFullScreen),Client.get().getFirstPlayerIndex())){
+                Renderer.get().toggleFullScreen();
+            }
             if (Client.get().nextTurn()) {
                 ParticleEngine.update();
                 StateManager.update();
