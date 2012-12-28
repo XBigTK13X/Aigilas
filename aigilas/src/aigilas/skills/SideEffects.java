@@ -28,7 +28,7 @@ public class SideEffects {
     public void Generate(Point2 gridLocation, Point2 velocity, BaseCreature source) {
         SkillEffect effect = new SkillEffect(gridLocation, velocity, source, _parent);
         _effectGraphics.add(effect);
-        EntityManager.get().addObject(effect);
+        EntityManager.get().addEntity(effect);
     }
 
     public SkillEffect getFirstGraphic() {

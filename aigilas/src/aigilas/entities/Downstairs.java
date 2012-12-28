@@ -11,6 +11,9 @@ import sps.core.Core;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
+import sps.entities.IActor;
+
+import java.util.List;
 
 public class Downstairs extends Entity {
     public Downstairs(Point2 location) {
@@ -31,7 +34,7 @@ public class Downstairs extends Entity {
             _graphic.setAlpha(0);
         }
         else {
-            _graphic.setAlpha(255);
+            _graphic.setAlpha(1);
             disabled = false;
         }
 

@@ -11,6 +11,7 @@ public class Common {
     public static final String Creature = "Creature";
     public static final String CycleLeft = "Cycle_Left";
     public static final String CycleRight = "Cycle_Right";
+    public static final String Darkness = "Darkness";
     public static final String Downstairs = "Downstairs";
     public static final String Dummy = "Dummy";
     public static final String Envy = "Envy";

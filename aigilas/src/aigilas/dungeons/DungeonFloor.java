@@ -84,8 +84,9 @@ public class DungeonFloor {
             _contents.add(pl);
         }
         for (Entity item : _contents) {
-            EntityManager.get().addObject(item);
+            EntityManager.get().addEntity(item);
         }
+
         //Force an update so that tiles with dynamic sprites render correctly without any flicker
         EntityManager.get().update();
     }
@@ -93,7 +94,7 @@ public class DungeonFloor {
     public void cacheContents() {
         for (IActor player : EntityManager.get().getActors(ActorTypes.get(Core.Player))) {
             Dungeon.addToCache((Entity) player);
-            EntityManager.get().removeObject((Entity) player);
+            EntityManager.get().removeEntity((Entity) player);
         }
         _contents = new ArrayList<Entity>(EntityManager.get().getEntitiesToCache());
     }
@@ -105,7 +106,7 @@ public class DungeonFloor {
                     if (tile.getEntityType() != EntityTypes.get(Core.Floor)) {
                         _contents.add(tile);
                     }
-                    EntityManager.get().addObject(tile);
+                    EntityManager.get().addEntity(tile);
                 }
             }
         }
@@ -125,7 +126,7 @@ public class DungeonFloor {
             for (Entity player : cache) {
                 player.setLocation(getRandomNeighbor(neighbors));
             }
-            EntityManager.get().addObjects(cache);
+            EntityManager.get().addEntities(cache);
             _contents.addAll(cache);
         }
     }
@@ -167,7 +168,8 @@ public class DungeonFloor {
     private void placeFloor() {
         for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
             for (int jj = 1; jj < Settings.get().tileMapHeight - 1; jj++) {
-                EntityManager.get().addObject(new Floor(new Point2(ii, jj)));
+                EntityManager.get().addEntity(new Floor(new Point2(ii, jj)));
+                EntityManager.get().addEntity(new Darkness(new Point2(ii,jj)));
             }
         }
     }

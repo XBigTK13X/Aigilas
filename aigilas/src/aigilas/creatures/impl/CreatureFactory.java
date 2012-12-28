@@ -34,7 +34,7 @@ public class CreatureFactory {
         result.setup(position);
         EntityManager.get().
 
-                addObject(result);
+                addEntity(result);
 
         if (Config.get().debugInventory)
 
@@ -145,7 +145,7 @@ public class CreatureFactory {
         if (location != null) {
             result.setLocation(location);
         }
-        EntityManager.get().addObject(result);
+        EntityManager.get().addEntity(result);
         return result;
     }
 

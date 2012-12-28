@@ -70,7 +70,7 @@ public class Inventory {
     public void dropAll() {
         for (GenericItem item : _contents.keySet()) {
             while (_contents.get(item) > 0) {
-                EntityManager.get().addObject(new GenericItem(item, _parent.getLocation()));
+                EntityManager.get().addEntity(new GenericItem(item, _parent.getLocation()));
                 remove(item);
             }
         }
