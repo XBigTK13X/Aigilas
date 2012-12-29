@@ -36,7 +36,7 @@ public class Altar extends Entity {
     public void update() {
         _currentTarget = EntityManager.get().getTouchingCreature(this);
         if (_currentTarget != null) {
-            if (_currentTarget.getActorType() == ActorTypes.get(Core.Player)) {
+            if (_currentTarget.getActorType() == ActorTypes.get(Core.Actors.Player)) {
                 _player = (Player) _currentTarget;
                 if (_player.isInteracting()) {
                     _player.pray(_god);

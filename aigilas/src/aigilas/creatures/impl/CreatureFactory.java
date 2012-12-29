@@ -24,7 +24,7 @@ public class CreatureFactory {
 
     public static BaseCreature create(ActorType actorType, Point2 position) {
         BaseEnemy result;
-        if (actorType.is(Core.Player)) {
+        if (actorType.is(Core.Actors.Player)) {
             result = new Player(__playerCount++);
         }
         else {

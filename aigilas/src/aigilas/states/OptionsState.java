@@ -29,7 +29,7 @@ public class OptionsState implements State {
     private ArrayList<SelectableButton> buttons = new ArrayList<SelectableButton>();
 
     public OptionsState() {
-        Input.setContext(Contexts.get(Core.Non_Free), Client.get().getFirstPlayerIndex());
+        Input.setContext(Contexts.get(Core.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
         Gdx.input.setInputProcessor(stage);
@@ -76,7 +76,7 @@ public class OptionsState implements State {
 
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Common.Contexts.Free), ii);
+                Input.setContext(Contexts.get(Core.Contexts.Free), ii);
             }
 
             StateManager.loadState(new LoadingState());

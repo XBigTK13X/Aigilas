@@ -66,7 +66,7 @@ public class GenericItem extends Entity {
         if (_isOnBoard) {
             IActor collider = EntityManager.get().getTouchingCreature(this);
             if (collider != null) {
-                if (collider.getActorType() == ActorTypes.get(Core.Player)) {
+                if (collider.getActorType() == ActorTypes.get(Core.Actors.Player)) {
                     _currentTarget = (Player) collider;
                     if (_currentTarget.isInteracting()) {
                         _currentTarget.pickupItem(this);

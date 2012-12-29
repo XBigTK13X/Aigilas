@@ -29,7 +29,7 @@ public class ControlledByPlayer extends BaseStrategy {
     public ControlledByPlayer(BaseCreature parent) {
         super(parent, Strategy.ControlledByPlayer);
 
-        _targets.addTargetTypes(new sps.bridge.ActorType[]{ActorTypes.get(Core.Non_Player)});
+        _targets.addTargetTypes(new sps.bridge.ActorType[]{ActorTypes.get(Core.ActorGroups.Non_Player)});
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ControlledByPlayer extends BaseStrategy {
                 float upVelocity = ((Input.isActive(Commands.get(Common.Commands.MoveUp), _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
                 _keyVelocity.setY(upVelocity + downVelocity);
 
-                if (Input.isContext(Contexts.get(Common.Contexts.Free), _parent.getPlayerIndex())) {
+                if (Input.isContext(Contexts.get(Core.Contexts.Free), _parent.getPlayerIndex())) {
                     boolean isPress = Input.isActive(Commands.get(Common.Commands.Confirm), _parent.getPlayerIndex());
                     if (!isPress) {
                         _parent.setInteraction(false);
@@ -107,7 +107,7 @@ public class ControlledByPlayer extends BaseStrategy {
                         }
                     }
                 }
-                Input.setContext(_parent.toggleInventoryVisibility() ? Contexts.get(Common.Commands.Inventory) : Contexts.get(Common.Contexts.Free), _parent.getPlayerIndex());
+                Input.setContext(_parent.toggleInventoryVisibility() ? Contexts.get(Common.Commands.Inventory) : Contexts.get(Core.Contexts.Free), _parent.getPlayerIndex());
             }
         }
     }

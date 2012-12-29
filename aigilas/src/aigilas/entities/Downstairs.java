@@ -22,7 +22,7 @@ public class Downstairs extends Entity {
 
     @Override
     public void update() {
-        int nonPlayerCount = EntityManager.get().getActors(ActorTypes.get(Core.Non_Player)).size();
+        int nonPlayerCount = EntityManager.get().getActors(ActorTypes.get(Core.ActorGroups.Non_Player)).size();
         int dummyCount = EntityManager.get().getActors(ActorTypes.get(Common.Actors.Dummy)).size();
         int minionCount = EntityManager.get().getActors(ActorTypes.get(Common.Actors.Minion)).size();
 

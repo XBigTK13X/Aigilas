@@ -61,10 +61,6 @@ public class Common {
         public static final String ToggleFullScreen = "Toggle_Full_Screen";
     }
 
-    public static class Contexts{
-        public static final String Free = "Free";
-    }
-
     public static class DrawDepths{
         public static final String Base_Skill_Effect = "Base_Skill_Effect";
         public static final String Creature = "Creature";

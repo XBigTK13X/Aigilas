@@ -11,6 +11,6 @@ import sps.entities.EntityManager;
 
 public class Floor extends Entity {
     public Floor(Point2 location) {
-        initialize(location, SpriteTypes.get(Core.Floor), EntityTypes.get(Core.Floor), DrawDepths.get(Core.Floor));
+        initialize(location, SpriteTypes.get(Core.Entities.Floor), EntityTypes.get(Core.Entities.Floor), DrawDepths.get(Core.Entities.Floor));
     }
 }

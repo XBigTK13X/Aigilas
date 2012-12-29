@@ -9,7 +9,7 @@ import sps.entities.Entity;
 
 public class EntityFactory {
     public static Entity create(EntityType type, Point2 location) {
-        if (EntityTypes.get(Core.Floor) == type) {
+        if (EntityTypes.get(Core.Entities.Floor) == type) {
             return new Floor(location);
         }
         if (EntityTypes.get(Common.Entities.Wall) == type) {

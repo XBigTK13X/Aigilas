@@ -92,7 +92,7 @@ public class DungeonFloor {
     }
 
     public void cacheContents() {
-        for (IActor player : EntityManager.get().getActors(ActorTypes.get(Core.Player))) {
+        for (IActor player : EntityManager.get().getActors(ActorTypes.get(Core.Actors.Player))) {
             Dungeon.addToCache((Entity) player);
             EntityManager.get().removeEntity((Entity) player);
         }
@@ -103,7 +103,7 @@ public class DungeonFloor {
         for (Entity[] row : dungeon) {
             for (Entity tile : row) {
                 if (tile != null) {
-                    if (tile.getEntityType() != EntityTypes.get(Core.Floor)) {
+                    if (tile.getEntityType() != EntityTypes.get(Core.Entities.Floor)) {
                         _contents.add(tile);
                     }
                     EntityManager.get().addEntity(tile);
@@ -119,7 +119,7 @@ public class DungeonFloor {
                 playerCount = 4;
             }
             for (int ii = 0; ii < playerCount; ii++) {
-                _contents.add(CreatureFactory.create(ActorTypes.get(Core.Player), getRandomNeighbor(neighbors)));
+                _contents.add(CreatureFactory.create(ActorTypes.get(Core.Actors.Player), getRandomNeighbor(neighbors)));
             }
         }
         else {
@@ -139,7 +139,7 @@ public class DungeonFloor {
         while (true) {
             int x = RNG.next(buffer, Settings.get().tileMapWidth - buffer);
             int y = RNG.next(buffer, Settings.get().tileMapHeight - buffer);
-            if (dungeon[x][y].getEntityType() == EntityTypes.get(Core.Floor)) {
+            if (dungeon[x][y].getEntityType() == EntityTypes.get(Core.Entities.Floor)) {
                 return new Point2(x, y);
             }
         }
@@ -177,7 +177,7 @@ public class DungeonFloor {
     private void placeCreatures(int amountOfCreatures) {
 //        $$$ Easiest way to test specific bosses
 //        Point2 random = new Point2(findRandomFreeTile());
-//        dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorTypes.get(Core.Player)Sloth, random);
+//        dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorTypes.get(Core.Actors.Player)Sloth, random);
 //        while(CreatureFactory.bossesRemaining() > 0){
 //                CreatureFactory.createNextBoss(Point2.Zero);
 //        }

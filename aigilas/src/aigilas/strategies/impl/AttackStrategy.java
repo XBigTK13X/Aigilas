@@ -19,12 +19,12 @@ public class AttackStrategy extends BaseStrategy {
         super(parent, Strategy.Attack);
 
         if (targetTypes.length == 1) {
-            if (targetTypes[0] == ActorTypes.get(Core.Friendly)) {
-                if (ActorTypes.get(Core.Player) != parent.getActorType()) {
-                    targetTypes[0] = ActorTypes.get(Core.Non_Player);
+            if (targetTypes[0] == ActorTypes.get(Core.ActorGroups.Friendly)) {
+                if (ActorTypes.get(Core.Actors.Player) != parent.getActorType()) {
+                    targetTypes[0] = ActorTypes.get(Core.ActorGroups.Non_Player);
                 }
                 else {
-                    targetTypes[0] = ActorTypes.get(Core.Player);
+                    targetTypes[0] = ActorTypes.get(Core.Actors.Player);
                 }
             }
         }

@@ -28,7 +28,7 @@ public class BoilStatus extends BaseStatus {
         super.setup();
         previousStrategy = _target.getStrategyId();
         _target.setStrategy(StrategyFactory.create(null, _target));
-        _target.getTargets().addTargetTypes(ActorTypes.get(Core.Player));
+        _target.getTargets().addTargetTypes(ActorTypes.get(Core.Actors.Player));
     }
 
     @Override

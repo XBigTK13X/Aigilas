@@ -18,7 +18,7 @@ public class Player extends BaseEnemy {
     private static final List<Color> __colors = Arrays.asList(Color.RED, Color.GREEN, Color.BLUE, Color.WHITE);
 
     public Player(int playerIndex) {
-        super(ActorTypes.get(Core.Player));
+        super(ActorTypes.get(Core.Actors.Player));
         _playerIndex = playerIndex;
         _graphic.setColor(__colors.get(_playerIndex));
         setStrategy(StrategyFactory.create(Strategy.ControlledByPlayer, this));

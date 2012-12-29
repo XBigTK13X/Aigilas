@@ -59,6 +59,6 @@ public class StatsRegistry {
         if (baseStats.containsKey(actorType)) {
             return new Stats(baseStats.get(actorType));
         }
-        return new Stats(baseStats.get(ActorTypes.get(Core.Non_Player)));
+        return new Stats(baseStats.get(ActorTypes.get(Core.ActorGroups.Non_Player)));
     }
 }
