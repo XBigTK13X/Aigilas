@@ -13,7 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
+import sps.graphics.FrameStrategy;
+import sps.graphics.RenderStrategy;
 import sps.graphics.Renderer;
+import sps.graphics.StretchStrategy;
 import sps.io.Input;
 import sps.states.State;
 import sps.states.StateManager;
@@ -40,7 +43,14 @@ public class OptionsState implements State {
         final SelectableButton fullScreenBtn = new SelectableButton("Toggle Fullscreen", UiAssets.getButtonStyle());
         fullScreenBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                toggleFullscreen();
+                toggleFullScreen();
+            }
+        });
+
+        final SelectableButton renderStratBtn = new SelectableButton("Toggle Fixed Aspect Ratio", UiAssets.getButtonStyle());
+        renderStratBtn.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                toggleRenderStrategy();
             }
         });
 
@@ -53,15 +63,32 @@ public class OptionsState implements State {
 
         table.add(fullScreenBtn);
         buttons.add(fullScreenBtn);
+        table.row();
+        table.add(renderStratBtn);
+        buttons.add(renderStratBtn);
+        table.row();
         table.add(backBtn);
         buttons.add(backBtn);
+
 
         stage.addActor(table);
     }
 
-    private void toggleFullscreen() {
+    private void toggleFullScreen() {
         Renderer.get().toggleFullScreen();
         StateManager.loadState(new OptionsState());
+    }
+
+    private RenderStrategy current;
+
+    private void toggleRenderStrategy() {
+        if (current == null || current.getClass() == FrameStrategy.class) {
+            current = new StretchStrategy();
+        }
+        else {
+            current = new FrameStrategy();
+        }
+        Renderer.get().setStrategy(current);
     }
 
     @Override
@@ -85,7 +112,7 @@ public class OptionsState implements State {
             if (UiSelection.commandActive()) {
                 switch (_selection) {
                     case 0:
-                        toggleFullscreen();
+                        toggleFullScreen();
                         return;
                     default:
                         break;
