@@ -6,6 +6,7 @@ import aigilas.net.LocalClient;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
 import sps.bridge.Bridge;
 import sps.bridge.Commands;
@@ -13,6 +14,7 @@ import sps.bridge.SpriteTypes;
 import sps.bridge.Spx;
 import sps.core.DevConsole;
 import sps.core.Logger;
+import sps.graphics.FrameStrategy;
 import sps.graphics.Renderer;
 import sps.graphics.SpriteSheetManager;
 import sps.io.Input;
@@ -31,6 +33,9 @@ public class Aigilas implements ApplicationListener {
     public void create() {
         Bridge.get();
         Spx.setup();
+        Renderer.get().setWindowsBackground(Color.BLACK);
+        Renderer.get().setStrategy(new FrameStrategy());
+        Renderer.get().setRefreshInstance(this);
         Client.reset(new LocalClient());
         Input.setup(Client.get());
         SpriteSheetManager.setup(SpriteTypes.getDefs());
@@ -42,7 +47,7 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-
+        Renderer.get().resize(width, height);
     }
 
     @Override
@@ -61,7 +66,7 @@ public class Aigilas implements ApplicationListener {
             if (Input.isActive(Commands.get(Common.Commands.Music), Client.get().getFirstPlayerIndex())) {
                 MusicPlayer.get().toggle();
             }
-            if(Input.isActive(Commands.get(Common.Commands.ToggleFullScreen),Client.get().getFirstPlayerIndex())){
+            if (Input.isActive(Commands.get(Common.Commands.ToggleFullScreen), Client.get().getFirstPlayerIndex())) {
                 Renderer.get().toggleFullScreen();
             }
             if (Client.get().nextTurn()) {
