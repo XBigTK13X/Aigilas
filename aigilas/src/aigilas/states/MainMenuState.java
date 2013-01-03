@@ -41,7 +41,7 @@ public class MainMenuState implements State {
         Gdx.input.setInputProcessor(stage);
 
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
-        Label title = new Label("Aigilas",lblStyle);
+        Label title = new Label("Aigilas", lblStyle);
         Table table = new Table();
         table.setFillParent(true);
 
@@ -94,19 +94,19 @@ public class MainMenuState implements State {
         buttons.add(exitBtn);
 
 
-        title.setY((int)(Renderer.get().VirtualHeight*.8));
-        title.setX((int)(Renderer.get().VirtualWidth*.4));
+        title.setY((int) (Renderer.get().VirtualHeight * .8));
+        title.setX((int) (Renderer.get().VirtualWidth * .4));
         stage.addActor(title);
         stage.addActor(table);
 
         File versionDat = new File("assets/data/version.dat");
-        if(versionDat.exists()){
-            try{
-            String versionText = FileUtils.readFileToString(versionDat);
-            Label version = new Label("Version: " + versionText, lblStyle);
-            stage.addActor(version);
+        if (versionDat.exists()) {
+            try {
+                String versionText = FileUtils.readFileToString(versionDat);
+                Label version = new Label("Version: " + versionText, lblStyle);
+                stage.addActor(version);
             }
-            catch(Exception e){
+            catch (Exception e) {
                 Logger.info("WARNING: No version information found at " + versionDat.getAbsolutePath());
             }
         }

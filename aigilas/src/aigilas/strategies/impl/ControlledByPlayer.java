@@ -45,7 +45,12 @@ public class ControlledByPlayer extends BaseStrategy {
                 float leftVelocity = (Input.isActive(Commands.get(Common.Commands.MoveLeft), _parent.getPlayerIndex()) ? -Stats.DefaultMoveDistance : 0);
                 float rightVelocity = ((Input.isActive(Commands.get(Common.Commands.MoveRight), _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
                 _keyVelocity.setX(rightVelocity + leftVelocity);
-
+                if (_keyVelocity.X > 0) {
+                    _parent.setFacingLeft(false);
+                }
+                if (_keyVelocity.X < 0) {
+                    _parent.setFacingLeft(true);
+                }
                 float downVelocity = ((Input.isActive(Commands.get(Common.Commands.MoveDown), _parent.getPlayerIndex())) ? -Stats.DefaultMoveDistance : 0);
                 float upVelocity = ((Input.isActive(Commands.get(Common.Commands.MoveUp), _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);
                 _keyVelocity.setY(upVelocity + downVelocity);

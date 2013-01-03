@@ -32,6 +32,7 @@ public class OptionsState implements State {
     private ArrayList<SelectableButton> buttons = new ArrayList<SelectableButton>();
 
     public OptionsState() {
+
         Input.setContext(Contexts.get(Core.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
