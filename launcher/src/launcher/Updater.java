@@ -4,12 +4,16 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 public class Updater {
     //Working update paths
     private File update = new File("aigilas-update.zip");
     private File updateDir = new File("aigilas-update");
+
+    //License path
+    private File licenseCache = new File("assets/data/license.dat");
 
     public Updater() {
 
@@ -25,6 +29,33 @@ public class Updater {
     }
 
 
+    private void cacheLicense(String license){
+        if(!licenseIsCached()){
+            try {
+                FileUtils.writeStringToFile(licenseCache,license);
+            } catch (IOException e) {
+                LaunchLogger.info("There was a problem caching your license. Please view launcher.log for more information.");
+                LaunchLogger.exception(e);
+            }
+        }
+    }
+
+    public String getCachedLicense(){
+        if(licenseCache.exists()){
+        try {
+            return FileUtils.readFileToString(licenseCache);
+        } catch (IOException e) {
+            LaunchLogger.info("There was a problem reading the cached license. Please view launcher.log for more information.");
+            LaunchLogger.exception(e);
+        }
+        }
+        return null;
+    }
+
+    public boolean licenseIsCached(){
+        return licenseCache.exists();
+    }
+
     private boolean checkLicense(String license) {
         try {
             LaunchLogger.info("Checking to see if a stable edition license has been entered.");
@@ -33,6 +64,7 @@ public class Updater {
                 String response = IOUtils.toString(licenseCheckUrl.openStream());
                 if (response.contains("true")) {
                     LaunchLogger.info(LaunchLogger.Tab + "License is valid.");
+                    cacheLicense(license);
                     return true;
                 }
             }

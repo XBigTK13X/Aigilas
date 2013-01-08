@@ -8,7 +8,6 @@ import java.io.File;
 
 public class LaunchWindow {
     private static final long launcherWaitInMs = 400;
-    boolean licenseFound = false;
 
     //UI Elements
     private JFrame guiFrame;
@@ -20,6 +19,10 @@ public class LaunchWindow {
     static private JLabel messageArea;
 
     Updater updater;
+
+    public static boolean licenseExists(){
+        return new File("license.dat").exists();
+    }
 
     public LaunchWindow() {
         updater = new Updater();
@@ -42,7 +45,7 @@ public class LaunchWindow {
     }
 
     public void show() {
-        licenseFound = new File("license.dat").exists();
+        updater.licenseIsCached();
 
         guiFrame = new JFrame();
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,16 +68,15 @@ public class LaunchWindow {
 
         messageArea.setVerticalAlignment(JLabel.TOP);
 
-        if (!licenseFound) {
+        if (!updater.licenseIsCached()) {
             mainPanel.add(licenseLbl);
             mainPanel.add(licenseIpt);
-
-            secPanel.add(messageArea);
-
-            guiFrame.add(mainPanel,BorderLayout.CENTER);
-            guiFrame.add(secPanel,BorderLayout.NORTH);
         }
 
+        secPanel.add(messageArea);
+
+        guiFrame.add(mainPanel,BorderLayout.CENTER);
+        guiFrame.add(secPanel,BorderLayout.NORTH);
 
         launchBtn.addActionListener(new ActionListener() {
             @Override
@@ -91,7 +93,11 @@ public class LaunchWindow {
 
     private void launchAigilas() {
         LaunchLogger.info("Preparing to launch the game.");
-        updater.runIfNeeded(licenseIpt.getText());
+        String license = updater.getCachedLicense();
+        if(license == null){
+            license = licenseIpt.getText();
+        }
+        updater.runIfNeeded(license);
         if(runAigilas()){
             System.exit(0);
         }
