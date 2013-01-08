@@ -1,21 +1,21 @@
 #! /bin/sh
 #
-cd aigilas
-mvn -q clean
-mvn -q package
-cd target
-git log --max-count=1 > version.txt
-ln ../../dist/README.txt ./README.txt
-cp -r ../assets .
-cp "../../dist/linux-start-game.sh" .
-cp "../../dist/Windows - Start Game.bat" .
-cp "../../dist/Mac OS X - Start Game.command" .
 
-cd ../../launcher
-mvn -q clean
-mvn -q package
-cd ../aigilas/target
-cp ../../launcher/target/aigilas-launcher.jar .
+echo "== Preparing a working directory for the new package: pkg"
+rm -rf pkg
+mkdir pkg
 
-zip -r aigilas.zip aigilas-launcher.jar aigilas.jar assets version.txt README.txt linux-start-game.sh "Windows - Start Game.bat" "Mac OS X - Start Game.command"
-cd ../..
+echo "== Compiling the game and the launcher"
+mvn -q clean package
+
+echo "== Copying resources"
+git log --max-count=1 > pkg/version.txt
+cp -r aigilas/assets ./pkg/assets
+cp -r dist/* ./pkg
+cp aigilas/target/aigilas.jar pkg/aigilas.jar
+cp launcher/target/aigilas-launcher.jar pkg/launcher.jar
+
+echo "== Creating the archive: pkg/aigilas.zip"
+cd pkg
+zip -rq aigilas.zip ./*
+cd ..
