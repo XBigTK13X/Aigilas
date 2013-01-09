@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>aigilas</groupId>
-    <artifactId>aigilas-parent</artifactId>
+    <artifactId>aigilas-meta</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <name>Aigilas</name>
+    <name>Aigilas Meta</name>
     <url>http://maven.apache.org</url>
     <modules>
         <module>aigilas</module>

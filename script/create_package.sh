@@ -1,5 +1,7 @@
 #! /bin/sh
-#
+
+echo "== Installing the latest checked in version of sps-gamelib."
+script/setup_maven.sh
 
 echo "== Preparing a working directory for the new package: pkg"
 rm -rf pkg
