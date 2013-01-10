@@ -2,68 +2,87 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>aigilas</groupId>
+    <parent>
+        <groupId>aigilas</groupId>
+        <artifactId>aigilas-meta</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+
     <artifactId>aigilas</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
     <name>Aigilas</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
+        <!-- Dependencies in maven central -->
         <dependency>
             <groupId>com.esotericsoftware.kryo</groupId>
             <artifactId>kryo</artifactId>
             <version>2.20</version>
         </dependency>
         <dependency>
-            <groupId>com.simplepathstudios</groupId>
-            <artifactId>sps-gamelib</artifactId>
-            <version>0.0.1</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+        <!-- Dependencies in the local lib repo-->
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx</artifactId>
+            <version>0.9.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-sources</artifactId>
+            <version>0.9.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-openal</artifactId>
+            <version>0.9.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-natives</artifactId>
+            <version>0.9.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
+            <version>0.9.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-backend-lwjgl-natives</artifactId>
+            <version>0.9.7</version>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>aigilas</finalName>
-        <sourceDirectory>${basedir}/src</sourceDirectory>
+
         <plugins>
-            
-    <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version>
-        <configuration>
-          <skipTests>true</skipTests>
-        </configuration>
-      </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.0</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>single</goal>
                         </goals>
                         <configuration>
-                            <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <archive>
+                                <manifest>
                                     <mainClass>targets.DesktopGame</mainClass>
-                                </transformer>
-                            </transformers>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
                         </configuration>
                     </execution>
                 </executions>

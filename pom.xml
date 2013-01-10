@@ -5,7 +5,9 @@
     <groupId>aigilas</groupId>
     <artifactId>aigilas-meta</artifactId>
     <version>0.1-SNAPSHOT</version>
+
     <packaging>pom</packaging>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -15,4 +17,22 @@
         <module>aigilas</module>
         <module>launcher</module>
     </modules>
+
+    <build>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>lib</id>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>file://${project.basedir}/../lib</url>
+        </repository>
+    </repositories>
 </project>
