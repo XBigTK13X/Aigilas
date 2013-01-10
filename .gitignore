@@ -16,3 +16,4 @@ out/
 script/aigilas.exe
 dependency-reduced-pom.xml
 pkg/
+.directory
