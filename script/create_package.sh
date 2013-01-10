@@ -8,7 +8,7 @@ echo "== Compiling the game and the launcher"
 mvn -q clean package
 
 echo "== Copying resources"
-git log --max-count=1 > pkg/version.txt
+git log --max-count=1 > pkg/git.txt
 cp -r aigilas/assets ./pkg/assets
 cp -r dist/* ./pkg
 cp aigilas/target/aigilas-jar-with-dependencies.jar pkg/aigilas.jar
