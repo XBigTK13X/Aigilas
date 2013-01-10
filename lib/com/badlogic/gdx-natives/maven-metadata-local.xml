@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>com.esotericsoftware</groupId>
+  <groupId>com.badlogic</groupId>
   <artifactId>gdx-natives</artifactId>
   <versioning>
-    <release>0.9.7</release>
+    <release>2013.01.10-nightly</release>
     <versions>
-      <version>0.9.7</version>
+      <version>2013.01.10-nightly</version>
     </versions>
-    <lastUpdated>20130110052237</lastUpdated>
+    <lastUpdated>20130110183908</lastUpdated>
   </versioning>
 </metadata>
