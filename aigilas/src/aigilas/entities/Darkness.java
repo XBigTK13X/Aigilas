@@ -16,7 +16,7 @@ public class Darkness extends Entity {
 
     public Darkness(Point2 location) {
         initialize(location, SpriteTypes.get(Common.Entities.Darkness), EntityTypes.get(Common.Entities.Darkness), DrawDepths.get(Common.Entities.Darkness));
-        transparency = RNG.next(30, 70, false) / 100f;
+        changeOpacity();
     }
 
     boolean playerNear;
@@ -43,6 +43,10 @@ public class Darkness extends Entity {
 
     public boolean beingLit() {
         return playerNear;
+    }
+
+    public void changeOpacity() {
+        transparency = RNG.next(30, 70, false) / 100f;
     }
 
     @Override

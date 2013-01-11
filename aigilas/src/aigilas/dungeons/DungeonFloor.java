@@ -9,6 +9,7 @@ import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
 import aigilas.net.Client;
 import sps.bridge.ActorTypes;
+import sps.bridge.EntityType;
 import sps.bridge.EntityTypes;
 import sps.core.Core;
 import sps.core.Point2;
@@ -19,6 +20,7 @@ import sps.entities.EntityManager;
 import sps.entities.IActor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DungeonFloor {
@@ -103,7 +105,7 @@ public class DungeonFloor {
         for (Entity[] row : dungeon) {
             for (Entity tile : row) {
                 if (tile != null) {
-                    if (tile.getEntityType() != EntityTypes.get(Core.Entities.Floor)) {
+                    if (staticTileCache == null || !staticTileCache.containsKey(tile.getEntityType())) {
                         _contents.add(tile);
                     }
                     EntityManager.get().addEntity(tile);
@@ -165,13 +167,25 @@ public class DungeonFloor {
         }
     }
 
+    private static HashMap<EntityType, List<Entity>> staticTileCache;
+
     private void placeFloor() {
-        for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
-            for (int jj = 1; jj < Settings.get().tileMapHeight - 1; jj++) {
-                EntityManager.get().addEntity(new Floor(new Point2(ii, jj)));
-                EntityManager.get().addEntity(new Darkness(new Point2(ii, jj)));
+        if (staticTileCache == null) {
+            staticTileCache = new HashMap<EntityType, List<Entity>>();
+            staticTileCache.put(EntityTypes.get(Core.Entities.Floor), new ArrayList<Entity>());
+            staticTileCache.put(EntityTypes.get(Common.Entities.Darkness), new ArrayList<Entity>());
+            for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
+                for (int jj = 1; jj < Settings.get().tileMapHeight - 1; jj++) {
+                    staticTileCache.get(EntityTypes.get(Core.Entities.Floor)).add(new Floor(new Point2(ii, jj)));
+                    staticTileCache.get(EntityTypes.get(Common.Entities.Darkness)).add(new Darkness(new Point2(ii, jj)));
+                }
             }
         }
+        for (Entity e : staticTileCache.get(EntityTypes.get(Common.Entities.Darkness))) {
+            ((Darkness) e).changeOpacity();
+        }
+        EntityManager.get().addEntities(staticTileCache.get(EntityTypes.get(Core.Entities.Floor)));
+        EntityManager.get().addEntities(staticTileCache.get(EntityTypes.get(Common.Entities.Darkness)));
     }
 
     private void placeCreatures(int amountOfCreatures) {

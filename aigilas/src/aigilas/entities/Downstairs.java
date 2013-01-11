@@ -26,8 +26,6 @@ public class Downstairs extends Entity {
         int dummyCount = EntityManager.get().getActors(ActorTypes.get(Common.Actors.Dummy)).size();
         int minionCount = EntityManager.get().getActors(ActorTypes.get(Common.Actors.Minion)).size();
 
-        //Logger.info(nonPlayerCount + ": NPC");
-
         if (nonPlayerCount - dummyCount - minionCount > 0) {
             disabled = true;
             _graphic.setAlpha(0);

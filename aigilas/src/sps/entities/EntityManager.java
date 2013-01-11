@@ -48,6 +48,12 @@ public class EntityManager {
         return entity;
     }
 
+    public void addEntities(List<? extends Entity> cache) {
+        for (Entity e : cache) {
+            addEntity(e);
+        }
+    }
+
     private void addToBuckets(Entity entity) {
         if (entity.getEntityType() == EntityTypes.get(Core.Entities.Actor)) {
             IActor actor = (IActor) entity;
@@ -70,12 +76,6 @@ public class EntityManager {
             _gridContents.put(entity.getLocation(), new ArrayList<Entity>());
         }
         _gridContents.get(entity.getLocation()).add(entity);
-    }
-
-    public void addEntities(List<Entity> cache) {
-        for (Entity e : cache) {
-            addEntity(e);
-        }
     }
 
     public Entity getEntity(EntityType type) {
@@ -207,10 +207,10 @@ public class EntityManager {
     }
 
     public void clear() {
-        _contents = new ArrayList<Entity>();
-        _gridContents = new HashMap<Point2, List<Entity>>();
-        actorBuckets = new HashMap<ActorType, List<IActor>>();
-        entityBuckets = new HashMap<EntityType, List<Entity>>();
+        _contents.clear();
+        _gridContents.clear();
+        actorBuckets.clear();
+        entityBuckets.clear();
     }
 
     public void update() {
@@ -286,10 +286,16 @@ public class EntityManager {
         return emptyLocations.get(RNG.next(0, emptyLocations.size()));
     }
 
+    private List<EntityType> cacheIgnore = new ArrayList<EntityType>();
+
+    public void addCacheType(EntityType entityType) {
+        cacheIgnore.add(entityType);
+    }
+
     public List<Entity> getEntitiesToCache() {
         List<Entity> results = new ArrayList<Entity>();
         for (Entity _content : _contents) {
-            if (_content.getEntityType() != EntityTypes.get(Core.Entities.Floor)) {
+            if (!cacheIgnore.contains(_content.getEntityType())) {
                 results.add(_content);
             }
         }
