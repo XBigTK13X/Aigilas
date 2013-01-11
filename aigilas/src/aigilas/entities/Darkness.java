@@ -12,11 +12,11 @@ import sps.entities.EntityManager;
 import sps.entities.HitTest;
 
 public class Darkness extends Entity {
-    private float transparency = .8f;
+    private float transparency;
 
     public Darkness(Point2 location) {
         initialize(location, SpriteTypes.get(Common.Entities.Darkness), EntityTypes.get(Common.Entities.Darkness), DrawDepths.get(Common.Entities.Darkness));
-        transparency = RNG.next(30,70)/100f;
+        transparency = RNG.next(30, 70, false) / 100f;
     }
 
     boolean playerNear;
@@ -30,7 +30,7 @@ public class Darkness extends Entity {
                 _graphic.setAlpha(0);
                 playerNear = true;
             }
-            else{
+            else {
                 _graphic.setAlpha(transparency);
                 playerNear = false;
             }

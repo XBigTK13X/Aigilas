@@ -9,8 +9,8 @@ public class TextEffects {
     private static class Fountain implements TextEffect {
         @Override
         public void init(Text text) {
-            text.setVel(0, RNG.next(10, 20));
-            text.setAccel(RNG.next(-25, 25) / 100f, -RNG.next(50, 100) / 100f);
+            text.setVel(0, RNG.next(10, 20, false));
+            text.setAccel(RNG.next(-25, 25, false) / 100f, -RNG.next(50, 100, false) / 100f);
         }
 
         @Override
