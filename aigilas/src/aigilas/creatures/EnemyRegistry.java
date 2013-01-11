@@ -4,6 +4,7 @@ import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
+import sps.core.Loader;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -16,7 +17,6 @@ import java.util.List;
 
 public class EnemyRegistry {
     private static EnemyRegistry __instance;
-    private static String __skillsDataPath = "assets/data/enemies.csv";
 
     public static EnemyRegistry get() {
         if (__instance == null) {
@@ -30,7 +30,7 @@ public class EnemyRegistry {
     private EnemyRegistry() {
         FileInputStream fstream;
         try {
-            fstream = new FileInputStream(__skillsDataPath);
+            fstream = new FileInputStream(Loader.get().data("enemies.csv"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;

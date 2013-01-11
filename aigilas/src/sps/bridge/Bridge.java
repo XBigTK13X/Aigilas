@@ -1,5 +1,6 @@
 package sps.bridge;
 
+import sps.core.Loader;
 import sps.core.Logger;
 import sps.graphics.Assets;
 
@@ -8,7 +9,6 @@ import java.io.FileReader;
 
 public class Bridge {
     private static Bridge __instance;
-    private static String __bridgePath = "assets/data/bridge.cfg";
 
     public static Bridge get() {
         if (__instance == null) {
@@ -20,7 +20,7 @@ public class Bridge {
     private Bridge() {
         try {
             Assets.get();
-            FileReader reader = new FileReader(__bridgePath);
+            FileReader reader = new FileReader(Loader.get().data("bridge.cfg"));
             BufferedReader br = new BufferedReader(reader);
             String line;
             while ((line = br.readLine()) != null) {

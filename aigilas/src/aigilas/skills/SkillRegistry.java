@@ -2,6 +2,7 @@ package aigilas.skills;
 
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
+import sps.core.Loader;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -13,7 +14,6 @@ import java.util.List;
 
 public class SkillRegistry {
     private static SkillRegistry __instance;
-    private static String __skillsDataPath = "assets/data/skills.csv";
 
     public static SkillRegistry get() {
         if (__instance == null) {
@@ -25,7 +25,7 @@ public class SkillRegistry {
     private SkillRegistry() {
         FileInputStream fstream;
         try {
-            fstream = new FileInputStream(__skillsDataPath);
+            fstream = new FileInputStream(Loader.get().data("skills.csv"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;

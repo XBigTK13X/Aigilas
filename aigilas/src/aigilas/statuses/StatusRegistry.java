@@ -1,5 +1,6 @@
 package aigilas.statuses;
 
+import sps.core.Loader;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -9,7 +10,6 @@ import java.io.InputStreamReader;
 
 public class StatusRegistry {
     private static StatusRegistry __instance;
-    private static String __skillsDataPath = "assets/data/statuses.csv";
 
     public static StatusRegistry get() {
         if (__instance == null) {
@@ -21,7 +21,7 @@ public class StatusRegistry {
     private StatusRegistry() {
         FileInputStream fstream;
         try {
-            fstream = new FileInputStream(__skillsDataPath);
+            fstream = new FileInputStream(Loader.get().data("statuses.csv"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;

@@ -3,6 +3,7 @@ package aigilas.creatures;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
 import sps.core.Core;
+import sps.core.Loader;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -13,7 +14,6 @@ import java.util.HashMap;
 
 public class StatsRegistry {
     private static StatsRegistry __instance;
-    private static String __skillsDataPath = "assets/data/base_stats.csv";
 
     public static StatsRegistry get() {
         if (__instance == null) {
@@ -27,7 +27,7 @@ public class StatsRegistry {
     private StatsRegistry() {
         FileInputStream fstream;
         try {
-            fstream = new FileInputStream(__skillsDataPath);
+            fstream = new FileInputStream(Loader.get().data("base_stats.csv"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;

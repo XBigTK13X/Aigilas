@@ -1,5 +1,6 @@
 package aigilas;
 
+import sps.core.Loader;
 import sps.core.Logger;
 import sps.util.Parse;
 
@@ -10,7 +11,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Config {
-    private static final String __configPath = "assets/data/aigilas.cfg";
     private static Config __instance;
 
     public static Config get() {
@@ -47,7 +47,7 @@ public class Config {
 
     private Config() {
         try {
-            FileInputStream fstream = new FileInputStream(__configPath);
+            FileInputStream fstream = new FileInputStream(Loader.get().data("aigilas.cfg"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;

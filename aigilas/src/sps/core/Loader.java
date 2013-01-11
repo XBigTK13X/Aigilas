@@ -18,15 +18,23 @@ public class Loader {
 
     private String root = "assets";
 
-    private File inputConfig = new File(root + "/data/input.cfg");
+    private String graphics = "graphics";
+    private String data = "data";
+    private String music = "music";
 
-    public File inputConfig() {
-        return inputConfig;
+    private File get(String dir, String target) {
+        return new File(root + "/" + dir + "/" + target);
     }
 
-    private File sprites = new File(root + "/graphics/sprites");
+    public File data(String target) {
+        return get(data, target);
+    }
 
-    public File sprites() {
-        return sprites;
+    public File graphics(String target) {
+        return get(graphics, target);
+    }
+
+    public File music(String target) {
+        return get(music, target);
     }
 }

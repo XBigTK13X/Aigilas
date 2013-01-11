@@ -18,7 +18,7 @@ public class InputBindings {
 
     public InputBindings() {
         try {
-            FileInputStream fstream = new FileInputStream(Loader.get().inputConfig());
+            FileInputStream fstream = new FileInputStream(Loader.get().data("input.cfg"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;

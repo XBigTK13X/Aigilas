@@ -1,5 +1,6 @@
 package aigilas.reactions;
 
+import sps.core.Loader;
 import sps.core.Logger;
 
 import java.io.BufferedReader;
@@ -10,7 +11,6 @@ import java.util.HashMap;
 
 public class ReactionRegistry {
     private static ReactionRegistry __instance;
-    private static String __skillsDataPath = "assets/data/reactions.csv";
 
     private static final HashMap<Integer, Reaction> __reactions = new HashMap<Integer, Reaction>();
 
@@ -55,7 +55,7 @@ public class ReactionRegistry {
     private ReactionRegistry() {
         FileInputStream fstream;
         try {
-            fstream = new FileInputStream(__skillsDataPath);
+            fstream = new FileInputStream(Loader.get().data("reactions.csv"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;

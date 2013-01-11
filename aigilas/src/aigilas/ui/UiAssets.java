@@ -5,16 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import sps.core.Loader;
 import sps.graphics.Assets;
 
 public class UiAssets {
-    private static TextureRegion buttonBg = new TextureRegion(new Texture("assets/graphics/button_bg.png"));
+    private static TextureRegion buttonBg = new TextureRegion(new Texture(Loader.get().graphics("button_bg.png").getAbsolutePath()));
 
     public static TextureRegionDrawable getNewBtnBg() {
         return new TextureRegionDrawable(buttonBg);
     }
 
-    private static TextureRegion cursor = new TextureRegion(new Texture("assets/graphics/cursor.png"));
+    private static TextureRegion cursor = new TextureRegion(new Texture(Loader.get().graphics("cursor.png").getAbsolutePath()));
 
     public static TextureRegionDrawable getNewCursor() {
         return new TextureRegionDrawable(cursor);

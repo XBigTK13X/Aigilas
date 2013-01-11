@@ -16,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
 import sps.core.Core;
+import sps.core.Loader;
 import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.graphics.Renderer;
@@ -99,7 +100,7 @@ public class MainMenuState implements State {
         stage.addActor(title);
         stage.addActor(table);
 
-        File versionDat = new File("assets/data/version.dat");
+        File versionDat = Loader.get().data("version.dat");
         if (versionDat.exists()) {
             try {
                 String versionText = FileUtils.readFileToString(versionDat);

@@ -20,11 +20,9 @@ public class Assets {
         MenuBase
     }
 
-    private static final String assetPath = "assets";
     private static Assets instance;
     private static final String __menuBaseSprite = "MenuBase.png";
     private static final String __particleSprite = "Particle.png";
-    private static final String fontAsset = "assets/graphics/main.fnt";
 
     public static Assets get() {
         if (instance == null) {
@@ -43,10 +41,9 @@ public class Assets {
 
 
     private Assets() {
-        File fontFile = new File(fontAsset);
-        _font = new BitmapFont(new FileHandle(fontFile.getAbsolutePath()), false);
+        _font = new BitmapFont(new FileHandle(Loader.get().graphics("main.fnt").getAbsolutePath()), false);
 
-        for (File spriteTile : Loader.get().sprites().listFiles()) {
+        for (File spriteTile : Loader.get().graphics("sprites").listFiles()) {
             if (!spriteTile.isHidden()) {
                 String[] comps = spriteTile.getName().split("-");
                 int index = Parse.inte(comps[0]);
@@ -94,7 +91,7 @@ public class Assets {
 
     public Texture image(String fileName) {
         if (!textures.containsKey(fileName)) {
-            textures.put(fileName, new Texture(assetPath + "/graphics/" + fileName));
+            textures.put(fileName, new Texture(Loader.get().graphics(fileName).getAbsolutePath()));
         }
         return textures.get(fileName);
     }

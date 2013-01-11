@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Settings {
-    private static final String __configPath = "assets/data/sps-gamelib.cfg";
     private static Settings __instance;
 
     public static Settings get() {
@@ -37,7 +36,7 @@ public class Settings {
 
     private Settings() {
         try {
-            FileInputStream fstream = new FileInputStream(__configPath);
+            FileInputStream fstream = new FileInputStream(Loader.get().data("sps-gamelib.cfg"));
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;
