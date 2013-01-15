@@ -1,8 +1,8 @@
 <launch4jConfig>
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>aigilas.jar</jar>
-  <outfile>C:\_z\dev\git\aigilas\dist\aigilas.exe</outfile>
+  <jar>launcher.jar</jar>
+  <outfile>/home/kretst/dev/aigilas/dist/Windows - Start Game.exe</outfile>
   <errTitle>Java was not found on this system.</errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
