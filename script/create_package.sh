@@ -2,6 +2,7 @@
 
 echo "== Preparing a working directory for the new package: pkg"
 rm -rf pkg
+rm -rf aigilas/assets/graphics/sprites/.directory
 mkdir pkg
 
 echo "== Compiling the game and the launcher"
