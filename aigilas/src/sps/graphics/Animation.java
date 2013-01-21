@@ -8,7 +8,7 @@ import sps.bridge.SpriteType;
 import sps.core.Core;
 import sps.core.Point2;
 
-public class AnimatedTexture {
+public class Animation {
     private int _currentFrame;
     private SpriteInfo _spriteInfo;
     private int _animationTimer;
@@ -22,7 +22,7 @@ public class AnimatedTexture {
 
     protected Point2 _position = new Point2(0, 0);
 
-    public AnimatedTexture() {
+    public Animation() {
         _depth = DrawDepths.get(Core.DrawDepths.Animated_Texture);
         setEdge(SpriteEdge.None);
     }

@@ -5,11 +5,11 @@ import sps.bridge.EntityType;
 import sps.bridge.SpriteType;
 import sps.core.Point2;
 import sps.core.Settings;
-import sps.graphics.AnimatedTexture;
+import sps.graphics.Animation;
 import sps.graphics.SpriteInfo;
 
 public class Entity implements Comparable {
-    protected final AnimatedTexture _graphic = new AnimatedTexture();
+    protected final Animation _graphic = new Animation();
 
     protected boolean _isActive = true;
     protected Boolean _isBlocking;
