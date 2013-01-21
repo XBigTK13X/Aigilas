@@ -7,6 +7,7 @@ import sps.bridge.DrawDepths;
 import sps.bridge.SpriteType;
 import sps.core.Core;
 import sps.core.Point2;
+import sps.core.RNG;
 
 public class Animation {
     private int _currentFrame;
@@ -101,5 +102,13 @@ public class Animation {
     public void flip(boolean x, boolean y) {
         flipX = x;
         flipY = y;
+    }
+
+    public void showRandomFrame(){
+        showRandomFrame(true);
+    }
+    public void showRandomFrame(boolean disableAnimation){
+        setAnimationEnabled(!disableAnimation);
+        _currentFrame = RNG.next(0,_spriteInfo.MaxFrame,false);
     }
 }
