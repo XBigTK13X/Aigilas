@@ -44,6 +44,7 @@ public class Particle2 extends PEComponent {
         if (IsActive) {
             _graphic.setPosition(Position);
             _graphic.setSize(Width,Height);
+            _graphic.setColor(_color);
             _graphic.draw();
         }
     }
