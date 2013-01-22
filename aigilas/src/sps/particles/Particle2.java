@@ -36,7 +36,6 @@ public class Particle2 extends PEComponent {
 
     public Particle2() {
         IsActive = false;
-        _graphic.loadContent(spriteType);
     }
 
 
@@ -58,6 +57,7 @@ public class Particle2 extends PEComponent {
     }
 
     private void init(ParticleBehavior behavior, Point2 position, Entity entity, Color baseColor) {
+        _graphic.loadContent(spriteType);
         _graphic.gotoRandomFrame();
         _behavior = behavior;
         if (position != null) {
