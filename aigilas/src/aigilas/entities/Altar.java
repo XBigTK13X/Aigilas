@@ -30,6 +30,7 @@ public class Altar extends Entity {
         _god = godName.getInstance();
         _graphic.setColor(_god.getColor());
         initialize(location, SpriteTypes.get(Aigilas.Entities.Altar), EntityTypes.get(Aigilas.Entities.Altar), DrawDepths.get(Aigilas.Entities.Altar));
+        _graphic.gotoRandomFrame(false);
     }
 
     @Override

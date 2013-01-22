@@ -43,6 +43,7 @@ public class Entity implements Comparable {
         _location.copy(location);
         _graphic.setPosition(_location);
         _graphic.setDrawDepth(depth);
+        _graphic.loadContent(spriteType);
     }
 
     public void update() {

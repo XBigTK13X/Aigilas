@@ -2,17 +2,18 @@ package aigilas.gods;
 
 import aigilas.items.ItemClass;
 import com.badlogic.gdx.graphics.Color;
+import sps.util.Colors;
 
 import java.util.HashMap;
 
 public enum GodId {
-    Lust(Color.MAGENTA, ItemClass.Leggings, ItemClass.Melee_Weapon),
-    Greed(Color.YELLOW, ItemClass.Head_Gear, ItemClass.Gloves),
-    Sloth(Color.GRAY, ItemClass.Shield, ItemClass.Head_Gear),
-    Envy(Color.YELLOW, ItemClass.Torso_Garb, ItemClass.Ranged_Weapon),
-    Wrath(Color.RED, ItemClass.Melee_Weapon, ItemClass.Ranged_Ammo),
-    Gluttony(Color.GREEN, ItemClass.Gloves, ItemClass.Torso_Garb),
-    Pride(Color.CYAN, ItemClass.Ring, ItemClass.Feet);
+    Lust(Colors.rgb(126, 115, 255), ItemClass.Leggings, ItemClass.Melee_Weapon),
+    Greed(Colors.rgb(201, 217, 98), ItemClass.Head_Gear, ItemClass.Gloves),
+    Sloth(Colors.rgb(119, 230, 218), ItemClass.Shield, ItemClass.Head_Gear),
+    Envy(Colors.rgb(39, 140, 39), ItemClass.Torso_Garb, ItemClass.Ranged_Weapon),
+    Wrath(Colors.rgb(130, 52, 52), ItemClass.Melee_Weapon, ItemClass.Ranged_Ammo),
+    Gluttony(Colors.rgb(176, 104, 37), ItemClass.Gloves, ItemClass.Torso_Garb),
+    Pride(Colors.rgb(150, 33, 150), ItemClass.Ring, ItemClass.Feet);
 
     public final Color Tint;
     public final ItemClass Desires;
