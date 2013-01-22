@@ -1,6 +1,6 @@
 package aigilas.creatures.impl;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.Config;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.StatsRegistry;
@@ -14,7 +14,7 @@ import sps.core.Point2;
 public class Minion extends BaseCreature {
     public Minion(ActorType actorType, int coolDown) {
         _actorType = actorType;
-        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get(Common.Actors.Minion));
+        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get(Aigilas.Actors.Minion));
     }
 
     public Minion(ActorType actorType) {
@@ -22,7 +22,7 @@ public class Minion extends BaseCreature {
     }
 
     public Minion() {
-        this(ActorTypes.get(Common.Actors.Minion), Config.get().defaultSpeed);
+        this(ActorTypes.get(Aigilas.Actors.Minion), Config.get().defaultSpeed);
     }
 
     public void init(BaseCreature source, SkillEffect effectGraphic) {

@@ -1,10 +1,10 @@
 package aigilas.creatures.impl;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import sps.bridge.ActorTypes;
 
 public class GreedEnemyAcolyte extends BaseEnemy {
     public GreedEnemyAcolyte() {
-        super(ActorTypes.get(Common.Actors.Greed_Acolyte));
+        super(ActorTypes.get(Aigilas.Actors.Greed_Acolyte));
     }
 }

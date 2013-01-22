@@ -2,7 +2,7 @@ package aigilas.creatures;
 
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Loader;
 import sps.core.Logger;
 
@@ -59,6 +59,6 @@ public class StatsRegistry {
         if (baseStats.containsKey(actorType)) {
             return new Stats(baseStats.get(actorType));
         }
-        return new Stats(baseStats.get(ActorTypes.get(Core.ActorGroups.Non_Player)));
+        return new Stats(baseStats.get(ActorTypes.get(Sps.ActorGroups.Non_Player)));
     }
 }

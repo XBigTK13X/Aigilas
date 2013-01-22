@@ -5,7 +5,7 @@ import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.bridge.Context;
 import sps.bridge.Contexts;
-import sps.core.Core;
+import sps.bridge.Sps;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +24,10 @@ public class Input {
 
     public static void setup(StateProvider stateProvider) {
         __contexts = new HashMap<Integer, Context>();
-        __contexts.put(0, Contexts.get(Core.Contexts.Free));
-        __contexts.put(1, Contexts.get(Core.Contexts.Free));
-        __contexts.put(2, Contexts.get(Core.Contexts.Free));
-        __contexts.put(3, Contexts.get(Core.Contexts.Free));
+        __contexts.put(0, Contexts.get(Sps.Contexts.Free));
+        __contexts.put(1, Contexts.get(Sps.Contexts.Free));
+        __contexts.put(2, Contexts.get(Sps.Contexts.Free));
+        __contexts.put(3, Contexts.get(Sps.Contexts.Free));
 
         if (stateProvider == null) {
             Input.stateProvider = new DefaultStateProvider();
@@ -79,7 +79,7 @@ public class Input {
     // If the key is marked to be locked on press and its lock context is
     // currently inactive
     private static boolean shouldLock(Command command, int playerIndex) {
-        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get(Core.Contexts.Non_Free) && __contexts.get(playerIndex) != Contexts.get(Core.Contexts.Free) || command.Context == Contexts.get(Core.Contexts.All));
+        return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get(Sps.Contexts.Non_Free) && __contexts.get(playerIndex) != Contexts.get(Sps.Contexts.Free) || command.Context == Contexts.get(Sps.Contexts.All));
     }
 
     public static void setContext(Context context, int playerIndex) {

@@ -1,6 +1,6 @@
 package aigilas.strategies.impl;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.creatures.BaseCreature;
 import aigilas.skills.AnimationType;
 import aigilas.skills.SkillLogic;
@@ -8,7 +8,7 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.RNG;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -19,7 +19,7 @@ public class TestBotStrategy extends BaseStrategy {
     public TestBotStrategy(BaseCreature parent) {
         super(parent, Strategy.TestBot);
 
-        _targets.addTargetTypes(new sps.bridge.ActorType[]{ActorTypes.get(Core.ActorGroups.Non_Player)});
+        _targets.addTargetTypes(new sps.bridge.ActorType[]{ActorTypes.get(Sps.ActorGroups.Non_Player)});
     }
 
     private Entity _stairsTarget;
@@ -53,8 +53,8 @@ public class TestBotStrategy extends BaseStrategy {
             }
         }
         else {
-            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getEntities(EntityTypes.get(Core.Entities.Actor)).size() == 1) {
-                _stairsTarget = EntityManager.get().getEntity(EntityTypes.get(Common.Entities.Downstairs));
+            if ((targetPath == null || !targetPath.hasMoves()) && EntityManager.get().getEntities(EntityTypes.get(Sps.Entities.Actor)).size() == 1) {
+                _stairsTarget = EntityManager.get().getEntity(EntityTypes.get(Aigilas.Entities.Downstairs));
                 if (_stairsTarget != null) {
                     targetPath = PathFinder.find(_parent.getLocation(), _stairsTarget.getLocation());
                 }

@@ -1,6 +1,6 @@
 package aigilas.skills;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.creatures.StatBuff;
 import aigilas.entities.Elements;
 import com.badlogic.gdx.graphics.Color;
@@ -18,7 +18,7 @@ public class SkillComponents {
     protected StatBuff _buff;
     protected float _effectStrength = 0;
     protected boolean _isPersistent = false;
-    protected final List<EntityType> _targetTypes = Arrays.asList(EntityTypes.get(Common.Entities.Wall));
+    protected final List<EntityType> _targetTypes = Arrays.asList(EntityTypes.get(Aigilas.Entities.Wall));
     protected List<ActorType> _targetActorTypes = new ArrayList<ActorType>();
     protected EntityType _onlyAffects;
 

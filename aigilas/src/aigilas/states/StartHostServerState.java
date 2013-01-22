@@ -1,6 +1,5 @@
 package aigilas.states;
 
-import aigilas.Common;
 import aigilas.Config;
 import aigilas.net.Client;
 import aigilas.net.LanClient;
@@ -15,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Contexts;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.io.Input;
@@ -34,7 +33,7 @@ public class StartHostServerState implements State {
         Client.reset(new LanClient());
 
         //UI
-        Input.setContext(Contexts.get(Core.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
+        Input.setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
         Gdx.input.setInputProcessor(stage);
@@ -69,7 +68,7 @@ public class StartHostServerState implements State {
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Core.Contexts.Free), ii);
+                Input.setContext(Contexts.get(Sps.Contexts.Free), ii);
             }
 
             Input.setup(Client.get());

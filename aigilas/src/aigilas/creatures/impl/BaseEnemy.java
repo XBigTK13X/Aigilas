@@ -10,7 +10,7 @@ import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Point2;
 
 public class BaseEnemy extends BaseCreature {
@@ -19,7 +19,7 @@ public class BaseEnemy extends BaseCreature {
     public BaseEnemy(ActorType actorType, CreatureClass cClass) {
         SetClass(cClass);
         _actorType = actorType;
-        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get(Core.ActorGroups.Non_Player));
+        _baseStats = StatsRegistry.get().baseStats(ActorTypes.get(Sps.ActorGroups.Non_Player));
         _maxStats = new Stats(_baseStats);
 
         if (EnemyRegistry.get().contains(_actorType)) {
@@ -50,7 +50,7 @@ public class BaseEnemy extends BaseCreature {
     public void setup(Point2 position) {
         setup(position, _actorType, _baseStats, _class);
         if (_strategies == null) {
-            setStrategy(StrategyFactory.create(Strategy.Attack, this, ActorTypes.get(Core.Actors.Player)));
+            setStrategy(StrategyFactory.create(Strategy.Attack, this, ActorTypes.get(Sps.Actors.Player)));
         }
     }
 }

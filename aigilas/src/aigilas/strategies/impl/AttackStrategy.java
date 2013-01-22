@@ -7,8 +7,7 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
-import sps.core.Core;
-import sps.core.Logger;
+import sps.bridge.Sps;
 import sps.core.RNG;
 
 public class AttackStrategy extends BaseStrategy {
@@ -19,12 +18,12 @@ public class AttackStrategy extends BaseStrategy {
         super(parent, Strategy.Attack);
 
         if (targetTypes.length == 1) {
-            if (targetTypes[0] == ActorTypes.get(Core.ActorGroups.Friendly)) {
-                if (ActorTypes.get(Core.Actors.Player) != parent.getActorType()) {
-                    targetTypes[0] = ActorTypes.get(Core.ActorGroups.Non_Player);
+            if (targetTypes[0] == ActorTypes.get(Sps.ActorGroups.Friendly)) {
+                if (ActorTypes.get(Sps.Actors.Player) != parent.getActorType()) {
+                    targetTypes[0] = ActorTypes.get(Sps.ActorGroups.Non_Player);
                 }
                 else {
-                    targetTypes[0] = ActorTypes.get(Core.Actors.Player);
+                    targetTypes[0] = ActorTypes.get(Sps.Actors.Player);
                 }
             }
         }

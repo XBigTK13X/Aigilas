@@ -22,7 +22,6 @@ public class Assets {
 
     private static Assets instance;
     private static final String __menuBaseSprite = "MenuBase.png";
-    private static final String __particleSprite = "Particle.png";
 
     public static Assets get() {
         if (instance == null) {
@@ -72,12 +71,6 @@ public class Assets {
         }
 
         try {
-            sprites.put(Sprites.Particle, new Sprite(image(__particleSprite)));
-        }
-        catch (Exception e) {
-            Logger.exception("ERROR: Exception while loading the particle sprite. The particle engine will not be functional.", e, false);
-        }
-        try {
             sprites.put(Sprites.MenuBase, new Sprite(image(__menuBaseSprite)));
         }
         catch (Exception e) {
@@ -102,10 +95,6 @@ public class Assets {
 
     public Sprite sprite(int frame, int index) {
         return indexedSprites.get(index).get(frame);
-    }
-
-    public Sprite particle() {
-        return sprites.get(Sprites.Particle);
     }
 
     public Sprite baseMenu() {

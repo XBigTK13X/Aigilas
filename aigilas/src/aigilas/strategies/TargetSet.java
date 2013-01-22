@@ -3,7 +3,7 @@ package aigilas.strategies;
 import aigilas.creatures.BaseCreature;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -106,7 +106,7 @@ public class TargetSet
 
         for (ActorType actorType : _targetActorTypes) {
             for (IActor target : EntityManager.get().getActorsAt(source.getLocation())) {
-                if (target.getActorType() == actorType || (actorType == ActorTypes.get(Core.ActorGroups.Non_Player) && target.getActorType() != ActorTypes.get(Core.Actors.Player)) || (actorType == ActorTypes.get(Core.Actors.Player) && target.getActorType() == ActorTypes.get(Core.Actors.Player))) {
+                if (target.getActorType() == actorType || (actorType == ActorTypes.get(Sps.ActorGroups.Non_Player) && target.getActorType() != ActorTypes.get(Sps.Actors.Player)) || (actorType == ActorTypes.get(Sps.Actors.Player) && target.getActorType() == ActorTypes.get(Sps.Actors.Player))) {
                     return (Entity) target;
                 }
             }

@@ -1,24 +1,26 @@
 package sps.particles;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepths;
-import sps.core.Core;
+import sps.bridge.SpriteType;
+import sps.bridge.SpriteTypes;
+import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.entities.Entity;
-import sps.graphics.Assets;
+import sps.graphics.Animation;
 import sps.graphics.Renderer;
 import sps.util.MathHelper;
 
 public class Particle2 extends PEComponent {
     public static final int DefaultLife = 100;
+    public static final SpriteType spriteType = SpriteTypes.get(Sps.Particle);
 
     public float Height = 1;
     public float Width = 1;
 
     private float _life = DefaultLife;
-    private final Sprite _texture = Assets.get().particle();
+    private final Animation _graphic = new Animation();
     private Color _color = Color.WHITE;
 
     public float MoveSpeed = 5f;
@@ -32,12 +34,17 @@ public class Particle2 extends PEComponent {
 
     private ParticleBehavior _behavior;
 
-    public Particle2(Point2 position) {
+    public Particle2() {
+        IsActive = false;
+        _graphic.loadContent(spriteType);
     }
+
 
     public void draw() {
         if (IsActive) {
-            Renderer.get().draw(_texture, Position, DrawDepths.get(Core.DrawDepths.Particle), _color, Width, Height);
+            _graphic.setPosition(Position);
+            _graphic.setSize(Width,Height);
+            _graphic.draw();
         }
     }
 
@@ -50,6 +57,7 @@ public class Particle2 extends PEComponent {
     }
 
     private void init(ParticleBehavior behavior, Point2 position, Entity entity, Color baseColor) {
+        _graphic.gotoRandomFrame();
         _behavior = behavior;
         if (position != null) {
             Origin.reset(position.X, position.Y);

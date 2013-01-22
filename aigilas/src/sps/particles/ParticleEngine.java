@@ -10,8 +10,7 @@ public class ParticleEngine {
 
     public static void reset() {
         for (int ii = 0; ii < __particles.length; ii++) {
-            __particles[ii] = new Particle2(null);
-            __particles[ii].IsActive = false;
+            __particles[ii] = new Particle2();
 
         }
         for (int ii = 0; ii < __emitters.length; ii++) {

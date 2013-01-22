@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.Config;
 import aigilas.net.Client;
 import aigilas.net.LanClient;
@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.graphics.Assets;
 import sps.io.Input;
 import sps.states.State;
@@ -32,7 +32,7 @@ public class JoinServerAsGuestState implements State {
     private boolean readyToConnect = false;
 
     public JoinServerAsGuestState() {
-        Input.setContext(Contexts.get(Core.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
+        Input.setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
         Gdx.input.setInputProcessor(stage);
@@ -72,7 +72,7 @@ public class JoinServerAsGuestState implements State {
             Input.setup(Client.get());
             connectStarted = true;
         }
-        if (Input.isActive(Commands.get(Common.Commands.Start), 0)) {
+        if (Input.isActive(Commands.get(Aigilas.Commands.Start), 0)) {
             if (ipIn.getText() != null && !ipIn.getText().isEmpty()) {
                 String[] contents = ipIn.getText().split(":");
                 String address = contents[0];
@@ -89,7 +89,7 @@ public class JoinServerAsGuestState implements State {
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Core.Contexts.Free), ii);
+                Input.setContext(Contexts.get(Sps.Contexts.Free), ii);
             }
             StateManager.loadState(new LoadingState());
         }

@@ -7,7 +7,7 @@ import aigilas.statuses.Status;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyFactory;
 import sps.bridge.ActorTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.text.TextEffects;
 import sps.text.TextPool;
 import sps.util.StringStorage;
@@ -28,7 +28,7 @@ public class BoilStatus extends BaseStatus {
         super.setup();
         previousStrategy = _target.getStrategyId();
         _target.setStrategy(StrategyFactory.create(null, _target));
-        _target.getTargets().addTargetTypes(ActorTypes.get(Core.Actors.Player));
+        _target.getTargets().addTargetTypes(ActorTypes.get(Sps.Actors.Player));
     }
 
     @Override

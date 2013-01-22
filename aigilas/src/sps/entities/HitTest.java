@@ -1,6 +1,6 @@
 package sps.entities;
 
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Point2;
 
 public class HitTest {
@@ -15,7 +15,7 @@ public class HitTest {
     }
 
     private static boolean isClose(float x1, float x2, float y1, float y2) {
-        return getDistanceSquare(x1, x2, y1, y2) < Core.SpriteRadius;
+        return getDistanceSquare(x1, x2, y1, y2) < Sps.SpriteRadius;
     }
 
     public static float getDistanceSquare(Entity source, Entity target)

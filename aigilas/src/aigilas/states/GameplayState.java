@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.classes.PlayerClassRegistry;
 import aigilas.creatures.StatsRegistry;
 import aigilas.creatures.impl.CreatureFactory;
@@ -12,7 +12,7 @@ import aigilas.reactions.ReactionRegistry;
 import aigilas.skills.SkillRegistry;
 import aigilas.statuses.StatusRegistry;
 import sps.bridge.EntityTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Logger;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -32,8 +32,8 @@ public class GameplayState implements State {
         PlayerClassRegistry.get();
         StatsRegistry.get();
         EntityManager.reset();
-        EntityManager.get().addCacheType(EntityTypes.get(Common.Entities.Darkness));
-        EntityManager.get().addCacheType(EntityTypes.get(Core.Entities.Floor));
+        EntityManager.get().addCacheType(EntityTypes.get(Aigilas.Entities.Darkness));
+        EntityManager.get().addCacheType(EntityTypes.get(Sps.Entities.Floor));
         CreatureFactory.reset();
         Dungeon.start();
         DungeonFloor.reset();

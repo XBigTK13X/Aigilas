@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
 import sps.bridge.SpriteTypes;
@@ -10,7 +10,7 @@ import sps.graphics.SpriteEdge;
 
 public class Wall extends Entity {
     public Wall(Point2 location) {
-        initialize(location, SpriteTypes.get(Common.Entities.Wall), EntityTypes.get(Common.Entities.Wall), DrawDepths.get(Common.Entities.Wall));
+        initialize(location, SpriteTypes.get(Aigilas.Entities.Wall), EntityTypes.get(Aigilas.Entities.Wall), DrawDepths.get(Aigilas.Entities.Wall));
         _isBlocking = true;
         _graphic.setAnimationEnabled(false);
     }

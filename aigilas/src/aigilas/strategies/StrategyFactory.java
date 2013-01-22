@@ -4,7 +4,7 @@ import aigilas.creatures.BaseCreature;
 import aigilas.strategies.impl.*;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Logger;
 
 public class StrategyFactory {
@@ -14,7 +14,7 @@ public class StrategyFactory {
         }
         switch (strategy) {
             case Attack:
-                return new AttackStrategy(target, ActorTypes.get(Core.Actors.Player));
+                return new AttackStrategy(target, ActorTypes.get(Sps.Actors.Player));
             case AttackSelf:
                 return new AttackSelfStrategy(target);
             case Confused:
@@ -24,7 +24,7 @@ public class StrategyFactory {
             case ControlledByPlayer:
                 return new ControlledByPlayer(target);
             case Flee:
-                return new FleeStrategy(target, ActorTypes.get(Core.Actors.Player));
+                return new FleeStrategy(target, ActorTypes.get(Sps.Actors.Player));
             case MinionCloud:
                 return new MinionCloudStrategy(target);
             case MinionExplode:
@@ -36,7 +36,7 @@ public class StrategyFactory {
             case MinionRotate:
                 return new MinionRotateStrategy(target);
             case Mutiny:
-                return new AttackStrategy(target, ActorTypes.get(Core.ActorGroups.Friendly));
+                return new AttackStrategy(target, ActorTypes.get(Sps.ActorGroups.Friendly));
             case StraightLineRotate:
                 return new StraightLineRotateStrategy(target);
             case StraightLine:

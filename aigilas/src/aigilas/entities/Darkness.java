@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
 import sps.bridge.SpriteTypes;
@@ -15,7 +15,7 @@ public class Darkness extends Entity {
     private float transparency;
 
     public Darkness(Point2 location) {
-        initialize(location, SpriteTypes.get(Common.Entities.Darkness), EntityTypes.get(Common.Entities.Darkness), DrawDepths.get(Common.Entities.Darkness));
+        initialize(location, SpriteTypes.get(Aigilas.Entities.Darkness), EntityTypes.get(Aigilas.Entities.Darkness), DrawDepths.get(Aigilas.Entities.Darkness));
         changeOpacity();
     }
 

@@ -1,6 +1,6 @@
 package aigilas.creatures.impl;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
 import aigilas.strategies.Strategy;
@@ -9,7 +9,7 @@ import sps.bridge.ActorTypes;
 
 public class DartTrap extends Minion {
     public DartTrap() {
-        super(ActorTypes.get(Common.Actors.Minion));
+        super(ActorTypes.get(Aigilas.Actors.Minion));
         setStrategy(StrategyFactory.create(Strategy.MinionFire, this));
         add(SkillId.Dart);
         _composition.add(Elements.Dark);

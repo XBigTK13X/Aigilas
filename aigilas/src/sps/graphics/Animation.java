@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepth;
 import sps.bridge.DrawDepths;
 import sps.bridge.SpriteType;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.core.RNG;
+import sps.core.Settings;
 
 public class Animation {
     private int _currentFrame;
@@ -20,11 +21,13 @@ public class Animation {
     private boolean animationEnabled = true;
     private boolean flipX = false;
     private boolean flipY = false;
+    private float _height = -1;
+    private float _width = -1;
 
     protected Point2 _position = new Point2(0, 0);
 
     public Animation() {
-        _depth = DrawDepths.get(Core.DrawDepths.Animated_Texture);
+        _depth = DrawDepths.get(Sps.DrawDepths.Animated_Texture);
         setEdge(SpriteEdge.None);
     }
 
@@ -34,7 +37,7 @@ public class Animation {
 
     public void loadContent(SpriteType assetName) {
         _spriteInfo = SpriteSheetManager.getSpriteInfo(assetName);
-        _animationTimer = Core.AnimationFps;
+        _animationTimer = Sps.AnimationFps;
     }
 
     public void draw() {
@@ -43,6 +46,12 @@ public class Animation {
         }
         if (_color.a > 0) {
             _sprite.setRotation(_rotation);
+            if(_width >= 0 &&_height >= 0){
+                _sprite.setSize(_width,_height);
+            }
+            else{
+                _sprite.setSize(Settings.get().spriteWidth,Settings.get().spriteHeight);
+            }
             _sprite = Assets.get().sprite(_currentFrame, _spriteInfo.SpriteIndex);
             updateAnimation();
             Renderer.get().draw(_sprite, _position, _depth, _color, flipX, flipY);
@@ -54,7 +63,7 @@ public class Animation {
             _animationTimer--;
             if (_animationTimer <= 0) {
                 _currentFrame = (_currentFrame + 1) % _spriteInfo.MaxFrame;
-                _animationTimer = Core.AnimationFps;
+                _animationTimer = Sps.AnimationFps;
             }
         }
     }
@@ -104,11 +113,17 @@ public class Animation {
         flipY = y;
     }
 
-    public void showRandomFrame(){
-        showRandomFrame(true);
+    public void gotoRandomFrame(){
+        gotoRandomFrame(true);
     }
-    public void showRandomFrame(boolean disableAnimation){
+
+    public void gotoRandomFrame(boolean disableAnimation){
         setAnimationEnabled(!disableAnimation);
         _currentFrame = RNG.next(0,_spriteInfo.MaxFrame,false);
+    }
+
+    public void setSize(float width, float height) {
+        _width = width;
+        _height = height;
     }
 }

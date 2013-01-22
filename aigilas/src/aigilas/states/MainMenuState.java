@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.net.Client;
 import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import org.apache.commons.io.FileUtils;
 import sps.bridge.Commands;
 import sps.bridge.Contexts;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Loader;
 import sps.core.Logger;
 import sps.graphics.Assets;
@@ -36,7 +36,7 @@ public class MainMenuState implements State {
     private ArrayList<SelectableButton> buttons = new ArrayList<SelectableButton>();
 
     public MainMenuState() {
-        Input.setContext(Contexts.get(Core.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
+        Input.setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
 
         Gdx.input.setInputProcessor(stage);
@@ -116,8 +116,8 @@ public class MainMenuState implements State {
 
     @Override
     public void update() {
-        int selectionVelocity = (Input.isActive(Commands.get(Common.Commands.MoveRight), Client.get().getFirstPlayerIndex()) ? horizDelta : 0) + (Input.isActive(Commands.get(Common.Commands.MoveLeft), Client.get().getFirstPlayerIndex()) ? -horizDelta : 0);
-        selectionVelocity += (Input.isActive(Commands.get(Common.Commands.MoveUp), Client.get().getFirstPlayerIndex()) ? -verticalDelta : 0) + (Input.isActive(Commands.get(Common.Commands.MoveDown), Client.get().getFirstPlayerIndex()) ? verticalDelta : 0);
+        int selectionVelocity = (Input.isActive(Commands.get(Aigilas.Commands.MoveRight), Client.get().getFirstPlayerIndex()) ? horizDelta : 0) + (Input.isActive(Commands.get(Aigilas.Commands.MoveLeft), Client.get().getFirstPlayerIndex()) ? -horizDelta : 0);
+        selectionVelocity += (Input.isActive(Commands.get(Aigilas.Commands.MoveUp), Client.get().getFirstPlayerIndex()) ? -verticalDelta : 0) + (Input.isActive(Commands.get(Aigilas.Commands.MoveDown), Client.get().getFirstPlayerIndex()) ? verticalDelta : 0);
         _selection += selectionVelocity;
         _selection %= buttons.size();
         if (_selection < 0) {
@@ -126,7 +126,7 @@ public class MainMenuState implements State {
 
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Core.Contexts.Free), ii);
+                Input.setContext(Contexts.get(Sps.Contexts.Free), ii);
             }
 
             StateManager.loadState(new LoadingState());

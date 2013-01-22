@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.creatures.impl.Player;
 import aigilas.gods.God;
 import aigilas.gods.GodId;
@@ -9,7 +9,7 @@ import sps.bridge.ActorTypes;
 import sps.bridge.DrawDepths;
 import sps.bridge.EntityTypes;
 import sps.bridge.SpriteTypes;
-import sps.core.Core;
+import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -29,19 +29,19 @@ public class Altar extends Entity {
     public Altar(Point2 location, GodId godName) {
         _god = godName.getInstance();
         _graphic.setColor(_god.getColor());
-        initialize(location, SpriteTypes.get(Common.Entities.Altar), EntityTypes.get(Common.Entities.Altar), DrawDepths.get(Common.Entities.Altar));
+        initialize(location, SpriteTypes.get(Aigilas.Entities.Altar), EntityTypes.get(Aigilas.Entities.Altar), DrawDepths.get(Aigilas.Entities.Altar));
     }
 
     @Override
     public void update() {
         _currentTarget = EntityManager.get().getTouchingCreature(this);
         if (_currentTarget != null) {
-            if (_currentTarget.getActorType() == ActorTypes.get(Core.Actors.Player)) {
+            if (_currentTarget.getActorType() == ActorTypes.get(Sps.Actors.Player)) {
                 _player = (Player) _currentTarget;
                 if (_player.isInteracting()) {
                     _player.pray(_god);
                 }
-                _offerings = EntityManager.get().getEntities(EntityTypes.get(Common.Entities.Item), _location);
+                _offerings = EntityManager.get().getEntities(EntityTypes.get(Aigilas.Entities.Item), _location);
                 for (Entity offering : _offerings) {
                     _player.sacrifice(_god, (GenericItem) offering);
                 }

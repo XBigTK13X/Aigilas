@@ -67,6 +67,7 @@ public class Renderer {
         this.bgColor = bgColor;
     }
 
+    private static boolean tipHasBeenDisplayed = false;
     public void setStrategy(RenderStrategy strategy) {
 
         this.strategy = strategy;
@@ -75,7 +76,10 @@ public class Renderer {
             refreshInstance.resize(getWidth(), getHeight());
         }
         else {
-            Logger.info("If the app is registered with Renderer.get().setRefreshInstance(this); in the create method, then the screen will update without a manual resizing.");
+            if(!tipHasBeenDisplayed){
+                Logger.info("If the app is registered with Renderer.get().setRefreshInstance(this); in the create method, then the screen will update without a manual resizing.");
+                tipHasBeenDisplayed = true;
+            }
         }
     }
 
@@ -120,7 +124,7 @@ public class Renderer {
     }
 
     public void draw(Sprite sprite, Point2 position, DrawDepth depth, Color color, boolean flipX, boolean flipY) {
-        render(sprite, position, depth, color, Settings.get().spriteWidth, Settings.get().spriteHeight, flipX ? -1 : 1, flipY ? -1 : 1);
+        render(sprite, position, depth, color, sprite.getWidth(), sprite.getHeight(), flipX ? -1 : 1, flipY ? -1 : 1);
     }
 
     public void draw(Sprite sprite, Point2 position, DrawDepth depth, Color color, float width, float height) {
@@ -136,7 +140,7 @@ public class Renderer {
     }
 
     // String rendering
-    public void drawString(String content, Point2 location, Color filter, float scale, DrawDepth depth) {
+    public void draw(String content, Point2 location, Color filter, float scale, DrawDepth depth) {
         renderString(content, location, filter, scale, depth);
     }
 

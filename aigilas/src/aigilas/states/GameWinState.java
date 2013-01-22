@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import sps.audio.MusicPlayer;
 import sps.bridge.Commands;
 import sps.core.Point2;
@@ -21,7 +21,7 @@ public class GameWinState implements State {
 
     @Override
     public void update() {
-        if (Input.isActive(Commands.get(Common.Commands.Confirm), 0, true)) {
+        if (Input.isActive(Commands.get(Aigilas.Commands.Confirm), 0, true)) {
             StateManager.loadState(new LoadingState());
         }
     }

@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.creatures.BaseCreature;
 import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillFactory;
@@ -34,7 +34,7 @@ public class SkillEffect extends Entity {
 
     public SkillEffect(Point2 gridLocation, Point2 velocity, BaseCreature source, BaseSkill skill) {
         _skill = skill;
-        initialize(gridLocation, _skill.behavior().getSpriteType(), EntityTypes.get(Common.Entities.Skill_Effect), DrawDepths.get(Common.DrawDepths.Base_Skill_Effect));
+        initialize(gridLocation, _skill.behavior().getSpriteType(), EntityTypes.get(Aigilas.Entities.Skill_Effect), DrawDepths.get(Aigilas.DrawDepths.Base_Skill_Effect));
         _velocity.copy(velocity);
         _direction.copy(velocity);
         _source = source;

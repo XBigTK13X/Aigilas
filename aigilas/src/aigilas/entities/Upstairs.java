@@ -1,6 +1,6 @@
 package aigilas.entities;
 
-import aigilas.Common;
+import aigilas.Aigilas;
 import aigilas.creatures.BaseCreature;
 import aigilas.dungeons.Dungeon;
 import sps.bridge.DrawDepths;
@@ -12,7 +12,7 @@ import sps.entities.EntityManager;
 
 public class Upstairs extends Entity {
     public Upstairs(Point2 location) {
-        initialize(location, SpriteTypes.get(Common.Entities.Upstairs), EntityTypes.get(Common.Entities.Upstairs), DrawDepths.get(Common.DrawDepths.Stairs));
+        initialize(location, SpriteTypes.get(Aigilas.Entities.Upstairs), EntityTypes.get(Aigilas.Entities.Upstairs), DrawDepths.get(Aigilas.DrawDepths.Stairs));
     }
 
     BaseCreature player;
