@@ -1,5 +1,6 @@
 package sps.text;
 
+import com.badlogic.gdx.graphics.Color;
 import sps.core.Point2;
 
 import java.util.ArrayList;
@@ -40,11 +41,17 @@ public class TextPool {
         return write(message, position, lifeInSeconds, TextEffects.None);
     }
 
-    public Text write(String message, Point2 position, float lifeInSeconds, TextEffect effect) {
+    public Text write(String message, Point2 position, float lifeInSeconds, TextEffect effect, Color color, float scale) {
         Text result = texts.get(index);
         result.reset(position, message, 1, lifeInSeconds, effect);
+        result.setColor(color);
+        result.setScale(scale);
         index = (index + 1) % texts.size();
         return result;
+    }
+
+    public Text write(String message, Point2 position, float lifeInSeconds, TextEffect effect) {
+        return write(message, position, lifeInSeconds, effect, Color.WHITE, 1f);
     }
 
     public void draw() {

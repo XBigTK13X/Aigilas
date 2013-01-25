@@ -10,6 +10,7 @@ import sps.core.Point2;
 import sps.core.Settings;
 import sps.graphics.Renderer;
 import sps.text.Text;
+import sps.text.TextEffects;
 import sps.text.TextPool;
 
 public class SkillHud extends BaseHud {
@@ -40,7 +41,7 @@ public class SkillHud extends BaseHud {
             if (skillHeader != null) {
                 skillHeader.hide();
             }
-            skillHeader = TextPool.get().write(getSkillStrings(), getSkillAnchor().add(Settings.get().spriteWidth, 0));
+            skillHeader = TextPool.get().write(getSkillStrings(), getSkillAnchor().add(Settings.get().spriteWidth, 0), Text.NotTimed, TextEffects.None, Color.WHITE, .6f);
         }
     }
 

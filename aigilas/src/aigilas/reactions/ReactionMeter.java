@@ -5,6 +5,8 @@ import aigilas.GameplayLogger;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
 import aigilas.entities.ReactionMarker;
+import com.badlogic.gdx.graphics.Color;
+import sps.text.TextEffects;
 import sps.text.TextPool;
 
 import java.util.ArrayList;
@@ -95,7 +97,7 @@ public class ReactionMeter {
                 if (reaction != null) {
                     reaction.affect(_parent);
                     GameplayLogger.log(_parent + " affected by " + reactionId.toString());
-                    TextPool.get().write(reactionId.toString(), _parent.getLocation(), .5f);
+                    TextPool.get().write(reactionId.toString(), _parent.getLocation(), .5f, TextEffects.Fountain, Color.WHITE, .5f);
                 }
             }
             _elements.clear();

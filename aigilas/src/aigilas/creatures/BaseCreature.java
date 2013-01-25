@@ -23,8 +23,8 @@ import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
 import aigilas.strategies.StrategyPlan;
 import aigilas.strategies.TargetSet;
+import com.badlogic.gdx.graphics.Color;
 import sps.bridge.*;
-import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.core.Settings;
 import sps.entities.CoordVerifier;
@@ -230,6 +230,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     }
 
     private List<Entity> darkness;
+
     @Override
     public void draw() {
         if (Settings.get().viewPaths) {
@@ -238,8 +239,8 @@ public abstract class BaseCreature extends Entity implements IActor {
                 path.draw();
             }
         }
-        darkness = EntityManager.get().getEntities(EntityTypes.get(Aigilas.Entities.Darkness),getLocation());
-        if((darkness.size() > 0 && ((Darkness)darkness.get(0)).beingLit()) || darkness.size() == 0){
+        darkness = EntityManager.get().getEntities(EntityTypes.get(Aigilas.Entities.Darkness), getLocation());
+        if ((darkness.size() > 0 && ((Darkness) darkness.get(0)).beingLit()) || darkness.size() == 0) {
             super.draw();
             _combo.draw();
         }
@@ -341,10 +342,13 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (damage < 0) {
                 textPrepend = "+";
             }
-            TextPool.get().write(textPrepend + StringStorage.get(Math.abs(damage)), new Point2(getLocation().PosX + Settings.get().spriteWidth / 3, getLocation().PosY + Settings.get().spriteHeight), .5f, TextEffects.Fountain);
+
+            TextPool.get().write(textPrepend + StringStorage.get(Math.abs(damage)), new Point2(getLocation().PosX + Settings.get().spriteWidth / 3, getLocation().PosY + Settings.get().spriteHeight), .5f, TextEffects.Fountain, (_actorType == ActorTypes.get(Sps.Actors.Player)) ? Color.WHITE : Color.BLACK, .6f);
         }
         if (damage > 0 || (damage < 0 && _statuses.allows(CreatureAction.ReceiveHealing))) {
-            GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
+            if (Config.get().gameplayVerbose) {
+                GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
+            }
             if (_actorType != ActorTypes.get(Aigilas.Actors.Dummy)) {
                 adjust((statType == null) ? StatType.Health : statType, -damage);
             }
@@ -494,7 +498,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             lastSum = _baseStats.getSum();
             _skills.useActive();
             if (lastSum != _baseStats.getSum()) {
-                TextPool.get().write(getActiveSkillName(), new Point2(getLocation().PosX, getLocation().PosY + Settings.get().spriteHeight), .5f);
+                TextPool.get().write(getActiveSkillName(), new Point2(getLocation().PosX, getLocation().PosY + Settings.get().spriteHeight), .5f, TextEffects.Fountain, Color.WHITE, .8f);
             }
         }
     }

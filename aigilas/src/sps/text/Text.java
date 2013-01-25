@@ -20,8 +20,10 @@ public class Text {
     private float yVel;
     private float dX;
     private float dY;
+    private Color _color;
 
     public Text() {
+        _color = Color.WHITE;
     }
 
     public void reset(Point2 position, String message, float scale, float lifeInSeconds, TextEffect effect) {
@@ -53,7 +55,7 @@ public class Text {
     }
 
     public void draw() {
-        Renderer.get().draw(message, position, Color.WHITE, scale, DrawDepths.get(Sps.DrawDepths.Default_Text));
+        Renderer.get().draw(message, position, _color, scale, DrawDepths.get(Sps.DrawDepths.Default_Text));
     }
 
     public boolean isVisible() {
@@ -74,5 +76,13 @@ public class Text {
     public void setAccel(float dX, float dY) {
         this.dX = dX;
         this.dY = dY;
+    }
+
+    public void setColor(Color color) {
+        _color = color;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 }
