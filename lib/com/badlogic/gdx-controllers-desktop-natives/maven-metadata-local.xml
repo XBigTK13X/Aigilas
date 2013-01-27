@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.badlogic</groupId>
+  <artifactId>gdx-controllers-desktop-natives</artifactId>
+  <versioning>
+    <release>2013.01.27-nightly</release>
+    <versions>
+      <version>2013.01.27-nightly</version>
+    </versions>
+    <lastUpdated>20130127125752</lastUpdated>
+  </versioning>
+</metadata>

@@ -31,27 +31,42 @@
         <dependency>
             <groupId>com.badlogic</groupId>
             <artifactId>gdx</artifactId>
-            <version>2013.01.10-nightly</version>
+            <version>2013.01.27-nightly</version>
         </dependency>
         <dependency>
             <groupId>com.badlogic</groupId>
             <artifactId>gdx-openal</artifactId>
-            <version>2013.01.10-nightly</version>
+            <version>2013.01.27-nightly</version>
         </dependency>
         <dependency>
             <groupId>com.badlogic</groupId>
             <artifactId>gdx-natives</artifactId>
-            <version>2013.01.10-nightly</version>
+            <version>2013.01.27-nightly</version>
         </dependency>
         <dependency>
             <groupId>com.badlogic</groupId>
             <artifactId>gdx-backend-lwjgl</artifactId>
-            <version>2013.01.10-nightly</version>
+            <version>2013.01.27-nightly</version>
         </dependency>
         <dependency>
             <groupId>com.badlogic</groupId>
             <artifactId>gdx-backend-lwjgl-natives</artifactId>
-            <version>2013.01.10-nightly</version>
+            <version>2013.01.27-nightly</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-controllers</artifactId>
+            <version>2013.01.27-nightly</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-controllers-desktop</artifactId>
+            <version>2013.01.27-nightly</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogic</groupId>
+            <artifactId>gdx-controllers-desktop-natives</artifactId>
+            <version>2013.01.27-nightly</version>
         </dependency>
     </dependencies>
 
