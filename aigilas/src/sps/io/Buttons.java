@@ -1,7 +1,5 @@
 package sps.io;
 
-import sps.core.Logger;
-
 public enum Buttons {
     LeftStickButton,
     LeftStickUp,
@@ -34,7 +32,6 @@ public enum Buttons {
                 return key;
             }
         }
-        Logger.info("Unknown button being bound: " + s);
         return null;
     }
 }

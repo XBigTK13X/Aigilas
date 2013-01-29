@@ -1,17 +1,83 @@
 package sps.io;
 
 import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
+import com.badlogic.gdx.math.Vector3;
 
 public class XBox360Controller {
     private static XBox360Controller instance = null;
 
+    private static ControllerListener initTriggers = new ControllerListener() {
+        @Override
+        public void connected(Controller controller) {
+        }
+
+        @Override
+        public void disconnected(Controller controller) {
+        }
+
+        @Override
+        public boolean buttonDown(Controller controller, int i) {
+            return false;
+        }
+
+        @Override
+        public boolean buttonUp(Controller controller, int i) {
+            return false;
+        }
+
+        @Override
+        public boolean axisMoved(Controller controller, int axisIndex, float value) {
+            if (axisIndex == 5) {
+                XBox360Controller.RightShoulderInit();
+            }
+            if (axisIndex == 2) {
+                XBox360Controller.LeftShoulderInit();
+            }
+            return false;
+        }
+
+        @Override
+        public boolean povMoved(Controller controller, int i, PovDirection povDirection) {
+            return false;
+        }
+
+        @Override
+        public boolean xSliderMoved(Controller controller, int i, boolean b) {
+            return false;
+        }
+
+        @Override
+        public boolean ySliderMoved(Controller controller, int i, boolean b) {
+            return false;
+        }
+
+        @Override
+        public boolean accelerometerMoved(Controller controller, int i, Vector3 vector3) {
+            return false;
+        }
+    };
+
     public static XBox360Controller get() {
         if (instance == null) {
+            Controllers.addListener(initTriggers);
             instance = new XBox360Controller();
         }
         return instance;
+    }
+
+    private static boolean rightShoulderInit = false;
+
+    public static void RightShoulderInit() {
+        rightShoulderInit = true;
+    }
+
+    private static boolean leftShoulderInit = false;
+
+    public static void LeftShoulderInit() {
+        leftShoulderInit = true;
     }
 
     private XBox360Controller() {
@@ -48,9 +114,9 @@ public class XBox360Controller {
             case RightStickRight:
                 return controller.getAxis(3) > deadZone;
             case RightTrigger:
-                return controller.getAxis(5) > zeroPoint;
+                return controller.getAxis(5) > zeroPoint && rightShoulderInit;
             case LeftTrigger:
-                return controller.getAxis(2) > zeroPoint;
+                return controller.getAxis(2) > zeroPoint && leftShoulderInit;
             case RightShoulder:
                 return controller.getButton(5);
             case LeftShoulder:
