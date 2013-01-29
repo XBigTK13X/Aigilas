@@ -1,23 +1,32 @@
 package sps.io;
 
-public enum Buttons {
+import sps.core.Logger;
 
+public enum Buttons {
+    LeftStickButton,
     LeftStickUp,
     LeftStickDown,
     LeftStickLeft,
     LeftStickRight,
+    RightStickButton,
+    RightStickUp,
+    RightStickDown,
+    RightStickLeft,
+    RightStickRight,
     RightTrigger,
-    DPadUp,
-    X,
-    Start,
-    Back,
+    LeftTrigger,
     RightShoulder,
     LeftShoulder,
+    DPadUp,
+    DPadLeft,
+    DPadRight,
+    DPadDown,
+    Start,
+    Back,
     A,
-    LeftTrigger,
+    X,
     Y,
-    B,
-    DPadDown;
+    B;
 
     public static Buttons get(String s) {
         for (Buttons key : values()) {
@@ -25,6 +34,7 @@ public enum Buttons {
                 return key;
             }
         }
+        Logger.info("Unknown button being bound: " + s);
         return null;
     }
 }

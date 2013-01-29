@@ -1,11 +1,8 @@
 package sps.io;
 
 import com.badlogic.gdx.Gdx;
-import sps.bridge.Command;
-import sps.bridge.Commands;
-import sps.bridge.Context;
-import sps.bridge.Contexts;
-import sps.bridge.Sps;
+import sps.bridge.*;
+import sps.core.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,8 +43,12 @@ public class Input {
            * command.button());
            */
         // $$$
-        boolean gamepadActive = false;
-        return gamepadActive || (playerIndex == stateProvider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode()));
+        boolean gamepadActive = XBox360Controller.get().isActive(command.button(), playerIndex);
+        if (gamepadActive) {
+            Logger.info(command.name() + "");
+        }
+        boolean keyboardActive = playerIndex == stateProvider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
+        return gamepadActive || keyboardActive;
     }
 
     private static boolean isDown(Command command, int playerIndex) {
