@@ -5,6 +5,10 @@ import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
+import org.apache.commons.lang3.SystemUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class XBox360Controller {
     private static XBox360Controller instance = null;
@@ -20,27 +24,31 @@ public class XBox360Controller {
 
         @Override
         public boolean buttonDown(Controller controller, int i) {
+            get().controllers.get(controller).buttons.put(i, true);
             return false;
         }
 
         @Override
         public boolean buttonUp(Controller controller, int i) {
+            get().controllers.get(controller).buttons.put(i, false);
             return false;
         }
 
         @Override
         public boolean axisMoved(Controller controller, int axisIndex, float value) {
-            if (axisIndex == 5) {
+            if (axisIndex == Buttons.RightShoulder.Index) {
                 XBox360Controller.RightShoulderInit();
             }
-            if (axisIndex == 2) {
+            if (axisIndex == Buttons.LeftShoulder.Index) {
                 XBox360Controller.LeftShoulderInit();
             }
+            get().controllers.get(controller).axes.put(axisIndex, value);
             return false;
         }
 
         @Override
         public boolean povMoved(Controller controller, int i, PovDirection povDirection) {
+            get().controllers.get(controller).povs.put(i, povDirection);
             return false;
         }
 
@@ -80,12 +88,39 @@ public class XBox360Controller {
         leftShoulderInit = true;
     }
 
-    private XBox360Controller() {
+    private class ControllerState {
+        private Map<Integer, Float> axes = new HashMap<Integer, Float>();
+        private Map<Integer, Boolean> buttons = new HashMap<Integer, Boolean>();
+        private Map<Integer, PovDirection> povs = new HashMap<Integer, PovDirection>();
+    }
 
+    private Map<Controller, ControllerState> controllers = new HashMap<Controller, ControllerState>();
+
+    private XBox360Controller() {
+        for (Controller c : Controllers.getControllers()) {
+            controllers.put(c, new ControllerState());
+            for (Buttons btn : Buttons.values()) {
+                controllers.get(c).buttons.put(btn.Index, false);
+                controllers.get(c).axes.put(btn.Index, 0f);
+                controllers.get(c).povs.put(btn.Index, PovDirection.center);
+            }
+        }
     }
 
     private float deadZone = .5f;
     private float zeroPoint = -.5f;
+
+    private boolean isDown(Controller controller, Integer index) {
+        return controllers.get(controller).buttons.get(index);
+    }
+
+    private boolean isPositive(Controller controller, Integer axis) {
+        return controllers.get(controller).axes.get(axis) > deadZone;
+    }
+
+    private boolean isNegative(Controller controller, Integer axis) {
+        return controllers.get(controller).axes.get(axis) < -deadZone;
+    }
 
     public boolean isActive(Buttons button, int controllerIndex) {
         if (button == null || Controllers.getControllers().size <= controllerIndex) {
@@ -94,53 +129,59 @@ public class XBox360Controller {
         Controller controller = Controllers.getControllers().get(controllerIndex);
         switch (button) {
             case LeftStickButton:
-                return controller.getButton(9);
+                return isDown(controller, button.Index);
             case LeftStickUp:
-                return controller.getAxis(1) < -deadZone;
+                return isNegative(controller, button.Index);
             case LeftStickDown:
-                return controller.getAxis(1) > deadZone;
+                return isPositive(controller, button.Index);
             case LeftStickLeft:
-                return controller.getAxis(0) < -deadZone;
+                return isNegative(controller, button.Index);
             case LeftStickRight:
-                return controller.getAxis(0) > deadZone;
+                return isPositive(controller, button.Index);
             case RightStickButton:
-                return controller.getButton(10);
+                return isDown(controller, button.Index);
             case RightStickUp:
-                return controller.getAxis(4) < -deadZone;
+                return isNegative(controller, button.Index);
             case RightStickDown:
-                return controller.getAxis(4) > deadZone;
+                return isPositive(controller, button.Index);
             case RightStickLeft:
-                return controller.getAxis(3) < -deadZone;
+                return isNegative(controller, button.Index);
             case RightStickRight:
-                return controller.getAxis(3) > deadZone;
+                return isPositive(controller, button.Index);
             case RightTrigger:
-                return controller.getAxis(5) > zeroPoint && rightShoulderInit;
+                if (SystemUtils.IS_OS_WINDOWS) {
+                    return controller.getAxis(button.Index) < zeroPoint;
+                }
+                return controller.getAxis(button.Index) > zeroPoint && rightShoulderInit;
             case LeftTrigger:
-                return controller.getAxis(2) > zeroPoint && leftShoulderInit;
+                if (SystemUtils.IS_OS_WINDOWS) {
+                    return controller.getAxis(button.Index) > -zeroPoint;
+                }
+                return controller.getAxis(button.Index) > zeroPoint && leftShoulderInit;
             case RightShoulder:
-                return controller.getButton(5);
+                return isDown(controller, button.Index);
             case LeftShoulder:
-                return controller.getButton(4);
+                return isDown(controller, button.Index);
             case Start:
-                return controller.getButton(7);
+                return isDown(controller, button.Index);
             case Back:
-                return controller.getButton(6);
+                return isDown(controller, button.Index);
             case X:
-                return controller.getButton(3);
+                return isDown(controller, button.Index);
             case A:
-                return controller.getButton(0);
+                return isDown(controller, button.Index);
             case Y:
-                return controller.getButton(2);
+                return isDown(controller, button.Index);
             case B:
-                return controller.getButton(1);
+                return isDown(controller, button.Index);
             case DPadUp:
-                return controller.getPov(0) == PovDirection.north;
+                return controller.getPov(button.Index) == PovDirection.north;
             case DPadDown:
-                return controller.getPov(0) == PovDirection.south;
+                return controller.getPov(button.Index) == PovDirection.south;
             case DPadLeft:
-                return controller.getPov(0) == PovDirection.west;
+                return controller.getPov(button.Index) == PovDirection.west;
             case DPadRight:
-                return controller.getPov(0) == PovDirection.east;
+                return controller.getPov(button.Index) == PovDirection.east;
         }
         return false;
     }

@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 public class GamepadTest extends InputAdapter implements ApplicationListener {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
+        cfg.useGL20 = true;
         new LwjglApplication(new GamepadTest(), cfg);
     }
 
@@ -59,12 +60,13 @@ public class GamepadTest extends InputAdapter implements ApplicationListener {
 
             @Override
             public boolean buttonDown(Controller controller, int buttonIndex) {
-                print("#" + indexOf(controller) + ", button " + buttonIndex + " down");
+                print("#" + indexOf(controller) + ", button " + buttonIndex + " down" + controller.getButton(buttonIndex));
                 return false;
             }
 
             @Override
             public boolean buttonUp(Controller controller, int buttonIndex) {
+                print("=============================clear=================");
                 print("#" + indexOf(controller) + ", button " + buttonIndex + " up");
                 return false;
             }
@@ -120,18 +122,6 @@ public class GamepadTest extends InputAdapter implements ApplicationListener {
     @Override
     public void dispose() {
     }
-
-    public void drender() {
-        String out = "";
-        for (Controller c : Controllers.getControllers()) {
-            for (int ii = 0; ii < 20; ii++) {
-                if (c.getButton(ii)) {
-                    System.out.println(ii);
-                }
-            }
-        }
-    }
-
 
     private void print(String message) {
         System.out.println(message);
