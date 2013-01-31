@@ -3,9 +3,11 @@ package aigilas.net;
 import aigilas.Config;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
+import sps.bridge.Commands;
 import sps.core.Logger;
 import sps.core.RNG;
 import sps.io.CommandState;
+import sps.io.Input;
 
 import java.net.ConnectException;
 import java.net.Socket;
@@ -101,6 +103,13 @@ public class LanClient extends IClient {
     public void setState(Command command, int playerIndex, boolean isActive) {
         if (isActive != state.isActive(playerIndex, command)) {
             sendMessage(Message.createMovement(command, playerIndex, isActive));
+        }
+    }
+
+    @Override
+    public void pollLocalState() {
+        for (Command command : Commands.values()) {
+            setState(command, getFirstPlayerIndex(), Input.detectState(command, getFirstPlayerIndex()));
         }
     }
 

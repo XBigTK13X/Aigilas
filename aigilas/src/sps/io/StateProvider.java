@@ -8,4 +8,6 @@ public interface StateProvider {
     public int getFirstPlayerIndex();
 
     public void setState(Command command, int playerIndex, boolean isActive);
+
+    public void pollLocalState();
 }

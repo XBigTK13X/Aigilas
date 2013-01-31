@@ -3,8 +3,10 @@ package aigilas.net;
 import aigilas.Config;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
+import sps.bridge.Commands;
 import sps.core.RNG;
 import sps.io.CommandState;
+import sps.io.Input;
 
 public class LocalClient extends IClient {
     private boolean _isGameStarting;
@@ -44,8 +46,9 @@ public class LocalClient extends IClient {
         state.setState(playerIndex, command, isActive);
     }
 
+
     public int getPlayerCount() {
-        return 1;
+        return 2;
     }
 
     public void startGame() {
@@ -68,5 +71,13 @@ public class LocalClient extends IClient {
     }
 
     public void prepareForNextTurn() {
+    }
+
+    public void pollLocalState() {
+        for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
+            for (Command command : Commands.values()) {
+                setState(command, ii, Input.detectState(command, ii));
+            }
+        }
     }
 }

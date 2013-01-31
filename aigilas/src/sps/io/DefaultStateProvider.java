@@ -19,4 +19,9 @@ public class DefaultStateProvider implements StateProvider {
     public void setState(Command command, int playerIndex, boolean isActive) {
         state.setState(playerIndex, command, isActive);
     }
+
+    @Override
+    public void pollLocalState() {
+
+    }
 }
