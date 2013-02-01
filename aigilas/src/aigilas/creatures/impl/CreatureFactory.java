@@ -20,12 +20,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CreatureFactory {
-    private static int __playerCount = 0;
+    private static int activePlayers = 0;
 
     public static BaseCreature create(ActorType actorType, Point2 position) {
         BaseEnemy result;
         if (actorType.is(Sps.Actors.Player)) {
-            result = new Player(__playerCount++);
+            result = new Player(activePlayers++);
         }
         else {
             result = generateCreature(actorType);
@@ -165,7 +165,7 @@ public class CreatureFactory {
 
     public static void reset() {
         __remainingBosses = new LinkedList<ActorType>(Arrays.asList(ActorTypes.get(Aigilas.Actors.Wrath), ActorTypes.get(Aigilas.Actors.Envy), ActorTypes.get(Aigilas.Actors.Pride), ActorTypes.get(Aigilas.Actors.Sloth), ActorTypes.get(Aigilas.Actors.Greed), ActorTypes.get(Aigilas.Actors.Lust), ActorTypes.get(Aigilas.Actors.Gluttony)));
-        __playerCount = 0;
+        activePlayers = 0;
     }
 
     public static int bossesRemaining() {

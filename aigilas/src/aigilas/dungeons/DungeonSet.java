@@ -19,14 +19,14 @@ public class DungeonSet {
     }
 
     public void gotoNext() {
-        _floors.get(_currentFloor).cacheContents();
+        _floors.get(_currentFloor).preserveFloor();
         _currentFloor++;
         loadOrCreateDungeon(false);
     }
 
     public boolean gotoPrevious() {
         if (_currentFloor > 0) {
-            _floors.get(_currentFloor).cacheContents();
+            _floors.get(_currentFloor).preserveFloor();
             _currentFloor--;
             loadOrCreateDungeon(true);
             return true;
@@ -35,8 +35,9 @@ public class DungeonSet {
     }
 
     private int count = 0;
+
     private void loadOrCreateDungeon(boolean goingUp) {
-        Logger.info("Creating:" + count++ + ", goingUp: "+goingUp);
+        Logger.info("Creating:" + count++ + ", goingUp: " + goingUp);
         if (!_floors.containsKey(_currentFloor)) {
             _floors.put(_currentFloor, new DungeonFloor(_floors.get(_currentFloor - 1).getDownstairsLocation()));
             Dungeon.increaseFloorCount();

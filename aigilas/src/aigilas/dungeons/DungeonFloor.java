@@ -10,6 +10,7 @@ import aigilas.net.Client;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
 import sps.bridge.Sps;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -61,7 +62,7 @@ public class DungeonFloor {
         placeFloor();
         Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
         List<Point2> neighbors = spawn.getNeighbors();
-        for (Entity player : EntityCache.get().retrieveCache()){
+        for (Entity player : EntityCache.get().flushCache()) {
             player.setLocation(getRandomNeighbor(neighbors));
             _contents.add(player);
         }
@@ -73,10 +74,12 @@ public class DungeonFloor {
         EntityManager.get().update();
     }
 
-    public void cacheContents(){
-        for (Entity player : EntityManager.get().getEntities(EntityTypes.get(Sps.Actors.Player))) {
-            EntityCache.get().addToCache(player);
-            EntityManager.get().removeEntity(player);
+    public void preserveFloor() {
+        List<Entity> players = EntityManager.get().getPlayers();
+        Logger.info("Detected " + players.size() + " players");
+        for (int ii = 0; ii < players.size(); ii++) {
+            EntityCache.get().addToCache(players.get(ii));
+            EntityManager.get().removeEntity(players.get(ii));
         }
         _contents = new ArrayList<Entity>(EntityCache.get().getEntitiesToCache());
     }
@@ -89,7 +92,7 @@ public class DungeonFloor {
         for (Entity[] row : dungeon) {
             for (Entity tile : row) {
                 if (tile != null) {
-                    if (!EntityCache.get().staticallyCaches(tile.getEntityType())) {
+                    if (!EntityCache.get().isReusable(tile.getEntityType())) {
                         _contents.add(tile);
                     }
                     EntityManager.get().addEntity(tile);
@@ -116,17 +119,6 @@ public class DungeonFloor {
             EntityManager.get().addEntities(cache);
             _contents.addAll(cache);
         }
-    }
-
-    private void placeAltars() {
-        int startY = Settings.get().tileMapHeight / 2;
-        int startX = Settings.get().tileMapWidth / 3 - 1;
-        for (GodId god : GodId.values()) {
-            dungeon[startX][startY] = new Altar(new Point2(startX, startY), god);
-            startX += 2;
-        }
-
-        CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
     }
 
     private Point2 findRandomFreeTile() {
@@ -163,22 +155,31 @@ public class DungeonFloor {
         }
     }
 
-    private void placeFloor() {
-
-        for (Entity e : EntityCache.get().retrieve(EntityTypes.get(Aigilas.Entities.Darkness))) {
-            ((Darkness) e).changeOpacity();
+    private void placeAltars() {
+        int startY = Settings.get().tileMapHeight / 2;
+        int startX = Settings.get().tileMapWidth / 3 - 1;
+        for (GodId god : GodId.values()) {
+            dungeon[startX][startY] = new Altar(new Point2(startX, startY), god);
+            startX += 2;
         }
-        EntityManager.get().addEntities(EntityCache.get().retrieve(EntityTypes.get(Sps.Entities.Floor)));
-        EntityManager.get().addEntities(EntityCache.get().retrieve(EntityTypes.get(Aigilas.Entities.Darkness)));
+
+        CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
     }
 
-    private void placeBossesForTesting(int amountOfCreatures){
+    private void placeFloor() {
+        for (Entity e : EntityCache.get().getReusable(EntityTypes.get(Aigilas.Entities.Darkness))) {
+            ((Darkness) e).changeOpacity();
+        }
+        EntityManager.get().addEntities(EntityCache.get().getReusable(EntityTypes.get(Sps.Entities.Floor)));
+        EntityManager.get().addEntities(EntityCache.get().getReusable(EntityTypes.get(Aigilas.Entities.Darkness)));
+    }
+
+    private void placeBossesForTesting(int amountOfCreatures) {
         Point2 random = new Point2(findRandomFreeTile());
         dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Sloth), random);
-        while(CreatureFactory.bossesRemaining() > 0){
-                CreatureFactory.createNextBoss(Point2.Zero);
+        while (CreatureFactory.bossesRemaining() > 0) {
+            CreatureFactory.createNextBoss(Point2.Zero);
         }
-
     }
 
     private void placeCreatures(int amountOfCreatures) {
@@ -196,20 +197,12 @@ public class DungeonFloor {
     }
 
     private void placeStairs() {
-        placeUpstairs();
-        placeDownstairs();
-    }
-
-    private void placeDownstairs() {
-        _downSpawnLocation.copy(findRandomFreeTile(2));
-        dungeon[_downSpawnLocation.GridX][_downSpawnLocation.GridY] = new Downstairs(_downSpawnLocation);
-    }
-
-    private void placeUpstairs() {
         if (_upSpawnLocation.isZero()) {
             _upSpawnLocation.copy(findRandomFreeTile(2));
         }
         dungeon[_upSpawnLocation.GridX][_upSpawnLocation.GridY] = new Upstairs(_upSpawnLocation);
+        _downSpawnLocation.copy(findRandomFreeTile(2));
+        dungeon[_downSpawnLocation.GridX][_downSpawnLocation.GridY] = new Downstairs(_downSpawnLocation);
     }
 
     private void placeItems(int amountToPlace) {

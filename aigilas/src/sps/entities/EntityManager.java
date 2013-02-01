@@ -1,10 +1,7 @@
 package sps.entities;
 
-import sps.bridge.ActorType;
-import sps.bridge.ActorTypes;
-import sps.bridge.EntityType;
-import sps.bridge.EntityTypes;
-import sps.bridge.Sps;
+import sps.bridge.*;
+import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -59,6 +56,7 @@ public class EntityManager {
             IActor actor = (IActor) entity;
             if (actor.getActorType() == ActorTypes.get(Sps.Actors.Player)) {
                 players.add(entity);
+                Logger.info("Adding");
             }
             if (!actorBuckets.containsKey(actor)) {
                 actorBuckets.put(actor.getActorType(), new ArrayList<IActor>());
@@ -88,7 +86,7 @@ public class EntityManager {
     private final List<Entity> _gopResults = new ArrayList<Entity>();
     private final List<Entity> _goResults = new ArrayList<Entity>();
 
-    public List<Entity> getAllEntities(){
+    public List<Entity> getAllEntities() {
         return _contents;
     }
 
@@ -207,7 +205,6 @@ public class EntityManager {
             actorBuckets.remove(actor);
         }
         entityBuckets.get(target.getEntityType()).remove(target);
-
     }
 
     public void clear() {
@@ -215,6 +212,7 @@ public class EntityManager {
         _gridContents.clear();
         actorBuckets.clear();
         entityBuckets.clear();
+        players.clear();
     }
 
     public void update() {
