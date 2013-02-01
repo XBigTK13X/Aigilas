@@ -6,6 +6,7 @@ import aigilas.creatures.StatsRegistry;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFloor;
+import aigilas.dungeons.EntityCache;
 import aigilas.hud.HudRenderer;
 import aigilas.net.Client;
 import aigilas.reactions.ReactionRegistry;
@@ -32,8 +33,8 @@ public class GameplayState implements State {
         PlayerClassRegistry.get();
         StatsRegistry.get();
         EntityManager.reset();
-        EntityManager.get().addCacheType(EntityTypes.get(Aigilas.Entities.Darkness));
-        EntityManager.get().addCacheType(EntityTypes.get(Sps.Entities.Floor));
+        EntityCache.get().addCacheType(EntityTypes.get(Aigilas.Entities.Darkness));
+        EntityCache.get().addCacheType(EntityTypes.get(Sps.Entities.Floor));
         CreatureFactory.reset();
         Dungeon.start();
         DungeonFloor.reset();

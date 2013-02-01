@@ -3,13 +3,11 @@ package aigilas.dungeons;
 import aigilas.Aigilas;
 import aigilas.Config;
 import aigilas.creatures.impl.CreatureFactory;
-import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
 import aigilas.net.Client;
 import sps.bridge.ActorTypes;
-import sps.bridge.EntityType;
 import sps.bridge.EntityTypes;
 import sps.bridge.Sps;
 import sps.core.Point2;
@@ -17,16 +15,13 @@ import sps.core.RNG;
 import sps.core.Settings;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
-import sps.entities.IActor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class DungeonFloor {
     private static int enemyCapModifier = 0;
     private static int enemyBaseModifier = 0;
-    private int playerCount = Client.get().getPlayerCount();
 
     private List<Entity> _contents = new ArrayList<Entity>();
     private final Entity[][] dungeon = new Entity[Settings.get().tileMapWidth][Settings.get().tileMapHeight];
@@ -59,6 +54,68 @@ public class DungeonFloor {
         placeCreatures(enemiesToPlace);
         placeItems(RNG.next(Config.get().itemBase, Config.get().itemCap));
         transferDungeonState();
+    }
+
+    public void loadTiles(boolean goingUp) {
+        EntityManager.get().clear();
+        placeFloor();
+        Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
+        List<Point2> neighbors = spawn.getNeighbors();
+        for (Entity player : EntityCache.get().retrieveCache()){
+            player.setLocation(getRandomNeighbor(neighbors));
+            _contents.add(player);
+        }
+        for (Entity item : _contents) {
+            EntityManager.get().addEntity(item);
+        }
+
+        //Force an update so that tiles with dynamic sprites render correctly without any flicker
+        EntityManager.get().update();
+    }
+
+    public void cacheContents(){
+        for (Entity player : EntityManager.get().getEntities(EntityTypes.get(Sps.Actors.Player))) {
+            EntityCache.get().addToCache(player);
+            EntityManager.get().removeEntity(player);
+        }
+        _contents = new ArrayList<Entity>(EntityCache.get().getEntitiesToCache());
+    }
+
+    public Point2 getDownstairsLocation() {
+        return _downSpawnLocation;
+    }
+
+    public void transferDungeonState() {
+        for (Entity[] row : dungeon) {
+            for (Entity tile : row) {
+                if (tile != null) {
+                    if (!EntityCache.get().staticallyCaches(tile.getEntityType())) {
+                        _contents.add(tile);
+                    }
+                    EntityManager.get().addEntity(tile);
+                }
+            }
+        }
+
+        List<Entity> cache = EntityCache.get().flushCache();
+        List<Point2> neighbors = _upSpawnLocation.getNeighbors();
+
+        int playerCount = Client.get().getPlayerCount();
+        if (cache.size() == 0) {
+            if (Config.get().debugFourPlayers) {
+                playerCount = 4;
+            }
+            for (int ii = 0; ii < playerCount; ii++) {
+                _contents.add(CreatureFactory.create(ActorTypes.get(Sps.Actors.Player), getRandomNeighbor(neighbors)));
+            }
+        }
+        else {
+            for (Entity player : cache) {
+                player.setLocation(getRandomNeighbor(neighbors));
+            }
+            EntityManager.get().addEntities(cache);
+            _contents.addAll(cache);
+        }
     }
 
     private void placeAltars() {
@@ -106,25 +163,13 @@ public class DungeonFloor {
         }
     }
 
-    private static HashMap<EntityType, List<Entity>> staticTileCache;
-
     private void placeFloor() {
-        if (staticTileCache == null) {
-            staticTileCache = new HashMap<EntityType, List<Entity>>();
-            staticTileCache.put(EntityTypes.get(Sps.Entities.Floor), new ArrayList<Entity>());
-            staticTileCache.put(EntityTypes.get(Aigilas.Entities.Darkness), new ArrayList<Entity>());
-            for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
-                for (int jj = 1; jj < Settings.get().tileMapHeight - 1; jj++) {
-                    staticTileCache.get(EntityTypes.get(Sps.Entities.Floor)).add(new Floor(new Point2(ii, jj)));
-                    staticTileCache.get(EntityTypes.get(Aigilas.Entities.Darkness)).add(new Darkness(new Point2(ii, jj)));
-                }
-            }
-        }
-        for (Entity e : staticTileCache.get(EntityTypes.get(Aigilas.Entities.Darkness))) {
+
+        for (Entity e : EntityCache.get().retrieve(EntityTypes.get(Aigilas.Entities.Darkness))) {
             ((Darkness) e).changeOpacity();
         }
-        EntityManager.get().addEntities(staticTileCache.get(EntityTypes.get(Sps.Entities.Floor)));
-        EntityManager.get().addEntities(staticTileCache.get(EntityTypes.get(Aigilas.Entities.Darkness)));
+        EntityManager.get().addEntities(EntityCache.get().retrieve(EntityTypes.get(Sps.Entities.Floor)));
+        EntityManager.get().addEntities(EntityCache.get().retrieve(EntityTypes.get(Aigilas.Entities.Darkness)));
     }
 
     private void placeBossesForTesting(int amountOfCreatures){
@@ -172,82 +217,6 @@ public class DungeonFloor {
             amountToPlace--;
             Point2 randomPoint = findRandomFreeTile();
             dungeon[randomPoint.GridX][randomPoint.GridY] = ItemFactory.createRandomPlain(randomPoint);
-        }
-    }
-
-    public Point2 getDownstairsLocation() {
-        return _downSpawnLocation;
-    }
-
-    //Inter-floor caching.
-    public void addToCache(Entity content) {
-        _cache.add(content);
-    }
-
-    public List<Entity> flushCache() {
-        ArrayList<Entity> result = new ArrayList<Entity>(_cache);
-        _cache.clear();
-        return result;
-    }
-
-    private static List<Entity> _cache = new ArrayList<Entity>();
-    private List<Entity> playerCache;
-
-    public void loadTiles(boolean goingUp) {
-        EntityManager.get().clear();
-        placeFloor();
-        playerCache = flushCache();
-        Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
-        List<Point2> neighbors = spawn.getNeighbors();
-        for (Entity player : playerCache) {
-            player.setLocation(getRandomNeighbor(neighbors));
-            _contents.add(player);
-        }
-        for (Entity item : _contents) {
-            EntityManager.get().addEntity(item);
-        }
-
-        //Force an update so that tiles with dynamic sprites render correctly without any flicker
-        EntityManager.get().update();
-    }
-
-    public void cacheContents() {
-        for (IActor player : EntityManager.get().getActors(ActorTypes.get(Sps.Actors.Player))) {
-            addToCache((Entity) player);
-            EntityManager.get().removeEntity((Entity) player);
-        }
-        _contents = new ArrayList<Entity>(EntityManager.get().getEntitiesToCache());
-    }
-
-    private void transferDungeonState() {
-        for (Entity[] row : dungeon) {
-            for (Entity tile : row) {
-                if (tile != null) {
-                    if (staticTileCache == null || !staticTileCache.containsKey(tile.getEntityType())) {
-                        _contents.add(tile);
-                    }
-                    EntityManager.get().addEntity(tile);
-                }
-            }
-        }
-
-        List<Entity> cache = flushCache();
-        List<Point2> neighbors = _upSpawnLocation.getNeighbors();
-
-        if (cache.size() == 0) {
-            if (Config.get().debugFourPlayers) {
-                playerCount = 4;
-            }
-            for (int ii = 0; ii < playerCount; ii++) {
-                _contents.add(CreatureFactory.create(ActorTypes.get(Sps.Actors.Player), getRandomNeighbor(neighbors)));
-            }
-        }
-        else {
-            for (Entity player : cache) {
-                player.setLocation(getRandomNeighbor(neighbors));
-            }
-            EntityManager.get().addEntities(cache);
-            _contents.addAll(cache);
         }
     }
 }

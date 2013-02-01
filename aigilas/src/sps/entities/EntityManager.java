@@ -88,6 +88,10 @@ public class EntityManager {
     private final List<Entity> _gopResults = new ArrayList<Entity>();
     private final List<Entity> _goResults = new ArrayList<Entity>();
 
+    public List<Entity> getAllEntities(){
+        return _contents;
+    }
+
     public List<Entity> getEntities(EntityType type, Point2 target) {
         if (_contents != null) {
             _gopResults.clear();
@@ -284,22 +288,6 @@ public class EntityManager {
             }
         }
         return emptyLocations.get(RNG.next(0, emptyLocations.size()));
-    }
-
-    private List<EntityType> cacheIgnore = new ArrayList<EntityType>();
-
-    public void addCacheType(EntityType entityType) {
-        cacheIgnore.add(entityType);
-    }
-
-    public List<Entity> getEntitiesToCache() {
-        List<Entity> results = new ArrayList<Entity>();
-        for (Entity _content : _contents) {
-            if (!cacheIgnore.contains(_content.getEntityType())) {
-                results.add(_content);
-            }
-        }
-        return results;
     }
 
     public IActor getTouchingCreature(Entity entity) {

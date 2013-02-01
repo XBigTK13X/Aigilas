@@ -33,7 +33,6 @@ public class Dungeon {
 
     public static void start() {
         _world = new HashMap<Location, DungeonSet>();
-        _cache = new ArrayList<Entity>();
         _world.put(Location.Depths, new DungeonSet());
         __floorCount = 0;
         finalBossFloor = 0;

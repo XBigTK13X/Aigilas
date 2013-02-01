@@ -1,5 +1,6 @@
 package aigilas.dungeons;
 
+import sps.core.Logger;
 import sps.particles.ParticleEngine;
 
 import java.util.HashMap;
@@ -33,7 +34,9 @@ public class DungeonSet {
         return false;
     }
 
+    private int count = 0;
     private void loadOrCreateDungeon(boolean goingUp) {
+        Logger.info("Creating:" + count++ + ", goingUp: "+goingUp);
         if (!_floors.containsKey(_currentFloor)) {
             _floors.put(_currentFloor, new DungeonFloor(_floors.get(_currentFloor - 1).getDownstairsLocation()));
             Dungeon.increaseFloorCount();
