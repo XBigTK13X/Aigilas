@@ -15,7 +15,6 @@ public class Dungeon {
     private static int __floorCount = 0;
 
     private static HashMap<Location, DungeonSet> _world = new HashMap<Location, DungeonSet>();
-    private static List<Entity> _cache = new ArrayList<Entity>();
     private static int finalBossFloor = 0;
 
 
@@ -30,16 +29,6 @@ public class Dungeon {
 
     public static boolean getPreviousFloor() {
         return _world.get(Location.Depths).gotoPrevious();
-    }
-
-    public static void addToCache(Entity content) {
-        _cache.add(content);
-    }
-
-    public static List<Entity> flushCache() {
-        ArrayList<Entity> result = new ArrayList<Entity>(_cache);
-        _cache.clear();
-        return result;
     }
 
     public static void start() {

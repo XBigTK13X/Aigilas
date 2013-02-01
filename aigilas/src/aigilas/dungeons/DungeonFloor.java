@@ -72,67 +72,6 @@ public class DungeonFloor {
         CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
     }
 
-    private List<Entity> playerCache;
-
-    public void loadTiles(boolean goingUp) {
-        EntityManager.get().clear();
-        placeFloor();
-        playerCache = Dungeon.flushCache();
-        Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
-        List<Point2> neighbors = spawn.getNeighbors();
-        for (Entity player : playerCache) {
-            Player pl = ((Player) player);
-            pl.setLocation(getRandomNeighbor(neighbors));
-            _contents.add(pl);
-        }
-        for (Entity item : _contents) {
-            EntityManager.get().addEntity(item);
-        }
-
-        //Force an update so that tiles with dynamic sprites render correctly without any flicker
-        EntityManager.get().update();
-    }
-
-    public void cacheContents() {
-        for (IActor player : EntityManager.get().getActors(ActorTypes.get(Sps.Actors.Player))) {
-            Dungeon.addToCache((Entity) player);
-            EntityManager.get().removeEntity((Entity) player);
-        }
-        _contents = new ArrayList<Entity>(EntityManager.get().getEntitiesToCache());
-    }
-
-    private void transferDungeonState() {
-        for (Entity[] row : dungeon) {
-            for (Entity tile : row) {
-                if (tile != null) {
-                    if (staticTileCache == null || !staticTileCache.containsKey(tile.getEntityType())) {
-                        _contents.add(tile);
-                    }
-                    EntityManager.get().addEntity(tile);
-                }
-            }
-        }
-
-        List<Entity> cache = Dungeon.flushCache();
-        List<Point2> neighbors = _upSpawnLocation.getNeighbors();
-
-        if (cache.size() == 0) {
-            if (Config.get().debugFourPlayers) {
-                playerCount = 4;
-            }
-            for (int ii = 0; ii < playerCount; ii++) {
-                _contents.add(CreatureFactory.create(ActorTypes.get(Sps.Actors.Player), getRandomNeighbor(neighbors)));
-            }
-        }
-        else {
-            for (Entity player : cache) {
-                player.setLocation(getRandomNeighbor(neighbors));
-            }
-            EntityManager.get().addEntities(cache);
-            _contents.addAll(cache);
-        }
-    }
-
     private Point2 findRandomFreeTile() {
         return findRandomFreeTile(1);
     }
@@ -188,16 +127,16 @@ public class DungeonFloor {
         EntityManager.get().addEntities(staticTileCache.get(EntityTypes.get(Aigilas.Entities.Darkness)));
     }
 
-    private void placeCreatures(int amountOfCreatures) {
-//        $$$ Easiest way to test specific bosses
-//        Point2 random = new Point2(findRandomFreeTile());
-//        dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorTypes.get(Sps.Actors.Player)Sloth, random);
-//        while(CreatureFactory.bossesRemaining() > 0){
-//                CreatureFactory.createNextBoss(Point2.Zero);
-//        }
-//
-//        return;
+    private void placeBossesForTesting(int amountOfCreatures){
+        Point2 random = new Point2(findRandomFreeTile());
+        dungeon[random.GridX][random.GridY] = CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Sloth), random);
+        while(CreatureFactory.bossesRemaining() > 0){
+                CreatureFactory.createNextBoss(Point2.Zero);
+        }
 
+    }
+
+    private void placeCreatures(int amountOfCreatures) {
         if (Config.get().bossLevelMod <= 1 || Dungeon.getFloorCount() % Config.get().bossLevelMod == 1) {
             Point2 randomPoint = new Point2(findRandomFreeTile());
             dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
@@ -238,5 +177,77 @@ public class DungeonFloor {
 
     public Point2 getDownstairsLocation() {
         return _downSpawnLocation;
+    }
+
+    //Inter-floor caching.
+    public void addToCache(Entity content) {
+        _cache.add(content);
+    }
+
+    public List<Entity> flushCache() {
+        ArrayList<Entity> result = new ArrayList<Entity>(_cache);
+        _cache.clear();
+        return result;
+    }
+
+    private static List<Entity> _cache = new ArrayList<Entity>();
+    private List<Entity> playerCache;
+
+    public void loadTiles(boolean goingUp) {
+        EntityManager.get().clear();
+        placeFloor();
+        playerCache = flushCache();
+        Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
+        List<Point2> neighbors = spawn.getNeighbors();
+        for (Entity player : playerCache) {
+            player.setLocation(getRandomNeighbor(neighbors));
+            _contents.add(player);
+        }
+        for (Entity item : _contents) {
+            EntityManager.get().addEntity(item);
+        }
+
+        //Force an update so that tiles with dynamic sprites render correctly without any flicker
+        EntityManager.get().update();
+    }
+
+    public void cacheContents() {
+        for (IActor player : EntityManager.get().getActors(ActorTypes.get(Sps.Actors.Player))) {
+            addToCache((Entity) player);
+            EntityManager.get().removeEntity((Entity) player);
+        }
+        _contents = new ArrayList<Entity>(EntityManager.get().getEntitiesToCache());
+    }
+
+    private void transferDungeonState() {
+        for (Entity[] row : dungeon) {
+            for (Entity tile : row) {
+                if (tile != null) {
+                    if (staticTileCache == null || !staticTileCache.containsKey(tile.getEntityType())) {
+                        _contents.add(tile);
+                    }
+                    EntityManager.get().addEntity(tile);
+                }
+            }
+        }
+
+        List<Entity> cache = flushCache();
+        List<Point2> neighbors = _upSpawnLocation.getNeighbors();
+
+        if (cache.size() == 0) {
+            if (Config.get().debugFourPlayers) {
+                playerCount = 4;
+            }
+            for (int ii = 0; ii < playerCount; ii++) {
+                _contents.add(CreatureFactory.create(ActorTypes.get(Sps.Actors.Player), getRandomNeighbor(neighbors)));
+            }
+        }
+        else {
+            for (Entity player : cache) {
+                player.setLocation(getRandomNeighbor(neighbors));
+            }
+            EntityManager.get().addEntities(cache);
+            _contents.addAll(cache);
+        }
     }
 }
