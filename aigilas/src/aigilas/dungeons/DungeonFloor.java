@@ -62,7 +62,9 @@ public class DungeonFloor {
         placeFloor();
         Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
         List<Point2> neighbors = spawn.getNeighbors();
+        Logger.info("Flushing from lT");
         for (Entity player : EntityCache.get().flushCache()) {
+            Logger.info("Flushed a player");
             player.setLocation(getRandomNeighbor(neighbors));
             _contents.add(player);
         }
@@ -75,11 +77,12 @@ public class DungeonFloor {
     }
 
     public void preserveFloor() {
-        List<Entity> players = EntityManager.get().getPlayers();
+        List<Entity> players = new ArrayList<Entity>(EntityManager.get().getPlayers());
         Logger.info("Detected " + players.size() + " players");
-        for (int ii = 0; ii < players.size(); ii++) {
-            EntityCache.get().addToCache(players.get(ii));
-            EntityManager.get().removeEntity(players.get(ii));
+        for (Entity player:players){
+            EntityCache.get().addToCache(player);
+            Logger.info("Putting a player in cache");
+            EntityManager.get().removeEntity(player);
         }
         _contents = new ArrayList<Entity>(EntityCache.get().getEntitiesToCache());
     }
@@ -100,6 +103,7 @@ public class DungeonFloor {
             }
         }
 
+        Logger.info("Flushing from tDS");
         List<Entity> cache = EntityCache.get().flushCache();
         List<Point2> neighbors = _upSpawnLocation.getNeighbors();
 
@@ -113,6 +117,7 @@ public class DungeonFloor {
             }
         }
         else {
+            Logger.info("Cache size during tDS: "+cache.size());
             for (Entity player : cache) {
                 player.setLocation(getRandomNeighbor(neighbors));
             }

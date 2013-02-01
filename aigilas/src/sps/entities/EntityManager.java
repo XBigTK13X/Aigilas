@@ -56,7 +56,7 @@ public class EntityManager {
             IActor actor = (IActor) entity;
             if (actor.getActorType() == ActorTypes.get(Sps.Actors.Player)) {
                 players.add(entity);
-                Logger.info("Adding");
+                Logger.info("PLayers size in EM: "+players.size());
             }
             if (!actorBuckets.containsKey(actor)) {
                 actorBuckets.put(actor.getActorType(), new ArrayList<IActor>());
