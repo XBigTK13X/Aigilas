@@ -2,6 +2,7 @@ package aigilas.net;
 
 import aigilas.Config;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.core.RNG;
@@ -48,7 +49,10 @@ public class LocalClient extends IClient {
 
 
     public int getPlayerCount() {
-        return 2;
+        if (Controllers.getControllers().size > 0) {
+            return Controllers.getControllers().size;
+        }
+        return 1;
     }
 
     public void startGame() {
