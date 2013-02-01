@@ -10,7 +10,6 @@ import aigilas.net.Client;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
 import sps.bridge.Sps;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -62,9 +61,7 @@ public class DungeonFloor {
         placeFloor();
         Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
         List<Point2> neighbors = spawn.getNeighbors();
-        Logger.info("Flushing from lT");
         for (Entity player : EntityCache.get().flushCache()) {
-            Logger.info("Flushed a player");
             player.setLocation(getRandomNeighbor(neighbors));
             _contents.add(player);
         }
@@ -78,10 +75,8 @@ public class DungeonFloor {
 
     public void preserveFloor() {
         List<Entity> players = new ArrayList<Entity>(EntityManager.get().getPlayers());
-        Logger.info("Detected " + players.size() + " players");
-        for (Entity player:players){
+        for (Entity player : players) {
             EntityCache.get().addToCache(player);
-            Logger.info("Putting a player in cache");
             EntityManager.get().removeEntity(player);
         }
         _contents = new ArrayList<Entity>(EntityCache.get().getEntitiesToCache());
@@ -103,7 +98,6 @@ public class DungeonFloor {
             }
         }
 
-        Logger.info("Flushing from tDS");
         List<Entity> cache = EntityCache.get().flushCache();
         List<Point2> neighbors = _upSpawnLocation.getNeighbors();
 
@@ -117,7 +111,6 @@ public class DungeonFloor {
             }
         }
         else {
-            Logger.info("Cache size during tDS: "+cache.size());
             for (Entity player : cache) {
                 player.setLocation(getRandomNeighbor(neighbors));
             }

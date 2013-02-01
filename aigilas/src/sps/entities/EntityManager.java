@@ -1,7 +1,6 @@
 package sps.entities;
 
 import sps.bridge.*;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -56,7 +55,6 @@ public class EntityManager {
             IActor actor = (IActor) entity;
             if (actor.getActorType() == ActorTypes.get(Sps.Actors.Player)) {
                 players.add(entity);
-                Logger.info("PLayers size in EM: "+players.size());
             }
             if (!actorBuckets.containsKey(actor)) {
                 actorBuckets.put(actor.getActorType(), new ArrayList<IActor>());
