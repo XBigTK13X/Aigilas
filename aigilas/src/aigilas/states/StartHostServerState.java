@@ -6,24 +6,18 @@ import aigilas.net.LanClient;
 import aigilas.net.Server;
 import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.bridge.Contexts;
 import sps.bridge.Sps;
 import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.io.Input;
-import sps.states.State;
 import sps.states.StateManager;
 
-public class StartHostServerState implements State {
-
-    private Stage stage;
+public class StartHostServerState extends MenuState {
     private Label connectedPlayersLbl;
 
     public StartHostServerState() {
@@ -34,9 +28,6 @@ public class StartHostServerState implements State {
 
         //UI
         Input.setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
-        stage = new Stage();
-
-        Gdx.input.setInputProcessor(stage);
 
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
         connectedPlayersLbl = new Label("0 players connected", lblStyle);
@@ -49,13 +40,9 @@ public class StartHostServerState implements State {
             }
         });
 
-        Table table = new Table();
-        table.setFillParent(true);
         table.add(connectedPlayersLbl);
         table.row();
-        table.add(startGameBtn);
-
-        stage.addActor(table);
+        add(startGameBtn);
     }
 
     private int connectedPlayers;
@@ -74,21 +61,5 @@ public class StartHostServerState implements State {
             Input.setup(Client.get());
             StateManager.loadState(new LoadingState());
         }
-    }
-
-    @Override
-    public void load() {
-
-    }
-
-    @Override
-    public void unload() {
-
-    }
-
-    @Override
-    public void draw() {
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
     }
 }
