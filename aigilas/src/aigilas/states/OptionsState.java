@@ -27,14 +27,14 @@ public class OptionsState extends MenuState {
         });
 
         final SelectableButton configControllerBtn = new SelectableButton("Setup Controller", UiAssets.getButtonStyle());
-        renderStratBtn.addListener(new ChangeListener() {
+        configControllerBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 setupController();
             }
         });
 
         final SelectableButton keyboardConfigBtn = new SelectableButton("Setup Controller", UiAssets.getButtonStyle());
-        renderStratBtn.addListener(new ChangeListener() {
+        keyboardConfigBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 setupKeyboard();
             }

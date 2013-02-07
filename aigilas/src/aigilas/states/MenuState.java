@@ -17,10 +17,9 @@ import sps.states.State;
 import java.util.ArrayList;
 
 public abstract class MenuState implements State {
-    protected int _selection = 0;
     protected final int horizDelta = 1;
     protected final int verticalDelta = 3;
-
+    protected int _selection = 0;
     protected Stage stage;
     protected ArrayList<SelectableButton> buttons = new ArrayList<SelectableButton>();
     protected Table table;
@@ -46,9 +45,14 @@ public abstract class MenuState implements State {
         int selectionVelocity = (Input.isActive(Commands.get(Aigilas.Commands.MoveRight), Client.get().getFirstPlayerIndex()) ? horizDelta : 0) + (Input.isActive(Commands.get(Aigilas.Commands.MoveLeft), Client.get().getFirstPlayerIndex()) ? -horizDelta : 0);
         selectionVelocity += (Input.isActive(Commands.get(Aigilas.Commands.MoveUp), Client.get().getFirstPlayerIndex()) ? -verticalDelta : 0) + (Input.isActive(Commands.get(Aigilas.Commands.MoveDown), Client.get().getFirstPlayerIndex()) ? verticalDelta : 0);
         _selection += selectionVelocity;
-        _selection %= buttons.size();
-        if (_selection < 0) {
-            _selection = buttons.size() - 1;
+        if (buttons.size() > 0) {
+            _selection %= buttons.size();
+            if (_selection < 0) {
+                _selection = buttons.size() - 1;
+            }
+        }
+        else {
+            _selection = 0;
         }
 
 
