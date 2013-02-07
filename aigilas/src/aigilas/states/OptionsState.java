@@ -76,10 +76,10 @@ public class OptionsState extends MenuState {
     }
 
     private void setupController() {
-
+        StateManager.loadState(new SetupControllerState());
     }
 
     private void setupKeyboard() {
-
+        StateManager.loadState(new SetupKeyboardState());
     }
 }

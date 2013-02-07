@@ -49,6 +49,7 @@ public class StartHostServerState extends MenuState {
 
     @Override
     public void update() {
+        super.update();
         if (connectedPlayers != Client.get().getPlayerCount()) {
             connectedPlayers = Client.get().getPlayerCount();
             connectedPlayersLbl.setText(connectedPlayers + " players connected");

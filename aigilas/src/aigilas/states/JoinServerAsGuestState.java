@@ -79,6 +79,7 @@ public class JoinServerAsGuestState extends MenuState {
 
     @Override
     public void update() {
+        super.update();
         if (readyToConnect && !connectStarted) {
             Client.reset(new LanClient());
             Input.setup(Client.get());
