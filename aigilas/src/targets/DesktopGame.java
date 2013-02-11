@@ -8,6 +8,7 @@ import sps.core.Logger;
 import sps.core.Settings;
 
 public class DesktopGame {
+    private static LwjglApplication instance;
     public static void main(String[] args) {
         Logger.setLogFile("aigilas.log");
         Logger.info("Launching the main game loop");
@@ -22,6 +23,10 @@ public class DesktopGame {
             cfg.height = Settings.get().resolutionHeight;
         }
         cfg.useGL20 = true;
-        new LwjglApplication(new Aigilas(), cfg);
+        instance = new LwjglApplication(new Aigilas(), cfg);
+    }
+
+    public static LwjglApplication get(){
+        return instance;
     }
 }

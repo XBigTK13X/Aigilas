@@ -37,7 +37,7 @@ public class OptionsState extends MenuState {
             }
         });
 
-        final SelectableButton keyboardConfigBtn = new SelectableButton("Setup Controller", UiAssets.getButtonStyle());
+        final SelectableButton keyboardConfigBtn = new SelectableButton("Setup Keyboard", UiAssets.getButtonStyle());
         keyboardConfigBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 setupKeyboard();

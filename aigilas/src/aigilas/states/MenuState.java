@@ -50,35 +50,31 @@ public abstract class MenuState implements State {
             if (_selection < 0) {
                 _selection = buttons.size() - 1;
             }
-        }
-        else {
-            _selection = 0;
-        }
 
-
-        if (!Client.get().isGameStarting()) {
-            if (UiSelection.commandActive()) {
-                buttons.get(_selection).fire(new ChangeListener.ChangeEvent() {
-                });
+            if (!Client.get().isGameStarting()) {
+                if (UiSelection.commandActive()) {
+                    buttons.get(_selection).fire(new ChangeListener.ChangeEvent() {
+                    });
+                }
             }
-        }
 
-        if (selectionVelocity != 0) {
+            if (selectionVelocity != 0) {
+                for (int ii = 0; ii < buttons.size(); ii++) {
+                    buttons.get(ii).setSelected(false);
+                }
+                buttons.get(_selection).setSelected(true);
+            }
+            boolean reset = false;
             for (int ii = 0; ii < buttons.size(); ii++) {
-                buttons.get(ii).setSelected(false);
+                if (buttons.get(ii).mouseIsOver() && _selection != ii) {
+                    _selection = ii;
+                    reset = true;
+                }
             }
-            buttons.get(_selection).setSelected(true);
-        }
-        boolean reset = false;
-        for (int ii = 0; ii < buttons.size(); ii++) {
-            if (buttons.get(ii).mouseIsOver() && _selection != ii) {
-                _selection = ii;
-                reset = true;
-            }
-        }
-        if (reset) {
-            for (int ii = 0; ii < buttons.size(); ii++) {
-                buttons.get(ii).setSelected(_selection == ii);
+            if (reset) {
+                for (int ii = 0; ii < buttons.size(); ii++) {
+                    buttons.get(ii).setSelected(_selection == ii);
+                }
             }
         }
     }

@@ -28,8 +28,8 @@ public class JoinServerAsGuestState extends MenuState {
 
     public JoinServerAsGuestState() {
 
-        Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
-        label = new Label("Server IP:", lblStyle);
+
+        label = new Label("Server IP:", UiAssets.getLabelStyle());
 
         TextField.TextFieldStyle style = new TextField.TextFieldStyle();
         style.font = Assets.get().font();

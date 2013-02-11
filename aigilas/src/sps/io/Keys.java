@@ -168,4 +168,13 @@ public enum Keys {
         }
         return null;
     }
+
+    public static Keys find(int keyCode){
+        for(Keys key:values()){
+            if(key.getKeyCode() == keyCode){
+                return key;
+            }
+        }
+        return null;
+    }
 }
