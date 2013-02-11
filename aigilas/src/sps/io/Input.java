@@ -11,7 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Input {
+public class Input implements InputProvider {
+
+    private static InputProvider instance = new Input();
+    private static InputProvider falseInstance = new FalseInput();
+    private static boolean disabled = false;
+
+    public static InputProvider get() {
+        return isDisabled() ? falseInstance : instance;
+    }
 
     private static StateProvider stateProvider;
 
@@ -19,10 +27,11 @@ public class Input {
     private static HashMap<Integer, Context> __contexts;
 
     // Lists what commands are locked for a given player
-    private static final List<CommandLock> __locks = new ArrayList<CommandLock>();
-    private static boolean __isInputActive = false;
+    private final List<CommandLock> __locks = new ArrayList<CommandLock>();
+    private boolean __isInputActive = false;
 
-    public static void setup(StateProvider stateProvider) {
+    @Override
+    public void setup(StateProvider stateProvider) {
         __contexts = new HashMap<Integer, Context>();
         __contexts.put(0, Contexts.get(Sps.Contexts.Free));
         __contexts.put(1, Contexts.get(Sps.Contexts.Free));
@@ -31,15 +40,15 @@ public class Input {
 
         if (stateProvider == null) {
             Input.stateProvider = new DefaultStateProvider();
-        }
-        else {
+        } else {
             Input.stateProvider = stateProvider;
         }
 
         InputBindings.init();
     }
 
-    public static boolean detectState(Command command, int playerIndex) {
+    @Override
+    public boolean detectState(Command command, int playerIndex) {
         boolean debugInput = false;
         boolean gamepadActive = XBox360Controller.get().isActive(command.button(), playerIndex);
         boolean keyboardActive = playerIndex == stateProvider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
@@ -49,15 +58,16 @@ public class Input {
         return gamepadActive || keyboardActive;
     }
 
-    private static boolean isDown(Command command, int playerIndex) {
+    private boolean isDown(Command command, int playerIndex) {
         return stateProvider.isActive(command, playerIndex);
     }
 
-    public static boolean isActive(Command command, int playerIndex) {
+    public boolean isActive(Command command, int playerIndex) {
         return isActive(command, playerIndex, true);
     }
 
-    public static boolean isActive(Command command, int playerIndex, boolean failIfLocked) {
+    @Override
+    public boolean isActive(Command command, int playerIndex, boolean failIfLocked) {
         __isInputActive = isDown(command, playerIndex);
         if (!__isInputActive && shouldLock(command, playerIndex)) {
             unlock(command, playerIndex);
@@ -76,19 +86,22 @@ public class Input {
 
     // If the key is marked to be locked on press and its lock context is
     // currently inactive
-    private static boolean shouldLock(Command command, int playerIndex) {
+    private boolean shouldLock(Command command, int playerIndex) {
         return command.Context == __contexts.get(playerIndex) || (command.Context == Contexts.get(Sps.Contexts.Non_Free) && __contexts.get(playerIndex) != Contexts.get(Sps.Contexts.Free) || command.Context == Contexts.get(Sps.Contexts.All));
     }
 
-    public static void setContext(Context context, int playerIndex) {
+    @Override
+    public void setContext(Context context, int playerIndex) {
         __contexts.put(playerIndex, context);
     }
 
-    public static boolean isContext(Context context, int playerIndex) {
+    @Override
+    public boolean isContext(Context context, int playerIndex) {
         return __contexts.get(playerIndex) == context;
     }
 
-    public static boolean isLocked(Command command, int playerIndex) {
+    @Override
+    public boolean isLocked(Command command, int playerIndex) {
         for (CommandLock pair : __locks) {
             if (pair.Command == command && pair.PlayerIndex == playerIndex) {
                 return true;
@@ -97,11 +110,13 @@ public class Input {
         return false;
     }
 
-    public static void lock(Command command, int playerIndex) {
+    @Override
+    public void lock(Command command, int playerIndex) {
         __locks.add(new CommandLock(command, playerIndex));
     }
 
-    public static void unlock(Command command, int playerIndex) {
+    @Override
+    public void unlock(Command command, int playerIndex) {
         for (int ii = 0; ii < __locks.size(); ii++) {
             if (__locks.get(ii).Command == command && __locks.get(ii).PlayerIndex == playerIndex) {
                 __locks.remove(__locks.get(ii));
@@ -110,7 +125,8 @@ public class Input {
         }
     }
 
-    public static void update() {
+    @Override
+    public void update() {
         // Remove command locks if the associated key/button isn't being pressed
         for (int ii = 0; ii < __locks.size(); ii++) {
             if (!isDown(__locks.get(ii).Command, __locks.get(ii).PlayerIndex)) {
@@ -120,5 +136,19 @@ public class Input {
         }
 
         stateProvider.pollLocalState();
+    }
+
+
+    public static void enable(){
+        disabled = false;
+    }
+
+    public static void disable(){
+        disabled = true;
+    }
+
+
+    public static boolean isDisabled(){
+        return disabled;
     }
 }
