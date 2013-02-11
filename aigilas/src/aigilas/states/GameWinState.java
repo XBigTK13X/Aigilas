@@ -21,7 +21,7 @@ public class GameWinState implements State {
 
     @Override
     public void update() {
-        if (Input.isActive(Commands.get(Aigilas.Commands.Confirm), 0, true)) {
+        if (Input.get().isActive(Commands.get(Aigilas.Commands.Confirm), 0, true)) {
             StateManager.loadState(new LoadingState());
         }
     }

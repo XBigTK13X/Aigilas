@@ -609,7 +609,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     @Override
     public void performInteraction() {
         setInteracting(false);
-        Input.lock(Commands.get(Aigilas.Commands.Confirm), getPlayerIndex());
+        Input.get().lock(Commands.get(Aigilas.Commands.Confirm), getPlayerIndex());
     }
 
     public void markHotSkill(Command hotSkillSlot) {

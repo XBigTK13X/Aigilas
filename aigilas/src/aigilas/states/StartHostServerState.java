@@ -27,7 +27,7 @@ public class StartHostServerState extends MenuState {
         Client.reset(new LanClient());
 
         //UI
-        Input.setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
+        Input.get().setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
 
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
         connectedPlayersLbl = new Label("0 players connected", lblStyle);
@@ -56,10 +56,10 @@ public class StartHostServerState extends MenuState {
         }
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Sps.Contexts.Free), ii);
+                Input.get().setContext(Contexts.get(Sps.Contexts.Free), ii);
             }
 
-            Input.setup(Client.get());
+            Input.get().setup(Client.get());
             StateManager.loadState(new LoadingState());
         }
     }

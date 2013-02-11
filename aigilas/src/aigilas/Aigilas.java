@@ -34,7 +34,7 @@ public class Aigilas implements ApplicationListener {
         Renderer.get().setStrategy(new FrameStrategy());
         Renderer.get().setRefreshInstance(this);
         Client.reset(new LocalClient());
-        Input.setup(Client.get());
+        Input.get().setup(Client.get());
         SpriteSheetManager.setup(SpriteTypes.getDefs());
         StateManager.loadState(new MainMenuState());
         ParticleEngine.reset();
@@ -53,17 +53,17 @@ public class Aigilas implements ApplicationListener {
             //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
 
             // Update
-            Input.update();
-            if (Input.isActive(sps.bridge.Commands.get(Commands.ToggleDevConsole), Client.get().getFirstPlayerIndex())) {
+            Input.get().update();
+            if (Input.get().isActive(sps.bridge.Commands.get(Commands.ToggleDevConsole), Client.get().getFirstPlayerIndex())) {
                 DevConsole.get().toggle();
             }
-            if (Input.isActive(sps.bridge.Commands.get(Commands.Back), Client.get().getFirstPlayerIndex())) {
+            if (Input.get().isActive(sps.bridge.Commands.get(Commands.Back), Client.get().getFirstPlayerIndex())) {
                 Gdx.app.exit();
             }
-            if (Input.isActive(sps.bridge.Commands.get(Commands.Music), Client.get().getFirstPlayerIndex())) {
+            if (Input.get().isActive(sps.bridge.Commands.get(Commands.Music), Client.get().getFirstPlayerIndex())) {
                 MusicPlayer.get().toggle();
             }
-            if (Input.isActive(sps.bridge.Commands.get(Commands.ToggleFullScreen), Client.get().getFirstPlayerIndex())) {
+            if (Input.get().isActive(sps.bridge.Commands.get(Commands.ToggleFullScreen), Client.get().getFirstPlayerIndex())) {
                 Renderer.get().toggleFullScreen();
             }
             if (Client.get().nextTurn()) {

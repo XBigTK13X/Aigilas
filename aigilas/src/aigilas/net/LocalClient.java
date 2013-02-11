@@ -80,7 +80,7 @@ public class LocalClient extends IClient {
     public void pollLocalState() {
         for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
             for (Command command : Commands.values()) {
-                setState(command, ii, Input.detectState(command, ii));
+                setState(command, ii, Input.get().detectState(command, ii));
             }
         }
     }

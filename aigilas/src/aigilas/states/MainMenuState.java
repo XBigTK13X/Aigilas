@@ -92,7 +92,7 @@ public class MainMenuState extends MenuState {
         super.update();
         if (Client.get().isGameStarting()) {
             for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.setContext(Contexts.get(Sps.Contexts.Free), ii);
+                Input.get().setContext(Contexts.get(Sps.Contexts.Free), ii);
             }
             StateManager.loadState(new LoadingState());
         }

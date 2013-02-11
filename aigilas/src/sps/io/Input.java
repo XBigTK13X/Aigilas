@@ -21,14 +21,13 @@ public class Input implements InputProvider {
         return isDisabled() ? falseInstance : instance;
     }
 
-    private static StateProvider stateProvider;
-
+    private StateProvider provider;
     // $$$ FIXME (Integer -> PlayerId) Maps a playerId to a context
-    private static HashMap<Integer, Context> __contexts;
-
+    private HashMap<Integer, Context> __contexts;
     // Lists what commands are locked for a given player
     private final List<CommandLock> __locks = new ArrayList<CommandLock>();
     private boolean __isInputActive = false;
+
 
     @Override
     public void setup(StateProvider stateProvider) {
@@ -39,9 +38,9 @@ public class Input implements InputProvider {
         __contexts.put(3, Contexts.get(Sps.Contexts.Free));
 
         if (stateProvider == null) {
-            Input.stateProvider = new DefaultStateProvider();
+            provider = new DefaultStateProvider();
         } else {
-            Input.stateProvider = stateProvider;
+            provider = stateProvider;
         }
 
         InputBindings.init();
@@ -51,7 +50,7 @@ public class Input implements InputProvider {
     public boolean detectState(Command command, int playerIndex) {
         boolean debugInput = false;
         boolean gamepadActive = XBox360Controller.get().isActive(command.button(), playerIndex);
-        boolean keyboardActive = playerIndex == stateProvider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
+        boolean keyboardActive = playerIndex == provider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
         if (debugInput && (gamepadActive || keyboardActive)) {
             Logger.info("ACTIVE: " + command.name());
         }
@@ -59,7 +58,7 @@ public class Input implements InputProvider {
     }
 
     private boolean isDown(Command command, int playerIndex) {
-        return stateProvider.isActive(command, playerIndex);
+        return provider.isActive(command, playerIndex);
     }
 
     public boolean isActive(Command command, int playerIndex) {
@@ -135,7 +134,7 @@ public class Input implements InputProvider {
             }
         }
 
-        stateProvider.pollLocalState();
+        provider.pollLocalState();
     }
 
 

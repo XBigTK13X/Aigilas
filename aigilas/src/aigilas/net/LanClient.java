@@ -109,7 +109,7 @@ public class LanClient extends IClient {
     @Override
     public void pollLocalState() {
         for (Command command : Commands.values()) {
-            setState(command, getFirstPlayerIndex(), Input.detectState(command, getFirstPlayerIndex()));
+            setState(command, getFirstPlayerIndex(), Input.get().detectState(command, getFirstPlayerIndex()));
         }
     }
 

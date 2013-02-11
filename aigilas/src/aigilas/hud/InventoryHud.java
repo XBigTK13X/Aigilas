@@ -48,7 +48,7 @@ public class InventoryHud extends BaseHud {
     }
 
     private void handleInput() {
-        if (Input.isActive(Commands.get(Aigilas.Commands.CycleLeft), _parent.getPlayerIndex())) {
+        if (Input.get().isActive(Commands.get(Aigilas.Commands.CycleLeft), _parent.getPlayerIndex())) {
             _currentClass--;
             if (_currentClass < 0) {
                 _currentClass = ItemClass.values().length - 1;
@@ -58,7 +58,7 @@ public class InventoryHud extends BaseHud {
             forceRefresh = true;
         }
 
-        if (Input.isActive(Commands.get(Aigilas.Commands.CycleRight), _parent.getPlayerIndex())) {
+        if (Input.get().isActive(Commands.get(Aigilas.Commands.CycleRight), _parent.getPlayerIndex())) {
             _currentClass++;
             if (_currentClass >= ItemClass.values().length) {
                 _currentClass = 0;
@@ -68,7 +68,7 @@ public class InventoryHud extends BaseHud {
             forceRefresh = true;
         }
 
-        if (Input.isActive(Commands.get(Aigilas.Commands.MoveDown), _parent.getPlayerIndex())) {
+        if (Input.get().isActive(Commands.get(Aigilas.Commands.MoveDown), _parent.getPlayerIndex())) {
             if (_startingItem < _currentClassItems.size() - 1) {
                 _startingItem++;
                 _endingItem++;
@@ -76,18 +76,18 @@ public class InventoryHud extends BaseHud {
             }
         }
 
-        if (Input.isActive(Commands.get(Aigilas.Commands.MoveUp), _parent.getPlayerIndex())) {
+        if (Input.get().isActive(Commands.get(Aigilas.Commands.MoveUp), _parent.getPlayerIndex())) {
             if (_startingItem > 0) {
                 _startingItem--;
                 _endingItem--;
                 forceRefresh = true;
             }
         }
-        if (Input.isActive(Commands.get(Aigilas.Commands.Confirm), _parent.getPlayerIndex())) {
+        if (Input.get().isActive(Commands.get(Aigilas.Commands.Confirm), _parent.getPlayerIndex())) {
             _parent.equip(_currentSelectedItem);
             forceRefresh = true;
         }
-        if (Input.isActive(Commands.get(Aigilas.Commands.Cancel), _parent.getPlayerIndex())) {
+        if (Input.get().isActive(Commands.get(Aigilas.Commands.Cancel), _parent.getPlayerIndex())) {
             _parent.drop(_currentSelectedItem);
             forceRefresh = true;
         }
