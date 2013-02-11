@@ -4,11 +4,15 @@ import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import org.apache.commons.io.FileUtils;
+import sps.core.Logger;
 import sps.graphics.FrameStrategy;
 import sps.graphics.RenderStrategy;
 import sps.graphics.Renderer;
 import sps.graphics.StretchStrategy;
 import sps.states.StateManager;
+
+import java.io.File;
 
 public class OptionsState extends MenuState {
     public OptionsState() {
@@ -40,6 +44,13 @@ public class OptionsState extends MenuState {
             }
         });
 
+        final SelectableButton resetControlsBtn = new SelectableButton("Reset Controls", UiAssets.getButtonStyle());
+        keyboardConfigBtn.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                resetControls();
+            }
+        });
+
         final SelectableButton backBtn = new SelectableButton("Main Menu", UiAssets.getButtonStyle());
         backBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
@@ -52,8 +63,9 @@ public class OptionsState extends MenuState {
         add(renderStratBtn);
         table.row();
         add(configControllerBtn);
-        table.row();
         add(keyboardConfigBtn);
+        table.row();
+        add(resetControlsBtn);
         table.row();
         add(backBtn);
     }
@@ -81,5 +93,14 @@ public class OptionsState extends MenuState {
 
     private void setupKeyboard() {
         StateManager.loadState(new SetupKeyboardState());
+    }
+
+    private void resetControls(){
+        try{
+            FileUtils.copyFile(new File("assets/data/default_input.cfg"),new File("assets/data/input.cfg"));
+        }
+        catch(Exception e){
+            Logger.exception(e,false);
+        }
     }
 }
