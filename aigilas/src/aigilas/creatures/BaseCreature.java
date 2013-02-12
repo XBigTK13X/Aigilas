@@ -70,6 +70,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected float _experience;
     protected static final float __levelUpAmount = 1500;
     protected float _nextLevelExperience = __levelUpAmount;
+    protected boolean canMove = true;
 
     protected ActorType _actorType;
 
@@ -141,8 +142,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         if (_inventory.getItemCount(item) > 0 && !_equipment.isRegistered(item)) {
             _equipment.register(item);
             _inventory.remove(item);
-        }
-        else {
+        } else {
             if (_equipment.isRegistered(item)) {
                 _equipment.unregister(item);
             }
@@ -156,8 +156,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (_inventory.getItemCount(item) > 0) {
                 EntityManager.get().addEntity(new GenericItem(item, getLocation()));
                 _inventory.remove(item);
-            }
-            else {
+            } else {
                 if (_inventory.getItemCount(item) == 0) {
                     _equipment.unregister(item);
                     EntityManager.get().addEntity(new GenericItem(item, getLocation()));
@@ -196,8 +195,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                     if (waitTime > BaseWaitTime) {
                         waitTime = BaseWaitTime;
                     }
-                }
-                else {
+                } else {
                     _statuses.act();
                 }
                 regenerate();
@@ -388,8 +386,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     public void addBuff(StatBuff buff, boolean applyToMax) {
         if (!applyToMax) {
             _baseStats.addBuff(buff);
-        }
-        else {
+        } else {
             _maxStats.addBuff(buff);
         }
     }
@@ -407,7 +404,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     public void moveIfPossible(float xVel, float yVel) {
 
-        if (_statuses.allows(CreatureAction.Movement)) {
+        if (_statuses.allows(CreatureAction.Movement) && canMove) {
             if ((xVel != 0 || yVel != 0) && isCooledDown()) {
                 target.reset(xVel + getLocation().PosX, yVel + getLocation().PosY);
                 if (!isBlocking() || !CoordVerifier.isBlocked(target)) {
@@ -460,8 +457,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (amount > _nextLevelExperience) {
                 diff = _nextLevelExperience;
                 amount -= _nextLevelExperience;
-            }
-            else {
+            } else {
                 amount = 0;
             }
             _experience += diff;

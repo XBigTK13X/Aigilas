@@ -13,5 +13,6 @@ public class AcidNozzle extends Minion {
         add(SkillId.Acid_Drip);
         _composition.add(Elements.Earth);
         setStrategy(StrategyFactory.create(Strategy.MinionRotate, this));
+        canMove = false;
     }
 }

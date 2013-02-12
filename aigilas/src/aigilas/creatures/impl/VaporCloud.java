@@ -18,6 +18,7 @@ public class VaporCloud extends Minion {
         setStrategy(StrategyFactory.create(Strategy.MinionCloud, this));
         add(SkillId.Vapor_Cloud);
         _composition.add(Elements.Water);
+        canMove = false;
     }
 
     @Override

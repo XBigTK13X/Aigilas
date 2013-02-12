@@ -8,21 +8,14 @@ import aigilas.statuses.Status;
 import aigilas.statuses.StatusFactory;
 
 public class DartSkill extends BaseSkill {
-    public DartSkill()
-
-    {
+    public DartSkill() {
         super(SkillId.Dart, AnimationType.RANGED);
-
-
     }
 
     @Override
-    public void affect(BaseCreature target)
-
-    {
+    public void affect(BaseCreature target) {
         StatusFactory.apply(target, Status.Poison);
         target.applyDamage(5, _source);
 
     }
-
 }

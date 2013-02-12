@@ -13,5 +13,6 @@ public class IceShard extends Minion {
         setStrategy(StrategyFactory.create(Strategy.MinionOneUse, this));
         add(SkillId.Ice_Shard);
         _composition.add(Elements.Water);
+        canMove = false;
     }
 }

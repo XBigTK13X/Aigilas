@@ -13,5 +13,6 @@ public class DartTrap extends Minion {
         setStrategy(StrategyFactory.create(Strategy.MinionFire, this));
         add(SkillId.Dart);
         _composition.add(Elements.Dark);
+        canMove = false;
     }
 }

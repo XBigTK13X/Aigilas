@@ -16,5 +16,6 @@ public class Dummy extends BaseEnemy {
         _baseStats = StatsRegistry.get().baseStats(ActorTypes.get(Sps.ActorGroups.Non_Player));
         _maxStats = new Stats(_baseStats);
         _composition.add(Elements.Physical);
+        canMove = false;
     }
 }

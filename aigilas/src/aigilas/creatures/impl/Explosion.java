@@ -13,5 +13,6 @@ public class Explosion extends Minion {
         setStrategy(StrategyFactory.create(Strategy.MinionOneUse, this));
         add(SkillId.Explode);
         _composition.add(Elements.Fire);
+        canMove = false;
     }
 }

@@ -13,5 +13,6 @@ public class PoisonCloud extends Minion {
         setStrategy(StrategyFactory.create(Strategy.MinionOneUse, this));
         add(SkillId.Poison_Cloud);
         _composition.add(Elements.Mental);
+        canMove = false;
     }
 }
