@@ -23,6 +23,61 @@ public class SetupKeyboardState extends MenuState {
 
     private Map<Integer, Integer> duplicateCatcher;
 
+    private InputProcessor keyboardCatcher = new InputProcessor() {
+        @Override
+        public boolean keyDown(int i) {
+            if (!duplicateCatcher.containsKey(i)) {
+                currentCommand.bind(currentCommand.button(), Keys.find(i));
+                selectNextCommand();
+                duplicateCatcher.put(i, i);
+                inUse.setVisible(false);
+                return false;
+            }
+            inUse.setVisible(true);
+            return false;
+        }
+
+        @Override
+        public boolean keyUp(int i) {
+            return false;
+        }
+
+        @Override
+        public boolean keyTyped(char c) {
+            return false;
+        }
+
+        @Override
+        public boolean touchDown(int i, int i2, int i3, int i4) {
+            return false;
+        }
+
+        @Override
+        public boolean touchUp(int i, int i2, int i3, int i4) {
+            return false;
+        }
+
+        @Override
+        public boolean touchDragged(int i, int i2, int i3) {
+            return false;
+        }
+
+        @Override
+        public boolean mouseMoved(int i, int i2) {
+            return false;
+        }
+
+        @Override
+        public boolean scrolled(int i) {
+            return false;
+        }
+
+        ;
+    };
+
+    private InputProcessor originalInputProcessor;
+
+
     public SetupKeyboardState() {
         header = new Label("Press the key for: ", UiAssets.getLabelStyle());
         command = new Label("", UiAssets.getLabelStyle());
@@ -33,55 +88,8 @@ public class SetupKeyboardState extends MenuState {
 
         Input.disable();
 
-        DesktopGame.get().getInput().setInputProcessor(new InputProcessor() {
-            @Override
-            public boolean keyDown(int i) {
-                if (!duplicateCatcher.containsKey(i)) {
-                    currentCommand.bind(currentCommand.button(), Keys.find(i));
-                    selectNextCommand();
-                    duplicateCatcher.put(i, i);
-                    inUse.setVisible(false);
-                    return false;
-                }
-                inUse.setVisible(true);
-                return false;
-            }
-
-            @Override
-            public boolean keyUp(int i) {
-                return false;
-            }
-
-            @Override
-            public boolean keyTyped(char c) {
-                return false;
-            }
-
-            @Override
-            public boolean touchDown(int i, int i2, int i3, int i4) {
-                return false;
-            }
-
-            @Override
-            public boolean touchUp(int i, int i2, int i3, int i4) {
-                return false;
-            }
-
-            @Override
-            public boolean touchDragged(int i, int i2, int i3) {
-                return false;
-            }
-
-            @Override
-            public boolean mouseMoved(int i, int i2) {
-                return false;
-            }
-
-            @Override
-            public boolean scrolled(int i) {
-                return false;
-            }
-        });
+        originalInputProcessor = DesktopGame.get().getInput().getInputProcessor();
+        DesktopGame.get().getInput().setInputProcessor(keyboardCatcher);
 
         table.add(header);
         table.row();
@@ -96,8 +104,10 @@ public class SetupKeyboardState extends MenuState {
             currentCommand = Commands.values().get(commandIndex);
             command.setText(currentCommand.name());
             commandIndex++;
-        } else {
+        }
+        else {
             InputBindings.persistCommandsToConfig();
+            DesktopGame.get().getInput().setInputProcessor(originalInputProcessor);
             Input.enable();
             StateManager.loadState(new OptionsState());
         }
