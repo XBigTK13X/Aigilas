@@ -7,11 +7,7 @@ import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
 import aigilas.strategies.BaseStrategy;
 import aigilas.strategies.Strategy;
-import sps.bridge.ActorTypes;
-import sps.bridge.Command;
-import sps.bridge.Commands;
-import sps.bridge.Contexts;
-import sps.bridge.Sps;
+import sps.bridge.*;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -85,8 +81,7 @@ public class ControlledByPlayer extends BaseStrategy {
                             if (_parent.setHotSkillActive(hotkey)) {
                                 _isCasting = true;
                             }
-                        }
-                        else {
+                        } else {
                             _parent.markHotSkill(hotkey);
                         }
                     }

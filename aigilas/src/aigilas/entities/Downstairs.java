@@ -3,11 +3,7 @@ package aigilas.entities;
 import aigilas.Aigilas;
 import aigilas.creatures.BaseCreature;
 import aigilas.dungeons.Dungeon;
-import sps.bridge.ActorTypes;
-import sps.bridge.DrawDepths;
-import sps.bridge.EntityTypes;
-import sps.bridge.SpriteTypes;
-import sps.bridge.Sps;
+import sps.bridge.*;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -29,8 +25,7 @@ public class Downstairs extends Entity {
         if (nonPlayerCount - dummyCount - minionCount > 0) {
             disabled = true;
             _graphic.setAlpha(0);
-        }
-        else {
+        } else {
             _graphic.setAlpha(1);
             disabled = false;
         }

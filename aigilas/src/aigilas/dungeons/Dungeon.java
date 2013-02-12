@@ -3,12 +3,9 @@ package aigilas.dungeons;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.states.GameWinState;
 import sps.audio.MusicPlayer;
-import sps.entities.Entity;
 import sps.states.StateManager;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Dungeon {
 
@@ -21,8 +18,7 @@ public class Dungeon {
     public static void getNextFloor() {
         if (CreatureFactory.bossesRemaining() <= 0 && _world.get(Location.Depths).getFloorCount() >= finalBossFloor) {
             StateManager.loadState(new GameWinState());
-        }
-        else {
+        } else {
             _world.get(Location.Depths).gotoNext();
         }
     }

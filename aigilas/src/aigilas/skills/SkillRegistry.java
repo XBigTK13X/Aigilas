@@ -2,13 +2,10 @@ package aigilas.skills;
 
 import aigilas.creatures.StatType;
 import aigilas.entities.Elements;
+import org.apache.commons.io.FileUtils;
 import sps.core.Loader;
 import sps.core.Logger;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +20,8 @@ public class SkillRegistry {
     }
 
     private SkillRegistry() {
-        FileInputStream fstream;
         try {
-            fstream = new FileInputStream(Loader.get().data("skills.csv"));
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = br.readLine()) != null) {
+            for (String line : FileUtils.readLines(Loader.get().data("skills.csv"))) {
                 if (!line.contains("#")) {
                     String[] values = line.split(",");
                     String name = values[0];
@@ -55,9 +47,7 @@ public class SkillRegistry {
                     SkillId.get(name).Info = new SkillInfo(name.replace("_", " "), stat, cost, magnitude, elements, restrict, offCenter);
                 }
             }
-            in.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception("Error occurred while parsing skills.csv.", e);
         }
     }

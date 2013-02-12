@@ -1,7 +1,6 @@
 package aigilas.ui;
 
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class SelectableButton extends TextButton {
@@ -16,11 +15,11 @@ public class SelectableButton extends TextButton {
         return isSelected || super.isOver();
     }
 
-    public boolean mouseIsOver(){
+    public boolean mouseIsOver() {
         return super.isOver();
     }
 
-    public void setSelected(boolean selected){
+    public void setSelected(boolean selected) {
         isSelected = selected;
     }
 }

@@ -5,11 +5,7 @@ import aigilas.creatures.impl.Player;
 import aigilas.gods.God;
 import aigilas.gods.GodId;
 import aigilas.items.GenericItem;
-import sps.bridge.ActorTypes;
-import sps.bridge.DrawDepths;
-import sps.bridge.EntityTypes;
-import sps.bridge.SpriteTypes;
-import sps.bridge.Sps;
+import sps.bridge.*;
 import sps.core.Point2;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -49,8 +45,7 @@ public class Altar extends Entity {
                 if (text == null || !text.isVisible()) {
                     text = TextPool.get().write(_god.NameText, getLocation());
                 }
-            }
-            else {
+            } else {
                 _currentTarget = null;
             }
 

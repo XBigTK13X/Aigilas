@@ -1,7 +1,6 @@
 package sps.particles;
 
 import com.badlogic.gdx.graphics.Color;
-import sps.bridge.DrawDepths;
 import sps.bridge.SpriteType;
 import sps.bridge.SpriteTypes;
 import sps.bridge.Sps;
@@ -9,7 +8,6 @@ import sps.core.Point2;
 import sps.core.RNG;
 import sps.entities.Entity;
 import sps.graphics.Animation;
-import sps.graphics.Renderer;
 import sps.util.MathHelper;
 
 public class Particle2 extends PEComponent {
@@ -42,7 +40,7 @@ public class Particle2 extends PEComponent {
     public void draw() {
         if (IsActive) {
             _graphic.setPosition(Position);
-            _graphic.setSize(Width,Height);
+            _graphic.setSize(Width, Height);
             _graphic.setColor(_color);
             _graphic.draw();
         }
@@ -71,8 +69,7 @@ public class Particle2 extends PEComponent {
         }
         if (baseColor != null) {
             _color = darken(baseColor, (RNG.next(10, 50)) / 100f);
-        }
-        else {
+        } else {
             _color = new Color(RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, 1f);
         }
         Angle = RNG.angle();

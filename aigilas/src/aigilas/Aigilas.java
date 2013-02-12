@@ -8,7 +8,9 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
-import sps.bridge.*;
+import sps.bridge.Bridge;
+import sps.bridge.SpriteTypes;
+import sps.bridge.Sps;
 import sps.core.DevConsole;
 import sps.core.Logger;
 import sps.graphics.FrameStrategy;
@@ -70,8 +72,7 @@ public class Aigilas implements ApplicationListener {
                 ParticleEngine.update();
                 StateManager.update();
                 Client.get().prepareForNextTurn();
-            }
-            else {
+            } else {
                 Client.get().heartBeat();
             }
             if (!IsRunning) {
@@ -88,8 +89,7 @@ public class Aigilas implements ApplicationListener {
             TextPool.get().draw();
             DevConsole.get().draw();
             Renderer.get().end();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception(e);
         }
     }
@@ -106,7 +106,7 @@ public class Aigilas implements ApplicationListener {
     public void dispose() {
     }
 
-    public static class Entities{
+    public static class Entities {
 
         //Ent
         public static final String Altar = "Altar";
@@ -119,7 +119,7 @@ public class Aigilas implements ApplicationListener {
         public static final String Wall = "Wall";
     }
 
-    public static class Actors{
+    public static class Actors {
 
         public static final String Breaking_Wheel = "Breaking_Wheel";
         public static final String Envy = "Envy";
@@ -142,7 +142,7 @@ public class Aigilas implements ApplicationListener {
         public static final String Minion = "Minion";
     }
 
-    public static class Commands{
+    public static class Commands {
 
         public static final String Back = "Back";
         public static final String Cancel = "Cancel";
@@ -165,7 +165,7 @@ public class Aigilas implements ApplicationListener {
         public static final String ToggleFullScreen = "Toggle_Full_Screen";
     }
 
-    public static class DrawDepths{
+    public static class DrawDepths {
         public static final String Base_Skill_Effect = "Base_Skill_Effect";
         public static final String Creature = "Creature";
         public static final String Stairs = "Stairs";

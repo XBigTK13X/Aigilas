@@ -1,12 +1,8 @@
 package aigilas.statuses;
 
+import org.apache.commons.io.FileUtils;
 import sps.core.Loader;
 import sps.core.Logger;
-
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 
 public class StatusRegistry {
     private static StatusRegistry __instance;
@@ -19,13 +15,8 @@ public class StatusRegistry {
     }
 
     private StatusRegistry() {
-        FileInputStream fstream;
         try {
-            fstream = new FileInputStream(Loader.get().data("statuses.csv"));
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = br.readLine()) != null) {
+            for (String line : FileUtils.readLines(Loader.get().data("statuses.csv"))) {
                 if (!line.contains("#")) {
                     String[] values = line.split(",");
                     String name = values[0];
@@ -33,9 +24,7 @@ public class StatusRegistry {
                     Status.get(name).Info = new StatusInfo(name, magnitude);
                 }
             }
-            in.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception("Error occurred while parsing statuses.csv.", e);
         }
     }

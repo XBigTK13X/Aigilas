@@ -3,12 +3,12 @@ package targets;
 import aigilas.Aigilas;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import sps.bridge.Bridge;
 import sps.core.Logger;
 import sps.core.Settings;
 
 public class DesktopGame {
     private static LwjglApplication instance;
+
     public static void main(String[] args) {
         Logger.setLogFile("aigilas.log");
         Logger.info("Launching the main game loop");
@@ -17,8 +17,7 @@ public class DesktopGame {
         if (Settings.get().fullScreen) {
             cfg.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
             cfg.fullscreen = Settings.get().fullScreen;
-        }
-        else {
+        } else {
             cfg.width = Settings.get().resolutionWidth;
             cfg.height = Settings.get().resolutionHeight;
         }
@@ -26,7 +25,7 @@ public class DesktopGame {
         instance = new LwjglApplication(new Aigilas(), cfg);
     }
 
-    public static LwjglApplication get(){
+    public static LwjglApplication get() {
         return instance;
     }
 }

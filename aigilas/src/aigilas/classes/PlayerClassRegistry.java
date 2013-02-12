@@ -2,13 +2,10 @@ package aigilas.classes;
 
 import aigilas.creatures.Stats;
 import aigilas.skills.SkillId;
+import org.apache.commons.io.FileUtils;
 import sps.core.Loader;
 import sps.core.Logger;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +21,8 @@ public class PlayerClassRegistry {
     }
 
     private PlayerClassRegistry() {
-        FileInputStream fstream;
         try {
-            fstream = new FileInputStream(Loader.get().data("classes.csv"));
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = br.readLine()) != null) {
+            for (String line : FileUtils.readLines(Loader.get().data("classes.csv"))) {
                 if (!line.contains("#")) {
                     String[] values = line.split(",");
                     PlayerClass pClass = PlayerClass.get(values[0]);
@@ -50,9 +42,7 @@ public class PlayerClassRegistry {
                     pClass.Info = new PlayerClassInfo(skills, stats);
                 }
             }
-            in.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception("Error occurred while parsing " + Loader.get().data("classes.csv"), e);
         }
     }

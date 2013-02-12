@@ -1,7 +1,6 @@
 package sps.bridge;
 
 import com.badlogic.gdx.utils.GdxNativesLoader;
-import sps.bridge.Bridge;
 import sps.core.Settings;
 import sps.graphics.Assets;
 

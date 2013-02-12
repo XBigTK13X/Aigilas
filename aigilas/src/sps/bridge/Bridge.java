@@ -1,11 +1,9 @@
 package sps.bridge;
 
+import org.apache.commons.io.FileUtils;
 import sps.core.Loader;
 import sps.core.Logger;
 import sps.graphics.Assets;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class Bridge {
     private static Bridge __instance;
@@ -20,10 +18,7 @@ public class Bridge {
     private Bridge() {
         try {
             Assets.get();
-            FileReader reader = new FileReader(Loader.get().data("bridge.cfg"));
-            BufferedReader br = new BufferedReader(reader);
-            String line;
-            while ((line = br.readLine()) != null) {
+            for (String line : FileUtils.readLines(Loader.get().data("bridge.cfg"))) {
                 if (line.contains("_")) {
                     int x = 0;
                 }
@@ -59,9 +54,7 @@ public class Bridge {
                     }
                 }
             }
-            reader.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception("Error occurred while parsing bridge.cfg.", e);
         }
     }

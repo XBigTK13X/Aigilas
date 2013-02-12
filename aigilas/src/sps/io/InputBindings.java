@@ -1,13 +1,9 @@
 package sps.io;
 
+import org.apache.commons.io.FileUtils;
 import sps.bridge.Commands;
 import sps.core.Loader;
 import sps.core.Logger;
-
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 
 public class InputBindings {
     public static InputBindings __instance;
@@ -18,12 +14,8 @@ public class InputBindings {
 
     public InputBindings() {
         try {
-            FileInputStream fstream = new FileInputStream(Loader.get().data("input.cfg"));
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
             Logger.info("Parsing input.cfg");
-            while ((line = br.readLine()) != null) {
+            for (String line : FileUtils.readLines(Loader.get().data("input.cfg"))) {
                 if (!line.contains("##") && line.length() > 1) {
                     String key = line.split(",")[0];
                     String value = line.split(",")[1];
@@ -32,11 +24,12 @@ public class InputBindings {
                     Commands.get(key).bind(buttonBinding, keyBinding);
                 }
             }
-            in.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception(e);
         }
     }
 
+    public static void persistCommandsToConfig() {
+
+    }
 }

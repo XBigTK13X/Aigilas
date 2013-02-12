@@ -1,9 +1,7 @@
 package aigilas.states;
 
-import aigilas.Aigilas;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import sps.bridge.Command;
 import sps.bridge.Commands;
@@ -29,7 +27,7 @@ public class SetupKeyboardState extends MenuState {
         DesktopGame.get().getInput().setInputProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int i) {
-                currentCommand.bind(currentCommand.button(),Keys.find(i));
+                currentCommand.bind(currentCommand.button(), Keys.find(i));
                 selectNextCommand();
                 return false;
             }
@@ -81,8 +79,7 @@ public class SetupKeyboardState extends MenuState {
             currentCommand = Commands.values().get(commandIndex);
             command.setText(currentCommand.name());
             commandIndex++;
-        }
-        else{
+        } else {
             Input.enable();
             StateManager.loadState(new OptionsState());
         }

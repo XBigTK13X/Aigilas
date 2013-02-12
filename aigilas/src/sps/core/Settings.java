@@ -1,11 +1,8 @@
 package sps.core;
 
+import org.apache.commons.io.FileUtils;
 import sps.util.Parse;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Settings {
@@ -36,11 +33,7 @@ public class Settings {
 
     private Settings() {
         try {
-            FileInputStream fstream = new FileInputStream(Loader.get().data("sps-gamelib.cfg"));
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = br.readLine()) != null) {
+            for (String line : FileUtils.readLines(Loader.get().data("sps-gamelib.cfg"))) {
                 if (!line.contains("##") && line.length() > 1) {
                     String key = line.split("=")[0];
                     String value = line.split("=")[1];
@@ -50,9 +43,7 @@ public class Settings {
                     Logger.info("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
                 }
             }
-            in.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception(e);
         }
 

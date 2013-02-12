@@ -2,15 +2,12 @@ package aigilas.creatures;
 
 import aigilas.entities.Elements;
 import aigilas.skills.SkillId;
+import org.apache.commons.io.FileUtils;
 import sps.bridge.ActorType;
 import sps.bridge.ActorTypes;
 import sps.core.Loader;
 import sps.core.Logger;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +25,8 @@ public class EnemyRegistry {
     private HashMap<ActorType, EnemyInfo> info = new HashMap<ActorType, EnemyInfo>();
 
     private EnemyRegistry() {
-        FileInputStream fstream;
         try {
-            fstream = new FileInputStream(Loader.get().data("enemies.csv"));
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = br.readLine()) != null) {
+            for (String line : FileUtils.readLines(Loader.get().data("enemies.csv"))) {
                 if (!line.contains("#")) {
                     String convert = line.replace(",,", ",-,");
 
@@ -65,17 +57,14 @@ public class EnemyRegistry {
                         for (String skill : rawSkills.split("-")) {
                             skills.add(SkillId.get(skill));
                         }
-                    }
-                    else {
+                    } else {
                         skills.add(SkillId.No_Skill);
                     }
 
                     info.put(actorType, new EnemyInfo(strengths, weaknesses, elements, skills));
                 }
             }
-            in.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Logger.exception("Error occurred while parsing enemies.csv.", e);
         }
     }
