@@ -6,20 +6,29 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.io.Input;
+import sps.io.InputBindings;
 import sps.io.Keys;
 import sps.states.StateManager;
 import targets.DesktopGame;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SetupKeyboardState extends MenuState {
     final Label header;
     final Label command;
+    final Label inUse;
     private int commandIndex = 0;
     private Command currentCommand;
 
+    private Map<Integer, Integer> duplicateCatcher;
 
     public SetupKeyboardState() {
         header = new Label("Press the key for: ", UiAssets.getLabelStyle());
         command = new Label("", UiAssets.getLabelStyle());
+        inUse = new Label("Already in use", UiAssets.getLabelStyle());
+        duplicateCatcher = new HashMap<Integer, Integer>();
+        inUse.setVisible(false);
         selectNextCommand();
 
         Input.disable();
@@ -27,8 +36,14 @@ public class SetupKeyboardState extends MenuState {
         DesktopGame.get().getInput().setInputProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int i) {
-                currentCommand.bind(currentCommand.button(), Keys.find(i));
-                selectNextCommand();
+                if (!duplicateCatcher.containsKey(i)) {
+                    currentCommand.bind(currentCommand.button(), Keys.find(i));
+                    selectNextCommand();
+                    duplicateCatcher.put(i, i);
+                    inUse.setVisible(false);
+                    return false;
+                }
+                inUse.setVisible(true);
                 return false;
             }
 
@@ -71,6 +86,8 @@ public class SetupKeyboardState extends MenuState {
         table.add(header);
         table.row();
         table.add(command);
+        table.row();
+        table.add(inUse);
 
     }
 
@@ -80,6 +97,7 @@ public class SetupKeyboardState extends MenuState {
             command.setText(currentCommand.name());
             commandIndex++;
         } else {
+            InputBindings.persistCommandsToConfig();
             Input.enable();
             StateManager.loadState(new OptionsState());
         }

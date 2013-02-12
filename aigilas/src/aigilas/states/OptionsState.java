@@ -45,7 +45,7 @@ public class OptionsState extends MenuState {
         });
 
         final SelectableButton resetControlsBtn = new SelectableButton("Reset Controls", UiAssets.getButtonStyle());
-        keyboardConfigBtn.addListener(new ChangeListener() {
+        resetControlsBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 resetControls();
             }
@@ -80,8 +80,7 @@ public class OptionsState extends MenuState {
     private void toggleRenderStrategy() {
         if (current == null || current.getClass() == FrameStrategy.class) {
             current = new StretchStrategy();
-        }
-        else {
+        } else {
             current = new FrameStrategy();
         }
         Renderer.get().setStrategy(current);
@@ -95,12 +94,11 @@ public class OptionsState extends MenuState {
         StateManager.loadState(new SetupKeyboardState());
     }
 
-    private void resetControls(){
-        try{
-            FileUtils.copyFile(new File("assets/data/default_input.cfg"),new File("assets/data/input.cfg"));
-        }
-        catch(Exception e){
-            Logger.exception(e,false);
+    private void resetControls() {
+        try {
+            FileUtils.copyFile(new File("assets/data/default_input.cfg"), new File("assets/data/input.cfg"));
+        } catch (Exception e) {
+            Logger.exception(e, false);
         }
     }
 }

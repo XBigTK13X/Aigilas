@@ -1,9 +1,15 @@
 package sps.io;
 
 import org.apache.commons.io.FileUtils;
+import sps.bridge.Command;
 import sps.bridge.Commands;
 import sps.core.Loader;
 import sps.core.Logger;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputBindings {
     public static InputBindings __instance;
@@ -30,6 +36,15 @@ public class InputBindings {
     }
 
     public static void persistCommandsToConfig() {
-
+        File input = Loader.get().data("input.cfg");
+        List<String> lines = new ArrayList<String>();
+        for (Command command : Commands.values()) {
+            lines.add(command.name() + "," + command.key().name() + "-" + command.button().name());
+        }
+        try {
+            FileUtils.writeLines(input, lines);
+        } catch (IOException e) {
+            Logger.exception(e, false);
+        }
     }
 }
