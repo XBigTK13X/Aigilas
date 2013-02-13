@@ -6,14 +6,14 @@ import org.apache.commons.lang3.SystemUtils;
 public enum Buttons {
     LeftStickButton(9, 8, 0),
     LeftStickUp(1, 0, 0, Device.Axis, false),
-    LeftStickDown(1, 0, 0, Device.Axis, false),
+    LeftStickDown(1, 0, 0, Device.Axis, true),
     LeftStickLeft(0, 1, 0, Device.Axis, false),
-    LeftStickRight(0, 1, 0, Device.Axis, false),
+    LeftStickRight(0, 1, 0, Device.Axis, true),
     RightStickButton(10, 9, 0),
     RightStickUp(4, 2, 0, Device.Axis, false),
-    RightStickDown(4, 2, 0, Device.Axis, false),
+    RightStickDown(4, 2, 0, Device.Axis, true),
     RightStickLeft(3, 3, 0, Device.Axis, false),
-    RightStickRight(3, 3, 0, Device.Axis, false),
+    RightStickRight(3, 3, 0, Device.Axis, true),
     RightTrigger(5, 4, 0),
     LeftTrigger(2, 4, 0),
     RightShoulder(5, 5, 0),
@@ -60,7 +60,7 @@ public enum Buttons {
                 Input = ControllerInput.createButton(Index);
                 break;
             case Axis:
-                if (positive != null) {
+                if (positive == null) {
                     Input = ControllerInput.createNonZeroAxis(Index);
                     break;
                 }

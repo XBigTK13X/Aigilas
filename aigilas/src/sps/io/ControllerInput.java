@@ -46,14 +46,16 @@ public class ControllerInput {
             return ControllerAdapter.get().isDown(controller, button);
         }
         if (axis != null) {
-            if (nonZero) {
+            if (positive != null) {
+                if (positive) {
+                    return ControllerAdapter.get().isPositive(controller, axis);
+                }
+                if (!positive) {
+                    return ControllerAdapter.get().isNegative(controller, axis);
+                }
+            }
+            else {
                 return ControllerAdapter.get().isNotZero(controller, axis);
-            }
-            if (positive) {
-                return ControllerAdapter.get().isPositive(controller, axis);
-            }
-            if (!positive) {
-                return ControllerAdapter.get().isNegative(controller, axis);
             }
             Logger.error("Invalid axis ControllerInput defined");
             return false;
