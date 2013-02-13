@@ -36,12 +36,6 @@ public class ControllerAdapter {
 
         @Override
         public boolean axisMoved(Controller controller, int axisIndex, float value) {
-            if (axisIndex == XBox360ControllerInputs.RightShoulder.Index) {
-                XBox360Controller.RightShoulderInit();
-            }
-            if (axisIndex == XBox360ControllerInputs.LeftShoulder.Index) {
-                XBox360Controller.LeftShoulderInit();
-            }
             get().controllers.get(controller).axes.put(axisIndex, value);
             return false;
         }
@@ -116,4 +110,7 @@ public class ControllerAdapter {
         return controllers.get(controller).axes.get(axis) > ZeroPoint;
     }
 
+    public boolean isAxisGreaterThan(Controller controller, Integer axis, Float threshold) {
+        return controllers.get(controller).axes.get(axis) > threshold;
+    }
 }

@@ -19,9 +19,9 @@ public enum XBox360ControllerInputs {
     RightShoulder(5, 5, 0),
     LeftShoulder(4, 4, 0),
     DPadUp(0, 0, 0, PovDirection.north),
-    DPadLeft(0, 0, 0, PovDirection.north),
-    DPadRight(0, 0, 0, PovDirection.north),
-    DPadDown(0, 0, 0, PovDirection.north),
+    DPadLeft(0, 0, 0, PovDirection.west),
+    DPadRight(0, 0, 0, PovDirection.east),
+    DPadDown(0, 0, 0, PovDirection.south),
     Start(7, 7, 0),
     Back(6, 6, 0),
     A(0, 0, 0),
@@ -32,50 +32,72 @@ public enum XBox360ControllerInputs {
     final public int Index;
     final public ControllerInput Input;
 
-    private XBox360ControllerInputs(int lindex, int windex, int mindex) {
-        this(lindex, windex, mindex, Device.Button, null);
+    private XBox360ControllerInputs(int linuxIndex, int windowsIndex, int macIndex) {
+        this(linuxIndex, windowsIndex, macIndex, Device.Button, null);
     }
 
-    private XBox360ControllerInputs(int lindex, int windex, int mindex, PovDirection direction) {
-        this(lindex, windex, mindex, Device.Pov, direction, null);
+    private XBox360ControllerInputs(int linuxIndex, int windowsIndex, int macIndex, PovDirection direction) {
+        this(linuxIndex, windowsIndex, macIndex, Device.Pov, direction, null);
     }
 
-    private XBox360ControllerInputs(int lindex, int windex, int mindex, Device device, Boolean positive) {
-        this(lindex, windex, mindex, device, null, positive);
+    private XBox360ControllerInputs(int linuxIndex, int windowsIndex, int macIndex, Device device, Boolean positive) {
+        this(linuxIndex, windowsIndex, macIndex, device, null, positive);
     }
 
-    private XBox360ControllerInputs(int lindex, int windex, int mindex, Device device, PovDirection direction, Boolean positive) {
+    private XBox360ControllerInputs(int linuxIndex, int windowsIndex, int macIndex, Device device, PovDirection direction, Boolean positive) {
         if (SystemUtils.IS_OS_MAC) {
-            Index = mindex;
+            Index = macIndex;
         }
         else if (SystemUtils.IS_OS_WINDOWS) {
-            Index = windex;
+            Index = windowsIndex;
         }
         else {
-            Index = lindex;
+            Index = linuxIndex;
         }
-        switch (device) {
-            case Button:
-                Input = ControllerInput.createButton(Index);
-                break;
-            case Axis:
-                if (positive == null) {
-                    Input = ControllerInput.createNonZeroAxis(Index);
+
+        if (name().equalsIgnoreCase("RightTrigger")) {
+            if (SystemUtils.IS_OS_WINDOWS) {
+                Input = ControllerInput.createLessThanAxis(Index, ControllerAdapter.ZeroPoint);
+            }
+            else {
+                Input = ControllerInput.createGreaterThanAxis(Index, ControllerAdapter.ZeroPoint);
+                //return controller.getAxis(button.Index) > ControllerAdapter.ZeroPoint && leftShoulderInit;
+            }
+        }
+        else if (name().equalsIgnoreCase("LeftTrigger")) {
+            if (SystemUtils.IS_OS_WINDOWS) {
+                Input = ControllerInput.createGreaterThanAxis(Index, -ControllerAdapter.ZeroPoint);
+            }
+            else {
+                Input = ControllerInput.createGreaterThanAxis(Index, ControllerAdapter.ZeroPoint);
+                //return controller.getAxis(button.Index) > ControllerAdapter.ZeroPoint && rightShoulderInit;
+            }
+
+        }
+        else {
+            switch (device) {
+                case Button:
+                    Input = ControllerInput.createButton(Index);
                     break;
-                }
-                else if (positive) {
-                    Input = ControllerInput.createPositiveAxis(Index);
+                case Axis:
+                    if (positive == null) {
+                        Input = ControllerInput.createNonZeroAxis(Index);
+                        break;
+                    }
+                    else if (positive) {
+                        Input = ControllerInput.createPositiveAxis(Index);
+                        break;
+                    }
+                    else {
+                        Input = ControllerInput.createNegativeAxis(Index);
+                        break;
+                    }
+                case Pov:
+                    Input = ControllerInput.createPov(Index, direction);
                     break;
-                }
-                else {
-                    Input = ControllerInput.createNegativeAxis(Index);
-                    break;
-                }
-            case Pov:
-                Input = ControllerInput.createPov(Index, direction);
-                break;
-            default:
-                Input = null;
+                default:
+                    Input = null;
+            }
         }
     }
 

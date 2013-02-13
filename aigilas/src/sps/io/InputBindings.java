@@ -27,6 +27,7 @@ public class InputBindings {
                     String value = line.split(",")[1];
                     Keys keyBinding = Keys.get(value.split("-")[0]);
                     ControllerInput controllerInput = ControllerInput.parse(value.split("-")[1]);
+                    Logger.info(controllerInput.serialize());
                     Commands.get(key).bind(controllerInput, keyBinding);
                 }
             }

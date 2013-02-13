@@ -12,8 +12,10 @@ public class ControllerInput {
     private Boolean positive;
     private Boolean nonZero;
     private Device device;
+    private Float threshold;
+    private Boolean greaterThan;
 
-    private ControllerInput(Integer buttonIndex, Integer axisIndex, Integer povIndex, PovDirection direction, Boolean nonzero, Boolean positive) {
+    private ControllerInput(Integer buttonIndex, Integer axisIndex, Integer povIndex, PovDirection direction, Boolean nonzero, Boolean positive, Float threshold, Boolean greaterThan) {
         pov = povIndex;
         povDirection = direction;
         axis = axisIndex;
@@ -29,31 +31,40 @@ public class ControllerInput {
         else {
             device = Device.Button;
         }
+        this.threshold = threshold;
+        this.greaterThan = greaterThan;
     }
 
     public static ControllerInput createButton(int index) {
-        return new ControllerInput(index, null, null, null, null, null);
+        return new ControllerInput(index, null, null, null, null, null, null, null);
     }
 
     public static ControllerInput createNonZeroAxis(int index) {
-        return new ControllerInput(null, index, null, null, true, null);
+        return new ControllerInput(null, index, null, null, true, null, null, null);
     }
 
     public static ControllerInput createPositiveAxis(int index) {
-        return new ControllerInput(null, index, null, null, null, true);
+        return new ControllerInput(null, index, null, null, null, true, null, null);
     }
 
     public static ControllerInput createNegativeAxis(int index) {
-        return new ControllerInput(null, index, null, null, null, false);
+        return new ControllerInput(null, index, null, null, null, false, null, null);
+    }
+
+    public static ControllerInput createGreaterThanAxis(int index, float threshold) {
+        return new ControllerInput(null, index, null, null, null, null, threshold, true);
+    }
+
+    public static ControllerInput createLessThanAxis(int index, float threshold) {
+        return new ControllerInput(null, index, null, null, null, null, threshold, false);
     }
 
     public static ControllerInput createPov(int index, PovDirection direction) {
-        return new ControllerInput(null, null, index, direction, null, null);
+        return new ControllerInput(null, null, index, direction, null, null, null, null);
     }
 
     public static ControllerInput parse(String source) {
         String[] parts = source.split("/");
-
         //Wired Xbox 360 controllers are the only supported, non-serialized input
         if (parts.length == 1) {
             return XBox360ControllerInputs.get(parts[0]).Input;
@@ -113,6 +124,14 @@ public class ControllerInput {
     }
 
     public boolean isActive(Controller controller) {
+        if (threshold != null) {
+            if (greaterThan) {
+                return ControllerAdapter.get().isAxisGreaterThan(controller, axis, threshold);
+            }
+            else {
+                return !ControllerAdapter.get().isAxisGreaterThan(controller, axis, threshold);
+            }
+        }
         if (button != null) {
             return ControllerAdapter.get().isDown(controller, button);
         }
