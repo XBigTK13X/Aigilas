@@ -53,26 +53,33 @@ public class ControllerInput {
 
     public static ControllerInput parse(String source) {
         String[] parts = source.split("/");
-        Device device = Device.get(parts[0]);
-        int index = Integer.parseInt(parts[1]);
-        switch (device) {
-            case Button:
-                return createButton(index);
-            case Pov:
-                int povIndex = index;
-                PovDirection direction = getDirection(parts[2]);
-                return createPov(povIndex, direction);
-            case Axis:
-                String trigger = parts[2];
-                if (trigger.equalsIgnoreCase("nonzero")) {
-                    return createNonZeroAxis(index);
-                }
-                else if (trigger.equalsIgnoreCase("positive")) {
-                    return createPositiveAxis(index);
-                }
-                else {
-                    return createNegativeAxis(index);
-                }
+
+        //Wired Xbox 360 controllers are the only supported, non-serialized input
+        if (parts.length == 1) {
+            return XBox360ControllerInputs.get(parts[0]).Input;
+        }
+        else {
+            Device device = Device.get(parts[0]);
+            int index = Integer.parseInt(parts[1]);
+            switch (device) {
+                case Button:
+                    return createButton(index);
+                case Pov:
+                    int povIndex = index;
+                    PovDirection direction = getDirection(parts[2]);
+                    return createPov(povIndex, direction);
+                case Axis:
+                    String trigger = parts[2];
+                    if (trigger.equalsIgnoreCase("nonzero")) {
+                        return createNonZeroAxis(index);
+                    }
+                    else if (trigger.equalsIgnoreCase("positive")) {
+                        return createPositiveAxis(index);
+                    }
+                    else {
+                        return createNegativeAxis(index);
+                    }
+            }
         }
         return null;
     }
@@ -84,6 +91,25 @@ public class ControllerInput {
             }
         }
         return null;
+    }
+
+    public String serialize() {
+        String result = "";
+        result += device.name() + "/";
+        switch (device) {
+            case Button:
+                result += button;
+                break;
+            case Pov:
+                result += pov + "/";
+                result += povDirection.name();
+                break;
+            case Axis:
+                result += axis + "/";
+                result += (positive == null) ? "NonZero" : (positive) ? "Positive" : "Negative";
+                break;
+        }
+        return result;
     }
 
     public boolean isActive(Controller controller) {
@@ -108,25 +134,6 @@ public class ControllerInput {
         return controller.getPov(pov) == povDirection;
     }
 
-    public String serialize() {
-        String result = "";
-        result += device.name() + "/";
-        switch (device) {
-            case Button:
-                result += button;
-                break;
-            case Pov:
-                result += pov + "/";
-                result += povDirection.name();
-                break;
-            case Axis:
-                result += axis + "/";
-                result += (positive == null) ? "NonZero" : (positive) ? "Positive" : "Negative";
-                break;
-        }
-        return result;
-    }
-
     private enum Device {
         Button,
         Pov,
@@ -141,4 +148,5 @@ public class ControllerInput {
             return null;
         }
     }
+
 }

@@ -36,10 +36,10 @@ public class ControllerAdapter {
 
         @Override
         public boolean axisMoved(Controller controller, int axisIndex, float value) {
-            if (axisIndex == Buttons.RightShoulder.Index) {
+            if (axisIndex == XBox360ControllerInputs.RightShoulder.Index) {
                 XBox360Controller.RightShoulderInit();
             }
-            if (axisIndex == Buttons.LeftShoulder.Index) {
+            if (axisIndex == XBox360ControllerInputs.LeftShoulder.Index) {
                 XBox360Controller.LeftShoulderInit();
             }
             get().controllers.get(controller).axes.put(axisIndex, value);
@@ -91,7 +91,7 @@ public class ControllerAdapter {
             controllers = new HashMap<Controller, ControllerState>();
             for (Controller c : Controllers.getControllers()) {
                 controllers.put(c, new ControllerState());
-                for (Buttons btn : Buttons.values()) {
+                for (XBox360ControllerInputs btn : XBox360ControllerInputs.values()) {
                     controllers.get(c).buttons.put(btn.Index, false);
                     controllers.get(c).axes.put(btn.Index, 0f);
                     controllers.get(c).povs.put(btn.Index, PovDirection.center);

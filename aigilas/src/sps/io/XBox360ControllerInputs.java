@@ -3,7 +3,7 @@ package sps.io;
 import com.badlogic.gdx.controllers.PovDirection;
 import org.apache.commons.lang3.SystemUtils;
 
-public enum Buttons {
+public enum XBox360ControllerInputs {
     LeftStickButton(9, 8, 0),
     LeftStickUp(1, 0, 0, Device.Axis, false),
     LeftStickDown(1, 0, 0, Device.Axis, true),
@@ -32,20 +32,19 @@ public enum Buttons {
     final public int Index;
     final public ControllerInput Input;
 
-    private Buttons(int lindex, int windex, int mindex) {
+    private XBox360ControllerInputs(int lindex, int windex, int mindex) {
         this(lindex, windex, mindex, Device.Button, null);
     }
 
-    private Buttons(int lindex, int windex, int mindex, PovDirection direction) {
+    private XBox360ControllerInputs(int lindex, int windex, int mindex, PovDirection direction) {
         this(lindex, windex, mindex, Device.Pov, direction, null);
     }
 
-    private Buttons(int lindex, int windex, int mindex, Device device, Boolean positive) {
+    private XBox360ControllerInputs(int lindex, int windex, int mindex, Device device, Boolean positive) {
         this(lindex, windex, mindex, device, null, positive);
     }
 
-    private Buttons(int lindex, int windex, int mindex, Device device, PovDirection direction, Boolean positive) {
-
+    private XBox360ControllerInputs(int lindex, int windex, int mindex, Device device, PovDirection direction, Boolean positive) {
         if (SystemUtils.IS_OS_MAC) {
             Index = mindex;
         }
@@ -80,8 +79,8 @@ public enum Buttons {
         }
     }
 
-    public static Buttons get(String s) {
-        for (Buttons key : values()) {
+    public static XBox360ControllerInputs get(String s) {
+        for (XBox360ControllerInputs key : values()) {
             if (key.name().equalsIgnoreCase(s)) {
                 return key;
             }

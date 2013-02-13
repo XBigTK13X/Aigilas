@@ -29,7 +29,7 @@ public class XBox360Controller {
     private XBox360Controller() {
     }
 
-    public boolean isActive(Buttons button, int controllerIndex) {
+    public boolean isActive(XBox360ControllerInputs button, int controllerIndex) {
         if (button == null || Controllers.getControllers().size <= controllerIndex) {
             return false;
         }
