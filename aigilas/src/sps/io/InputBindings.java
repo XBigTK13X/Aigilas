@@ -26,11 +26,12 @@ public class InputBindings {
                     String key = line.split(",")[0];
                     String value = line.split(",")[1];
                     Keys keyBinding = Keys.get(value.split("-")[0]);
-                    Buttons buttonBinding = Buttons.get(value.split("-")[1]);
-                    Commands.get(key).bind(buttonBinding, keyBinding);
+                    ControllerInput controllerInput = ControllerInput.parse(value.split("-")[1]);
+                    Commands.get(key).bind(controllerInput, keyBinding);
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Logger.exception(e);
         }
     }
@@ -39,11 +40,12 @@ public class InputBindings {
         File input = Loader.get().data("input.cfg");
         List<String> lines = new ArrayList<String>();
         for (Command command : Commands.values()) {
-            lines.add(command.name() + "," + command.key().name() + "-" + command.button().name());
+            lines.add(command.name() + "," + command.key().name() + "-" + command.controllerInput().serialize());
         }
         try {
             FileUtils.writeLines(input, lines);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Logger.exception(e, false);
         }
     }

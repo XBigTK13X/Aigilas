@@ -1,6 +1,7 @@
 package sps.io;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import sps.bridge.Command;
 import sps.bridge.Context;
 import sps.bridge.Contexts;
@@ -39,7 +40,8 @@ public class Input implements InputProvider {
 
         if (stateProvider == null) {
             provider = new DefaultStateProvider();
-        } else {
+        }
+        else {
             provider = stateProvider;
         }
 
@@ -49,7 +51,7 @@ public class Input implements InputProvider {
     @Override
     public boolean detectState(Command command, int playerIndex) {
         boolean debugInput = false;
-        boolean gamepadActive = XBox360Controller.get().isActive(command.button(), playerIndex);
+        boolean gamepadActive = command.controllerInput().isActive(Controllers.getControllers().get(playerIndex)); //XBox360Controller.get().isActive(command.button(), playerIndex);
         boolean keyboardActive = playerIndex == provider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
         if (debugInput && (gamepadActive || keyboardActive)) {
             Logger.info("ACTIVE: " + command.name());
@@ -138,16 +140,16 @@ public class Input implements InputProvider {
     }
 
 
-    public static void enable(){
+    public static void enable() {
         disabled = false;
     }
 
-    public static void disable(){
+    public static void disable() {
         disabled = true;
     }
 
 
-    public static boolean isDisabled(){
+    public static boolean isDisabled() {
         return disabled;
     }
 }

@@ -62,4 +62,15 @@ public class ControllerInput {
         }
         return controller.getPov(pov) == povDirection;
     }
+
+    public static ControllerInput parse(String source) {
+        ControllerInput result = null;
+
+        return result;
+    }
+
+    public String serialize() {
+        String result = "";
+        return result;
+    }
 }

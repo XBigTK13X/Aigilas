@@ -27,7 +27,7 @@ public class SetupKeyboardState extends MenuState {
         @Override
         public boolean keyDown(int i) {
             if (!duplicateCatcher.containsKey(i)) {
-                currentCommand.bind(currentCommand.button(), Keys.find(i));
+                currentCommand.bind(currentCommand.controllerInput(), Keys.find(i));
                 selectNextCommand();
                 duplicateCatcher.put(i, i);
                 inUse.setVisible(false);

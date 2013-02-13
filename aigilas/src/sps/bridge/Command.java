@@ -1,10 +1,10 @@
 package sps.bridge;
 
-import sps.io.Buttons;
+import sps.io.ControllerInput;
 import sps.io.Keys;
 
 public class Command {
-    private Buttons _button;
+    private ControllerInput _controllerInput;
     private Keys _key;
     private String _name;
     public Context Context;
@@ -18,13 +18,13 @@ public class Command {
         _name = name;
     }
 
-    public void bind(Buttons button, Keys key) {
-        _button = button;
+    public void bind(ControllerInput controllerInput, Keys key) {
+        _controllerInput = controllerInput;
         _key = key;
     }
 
-    public Buttons button() {
-        return _button;
+    public ControllerInput controllerInput() {
+        return _controllerInput;
     }
 
     public Keys key() {
