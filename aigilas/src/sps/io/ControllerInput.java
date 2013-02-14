@@ -5,15 +5,15 @@ import com.badlogic.gdx.controllers.PovDirection;
 import sps.core.Logger;
 
 public class ControllerInput {
-    private PovDirection povDirection;
-    private Integer pov;
-    private Integer button;
-    private Integer axis;
-    private Boolean positive;
-    private Boolean nonZero;
-    private Device device;
-    private Float threshold;
-    private Boolean greaterThan;
+    final private PovDirection povDirection;
+    final private Integer pov;
+    final private Integer button;
+    final private Integer axis;
+    final private Boolean positive;
+    final private Boolean nonZero;
+    final private Device device;
+    final private Float threshold;
+    final private Boolean greaterThan;
 
     private ControllerInput(Integer buttonIndex, Integer axisIndex, Integer povIndex, PovDirection direction, Boolean nonzero, Boolean positive, Float threshold, Boolean greaterThan) {
         pov = povIndex;
@@ -129,7 +129,7 @@ public class ControllerInput {
                 return ControllerAdapter.get().isAxisGreaterThan(controller, axis, threshold);
             }
             else {
-                return !ControllerAdapter.get().isAxisGreaterThan(controller, axis, threshold);
+                return ControllerAdapter.get().isAxisLessThan(controller, axis, threshold);
             }
         }
         if (button != null) {
@@ -151,6 +151,33 @@ public class ControllerInput {
             return false;
         }
         return ControllerAdapter.get().isPovActive(controller, pov, povDirection);
+    }
+
+    public int hashCode() {
+        int hash = 0;
+        hash += (positive != null) ? ((positive) ? 1 : 2) : 0;
+        hash += (nonZero != null) ? ((nonZero) ? 5 : 7) : 0;
+        hash += (greaterThan != null) ? ((greaterThan) ? 13 : 17) : 0;
+        hash += (povDirection != null) ? povDirection.ordinal() * 100 : 0;
+        hash += (pov != null) ? pov * 10000 : 0;
+        hash += (axis != null) ? axis * 1000000 : 0;
+        hash += (button != null) ? button * 100000000 : 0;
+        return hash;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+
+        ControllerInput rhs = (ControllerInput) obj;
+        return rhs.hashCode() == hashCode();
     }
 
     private enum Device {
