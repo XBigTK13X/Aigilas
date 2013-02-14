@@ -113,4 +113,8 @@ public class ControllerAdapter {
     public boolean isAxisGreaterThan(Controller controller, Integer axis, Float threshold) {
         return controllers.get(controller).axes.get(axis) > threshold;
     }
+
+    public boolean isPovActive(Controller controller, Integer index, PovDirection direction) {
+        return controllers.get(controller).povs.get(index) == direction;
+    }
 }

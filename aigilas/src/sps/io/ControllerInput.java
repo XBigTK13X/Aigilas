@@ -150,7 +150,7 @@ public class ControllerInput {
             Logger.error("Invalid axis ControllerInput defined");
             return false;
         }
-        return controller.getPov(pov) == povDirection;
+        return ControllerAdapter.get().isPovActive(controller, pov, povDirection);
     }
 
     private enum Device {
