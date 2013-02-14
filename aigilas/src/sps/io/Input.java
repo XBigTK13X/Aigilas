@@ -51,7 +51,7 @@ public class Input implements InputProvider {
     @Override
     public boolean detectState(Command command, int playerIndex) {
         boolean debugInput = false;
-        boolean gamepadActive = command.controllerInput().isActive(Controllers.getControllers().get(playerIndex)); //XBox360Controller.get().isActive(command.button(), playerIndex);
+        boolean gamepadActive = command.controllerInput().isActive(Controllers.getControllers().get(playerIndex));
         boolean keyboardActive = playerIndex == provider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
         if (debugInput && (gamepadActive || keyboardActive)) {
             Logger.info("ACTIVE: " + command.name());

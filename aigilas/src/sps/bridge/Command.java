@@ -3,7 +3,7 @@ package sps.bridge;
 import sps.io.ControllerInput;
 import sps.io.Keys;
 
-public class Command {
+public class Command implements Comparable {
     private ControllerInput _controllerInput;
     private Keys _key;
     private String _name;
@@ -46,5 +46,10 @@ public class Command {
             return false;
         }
         return obj.hashCode() == hashCode();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return name().compareTo(((Command) o).name());
     }
 }
