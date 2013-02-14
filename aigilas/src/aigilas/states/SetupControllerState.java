@@ -1,19 +1,18 @@
 package aigilas.states;
 
 import aigilas.ui.UiAssets;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import sps.bridge.Command;
 import sps.bridge.Commands;
+import sps.io.ControllerInput;
 import sps.io.Input;
 import sps.io.InputBindings;
-import sps.io.Keys;
 import sps.states.StateManager;
-import targets.DesktopGame;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class SetupControllerState extends MenuState {
     private int commandIndex = 0;
     private Command currentCommand;
 
-    private Map<Integer, Integer> duplicateCatcher;
+    private Map<ControllerInput, ControllerInput> duplicateCatcher;
 
     private ControllerListener inputCatcher = new ControllerListener() {
         @Override
@@ -38,6 +37,7 @@ public class SetupControllerState extends MenuState {
 
         @Override
         public boolean buttonDown(Controller controller, int i) {
+            bindInputToCurrentCommand(ControllerInput.createButton(i));
             return false;
         }
 
@@ -48,12 +48,14 @@ public class SetupControllerState extends MenuState {
 
         @Override
         public boolean axisMoved(Controller controller, int axisIndex, float value) {
-
             return false;
         }
 
         @Override
         public boolean povMoved(Controller controller, int i, PovDirection povDirection) {
+            if (povDirection != PovDirection.center) {
+                bindInputToCurrentCommand(ControllerInput.createPov(i, povDirection));
+            }
             return false;
         }
 
@@ -77,68 +79,29 @@ public class SetupControllerState extends MenuState {
         header = new Label("Press the button for: ", UiAssets.getLabelStyle());
         command = new Label("", UiAssets.getLabelStyle());
         inUse = new Label("Already in use", UiAssets.getLabelStyle());
-        duplicateCatcher = new HashMap<Integer, Integer>();
+        duplicateCatcher = new HashMap<ControllerInput, ControllerInput>();
         inUse.setVisible(false);
         selectNextCommand();
 
         Input.disable();
 
-        DesktopGame.get().getInput().setInputProcessor(new InputProcessor() {
-            @Override
-            public boolean keyDown(int i) {
-                if (!duplicateCatcher.containsKey(i)) {
-                    currentCommand.bind(currentCommand.controllerInput(), Keys.find(i));
-                    selectNextCommand();
-                    duplicateCatcher.put(i, i);
-                    inUse.setVisible(false);
-                    return false;
-                }
-                inUse.setVisible(true);
-                return false;
-            }
-
-            @Override
-            public boolean keyUp(int i) {
-                return false;
-            }
-
-            @Override
-            public boolean keyTyped(char c) {
-                return false;
-            }
-
-            @Override
-            public boolean touchDown(int i, int i2, int i3, int i4) {
-                return false;
-            }
-
-            @Override
-            public boolean touchUp(int i, int i2, int i3, int i4) {
-                return false;
-            }
-
-            @Override
-            public boolean touchDragged(int i, int i2, int i3) {
-                return false;
-            }
-
-            @Override
-            public boolean mouseMoved(int i, int i2) {
-                return false;
-            }
-
-            @Override
-            public boolean scrolled(int i) {
-                return false;
-            }
-        });
+        Controllers.addListener(inputCatcher);
 
         table.add(header);
         table.row();
         table.add(command);
         table.row();
         table.add(inUse);
+    }
 
+    private void bindInputToCurrentCommand(ControllerInput input) {
+        if (!duplicateCatcher.containsKey(input)) {
+            currentCommand.bind(input, currentCommand.key());
+            selectNextCommand();
+            duplicateCatcher.put(input, input);
+            inUse.setVisible(false);
+        }
+        inUse.setVisible(true);
     }
 
     private void selectNextCommand() {
@@ -149,6 +112,7 @@ public class SetupControllerState extends MenuState {
         }
         else {
             InputBindings.persistCommandsToConfig();
+            Controllers.removeListener(inputCatcher);
             Input.enable();
             StateManager.loadState(new OptionsState());
         }
