@@ -15,16 +15,26 @@ import sps.io.InputBindings;
 import sps.states.StateManager;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class SetupControllerState extends MenuState {
+    private static final float minAxisDeltaForDetection = .016f;
+    private static final int minDeltasForDetection = 4;
     final Label header;
     final Label command;
     final Label inUse;
     private int commandIndex = 0;
     private Command currentCommand;
-
     private Map<ControllerInput, ControllerInput> duplicateCatcher;
+    private Map<Integer, Float> axisValues = new HashMap<Integer, Float>();
+    private Map<Integer, Float> deltas = new HashMap<Integer, Float>();
+    private Map<Integer, Integer> deltaCount = new HashMap<Integer, Integer>();
+    private Map<Integer, Float> zeroPoints = new HashMap<Integer, Float>();
+
+    private Set<Integer> lessThanAxes = new HashSet<Integer>();
+    private Set<Integer> greaterThanAxes = new HashSet<Integer>();
 
     private ControllerListener inputCatcher = new ControllerListener() {
         @Override
@@ -48,6 +58,31 @@ public class SetupControllerState extends MenuState {
 
         @Override
         public boolean axisMoved(Controller controller, int axisIndex, float value) {
+
+            if (!axisValues.containsKey(axisIndex)) {
+                axisValues.put(axisIndex, value);
+                deltaCount.put(axisIndex, 0);
+            }
+            deltas.put(axisIndex, value - axisValues.get(axisIndex));
+            axisValues.put(axisIndex, value);
+            deltaCount.put(axisIndex, deltaCount.get(axisIndex) + 1);
+            if (deltaCount.get(axisIndex) > minDeltasForDetection && Math.abs(deltas.get(axisIndex)) >= minAxisDeltaForDetection) {
+                deltaCount.put(axisIndex, 0);
+                float delta = deltas.get(axisIndex);
+                float threshold = value - (delta * (minAxisDeltaForDetection / 2));
+                if (delta < 0 && value < 0) {
+                    if (!lessThanAxes.contains(axisIndex)) {
+                        bindInputToCurrentCommand(ControllerInput.createLessThanAxis(axisIndex, threshold));
+                        lessThanAxes.add(axisIndex);
+                    }
+                }
+                if (delta > 0 && value > 0) {
+                    if (!greaterThanAxes.contains(axisIndex)) {
+                        bindInputToCurrentCommand(ControllerInput.createGreaterThanAxis(axisIndex, threshold));
+                        greaterThanAxes.add(axisIndex);
+                    }
+                }
+            }
             return false;
         }
 
