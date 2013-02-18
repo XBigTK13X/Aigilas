@@ -52,7 +52,7 @@ public class Input implements InputProvider {
     public boolean detectState(Command command, int playerIndex) {
         boolean debugInput = false;
         boolean gamepadActive = false;
-        if(Controllers.getControllers().size > 0){
+        if(Controllers.getControllers().size > playerIndex){
             gamepadActive = command.controllerInput().isActive(Controllers.getControllers().get(playerIndex));
         }
         boolean keyboardActive = playerIndex == provider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
