@@ -16,14 +16,14 @@ import java.io.File;
 
 public class OptionsState extends MenuState {
     public OptionsState() {
-        final SelectableButton fullScreenBtn = new SelectableButton("Toggle Fullscreen", UiAssets.getButtonStyle());
+        final SelectableButton fullScreenBtn = new SelectableButton("Fullscreen", UiAssets.getButtonStyle());
         fullScreenBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 toggleFullScreen();
             }
         });
 
-        final SelectableButton renderStratBtn = new SelectableButton("Toggle Fixed Aspect Ratio", UiAssets.getButtonStyle());
+        final SelectableButton renderStratBtn = new SelectableButton("Fixed Render", UiAssets.getButtonStyle());
         renderStratBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 toggleRenderStrategy();
@@ -59,14 +59,11 @@ public class OptionsState extends MenuState {
         });
 
         add(fullScreenBtn);
-        table.row();
         add(renderStratBtn);
-        table.row();
         add(configControllerBtn);
+        table.row();
         add(keyboardConfigBtn);
-        table.row();
         add(resetControlsBtn);
-        table.row();
         add(backBtn);
     }
 
@@ -80,7 +77,8 @@ public class OptionsState extends MenuState {
     private void toggleRenderStrategy() {
         if (current == null || current.getClass() == FrameStrategy.class) {
             current = new StretchStrategy();
-        } else {
+        }
+        else {
             current = new FrameStrategy();
         }
         Renderer.get().setStrategy(current);
@@ -97,7 +95,8 @@ public class OptionsState extends MenuState {
     private void resetControls() {
         try {
             FileUtils.copyFile(new File("assets/data/default_input.cfg"), new File("assets/data/input.cfg"));
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Logger.exception(e, false);
         }
     }

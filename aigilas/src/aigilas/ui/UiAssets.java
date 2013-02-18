@@ -2,6 +2,7 @@ package aigilas.ui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -27,7 +28,8 @@ public class UiAssets {
     public static TextButton.TextButtonStyle getButtonStyle() {
         if (btnStyle == null) {
             btnStyle = new TextButton.TextButtonStyle();
-            btnStyle.font = Assets.get().font();
+            BitmapFont font = Assets.get().font();
+            btnStyle.font = font;
 
             btnStyle.overFontColor = Color.YELLOW;
             btnStyle.downFontColor = Color.GREEN;
@@ -40,8 +42,9 @@ public class UiAssets {
     }
 
     private static Label.LabelStyle lblStyle;
-    public static Label.LabelStyle getLabelStyle(){
-        if(lblStyle == null){
+
+    public static Label.LabelStyle getLabelStyle() {
+        if (lblStyle == null) {
             lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
         }
         return lblStyle;
