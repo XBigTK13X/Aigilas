@@ -11,6 +11,7 @@ import sps.core.RNG;
 import sps.core.Settings;
 
 public class Animation {
+    protected Point2 _position = new Point2(0, 0);
     private int _currentFrame;
     private SpriteInfo _spriteInfo;
     private int _animationTimer;
@@ -23,8 +24,11 @@ public class Animation {
     private boolean flipY = false;
     private float _height = -1;
     private float _width = -1;
-
-    protected Point2 _position = new Point2(0, 0);
+    private float flashes = 30;
+    private float flashCount = flashes + 1;
+    private Color flashColor = Color.BLUE;
+    private int alternateCount = 7;
+    private boolean alternate;
 
     public Animation() {
         _depth = DrawDepths.get(Sps.DrawDepths.Animated_Texture);
@@ -46,15 +50,26 @@ public class Animation {
         }
         if (_color.a > 0) {
             _sprite.setRotation(_rotation);
-            if(_width >= 0 &&_height >= 0){
-                _sprite.setSize(_width,_height);
+            if (_width >= 0 && _height >= 0) {
+                _sprite.setSize(_width, _height);
             }
-            else{
-                _sprite.setSize(Settings.get().spriteWidth,Settings.get().spriteHeight);
+            else {
+                _sprite.setSize(Settings.get().spriteWidth, Settings.get().spriteHeight);
             }
             _sprite = Assets.get().sprite(_currentFrame, _spriteInfo.SpriteIndex);
             updateAnimation();
-            Renderer.get().draw(_sprite, _position, _depth, _color, flipX, flipY);
+
+            if (flashCount < flashes) {
+                if (flashCount % alternateCount == 1) {
+                    alternate = !alternate;
+                }
+                flashCount++;
+                if (flashCount >= flashes) {
+                    alternate = false;
+                }
+            }
+            Color renderColor = (alternate) ? _color.tmp().mul(flashColor) : _color;
+            Renderer.get().draw(_sprite, _position, _depth, renderColor, flipX, flipY);
         }
     }
 
@@ -79,12 +94,12 @@ public class Animation {
         _position.reset(position.PosX, position.PosY);
     }
 
-    public void setColor(Color color) {
-        _color = color;
-    }
-
     public Color getColor() {
         return _color;
+    }
+
+    public void setColor(Color color) {
+        _color = color;
     }
 
     public void setAlpha(float alpha) {
@@ -113,17 +128,22 @@ public class Animation {
         flipY = y;
     }
 
-    public void gotoRandomFrame(){
+    public void gotoRandomFrame() {
         gotoRandomFrame(true);
     }
 
-    public void gotoRandomFrame(boolean disableAnimation){
+    public void gotoRandomFrame(boolean disableAnimation) {
         setAnimationEnabled(!disableAnimation);
-        _currentFrame = RNG.next(0,_spriteInfo.MaxFrame,false);
+        _currentFrame = RNG.next(0, _spriteInfo.MaxFrame, false);
     }
 
     public void setSize(float width, float height) {
         _width = width;
         _height = height;
+    }
+
+    public void flash(Color attackColor) {
+        flashCount = 0;
+        flashColor = attackColor;
     }
 }

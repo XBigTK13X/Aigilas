@@ -21,6 +21,7 @@ public class Player extends BaseEnemy {
         super(ActorTypes.get(Sps.Actors.Player));
         _playerIndex = playerIndex;
         _graphic.setColor(__colors.get(_playerIndex));
+        _attackColor = __colors.get(_playerIndex);
         setStrategy(StrategyFactory.create(Strategy.ControlledByPlayer, this));
         _baseStats = StatsRegistry.get().baseStats(_actorType);
         _maxStats = new Stats(_baseStats);
