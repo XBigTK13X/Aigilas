@@ -4,7 +4,9 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.PovDirection;
 import sps.core.Logger;
 
-public class ControllerInput {
+import java.io.Serializable;
+
+public class ControllerInput implements Serializable {
     final private PovDirection povDirection;
     final private Integer pov;
     final private Integer button;
@@ -33,6 +35,10 @@ public class ControllerInput {
         }
         this.threshold = threshold;
         this.greaterThan = greaterThan;
+    }
+
+    private ControllerInput(){
+        this(null,null,null,null,null,null,null,null);
     }
 
     public static ControllerInput createButton(int index) {
