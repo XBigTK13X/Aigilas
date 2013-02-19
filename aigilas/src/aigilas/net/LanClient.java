@@ -13,12 +13,12 @@ import java.net.ConnectException;
 import java.net.Socket;
 
 public class LanClient extends IClient {
+    private static final float _heartBeatWaitSeconds = .1f;
+    int _playerCount = 0;
     // Client <-> Server
     private Message _message;
     private MessageHandler _comm;
-    private static final float _heartBeatWaitSeconds = .1f;
     private float _heartBeat = _heartBeatWaitSeconds;
-
     // Client <-> Game
     private Integer _initialPlayerIndex;
     private boolean _isGameStarting;
@@ -113,8 +113,6 @@ public class LanClient extends IClient {
         }
     }
 
-    int _playerCount = 0;
-
     public int getPlayerCount() {
         if (_playerCount == 0 || !isGameStarting()) {
             sendMessage(Message.createPlayerCount(0));
@@ -170,6 +168,7 @@ public class LanClient extends IClient {
                 break;
             case Sync_State:
                 state.reset(contents.CommandState);
+                Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed);
                 break;
             default:
                 break;

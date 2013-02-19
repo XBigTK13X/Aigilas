@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputBindings {
-    public static InputBindings __instance;
+    private static InputBindings __instance;
 
     public static void init() {
-        __instance = new InputBindings();
+        if (__instance == null) {
+            __instance = new InputBindings();
+        }
     }
 
     public InputBindings() {

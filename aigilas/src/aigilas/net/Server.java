@@ -6,6 +6,22 @@ import sps.core.Logger;
 import sps.io.CommandState;
 
 public class Server extends Thread {
+    private final static int seedBound = Integer.MAX_VALUE;
+    private final CommandState state = new CommandState();
+    private final boolean[] _readyCheckIn = {true, true, true, true};
+    private final ClientManager clients;
+    private boolean isRunning = true;
+    private int _rngSeed = (int) (System.currentTimeMillis() % seedBound);
+    private Message _message = Message.empty();
+    private Integer _turnCount = 0;
+    private float _turnTime = 0;
+    private boolean gameHasStarted = false;
+
+    private Server() {
+        setName("Server");
+        clients = new ClientManager();
+    }
+
     public static void reset() {
         Logger.info("Starting the server");
         Thread server = new Server();
@@ -16,21 +32,6 @@ public class Server extends Thread {
         catch (InterruptedException e) {
             Logger.exception(e);
         }
-    }
-
-    private boolean isRunning = true;
-    private final CommandState state = new CommandState();
-    private final int _rngSeed = (int) System.currentTimeMillis();
-    private Message _message = Message.empty();
-    private Integer _turnCount = 0;
-    private final boolean[] _readyCheckIn = {true, true, true, true};
-    private float _turnTime = 0;
-
-    private final ClientManager clients;
-
-    private Server() {
-        setName("Server");
-        clients = new ClientManager();
     }
 
     public void run() {
@@ -65,6 +66,8 @@ public class Server extends Thread {
 
                 case Start_Game:
                     _message.setPlayerCount(clients.size());
+                    gameHasStarted = true;
+                    Logger.info("SERVER: Game has been started");
                     announce(_message);
                     break;
 
@@ -74,6 +77,7 @@ public class Server extends Thread {
 
                 case Ready_For_Next_Turn:
                     _readyCheckIn[_message.PlayerIndex] = true;
+                    Logger.info("SERVER: Check in from: " + _message.PlayerIndex);
                     break;
 
                 case Heart_Beat:
@@ -86,17 +90,21 @@ public class Server extends Thread {
     }
 
     private void broadCastGameState() {
-        _turnTime += Gdx.graphics.getDeltaTime();
-        if (_turnTime >= Config.get().turnTime) {
-            int readyCount = 0;
-            for (boolean checkedIn : _readyCheckIn) {
-                readyCount += checkedIn ? 1 : 0;
-            }
-            if (readyCount >= clients.size()) {
-                _turnTime = 0;
-                announce(Message.createPlayerState(state, _turnCount++, _rngSeed));
-                for (int ii = 0; ii < _readyCheckIn.length; ii++) {
-                    _readyCheckIn[ii] = false;
+        if (gameHasStarted) {
+            _turnTime += Gdx.graphics.getDeltaTime();
+            if (_turnTime >= Config.get().turnTime) {
+                int readyCount = 0;
+                for (boolean checkedIn : _readyCheckIn) {
+                    readyCount += checkedIn ? 1 : 0;
+                }
+                if (readyCount >= clients.size()) {
+                    _turnTime = 0;
+                    _rngSeed = (int) (System.currentTimeMillis() % seedBound);
+                    Logger.info("Announcing turn: " + _turnCount);
+                    announce(Message.createPlayerState(state, _turnCount++, _rngSeed));
+                    for (int ii = 0; ii < _readyCheckIn.length; ii++) {
+                        _readyCheckIn[ii] = false;
+                    }
                 }
             }
         }
