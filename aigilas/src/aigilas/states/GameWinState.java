@@ -27,6 +27,10 @@ public class GameWinState implements State {
     }
 
     @Override
+    public void asyncUpdate() {
+    }
+
+    @Override
     public void load() {
         MusicPlayer.get().stop();
         TextPool.get().write("Victory to you!", Renderer.get().center());

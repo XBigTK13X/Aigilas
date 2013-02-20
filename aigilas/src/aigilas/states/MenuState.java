@@ -85,6 +85,12 @@ public abstract class MenuState implements State {
     }
 
     @Override
+    public void asyncUpdate() {
+    }
+
+    ;
+
+    @Override
     public void unload() {
 
     }

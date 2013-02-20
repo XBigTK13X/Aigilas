@@ -5,10 +5,13 @@ import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
 import sps.io.CommandState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Server extends Thread {
     private final static int seedBound = Integer.MAX_VALUE;
     private final CommandState state = new CommandState();
-    private final boolean[] _readyCheckIn = {true, true, true, true};
+    private final List<Boolean> _readyCheckIn = new ArrayList<Boolean>();
     private final ClientManager clients;
     private boolean isRunning = true;
     private int _rngSeed = (int) (System.currentTimeMillis() % seedBound);
@@ -53,6 +56,8 @@ public class Server extends Thread {
             switch (_message.MessageType) {
                 case Connect:
                     sendMessage(Message.createInit(clients.size(), _rngSeed), _message.LocalPort);
+                    _readyCheckIn.add(false);
+                    Logger.info("New connection");
                     _turnCount = 0;
                     break;
                 case Check_State:
@@ -76,12 +81,11 @@ public class Server extends Thread {
                     break;
 
                 case Ready_For_Next_Turn:
-                    _readyCheckIn[_message.PlayerIndex] = true;
-                    Logger.info("SERVER: Check in from: " + _message.PlayerIndex);
+                    _readyCheckIn.set(_message.PlayerIndex, true);
                     break;
 
                 case Heart_Beat:
-                    _readyCheckIn[_message.PlayerIndex] = true;
+                    _readyCheckIn.set(_message.PlayerIndex, true);
                     break;
                 default:
                     break;
@@ -102,8 +106,8 @@ public class Server extends Thread {
                     _rngSeed = (int) (System.currentTimeMillis() % seedBound);
                     Logger.info("Announcing turn: " + _turnCount);
                     announce(Message.createPlayerState(state, _turnCount++, _rngSeed));
-                    for (int ii = 0; ii < _readyCheckIn.length; ii++) {
-                        _readyCheckIn[ii] = false;
+                    for (int ii = 0; ii < _readyCheckIn.size(); ii++) {
+                        _readyCheckIn.set(ii, false);
                     }
                 }
             }

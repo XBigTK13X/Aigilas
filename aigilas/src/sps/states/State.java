@@ -5,6 +5,8 @@ public interface State {
 
     void update();
 
+    void asyncUpdate();
+
     void load();
 
     void unload();

@@ -10,11 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import sps.bridge.Contexts;
-import sps.bridge.Sps;
+import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.io.Input;
-import sps.states.StateManager;
 import sps.util.Parse;
 
 public class JoinServerAsGuestState extends MenuState {
@@ -84,12 +82,7 @@ public class JoinServerAsGuestState extends MenuState {
             Client.reset(new LanClient());
             Input.get().setup(Client.get());
             connectStarted = true;
-        }
-        if (Client.get().isGameStarting()) {
-            for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                Input.get().setContext(Contexts.get(Sps.Contexts.Free), ii);
-            }
-            StateManager.loadState(new LoadingState());
+            Logger.info("Connecting as guest");
         }
     }
 }

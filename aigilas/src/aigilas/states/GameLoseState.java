@@ -27,6 +27,10 @@ public class GameLoseState implements State {
     }
 
     @Override
+    public void asyncUpdate() {
+    }
+
+    @Override
     public void load() {
         MusicPlayer.get().stop();
         TextPool.get().write("Game Over", Renderer.get().center());

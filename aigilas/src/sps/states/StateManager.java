@@ -25,4 +25,8 @@ public class StateManager {
     public static void update() {
         _state.update();
     }
+
+    public static void asyncUpdate() {
+        _state.asyncUpdate();
+    }
 }

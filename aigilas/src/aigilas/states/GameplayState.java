@@ -53,6 +53,10 @@ public class GameplayState implements State {
     }
 
     @Override
+    public void asyncUpdate() {
+    }
+
+    @Override
     public void load() {
         EntityManager.get().loadContent();
     }
