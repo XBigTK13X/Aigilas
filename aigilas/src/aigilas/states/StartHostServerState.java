@@ -20,6 +20,7 @@ public class StartHostServerState extends MenuState {
     private Label connectedPlayersLbl;
 
     public StartHostServerState() {
+
         //Server
         Logger.info("IP is " + Config.get().serverIp());
         Server.reset();

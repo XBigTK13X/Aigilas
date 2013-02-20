@@ -16,15 +16,10 @@ public class LoadingState implements State {
 
     }
 
-    boolean fired = false;
-
     @Override
     public void update() {
-        if (!fired) {
-            Logger.info("Updating the load state");
-            StateManager.loadState(new GameplayState());
-            fired = true;
-        }
+        Logger.info(LoadingState.class.toString());
+        StateManager.loadState(new GameplayState());
     }
 
     @Override

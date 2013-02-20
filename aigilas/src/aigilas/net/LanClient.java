@@ -169,7 +169,7 @@ public class LanClient extends IClient {
             case Sync_State:
                 state.reset(contents.CommandState);
                 //_playerCount = contents.PlayerCount;
-                Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
+                //kLogger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
                 break;
             default:
                 break;
