@@ -1,7 +1,6 @@
 package aigilas.states;
 
 import sps.audio.MusicPlayer;
-import sps.core.Logger;
 import sps.graphics.Renderer;
 import sps.states.State;
 import sps.states.StateManager;
@@ -18,7 +17,6 @@ public class LoadingState implements State {
 
     @Override
     public void update() {
-        Logger.info(LoadingState.class.toString());
         StateManager.loadState(new GameplayState());
     }
 
@@ -35,5 +33,10 @@ public class LoadingState implements State {
     @Override
     public void unload() {
 
+    }
+
+    @Override
+    public String getName() {
+        return "Loading state";
     }
 }

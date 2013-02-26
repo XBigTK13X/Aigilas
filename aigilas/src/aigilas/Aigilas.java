@@ -3,14 +3,12 @@ package aigilas;
 import aigilas.hud.HudRenderer;
 import aigilas.net.Client;
 import aigilas.net.LocalClient;
-import aigilas.states.LoadingState;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
 import sps.bridge.Bridge;
-import sps.bridge.Contexts;
 import sps.bridge.SpriteTypes;
 import sps.bridge.Sps;
 import sps.core.DevConsole;
@@ -78,13 +76,6 @@ public class Aigilas implements ApplicationListener {
                 ParticleEngine.update();
                 StateManager.update();
                 Client.get().prepareForNextTurn();
-                if (Client.get().isGameStarting() && !built) {
-                    for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
-                        Input.get().setContext(Contexts.get(Sps.Contexts.Free), ii);
-                    }
-                    StateManager.loadState(new LoadingState());
-                    built = true;
-                }
             }
             else {
                 Client.get().heartBeat();

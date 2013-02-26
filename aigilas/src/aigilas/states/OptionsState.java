@@ -100,4 +100,9 @@ public class OptionsState extends MenuState {
             Logger.exception(e, false);
         }
     }
+
+    @Override
+    public String getName() {
+        return "OptionsState";
+    }
 }

@@ -1,13 +1,17 @@
 package aigilas.net;
 
 import aigilas.Config;
+import aigilas.states.LoadingState;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
 import sps.bridge.Commands;
+import sps.bridge.Contexts;
+import sps.bridge.Sps;
 import sps.core.Logger;
 import sps.core.RNG;
 import sps.io.CommandState;
 import sps.io.Input;
+import sps.states.StateManager;
 
 import java.net.ConnectException;
 import java.net.Socket;
@@ -92,7 +96,9 @@ public class LanClient extends IClient {
     }
 
     public void prepareForNextTurn() {
-        sendMessage(Message.createReadyForNextTurn());
+        if (_dungeonHasLoaded) {
+            sendMessage(Message.createReadyForNextTurn());
+        }
     }
 
     // Client <-> Server communication
@@ -114,7 +120,7 @@ public class LanClient extends IClient {
     }
 
     public int getPlayerCount() {
-        if (_playerCount == 0 || !isGameStarting()) {
+        if (_playerCount == 0) {
             sendMessage(Message.createPlayerCount(0));
             awaitReply(MessageTypes.Player_Count);
             _playerCount = _message.PlayerCount;
@@ -167,9 +173,18 @@ public class LanClient extends IClient {
                 _playerCount = contents.PlayerCount;
                 break;
             case Sync_State:
-                state.reset(contents.CommandState);
-                //_playerCount = contents.PlayerCount;
-                //kLogger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
+                if (_dungeonHasLoaded) {
+                    state.reset(contents.CommandState);
+                    RNG.seed(contents.RngSeed);
+                }
+                //Setup the game if this is the first sync
+                if (contents.TurnCount == 0) {
+                    for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
+                        Input.get().setContext(Contexts.get(Sps.Contexts.Free), ii);
+                    }
+                    StateManager.loadState(new LoadingState());
+                }
+                Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
                 break;
             default:
                 break;

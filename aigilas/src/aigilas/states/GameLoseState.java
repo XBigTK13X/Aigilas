@@ -22,7 +22,7 @@ public class GameLoseState implements State {
     @Override
     public void update() {
         if (Input.get().isActive(Commands.get(Aigilas.Commands.Confirm), 0, true)) {
-            StateManager.loadState(new LoadingState());
+            StateManager.loadState(new MainMenuState());
         }
     }
 
@@ -34,11 +34,16 @@ public class GameLoseState implements State {
     public void load() {
         MusicPlayer.get().stop();
         TextPool.get().write("Game Over", Renderer.get().center());
-        TextPool.get().write("Press SPACEBAR to restart", new Point2(200, 200));
+        TextPool.get().write("Press SPACEBAR to continue", new Point2(200, 200));
     }
 
     @Override
     public void unload() {
 
+    }
+
+    @Override
+    public String getName() {
+        return "GameLoseState";
     }
 }

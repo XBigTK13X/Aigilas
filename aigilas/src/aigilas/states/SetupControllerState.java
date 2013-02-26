@@ -152,4 +152,9 @@ public class SetupControllerState extends MenuState {
             StateManager.loadState(new OptionsState());
         }
     }
+
+    @Override
+    public String getName() {
+        return "SetupControllerState";
+    }
 }

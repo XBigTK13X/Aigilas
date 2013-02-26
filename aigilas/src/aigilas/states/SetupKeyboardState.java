@@ -112,4 +112,9 @@ public class SetupKeyboardState extends MenuState {
             StateManager.loadState(new OptionsState());
         }
     }
+
+    @Override
+    public String getName() {
+        return "SetupKeyboardState";
+    }
 }

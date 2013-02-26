@@ -97,4 +97,9 @@ public class MainMenuState extends MenuState {
             StateManager.loadState(new LoadingState());
         }
     }
+
+    @Override
+    public String getName() {
+        return "MainMenuState";
+    }
 }

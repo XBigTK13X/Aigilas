@@ -85,4 +85,9 @@ public class JoinServerAsGuestState extends MenuState {
             Logger.info("Connecting as guest");
         }
     }
+
+    @Override
+    public String getName() {
+        return "JoinServerAsGuestState";
+    }
 }

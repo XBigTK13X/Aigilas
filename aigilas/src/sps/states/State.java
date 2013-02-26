@@ -10,4 +10,6 @@ public interface State {
     void load();
 
     void unload();
+
+    String getName();
 }

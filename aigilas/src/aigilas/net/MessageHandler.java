@@ -38,7 +38,7 @@ public class MessageHandler {
                         while (!Thread.interrupted()) {
                             Message msg;
                             msg = outboundMessages.take();
-                            //Logger.info("Sending message" + msg.MessageType);
+                            Logger.info(owner + "-> Sending message: " + msg.MessageType);
                             outKryo.writeObject(oos, msg);
                             oos.flush();
                         }
@@ -60,7 +60,7 @@ public class MessageHandler {
                             Message msg;
 
                             msg = inKryo.readObject(ois, Message.class);
-                            //Logger.info("Getting message: " + msg.MessageType);
+                            Logger.info(owner + "-> Getting message: " + msg.MessageType);
                             inboundMessages.add(msg);
                         }
                         catch (Exception e) {

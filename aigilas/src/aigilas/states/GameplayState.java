@@ -22,17 +22,7 @@ import java.util.List;
 
 public class GameplayState implements State {
     public GameplayState() {
-        Logger.info("Generating the dungeon...");
-        SkillRegistry.get();
-        StatusRegistry.get();
-        ReactionRegistry.get();
-        PlayerClassRegistry.get();
-        StatsRegistry.get();
-        EntityManager.reset();
-        CreatureFactory.reset();
-        Dungeon.start();
-        DungeonFloor.reset();
-        Client.get().dungeonHasLoaded();
+
     }
 
     List<Entity> players = new ArrayList<Entity>();
@@ -58,7 +48,19 @@ public class GameplayState implements State {
 
     @Override
     public void load() {
+        Logger.info("Generating the dungeon...");
+        SkillRegistry.get();
+        StatusRegistry.get();
+        ReactionRegistry.get();
+        PlayerClassRegistry.get();
+        StatsRegistry.get();
+        EntityManager.reset();
+        CreatureFactory.reset();
+        Dungeon.start();
+        DungeonFloor.reset();
+        Client.get().dungeonHasLoaded();
         EntityManager.get().loadContent();
+        //Gdx.app.exit();
     }
 
     @Override
@@ -66,6 +68,11 @@ public class GameplayState implements State {
         EntityManager.get().clear();
         HudRenderer.reset();
         ParticleEngine.reset();
+    }
+
+    @Override
+    public String getName() {
+        return "GameplayState";
     }
 
     @Override

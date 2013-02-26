@@ -1,5 +1,6 @@
 package sps.states;
 
+import sps.core.Logger;
 import sps.text.TextPool;
 
 public class StateManager {
@@ -11,6 +12,7 @@ public class StateManager {
         }
         TextPool.get().clear();
         _state = state;
+        Logger.info("=== Loading new state: " + state.getName());
         _state.load();
     }
 

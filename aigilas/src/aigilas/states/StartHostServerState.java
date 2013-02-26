@@ -55,4 +55,9 @@ public class StartHostServerState extends MenuState {
             connectedPlayersLbl.setText(connectedPlayers + " players connected");
         }
     }
+
+    @Override
+    public String getName() {
+        return "StartHostServerState";
+    }
 }
