@@ -4,6 +4,7 @@ import aigilas.creatures.impl.CreatureFactory;
 import aigilas.states.GameWinState;
 import sps.audio.MusicPlayer;
 import sps.core.Logger;
+import sps.core.RNG;
 import sps.states.StateManager;
 
 import java.util.HashMap;
@@ -39,10 +40,11 @@ public class Dungeon {
             getNextFloor();
             finalBossFloor++;
             Logger.info("\'=== Generating a new floor: " + __floorCount);
+            RNG.printCounts();
         }
         while (getPreviousFloor()) {
             Logger.info("=== Moving back up");
-
+            RNG.printCounts();
         }
         MusicPlayer.get().start();
     }

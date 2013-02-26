@@ -3,7 +3,6 @@ package aigilas.dungeons;
 import aigilas.Aigilas;
 import aigilas.Config;
 import aigilas.creatures.impl.CreatureFactory;
-import aigilas.creatures.impl.Player;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
 import aigilas.items.ItemFactory;
@@ -11,7 +10,6 @@ import aigilas.net.Client;
 import sps.bridge.ActorTypes;
 import sps.bridge.EntityTypes;
 import sps.bridge.Sps;
-import sps.core.Logger;
 import sps.core.Point2;
 import sps.core.RNG;
 import sps.core.Settings;
@@ -115,7 +113,7 @@ public class DungeonFloor {
         else {
             for (Entity player : cache) {
                 player.setLocation(getRandomNeighbor(neighbors));
-                Logger.info("Chose player " + ((Player) player).getPlayerIndex() + " location " + player.getLocation());
+                //Logger.info("Chose player " + ((Player) player).getPlayerIndex() + " location " + player.getLocation());
             }
             EntityManager.get().addEntities(cache);
             _contents.addAll(cache);
