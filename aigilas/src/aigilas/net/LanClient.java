@@ -182,11 +182,7 @@ public class LanClient extends IClient {
                     }
                     StateManager.loadState(new LoadingState());
                 }
-                Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
-//TODO remove
-//                if (contents.TurnCount >= 8) {
-//                    Gdx.app.exit();
-//                }
+                //$$$ Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
                 break;
             default:
                 break;
