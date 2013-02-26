@@ -15,7 +15,7 @@ public class ItemFactory {
         }
 
         itemType = selectRandomType();
-        return (GenericItem) EntityManager.get().addEntity(new GenericItem(new Stats(RNG.Rand.nextInt(itemGrowth), RNG.Rand.nextInt(itemGrowth), RNG.Rand.nextInt(itemGrowth), 0, 0, 0, 0, 0, 0, 0, 0, 0), null, null, itemType, location, onFloor));
+        return (GenericItem) EntityManager.get().addEntity(new GenericItem(new Stats(RNG.next(0, itemGrowth), RNG.next(0, itemGrowth), RNG.next(0, itemGrowth), 0, 0, 0, 0, 0, 0, 0, 0, 0), null, null, itemType, location, onFloor));
     }
 
     public static GenericItem createRandomPlain(Point2 location) {

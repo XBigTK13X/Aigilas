@@ -7,24 +7,17 @@ import aigilas.skills.BaseSkill;
 import aigilas.skills.SkillId;
 import sps.core.RNG;
 
+//TODO This is a debugging stub
 public class StealItemSkill extends BaseSkill {
-    public StealItemSkill()
-
-    {
+    public StealItemSkill() {
         super(SkillId.Steal_Item, AnimationType.ROTATE);
-
-
     }
 
     @Override
-    public void affect(BaseCreature target)
-
-    {
-        if (RNG.Rand.nextInt(100) > 0) {
+    public void affect(BaseCreature target) {
+        if (RNG.next(0, 100) > 0) {
             _source.pickupItem(ItemFactory.createRandomPlain());
-
         }
-
     }
 
 }

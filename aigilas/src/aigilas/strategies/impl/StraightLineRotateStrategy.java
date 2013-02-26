@@ -26,8 +26,8 @@ public class StraightLineRotateStrategy extends BaseStrategy {
         _parent.moveIfPossible(_direction.PosX, _direction.PosY);
         target.reset(_direction.PosX + _parent.getLocation().PosX, _direction.PosY + _parent.getLocation().PosY);
         if (CoordVerifier.isBlocked(target) && _parent.isCooledDown()) {
-            _direction.setX(RNG.Rand.nextInt(3) - 1);
-            _direction.setY(RNG.Rand.nextInt(3) - 1);
+            _direction.setX(RNG.next(0, 3) - 1);
+            _direction.setY(RNG.next(0, 3) - 1);
         }
     }
 }

@@ -31,6 +31,7 @@ public class Dungeon {
     }
 
     public static void start() {
+        RNG.printCounts();
         _world = new HashMap<Location, DungeonSet>();
         _world.put(Location.Depths, new DungeonSet());
         __floorCount = 0;
@@ -46,6 +47,7 @@ public class Dungeon {
             Logger.info("=== Moving back up");
             RNG.printCounts();
         }
+        RNG.showStackMap();
         MusicPlayer.get().start();
     }
 

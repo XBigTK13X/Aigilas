@@ -29,30 +29,32 @@ public class Updater {
     }
 
 
-    private void cacheLicense(String license){
-        if(!licenseIsCached()){
+    private void cacheLicense(String license) {
+        if (!licenseIsCached()) {
             try {
-                FileUtils.writeStringToFile(licenseCache,license);
-            } catch (IOException e) {
+                FileUtils.writeStringToFile(licenseCache, license);
+            }
+            catch (IOException e) {
                 LaunchLogger.info("There was a problem caching your license. Please view launcher.log for more information.");
                 LaunchLogger.exception(e);
             }
         }
     }
 
-    public String getCachedLicense(){
-        if(licenseCache.exists()){
-        try {
-            return FileUtils.readFileToString(licenseCache);
-        } catch (IOException e) {
-            LaunchLogger.info("There was a problem reading the cached license. Please view launcher.log for more information.");
-            LaunchLogger.exception(e);
-        }
+    public String getCachedLicense() {
+        if (licenseCache.exists()) {
+            try {
+                return FileUtils.readFileToString(licenseCache);
+            }
+            catch (IOException e) {
+                LaunchLogger.info("There was a problem reading the cached license. Please view launcher.log for more information.");
+                LaunchLogger.exception(e);
+            }
         }
         return null;
     }
 
-    public boolean licenseIsCached(){
+    public boolean licenseIsCached() {
         return licenseCache.exists();
     }
 
@@ -60,7 +62,7 @@ public class Updater {
         try {
             LaunchLogger.info("Checking to see if a stable edition license has been entered.");
             if (license != null && !license.isEmpty()) {
-                URL licenseCheckUrl = new URL("http://www.simplepathstudios.com/download.php?target=aigilas-validate&license="+license);
+                URL licenseCheckUrl = new URL("http://www.simplepathstudios.com/download.php?target=aigilas-validate&license=" + license);
                 String response = IOUtils.toString(licenseCheckUrl.openStream());
                 if (response.contains("true")) {
                     LaunchLogger.info(LaunchLogger.Tab + "License is valid.");
@@ -80,9 +82,8 @@ public class Updater {
         try {
             LaunchLogger.info("Checking for updates.");
 
-            //TODO makeRequest <- store in uR
             File versionPath = new File("assets/data/version.dat");
-            if(versionPath.exists()){
+            if (versionPath.exists()) {
                 String myVersion = FileUtils.readFileToString(versionPath);
                 LaunchLogger.info("Detected version: " + myVersion);
 
@@ -94,7 +95,7 @@ public class Updater {
                     return true;
                 }
             }
-            else{
+            else {
                 LaunchLogger.info(LaunchLogger.Tab + "No version information was found");
                 LaunchLogger.info(LaunchLogger.Tab + versionPath.getAbsolutePath());
                 return false;

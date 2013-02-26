@@ -41,6 +41,6 @@ public class ActorTypes {
     private static List<ActorType> __randoms = new ArrayList<ActorType>();
 
     public static ActorType getRandomGeneratable() {
-        return __randoms.get(RNG.Rand.nextInt(__randoms.size()));
+        return __randoms.get(RNG.next(0, __randoms.size()));
     }
 }

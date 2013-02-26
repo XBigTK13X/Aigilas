@@ -1,16 +1,20 @@
 package sps.core;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class RNG {
-    public static Random SyncedRand;
-    public static Random Rand = new Random();
+    private static Random SyncedRand;
+    private static Random Rand = new Random();
+    private static int lastSyncSeed;
 
     private static Random getRand(boolean synced) {
         return synced ? SyncedRand : Rand;
     }
 
     public static void seed(int seed) {
+        lastSyncSeed = seed;
         SyncedRand = new Random(seed);
     }
 
@@ -20,10 +24,24 @@ public class RNG {
 
     private static int count = 0;
     private static int unsyncCount = 0;
+    private static Map<String, Integer> stackMap = new HashMap<String, Integer>();
 
     public static int next(int min, int max, boolean synced) {
         if (max - min > 0) {
             int rand = getRand(synced).nextInt(max - min) + min;
+
+            for (int ii = 2; ii < 5; ii++) {
+                String stack = Thread.currentThread().getStackTrace()[ii].toString();
+                if (!stack.contains("RNG")) {
+                    if (!stackMap.containsKey(stack)) {
+                        stackMap.put(stack, 1);
+                    }
+                    else {
+                        stackMap.put(stack, stackMap.get(stack) + 1);
+                    }
+                }
+            }
+
 //            Logger.info("Caller: " + Thread.currentThread().getStackTrace()[2]);
 //            Logger.info("Caller: " + Thread.currentThread().getStackTrace()[3]);
 //            Logger.info("Caller: " + Thread.currentThread().getStackTrace()[4]);
@@ -40,8 +58,12 @@ public class RNG {
         return 0;
     }
 
+    public static void showStackMap() {
+        int x = 0;
+    }
+
     public static void printCounts() {
-        Logger.info("=== SYNCED: " + count + " , UNSYNCED: " + unsyncCount + ", STANDARD: " + next(0, Integer.MAX_VALUE));
+        Logger.info("SYNC: " + count + ", UNSYNC: " + unsyncCount + ", Rand: " + next(0, Integer.MAX_VALUE) + ", Seed:" + lastSyncSeed);
     }
 
     public static boolean percent(int percent) {
@@ -56,19 +78,11 @@ public class RNG {
     }
 
     public static double angle() {
-        return RNG.Rand.nextInt(360) * Math.PI / 180;
+        return angle(true);
     }
 
     public static double angle(boolean synced) {
         return getRand(synced).nextInt(360) * Math.PI / 180;
-    }
-
-    public static int negative(int radius) {
-        return negative(radius, true);
-    }
-
-    public static int negative(int radius, boolean synced) {
-        return getRand(synced).nextInt(Math.abs(radius) * 2) - Math.abs(radius);
     }
 
     public static boolean coinFlip() {
