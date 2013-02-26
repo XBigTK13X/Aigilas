@@ -25,6 +25,7 @@ public class StartHostServerState extends MenuState {
         Logger.info("IP is " + Config.get().serverIp());
         Server.reset();
         Client.reset(new LanClient());
+        Input.get().setup(Client.get());
 
         //UI
         Input.get().setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
