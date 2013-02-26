@@ -15,6 +15,7 @@ public class RNG {
     }
 
     public static int next(int min, int max) {
+
         return next(min, max, true);
     }
 

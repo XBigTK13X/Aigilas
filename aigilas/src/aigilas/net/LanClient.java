@@ -184,7 +184,7 @@ public class LanClient extends IClient {
                     }
                     StateManager.loadState(new LoadingState());
                 }
-                //Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
+                Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
                 break;
             default:
                 break;

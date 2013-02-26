@@ -351,7 +351,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             if (Config.get().gameplayVerbose) {
                 GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
             }
-            if (_graphic != null && attacker == null) {
+            if (_graphic != null && attacker != null) {
                 _graphic.flash(attacker.getAttackColor());
             }
             if (_actorType != ActorTypes.get(Aigilas.Actors.Dummy)) {
