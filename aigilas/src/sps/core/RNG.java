@@ -15,13 +15,25 @@ public class RNG {
     }
 
     public static int next(int min, int max) {
-
         return next(min, max, true);
     }
 
+    private static int count = 0;
+    private static int unsyncCount = 0;
+
     public static int next(int min, int max, boolean synced) {
         if (max - min > 0) {
-            return getRand(synced).nextInt(max - min) + min;
+            int rand = getRand(synced).nextInt(max - min) + min;
+            Logger.info("Caller: " + Thread.currentThread().getStackTrace()[2]);
+            Logger.info("Caller: " + Thread.currentThread().getStackTrace()[3]);
+            Logger.info("Caller: " + Thread.currentThread().getStackTrace()[4]);
+            if (synced) {
+                Logger.info("synced RNG called " + (++count) + " times. Returning " + rand);
+            }
+            else {
+                //Logger.info("Unsync RNG called " + (++unsyncCount) + " times. Returning "+rand);
+            }
+            return rand;
         }
         return 0;
     }

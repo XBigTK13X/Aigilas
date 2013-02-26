@@ -3,6 +3,7 @@ package aigilas.dungeons;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.states.GameWinState;
 import sps.audio.MusicPlayer;
+import sps.core.Logger;
 import sps.states.StateManager;
 
 import java.util.HashMap;
@@ -18,7 +19,8 @@ public class Dungeon {
     public static void getNextFloor() {
         if (CreatureFactory.bossesRemaining() <= 0 && _world.get(Location.Depths).getFloorCount() >= finalBossFloor) {
             StateManager.loadState(new GameWinState());
-        } else {
+        }
+        else {
             _world.get(Location.Depths).gotoNext();
         }
     }
@@ -36,8 +38,11 @@ public class Dungeon {
         while (CreatureFactory.bossesRemaining() > 0) {
             getNextFloor();
             finalBossFloor++;
+            Logger.info("\'=== Generating a new floor: " + __floorCount);
         }
         while (getPreviousFloor()) {
+            Logger.info("=== Moving back up");
+
         }
         MusicPlayer.get().start();
     }

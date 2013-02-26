@@ -7,6 +7,7 @@ import sps.io.CommandState;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Server extends Thread {
     private final static int seedBound = Integer.MAX_VALUE;
@@ -14,7 +15,7 @@ public class Server extends Thread {
     private final List<Boolean> _readyCheckIn = new ArrayList<Boolean>();
     private final ClientManager clients;
     private boolean isRunning = true;
-    private int _rngSeed = (int) (System.currentTimeMillis() % seedBound);
+    private int _rngSeed = UUID.randomUUID().hashCode();
     private Message _message = Message.empty();
     private Integer _turnCount = 0;
     private float _turnTime = 0;
@@ -102,7 +103,7 @@ public class Server extends Thread {
                 }
                 if (readyCount >= clients.size()) {
                     _turnTime = 0;
-                    _rngSeed = (int) (System.currentTimeMillis() % seedBound);
+                    _rngSeed = UUID.randomUUID().hashCode();
                     //Logger.info(state.toString());
                     //Logger.info("Announcing turn: " + _turnCount);
                     announce(Message.createPlayerState(state, _turnCount++, _rngSeed));

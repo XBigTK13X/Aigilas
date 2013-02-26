@@ -173,10 +173,8 @@ public class LanClient extends IClient {
                 _playerCount = contents.PlayerCount;
                 break;
             case Sync_State:
-                if (_dungeonHasLoaded) {
-                    state.reset(contents.CommandState);
-                    RNG.seed(contents.RngSeed);
-                }
+                state.reset(contents.CommandState);
+                RNG.seed(contents.RngSeed);
                 //Setup the game if this is the first sync
                 if (contents.TurnCount == 0) {
                     for (int ii = 0; ii < Client.get().getPlayerCount(); ii++) {
@@ -185,6 +183,9 @@ public class LanClient extends IClient {
                     StateManager.loadState(new LoadingState());
                 }
                 Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
+                if (contents.TurnCount >= 8) {
+                    Gdx.app.exit();
+                }
                 break;
             default:
                 break;
