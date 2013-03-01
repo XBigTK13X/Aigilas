@@ -40,7 +40,7 @@ public class Config {
 
     public final boolean debugInventory;
     public final boolean debugFourPlayers;
-
+    public final boolean activateTestBots;
 
     private Config() {
         try {
@@ -54,7 +54,8 @@ public class Config {
                     Logger.info("SETTINGS: Parsing section '" + line.replace("##", "") + "'");
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Logger.exception(e);
         }
 
@@ -81,6 +82,7 @@ public class Config {
         gameplayVerbose = Parse.bool(_settings.get("gameplay_log_verbose"));
         debugFourPlayers = Parse.bool(_settings.get("debug_four_players"));
         debugInventory = Parse.bool(_settings.get("debug_inventory"));
+        activateTestBots = Parse.bool(_settings.get("activateTestBots"));
     }
 
     public int port() {

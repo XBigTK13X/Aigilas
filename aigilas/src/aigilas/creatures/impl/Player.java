@@ -1,5 +1,6 @@
 package aigilas.creatures.impl;
 
+import aigilas.Config;
 import aigilas.creatures.Stats;
 import aigilas.creatures.StatsRegistry;
 import aigilas.entities.Elements;
@@ -22,7 +23,7 @@ public class Player extends BaseEnemy {
         _playerIndex = playerIndex;
         _graphic.setColor(__colors.get(_playerIndex));
         _attackColor = __colors.get(_playerIndex);
-        setStrategy(StrategyFactory.create(Strategy.ControlledByPlayer, this));
+        setStrategy(StrategyFactory.create((Config.get().activateTestBots) ? Strategy.TestBot : Strategy.ControlledByPlayer, this));
         _baseStats = StatsRegistry.get().baseStats(_actorType);
         _maxStats = new Stats(_baseStats);
         assignGod(GodId.values()[RNG.next(0, GodId.values().length)].getInstance());

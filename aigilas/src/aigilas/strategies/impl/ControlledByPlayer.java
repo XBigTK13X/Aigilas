@@ -81,7 +81,8 @@ public class ControlledByPlayer extends BaseStrategy {
                             if (_parent.setHotSkillActive(hotkey)) {
                                 _isCasting = true;
                             }
-                        } else {
+                        }
+                        else {
                             _parent.markHotSkill(hotkey);
                         }
                     }

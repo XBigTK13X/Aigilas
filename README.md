@@ -1,6 +1,6 @@
 # Aigilas #
 ## A battle to become the Underworld's ambassador to Earth ##
-> Currently in Open Alpha Development
+> Currently in beta 
 
 ## How to Build the Game##
 Prerequisites:
