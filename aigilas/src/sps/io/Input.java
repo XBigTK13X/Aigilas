@@ -1,5 +1,6 @@
 package sps.io;
 
+import aigilas.Aigilas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
 import sps.bridge.Command;
@@ -17,18 +18,28 @@ public class Input implements InputProvider {
     private static InputProvider instance = new Input();
     private static InputProvider falseInstance = new FalseInput();
     private static boolean disabled = false;
+    // Lists what commands are locked for a given player
+    private final List<CommandLock> __locks = new ArrayList<CommandLock>();
+    private StateProvider provider;
+    // $$$ FIXME (Integer -> PlayerId) Maps a playerId to a context
+    private HashMap<Integer, Context> __contexts;
+    private boolean __isInputActive = false;
 
     public static InputProvider get() {
         return isDisabled() ? falseInstance : instance;
     }
 
-    private StateProvider provider;
-    // $$$ FIXME (Integer -> PlayerId) Maps a playerId to a context
-    private HashMap<Integer, Context> __contexts;
-    // Lists what commands are locked for a given player
-    private final List<CommandLock> __locks = new ArrayList<CommandLock>();
-    private boolean __isInputActive = false;
+    public static void enable() {
+        disabled = false;
+    }
 
+    public static void disable() {
+        disabled = true;
+    }
+
+    public static boolean isDisabled() {
+        return disabled;
+    }
 
     @Override
     public void setup(StateProvider stateProvider) {
@@ -52,13 +63,20 @@ public class Input implements InputProvider {
     public boolean detectState(Command command, int playerIndex) {
         boolean debugInput = false;
         boolean gamepadActive = false;
-        if(Controllers.getControllers().size > playerIndex){
+        if (Controllers.getControllers().size > playerIndex) {
             gamepadActive = command.controllerInput().isActive(Controllers.getControllers().get(playerIndex));
         }
-        boolean keyboardActive = playerIndex == provider.getFirstPlayerIndex() && Gdx.input.isKeyPressed(command.key().getKeyCode());
-        if (debugInput && (gamepadActive || keyboardActive)) {
-            Logger.info("ACTIVE: " + command.name());
+        boolean keyboardActive = (playerIndex == provider.getFirstPlayerIndex()) && Gdx.input.isKeyPressed(command.key().getKeyCode());
+
+        if (debugInput && command.equals(Aigilas.Commands.MoveLeft)) {
+            if (debugInput && (gamepadActive || keyboardActive)) {
+                Logger.info("ACTIVE: " + command.name() + ", controller:" + gamepadActive + ", keyboard:" + keyboardActive);
+            }
+            else {
+                Logger.info("INACTIVE: " + command.name() + ", controller:" + gamepadActive + ", keyboard:" + keyboardActive);
+            }
         }
+
         return gamepadActive || keyboardActive;
     }
 
@@ -140,19 +158,5 @@ public class Input implements InputProvider {
         }
 
         provider.pollLocalState();
-    }
-
-
-    public static void enable() {
-        disabled = false;
-    }
-
-    public static void disable() {
-        disabled = true;
-    }
-
-
-    public static boolean isDisabled() {
-        return disabled;
     }
 }

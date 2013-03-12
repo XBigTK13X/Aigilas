@@ -4,6 +4,7 @@ import aigilas.Config;
 import com.badlogic.gdx.Gdx;
 import sps.core.Logger;
 import sps.io.CommandState;
+import sps.util.RealTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class Server extends Thread {
             }
             pollForNewMessages();
             broadCastGameState();
+            RealTime.get().update();
         }
     }
 
@@ -95,7 +97,7 @@ public class Server extends Thread {
 
     private void broadCastGameState() {
         if (gameHasStarted) {
-            _turnTime += Gdx.graphics.getDeltaTime();
+            _turnTime += RealTime.get().delta();
             if (_turnTime >= Config.get().turnTime) {
                 int readyCount = 0;
                 for (boolean checkedIn : _readyCheckIn) {
@@ -104,8 +106,9 @@ public class Server extends Thread {
                 if (readyCount >= clients.size()) {
                     _turnTime = 0;
                     _rngSeed = UUID.randomUUID().hashCode();
-                    //Logger.info(state.toString());
-                    //Logger.info("Announcing turn: " + _turnCount);
+
+                    //System.out.println(state.debug());
+                    //System.out.println("Announcing turn: " + _turnCount);
                     announce(Message.createPlayerState(state, _turnCount++, _rngSeed));
                     for (int ii = 0; ii < _readyCheckIn.size(); ii++) {
                         _readyCheckIn.set(ii, false);

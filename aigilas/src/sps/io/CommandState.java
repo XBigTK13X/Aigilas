@@ -48,4 +48,17 @@ public class CommandState {
             }
         }
     }
+
+    public String debug(){
+        String result = "";
+        for(Integer key:_state.keySet()){
+            result+="{PI:"+key+",";
+            HashMap<Command,Boolean> upOrDowns = _state.get(key);
+            for(Command command:upOrDowns.keySet()){
+                result+="{c:"+command.name()+",?: "+upOrDowns.get(command)+"}";
+            }
+            result+="}";
+        }
+        return result;
+    }
 }

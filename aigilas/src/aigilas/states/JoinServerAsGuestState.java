@@ -16,13 +16,14 @@ import sps.io.Input;
 import sps.util.Parse;
 
 public class JoinServerAsGuestState extends MenuState {
-    private static final String waitMessage = "Waiting for host to start the game.";
+    private static final String waitMessage = "Waiting for any player to start the game.";
     final TextField ipIn;
     final Label label;
     private boolean connectStarted = false;
     private boolean readyToConnect = false;
 
     final SelectableButton joinBtn;
+    final SelectableButton startGameBtn;
 
     public JoinServerAsGuestState() {
 
@@ -52,10 +53,20 @@ public class JoinServerAsGuestState extends MenuState {
             }
         });
 
+        startGameBtn = new SelectableButton("Start", UiAssets.getButtonStyle());
+        startGameBtn.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                Logger.info("Starting the game as a guest");
+                Client.get().startGame();
+            }
+        });
+
+        startGameBtn.setVisible(false);
         table.add(label);
         table.add(ipIn).minWidth(300);
         table.row();
         add(joinBtn);
+        add(startGameBtn);
     }
 
     private void startGameIfReady() {
@@ -72,6 +83,7 @@ public class JoinServerAsGuestState extends MenuState {
             Config.get().setServerIp(address);
             readyToConnect = true;
             ipIn.setVisible(false);
+            startGameBtn.setVisible(true);
         }
     }
 

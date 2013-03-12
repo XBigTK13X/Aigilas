@@ -36,6 +36,8 @@ public class Config {
     public final float turnTime;
     public final int turnsPerSecond;
 
+    public final boolean standaloneServer;
+
     public final boolean gameplayVerbose;
 
     public final boolean debugInventory;
@@ -62,6 +64,7 @@ public class Config {
         // Networking
         serverIp = _settings.get("server_ip");
         port = Parse.inte(_settings.get("socket_port"));
+        standaloneServer = Parse.bool(_settings.get("standalone_server"));
 
         // Gameplay
         enemyCap = Parse.inte(_settings.get("enemyCap"));

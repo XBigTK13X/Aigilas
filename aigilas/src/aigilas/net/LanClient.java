@@ -108,12 +108,14 @@ public class LanClient extends IClient {
 
     public void setState(Command command, int playerIndex, boolean isActive) {
         if (isActive != state.isActive(playerIndex, command)) {
+            //Logger.info("MISMATCH: command:"+command.name()+", active:" +isActive);
             sendMessage(Message.createMovement(command, playerIndex, isActive));
         }
     }
 
     @Override
     public void pollLocalState() {
+        //Logger.info(state.debug());
         for (Command command : Commands.values()) {
             setState(command, getFirstPlayerIndex(), Input.get().detectState(command, getFirstPlayerIndex()));
         }
