@@ -1,6 +1,6 @@
 package sps.graphics;
 
-import sps.core.Settings;
+import sps.core.SpsConfig;
 
 public class SpriteInfo {
     public final int X;
@@ -9,8 +9,8 @@ public class SpriteInfo {
     public final int MaxFrame;
 
     public SpriteInfo(int spriteIndex, int maxFrame) {
-        X = Settings.get().spriteWidth;
-        Y = Settings.get().spriteHeight;
+        X = SpsConfig.get().spriteWidth;
+        Y = SpsConfig.get().spriteHeight;
         SpriteIndex = spriteIndex;
         MaxFrame = maxFrame;
     }

@@ -1,7 +1,7 @@
 package aigilas.creatures;
 
 import aigilas.Aigilas;
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.GameplayLogger;
 import aigilas.classes.CreatureClass;
 import aigilas.entities.Darkness;
@@ -26,7 +26,7 @@ import aigilas.strategies.TargetSet;
 import com.badlogic.gdx.graphics.Color;
 import sps.bridge.*;
 import sps.core.Point2;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.entities.CoordVerifier;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -48,7 +48,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     protected Stats _maxStats;
     protected God _god;
 
-    protected final int BaseWaitTime = Config.get().defaultSpeed * Config.get().turnsPerSecond;
+    protected final int BaseWaitTime = AigilasConfig.get().defaultSpeed * AigilasConfig.get().turnsPerSecond;
     protected int waitTime = BaseWaitTime;
     protected int regenTime = BaseWaitTime;
 
@@ -235,7 +235,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     @Override
     public void draw() {
-        if (Settings.get().viewPaths) {
+        if (SpsConfig.get().viewPaths) {
             Path path = _strategies.current().getPath();
             if (path != null) {
                 path.draw();
@@ -345,10 +345,10 @@ public abstract class BaseCreature extends Entity implements IActor {
                 textPrepend = "+";
             }
 
-            TextPool.get().write(textPrepend + StringStorage.get(Math.abs(damage)), new Point2(getLocation().PosX + Settings.get().spriteWidth / 3, getLocation().PosY + Settings.get().spriteHeight), .5f, TextEffects.Fountain, (_actorType == ActorTypes.get(Sps.Actors.Player)) ? Color.WHITE : Color.BLACK, .6f);
+            TextPool.get().write(textPrepend + StringStorage.get(Math.abs(damage)), new Point2(getLocation().PosX + SpsConfig.get().spriteWidth / 3, getLocation().PosY + SpsConfig.get().spriteHeight), .5f, TextEffects.Fountain, (_actorType == ActorTypes.get(Sps.Actors.Player)) ? Color.WHITE : Color.BLACK, .6f);
         }
         if (damage > 0 || (damage < 0 && _statuses.allows(CreatureAction.ReceiveHealing))) {
-            if (Config.get().gameplayVerbose) {
+            if (AigilasConfig.get().gameplayVerbose) {
                 GameplayLogger.log(this.toString() + " taking " + damage + " damage" + " from " + attacker);
             }
             if (_graphic != null && attacker != null) {
@@ -477,7 +477,7 @@ public abstract class BaseCreature extends Entity implements IActor {
                 if (_class != null) {
                     _skills.add(_class.getLevelSkills(_currentLevel));
                 }
-                TextPool.get().write("LEVEL UP!", new Point2(getLocation().PosX, getLocation().PosY + Settings.get().spriteHeight), 1);
+                TextPool.get().write("LEVEL UP!", new Point2(getLocation().PosX, getLocation().PosY + SpsConfig.get().spriteHeight), 1);
             }
         }
     }
@@ -503,7 +503,7 @@ public abstract class BaseCreature extends Entity implements IActor {
             lastSum = _baseStats.getSum();
             _skills.useActive();
             if (lastSum != _baseStats.getSum()) {
-                TextPool.get().write(getActiveSkillName(), new Point2(getLocation().PosX, getLocation().PosY + Settings.get().spriteHeight), .5f, TextEffects.Fountain, Color.WHITE, .8f);
+                TextPool.get().write(getActiveSkillName(), new Point2(getLocation().PosX, getLocation().PosY + SpsConfig.get().spriteHeight), .5f, TextEffects.Fountain, Color.WHITE, .8f);
             }
         }
     }

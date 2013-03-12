@@ -79,7 +79,7 @@ public class DevConsole {
     }
 
     public void toggle() {
-        if (Settings.get().devConsoleEnabled) {
+        if (SpsConfig.get().devConsoleEnabled) {
             _isVisible = !_isVisible;
         }
     }

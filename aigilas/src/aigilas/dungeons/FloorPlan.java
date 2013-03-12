@@ -1,13 +1,13 @@
 package aigilas.dungeons;
 
 import aigilas.Aigilas;
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import sps.bridge.EntityType;
 import sps.bridge.EntityTypes;
 import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.core.RNG;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,23 +25,23 @@ public class FloorPlan {
 
     public FloorPlan(boolean altarRoom) {
         rooms = new ArrayList<Room>();
-        tiles = new EntityType[Settings.get().tileMapWidth][Settings.get().tileMapHeight];
-        for (int ii = 0; ii < Settings.get().tileMapWidth; ii++) {
-            for (int jj = 0; jj < Settings.get().tileMapHeight; jj++) {
+        tiles = new EntityType[SpsConfig.get().tileMapWidth][SpsConfig.get().tileMapHeight];
+        for (int ii = 0; ii < SpsConfig.get().tileMapWidth; ii++) {
+            for (int jj = 0; jj < SpsConfig.get().tileMapHeight; jj++) {
                 tiles[ii][jj] = EntityTypes.get(Sps.Entities.Floor);
             }
         }
 
-        rooms.add(new Room(Settings.get().tileMapHeight, Settings.get().tileMapWidth, 0, 0));
+        rooms.add(new Room(SpsConfig.get().tileMapHeight, SpsConfig.get().tileMapWidth, 0, 0));
         if (!altarRoom) {
-            int roomsToPlace = Config.get().minRoomCount + RNG.next(0, Config.get().maxRoomCount);
+            int roomsToPlace = AigilasConfig.get().minRoomCount + RNG.next(0, AigilasConfig.get().maxRoomCount);
             int attemptCount = 0;
             while (attemptCount < 100 && roomsToPlace > 0) {
                 attemptCount++;
                 int width = minRoomWidth + RNG.next(0, maxRoomWidth - minRoomHeight);
                 int height = minRoomHeight + RNG.next(0, maxRoomHeight - minRoomHeight);
-                int x = RNG.next(buffer, Settings.get().tileMapWidth - width - buffer);
-                int y = RNG.next(buffer, Settings.get().tileMapHeight - height - buffer);
+                int x = RNG.next(buffer, SpsConfig.get().tileMapWidth - width - buffer);
+                int y = RNG.next(buffer, SpsConfig.get().tileMapHeight - height - buffer);
 
                 roomsToPlace--;
                 Room nextRoom = new Room(height, width, x, y);
@@ -68,12 +68,12 @@ public class FloorPlan {
                 for (int jj = room.Y; jj < room.BottomSide; jj++) {
                     if (ii == room.X || jj == room.Y || ii == room.RightSide - 1 || jj == room.BottomSide - 1) {
                         if (!room.Corners.contains(new Point2(ii, jj))) {
-                            if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < Settings.get().tileMapWidth)) {
+                            if ((ii == room.X && ii > 0) || (ii == room.RightSide && ii < SpsConfig.get().tileMapWidth)) {
                                 if (is(ii - 1, jj, EntityTypes.get(Sps.Entities.Floor)) && is(ii + 1, jj, EntityTypes.get(Sps.Entities.Floor))) {
                                     possibleEntrances.add(new OrientedPoint(ii, jj, true));
                                 }
                             }
-                            if ((jj == room.Y && jj > 0) || (jj == room.BottomSide && jj < Settings.get().tileMapHeight)) {
+                            if ((jj == room.Y && jj > 0) || (jj == room.BottomSide && jj < SpsConfig.get().tileMapHeight)) {
                                 if (is(ii, jj - 1, EntityTypes.get(Sps.Entities.Floor)) && is(ii, jj + 1, EntityTypes.get(Sps.Entities.Floor))) {
                                     possibleEntrances.add(new OrientedPoint(ii, jj));
                                 }
@@ -97,7 +97,7 @@ public class FloorPlan {
         }
         for (OrientedPoint entrance : entrances) {
             int pivot = (entrance.isHorizontal()) ? entrance.X : entrance.Y;
-            int max = (entrance.isHorizontal()) ? Settings.get().tileMapWidth - 1 : Settings.get().tileMapHeight;
+            int max = (entrance.isHorizontal()) ? SpsConfig.get().tileMapWidth - 1 : SpsConfig.get().tileMapHeight;
             for (int ii = pivot - 2; ii < pivot + 2; ii++) {
                 if (ii < 1 || ii > max) {
                     continue;
@@ -110,11 +110,11 @@ public class FloorPlan {
         }
 
         List<Tile> walls = new ArrayList<Tile>();
-        for (int ii = 0; ii < Settings.get().tileMapWidth; ii++) {
-            for (int jj = 0; jj < Settings.get().tileMapHeight; jj++) {
+        for (int ii = 0; ii < SpsConfig.get().tileMapWidth; ii++) {
+            for (int jj = 0; jj < SpsConfig.get().tileMapHeight; jj++) {
                 EntityType tile = tiles[ii][jj];
-                if (ii > 0 && jj > 0 && ii < Settings.get().tileMapWidth - 1 && jj < Settings.get().tileMapHeight - 1) {
-                    tile = RNG.percent(Config.get().wallDecayPercent) ? EntityTypes.get(Sps.Entities.Floor) : tile;
+                if (ii > 0 && jj > 0 && ii < SpsConfig.get().tileMapWidth - 1 && jj < SpsConfig.get().tileMapHeight - 1) {
+                    tile = RNG.percent(AigilasConfig.get().wallDecayPercent) ? EntityTypes.get(Sps.Entities.Floor) : tile;
                 }
                 walls.add(new Tile(tile, ii, jj));
             }

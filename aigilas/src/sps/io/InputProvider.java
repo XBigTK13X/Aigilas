@@ -8,7 +8,7 @@ import sps.bridge.Context;
  * User: kretst
  * Date: 2/11/13
  * Time: 6:41 PM
- * To change this template use File | Settings | File Templates.
+ * To change this template use File | SpsConfig | File Templates.
  */
 public interface InputProvider {
     void setup(StateProvider stateProvider);

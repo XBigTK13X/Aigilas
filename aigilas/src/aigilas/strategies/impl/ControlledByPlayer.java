@@ -1,7 +1,7 @@
 package aigilas.strategies.impl;
 
 import aigilas.Aigilas;
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.creatures.BaseCreature;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
@@ -100,7 +100,7 @@ public class ControlledByPlayer extends BaseStrategy {
             }
 
             if (Input.get().isActive(Commands.get(Aigilas.Commands.Inventory), _parent.getPlayerIndex())) {
-                if (Config.get().debugInventory) {
+                if (AigilasConfig.get().debugInventory) {
                     for (Entity player : EntityManager.get().getPlayers()) {
                         Player p = (Player) player;
                         if (p.getPlayerIndex() != _parent.getPlayerIndex()) {

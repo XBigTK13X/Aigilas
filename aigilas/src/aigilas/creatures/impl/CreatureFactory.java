@@ -1,7 +1,7 @@
 package aigilas.creatures.impl;
 
 import aigilas.Aigilas;
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.SkillEffect;
 import aigilas.items.ItemFactory;
@@ -36,7 +36,7 @@ public class CreatureFactory {
 
                 addEntity(result);
 
-        if (Config.get().debugInventory)
+        if (AigilasConfig.get().debugInventory)
 
         {
             for (int ii = 0; ii < 1000; ii++) {

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import sps.bridge.Commands;
 import sps.bridge.DrawDepths;
 import sps.core.Point2;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.graphics.Renderer;
 import sps.text.Text;
 import sps.text.TextEffects;
@@ -20,7 +20,7 @@ public class SkillHud extends BaseHud {
     private Point2 _energyPosition = new Point2();
 
     public SkillHud(BaseCreature owner) {
-        super(owner, Settings.get().spriteWidth, Renderer.get().VirtualHeight / 4);
+        super(owner, SpsConfig.get().spriteWidth, Renderer.get().VirtualHeight / 4);
         _energyPosition = new Point2(getMeterAnchor().X, getMeterAnchor().Y - Renderer.get().VirtualHeight / 4);
     }
 
@@ -41,7 +41,7 @@ public class SkillHud extends BaseHud {
             if (skillHeader != null) {
                 skillHeader.hide();
             }
-            skillHeader = TextPool.get().write(getSkillStrings(), getSkillAnchor().add(Settings.get().spriteWidth, 0), Text.NotTimed, TextEffects.None, Color.WHITE, .6f);
+            skillHeader = TextPool.get().write(getSkillStrings(), getSkillAnchor().add(SpsConfig.get().spriteWidth, 0), Text.NotTimed, TextEffects.None, Color.WHITE, .6f);
         }
     }
 
@@ -54,8 +54,8 @@ public class SkillHud extends BaseHud {
             return;
         }
 
-        Renderer.get().draw(_menuBase, getMeterAnchor(), DrawDepths.get(Aigilas.DrawDepths.Hud_BG), Color.GREEN, Settings.get().spriteWidth, calculateHeight(StatType.Health));
-        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get(Aigilas.DrawDepths.Hud_BG), Color.BLUE, Settings.get().spriteWidth, calculateHeight(StatType.Energy));
-        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get(Aigilas.DrawDepths.Hud_BG), Color.YELLOW, Settings.get().spriteWidth / 2, costOfCurrentSkill());
+        Renderer.get().draw(_menuBase, getMeterAnchor(), DrawDepths.get(Aigilas.DrawDepths.Hud_BG), Color.GREEN, SpsConfig.get().spriteWidth, calculateHeight(StatType.Health));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get(Aigilas.DrawDepths.Hud_BG), Color.BLUE, SpsConfig.get().spriteWidth, calculateHeight(StatType.Energy));
+        Renderer.get().draw(_menuBase, _energyPosition, DrawDepths.get(Aigilas.DrawDepths.Hud_BG), Color.YELLOW, SpsConfig.get().spriteWidth / 2, costOfCurrentSkill());
     }
 }

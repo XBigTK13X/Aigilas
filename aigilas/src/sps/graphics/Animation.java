@@ -8,7 +8,7 @@ import sps.bridge.SpriteType;
 import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.core.RNG;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 
 public class Animation {
     protected Point2 _position = new Point2(0, 0);
@@ -54,7 +54,7 @@ public class Animation {
                 _sprite.setSize(_width, _height);
             }
             else {
-                _sprite.setSize(Settings.get().spriteWidth, Settings.get().spriteHeight);
+                _sprite.setSize(SpsConfig.get().spriteWidth, SpsConfig.get().spriteHeight);
             }
             _sprite = Assets.get().sprite(_currentFrame, _spriteInfo.SpriteIndex);
             updateAnimation();

@@ -7,7 +7,7 @@ import sps.bridge.EntityType;
 import sps.bridge.EntityTypes;
 import sps.bridge.Sps;
 import sps.core.Point2;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 
@@ -29,8 +29,8 @@ public class EntityCache {
         reusableTiles = new HashMap<EntityType, List<Entity>>();
         reusableTiles.put(EntityTypes.get(Sps.Entities.Floor), new ArrayList<Entity>());
         reusableTiles.put(EntityTypes.get(Aigilas.Entities.Darkness), new ArrayList<Entity>());
-        for (int ii = 1; ii < Settings.get().tileMapWidth - 1; ii++) {
-            for (int jj = 1; jj < Settings.get().tileMapHeight - 1; jj++) {
+        for (int ii = 1; ii < SpsConfig.get().tileMapWidth - 1; ii++) {
+            for (int jj = 1; jj < SpsConfig.get().tileMapHeight - 1; jj++) {
                 reusableTiles.get(EntityTypes.get(Sps.Entities.Floor)).add(new Floor(new Point2(ii, jj)));
                 reusableTiles.get(EntityTypes.get(Aigilas.Entities.Darkness)).add(new Darkness(new Point2(ii, jj)));
             }

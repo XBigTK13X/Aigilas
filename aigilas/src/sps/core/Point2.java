@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Point2 {
     public static final Point2 Zero = new Point2(0, 0);
-    private static final float halfHeight = Settings.get().spriteHeight / 2;
-    private static final float halfWidth = Settings.get().spriteWidth / 2;
+    private static final float halfHeight = SpsConfig.get().spriteHeight / 2;
+    private static final float halfWidth = SpsConfig.get().spriteWidth / 2;
 
     public float X;
     public float Y;
@@ -18,7 +18,7 @@ public class Point2 {
     public float PosCenterX;
     public float PosCenterY;
 
-    public static final Point2[][] _locations = new Point2[Settings.get().tileMapHeight][Settings.get().tileMapWidth];
+    public static final Point2[][] _locations = new Point2[SpsConfig.get().tileMapHeight][SpsConfig.get().tileMapWidth];
 
     public Point2() {
     }
@@ -92,7 +92,7 @@ public class Point2 {
 
     public void setX(float x) {
         X = x;
-        boolean isGrid = (Math.abs(X) < Settings.get().tileMapWidth);
+        boolean isGrid = (Math.abs(X) < SpsConfig.get().tileMapWidth);
         if (isGrid) {
             setAdjustedX(x);
         }
@@ -105,19 +105,19 @@ public class Point2 {
         X = x;
         PosX = X;
         PosCenterX = PosX + halfWidth;
-        GridX = (int) (X / Settings.get().spriteWidth);
+        GridX = (int) (X / SpsConfig.get().spriteWidth);
     }
 
     private void setAdjustedX(float x) {
         X = x;
-        PosX = X * Settings.get().spriteWidth;
+        PosX = X * SpsConfig.get().spriteWidth;
         PosCenterX = PosX + halfWidth;
         GridX = (int) X;
     }
 
     public void setY(float y) {
         Y = y;
-        boolean isGrid = (Math.abs(Y) < Settings.get().tileMapHeight);
+        boolean isGrid = (Math.abs(Y) < SpsConfig.get().tileMapHeight);
         if (isGrid) {
             setAdjustedY(y);
         }
@@ -130,12 +130,12 @@ public class Point2 {
         Y = y;
         PosY = Y;
         PosCenterY = PosY + halfWidth;
-        GridY = (int) (Y / Settings.get().spriteHeight);
+        GridY = (int) (Y / SpsConfig.get().spriteHeight);
     }
 
     private void setAdjustedY(float y) {
         Y = y;
-        PosY = Y * Settings.get().spriteHeight;
+        PosY = Y * SpsConfig.get().spriteHeight;
         PosCenterY = PosY + halfHeight;
         GridY = (int) Y;
     }
@@ -156,8 +156,8 @@ public class Point2 {
 
     public List<Point2> getNeighbors() {
         if (_locations[0][0] == null) {
-            for (int ii = 0; ii < Settings.get().tileMapHeight; ii++) {
-                for (int jj = 0; jj < Settings.get().tileMapWidth; jj++) {
+            for (int ii = 0; ii < SpsConfig.get().tileMapHeight; ii++) {
+                for (int jj = 0; jj < SpsConfig.get().tileMapWidth; jj++) {
                     _locations[ii][jj] = new Point2(jj, ii);
                 }
             }
@@ -165,7 +165,7 @@ public class Point2 {
         _neighbors.clear();
         for (int ii = -1; ii < 2; ii++) {
             for (int jj = -1; jj < 2; jj++) {
-                if ((ii != 0 || jj != 0) && (GridX + jj >= 0 && GridY + ii >= 0) && (GridX + jj < Settings.get().tileMapWidth && GridY + ii < Settings.get().tileMapHeight)) {
+                if ((ii != 0 || jj != 0) && (GridX + jj >= 0 && GridY + ii >= 0) && (GridX + jj < SpsConfig.get().tileMapWidth && GridY + ii < SpsConfig.get().tileMapHeight)) {
                     _neighbors.add(_locations[GridY + ii][GridX + jj]);
                 }
             }

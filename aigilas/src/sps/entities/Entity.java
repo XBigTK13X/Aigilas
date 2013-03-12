@@ -4,7 +4,7 @@ import sps.bridge.DrawDepth;
 import sps.bridge.EntityType;
 import sps.bridge.SpriteType;
 import sps.core.Point2;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.graphics.Animation;
 import sps.graphics.SpriteInfo;
 
@@ -95,9 +95,9 @@ public class Entity implements Comparable {
     private static float normalizeDistance(float amount) {
         isNeg = (amount < 0) ? -1 : 1;
         amount = Math.abs(amount);
-        factorsOfSpriteHeight = (int) Math.floor(amount / Settings.get().spriteHeight);
+        factorsOfSpriteHeight = (int) Math.floor(amount / SpsConfig.get().spriteHeight);
         factorsOfSpriteHeight = (factorsOfSpriteHeight == 0 && amount != 0) ? 1 : factorsOfSpriteHeight;
-        return (Settings.get().spriteHeight * factorsOfSpriteHeight * isNeg);
+        return (SpsConfig.get().spriteHeight * factorsOfSpriteHeight * isNeg);
     }
 
     public boolean isActive() {

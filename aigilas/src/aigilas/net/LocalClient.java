@@ -1,6 +1,6 @@
 package aigilas.net;
 
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
 import sps.bridge.Command;
@@ -28,7 +28,7 @@ public class LocalClient extends IClient {
 
     public boolean nextTurn() {
         update();
-        if (_turnTimer >= Config.get().turnTime) {
+        if (_turnTimer >= AigilasConfig.get().turnTime) {
             _turnTimer = 0;
             return true;
         }

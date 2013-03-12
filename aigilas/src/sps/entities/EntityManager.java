@@ -3,7 +3,7 @@ package sps.entities;
 import sps.bridge.*;
 import sps.core.Point2;
 import sps.core.RNG;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.graphics.Renderer;
 
 import java.util.ArrayList;
@@ -271,7 +271,7 @@ public class EntityManager {
     public Point2 getEmptyLocation() {
         List<Point2> emptyLocations = new ArrayList<Point2>();
         for (Point2 location : _gridContents.keySet()) {
-            if (location.GridX > 0 && location.GridY > 0 && location.GridX < Settings.get().tileMapWidth - 1 && location.GridY < Settings.get().tileMapHeight - 1) {
+            if (location.GridX > 0 && location.GridY > 0 && location.GridX < SpsConfig.get().tileMapWidth - 1 && location.GridY < SpsConfig.get().tileMapHeight - 1) {
                 boolean exclude = false;
                 for (int ii = 0; ii < _gridContents.get(location).size(); ii++) {
                     if (_gridContents.get(location).get(ii).getEntityType() == EntityTypes.get(Sps.Entities.Actor)) {

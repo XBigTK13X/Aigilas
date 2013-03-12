@@ -1,6 +1,6 @@
 package aigilas.reactions;
 
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.GameplayLogger;
 import aigilas.creatures.BaseCreature;
 import aigilas.entities.Elements;
@@ -16,7 +16,7 @@ public class ReactionMeter {
     private final BaseCreature _parent;
     private final List<Elements> _elements = new ArrayList<Elements>();
     private final List<ReactionMarker> _markers = new ArrayList<ReactionMarker>();
-    private static final int _maxTimer = Config.get().defaultSpeed * 4;
+    private static final int _maxTimer = AigilasConfig.get().defaultSpeed * 4;
     private int _reactionTimer = _maxTimer;
 
     public ReactionMeter(BaseCreature parent) {

@@ -1,6 +1,6 @@
 package sps.audio;
 
-import sps.core.Settings;
+import sps.core.SpsConfig;
 
 public abstract class MusicPlayer {
     private static MusicPlayer __instance;
@@ -8,7 +8,7 @@ public abstract class MusicPlayer {
     public static MusicPlayer get(MusicPlayer player) {
 
         if (__instance == null) {
-            if (Settings.get().musicEnabled && player != null) {
+            if (SpsConfig.get().musicEnabled && player != null) {
                 __instance = player;
             }
             else {

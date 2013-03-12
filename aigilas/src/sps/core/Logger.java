@@ -44,7 +44,7 @@ public class Logger {
     }
 
     public static void devConsole(String message) {
-        if (Settings.get().devConsoleEnabled) {
+        if (SpsConfig.get().devConsoleEnabled) {
             DevConsole.get().add(message);
         }
     }

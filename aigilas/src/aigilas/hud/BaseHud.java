@@ -3,7 +3,7 @@ package aigilas.hud;
 import aigilas.creatures.BaseCreature;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.core.Point2;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.graphics.Assets;
 import sps.graphics.Renderer;
 
@@ -36,10 +36,10 @@ public abstract class BaseHud {
         meterAnchors.add(new Point2(0, _dimensions.Y));
         meterAnchors.add(new Point2(Renderer.get().VirtualWidth - _dimensions.X, _dimensions.Y));
 
-        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, Renderer.get().VirtualHeight - (int) (.1 * _dimensions.Y)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + SpsConfig.get().spriteWidth, Renderer.get().VirtualHeight - (int) (.1 * _dimensions.Y)));
         skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.get().VirtualWidth / 2, Renderer.get().VirtualHeight - (int) (.1 * _dimensions.Y)));
-        skillAnchors.add(new Point2(getMeterAnchor().X + Settings.get().spriteWidth, (int) (Settings.get().spriteHeight * .8)));
-        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.get().VirtualWidth / 2, (int) (Settings.get().spriteHeight * .8)));
+        skillAnchors.add(new Point2(getMeterAnchor().X + SpsConfig.get().spriteWidth, (int) (SpsConfig.get().spriteHeight * .8)));
+        skillAnchors.add(new Point2(getMeterAnchor().X - Renderer.get().VirtualWidth / 2, (int) (SpsConfig.get().spriteHeight * .8)));
     }
 
     public void toggle() {

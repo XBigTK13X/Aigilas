@@ -6,7 +6,7 @@ import sps.bridge.EntityTypes;
 import sps.bridge.SpriteTypes;
 import sps.core.Point2;
 import sps.core.RNG;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 import sps.entities.HitTest;
@@ -26,7 +26,7 @@ public class Darkness extends Entity {
         Entity player = (Entity) EntityManager.get().getNearestPlayer(this);
         if (player.isActive()) {
             float distance = HitTest.getDistanceSquare(player, this);
-            if (distance < Settings.get().spriteWidth * Settings.get().spriteWidth * 7) {
+            if (distance < SpsConfig.get().spriteWidth * SpsConfig.get().spriteWidth * 7) {
                 _graphic.setAlpha(0);
                 playerNear = true;
             }

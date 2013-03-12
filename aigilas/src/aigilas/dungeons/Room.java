@@ -1,7 +1,7 @@
 package aigilas.dungeons;
 
 import sps.core.Point2;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class Room {
     }
 
     public boolean isBad() {
-        return BottomSide > Settings.get().tileMapHeight || RightSide > Settings.get().tileMapWidth;
+        return BottomSide > SpsConfig.get().tileMapHeight || RightSide > SpsConfig.get().tileMapWidth;
     }
 
     public boolean collides(Room target) {

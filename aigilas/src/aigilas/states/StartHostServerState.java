@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.net.Client;
 import aigilas.net.LanClient;
 import aigilas.net.Server;
@@ -22,7 +22,7 @@ public class StartHostServerState extends MenuState {
     public StartHostServerState() {
 
         //Server
-        Logger.info("IP is " + Config.get().serverIp());
+        Logger.info("IP is " + AigilasConfig.get().serverIp());
         Server.reset();
         Client.reset(new LanClient());
         Input.get().setup(Client.get());

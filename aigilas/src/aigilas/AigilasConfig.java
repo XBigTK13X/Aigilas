@@ -7,12 +7,12 @@ import sps.util.Parse;
 
 import java.util.HashMap;
 
-public class Config {
-    private static Config __instance;
+public class AigilasConfig {
+    private static AigilasConfig __instance;
 
-    public static Config get() {
+    public static AigilasConfig get() {
         if (__instance == null) {
-            __instance = new Config();
+            __instance = new AigilasConfig();
         }
         return __instance;
     }
@@ -44,7 +44,7 @@ public class Config {
     public final boolean debugFourPlayers;
     public final boolean activateTestBots;
 
-    private Config() {
+    private AigilasConfig() {
         try {
             for (String line : FileUtils.readLines(Loader.get().data("aigilas.cfg"))) {
                 if (!line.contains("##") && line.length() > 1) {

@@ -1,6 +1,6 @@
 package aigilas.creatures.impl;
 
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.classes.CreatureClass;
 import aigilas.creatures.*;
 import aigilas.entities.Elements;
@@ -25,10 +25,10 @@ public class BaseEnemy extends BaseCreature {
         if (EnemyRegistry.get().contains(_actorType)) {
             EnemyInfo info = EnemyRegistry.get().getInfo(_actorType);
             for (StatType stat : info.Strengths) {
-                initStat(stat, get(stat) + Config.get().enemyStatMultiplier);
+                initStat(stat, get(stat) + AigilasConfig.get().enemyStatMultiplier);
             }
             for (StatType stat : info.Weaknesses) {
-                initStat(stat, get(stat) - Config.get().enemyStatMultiplier);
+                initStat(stat, get(stat) - AigilasConfig.get().enemyStatMultiplier);
             }
             for (Elements element : info.Elements) {
                 _composition.add(element);

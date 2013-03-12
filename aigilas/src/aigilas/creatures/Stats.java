@@ -1,13 +1,13 @@
 package aigilas.creatures;
 
-import sps.core.Settings;
+import sps.core.SpsConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Stats {
-    public static final int DefaultMoveDistance = Settings.get().spriteHeight;
+    public static final int DefaultMoveDistance = SpsConfig.get().spriteHeight;
 
     private HashMap<StatType, Integer> _stats = new HashMap<StatType, Integer>();
     private final List<StatBuff> _buffs = new ArrayList<StatBuff>();

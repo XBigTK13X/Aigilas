@@ -1,7 +1,7 @@
 package aigilas.dungeons;
 
 import aigilas.Aigilas;
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
@@ -12,7 +12,7 @@ import sps.bridge.EntityTypes;
 import sps.bridge.Sps;
 import sps.core.Point2;
 import sps.core.RNG;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
 
@@ -24,7 +24,7 @@ public class DungeonFloor {
     private static int enemyBaseModifier = 0;
 
     private List<Entity> _contents = new ArrayList<Entity>();
-    private final Entity[][] dungeon = new Entity[Settings.get().tileMapWidth][Settings.get().tileMapHeight];
+    private final Entity[][] dungeon = new Entity[SpsConfig.get().tileMapWidth][SpsConfig.get().tileMapHeight];
     private final Point2 _upSpawnLocation = new Point2(0, 0);
     private final Point2 _downSpawnLocation = new Point2(0, 0);
 
@@ -42,17 +42,17 @@ public class DungeonFloor {
 
     public DungeonFloor(Point2 upstairsSpawn) {
         enemyCapModifier++;
-        enemyBaseModifier = Config.get().enemyBase + enemyCapModifier / 5;
+        enemyBaseModifier = AigilasConfig.get().enemyBase + enemyCapModifier / 5;
         EntityManager.get().clear();
         generateRooms(false);
         _upSpawnLocation.copy(upstairsSpawn);
         placeStairs();
-        int enemiesToPlace = RNG.next(Config.get().enemyBase + enemyBaseModifier, Config.get().enemyCap + enemyCapModifier);
+        int enemiesToPlace = RNG.next(AigilasConfig.get().enemyBase + enemyBaseModifier, AigilasConfig.get().enemyCap + enemyCapModifier);
         if (enemiesToPlace <= 0) {
             enemiesToPlace = 1;
         }
         placeCreatures(enemiesToPlace);
-        placeItems(RNG.next(Config.get().itemBase, Config.get().itemCap));
+        placeItems(RNG.next(AigilasConfig.get().itemBase, AigilasConfig.get().itemCap));
         transferDungeonState();
     }
 
@@ -103,7 +103,7 @@ public class DungeonFloor {
 
         int playerCount = Client.get().getPlayerCount();
         if (cache.size() == 0) {
-            if (Config.get().debugFourPlayers) {
+            if (AigilasConfig.get().debugFourPlayers) {
                 playerCount = 4;
             }
             for (int ii = 0; ii < playerCount; ii++) {
@@ -126,8 +126,8 @@ public class DungeonFloor {
 
     private Point2 findRandomFreeTile(int buffer) {
         while (true) {
-            int x = RNG.next(buffer, Settings.get().tileMapWidth - buffer);
-            int y = RNG.next(buffer, Settings.get().tileMapHeight - buffer);
+            int x = RNG.next(buffer, SpsConfig.get().tileMapWidth - buffer);
+            int y = RNG.next(buffer, SpsConfig.get().tileMapHeight - buffer);
             if (dungeon[x][y].getEntityType() == EntityTypes.get(Sps.Entities.Floor)) {
                 return new Point2(x, y);
             }
@@ -155,14 +155,14 @@ public class DungeonFloor {
     }
 
     private void placeAltars() {
-        int startY = Settings.get().tileMapHeight / 2;
-        int startX = Settings.get().tileMapWidth / 3 - 1;
+        int startY = SpsConfig.get().tileMapHeight / 2;
+        int startX = SpsConfig.get().tileMapWidth / 3 - 1;
         for (GodId god : GodId.values()) {
             dungeon[startX][startY] = new Altar(new Point2(startX, startY), god);
             startX += 2;
         }
-        if (!Config.get().activateTestBots) {
-            CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Dummy), new Point2(Settings.get().tileMapWidth / 2, startY - 2));
+        if (!AigilasConfig.get().activateTestBots) {
+            CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Dummy), new Point2(SpsConfig.get().tileMapWidth / 2, startY - 2));
         }
     }
 
@@ -183,7 +183,7 @@ public class DungeonFloor {
     }
 
     private void placeCreatures(int amountOfCreatures) {
-        if (Config.get().bossLevelMod <= 1 || Dungeon.getFloorCount() % Config.get().bossLevelMod == 1) {
+        if (AigilasConfig.get().bossLevelMod <= 1 || Dungeon.getFloorCount() % AigilasConfig.get().bossLevelMod == 1) {
             Point2 randomPoint = new Point2(findRandomFreeTile());
             dungeon[randomPoint.GridX][randomPoint.GridY] = CreatureFactory.createNextBoss(randomPoint);
         }

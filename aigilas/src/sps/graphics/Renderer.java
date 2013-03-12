@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sps.bridge.DrawDepth;
 import sps.core.Logger;
 import sps.core.Point2;
-import sps.core.Settings;
+import sps.core.SpsConfig;
 
 public class Renderer {
 
@@ -20,8 +20,8 @@ public class Renderer {
 
     public static Renderer get() {
         if (instance == null) {
-            int width = Settings.get().spriteWidth * Settings.get().tileMapWidth;
-            int height = Settings.get().spriteHeight * Settings.get().tileMapHeight;
+            int width = SpsConfig.get().spriteWidth * SpsConfig.get().tileMapWidth;
+            int height = SpsConfig.get().spriteHeight * SpsConfig.get().tileMapHeight;
             Logger.info("Virtual resolution: " + width + "W, " + height + "H");
             instance = new Renderer(width, height);
             instance.setStrategy(defaultStrategy);
@@ -120,7 +120,7 @@ public class Renderer {
 
     // Sprite rendering
     public void draw(Sprite sprite, Point2 position, DrawDepth depth, Color color) {
-        render(sprite, position, depth, color, Settings.get().spriteWidth, Settings.get().spriteHeight, 1, 1);
+        render(sprite, position, depth, color, SpsConfig.get().spriteWidth, SpsConfig.get().spriteHeight, 1, 1);
     }
 
     public void draw(Sprite sprite, Point2 position, DrawDepth depth, Color color, boolean flipX, boolean flipY) {

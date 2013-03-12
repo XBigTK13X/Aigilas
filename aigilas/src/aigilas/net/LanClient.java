@@ -1,6 +1,6 @@
 package aigilas.net;
 
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.states.LoadingState;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
@@ -36,7 +36,7 @@ public class LanClient extends IClient {
 
     private void connect() {
         try {
-            Socket server = new Socket(Config.get().serverIp(), Config.get().port());
+            Socket server = new Socket(AigilasConfig.get().serverIp(), AigilasConfig.get().port());
             _comm = new MessageHandler(server);
             _comm.owner = "CLIENT";
             sendMessage(Message.createInit(0, 0));

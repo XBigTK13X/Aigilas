@@ -5,12 +5,12 @@ import sps.util.Parse;
 
 import java.util.HashMap;
 
-public class Settings {
-    private static Settings __instance;
+public class SpsConfig {
+    private static SpsConfig __instance;
 
-    public static Settings get() {
+    public static SpsConfig get() {
         if (__instance == null) {
-            __instance = new Settings();
+            __instance = new SpsConfig();
         }
         return __instance;
     }
@@ -31,7 +31,7 @@ public class Settings {
     public final boolean devConsoleEnabled;
 
 
-    private Settings() {
+    private SpsConfig() {
         try {
             for (String line : FileUtils.readLines(Loader.get().data("sps-gamelib.cfg"))) {
                 if (!line.contains("##") && line.length() > 1) {

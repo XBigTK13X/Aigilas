@@ -1,7 +1,6 @@
 package aigilas.net;
 
-import aigilas.Config;
-import com.badlogic.gdx.Gdx;
+import aigilas.AigilasConfig;
 import sps.core.Logger;
 import sps.io.CommandState;
 import sps.util.RealTime;
@@ -98,7 +97,7 @@ public class Server extends Thread {
     private void broadCastGameState() {
         if (gameHasStarted) {
             _turnTime += RealTime.get().delta();
-            if (_turnTime >= Config.get().turnTime) {
+            if (_turnTime >= AigilasConfig.get().turnTime) {
                 int readyCount = 0;
                 for (boolean checkedIn : _readyCheckIn) {
                     readyCount += checkedIn ? 1 : 0;

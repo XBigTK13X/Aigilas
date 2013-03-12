@@ -1,6 +1,6 @@
 package aigilas.net;
 
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import sps.core.Logger;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class ClientManager {
 
     public ClientManager() {
         try {
-            this.server = new ServerSocket(Config.get().port());
+            this.server = new ServerSocket(AigilasConfig.get().port());
             clientListener = new Thread(new Runnable() {
                 public void run() {
                     while (!Thread.interrupted()) {

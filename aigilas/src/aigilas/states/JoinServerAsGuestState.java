@@ -1,6 +1,6 @@
 package aigilas.states;
 
-import aigilas.Config;
+import aigilas.AigilasConfig;
 import aigilas.net.Client;
 import aigilas.net.LanClient;
 import aigilas.ui.SelectableButton;
@@ -76,11 +76,11 @@ public class JoinServerAsGuestState extends MenuState {
             String address = contents[0];
             if (contents.length > 1) {
                 int port = Parse.inte(contents[1]);
-                Config.get().setPort(port);
+                AigilasConfig.get().setPort(port);
             }
 
             label.setText(waitMessage);
-            Config.get().setServerIp(address);
+            AigilasConfig.get().setServerIp(address);
             readyToConnect = true;
             ipIn.setVisible(false);
             startGameBtn.setVisible(true);
