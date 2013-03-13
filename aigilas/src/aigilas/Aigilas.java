@@ -8,7 +8,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
-import sps.bridge.Bridge;
 import sps.bridge.SpriteTypes;
 import sps.bridge.Sps;
 import sps.core.DevConsole;
@@ -23,15 +22,9 @@ import sps.text.TextPool;
 
 public class Aigilas implements ApplicationListener {
     private boolean IsRunning = true;
-    private boolean built = false;
-
-    private void setIsRunning(boolean isRunning) {
-        IsRunning = isRunning;
-    }
 
     @Override
     public void create() {
-        Bridge.get();
         Sps.setup();
         Renderer.get().setWindowsBackground(Color.BLACK);
         Renderer.get().setStrategy(new FrameStrategy());

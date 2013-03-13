@@ -59,6 +59,8 @@ public class Server extends Thread {
                 case Connect:
                     sendMessage(Message.createInit(clients.size(), _rngSeed), _message.LocalPort);
                     _readyCheckIn.add(false);
+
+                    Logger.info("SERVER: A player has connected");
                     _turnCount = 0;
                     break;
                 case Check_State:
@@ -106,7 +108,7 @@ public class Server extends Thread {
                     _turnTime = 0;
                     _rngSeed = UUID.randomUUID().hashCode();
 
-                    //System.out.println(state.debug());
+                    //Logger.info("SERVER: Announce -> "+state.debug());
                     //System.out.println("Announcing turn: " + _turnCount);
                     announce(Message.createPlayerState(state, _turnCount++, _rngSeed));
                     for (int ii = 0; ii < _readyCheckIn.size(); ii++) {

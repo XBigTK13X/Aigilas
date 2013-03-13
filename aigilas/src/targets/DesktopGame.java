@@ -5,6 +5,7 @@ import aigilas.AigilasConfig;
 import aigilas.net.Server;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import sps.bridge.Bridge;
 import sps.core.Logger;
 import sps.core.SpsConfig;
 
@@ -15,6 +16,7 @@ public class DesktopGame {
 
         if (AigilasConfig.get().standaloneServer) {
             Logger.setLogFile("aigilas-server.log");
+            Bridge.getWithoutGraphics();
             Server.reset();
         }
         else {
