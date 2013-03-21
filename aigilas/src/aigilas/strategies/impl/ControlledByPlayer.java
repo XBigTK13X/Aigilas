@@ -3,6 +3,7 @@ package aigilas.strategies.impl;
 import aigilas.Aigilas;
 import aigilas.AigilasConfig;
 import aigilas.creatures.BaseCreature;
+import aigilas.creatures.StatType;
 import aigilas.creatures.Stats;
 import aigilas.creatures.impl.Player;
 import aigilas.strategies.BaseStrategy;
@@ -36,7 +37,7 @@ public class ControlledByPlayer extends BaseStrategy {
         if (Input.get().isActive(Commands.get(Aigilas.Commands.Back), _parent.getPlayerIndex())) {
             _parent.setPlaying(false);
         }
-        if (_parent.isPlaying()) {
+        if (_parent.isPlaying() && _parent.get(StatType.Health) > 0) {
             if (!Input.get().isContext(Contexts.get(Aigilas.Commands.Inventory), _parent.getPlayerIndex())) {
                 float leftVelocity = (Input.get().isActive(Commands.get(Aigilas.Commands.MoveLeft), _parent.getPlayerIndex()) ? -Stats.DefaultMoveDistance : 0);
                 float rightVelocity = ((Input.get().isActive(Commands.get(Aigilas.Commands.MoveRight), _parent.getPlayerIndex())) ? Stats.DefaultMoveDistance : 0);

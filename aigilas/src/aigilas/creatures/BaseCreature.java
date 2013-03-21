@@ -189,28 +189,33 @@ public abstract class BaseCreature extends Entity implements IActor {
     public void update() {
         _statuses.update();
         if (getRaw(StatType.Health) <= 0) {
-            _isActive = false;
+            disable();
         }
-        if (_statuses.allows(CreatureAction.Movement)) {
-            if (_isPlaying) {
-                if (!isCooledDown()) {
-                    waitTime -= get(StatType.Move_Cool_Down) + 1;
-                    if (waitTime > BaseWaitTime) {
-                        waitTime = BaseWaitTime;
+        else {
+            setPlaying(true);
+        }
+        if (isPlaying()) {
+            if (_statuses.allows(CreatureAction.Movement)) {
+                if (_isPlaying) {
+                    if (!isCooledDown()) {
+                        waitTime -= get(StatType.Move_Cool_Down) + 1;
+                        if (waitTime > BaseWaitTime) {
+                            waitTime = BaseWaitTime;
+                        }
                     }
+                    else {
+                        _statuses.act();
+                    }
+                    regenerate();
                 }
-                else {
-                    _statuses.act();
+                if (_strategies != null) {
+                    _strategies.current().act();
+                    _combo.update();
                 }
-                regenerate();
             }
-            if (_strategies != null) {
-                _strategies.current().act();
-                _combo.update();
+            if (_hudContainer != null) {
+                _hudContainer.update();
             }
-        }
-        if (_hudContainer != null) {
-            _hudContainer.update();
         }
     }
 
@@ -235,16 +240,18 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     @Override
     public void draw() {
-        if (SpsConfig.get().viewPaths) {
-            Path path = _strategies.current().getPath();
-            if (path != null) {
-                path.draw();
+        if (isPlaying()) {
+            if (SpsConfig.get().viewPaths) {
+                Path path = _strategies.current().getPath();
+                if (path != null) {
+                    path.draw();
+                }
             }
-        }
-        darkness = EntityManager.get().getEntities(EntityTypes.get(Aigilas.Entities.Darkness), getLocation());
-        if ((darkness.size() > 0 && ((Darkness) darkness.get(0)).beingLit()) || darkness.size() == 0) {
-            super.draw();
-            _combo.draw();
+            darkness = EntityManager.get().getEntities(EntityTypes.get(Aigilas.Entities.Darkness), getLocation());
+            if ((darkness.size() > 0 && ((Darkness) darkness.get(0)).beingLit()) || darkness.size() == 0) {
+                super.draw();
+                _combo.draw();
+            }
         }
     }
 
@@ -359,11 +366,22 @@ public abstract class BaseCreature extends Entity implements IActor {
             }
         }
         if (getRaw(StatType.Health) <= 0) {
-            setInactive();
+            disable();
             if (attacker != null) {
                 attacker.addExperience(calculateExperience());
                 attacker.passOn(attacker, StatusComponent.KillReward);
             }
+        }
+    }
+
+    private void disable() {
+        if (_actorType == ActorTypes.get(Sps.Actors.Player)) {
+            setPlaying(false);
+            updateLocation(new Point2(0, 0));
+            _combo.clear();
+        }
+        else {
+            setInactive();
         }
     }
 

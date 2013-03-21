@@ -105,4 +105,9 @@ public class ReactionMeter {
             _reactionTimer = _maxTimer;
         }
     }
+
+    public void clear() {
+        _markers.clear();
+        _elements.clear();
+    }
 }

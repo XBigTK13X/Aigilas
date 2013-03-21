@@ -2,6 +2,8 @@ package aigilas.dungeons;
 
 import aigilas.Aigilas;
 import aigilas.AigilasConfig;
+import aigilas.creatures.BaseCreature;
+import aigilas.creatures.StatType;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.entities.*;
 import aigilas.gods.GodId;
@@ -63,6 +65,8 @@ public class DungeonFloor {
         List<Point2> neighbors = spawn.getNeighbors();
         for (Entity player : EntityCache.get().flushCache()) {
             player.setLocation(getRandomNeighbor(neighbors));
+            ((BaseCreature) player).setPlaying(true);
+            ((BaseCreature) player).set(StatType.Health, Integer.MAX_VALUE);
             _contents.add(player);
         }
         for (Entity item : _contents) {

@@ -12,6 +12,7 @@ import sps.graphics.Renderer;
 import sps.text.Text;
 import sps.text.TextEffects;
 import sps.text.TextPool;
+import sps.util.MathHelper;
 
 public class SkillHud extends BaseHud {
     private static final String __separator = "|";
@@ -25,7 +26,7 @@ public class SkillHud extends BaseHud {
     }
 
     private int calculateHeight(StatType statType) {
-        return (int) (((float) _parent.get(statType) / _parent.getMax(statType)) * _dimensions.Y);
+        return MathHelper.clamp((((float) _parent.get(statType) / _parent.getMax(statType))) * _dimensions.Y, 0, (int) _dimensions.Y);
     }
 
     private int costOfCurrentSkill() {

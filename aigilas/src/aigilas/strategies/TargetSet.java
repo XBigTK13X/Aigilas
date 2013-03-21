@@ -69,10 +69,12 @@ public class TargetSet
         float closestDistance = Float.MAX_VALUE;
         if (_targets != null) {
             for (BaseCreature target : _targets) {
-                dist = Point2.distanceSquared(target.getLocation(), _parent.getLocation());
-                if (dist < closestDistance) {
-                    closest = target;
-                    closestDistance = dist;
+                if (target.isPlaying()) {
+                    dist = Point2.distanceSquared(target.getLocation(), _parent.getLocation());
+                    if (dist < closestDistance) {
+                        closest = target;
+                        closestDistance = dist;
+                    }
                 }
             }
             for (ActorType actorType : _targetActorTypes) {
@@ -82,7 +84,7 @@ public class TargetSet
                 }
 
                 for (BaseCreature creature : _calculatedTargets) {
-                    if (creature != _parent) {
+                    if (creature != _parent && creature.isPlaying()) {
                         dist = Point2.distanceSquared(creature.getLocation(), _parent.getLocation());
                         if (dist < closestDistance) {
                             closest = creature;
