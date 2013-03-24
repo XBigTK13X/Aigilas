@@ -137,11 +137,13 @@ public class EntityManager {
 
     public List<IActor> getActorsAt(Point2 target, ActorType actorType) {
         _creatures.clear();
-        for (Entity elem : _gridContents.get(target)) {
-            if (elem.getEntityType() == EntityTypes.get(Sps.Entities.Actor)) {
-                _nextResult = (IActor) elem;
-                if (actorType == null || _nextResult.getActorType() == actorType || (actorType == ActorTypes.get(Sps.ActorGroups.Non_Player) && _nextResult.getActorType() != ActorTypes.get(Sps.Actors.Player))) {
-                    _creatures.add(_nextResult);
+        if (_gridContents.get(target) != null) {
+            for (Entity elem : _gridContents.get(target)) {
+                if (elem.getEntityType() == EntityTypes.get(Sps.Entities.Actor)) {
+                    _nextResult = (IActor) elem;
+                    if (actorType == null || _nextResult.getActorType() == actorType || (actorType == ActorTypes.get(Sps.ActorGroups.Non_Player) && _nextResult.getActorType() != ActorTypes.get(Sps.Actors.Player))) {
+                        _creatures.add(_nextResult);
+                    }
                 }
             }
         }
@@ -173,9 +175,11 @@ public class EntityManager {
     }
 
     public boolean isLocationBlocked(Point2 location) {
-        for (Entity elem : _gridContents.get(location)) {
-            if (elem.isBlocking()) {
-                return true;
+        if (_gridContents.get(location) != null) {
+            for (Entity elem : _gridContents.get(location)) {
+                if (elem.isBlocking()) {
+                    return true;
+                }
             }
         }
         return false;
