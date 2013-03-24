@@ -188,7 +188,7 @@ public class EntityManager {
     public boolean anyAt(Point2 target, EntityType type) {
         if (CoordVerifier.isValid(target)) {
             for (Entity entity : _gridContents.get(target)) {
-                if (entity.getEntityType() == type) {
+                if (entity.getEntityType() == type && entity.isActive()) {
                     return true;
                 }
             }

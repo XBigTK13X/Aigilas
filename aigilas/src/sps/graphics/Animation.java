@@ -29,6 +29,7 @@ public class Animation {
     private Color flashColor = Color.BLUE;
     private int alternateCount = 7;
     private boolean alternate;
+    private SpriteEdge _edge = SpriteEdge.None;
 
     public Animation() {
         _depth = DrawDepths.get(Sps.DrawDepths.Animated_Texture);
@@ -121,6 +122,7 @@ public class Animation {
     public void setEdge(SpriteEdge edge) {
         _currentFrame = edge.Frame;
         _rotation = edge.Rotation;
+        _edge = edge;
     }
 
     public void flip(boolean x, boolean y) {
@@ -145,5 +147,9 @@ public class Animation {
     public void flash(Color attackColor) {
         flashCount = 0;
         flashColor = attackColor;
+    }
+
+    public String getSpriteEdge() {
+        return _edge.name() + ", " + _edge.Frame + ", " + _edge.Rotation;
     }
 }
