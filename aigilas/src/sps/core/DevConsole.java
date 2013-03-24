@@ -20,16 +20,17 @@ public class DevConsole {
         public ConsoleText(int x, int y, String content) {
             this.position.reset(x, y, false);
             this.content = TextPool.get().write(content, position);
+            this.content.setVisible(_isVisible);
         }
 
         public void draw() {
-            if (content.isVisible()) {
+            if (_isVisible) {
                 content.draw();
             }
         }
 
-        public String getContent() {
-            return content.getMessage();
+        public Text getContent() {
+            return content;
         }
 
         public void setContent(String content) {
@@ -50,7 +51,7 @@ public class DevConsole {
     private final int messageLimit = 20;
     private final ConsoleText[] _contents = new ConsoleText[messageLimit];
     private int _index = 0;
-    private boolean _isVisible = false;
+    private boolean _isVisible;
     private final Color _bgColor;
     private final Sprite _consoleBase;
 
@@ -58,6 +59,7 @@ public class DevConsole {
         _bgColor = Color.BLACK;
         _bgColor.a = (byte) 180;
         _consoleBase = Assets.get().baseMenu();
+        _isVisible = false;
         add("The development console has been started.");
     }
 
@@ -71,7 +73,7 @@ public class DevConsole {
         }
         else {
             for (int ii = 0; ii < _contents.length - 1; ii++) {
-                _contents[ii].setContent(_contents[ii + 1].getContent());
+                _contents[ii].setContent(_contents[ii + 1].getContent().getMessage());
             }
             _contents[_contents.length - 1].setContent(message);
         }
@@ -91,6 +93,11 @@ public class DevConsole {
     public void toggle() {
         if (SpsConfig.get().devConsoleEnabled) {
             _isVisible = !_isVisible;
+            for (int ii = 0; ii < _contents.length; ii++) {
+                if (_contents[ii] != null) {
+                    _contents[ii].getContent().setVisible(_isVisible);
+                }
+            }
         }
     }
 }

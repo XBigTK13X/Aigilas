@@ -44,6 +44,10 @@ public class Text {
         visible = false;
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public void update() {
         if (lifeInSeconds != NotTimed && (position.X != 0 || position.Y != 0)) {
             effect.update(this);
@@ -93,4 +97,6 @@ public class Text {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
 }
