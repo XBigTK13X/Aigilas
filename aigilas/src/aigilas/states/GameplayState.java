@@ -3,6 +3,7 @@ package aigilas.states;
 import aigilas.classes.PlayerClassRegistry;
 import aigilas.creatures.StatsRegistry;
 import aigilas.creatures.impl.CreatureFactory;
+import aigilas.creatures.impl.Player;
 import aigilas.dungeons.Dungeon;
 import aigilas.dungeons.DungeonFloor;
 import aigilas.hud.HudRenderer;
@@ -32,7 +33,8 @@ public class GameplayState implements State {
         players = EntityManager.get().getPlayers();
         boolean allDead = true;
         for (Entity player : players) {
-            if (player.isActive()) {
+            Player p = (Player) player;
+            if (p.isActive() && p.isPlaying()) {
                 allDead = false;
             }
         }
