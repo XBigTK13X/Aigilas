@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import sps.bridge.DrawDepths;
 import sps.graphics.Assets;
 import sps.graphics.Renderer;
+import sps.text.Text;
 import sps.text.TextPool;
 
 public class DevConsole {
@@ -13,20 +14,28 @@ public class DevConsole {
 
     private class ConsoleText {
         private Point2 position = new Point2(0, 0);
-        private String content;
+        private Text content;
+
 
         public ConsoleText(int x, int y, String content) {
             this.position.reset(x, y, false);
-            this.content = content;
+            this.content = TextPool.get().write(content, position);
         }
 
         public void draw() {
-            TextPool.get().write(content, position);
+            if (content.isVisible()) {
+                content.draw();
+            }
         }
 
         public String getContent() {
-            return content;
+            return content.getMessage();
         }
+
+        public void setContent(String content) {
+            this.content.setMessage(content);
+        }
+
     }
 
     private static DevConsole __instance;
@@ -62,9 +71,9 @@ public class DevConsole {
         }
         else {
             for (int ii = 0; ii < _contents.length - 1; ii++) {
-                _contents[ii] = new ConsoleText(margin, getY(ii), _contents[ii + 1].getContent());
+                _contents[ii].setContent(_contents[ii + 1].getContent());
             }
-            _contents[_contents.length - 1] = new ConsoleText(margin, getY(_contents.length - 1), message);
+            _contents[_contents.length - 1].setContent(message);
         }
     }
 

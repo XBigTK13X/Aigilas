@@ -85,4 +85,12 @@ public class Text {
     public void setScale(float scale) {
         this.scale = scale;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
