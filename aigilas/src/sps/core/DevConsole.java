@@ -9,14 +9,14 @@ import sps.text.TextPool;
 
 public class DevConsole {
 
-    public static final int margin = 50;
+    public static final int margin = 70;
 
     private class ConsoleText {
         private Point2 position = new Point2(0, 0);
         private String content;
 
         public ConsoleText(int x, int y, String content) {
-            this.position.reset(0, 0, false);
+            this.position.reset(x, y, false);
             this.content = content;
         }
 
@@ -59,7 +59,8 @@ public class DevConsole {
     public void add(String message) {
         if (_index < _contents.length) {
             _contents[_index++] = new ConsoleText(margin, getY(_index), message);
-        } else {
+        }
+        else {
             for (int ii = 0; ii < _contents.length - 1; ii++) {
                 _contents[ii] = new ConsoleText(margin, getY(ii), _contents[ii + 1].getContent());
             }
