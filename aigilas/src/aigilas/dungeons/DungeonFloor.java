@@ -117,7 +117,6 @@ public class DungeonFloor {
         else {
             for (Entity player : cache) {
                 player.setLocation(getRandomNeighbor(neighbors));
-                //Logger.info("Chose player " + ((Player) player).getPlayerIndex() + " location " + player.getLocation());
             }
             EntityManager.get().addEntities(cache);
             _contents.addAll(cache);

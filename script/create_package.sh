@@ -18,5 +18,5 @@ git log --max-count=1 > pkg/assets/data/git.txt
 
 echo "== Creating the archive: pkg/aigilas.zip"
 cd pkg
-zip -rq aigilas.zip ./*
+zip -rq aigilas.zip ./* -x "*.DS_Store"
 cd ..
