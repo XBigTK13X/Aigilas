@@ -48,6 +48,13 @@ public class MainMenuState extends MenuState {
             }
         });
 
+        SelectableButton helpBtn = new SelectableButton("Help", UiAssets.getButtonStyle());
+        helpBtn.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                StateManager.loadState(new HelpMenuState());
+            }
+        });
+
         SelectableButton optionsBtn = new SelectableButton("Options", UiAssets.getButtonStyle());
         optionsBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
@@ -66,6 +73,7 @@ public class MainMenuState extends MenuState {
         add(startServerBtn);
         add(connectToServerBtn);
         table.row();
+        add(helpBtn);
         add(optionsBtn);
         add(exitBtn);
 
