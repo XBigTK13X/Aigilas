@@ -1,6 +1,7 @@
 package sps.particles;
 
 import com.badlogic.gdx.graphics.Color;
+import sps.bridge.SpriteType;
 import sps.core.Point2;
 import sps.entities.Entity;
 
@@ -57,6 +58,12 @@ public class Emitter extends PEComponent {
             if (p != null) {
                 p.clear();
             }
+        }
+    }
+
+    public void setSprite(SpriteType sprite) {
+        for (int ii = 0; ii < _index; ii++) {
+            _particles[ii].setSprite(sprite);
         }
     }
 }

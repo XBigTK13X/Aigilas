@@ -12,7 +12,7 @@ import sps.util.MathHelper;
 
 public class Particle2 extends PEComponent {
     public static final int DefaultLife = 100;
-    public static final SpriteType spriteType = SpriteTypes.get(Sps.Particle);
+    public static final SpriteType DefaultSpriteType = SpriteTypes.get(Sps.Particle);
 
     public float Height = 1;
     public float Width = 1;
@@ -29,6 +29,7 @@ public class Particle2 extends PEComponent {
     public double Angle;
     public float Radius;
     public boolean Toggle;
+    private SpriteType _sprite = DefaultSpriteType;
 
     private ParticleBehavior _behavior;
 
@@ -55,7 +56,8 @@ public class Particle2 extends PEComponent {
     }
 
     private void init(ParticleBehavior behavior, Point2 position, Entity entity, Color baseColor) {
-        _graphic.loadContent(spriteType);
+        _sprite = DefaultSpriteType;
+        _graphic.loadContent(DefaultSpriteType);
         _graphic.gotoRandomFrame();
         _behavior = behavior;
         if (position != null) {
@@ -69,7 +71,8 @@ public class Particle2 extends PEComponent {
         }
         if (baseColor != null) {
             _color = darken(baseColor, (RNG.next(10, 50)) / 100f);
-        } else {
+        }
+        else {
             _color = new Color(RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, RNG.next(60, 190) / 255f, 1f);
         }
         Angle = RNG.angle();
@@ -105,5 +108,10 @@ public class Particle2 extends PEComponent {
         _color.a = 0;
         _life = 0;
         IsActive = false;
+    }
+
+    public void setSprite(SpriteType sprite) {
+        _sprite = sprite;
+        _graphic.loadContent(sprite);
     }
 }
