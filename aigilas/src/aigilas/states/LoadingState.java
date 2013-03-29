@@ -1,12 +1,20 @@
 package aigilas.states;
 
 import sps.audio.MusicPlayer;
+import sps.core.RNG;
 import sps.graphics.Renderer;
 import sps.states.State;
 import sps.states.StateManager;
 import sps.text.TextPool;
 
 public class LoadingState implements State {
+    private String[] sayings = {
+            "Preparing for adventure!",
+            "Are you ready to welcome death?",
+            "Punching acolytes won't get you far.",
+            "Combining the elements is crucial to your victory."
+    };
+
     public LoadingState() {
     }
 
@@ -27,7 +35,7 @@ public class LoadingState implements State {
     @Override
     public void load() {
         MusicPlayer.get().stop();
-        TextPool.get().write("Preparing for adventure!", Renderer.get().center());
+        TextPool.get().write(sayings[RNG.next(0, sayings.length - 1, false)], Renderer.get().center().add(-300, 0));
     }
 
     @Override
