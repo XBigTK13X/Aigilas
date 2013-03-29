@@ -63,7 +63,7 @@ public class DungeonFloor {
         placeFloor();
         Point2 spawn = goingUp ? _downSpawnLocation : _upSpawnLocation;
         List<Point2> neighbors = spawn.getNeighbors();
-        Player p = null;
+        Player p;
         for (Entity player : EntityCache.get().flushCache()) {
             player.setLocation(getRandomNeighbor(neighbors));
             p = (Player) player;

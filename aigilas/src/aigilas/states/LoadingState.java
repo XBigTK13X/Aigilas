@@ -12,7 +12,9 @@ public class LoadingState implements State {
             "Preparing for adventure!",
             "Are you ready to welcome death?",
             "Punching acolytes won't get you far.",
-            "Combining the elements is crucial to your victory."
+            "Combining the elements is crucial to your victory.",
+            "Put it off forever, or not at all.",
+            "You may delay, but time will not."
     };
 
     public LoadingState() {
@@ -35,7 +37,7 @@ public class LoadingState implements State {
     @Override
     public void load() {
         MusicPlayer.get().stop();
-        TextPool.get().write(sayings[RNG.next(0, sayings.length - 1, false)], Renderer.get().center().add(-300, 0));
+        TextPool.get().write(sayings[RNG.next(0, sayings.length, false)], Renderer.get().center().add(-500, 0));
     }
 
     @Override
