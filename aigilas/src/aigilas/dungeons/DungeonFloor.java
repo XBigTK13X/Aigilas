@@ -67,8 +67,10 @@ public class DungeonFloor {
         for (Entity player : EntityCache.get().flushCache()) {
             player.setLocation(getRandomNeighbor(neighbors));
             p = (Player) player;
-            p.setPlaying(true);
-            p.set(StatType.Health, p.getMax(StatType.Health));
+            if (!p.isPlaying()) {
+                p.setPlaying(true);
+                p.set(StatType.Health, p.getMax(StatType.Health));
+            }
             _contents.add(player);
         }
         for (Entity item : _contents) {
