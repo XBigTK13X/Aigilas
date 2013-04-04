@@ -1,6 +1,7 @@
 package targets;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -8,12 +9,16 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Vector3;
+import sps.core.SpsConfig;
 
 public class GamepadTest extends InputAdapter implements ApplicationListener {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.useGL20 = true;
+        cfg.width = SpsConfig.get().resolutionWidth;
+        cfg.height = SpsConfig.get().resolutionHeight;
         new LwjglApplication(new GamepadTest(), cfg);
     }
 
@@ -109,6 +114,16 @@ public class GamepadTest extends InputAdapter implements ApplicationListener {
 
     @Override
     public void render() {
+        //Macair was running loud and hot without this throttle
+        try {
+            Thread.sleep(50L);
+        }
+        catch (Exception e) {
+
+        }
+        //Macair screen was garbled without this clearing
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
     }
 
     @Override
