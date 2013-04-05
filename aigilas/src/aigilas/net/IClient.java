@@ -29,4 +29,6 @@ public abstract class IClient implements StateProvider {
     public abstract void startGame();
 
     public abstract void pollLocalState();
+
+    public abstract void close();
 }

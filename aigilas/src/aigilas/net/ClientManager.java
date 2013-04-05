@@ -32,7 +32,8 @@ public class ClientManager {
                             addressToIndex.put(client.getPort(), clients.size() - 1);
                         }
                         catch (IOException e) {
-                            Logger.exception(e);
+                            //This should only happen when disposing of the thread
+                            return;
                         }
                     }
                 }
@@ -70,5 +71,17 @@ public class ClientManager {
 
     public void send(Message contents) {
         clients.get(addressToIndex.get(contents.LocalPort)).sendOutboundMessage(contents);
+    }
+
+    public void close() {
+        try {
+            for(MessageHandler handler:clients){
+                handler.close();
+            }
+            server.close();
+        }
+        catch (IOException e) {
+            Logger.exception(e, false);
+        }
     }
 }

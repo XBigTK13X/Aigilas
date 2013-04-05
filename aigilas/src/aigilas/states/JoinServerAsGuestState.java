@@ -2,7 +2,9 @@ package aigilas.states;
 
 import aigilas.AigilasConfig;
 import aigilas.net.Client;
+import aigilas.net.IClient;
 import aigilas.net.LanClient;
+import aigilas.net.LocalClient;
 import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.graphics.Color;
@@ -13,21 +15,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.io.Input;
+import sps.states.StateManager;
 import sps.util.Parse;
 
 public class JoinServerAsGuestState extends MenuState {
     private static final String waitMessage = "Waiting for any player to start the game.";
     final TextField ipIn;
     final Label label;
+    final SelectableButton joinBtn;
+    final SelectableButton startGameBtn;
+    final SelectableButton backBtn;
     private boolean connectStarted = false;
     private boolean readyToConnect = false;
 
-    final SelectableButton joinBtn;
-    final SelectableButton startGameBtn;
-
     public JoinServerAsGuestState() {
-
-
         label = new Label("Server IP:", UiAssets.getLabelStyle());
 
         TextField.TextFieldStyle style = new TextField.TextFieldStyle();
@@ -39,6 +40,12 @@ public class JoinServerAsGuestState extends MenuState {
         ipIn = new TextField("", style);
         stage.setKeyboardFocus(ipIn);
 
+        backBtn = new SelectableButton("Back", UiAssets.getButtonStyle());
+        backBtn.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                StateManager.loadState(new MainMenuState());
+            }
+        });
         joinBtn = new SelectableButton("Join", UiAssets.getButtonStyle());
         joinBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
@@ -67,6 +74,8 @@ public class JoinServerAsGuestState extends MenuState {
         table.row();
         add(joinBtn);
         add(startGameBtn);
+        table.row();
+        add(backBtn);
     }
 
     private void startGameIfReady() {
@@ -91,7 +100,13 @@ public class JoinServerAsGuestState extends MenuState {
     public void update() {
         super.update();
         if (readyToConnect && !connectStarted) {
-            Client.reset(new LanClient());
+            IClient lanClient = new LanClient();
+            if (!lanClient.isConnected()) {
+                Client.reset(new LocalClient());
+                StateManager.loadState(new JoinServerAsGuestState());
+                return;
+            }
+            Client.reset(lanClient);
             Input.get().setup(Client.get());
             connectStarted = true;
             Logger.info("Connecting as guest");

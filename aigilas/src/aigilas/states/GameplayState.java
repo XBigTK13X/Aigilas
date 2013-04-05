@@ -11,6 +11,7 @@ import aigilas.net.Client;
 import aigilas.reactions.ReactionRegistry;
 import aigilas.skills.SkillRegistry;
 import aigilas.statuses.StatusRegistry;
+import sps.audio.MusicPlayer;
 import sps.core.Logger;
 import sps.entities.Entity;
 import sps.entities.EntityManager;
@@ -70,6 +71,7 @@ public class GameplayState implements State {
         EntityManager.get().clear();
         HudRenderer.reset();
         ParticleEngine.reset();
+        MusicPlayer.get().stop();
     }
 
     @Override

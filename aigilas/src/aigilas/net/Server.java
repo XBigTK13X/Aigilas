@@ -11,6 +11,7 @@ import java.util.UUID;
 
 public class Server extends Thread {
     private final static int seedBound = Integer.MAX_VALUE;
+    private static Server server;
     private final CommandState state = new CommandState();
     private final List<Boolean> _readyCheckIn = new ArrayList<Boolean>();
     private final ClientManager clients;
@@ -26,30 +27,53 @@ public class Server extends Thread {
         clients = new ClientManager();
     }
 
+    public static void shutdown(){
+        if(server != null){
+            server.close();
+        }
+    }
+
     public static void reset() {
         Logger.info("Starting the server");
-        Thread server = new Server();
+        if (server != null) {
+            server.close();
+            try {
+                Thread.sleep(200);
+            }
+            catch (InterruptedException e) {
+                Logger.exception(e, false);
+            }
+        }
+        server = new Server();
         server.start();
         try {
-            Thread.sleep(100);
+            Thread.sleep(200);
         }
         catch (InterruptedException e) {
             Logger.exception(e);
         }
     }
 
+    public void close(){
+        isRunning = false;
+        clients.close();
+    }
+
     public void run() {
-        while (isRunning) {
-            try {
+
+        try {
+            while (isRunning) {
                 Thread.sleep(1);
+                pollForNewMessages();
+                broadCastGameState();
+                RealTime.get().update();
             }
-            catch (InterruptedException e) {
-                Logger.exception(e);
-            }
-            pollForNewMessages();
-            broadCastGameState();
-            RealTime.get().update();
         }
+        catch (InterruptedException e) {
+            //Should only happen when we explicitly dispose of the server instance
+            Logger.exception(e,false);
+        }
+        Logger.info("Server thread is closing");
     }
 
     private void pollForNewMessages() {
@@ -126,10 +150,5 @@ public class Server extends Thread {
     private void sendMessage(Message contents, int localPort) {
         contents.LocalPort = localPort;
         clients.send(contents);
-    }
-
-    public void close() {
-        isRunning = false;
-        Logger.info("SERVER: Shutting down");
     }
 }

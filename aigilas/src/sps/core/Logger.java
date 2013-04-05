@@ -54,7 +54,7 @@ public class Logger {
     }
 
     public static void exception(Exception e, boolean exit) {
-        log(e.toString());
+        log("Exception logged by SPS: " + e.toString());
         if (e.getCause() != null) {
             log(e.getCause().getMessage());
         }

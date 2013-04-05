@@ -21,6 +21,7 @@ public class AigilasConfig {
 
     private int port;
     private String serverIp;
+    public final int lanConnectRetries;
 
     public final int enemyCap;
     public final int enemyBase;
@@ -64,6 +65,7 @@ public class AigilasConfig {
         // Networking
         serverIp = _settings.get("server_ip");
         port = Parse.inte(_settings.get("socket_port"));
+        lanConnectRetries = Parse.inte(_settings.get("lanConnectRetries"));
         standaloneServer = Parse.bool(_settings.get("standalone_server"));
 
         // Gameplay

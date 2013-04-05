@@ -2,6 +2,7 @@ package aigilas.net;
 
 import aigilas.AigilasConfig;
 import aigilas.states.LoadingState;
+import aigilas.states.MainMenuState;
 import com.badlogic.gdx.Gdx;
 import sps.bridge.Command;
 import sps.bridge.Commands;
@@ -29,12 +30,14 @@ public class LanClient extends IClient {
     private boolean _dungeonHasLoaded = false;
     private boolean _isConnected = false;
     private CommandState state = new CommandState();
+    private int connectAttemptLimit = AigilasConfig.get().lanConnectRetries;
 
     public LanClient() {
         connect();
     }
 
     private void connect() {
+        Logger.info("Trying to connect to server, " + connectAttemptLimit-- + " tries remaining.");
         try {
             Socket server = new Socket(AigilasConfig.get().serverIp(), AigilasConfig.get().port());
             _comm = new MessageHandler(server);
@@ -46,8 +49,9 @@ public class LanClient extends IClient {
         catch (ConnectException cE) {
             try {
                 Thread.sleep(1000);
-                Logger.info("Waiting to connect");
-                connect();
+                if (connectAttemptLimit > 0) {
+                    connect();
+                }
             }
             catch (InterruptedException e) {
                 Logger.exception(e);
@@ -157,6 +161,9 @@ public class LanClient extends IClient {
     }
 
     public void update() {
+        if(_comm.isClosing()){
+            StateManager.loadState(new MainMenuState());
+        }
         _message = _comm.readInboundMessage();
         if (_message != null) {
             handleResponse(_message);
@@ -185,7 +192,7 @@ public class LanClient extends IClient {
                     StateManager.loadState(new LoadingState());
                 }
                 //Logger.info("CLIENT: Synced-> "+state.debug());
-                //Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
+                Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
                 break;
             default:
                 break;
@@ -193,6 +200,6 @@ public class LanClient extends IClient {
     }
 
     public void close() {
-        Logger.info("Shutting down a client.");
+        _comm.close();
     }
 }

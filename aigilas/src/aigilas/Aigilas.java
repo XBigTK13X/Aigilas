@@ -54,7 +54,7 @@ public class Aigilas implements ApplicationListener {
                 DevConsole.get().toggle();
             }
             if (Input.get().isActive(sps.bridge.Commands.get(Commands.Back), Client.get().getFirstPlayerIndex())) {
-                Gdx.app.exit();
+                StateManager.loadState(new MainMenuState());
             }
             if (Input.get().isActive(sps.bridge.Commands.get(Commands.Music), Client.get().getFirstPlayerIndex())) {
                 MusicPlayer.get().toggle();

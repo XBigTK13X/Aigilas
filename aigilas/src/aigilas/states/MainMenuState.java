@@ -1,6 +1,8 @@
 package aigilas.states;
 
 import aigilas.net.Client;
+import aigilas.net.LocalClient;
+import aigilas.net.Server;
 import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.Gdx;
@@ -23,6 +25,9 @@ import java.io.File;
 public class MainMenuState extends MenuState {
     public MainMenuState() {
         super();
+        Server.shutdown();
+        Client.reset(new LocalClient());
+
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
         Label title = new Label("Aigilas", lblStyle);
 

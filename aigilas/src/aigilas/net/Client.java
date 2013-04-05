@@ -10,11 +10,12 @@ public class Client {
     }
 
     public static void reset(IClient client) {
-        Logger.info("Trying to initialize client");
+        if(__instance != null){
+            __instance.close();
+        }
         __instance = client;
         while (!__instance.isConnected()) {
             //Wait
         }
-        Logger.info("Client has been initialized");
     }
 }

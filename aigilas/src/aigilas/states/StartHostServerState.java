@@ -15,6 +15,7 @@ import sps.bridge.Sps;
 import sps.core.Logger;
 import sps.graphics.Assets;
 import sps.io.Input;
+import sps.states.StateManager;
 
 public class StartHostServerState extends MenuState {
     private Label connectedPlayersLbl;
@@ -22,7 +23,7 @@ public class StartHostServerState extends MenuState {
     public StartHostServerState() {
 
         //Server
-        Logger.info("IP is " + AigilasConfig.get().serverIp());
+        Logger.info("Server IP: " + AigilasConfig.get().serverIp());
         Server.reset();
         Client.reset(new LanClient());
         Input.get().setup(Client.get());
@@ -32,6 +33,13 @@ public class StartHostServerState extends MenuState {
 
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
         connectedPlayersLbl = new Label("0 players connected", lblStyle);
+
+        final SelectableButton backBtn = new SelectableButton("Back", UiAssets.getButtonStyle());
+        backBtn.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                StateManager.loadState(new MainMenuState());
+            }
+        });
 
         final SelectableButton startGameBtn = new SelectableButton("Start", UiAssets.getButtonStyle());
         startGameBtn.addListener(new ChangeListener() {
@@ -44,6 +52,8 @@ public class StartHostServerState extends MenuState {
         table.add(connectedPlayersLbl);
         table.row();
         add(startGameBtn);
+        table.row();
+        add(backBtn);
     }
 
     private int connectedPlayers;
