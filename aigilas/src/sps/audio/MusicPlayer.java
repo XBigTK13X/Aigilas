@@ -4,6 +4,7 @@ import sps.core.SpsConfig;
 
 public abstract class MusicPlayer {
     private static MusicPlayer __instance;
+    private static MusicPlayer togglePlayer;
 
     public static MusicPlayer get(MusicPlayer player) {
 
@@ -24,19 +25,18 @@ public abstract class MusicPlayer {
         }
         return __instance;
     }
-    
-    private static MusicPlayer togglePlayer;
-    public static void toggle(){
+
+    public static void toggle() {
         __instance.stop();
-	if(togglePlayer == null){
-	   togglePlayer = __instance;
-	   __instance = new MuteMusicPlayer();
-	}
-	else{
-	   __instance = togglePlayer;
-	   togglePlayer = null;
-	}
-	__instance.start();
+        if (togglePlayer == null) {
+            togglePlayer = __instance;
+            __instance = new MuteMusicPlayer();
+        }
+        else {
+            __instance = togglePlayer;
+            togglePlayer = null;
+        }
+        __instance.start();
     }
 
     public abstract void start();

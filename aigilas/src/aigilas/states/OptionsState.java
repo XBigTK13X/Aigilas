@@ -4,101 +4,44 @@ import aigilas.ui.SelectableButton;
 import aigilas.ui.UiAssets;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import org.apache.commons.io.FileUtils;
-import sps.core.Logger;
-import sps.graphics.FrameStrategy;
-import sps.graphics.RenderStrategy;
-import sps.graphics.Renderer;
-import sps.graphics.StretchStrategy;
 import sps.states.StateManager;
-
-import java.io.File;
 
 public class OptionsState extends MenuState {
     public OptionsState() {
-        final SelectableButton fullScreenBtn = new SelectableButton("Fullscreen", UiAssets.getButtonStyle());
-        fullScreenBtn.addListener(new ChangeListener() {
+        final SelectableButton videoOptions = new SelectableButton("Video", UiAssets.getButtonStyle());
+        videoOptions.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                toggleFullScreen();
+                StateManager.loadState(new VideoOptionsState());
             }
         });
 
-        final SelectableButton renderStratBtn = new SelectableButton("Fixed Render", UiAssets.getButtonStyle());
-        renderStratBtn.addListener(new ChangeListener() {
+        final SelectableButton audioOptions = new SelectableButton("Audio", UiAssets.getButtonStyle());
+        audioOptions.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                toggleRenderStrategy();
+                StateManager.loadState(new AudioOptionsState());
             }
         });
 
-        final SelectableButton configControllerBtn = new SelectableButton("Setup Controller", UiAssets.getButtonStyle());
-        configControllerBtn.addListener(new ChangeListener() {
+        final SelectableButton controlOptions = new SelectableButton("Controls", UiAssets.getButtonStyle());
+        controlOptions.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                setupController();
+                StateManager.loadState(new ControlOptionsState());
             }
         });
 
-        final SelectableButton keyboardConfigBtn = new SelectableButton("Setup Keyboard", UiAssets.getButtonStyle());
-        keyboardConfigBtn.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                setupKeyboard();
-            }
-        });
 
-        final SelectableButton resetControlsBtn = new SelectableButton("Reset Controls", UiAssets.getButtonStyle());
-        resetControlsBtn.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                resetControls();
-            }
-        });
-
-        final SelectableButton backBtn = new SelectableButton("Main Menu", UiAssets.getButtonStyle());
+        final SelectableButton backBtn = new SelectableButton("Back", UiAssets.getButtonStyle());
         backBtn.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 StateManager.loadState(new MainMenuState());
             }
         });
 
-        add(fullScreenBtn);
-        add(renderStratBtn);
-        add(configControllerBtn);
+        add(videoOptions);
+        add(audioOptions);
+        add(controlOptions);
         table.row();
-        add(keyboardConfigBtn);
-        add(resetControlsBtn);
         add(backBtn);
-    }
-
-    private void toggleFullScreen() {
-        Renderer.get().toggleFullScreen();
-        StateManager.loadState(new OptionsState());
-    }
-
-    private RenderStrategy current;
-
-    private void toggleRenderStrategy() {
-        if (current == null || current.getClass() == FrameStrategy.class) {
-            current = new StretchStrategy();
-        }
-        else {
-            current = new FrameStrategy();
-        }
-        Renderer.get().setStrategy(current);
-    }
-
-    private void setupController() {
-        StateManager.loadState(new SetupControllerState());
-    }
-
-    private void setupKeyboard() {
-        StateManager.loadState(new SetupKeyboardState());
-    }
-
-    private void resetControls() {
-        try {
-            FileUtils.copyFile(new File("assets/data/default_input.cfg"), new File("assets/data/input.cfg"));
-        }
-        catch (Exception e) {
-            Logger.exception(e, false);
-        }
     }
 
     @Override
