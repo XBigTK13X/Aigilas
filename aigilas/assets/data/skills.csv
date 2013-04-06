@@ -37,7 +37,7 @@ Serpent_Supper,300,Energy,Mental,100,Boss
 Soul_Crush,500,Energy,Mental,5,
 Soul_Reinforcement,100,Energy,Light,100,
 Spawn_Item,200,Energy,Earth,100,
-Speed_Up,100,Energy,Water,100,
+Speed_Up,300,Energy,Water,100,
 Steal_Item,100,Energy,Air,100,
 Strength_Up,100,Energy,Fire,100,
 Throw_Item,0,Energy,Air,100,

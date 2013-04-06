@@ -24,7 +24,7 @@ public class Darkness extends Entity {
     @Override
     public void update() {
         Entity player = (Entity) EntityManager.get().getNearestPlayer(this);
-        if (player.isActive()) {
+        if (player != null && player.isActive()) {
             float distance = HitTest.getDistanceSquare(player, this);
             if (distance < SpsConfig.get().spriteWidth * SpsConfig.get().spriteWidth * 7) {
                 _graphic.setAlpha(0);

@@ -6,7 +6,7 @@ IntDown,100
 EnergyUp,100
 Poison,100
 RandomBuff,100
-Regen,100
+Regen,5
 SlowDown,100
 SpeedUp,500
 StrengthUp,100
