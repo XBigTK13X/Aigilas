@@ -1,5 +1,6 @@
 package sps.entities;
 
+import aigilas.dungeons.EntityCache;
 import sps.bridge.*;
 import sps.core.Point2;
 import sps.core.RNG;
@@ -299,5 +300,10 @@ public class EntityManager {
             }
         }
         return null;
+    }
+
+    public void removeFromPlay(Entity entity) {
+        EntityCache.get().addToCache(entity);
+        removeEntity(entity);
     }
 }

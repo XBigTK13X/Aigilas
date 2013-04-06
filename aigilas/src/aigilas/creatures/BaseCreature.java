@@ -377,6 +377,7 @@ public abstract class BaseCreature extends Entity implements IActor {
     private void disable() {
         if (_actorType == ActorTypes.get(Sps.Actors.Player)) {
             setPlaying(false);
+            EntityManager.get().removeFromPlay(this);
             updateLocation(new Point2(0, 0));
             _combo.clear();
         }
