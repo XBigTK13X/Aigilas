@@ -6,6 +6,7 @@ import sps.bridge.SpriteType;
 import sps.core.Point2;
 import sps.core.SpsConfig;
 import sps.graphics.Animation;
+import sps.graphics.SpriteEdge;
 import sps.graphics.SpriteInfo;
 
 public class Entity implements Comparable {
@@ -155,5 +156,11 @@ public class Entity implements Comparable {
     public int compareTo(Object o) {
         Entity e = (Entity) o;
         return getDepth().DrawDepth - e.getDepth().DrawDepth;
+    }
+
+    public void recalculateEdge() {
+        if (_graphic.hasDynamicEdges()) {
+            _graphic.setEdge(SpriteEdge.determine(_entityType, _location));
+        }
     }
 }

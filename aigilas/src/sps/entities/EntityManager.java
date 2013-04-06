@@ -306,4 +306,13 @@ public class EntityManager {
         EntityCache.get().addToCache(entity);
         removeEntity(entity);
     }
+
+    public void recalculateEdges() {
+        for (int ii = 0; ii < _contents.size(); ii++) {
+            if (ii >= _contents.size()) {
+                return;
+            }
+            _contents.get(ii).recalculateEdge();
+        }
+    }
 }

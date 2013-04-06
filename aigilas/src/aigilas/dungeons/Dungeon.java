@@ -3,6 +3,7 @@ package aigilas.dungeons;
 import aigilas.creatures.impl.CreatureFactory;
 import aigilas.states.GameWinState;
 import sps.audio.MusicPlayer;
+import sps.entities.EntityManager;
 import sps.states.StateManager;
 
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class Dungeon {
         else {
             _world.get(Location.Depths).gotoNext();
         }
+        EntityManager.get().recalculateEdges();
     }
 
     public static boolean getPreviousFloor() {

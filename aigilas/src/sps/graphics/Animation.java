@@ -29,11 +29,11 @@ public class Animation {
     private Color flashColor = Color.BLUE;
     private int alternateCount = 7;
     private boolean alternate;
-    private SpriteEdge _edge = SpriteEdge.None;
+    private SpriteEdge _edge = null;
+    private boolean _dynamicEdges = false;
 
     public Animation() {
         _depth = DrawDepths.get(Sps.DrawDepths.Animated_Texture);
-        setEdge(SpriteEdge.None);
     }
 
     public void setAnimationEnabled(boolean value) {
@@ -149,7 +149,15 @@ public class Animation {
         flashColor = attackColor;
     }
 
-    public String getSpriteEdge() {
-        return _edge.name() + ", " + _edge.Frame + ", " + _edge.Rotation;
+    public SpriteEdge getSpriteEdge() {
+        return _edge;
+    }
+
+    public void setDynamicEdges(boolean value) {
+        _dynamicEdges = value;
+    }
+
+    public boolean hasDynamicEdges() {
+        return _dynamicEdges;
     }
 }
