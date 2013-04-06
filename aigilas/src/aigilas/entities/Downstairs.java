@@ -22,10 +22,12 @@ public class Downstairs extends Entity {
         int dummyCount = EntityManager.get().getActors(ActorTypes.get(Aigilas.Actors.Dummy)).size();
         int minionCount = EntityManager.get().getActors(ActorTypes.get(Aigilas.Actors.Minion)).size();
 
-        if (nonPlayerCount - dummyCount - minionCount > 0) {
+        int liveCount = nonPlayerCount - dummyCount - minionCount;
+        if (liveCount > 0) {
             disabled = true;
             _graphic.setAlpha(0);
-        } else {
+        }
+        else {
             _graphic.setAlpha(1);
             disabled = false;
         }

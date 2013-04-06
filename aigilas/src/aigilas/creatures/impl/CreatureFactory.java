@@ -32,13 +32,9 @@ public class CreatureFactory {
         }
 
         result.setup(position);
-        EntityManager.get().
+        EntityManager.get().addEntity(result);
 
-                addEntity(result);
-
-        if (AigilasConfig.get().debugInventory)
-
-        {
+        if (AigilasConfig.get().debugInventory) {
             for (int ii = 0; ii < 1000; ii++) {
                 result.pickupItem(ItemFactory.createRandomPlain());
             }

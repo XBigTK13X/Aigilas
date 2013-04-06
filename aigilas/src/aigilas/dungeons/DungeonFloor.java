@@ -169,7 +169,9 @@ public class DungeonFloor {
             startX += 2;
         }
         if (!AigilasConfig.get().activateTestBots) {
-            CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Dummy), new Point2(SpsConfig.get().tileMapWidth / 2, startY - 2));
+            Point2 dummyLocation = new Point2(SpsConfig.get().tileMapWidth / 2, startY - 2);
+            dungeon[dummyLocation.GridX][dummyLocation.GridY] = CreatureFactory.create(ActorTypes.get(Aigilas.Actors.Dummy), dummyLocation);
+            EntityManager.get().removeEntity(dungeon[dummyLocation.GridX][dummyLocation.GridY]);
         }
     }
 
