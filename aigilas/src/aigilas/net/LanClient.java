@@ -161,7 +161,7 @@ public class LanClient extends IClient {
     }
 
     public void update() {
-        if(_comm.isClosing()){
+        if (_comm.isClosing()) {
             StateManager.loadState(new MainMenuState());
         }
         _message = _comm.readInboundMessage();
@@ -192,7 +192,7 @@ public class LanClient extends IClient {
                     StateManager.loadState(new LoadingState());
                 }
                 //Logger.info("CLIENT: Synced-> "+state.debug());
-                Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
+                //Logger.info("CLIENT: Synced to turnCount: " + contents.TurnCount + " new seed is " + contents.RngSeed + " with this many players " + _playerCount);
                 break;
             default:
                 break;

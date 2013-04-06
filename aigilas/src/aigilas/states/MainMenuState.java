@@ -27,6 +27,7 @@ public class MainMenuState extends MenuState {
         super();
         Server.shutdown();
         Client.reset(new LocalClient());
+        Input.get().setup(Client.get());
 
         Label.LabelStyle lblStyle = new Label.LabelStyle(Assets.get().font(), Color.WHITE);
         Label title = new Label("Aigilas", lblStyle);

@@ -27,8 +27,8 @@ public class Server extends Thread {
         clients = new ClientManager();
     }
 
-    public static void shutdown(){
-        if(server != null){
+    public static void shutdown() {
+        if (server != null) {
             server.close();
         }
     }
@@ -54,7 +54,7 @@ public class Server extends Thread {
         }
     }
 
-    public void close(){
+    public void close() {
         isRunning = false;
         clients.close();
     }
@@ -71,7 +71,7 @@ public class Server extends Thread {
         }
         catch (InterruptedException e) {
             //Should only happen when we explicitly dispose of the server instance
-            Logger.exception(e,false);
+            Logger.exception(e, false);
         }
         Logger.info("Server thread is closing");
     }
@@ -112,7 +112,12 @@ public class Server extends Thread {
                     break;
 
                 case Heart_Beat:
-                    _readyCheckIn.set(_message.PlayerIndex, true);
+                    if (_readyCheckIn.size() <= _message.PlayerIndex) {
+                        _readyCheckIn.add(true);
+                    }
+                    else {
+                        _readyCheckIn.set(_message.PlayerIndex, true);
+                    }
                     break;
                 default:
                     break;
