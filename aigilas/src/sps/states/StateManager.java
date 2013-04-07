@@ -30,4 +30,8 @@ public class StateManager {
     public static void asyncUpdate() {
         _state.asyncUpdate();
     }
+
+    public static void resize(int width, int height) {
+        _state.resize(width, height);
+    }
 }

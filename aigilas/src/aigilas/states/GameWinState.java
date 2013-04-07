@@ -46,4 +46,8 @@ public class GameWinState implements State {
     public String getName() {
         return "GameWinState";
     }
+
+    @Override
+    public void resize(int width, int height) {
+    }
 }

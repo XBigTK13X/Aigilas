@@ -12,4 +12,6 @@ public interface State {
     void unload();
 
     String getName();
+
+    void resize(int width, int height);
 }

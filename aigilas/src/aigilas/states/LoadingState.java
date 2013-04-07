@@ -49,4 +49,8 @@ public class LoadingState implements State {
     public String getName() {
         return "Loading state";
     }
+
+    @Override
+    public void resize(int width, int height) {
+    }
 }

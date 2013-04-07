@@ -24,6 +24,9 @@ public abstract class MenuState implements State {
     protected ArrayList<SelectableButton> buttons = new ArrayList<SelectableButton>();
     protected Table table;
 
+    private static final int internalWidth = 1920;
+    private static final int internalHeight = 1080;
+
     public MenuState() {
         Input.get().setContext(Contexts.get(Sps.Contexts.Non_Free), Client.get().getFirstPlayerIndex());
         stage = new Stage();
@@ -88,8 +91,6 @@ public abstract class MenuState implements State {
     public void asyncUpdate() {
     }
 
-    ;
-
     @Override
     public void unload() {
 
@@ -99,5 +100,10 @@ public abstract class MenuState implements State {
     public void draw() {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        stage.setViewport(internalWidth, internalHeight, false);
     }
 }

@@ -5,7 +5,6 @@ import aigilas.net.Client;
 import aigilas.net.LocalClient;
 import aigilas.states.MainMenuState;
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import sps.audio.MusicPlayer;
 import sps.bridge.SpriteTypes;
@@ -41,6 +40,7 @@ public class Aigilas implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         Renderer.get().resize(width, height);
+        StateManager.resize(width, height);
     }
 
     @Override
