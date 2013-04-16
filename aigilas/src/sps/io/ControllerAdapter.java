@@ -13,6 +13,7 @@ public class ControllerAdapter {
     public final static float DeadZone = .5f;
     public final static float ZeroPoint = -.5f;
     public final static float MaxInputsPerDevice = 50;
+
     private static ControllerListener initTriggers = new ControllerListener() {
         @Override
         public void connected(Controller controller) {
@@ -36,6 +37,7 @@ public class ControllerAdapter {
 
         @Override
         public boolean axisMoved(Controller controller, int axisIndex, float value) {
+            get().controllers.get(controller).detectMovement(axisIndex);
             get().controllers.get(controller).axes.put(axisIndex, value);
             return false;
         }
@@ -109,23 +111,38 @@ public class ControllerAdapter {
     }
 
     public boolean isPositive(Controller controller, Integer axis) {
+        if (!controllers.get(controller).hasBeenMoved(axis)) {
+            return false;
+        }
         return controllers.get(controller).axes.get(axis) > DeadZone;
     }
 
     public boolean isNegative(Controller controller, Integer axis) {
+        if (!controllers.get(controller).hasBeenMoved(axis)) {
+            return false;
+        }
         float value = controllers.get(controller).axes.get(axis);
         return value < -DeadZone && value != Float.MIN_VALUE;
     }
 
     public boolean isNotZero(Controller controller, Integer axis) {
+        if (!controllers.get(controller).hasBeenMoved(axis)) {
+            return false;
+        }
         return controllers.get(controller).axes.get(axis) > ZeroPoint;
     }
 
     public boolean isAxisGreaterThan(Controller controller, Integer axis, Float threshold) {
+        if (!controllers.get(controller).hasBeenMoved(axis)) {
+            return false;
+        }
         return controllers.get(controller).axes.get(axis) > threshold;
     }
 
     public boolean isAxisLessThan(Controller controller, Integer axis, Float threshold) {
+        if (!controllers.get(controller).hasBeenMoved(axis)) {
+            return false;
+        }
         float value = controllers.get(controller).axes.get(axis);
         return value < threshold && value != Float.MIN_VALUE;
     }
@@ -135,8 +152,26 @@ public class ControllerAdapter {
     }
 
     private class ControllerState {
+        private static final int axisMovementsRequiredForDetection = 2;
+
         private Map<Integer, Float> axes = new HashMap<Integer, Float>();
         private Map<Integer, Boolean> buttons = new HashMap<Integer, Boolean>();
         private Map<Integer, PovDirection> povs = new HashMap<Integer, PovDirection>();
+
+        private Map<Integer, Integer> axisMovements = new HashMap<Integer, Integer>();
+
+        public boolean hasBeenMoved(int axis) {
+            if (!axisMovements.containsKey(axis)) {
+                axisMovements.put(axis, 0);
+            }
+            return axisMovements.get(axis) > axisMovementsRequiredForDetection;
+        }
+
+        public void detectMovement(int axis) {
+            if (!axisMovements.containsKey(axis)) {
+                axisMovements.put(axis, 0);
+            }
+            axisMovements.put(axis, axisMovements.get(axis) + 1);
+        }
     }
 }
