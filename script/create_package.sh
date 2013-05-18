@@ -22,6 +22,6 @@ zip -rq aigilas.zip ./* -x "*.DS_Store"
 echo "=== Present working dir is"
 pwd
 echo "=== Correcting permissions."
-cp pkg/aigilas.zip pkg/aigilas_unstable_edition.zip
-chmod 755 pkg/aigilas_unstable_edition.zip
+cp aigilas.zip aigilas_unstable_edition.zip
+chmod 755 aigilas_unstable_edition.zip
 cd ..
