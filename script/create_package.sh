@@ -19,4 +19,9 @@ git log --max-count=1 > pkg/assets/data/git.txt
 echo "== Creating the archive: pkg/aigilas.zip"
 cd pkg
 zip -rq aigilas.zip ./* -x "*.DS_Store"
+echo "=== Present working dir is"
+pwd
+echo "=== Correcting permissions."
+cp pkg/aigilas.zip pkg/aigilas_unstable_edition.zip
+chmod 755 pkg/aigilas_unstable_edition.zip
 cd ..
