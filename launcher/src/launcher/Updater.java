@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Updater {
+    private static final String spsScriptDir = "http://www.simplepathstudios.com/script/aigilas/";
     //Working update paths
     private File update = new File("aigilas-update.zip");
     private File updateDir = new File("aigilas-update");
@@ -62,7 +63,7 @@ public class Updater {
         try {
             LaunchLogger.info("Checking to see if a stable edition license has been entered.");
             if (license != null && !license.isEmpty()) {
-                URL licenseCheckUrl = new URL("http://www.simplepathstudios.com/download.php?target=aigilas-validate&license=" + license);
+                URL licenseCheckUrl = new URL(spsScriptDir+"download.php?target=aigilas-validate&license=" + license);
                 String response = IOUtils.toString(licenseCheckUrl.openStream());
                 if (response.contains("true")) {
                     LaunchLogger.info(LaunchLogger.Tab + "License is valid.");
@@ -87,7 +88,7 @@ public class Updater {
                 String myVersion = FileUtils.readFileToString(versionPath);
                 LaunchLogger.info("Detected version: " + myVersion);
 
-                URL versionCheckUrl = new URL("http://www.simplepathstudios.com/download.php?target=aigilas-version&version=" + myVersion);
+                URL versionCheckUrl = new URL(spsScriptDir+"download.php?target=aigilas-version&version=" + myVersion);
 
                 String result = IOUtils.toString(versionCheckUrl.openStream());
                 if (result.contains("true")) {
@@ -119,7 +120,7 @@ public class Updater {
             int responseTimeoutMs = 10000;
             int downloadTimeoutMs = 60000;
             LaunchLogger.info("Attempting to download an update using license: [" + license + "]");
-            String spsLicenseUrl = "http://www.simplepathstudios.com/download.php?target=aigilas&license=" + license;
+            String spsLicenseUrl = spsScriptDir+"download.php?target=aigilas&license=" + license;
             LaunchLogger.info("Downloading latest stable edition");
             FileUtils.copyURLToFile(new URL(spsLicenseUrl), update, responseTimeoutMs, downloadTimeoutMs);
         }
