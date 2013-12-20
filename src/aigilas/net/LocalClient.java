@@ -47,7 +47,6 @@ public class LocalClient extends IClient {
         state.setState(playerIndex, command, isActive);
     }
 
-
     public int getPlayerCount() {
         if (Controllers.getControllers().size > 0) {
             return Controllers.getControllers().size;
