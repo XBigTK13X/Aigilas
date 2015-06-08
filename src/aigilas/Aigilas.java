@@ -24,6 +24,7 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void create() {
+    	//comments
         Sps.setup();
         Renderer.get().setWindowsBackground(Color.BLACK);
         Renderer.get().setStrategy(new FrameStrategy());
