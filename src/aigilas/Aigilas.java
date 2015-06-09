@@ -45,6 +45,7 @@ public class Aigilas implements ApplicationListener {
 
     @Override
     public void render() {
+    	//coments
         try {
             //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
 
