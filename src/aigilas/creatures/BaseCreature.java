@@ -185,7 +185,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         return regenTime <= 0;
     }
 
-    @Override
+    //@Override
     public void update() {
         _statuses.update();
         if (getRaw(StatType.Health) <= 0) {
@@ -238,7 +238,7 @@ public abstract class BaseCreature extends Entity implements IActor {
 
     private List<Entity> darkness;
 
-    @Override
+    //@Override
     public void draw() {
         if (isPlaying()) {
             if (SpsConfig.get().viewPaths) {
@@ -311,7 +311,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         return _playerIndex;
     }
 
-    @Override
+    //@Override
     public ActorType getActorType() {
         return _actorType;
     }
@@ -630,7 +630,7 @@ public abstract class BaseCreature extends Entity implements IActor {
         }
     }
 
-    @Override
+    //@Override
     public void performInteraction() {
         setInteracting(false);
         Input.get().lock(Commands.get(Aigilas.Commands.Confirm), getPlayerIndex());
