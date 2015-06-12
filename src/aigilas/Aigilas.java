@@ -21,8 +21,12 @@ import sps.text.TextPool;
 
 public class Aigilas implements ApplicationListener {
     private boolean IsRunning = true;
-
-    @Override
+    
+    //Use of @Override keyword in JDK 1.5 and below is 
+    //absent and not to be done in overridden methods 
+    //from superclass.
+    
+    //@Override
     public void create() {
         Sps.setup();
         Renderer.get().setWindowsBackground(Color.BLACK);
@@ -37,14 +41,15 @@ public class Aigilas implements ApplicationListener {
         StateManager.loadContent();
     }
 
-    @Override
+    //@Override
     public void resize(int width, int height) {
         Renderer.get().resize(width, height);
         StateManager.resize(width, height);
     }
 
-    @Override
+    //@Override
     public void render() {
+    	//coments
         try {
             //$$$ Logger.devConsole("" + Gdx.graphics.getFramesPerSecond() + ": " + Gdx.graphics.getDeltaTime());
 
@@ -93,15 +98,15 @@ public class Aigilas implements ApplicationListener {
         }
     }
 
-    @Override
+    //@Override
     public void pause() {
     }
 
-    @Override
+    //@Override
     public void resume() {
     }
 
-    @Override
+    //@Override
     public void dispose() {
     }
 
