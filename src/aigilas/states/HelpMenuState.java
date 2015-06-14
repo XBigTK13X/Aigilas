@@ -45,7 +45,7 @@ public class HelpMenuState extends MenuState {
         add(backBtn);
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "HelpMenuState";
     }
