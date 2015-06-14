@@ -58,7 +58,7 @@ public class StartHostServerState extends MenuState {
 
     private int connectedPlayers;
 
-    @Override
+    //@Override
     public void asyncUpdate() {
         if (connectedPlayers != Client.get().getPlayerCount()) {
             connectedPlayers = Client.get().getPlayerCount();
@@ -67,7 +67,7 @@ public class StartHostServerState extends MenuState {
         }
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "StartHostServerState";
     }

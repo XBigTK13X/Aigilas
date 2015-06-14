@@ -101,7 +101,7 @@ public class MainMenuState extends MenuState {
         startGameBtn.setSelected(true);
     }
 
-    @Override
+    //@Override
     public void update() {
         super.update();
         if (Client.get().isGameStarting()) {
@@ -112,7 +112,7 @@ public class MainMenuState extends MenuState {
         }
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "MainMenuState";
     }

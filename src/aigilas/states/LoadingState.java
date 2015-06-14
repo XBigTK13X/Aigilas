@@ -20,37 +20,37 @@ public class LoadingState implements State {
     public LoadingState() {
     }
 
-    @Override
+    //@Override
     public void draw() {
 
     }
 
-    @Override
+    //@Override
     public void update() {
         StateManager.loadState(new GameplayState());
     }
 
-    @Override
+    //@Override
     public void asyncUpdate() {
     }
 
-    @Override
+    //@Override
     public void load() {
         MusicPlayer.get().stop();
         TextPool.get().write(sayings[RNG.next(0, sayings.length, false)], Renderer.get().center().add(-500, 0));
     }
 
-    @Override
+    //@Override
     public void unload() {
 
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "Loading state";
     }
 
-    @Override
+    //@Override
     public void resize(int width, int height) {
     }
 }

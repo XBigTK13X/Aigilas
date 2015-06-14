@@ -29,7 +29,7 @@ public class GameplayState implements State {
 
     List<Entity> players = new ArrayList<Entity>();
 
-    @Override
+    //@Override
     public void update() {
         players = EntityManager.get().getPlayers();
         boolean allDead = true;
@@ -45,11 +45,11 @@ public class GameplayState implements State {
         EntityManager.get().update();
     }
 
-    @Override
+    //@Override
     public void asyncUpdate() {
     }
 
-    @Override
+    //@Override
     public void load() {
         Logger.info("Generating the dungeon...");
         SkillRegistry.get();
@@ -66,7 +66,7 @@ public class GameplayState implements State {
         //Gdx.app.exit();
     }
 
-    @Override
+    //@Override
     public void unload() {
         EntityManager.get().clear();
         HudRenderer.reset();
@@ -74,17 +74,17 @@ public class GameplayState implements State {
         MusicPlayer.get().stop();
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "GameplayState";
     }
 
-    @Override
+    //@Override
     public void resize(int width, int height) {
 
     }
 
-    @Override
+    //@Override
     public void draw() {
         EntityManager.get().draw();
     }

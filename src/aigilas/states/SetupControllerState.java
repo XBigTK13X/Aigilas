@@ -37,26 +37,26 @@ public class SetupControllerState extends MenuState {
     private Set<Integer> greaterThanAxes = new HashSet<Integer>();
 
     private ControllerListener inputCatcher = new ControllerListener() {
-        @Override
+        //@Override
         public void connected(Controller controller) {
         }
 
-        @Override
+        //@Override
         public void disconnected(Controller controller) {
         }
 
-        @Override
+        //@Override
         public boolean buttonDown(Controller controller, int i) {
             bindInputToCurrentCommand(ControllerInput.createButton(i));
             return false;
         }
 
-        @Override
+        //@Override
         public boolean buttonUp(Controller controller, int i) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean axisMoved(Controller controller, int axisIndex, float value) {
 
             if (!axisValues.containsKey(axisIndex)) {
@@ -86,7 +86,7 @@ public class SetupControllerState extends MenuState {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean povMoved(Controller controller, int i, PovDirection povDirection) {
             if (povDirection != PovDirection.center) {
                 bindInputToCurrentCommand(ControllerInput.createPov(i, povDirection));
@@ -94,17 +94,17 @@ public class SetupControllerState extends MenuState {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean xSliderMoved(Controller controller, int i, boolean b) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean ySliderMoved(Controller controller, int i, boolean b) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean accelerometerMoved(Controller controller, int i, Vector3 vector3) {
             return false;
         }
@@ -153,7 +153,7 @@ public class SetupControllerState extends MenuState {
         }
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "SetupControllerState";
     }

@@ -56,7 +56,7 @@ public class VideoOptionsState extends MenuState {
         Renderer.get().setStrategy(current);
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "VideoOptionsState";
     }

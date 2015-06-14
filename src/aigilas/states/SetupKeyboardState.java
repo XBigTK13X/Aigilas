@@ -24,7 +24,7 @@ public class SetupKeyboardState extends MenuState {
     private Map<Integer, Integer> duplicateCatcher;
 
     private InputProcessor keyboardCatcher = new InputProcessor() {
-        @Override
+        //@Override
         public boolean keyDown(int i) {
             if (!duplicateCatcher.containsKey(i)) {
                 currentCommand.bind(currentCommand.controllerInput(), Keys.find(i));
@@ -37,37 +37,37 @@ public class SetupKeyboardState extends MenuState {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean keyUp(int i) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean keyTyped(char c) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean touchDown(int i, int i2, int i3, int i4) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean touchUp(int i, int i2, int i3, int i4) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean touchDragged(int i, int i2, int i3) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean mouseMoved(int i, int i2) {
             return false;
         }
 
-        @Override
+        //@Override
         public boolean scrolled(int i) {
             return false;
         }
@@ -113,7 +113,7 @@ public class SetupKeyboardState extends MenuState {
         }
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "SetupKeyboardState";
     }
