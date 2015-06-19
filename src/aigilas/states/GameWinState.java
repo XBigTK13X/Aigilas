@@ -15,39 +15,39 @@ public class GameWinState implements State {
 
     }
 
-    @Override
+    //@Override
     public void draw() {
     }
 
-    @Override
+    //@Override
     public void update() {
         if (Input.get().isActive(Commands.get(Aigilas.Commands.Confirm), 0, true)) {
             StateManager.loadState(new MainMenuState());
         }
     }
 
-    @Override
+    //@Override
     public void asyncUpdate() {
     }
 
-    @Override
+    //@Override
     public void load() {
         MusicPlayer.get().stop();
         TextPool.get().write("Victory to you!", Renderer.get().center());
         TextPool.get().write("Press SPACEBAR to continue", new Point2(200, 200));
     }
 
-    @Override
+    //@Override
     public void unload() {
 
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "GameWinState";
     }
 
-    @Override
+    //@Override
     public void resize(int width, int height) {
     }
 }

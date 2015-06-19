@@ -54,7 +54,7 @@ public class JoinServerAsGuestState extends MenuState {
         });
 
         ipIn.addListener(new ChangeListener() {
-            @Override
+            //@Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 ipIn.setBlinkTime(1);
             }
@@ -96,7 +96,7 @@ public class JoinServerAsGuestState extends MenuState {
         }
     }
 
-    @Override
+    //@Override
     public void update() {
         super.update();
         if (readyToConnect && !connectStarted) {
@@ -113,7 +113,7 @@ public class JoinServerAsGuestState extends MenuState {
         }
     }
 
-    @Override
+    //@Override
     public String getName() {
         return "JoinServerAsGuestState";
     }

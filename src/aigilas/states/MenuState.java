@@ -43,7 +43,7 @@ public abstract class MenuState implements State {
         table.add(button);
     }
 
-    @Override
+    //@Override
     public void update() {
         int selectionVelocity = (Input.get().isActive(Commands.get(Aigilas.Commands.MoveRight), Client.get().getFirstPlayerIndex()) ? horizDelta : 0) + (Input.get().isActive(Commands.get(Aigilas.Commands.MoveLeft), Client.get().getFirstPlayerIndex()) ? -horizDelta : 0);
         selectionVelocity += (Input.get().isActive(Commands.get(Aigilas.Commands.MoveUp), Client.get().getFirstPlayerIndex()) ? -verticalDelta : 0) + (Input.get().isActive(Commands.get(Aigilas.Commands.MoveDown), Client.get().getFirstPlayerIndex()) ? verticalDelta : 0);
@@ -82,27 +82,27 @@ public abstract class MenuState implements State {
         }
     }
 
-    @Override
+    //@Override
     public void load() {
 
     }
 
-    @Override
+    //@Override
     public void asyncUpdate() {
     }
 
-    @Override
+    //@Override
     public void unload() {
 
     }
 
-    @Override
+    //@Override
     public void draw() {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 
-    @Override
+    //@Override
     public void resize(int width, int height) {
         stage.setViewport(internalWidth, internalHeight, false);
     }
