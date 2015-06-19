@@ -48,7 +48,7 @@ public class Command implements Comparable {
         return obj.hashCode() == hashCode();
     }
 
-    @Override
+    //@Override
     public int compareTo(Object o) {
         return name().compareTo(((Command) o).name());
     }
