@@ -12,6 +12,7 @@ push(){
 	butler push $WORKSPACE/artifacts/$ZIP simplepathstudios/aigilas:$CHANNEL --userversion-file $WORKSPACE/assets/data/version.dat
 }
 
-push Aigilas-lin-64.zip linux-stable
-push Aigilas-mac.zip osx-stable
-push Aigilas-win-32.zip windows-stable
+push Aigilas-lin-64.zip linux
+push Aigilas-lin-32.zip linux-thirytwobit
+push Aigilas-mac.zip osx
+push Aigilas-win-32.zip windows
