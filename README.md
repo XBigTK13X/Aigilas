@@ -1,3 +1,5 @@
+# Migrated to https://gitlab.com/xbigtk13x/Aigilas
+
 # Aigilas #
 > A battle to become the Underworld's ambassador to Earth
 
